@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-01T06:17:44.000Z</updated>
+  <updated>2016-07-05T09:24:31.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,28 +16,29 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/07/01/hello-world/"/>
-    <id>http://yoursite.com/2016/07/01/hello-world/</id>
-    <published>2016-07-01T06:17:44.000Z</published>
-    <updated>2016-07-01T06:17:44.000Z</updated>
+    <title>博客迁移公告</title>
+    <link href="http://yoursite.com/2016/07/05/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E5%85%AC%E5%91%8A/"/>
+    <id>http://yoursite.com/2016/07/05/博客迁移公告/</id>
+    <published>2016-07-05T05:43:36.000Z</published>
+    <updated>2016-07-05T09:24:31.000Z</updated>
     
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo server&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo generate&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo deploy&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;你敢信！我又搬家了。。&lt;/p&gt;
+&lt;p&gt;之前在&lt;a href=&quot;http://www.cnblogs.com/madordie/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客园&lt;/a&gt;后来又去了&lt;a href=&quot;http://madordie.leanote.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;蚂蚁笔记&lt;/a&gt;，最后吧，我就到了&lt;a href=&quot;https://madordie.github.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;说下大体感受：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客园&lt;/a&gt;挺好的，不过不喜欢其编码方式，真的不喜欢。博客园的主题什么的都是可以定制，但是总归是写起来比较费劲的。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://leanote.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;蚂蚁笔记&lt;/a&gt;不错，我开始时候logo还不是这个&lt;img src=&quot;http://7xvzwi.com1.z0.glb.clouddn.com/leanote_new_logo.png&quot; height=&quot;15&quot; alt=&quot;新logo&quot;&gt;，原来logo是&lt;img src=&quot;http://7xvzwi.com1.z0.glb.clouddn.com/leanote_old_logo.png&quot; width=&quot;15&quot; alt=&quot;旧logo&quot;&gt;😂,不过现在已经很厉害了，开始了各种业务。期待会走得更好更远。&lt;/p&gt;
+&lt;p&gt;我是看了&lt;a href=&quot;http://blog.devtang.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;巧哥&lt;/a&gt;的&lt;a href=&quot;http://blog.devtang.com/2012/02/10/setup-blog-based-on-github/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这个博文&lt;/a&gt;才开始准备转到Github的。。赶脚markdown很好玩，虽然出来很早了，但是并没有仔细的去学习这个语法，于是乎这个博客就用&lt;a href=&quot;https://hexo.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;hexo&lt;/a&gt;进行搭建，采用了&lt;a href=&quot;https://github.com/MOxFIVE/hexo-theme-yelee&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Yelee主题&lt;/a&gt;。感觉很赞，主题的&lt;a href=&quot;http://moxfive.coding.me/yelee/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;文档&lt;/a&gt;也很给力。&lt;/p&gt;
+&lt;p&gt;虽然我还不知道怎么让百度收录我的Github，但是主要的是能尝试着自己想试试确没有尝试的事情！&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;p&gt;你敢信！我又搬家了。。&lt;/p&gt;
+&lt;p&gt;之前在&lt;a href=&quot;http://www.cnblogs.com/madordie/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客园&lt;/a&gt;后来又去了&lt;a href=&quot;http://madordie.lean
     
     </summary>
+    
+      <category term="公告" scheme="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
     
     
   </entry>

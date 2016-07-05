@@ -5,19 +5,22 @@
     
     
     
-    
   <url>
-    <loc>http://yoursite.com/2016/07/01/hello-world/</loc>
-    <lastmod>2016-07-01T06:17:44.000Z</lastmod>
+    <loc>http://yoursite.com/2016/07/05/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E5%85%AC%E5%91%8A/</loc>
+    <lastmod>2016-07-05T09:24:31.000Z</lastmod>
     <data>
         <display>
-        <title>Hello World</title>
-        <pubTime>2016-07-01T06:17:44.000Z</pubTime>
+        <title>博客迁移公告</title>
+        <pubTime>2016-07-05T05:43:36.000Z</pubTime>
         
          
            
+             
+              <breadCrumb title="公告" url="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
+          
         </display>
     </data>
     </url>
 
+    
 </urlset>
