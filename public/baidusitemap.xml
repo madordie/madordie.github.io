@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-
-    
-    
     
   <url>
-    <loc>http://yoursite.com/2016/07/05/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E5%85%AC%E5%91%8A/</loc>
-    <lastmod>2016-07-05T09:24:31.000Z</lastmod>
+    <loc>https://madordie.github.io/2016/07/05/use-hexo-setup-blog/</loc>
+    <lastmod>2016-07-06T03:54:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>use-hexo-setup-blog</title>
+        <pubTime>2016-07-05T10:03:31.000Z</pubTime>
+        
+        <tag>hexo </tag>
+         
+         
+           
+             
+              <breadCrumb title="教程" url="https://madordie.github.io/categories/%E6%95%99%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/07/05/about-change-blog/</loc>
+    <lastmod>2016-07-05T10:00:20.000Z</lastmod>
     <data>
         <display>
         <title>博客迁移公告</title>
@@ -16,11 +33,13 @@
          
            
              
-              <breadCrumb title="公告" url="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
+              <breadCrumb title="公告" url="https://madordie.github.io/categories/%E5%85%AC%E5%91%8A/"/>
           
         </display>
     </data>
     </url>
 
+    
+    
     
 </urlset>

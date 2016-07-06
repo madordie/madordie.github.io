@@ -871,6 +871,12 @@ a {
   -moz-background-size: 88%;
   background-size: 88%;
 }
+#header .header-nav .social .leanote {
+  background: url("/img/leanote.png") center no-repeat #fff;
+  -webkit-background-size: 120%;
+  -moz-background-size: 120%;
+  background-size: 120%;
+}
 #header .header-nav .social .bilibili {
   background: url("/img/bilibili.png") center no-repeat #f589a0;
   -webkit-background-size: 100%;

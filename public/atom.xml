@@ -4,9 +4,9 @@
   <subtitle>技术狂热粉</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2016-07-05T09:24:31.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="https://madordie.github.io/"/>
+  <updated>2016-07-06T03:54:37.000Z</updated>
+  <id>https://madordie.github.io/</id>
   
   <author>
     <name>Keith</name>
@@ -16,14 +16,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>use-hexo-setup-blog</title>
+    <link href="https://madordie.github.io/2016/07/05/use-hexo-setup-blog/"/>
+    <id>https://madordie.github.io/2016/07/05/use-hexo-setup-blog/</id>
+    <published>2016-07-05T10:03:31.000Z</published>
+    <updated>2016-07-06T03:54:37.000Z</updated>
+    
+    <content type="html">&lt;p&gt;auto-push-sitemap.py&lt;/p&gt;
+&lt;p&gt;pip install beautifulsoup4&lt;br&gt;pip install requests&lt;br&gt;xcode-select –install&lt;br&gt;pip install lxml &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;auto-push-sitemap.py&lt;/p&gt;
+&lt;p&gt;pip install beautifulsoup4&lt;br&gt;pip install requests&lt;br&gt;xcode-select –install&lt;br&gt;pip install lxml &lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="教程" scheme="https://madordie.github.io/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+      <category term="hexo" scheme="https://madordie.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
     <title>博客迁移公告</title>
-    <link href="http://yoursite.com/2016/07/05/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E5%85%AC%E5%91%8A/"/>
-    <id>http://yoursite.com/2016/07/05/博客迁移公告/</id>
+    <link href="https://madordie.github.io/2016/07/05/about-change-blog/"/>
+    <id>https://madordie.github.io/2016/07/05/about-change-blog/</id>
     <published>2016-07-05T05:43:36.000Z</published>
-    <updated>2016-07-05T09:24:31.000Z</updated>
+    <updated>2016-07-05T10:00:20.000Z</updated>
     
     <content type="html">&lt;p&gt;你敢信！我又搬家了。。&lt;/p&gt;
-&lt;p&gt;之前在&lt;a href=&quot;http://www.cnblogs.com/madordie/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客园&lt;/a&gt;后来又去了&lt;a href=&quot;http://madordie.leanote.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;蚂蚁笔记&lt;/a&gt;，最后吧，我就到了&lt;a href=&quot;https://madordie.github.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;之前在&lt;a href=&quot;http://www.cnblogs.com/madordie/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客园&lt;/a&gt;后来又去了&lt;a href=&quot;http://madordie.leanote.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;蚂蚁笔记&lt;/a&gt;，最后吧，我就到了&lt;a href=&quot;https://madordie.github.io&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;说下大体感受：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客园&lt;/a&gt;挺好的，不过不喜欢其编码方式，真的不喜欢。博客园的主题什么的都是可以定制，但是总归是写起来比较费劲的。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://leanote.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;蚂蚁笔记&lt;/a&gt;不错，我开始时候logo还不是这个&lt;img src=&quot;http://7xvzwi.com1.z0.glb.clouddn.com/leanote_new_logo.png&quot; height=&quot;15&quot; alt=&quot;新logo&quot;&gt;，原来logo是&lt;img src=&quot;http://7xvzwi.com1.z0.glb.clouddn.com/leanote_old_logo.png&quot; width=&quot;15&quot; alt=&quot;旧logo&quot;&gt;😂,不过现在已经很厉害了，开始了各种业务。期待会走得更好更远。&lt;/p&gt;
@@ -38,7 +64,7 @@
     
     </summary>
     
-      <category term="公告" scheme="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
+      <category term="公告" scheme="https://madordie.github.io/categories/%E5%85%AC%E5%91%8A/"/>
     
     
   </entry>
