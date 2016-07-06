@@ -5,9 +5,3 @@ tags: hexo
 categories: 教程
 ---
 
-auto-push-sitemap.py
-
-pip install beautifulsoup4
-pip install requests
-xcode-select --install	
-pip install lxml 
