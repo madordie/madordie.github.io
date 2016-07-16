@@ -1,529 +1,238 @@
 <!DOCTYPE html>
-<html lang="zh-CH">
+<html>
 <head>
-
-    <!--[if lt IE 9]>
-        <style>body {display: none; background: none !important} </style>
-        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
-    <![endif]-->
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="Keith" />
-
-
-
+  <meta charset="utf-8">
+  
+  <title>使用hexo搭建博客 | Keith&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考博客感谢 岁月如歌 的这个《Hexo 3.1.1 静态博客搭建指南》同时感谢这个《向百度推送hexo博客所有链接的Python脚本》(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)
+脚本修改上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：
+1234567891011121314151">
 <meta property="og:type" content="article">
-<meta property="og:title" content="use-hexo-setup-blog">
+<meta property="og:title" content="使用hexo搭建博客">
 <meta property="og:url" content="https://madordie.github.io/2016/07/05/use-hexo-setup-blog/index.html">
 <meta property="og:site_name" content="Keith's blog">
-<meta property="og:updated_time" content="2016-07-06T10:47:30.000Z">
+<meta property="og:description" content="参考博客感谢 岁月如歌 的这个《Hexo 3.1.1 静态博客搭建指南》同时感谢这个《向百度推送hexo博客所有链接的Python脚本》(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)
+脚本修改上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：
+1234567891011121314151">
+<meta property="og:updated_time" content="2016-07-13T12:32:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="use-hexo-setup-blog">
-
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
-
-
+<meta name="twitter:title" content="使用hexo搭建博客">
+<meta name="twitter:description" content="参考博客感谢 岁月如歌 的这个《Hexo 3.1.1 静态博客搭建指南》同时感谢这个《向百度推送hexo博客所有链接的Python脚本》(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)
+脚本修改上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：
+1234567891011121314151">
+  
     <link rel="alternate" href="/atom.xml" title="Keith&#39;s blog" type="application/atom+xml">
-
-
-
-    <link rel="shortcut icon" href="/apple-touch-icon.png">
-
-
-
-
-
-    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-
-
-
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-
-<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
-
-<title>use-hexo-setup-blog | Keith&#39;s blog</title>
-
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-<script>
-    var yiliaConfig = {
-        fancybox: true,
-        animate: false,
-        isHome: false,
-        isPost: true,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
-    }
-</script>
-
-
-    <script>
-        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
-    </script>
-
-
-
-    <script> yiliaConfig.rootUrl = "\/";</script>
-
-
-
-
-
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?26275fd2191bb3c1f8248947481e9ac4";
-            var s = document.getElementsByTagName("script")[0]; 
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
 
 </head>
+
 <body>
   <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            <img src="/img/avatar.png" class="animated zoomIn">
-        </a>
-        <hgroup>
-          <h1 class="header-author"><a href="/">Keith</a></h1>
-        </hgroup>
-
-        
-        <p class="header-subtitle">技术狂热粉</p>
-        
-
-        
-
-
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>Menu</li>
-                        <li>Tags</li>
-                        
-                        <li>Friends</li>
-                        
-                        
-                        <li>About Me</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">主页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">标签云</a></li>
-                        
-                            <li><a href="/about/">关于我</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" href="mailto:keith_127@126.com" title="Email"></a>
-                            
-                                <a class="fa GitHub" href="https://github.com/madordie" title="GitHub"></a>
-                            
-                                <a class="fa 博客园" href="http://www.cnblogs.com/madordie/" title="博客园"></a>
-                            
-                                <a class="fa leanote" href="http://madordie.leanote.com" title="leanote"></a>
-                            
-                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://madordie.leanote.com">蚂蚁笔记</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/madordie/">博客园</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://www.github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">热衷于技术</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
-</div>
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Keith&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">技术狂热粉</a>
+        </h2>
+      
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Keith</a></h1>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://madordie.github.io"></form>
       </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                <img src="/img/avatar.png" class="animated zoomIn">
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">Keith</a></h1>
-            </hgroup>
-            
-            <p class="header-subtitle">技术狂热粉</p>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">主页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">标签云</a></li>
-                
-                    <li><a href="/about/">关于我</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" target="_blank" href="mailto:keith_127@126.com" title="Email"></a>
-                            
-                                <a class="fa GitHub" target="_blank" href="https://github.com/madordie" title="GitHub"></a>
-                            
-                                <a class="fa 博客园" target="_blank" href="http://www.cnblogs.com/madordie/" title="博客园"></a>
-                            
-                                <a class="fa leanote" target="_blank" href="http://madordie.leanote.com" title="leanote"></a>
-                            
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-            </nav>
-        </header>                
     </div>
-    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
-</nav>
-      <div class="body-wrap"><article id="post-use-hexo-setup-blog" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/05/use-hexo-setup-blog/" class="article-date">
-      <time datetime="2016-07-05T10:03:31.000Z" itemprop="datePublished">2016-07-05</time>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-use-hexo-setup-blog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/05/use-hexo-setup-blog/" class="article-date">
+  <time datetime="2016-07-05T10:03:31.000Z" itemprop="datePublished">2016-07-05</time>
 </a>
-
-
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/教程/">教程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
     
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      use-hexo-setup-blog
+      使用hexo搭建博客
     </h1>
   
 
       </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/教程/">教程</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
     
     <div class="article-entry" itemprop="articleBody">
       
-          
-        
+        <h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p>感谢 <a href="http://lovenight.github.io" target="_blank" rel="external">岁月如歌</a> 的这个<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-静态博客搭建指南/" target="_blank" rel="external">《Hexo 3.1.1 静态博客搭建指南》</a>同时感谢这个<a href="http://lovenight.github.io/2015/11/18/向百度推送hexo博客所有链接的Python脚本/" target="_blank" rel="external">《向百度推送hexo博客所有链接的Python脚本》</a>(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)</p>
+<h1 id="脚本修改"><a href="#脚本修改" class="headerlink" title="脚本修改"></a>脚本修改</h1><p>上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># @Author: LoveNight</span></div><div class="line"><span class="comment"># @Date:   2015-11-16 20:45:59</span></div><div class="line"><span class="comment"># @Last Modified by:   LoveNight</span></div><div class="line"><span class="comment"># @Last Modified time: 2015-11-18 18:07:19</span></div><div class="line"></div><div class="line"><span class="comment"># @Last Modified by:   Keith</span></div><div class="line"><span class="comment"># @Last Modified time: 2016-07-06 16:22:45</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> BS</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="comment">#import msvcrt</span></div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line">hexo 博客专用，向百度站长平台提交所有网址</div><div class="line"></div><div class="line">本脚本必须放在hexo博客的根目录下执行！需要已安装生成百度站点地图的插件。</div><div class="line">百度站长平台提交链接：http://zhanzhang.baidu.com/linksubmit/index</div><div class="line">主动推送：最为快速的提交方式，推荐您将站点当天新产出链接立即通过此方式推送给百度，以保证新链接可以及时被百度收录。</div><div class="line">从中找到自己的接口调用地址</div><div class="line"></div><div class="line">python环境：</div><div class="line">pip install beautifulsoup4</div><div class="line">pip install requests</div><div class="line">xcode-select --install	</div><div class="line">pip install lxml </div><div class="line"></div><div class="line">"""</div><div class="line"></div><div class="line"><span class="comment"># ❌❌❌ 抄的需要更改这个URL！！这是我的！！❌❌❌</span></div><div class="line">url = <span class="string">'http://data.zz.baidu.com/urls?site=https://madordie.github.io&amp;token=j33t0VEPFl24tJ8N'</span></div><div class="line">baidu_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">'public'</span>, <span class="string">'baidusitemap.xml'</span>)</div><div class="line">google_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">'public'</span>, <span class="string">'sitemap.xml'</span>)</div><div class="line">sitemap = [baidu_sitemap, google_sitemap]</div><div class="line"></div><div class="line"><span class="keyword">assert</span> (os.path.exists(baidu_sitemap) <span class="keyword">or</span> os.path.exists(</div><div class="line">    google_sitemap)), <span class="string">"没找到任何网站地图，请检查！"</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 从站点地图中读取网址列表</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrls</span><span class="params">()</span>:</span></div><div class="line">    urls = []</div><div class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> sitemap:</div><div class="line">        <span class="keyword">if</span> os.path.exists(_):</div><div class="line">            <span class="keyword">with</span> open(_, <span class="string">"r"</span>) <span class="keyword">as</span> f:</div><div class="line">                xml = f.read()</div><div class="line">        soup = BS(xml, <span class="string">"xml"</span>)</div><div class="line">        tags = soup.find_all(<span class="string">"loc"</span>)</div><div class="line">        urls += [x.string <span class="keyword">for</span> x <span class="keyword">in</span> tags]</div><div class="line">        <span class="keyword">if</span> _ == baidu_sitemap:</div><div class="line">            tags = soup.find_all(<span class="string">"breadCrumb"</span>, url=<span class="keyword">True</span>)</div><div class="line">            urls += [x[<span class="string">"url"</span>] <span class="keyword">for</span> x <span class="keyword">in</span> tags]</div><div class="line">    <span class="keyword">return</span> urls</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># POST提交网址列表</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">postUrls</span><span class="params">(urls)</span>:</span></div><div class="line">    urls = set(urls)  <span class="comment"># 先去重</span></div><div class="line">    print(<span class="string">"一共提取出 %s 个网址"</span> % len(urls))</div><div class="line">    print(urls)</div><div class="line">    data = <span class="string">"\n"</span>.join(urls)</div><div class="line">    <span class="keyword">return</span> requests.post(url, data=data).text</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line"></div><div class="line">    urls = getUrls()</div><div class="line">    result = postUrls(urls)</div><div class="line">    print(<span class="string">"提交结果："</span>)</div><div class="line">    print(result)</div><div class="line"><span class="comment">#    msvcrt.getch()</span></div></pre></td></tr></table></figure>
       
     </div>
-    
+    <footer class="article-footer">
+      <a data-url="https://madordie.github.io/2016/07/05/use-hexo-setup-blog/" data-id="ciqoofxji0006kl6a6gg3ux4x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+    </footer>
   </div>
   
     
-    <div class="copyright">
-        <p><span>Title:</span><a href="/2016/07/05/use-hexo-setup-blog/">use-hexo-setup-blog</a></p>
-        <p><span>Author:</span><a href="/" title="Back to Homepage">Keith</a></p>
-        <p><span>Created:</span>2016-07-05, 18:03:31</p>
-        <p><span>Updated:</span>2016-07-06, 18:47:30</p>
-        <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/07/05/use-hexo-setup-blog/" title="use-hexo-setup-blog">https://madordie.github.io/2016/07/05/use-hexo-setup-blog/</a>
-            <span class="copy-path" data-clipboard-text="From https://madordie.github.io/2016/07/05/use-hexo-setup-blog/　　By Keith" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
+<nav id="article-nav">
+  
+    <a href="/2016/07/12/reactivecocoa-ready-to-use/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          准备食用RAC(ReactiveCocoa)的顾虑
         
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/07/05/about-change-blog/">
-                    博客迁移公告
-                </a>
-            </div>
-        
-    </nav>
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/05/about-change-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">博客迁移公告</div>
+    </a>
+  
+</nav>
 
   
 </article>
 
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
-    
-</div>
-<style>
-    .left-col .switch-btn,
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
-
-<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
-
-<script>
-    yiliaConfig.toc = ["Hide", "Show", !!"false"];
-</script>
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"use-hexo-setup-blog　| Keith's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
-
-
-
-
-
-
-
-    
-      <div class="duoshuo" id="comments">
-    <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/05/use-hexo-setup-blog/" data-title="use-hexo-setup-blog" data-url="https://madordie.github.io/2016/07/05/use-hexo-setup-blog/"></div>
-    <script>
-        var duoshuoQuery = {short_name:"madordie"};
-        var loadComment = function(){
-            var d = document, s = d.createElement('script');
-            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            s.async = true; s.charset = 'UTF-8';
-            (d.head || d.body).appendChild(s);
-        }
-
+</section>
         
-    </script>
+          <aside id="sidebar">
+  
     
-    <script> loadComment(); </script>
-
-</div>
-    
-
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
-        
-
-        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2016/07/05/about-change-blog/" title="Next: 博客迁移公告">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/公告/">公告</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li></ul>
     </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/use-hexo-setup-blog/">use-hexo-setup-blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/about-change-blog/">博客迁移公告</a></li></ul>
-
+  </div>
 
 
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactiveCocoa/">ReactiveCocoa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+  </div>
 
-    <script>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ReactiveCocoa/" style="font-size: 10px;">ReactiveCocoa</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
         
-    </script>
-</div>
+          <li>
+            <a href="/2016/07/12/reactivecocoa-ready-to-use/">准备食用RAC(ReactiveCocoa)的顾虑</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/05/use-hexo-setup-blog/">使用hexo搭建博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/05/about-change-blog/">博客迁移公告</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
       <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
-                2016 Keith
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
-            </div>
-        </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >Site Visitors: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">Page Hits: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Keith<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
+  </div>
 </footer>
     </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
     
-    <script src="/js/GithubRepoWidget.js"></script>
 
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<div class="scroll" id="scroll">
-    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script>
-    // Open in New Window
-    
-        var oOpenInNew = {
-             github: ".github-widget a", 
-            
-            
-            
-            
-            
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-            
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
-    
-</script>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
+<script src="/js/script.js"></script>
+
   </div>
 </body>
 </html>

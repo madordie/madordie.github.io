@@ -1,3 +1,4 @@
 .DS_Store
-.deploy_git
 .Ulysses*
+.deploy_git
+public
