@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2016-07-13T12:12:28.000Z</updated>
+  <updated>2016-07-24T05:15:10.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -16,11 +16,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>关于转载的文章</title>
+    <link href="https://madordie.github.io/2016/07/24/about-reprint-article/"/>
+    <id>https://madordie.github.io/2016/07/24/about-reprint-article/</id>
+    <published>2016-07-24T03:52:40.000Z</published>
+    <updated>2016-07-24T05:15:10.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;缘由&quot;&gt;&lt;a href=&quot;#缘由&quot; class=&quot;headerlink&quot; title=&quot;缘由&quot;&gt;&lt;/a&gt;缘由&lt;/h1&gt;&lt;p&gt;前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并没有署名转载出处，所以应该是原创）。之后看了一下他的另一个文章，刚好我百度过这个文章的原作者的最后一个系列的，于是我又翻阅了一下看看是不是不一样，结果和我想的一样，除了删除了作者的署名之外其他的都是一样的。于是关掉了网页，心中默默的鄙视。&lt;/p&gt;
+&lt;h1 id=&quot;关于转载的别人文章&quot;&gt;&lt;a href=&quot;#关于转载的别人文章&quot; class=&quot;headerlink&quot; title=&quot;关于转载的别人文章&quot;&gt;&lt;/a&gt;关于转载的别人文章&lt;/h1&gt;&lt;p&gt;对于一些大神的技术文章都是喜欢的，爱不释手的那种，我也是。有的能转载的我就转载，不能转载的，我会复制下来，放在我自己的文件夹中，为的是方便查询。在转载的时候我会特意标示转载的地址。而且一般情况下我会在文章的开始写上几句简单的主要的思想（比如：&lt;a href=&quot;http://www.cnblogs.com/madordie/p/5159597.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《[转]蓝牙开发》&lt;/a&gt;、&lt;a href=&quot;http://www.cnblogs.com/madordie/p/4322044.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《[搬运] mac下安装GDB》&lt;/a&gt;、&lt;a href=&quot;http://www.cnblogs.com/madordie/p/4322042.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《［搬运］MAC 下安装 brew》&lt;/a&gt;），当然有时候没来得及的就忘了😂（比如：&lt;a href=&quot;http://www.cnblogs.com/madordie/p/4357685.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《[搬运] iOS 7 侧滑返回手势使用和错误集》&lt;/a&gt;）。&lt;/p&gt;
+&lt;p&gt;还有关于文章的排版，殊不知原作者为了让读者更好的阅读会对排版做的比较好，有的人为了阅读方便会去阅读原作者的文章。比如说我这种强迫症。&lt;/p&gt;
+&lt;h1 id=&quot;我对删除原链的转载文章态度&quot;&gt;&lt;a href=&quot;#我对删除原链的转载文章态度&quot; class=&quot;headerlink&quot; title=&quot;我对删除原链的转载文章态度&quot;&gt;&lt;/a&gt;我对删除原链的转载文章态度&lt;/h1&gt;&lt;p&gt;然后说一下我对于那些抄袭的，然后删除了原链接的人鄙视一下。每一篇文章都是别人花费了大量的精力去完成的，有的为了让读者能够更清楚的理解，所以会在发布的时候找别人去读一读，看能不能理解其中云云。然而对文章的原链接保存是一种对别人劳动成果的尊重，对原作者最基本的尊重。&lt;/p&gt;
+&lt;p&gt;别的不想多说了。转载请注明出处。谢谢！&lt;br&gt;且行且珍惜。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;缘由&quot;&gt;&lt;a href=&quot;#缘由&quot; class=&quot;headerlink&quot; title=&quot;缘由&quot;&gt;&lt;/a&gt;缘由&lt;/h1&gt;&lt;p&gt;前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并
+    
+    </summary>
+    
+      <category term="感悟" scheme="https://madordie.github.io/categories/%E6%84%9F%E6%82%9F/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
     <link href="https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/"/>
     <id>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</id>
     <published>2016-07-12T01:53:14.000Z</published>
-    <updated>2016-07-13T12:12:28.000Z</updated>
+    <updated>2016-07-24T06:15:38.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h1&gt;&lt;p&gt;众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。&lt;/p&gt;
 &lt;h1 id=&quot;OC简单食用方法&quot;&gt;&lt;a href=&quot;#OC简单食用方法&quot; class=&quot;headerlink&quot; title=&quot;OC简单食用方法&quot;&gt;&lt;/a&gt;OC简单食用方法&lt;/h1&gt;&lt;p&gt;先来个例子代码：&lt;/p&gt;
@@ -28,7 +53,7 @@
 &lt;p&gt;是不是超级简单！&lt;/p&gt;
 &lt;h2 id=&quot;顾虑&quot;&gt;&lt;a href=&quot;#顾虑&quot; class=&quot;headerlink&quot; title=&quot;顾虑&quot;&gt;&lt;/a&gt;顾虑&lt;/h2&gt;&lt;p&gt;可是我有一个问题：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;OC属于运行时语法，这个里面的&lt;code&gt;id x&lt;/code&gt;的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。&lt;/li&gt;
+&lt;li&gt;OC属于运行时语法，这个里面的&lt;code&gt;id x&lt;/code&gt;的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&quot;Swift简单食用方法&quot;&gt;&lt;a href=&quot;#Swift简单食用方法&quot; class=&quot;headerlink&quot; title=&quot;Swift简单食用方法&quot;&gt;&lt;/a&gt;Swift简单食用方法&lt;/h1&gt;</content>
     

@@ -1,187 +1,719 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <title>Keith&#39;s blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Keith's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
 <meta property="og:title" content="Keith's blog">
 <meta property="og:url" content="https://madordie.github.io/index.html">
 <meta property="og:site_name" content="Keith's blog">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keith's blog">
-  
-    <link rel="alternate" href="/atom.xml" title="Keith&#39;s blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
 
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://madordie.github.io/"/>
+
+  <title> Keith's blog </title>
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Keith&#39;s blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">技术狂热粉</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://madordie.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-reactivecocoa-ready-to-use" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/12/reactivecocoa-ready-to-use/" class="article-date">
-  <time datetime="2016-07-12T01:53:14.000Z" itemprop="datePublished">2016-07-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/12/reactivecocoa-ready-to-use/">准备食用RAC(ReactiveCocoa)的顾虑</a>
-    </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
 
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?26275fd2191bb3c1f8248947481e9ac4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Keith's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">技术狂热粉</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/24/about-reprint-article/" itemprop="url">
+                  关于转载的文章
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-24T11:52:40+08:00" content="2016-07-24">
+              2016-07-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/感悟/" itemprop="url" rel="index">
+                    <span itemprop="name">感悟</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/24/about-reprint-article/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/24/about-reprint-article/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。</p>
+      
+
+      
+        
+          
+            <h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并没有署名转载出处，所以应该是原创）。之后看了一下他的另一个文章，刚好我百度过这个文章的原作者的最后一个系列的，于是我又翻阅了一下看看是不是不一样，结果和我想的一样，除了删除了作者的署名之外其他的都是一样的。于是关掉了网页，心中默默的鄙视。</p>
+<h1 id="关于转载的别人文章"><a href="#关于转载的别人文章" class="headerlink" title="关于转载的别人文章"></a>关于转载的别人文章</h1><p>对于一些大神的技术文章都是喜欢的，爱不释手的那种，我也是。有的能转载的我就转载，不能转载的，我会复制下来，放在我自己的文件夹中，为的是方便查询。在转载的时候我会特意标示转载的地址。而且一般情况下我会在文章的开始写上几句简单的主要的思想（比如：<a href="http://www.cnblogs.com/madordie/p/5159597.html" target="_blank" rel="external">《[转]蓝牙开发》</a>、<a href="http://www.cnblogs.com/madordie/p/4322044.html" target="_blank" rel="external">《[搬运] mac下安装GDB》</a>、<a href="http://www.cnblogs.com/madordie/p/4322042.html" target="_blank" rel="external">《［搬运］MAC 下安装 brew》</a>），当然有时候没来得及的就忘了😂（比如：<a href="http://www.cnblogs.com/madordie/p/4357685.html" target="_blank" rel="external">《[搬运] iOS 7 侧滑返回手势使用和错误集》</a>）。</p>
+<p>还有关于文章的排版，殊不知原作者为了让读者更好的阅读会对排版做的比较好，有的人为了阅读方便会去阅读原作者的文章。比如说我这种强迫症。</p>
+<h1 id="我对删除原链的转载文章态度"><a href="#我对删除原链的转载文章态度" class="headerlink" title="我对删除原链的转载文章态度"></a>我对删除原链的转载文章态度</h1><p>然后说一下我对于那些抄袭的，然后删除了原链接的人鄙视一下。每一篇文章都是别人花费了大量的精力去完成的，有的为了让读者能够更清楚的理解，所以会在发布的时候找别人去读一读，看能不能理解其中云云。然而对文章的原链接保存是一种对别人劳动成果的尊重，对原作者最基本的尊重。</p>
+<p>别的不想多说了。转载请注明出处。谢谢！<br>且行且珍惜。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/12/reactivecocoa-ready-to-use/" itemprop="url">
+                  准备食用RAC(ReactiveCocoa)的顾虑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-12T09:53:14+08:00" content="2016-07-12">
+              2016-07-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/12/reactivecocoa-ready-to-use/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/12/reactivecocoa-ready-to-use/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。</p>
 <h1 id="OC简单食用方法"><a href="#OC简单食用方法" class="headerlink" title="OC简单食用方法"></a>OC简单食用方法</h1><p>先来个例子代码：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">RACSignal *RSignal = [[<span class="keyword">self</span>.R rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.R.value)];</div><div class="line">RACSignal *GSignal = [[<span class="keyword">self</span>.G rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.G.value)];</div><div class="line">RACSignal *BSignal = [[<span class="keyword">self</span>.B rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.B.value)];</div><div class="line"></div><div class="line"><span class="built_in">NSString</span>*(^valueFormat)(<span class="built_in">NSNumber</span> *value) = ^(<span class="built_in">NSNumber</span> *value) &#123;</div><div class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.0f"</span>, [value doubleValue]*<span class="number">255</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">[RSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.RVaule.text = valueFormat(x);</div><div class="line">&#125;];</div><div class="line">[GSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.GValue.text = valueFormat(x);</div><div class="line">&#125;];</div><div class="line">[BSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.BValue.text = valueFormat(x);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
 <p>是不是超级简单！</p>
 <h2 id="顾虑"><a href="#顾虑" class="headerlink" title="顾虑"></a>顾虑</h2><p>可是我有一个问题：</p>
 <ul>
-<li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。</li>
+<li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。</li>
 </ul>
 <h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1>
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/" data-id="ciqoofxj90003kl6ark6mw1s9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactiveCocoa/">ReactiveCocoa</a></li></ul>
 
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
-  </div>
+  </article>
+
+
+    
+      
+
   
-</article>
-
+  
 
   
-    <article id="post-use-hexo-setup-blog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/05/use-hexo-setup-blog/" class="article-date">
-  <time datetime="2016-07-05T10:03:31.000Z" itemprop="datePublished">2016-07-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/教程/">教程</a>
-  </div>
+  
+  
 
-  </div>
-  <div class="article-inner">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/05/use-hexo-setup-blog/">使用hexo搭建博客</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/05/use-hexo-setup-blog/" itemprop="url">
+                  使用hexo搭建博客
+                </a>
+              
+            
+          </h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-05T18:03:31+08:00" content="2016-07-05">
+              2016-07-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/05/use-hexo-setup-blog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/05/use-hexo-setup-blog/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p>感谢 <a href="http://lovenight.github.io" target="_blank" rel="external">岁月如歌</a> 的这个<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-静态博客搭建指南/" target="_blank" rel="external">《Hexo 3.1.1 静态博客搭建指南》</a>同时感谢这个<a href="http://lovenight.github.io/2015/11/18/向百度推送hexo博客所有链接的Python脚本/" target="_blank" rel="external">《向百度推送hexo博客所有链接的Python脚本》</a>(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)</p>
+      
+
+      
+        
+          
+            <h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p>感谢 <a href="http://lovenight.github.io" target="_blank" rel="external">岁月如歌</a> 的这个<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-静态博客搭建指南/" target="_blank" rel="external">《Hexo 3.1.1 静态博客搭建指南》</a>同时感谢这个<a href="http://lovenight.github.io/2015/11/18/向百度推送hexo博客所有链接的Python脚本/" target="_blank" rel="external">《向百度推送hexo博客所有链接的Python脚本》</a>(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)</p>
 <h1 id="脚本修改"><a href="#脚本修改" class="headerlink" title="脚本修改"></a>脚本修改</h1><p>上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># @Author: LoveNight</span></div><div class="line"><span class="comment"># @Date:   2015-11-16 20:45:59</span></div><div class="line"><span class="comment"># @Last Modified by:   LoveNight</span></div><div class="line"><span class="comment"># @Last Modified time: 2015-11-18 18:07:19</span></div><div class="line"></div><div class="line"><span class="comment"># @Last Modified by:   Keith</span></div><div class="line"><span class="comment"># @Last Modified time: 2016-07-06 16:22:45</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> BS</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="comment">#import msvcrt</span></div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line">hexo 博客专用，向百度站长平台提交所有网址</div><div class="line"></div><div class="line">本脚本必须放在hexo博客的根目录下执行！需要已安装生成百度站点地图的插件。</div><div class="line">百度站长平台提交链接：http://zhanzhang.baidu.com/linksubmit/index</div><div class="line">主动推送：最为快速的提交方式，推荐您将站点当天新产出链接立即通过此方式推送给百度，以保证新链接可以及时被百度收录。</div><div class="line">从中找到自己的接口调用地址</div><div class="line"></div><div class="line">python环境：</div><div class="line">pip install beautifulsoup4</div><div class="line">pip install requests</div><div class="line">xcode-select --install	</div><div class="line">pip install lxml </div><div class="line"></div><div class="line">"""</div><div class="line"></div><div class="line"><span class="comment"># ❌❌❌ 抄的需要更改这个URL！！这是我的！！❌❌❌</span></div><div class="line">url = <span class="string">'http://data.zz.baidu.com/urls?site=https://madordie.github.io&amp;token=j33t0VEPFl24tJ8N'</span></div><div class="line">baidu_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">'public'</span>, <span class="string">'baidusitemap.xml'</span>)</div><div class="line">google_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">'public'</span>, <span class="string">'sitemap.xml'</span>)</div><div class="line">sitemap = [baidu_sitemap, google_sitemap]</div><div class="line"></div><div class="line"><span class="keyword">assert</span> (os.path.exists(baidu_sitemap) <span class="keyword">or</span> os.path.exists(</div><div class="line">    google_sitemap)), <span class="string">"没找到任何网站地图，请检查！"</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 从站点地图中读取网址列表</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrls</span><span class="params">()</span>:</span></div><div class="line">    urls = []</div><div class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> sitemap:</div><div class="line">        <span class="keyword">if</span> os.path.exists(_):</div><div class="line">            <span class="keyword">with</span> open(_, <span class="string">"r"</span>) <span class="keyword">as</span> f:</div><div class="line">                xml = f.read()</div><div class="line">        soup = BS(xml, <span class="string">"xml"</span>)</div><div class="line">        tags = soup.find_all(<span class="string">"loc"</span>)</div><div class="line">        urls += [x.string <span class="keyword">for</span> x <span class="keyword">in</span> tags]</div><div class="line">        <span class="keyword">if</span> _ == baidu_sitemap:</div><div class="line">            tags = soup.find_all(<span class="string">"breadCrumb"</span>, url=<span class="keyword">True</span>)</div><div class="line">            urls += [x[<span class="string">"url"</span>] <span class="keyword">for</span> x <span class="keyword">in</span> tags]</div><div class="line">    <span class="keyword">return</span> urls</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># POST提交网址列表</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">postUrls</span><span class="params">(urls)</span>:</span></div><div class="line">    urls = set(urls)  <span class="comment"># 先去重</span></div><div class="line">    print(<span class="string">"一共提取出 %s 个网址"</span> % len(urls))</div><div class="line">    print(urls)</div><div class="line">    data = <span class="string">"\n"</span>.join(urls)</div><div class="line">    <span class="keyword">return</span> requests.post(url, data=data).text</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line"></div><div class="line">    urls = getUrls()</div><div class="line">    result = postUrls(urls)</div><div class="line">    print(<span class="string">"提交结果："</span>)</div><div class="line">    print(result)</div><div class="line"><span class="comment">#    msvcrt.getch()</span></div></pre></td></tr></table></figure>
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://madordie.github.io/2016/07/05/use-hexo-setup-blog/" data-id="ciqoofxji0006kl6a6gg3ux4x" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
-  </div>
+  </article>
+
+
+    
+      
+
   
-</article>
-
+  
 
   
-    <article id="post-about-change-blog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/05/about-change-blog/" class="article-date">
-  <time datetime="2016-07-05T05:43:36.000Z" itemprop="datePublished">2016-07-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/公告/">公告</a>
-  </div>
+  
+  
 
-  </div>
-  <div class="article-inner">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/05/about-change-blog/">博客迁移公告</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/05/about-change-blog/" itemprop="url">
+                  博客迁移公告
+                </a>
+              
+            
+          </h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-05T13:43:36+08:00" content="2016-07-05">
+              2016-07-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/公告/" itemprop="url" rel="index">
+                    <span itemprop="name">公告</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/05/about-change-blog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/05/about-change-blog/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>你敢信！我又搬家了。。</p>
+      
+
+      
+        
+          
+            <p>你敢信！我又搬家了。。</p>
 <p>之前在<a href="http://www.cnblogs.com/madordie/" target="_blank" rel="external">博客园</a>后来又去了<a href="http://madordie.leanote.com" target="_blank" rel="external">蚂蚁笔记</a>，最后吧，我就到了<a href="https://madordie.github.io">这里</a>。</p>
 <p>说下大体感受：</p>
 <p><a href="http://www.cnblogs.com" target="_blank" rel="external">博客园</a>挺好的，不过不喜欢其编码方式，真的不喜欢。博客园的主题什么的都是可以定制，但是总归是写起来比较费劲的。</p>
@@ -189,117 +721,428 @@
 <p>我是看了<a href="http://blog.devtang.com" target="_blank" rel="external">巧哥</a>的<a href="http://blog.devtang.com/2012/02/10/setup-blog-based-on-github/" target="_blank" rel="external">这个博文</a>才开始准备转到Github的。。赶脚markdown很好玩，虽然出来很早了，但是并没有仔细的去学习这个语法，于是乎这个博客就用<a href="https://hexo.io" target="_blank" rel="external">hexo</a>进行搭建，采用了<a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" rel="external">Yelee主题</a>。感觉很赞，主题的<a href="http://moxfive.coding.me/yelee/" target="_blank" rel="external">文档</a>也很给力。</p>
 <p>虽然我还不知道怎么让百度收录我的Github，但是主要的是能尝试着自己想试试确没有尝试的事情！</p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://madordie.github.io/2016/07/05/about-change-blog/" data-id="ciqoofxj30001kl6ay7l90uc5" class="article-share-link">Share</a>
+
+    <div>
       
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
-  </div>
-  
-</article>
+  </article>
 
 
-  
-
-</section>
-        
-          <aside id="sidebar">
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/公告/">公告</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li></ul>
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
 
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReactiveCocoa/">ReactiveCocoa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-    </div>
-  </div>
+      
 
+      
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/ReactiveCocoa/" style="font-size: 10px;">ReactiveCocoa</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
-    </div>
-  </div>
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Keith" />
+          <p class="site-author-name" itemprop="name">Keith</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
-    </div>
-  </div>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+        </nav>
+
         
-          <li>
-            <a href="/2016/07/12/reactivecocoa-ready-to-use/">准备食用RAC(ReactiveCocoa)的顾虑</a>
-          </li>
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
-          <li>
-            <a href="/2016/07/05/use-hexo-setup-blog/">使用hexo搭建博客</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/05/about-change-blog/">博客迁移公告</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto:keith_127@126.com" target="_blank" title="Email">
+                  
+                  Email
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/madordie" target="_blank" title="GitHub">
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/madordie/" target="_blank" title="博客园">
+                  
+                  博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://madordie.leanote.com" target="_blank" title="Leanote">
+                  
+                  Leanote
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-      <footer id="footer">
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 Keith<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Keith</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
     </div>
   </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
+
+
   
-</nav>
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
     
+  
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"madordie"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js"></script>
 
-  </div>
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
 </body>
 </html>
