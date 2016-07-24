@@ -7,13 +7,25 @@ title: Keith's blog
 subtitle: 技术狂热粉
 description: 
 author: Keith
-language: zh-CH
+language: zh-Hans
 timezone: 
 
 
 baidusitemap:
   path: baidusitemap.xml
 
+# 多说评论
+duoshuo_shortname: madordie
+# 多说分享服务
+duoshuo_share: true
+# 百度统计
+baidu_analytics: 26275fd2191bb3c1f8248947481e9ac4
+# 谷歌分析
+#google_analytics:
+# 站内搜索
+search:
+  path: search.xml
+  field: post
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -68,7 +80,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
