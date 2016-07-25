@@ -2,64 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
-    
-    
-  <url>
-    <loc>https://madordie.github.io/2016/07/05/about-change-blog/</loc>
-    <lastmod>2016-07-24T23:08:24.000Z</lastmod>
-    <data>
-        <display>
-        <title>博客迁移公告</title>
-        <pubTime>2016-07-05T05:43:36.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="公告" url="https://madordie.github.io/categories/%E5%85%AC%E5%91%8A/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</loc>
-    <lastmod>2016-07-24T06:15:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
-        <pubTime>2016-07-12T01:53:14.000Z</pubTime>
-        
-        <tag>ReactiveCocoa </tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/07/24/about-reprint-article/</loc>
-    <lastmod>2016-07-24T05:15:10.000Z</lastmod>
-    <data>
-        <display>
-        <title>关于转载的文章</title>
-        <pubTime>2016-07-24T03:52:40.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="感悟" url="https://madordie.github.io/categories/%E6%84%9F%E6%82%9F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
   <url>
     <loc>https://madordie.github.io/2016/07/05/use-hexo-setup-blog/</loc>
-    <lastmod>2016-07-13T12:32:35.000Z</lastmod>
+    <lastmod>2016-07-25T01:57:32.000Z</lastmod>
     <data>
         <display>
         <title>使用hexo搭建博客</title>
@@ -76,6 +21,61 @@
     </data>
     </url>
 
+    
+  <url>
+    <loc>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</loc>
+    <lastmod>2016-07-25T01:57:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
+        <pubTime>2016-07-12T01:53:14.000Z</pubTime>
+        
+        <tag>ReactiveCocoa </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/07/24/about-reprint-article/</loc>
+    <lastmod>2016-07-25T01:57:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于转载的文章</title>
+        <pubTime>2016-07-24T03:52:40.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="感悟" url="https://madordie.github.io/categories/%E6%84%9F%E6%82%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/07/05/about-change-blog/</loc>
+    <lastmod>2016-07-25T00:09:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>博客迁移公告</title>
+        <pubTime>2016-07-05T05:43:36.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="公告" url="https://madordie.github.io/categories/%E5%85%AC%E5%91%8A/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
     
     
 </urlset>
