@@ -27,7 +27,14 @@
 <ul>
 <li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。</li>
 </ul>
-<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1>]]></content>
+<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1><p>在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a>的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift" target="_blank" rel="external">README.md</a>中有这么一段话：</p>
+<blockquote>
+<h2 id="Objective-C-and-Swift"><a href="#Objective-C-and-Swift" class="headerlink" title="Objective-C and Swift"></a>Objective-C and Swift</h2><p>  Although ReactiveCocoa was started as an Objective-C framework, as of [version<br>  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].</p>
+<p>  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is<br>  a [bridge][Objective-C Bridging] to convert between the two. This<br>  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to<br>  use Cocoa extensions which haven’t been added to the Swift API yet.</p>
+<p>  The Objective-C API will continue to exist and be supported for the foreseeable<br>  future, but it won’t receive many improvements. For more information about using<br>  this API, please consult our [legacy documentation][].</p>
+<p>  <strong>We highly recommend that all new projects use the Swift API.</strong></p>
+</blockquote>
+]]></content>
     </entry>
     
     <entry>

@@ -98,7 +98,7 @@ OC简单食用方法先来个例子代码：
 说明众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。
 OC简单食用方法先来个例子代码：
 123456789101112131415161718RACSignal *RSignal = [[self.R rac_newValueChannelWi">
-<meta property="og:updated_time" content="2016-07-25T01:57:30.000Z">
+<meta property="og:updated_time" content="2016-07-26T08:58:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="准备食用RAC(ReactiveCocoa)的顾虑">
 <meta name="twitter:description" content="对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。
@@ -356,7 +356,14 @@ OC简单食用方法先来个例子代码：
 <ul>
 <li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。</li>
 </ul>
-<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1>
+<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1><p>在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a>的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift" target="_blank" rel="external">README.md</a>中有这么一段话：</p>
+<blockquote>
+<h2 id="Objective-C-and-Swift"><a href="#Objective-C-and-Swift" class="headerlink" title="Objective-C and Swift"></a>Objective-C and Swift</h2><p>  Although ReactiveCocoa was started as an Objective-C framework, as of [version<br>  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].</p>
+<p>  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is<br>  a [bridge][Objective-C Bridging] to convert between the two. This<br>  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to<br>  use Cocoa extensions which haven’t been added to the Swift API yet.</p>
+<p>  The Objective-C API will continue to exist and be supported for the foreseeable<br>  future, but it won’t receive many improvements. For more information about using<br>  this API, please consult our [legacy documentation][].</p>
+<p>  <strong>We highly recommend that all new projects use the Swift API.</strong></p>
+</blockquote>
+
       
     </div>
 
@@ -571,7 +578,7 @@ OC简单食用方法先来个例子代码：
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OC简单食用方法"><span class="nav-number">2.</span> <span class="nav-text">OC简单食用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顾虑"><span class="nav-number">2.1.</span> <span class="nav-text">顾虑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift简单食用方法"><span class="nav-number">3.</span> <span class="nav-text">Swift简单食用方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OC简单食用方法"><span class="nav-number">2.</span> <span class="nav-text">OC简单食用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顾虑"><span class="nav-number">2.1.</span> <span class="nav-text">顾虑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift简单食用方法"><span class="nav-number">3.</span> <span class="nav-text">Swift简单食用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Objective-C-and-Swift"><span class="nav-number">3.1.</span> <span class="nav-text">Objective-C and Swift</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

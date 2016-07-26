@@ -3,6 +3,23 @@
 
     
   <url>
+    <loc>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</loc>
+    <lastmod>2016-07-26T08:58:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
+        <pubTime>2016-07-12T01:53:14.000Z</pubTime>
+        
+        <tag>ReactiveCocoa </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/2016/07/05/use-hexo-setup-blog/</loc>
     <lastmod>2016-07-25T01:57:32.000Z</lastmod>
     <data>
@@ -17,23 +34,6 @@
              
               <breadCrumb title="教程" url="https://madordie.github.io/categories/%E6%95%99%E7%A8%8B/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</loc>
-    <lastmod>2016-07-25T01:57:30.000Z</lastmod>
-    <data>
-        <display>
-        <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
-        <pubTime>2016-07-12T01:53:14.000Z</pubTime>
-        
-        <tag>ReactiveCocoa </tag>
-         
-         
-           
         </display>
     </data>
     </url>
