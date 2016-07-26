@@ -1,0 +1,26 @@
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Hexo version: \u001b[35m3.2.2\u001b[39m","time":"2016-07-24T06:34:15.250Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Working directory: \u001b[35m~/Desktop/Madordie/hexo/\u001b[39m","time":"2016-07-24T06:34:15.253Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Config loaded: \u001b[35m~/Desktop/Madordie/hexo/_config.yml\u001b[39m","time":"2016-07-24T06:34:15.326Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-asset-image\u001b[39m","time":"2016-07-24T06:34:15.425Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-baidu-sitemap\u001b[39m","time":"2016-07-24T06:34:15.429Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-deployer-git\u001b[39m","time":"2016-07-24T06:34:15.430Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-category\u001b[39m","time":"2016-07-24T06:34:15.431Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-archive\u001b[39m","time":"2016-07-24T06:34:15.433Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-feed\u001b[39m","time":"2016-07-24T06:34:15.467Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-index\u001b[39m","time":"2016-07-24T06:34:15.468Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-search\u001b[39m","time":"2016-07-24T06:34:15.471Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-sitemap\u001b[39m","time":"2016-07-24T06:34:15.472Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-tag\u001b[39m","time":"2016-07-24T06:34:15.473Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-ejs\u001b[39m","time":"2016-07-24T06:34:15.474Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-marked\u001b[39m","time":"2016-07-24T06:34:15.478Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-stylus\u001b[39m","time":"2016-07-24T06:34:15.479Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-server\u001b[39m","time":"2016-07-24T06:34:15.515Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/merge-configs.js\u001b[39m","time":"2016-07-24T06:34:15.516Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/center-quote.js\u001b[39m","time":"2016-07-24T06:34:15.516Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/full-image.js\u001b[39m","time":"2016-07-24T06:34:15.516Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/group-pictures.js\u001b[39m","time":"2016-07-24T06:34:15.517Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":30,"msg":"Deploying: \u001b[35mgit\u001b[39m","time":"2016-07-24T06:34:15.521Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":30,"msg":"Clearing .deploy_git folder...","time":"2016-07-24T06:34:15.526Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":30,"msg":"Copying files from public folder...","time":"2016-07-24T06:34:15.563Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":30,"msg":"Deploy done: \u001b[35mgit\u001b[39m","time":"2016-07-24T06:34:22.460Z","v":0}
+{"name":"hexo","hostname":"sunjigangdeMacBook-Pro.local","pid":1236,"level":20,"msg":"Database saved","time":"2016-07-24T06:34:22.462Z","v":0}

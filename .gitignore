@@ -2,3 +2,4 @@
 .Ulysses*
 .deploy_git
 public
+site_file.json

@@ -5,6 +5,9 @@ tags:
   - ReactiveCocoa
 ---
 
+对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。
+
+
 
 # 说明
 
@@ -48,3 +51,21 @@ tags:
 
 
 # Swift简单食用方法
+
+在[ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa)的[README.md](https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift)中有这么一段话：
+
+> ## Objective-C and Swift
+>
+  Although ReactiveCocoa was started as an Objective-C framework, as of [version
+  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].
+>
+  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is
+  a [bridge][Objective-C Bridging] to convert between the two. This
+  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to
+  use Cocoa extensions which haven’t been added to the Swift API yet.
+>
+  The Objective-C API will continue to exist and be supported for the foreseeable
+  future, but it won’t receive many improvements. For more information about using
+  this API, please consult our [legacy documentation][].
+>
+  **We highly recommend that all new projects use the Swift API.**
