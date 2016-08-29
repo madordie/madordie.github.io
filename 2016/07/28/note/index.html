@@ -88,23 +88,23 @@
 
 <meta name="description" content="开发中的小笔记。记录开发中的点滴滴点。
 
-NAN: 当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)返回是否为nan。另外这里有一篇文章Objective-C 中 判断 NaN大致记录了一下
-12345678910111213141516171819//  math.h  #56#if defined(__GNUC__)#   define    HUGE">
+NAN
+当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)返回是否为nan。另外这里有一篇文章Objective-C 中 判断 NaN大致记录了一下12345678910111213//  math.h  #56#if defined(__GNUC__)#   define    HUGE_VAL     __bui">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开发小记">
 <meta property="og:url" content="https://madordie.github.io/2016/07/28/note/index.html">
 <meta property="og:site_name" content="Keith's blog">
 <meta property="og:description" content="开发中的小笔记。记录开发中的点滴滴点。
 
-NAN: 当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)返回是否为nan。另外这里有一篇文章Objective-C 中 判断 NaN大致记录了一下
-12345678910111213141516171819//  math.h  #56#if defined(__GNUC__)#   define    HUGE">
-<meta property="og:updated_time" content="2016-08-16T03:29:50.000Z">
+NAN
+当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)返回是否为nan。另外这里有一篇文章Objective-C 中 判断 NaN大致记录了一下12345678910111213//  math.h  #56#if defined(__GNUC__)#   define    HUGE_VAL     __bui">
+<meta property="og:updated_time" content="2016-08-28T04:16:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开发小记">
 <meta name="twitter:description" content="开发中的小笔记。记录开发中的点滴滴点。
 
-NAN: 当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)返回是否为nan。另外这里有一篇文章Objective-C 中 判断 NaN大致记录了一下
-12345678910111213141516171819//  math.h  #56#if defined(__GNUC__)#   define    HUGE">
+NAN
+当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)返回是否为nan。另外这里有一篇文章Objective-C 中 判断 NaN大致记录了一下12345678910111213//  math.h  #56#if defined(__GNUC__)#   define    HUGE_VAL     __bui">
 
 
 
@@ -368,13 +368,36 @@ NAN: 当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)�
       
         <p>开发中的小笔记。记录开发中的点滴滴点。</p>
 <ul>
-<li><p>NAN: 当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885" target="_blank" rel="external">Objective-C 中 判断 NaN</a>大致记录了一下</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  math.h  #56</span></div><div class="line"></div><div class="line"><span class="meta">#if defined(__GNUC__)</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     __builtin_huge_val()</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    __builtin_huge_valf()</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    __builtin_huge_vall()</span></div><div class="line"><span class="meta">#   define    NAN          __builtin_nanf(<span class="meta-string">"0x7fc00000"</span>)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     1e500</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    1e50f</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    1e5000L</span></div><div class="line"><span class="meta">#   define    NAN          __nan()</span></div><div class="line"><span class="meta">#endif</span></div><div class="line"></div><div class="line"><span class="comment">//  另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题</span></div><div class="line"><span class="meta">#define isnan(x)                                                         \</span></div><div class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</div><div class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</div><div class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</div></pre></td></tr></table></figure>
+<li>NAN<ul>
+<li>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885" target="_blank" rel="external">Objective-C 中 判断 NaN</a>大致记录了一下<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  math.h  #56</span></div><div class="line"></div><div class="line"><span class="meta">#if defined(__GNUC__)</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     __builtin_huge_val()</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    __builtin_huge_valf()</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    __builtin_huge_vall()</span></div><div class="line"><span class="meta">#   define    NAN          __builtin_nanf(<span class="meta-string">"0x7fc00000"</span>)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     1e500</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    1e50f</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    1e5000L</span></div><div class="line"><span class="meta">#   define    NAN          __nan()</span></div><div class="line"><span class="meta">#endif</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>论项目架构设计的重要性</p>
+</ul>
 </li>
-<li>百度地图的坑</li>
-<li>筛选的坑</li>
+</ul>
+<ul>
+<li>另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//  math.h  #178</span></div><div class="line"></div><div class="line"><span class="meta">#define isnan(x)                                                         \</span></div><div class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</div><div class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</div><div class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>论项目架构设计的重要性 </p>
+<ul>
+<li>规范化</li>
+<li>筛选的坑 </li>
+<li>常见布局BUG </li>
+<li>线程安全</li>
+</ul>
+</li>
+<li><p>百度地图的坑</p>
+<ul>
+<li>设置经纬度缓慢</li>
+<li>刷新缓慢</li>
+</ul>
+</li>
+<li><p>选择图片时候默认方法选择不到系统的云端图片，但是默认单张选择器却可以！</p>
+<ul>
+<li>16G手机存储空间不够，图片转到了云端，会出现相册中的照片无法选择的情况</li>
+</ul>
+</li>
 </ul>
 
       
@@ -408,6 +431,10 @@ NAN: 当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)�
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/28/ui-source-and-code-decoupling/" rel="prev" title="ui-source-and-code-decoupling">
+                ui-source-and-code-decoupling <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -498,7 +525,7 @@ NAN: 当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

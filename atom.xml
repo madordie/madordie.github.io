@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2016-08-16T03:29:50.000Z</updated>
+  <updated>2016-08-29T01:50:39.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -16,21 +16,92 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>ui-source-and-code-decoupling</title>
+    <link href="https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/"/>
+    <id>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</id>
+    <published>2016-08-28T04:16:02.000Z</published>
+    <updated>2016-08-29T01:50:39.000Z</updated>
+    
+    <content type="html">&lt;p&gt;个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。&lt;/p&gt;
+&lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，&lt;/p&gt;
+&lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码农的无休止的协作，所以可以进行着方面的解藕。&lt;/p&gt;
+&lt;h2 id=&quot;解决方案&quot;&gt;&lt;a href=&quot;#解决方案&quot; class=&quot;headerlink&quot; title=&quot;解决方案&quot;&gt;&lt;/a&gt;解决方案&lt;/h2&gt;&lt;p&gt;  哪坏哪补。有问题就会有解决方案。群中说的&amp;lt;方案一&amp;gt;由于当时不方便，所以并没有弄明白。&amp;lt;方案二&amp;gt;、&amp;lt;方案三&amp;gt;是自己的一些解决方案。&lt;/p&gt;
+&lt;h3 id=&quot;方案一&quot;&gt;&lt;a href=&quot;#方案一&quot; class=&quot;headerlink&quot; title=&quot;方案一&quot;&gt;&lt;/a&gt;方案一&lt;/h3&gt;&lt;p&gt;  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。暴露出来已知的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;操作麻烦&lt;/li&gt;
+&lt;li&gt;图片可能重复&lt;/li&gt;
+&lt;li&gt;命名规范&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;方案二&quot;&gt;&lt;a href=&quot;#方案二&quot; class=&quot;headerlink&quot; title=&quot;方案二&quot;&gt;&lt;/a&gt;方案二&lt;/h3&gt;&lt;p&gt;  按照Pods的集成方式，可以将素材看作一个第三方库，直接将素材做成一个bundle，采用Pods私有库或者其他方式放入工程。暴露出来已知的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;什么时候更新这个bundle&lt;/li&gt;
+&lt;li&gt;多人合作时这个bundle冲突问题&lt;/li&gt;
+&lt;li&gt;命名规范&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;方案三&quot;&gt;&lt;a href=&quot;#方案三&quot; class=&quot;headerlink&quot; title=&quot;方案三&quot;&gt;&lt;/a&gt;方案三&lt;/h3&gt;&lt;p&gt;  工程使用&lt;code&gt;xcassets&lt;/code&gt;进行素材打包，然后使用子库进行持续集成。这样，设计师的素材可以放在另一个独立素材仓库，内含更新脚本，直接将素材生成对应的&lt;code&gt;xcassets&lt;/code&gt;结构，并上传至子库。这样设计师做完素材直接扔在文件夹中，自动或手动跑一下脚本即可更新到素材仓库。暴露出来已知的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由于没有测试过，不知道如果素材比较多的话会不会发生冲突。因该不会吧，都是加文件或者修改😂 (有时间去研究一下之后更新)&lt;/li&gt;
+&lt;li&gt;命名规范的问题依旧存在&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;思考&quot;&gt;&lt;a href=&quot;#思考&quot; class=&quot;headerlink&quot; title=&quot;思考&quot;&gt;&lt;/a&gt;思考&lt;/h2&gt;&lt;p&gt;  好了，重要的问题来了，上面的问题都是存在命名规范的问题。此问题如何化解呢？&lt;/p&gt;
+&lt;p&gt;  素材的引入需根据素材名写入代码中，那么如何才能不用素材名呢？那时不可能的😝，毕竟你要有一个唯一标识符去标志着一个素材。可能有的人说可以做一个json用来保存代码的命名和素材的命名呀，我只想说MDZZ，那不是有两套需要维护的命名规则么。。得不偿失。&lt;/p&gt;
+&lt;p&gt;  这个命名的问题其实不能复杂化。参看iOS的项目国际化操作，使用一个key作为文案的唯一标识符，需要显示该文案，通过这个唯一标识符就能直接取到。回头看下素材，是不是也能炮制一个呢？&lt;/p&gt;
+&lt;p&gt;  如果素材名字有统一的规则，就不需要这样的key作为统一标识符，直接使用素材名字即可，这样维护一套素材命名规则总比两套更容易维护。所以，直接使用素材名即可。&lt;/p&gt;
+&lt;p&gt;  如果素材不能统一命名规则，那么这样的对照文件存在也是很不错的。话又说回来，要进行UI素材和代码的解耦，素材名都不能统一，还如何解耦，此问题也不存在了。。&lt;/p&gt;
+&lt;p&gt;  退一步，我们的目的是让素材让设计师自己维护，代码不去维护素材。设计师和码农的耦合在于图片本身的交换比较烦。不论采用哪种解耦方案，都是把图片的耦合转换为图片名字的耦合(也可以理解为素材对应的KEY的耦合)。结果是 &lt;strong&gt; 为了解除一个耦合,而引入了一个新的耦合 &lt;/strong&gt; 。个人认为这样是不靠谱的。。除非有强力的人去推动设计师走标准的命名。&lt;/p&gt;
+&lt;h2 id=&quot;结论&quot;&gt;&lt;a href=&quot;#结论&quot; class=&quot;headerlink&quot; title=&quot;结论&quot;&gt;&lt;/a&gt;结论&lt;/h2&gt;&lt;p&gt;  其实这个问题大可不必纠结，如果有强力的人去推动这个标准持续走下去那么这个问题才有价值。如果真的要进行题中说的代码解耦的话，我认为第三种是比较靠谱的。 &lt;strong&gt; 命名标准、命名标准、命名标准… &lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h2&gt;&lt;p&gt;  经验有限，如果有更好的方案，望告知。拜谢！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。&lt;/p&gt;
+&lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;  群里听到有人讨论这个话题，当时觉得比较新鲜，就十
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>开发小记</title>
     <link href="https://madordie.github.io/2016/07/28/note/"/>
     <id>https://madordie.github.io/2016/07/28/note/</id>
     <published>2016-07-28T06:52:22.000Z</published>
-    <updated>2016-08-16T03:29:50.000Z</updated>
+    <updated>2016-08-28T04:16:11.000Z</updated>
     
     <content type="html">&lt;p&gt;开发中的小笔记。记录开发中的点滴滴点。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;NAN: 当&lt;code&gt;NSUInteger 0 - 1&lt;/code&gt;时，运算结果为 NAN，iOS中有一个宏&lt;code&gt;isnan(x)&lt;/code&gt;返回是否为nan。另外这里有一篇文章&lt;a href=&quot;http://blog.csdn.net/toss156/article/details/7101885&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Objective-C 中 判断 NaN&lt;/a&gt;大致记录了一下&lt;/p&gt;
-&lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//  math.h  #56&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#if defined(__GNUC__)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VAL     __builtin_huge_val()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALF    __builtin_huge_valf()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALL    __builtin_huge_vall()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    NAN          __builtin_nanf(&lt;span class=&quot;meta-string&quot;&gt;&quot;0x7fc00000&quot;&lt;/span&gt;)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#else&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VAL     1e500&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALF    1e50f&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALL    1e5000L&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    NAN          __nan()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#endif&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//  另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#define isnan(x)                                                         \&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ( &lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(x) == &lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;float&lt;/span&gt;)  ? __inline_isnanf((&lt;span class=&quot;keyword&quot;&gt;float&lt;/span&gt;)(x))          \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    : &lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(x) == &lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt;) ? __inline_isnand((&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt;)(x))         \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                                  : __inline_isnanl((&lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt;)(x)))&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;li&gt;NAN&lt;ul&gt;
+&lt;li&gt;当&lt;code&gt;NSUInteger 0 - 1&lt;/code&gt;时，运算结果为 NAN，iOS中有一个宏&lt;code&gt;isnan(x)&lt;/code&gt;返回是否为nan。另外这里有一篇文章&lt;a href=&quot;http://blog.csdn.net/toss156/article/details/7101885&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Objective-C 中 判断 NaN&lt;/a&gt;大致记录了一下&lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//  math.h  #56&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#if defined(__GNUC__)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VAL     __builtin_huge_val()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALF    __builtin_huge_valf()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALL    __builtin_huge_vall()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    NAN          __builtin_nanf(&lt;span class=&quot;meta-string&quot;&gt;&quot;0x7fc00000&quot;&lt;/span&gt;)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#else&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VAL     1e500&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALF    1e50f&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALL    1e5000L&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    NAN          __nan()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#endif&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;论项目架构设计的重要性&lt;/p&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;百度地图的坑&lt;/li&gt;
-&lt;li&gt;筛选的坑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题&lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;//  math.h  #178&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#define isnan(x)                                                         \&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ( &lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(x) == &lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;float&lt;/span&gt;)  ? __inline_isnanf((&lt;span class=&quot;keyword&quot;&gt;float&lt;/span&gt;)(x))          \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    : &lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(x) == &lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt;) ? __inline_isnand((&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt;)(x))         \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                                  : __inline_isnanl((&lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt;)(x)))&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;论项目架构设计的重要性 &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;规范化&lt;/li&gt;
+&lt;li&gt;筛选的坑 &lt;/li&gt;
+&lt;li&gt;常见布局BUG &lt;/li&gt;
+&lt;li&gt;线程安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;百度地图的坑&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置经纬度缓慢&lt;/li&gt;
+&lt;li&gt;刷新缓慢&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;选择图片时候默认方法选择不到系统的云端图片，但是默认单张选择器却可以！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;16G手机存储空间不够，图片转到了云端，会出现相册中的照片无法选择的情况&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 </content>
     
@@ -38,7 +109,8 @@
     
       &lt;p&gt;开发中的小笔记。记录开发中的点滴滴点。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;NAN: 当&lt;code&gt;NSUInteger 0 - 1&lt;/code&gt;时，运算结果为 NAN，iOS中有一个宏&lt;code&gt;isnan(x)&lt;/code&gt;返回是否为nan。另外这里有一篇文章&lt;a href
+&lt;li&gt;NAN&lt;ul&gt;
+&lt;li&gt;当&lt;code&gt;NSUInteger 0 - 1&lt;/code&gt;时，运算结果为 NAN，iOS中有一个宏&lt;code&gt;isnan(x)&lt;/code&gt;返回是否为nan。另外这里有一篇文章&lt;a 
     
     </summary>
     

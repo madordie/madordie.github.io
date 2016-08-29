@@ -4,17 +4,75 @@
   
     
     <entry>
+      <title><![CDATA[ui-source-and-code-decoupling]]></title>
+      <url>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</url>
+      <content type="html"><![CDATA[<p>个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码农的无休止的协作，所以可以进行着方面的解藕。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>  哪坏哪补。有问题就会有解决方案。群中说的&lt;方案一&gt;由于当时不方便，所以并没有弄明白。&lt;方案二&gt;、&lt;方案三&gt;是自己的一些解决方案。</p>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。暴露出来已知的问题：</p>
+<ul>
+<li>操作麻烦</li>
+<li>图片可能重复</li>
+<li>命名规范</li>
+</ul>
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>  按照Pods的集成方式，可以将素材看作一个第三方库，直接将素材做成一个bundle，采用Pods私有库或者其他方式放入工程。暴露出来已知的问题：</p>
+<ul>
+<li>什么时候更新这个bundle</li>
+<li>多人合作时这个bundle冲突问题</li>
+<li>命名规范</li>
+</ul>
+<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>  工程使用<code>xcassets</code>进行素材打包，然后使用子库进行持续集成。这样，设计师的素材可以放在另一个独立素材仓库，内含更新脚本，直接将素材生成对应的<code>xcassets</code>结构，并上传至子库。这样设计师做完素材直接扔在文件夹中，自动或手动跑一下脚本即可更新到素材仓库。暴露出来已知的问题：</p>
+<ul>
+<li>由于没有测试过，不知道如果素材比较多的话会不会发生冲突。因该不会吧，都是加文件或者修改😂 (有时间去研究一下之后更新)</li>
+<li>命名规范的问题依旧存在</li>
+</ul>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>  好了，重要的问题来了，上面的问题都是存在命名规范的问题。此问题如何化解呢？</p>
+<p>  素材的引入需根据素材名写入代码中，那么如何才能不用素材名呢？那时不可能的😝，毕竟你要有一个唯一标识符去标志着一个素材。可能有的人说可以做一个json用来保存代码的命名和素材的命名呀，我只想说MDZZ，那不是有两套需要维护的命名规则么。。得不偿失。</p>
+<p>  这个命名的问题其实不能复杂化。参看iOS的项目国际化操作，使用一个key作为文案的唯一标识符，需要显示该文案，通过这个唯一标识符就能直接取到。回头看下素材，是不是也能炮制一个呢？</p>
+<p>  如果素材名字有统一的规则，就不需要这样的key作为统一标识符，直接使用素材名字即可，这样维护一套素材命名规则总比两套更容易维护。所以，直接使用素材名即可。</p>
+<p>  如果素材不能统一命名规则，那么这样的对照文件存在也是很不错的。话又说回来，要进行UI素材和代码的解耦，素材名都不能统一，还如何解耦，此问题也不存在了。。</p>
+<p>  退一步，我们的目的是让素材让设计师自己维护，代码不去维护素材。设计师和码农的耦合在于图片本身的交换比较烦。不论采用哪种解耦方案，都是把图片的耦合转换为图片名字的耦合(也可以理解为素材对应的KEY的耦合)。结果是 <strong> 为了解除一个耦合,而引入了一个新的耦合 </strong> 。个人认为这样是不靠谱的。。除非有强力的人去推动设计师走标准的命名。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>  其实这个问题大可不必纠结，如果有强力的人去推动这个标准持续走下去那么这个问题才有价值。如果真的要进行题中说的代码解耦的话，我认为第三种是比较靠谱的。 <strong> 命名标准、命名标准、命名标准… </strong>。</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>  经验有限，如果有更好的方案，望告知。拜谢！</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[开发小记]]></title>
       <url>https://madordie.github.io/2016/07/28/note/</url>
       <content type="html"><![CDATA[<p>开发中的小笔记。记录开发中的点滴滴点。</p>
 <ul>
-<li><p>NAN: 当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885" target="_blank" rel="external">Objective-C 中 判断 NaN</a>大致记录了一下</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  math.h  #56</span></div><div class="line"></div><div class="line"><span class="meta">#if defined(__GNUC__)</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     __builtin_huge_val()</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    __builtin_huge_valf()</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    __builtin_huge_vall()</span></div><div class="line"><span class="meta">#   define    NAN          __builtin_nanf(<span class="meta-string">"0x7fc00000"</span>)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     1e500</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    1e50f</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    1e5000L</span></div><div class="line"><span class="meta">#   define    NAN          __nan()</span></div><div class="line"><span class="meta">#endif</span></div><div class="line"></div><div class="line"><span class="comment">//  另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题</span></div><div class="line"><span class="meta">#define isnan(x)                                                         \</span></div><div class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</div><div class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</div><div class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</div></pre></td></tr></table></figure>
+<li>NAN<ul>
+<li>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885" target="_blank" rel="external">Objective-C 中 判断 NaN</a>大致记录了一下<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  math.h  #56</span></div><div class="line"></div><div class="line"><span class="meta">#if defined(__GNUC__)</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     __builtin_huge_val()</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    __builtin_huge_valf()</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    __builtin_huge_vall()</span></div><div class="line"><span class="meta">#   define    NAN          __builtin_nanf(<span class="meta-string">"0x7fc00000"</span>)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     1e500</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    1e50f</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    1e5000L</span></div><div class="line"><span class="meta">#   define    NAN          __nan()</span></div><div class="line"><span class="meta">#endif</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>论项目架构设计的重要性</p>
+</ul>
 </li>
-<li>百度地图的坑</li>
-<li>筛选的坑</li>
+</ul>
+<ul>
+<li>另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//  math.h  #178</span></div><div class="line"></div><div class="line"><span class="meta">#define isnan(x)                                                         \</span></div><div class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</div><div class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</div><div class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>论项目架构设计的重要性 </p>
+<ul>
+<li>规范化</li>
+<li>筛选的坑 </li>
+<li>常见布局BUG </li>
+<li>线程安全</li>
+</ul>
+</li>
+<li><p>百度地图的坑</p>
+<ul>
+<li>设置经纬度缓慢</li>
+<li>刷新缓慢</li>
+</ul>
+</li>
+<li><p>选择图片时候默认方法选择不到系统的云端图片，但是默认单张选择器却可以！</p>
+<ul>
+<li>16G手机存储空间不够，图片转到了云端，会出现相册中的照片无法选择的情况</li>
+</ul>
+</li>
 </ul>
 ]]></content>
     </entry>
