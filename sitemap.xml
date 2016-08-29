@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/2016/07/27/about-project-tableview/</loc>
+    
+    <lastmod>2016-08-29T02:01:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</loc>
     
-    <lastmod>2016-08-29T02:00:58.000Z</lastmod>
+    <lastmod>2016-08-29T02:01:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</loc>
+    
+    <lastmod>2016-08-29T02:01:35.000Z</lastmod>
     
   </url>
   
@@ -12,20 +26,6 @@
     <loc>https://madordie.github.io/2016/07/28/note/</loc>
     
     <lastmod>2016-08-28T04:16:11.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/2016/07/27/about-project-tableview/</loc>
-    
-    <lastmod>2016-08-11T06:07:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</loc>
-    
-    <lastmod>2016-07-26T08:58:03.000Z</lastmod>
     
   </url>
   
