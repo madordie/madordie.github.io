@@ -10,7 +10,7 @@
 <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，</p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码农的无休止的协作，所以可以进行着方面的解藕。</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>  哪坏哪补。有问题就会有解决方案。群中说的<a href="#方案一">方案一</a>由于当时不方便，所以并没有弄明白。<a href="#方案二">方案二</a>、<a href="#方案三">方案三</a>是自己的一些解决方案。</p>
-<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a><a name="方案一">方案一</a></h3><p>  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。暴露出来已知的问题：</p>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a><a name="方案一">方案一</a></h3><p>  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。另外，@夏汁泡泡 还有一个简化就是这个处理的脚本可以放在<a href="https://developer.apple.com/library/ios/recipes/xcode_help-project_editor/Articles/AddingaRunScriptBuildPhase.html" target="_blank" rel="external">Add Run Script Build Phase</a>，暴露出来已知的问题：</p>
 <ul>
 <li>操作麻烦</li>
 <li>图片可能重复</li>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2016-08-29T02:01:44.000Z</updated>
+  <updated>2016-08-30T03:18:54.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,13 +20,13 @@
     <link href="https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/"/>
     <id>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</id>
     <published>2016-08-28T04:16:02.000Z</published>
-    <updated>2016-08-29T02:01:44.000Z</updated>
+    <updated>2016-08-30T03:18:54.000Z</updated>
     
     <content type="html">&lt;p&gt;个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。&lt;/p&gt;
 &lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，&lt;/p&gt;
 &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码农的无休止的协作，所以可以进行着方面的解藕。&lt;/p&gt;
 &lt;h2 id=&quot;解决方案&quot;&gt;&lt;a href=&quot;#解决方案&quot; class=&quot;headerlink&quot; title=&quot;解决方案&quot;&gt;&lt;/a&gt;解决方案&lt;/h2&gt;&lt;p&gt;  哪坏哪补。有问题就会有解决方案。群中说的&lt;a href=&quot;#方案一&quot;&gt;方案一&lt;/a&gt;由于当时不方便，所以并没有弄明白。&lt;a href=&quot;#方案二&quot;&gt;方案二&lt;/a&gt;、&lt;a href=&quot;#方案三&quot;&gt;方案三&lt;/a&gt;是自己的一些解决方案。&lt;/p&gt;
-&lt;h3 id=&quot;方案一&quot;&gt;&lt;a href=&quot;#方案一&quot; class=&quot;headerlink&quot; title=&quot;方案一&quot;&gt;&lt;/a&gt;&lt;a name=&quot;方案一&quot;&gt;方案一&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。暴露出来已知的问题：&lt;/p&gt;
+&lt;h3 id=&quot;方案一&quot;&gt;&lt;a href=&quot;#方案一&quot; class=&quot;headerlink&quot; title=&quot;方案一&quot;&gt;&lt;/a&gt;&lt;a name=&quot;方案一&quot;&gt;方案一&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。另外，@夏汁泡泡 还有一个简化就是这个处理的脚本可以放在&lt;a href=&quot;https://developer.apple.com/library/ios/recipes/xcode_help-project_editor/Articles/AddingaRunScriptBuildPhase.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Add Run Script Build Phase&lt;/a&gt;，暴露出来已知的问题：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;操作麻烦&lt;/li&gt;
 &lt;li&gt;图片可能重复&lt;/li&gt;
