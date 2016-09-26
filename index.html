@@ -290,8 +290,113 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/26/build-ipa-sh/" itemprop="url">
+                  Xcode8打包脚本
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-26T14:55:09+08:00" content="2016-09-26">
+              2016-09-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/26/build-ipa-sh/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/26/build-ipa-sh/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Xcode8"><a href="#Xcode8" class="headerlink" title="Xcode8"></a>Xcode8</h2><p>  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。</p>
+<p>  先来重点：可用脚本：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#   追上fir API token 自动上传</div><div class="line">#   基于当前代码进行打包打包目录：MyProject/build/MyProject_ent.ipa</div><div class="line"></div><div class="line">cd MyProject</div><div class="line"></div><div class="line">rm -rf ./build/*</div><div class="line"></div><div class="line">xcodebuild -archivePath &quot;./build/xxx.xcarchive&quot; -workspace MyProject.xcworkspace -sdk iphoneos -scheme &quot;MyProject_ent&quot; -configuration &quot;Release Inhouse&quot; archive</div><div class="line"></div><div class="line">echo &quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;&lt;plist version=&quot;1.0&quot;&gt;&lt;dict&gt;&lt;key&gt;method&lt;/key&gt;&lt;string&gt;enterprise&lt;/string&gt;&lt;key&gt;compileBitcode&lt;/key&gt;&lt;string&gt;YES&lt;/string&gt;&lt;/dict&gt;&lt;/plist&gt;&quot; &gt; ./build/exportOptionsPlist.plist</div><div class="line"></div><div class="line">xcodebuild -exportArchive -archivePath &quot;./build/xxx.xcarchive&quot; -exportPath &quot;./build/&quot; -exportOptionsPlist ./build/exportOptionsPlist.plist</div><div class="line"></div><div class="line"></div><div class="line">cd build/</div><div class="line"></div><div class="line">fir i ./MyProject_ent.ipa</div><div class="line"></div><div class="line"></div><div class="line">if [ -n &quot;$1&quot; ]; then</div><div class="line">    git log -10 &gt; git.log</div><div class="line">    fir p ./MyProject_ent.ipa -T $1 -c git.log</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>  之前漏掉了一个错误：<code>The flag -exportFormat cannot be specified along with -exportOptionsPlist</code> 导致了最终包签名错误，而无法安装。</p>
+<p>  exportOptionsPlist参考的<a href="https://testerhome.com/topics/4619" target="_blank" rel="external">iOS 打包总结</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/28/ui-source-and-code-decoupling/" itemprop="url">
-                  ui-source-and-code-decoupling
+                  UI素材与代码解耦的讨论与思考
                 </a>
               
             
@@ -520,6 +625,8 @@
 <ul>
 <li>16G手机存储空间不够，图片转到了云端，会出现相册中的照片无法选择的情况</li>
 </ul>
+</li>
+<li><p>无埋点技术的讨论</p>
 </li>
 </ul>
 
@@ -1216,7 +1323,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

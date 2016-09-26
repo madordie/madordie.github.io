@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2016-08-30T03:18:54.000Z</updated>
+  <updated>2016-09-26T07:04:49.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -16,11 +16,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>ui-source-and-code-decoupling</title>
+    <title>Xcode8打包脚本</title>
+    <link href="https://madordie.github.io/2016/09/26/build-ipa-sh/"/>
+    <id>https://madordie.github.io/2016/09/26/build-ipa-sh/</id>
+    <published>2016-09-26T06:55:09.000Z</published>
+    <updated>2016-09-26T07:04:49.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Xcode8&quot;&gt;&lt;a href=&quot;#Xcode8&quot; class=&quot;headerlink&quot; title=&quot;Xcode8&quot;&gt;&lt;/a&gt;Xcode8&lt;/h2&gt;&lt;p&gt;  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。&lt;/p&gt;
+&lt;p&gt;  先来重点：可用脚本：&lt;/p&gt;
+  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;#!/bin/bash&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#   追上fir API token 自动上传&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#   基于当前代码进行打包打包目录：MyProject/build/MyProject_ent.ipa&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;cd MyProject&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;rm -rf ./build/*&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xcodebuild -archivePath &amp;quot;./build/xxx.xcarchive&amp;quot; -workspace MyProject.xcworkspace -sdk iphoneos -scheme &amp;quot;MyProject_ent&amp;quot; -configuration &amp;quot;Release Inhouse&amp;quot; archive&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;echo &amp;quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;!DOCTYPE plist PUBLIC &amp;quot;-//Apple//DTD PLIST 1.0//EN&amp;quot; &amp;quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&amp;quot;&amp;gt;&amp;lt;plist version=&amp;quot;1.0&amp;quot;&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;method&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;enterprise&amp;lt;/string&amp;gt;&amp;lt;key&amp;gt;compileBitcode&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;YES&amp;lt;/string&amp;gt;&amp;lt;/dict&amp;gt;&amp;lt;/plist&amp;gt;&amp;quot; &amp;gt; ./build/exportOptionsPlist.plist&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xcodebuild -exportArchive -archivePath &amp;quot;./build/xxx.xcarchive&amp;quot; -exportPath &amp;quot;./build/&amp;quot; -exportOptionsPlist ./build/exportOptionsPlist.plist&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;cd build/&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fir i ./MyProject_ent.ipa&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;if [ -n &amp;quot;$1&amp;quot; ]; then&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    git log -10 &amp;gt; git.log&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    fir p ./MyProject_ent.ipa -T $1 -c git.log&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fi&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;  之前漏掉了一个错误：&lt;code&gt;The flag -exportFormat cannot be specified along with -exportOptionsPlist&lt;/code&gt; 导致了最终包签名错误，而无法安装。&lt;/p&gt;
+&lt;p&gt;  exportOptionsPlist参考的&lt;a href=&quot;https://testerhome.com/topics/4619&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS 打包总结&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Xcode8&quot;&gt;&lt;a href=&quot;#Xcode8&quot; class=&quot;headerlink&quot; title=&quot;Xcode8&quot;&gt;&lt;/a&gt;Xcode8&lt;/h2&gt;&lt;p&gt;  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用X
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>UI素材与代码解耦的讨论与思考</title>
     <link href="https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/"/>
     <id>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</id>
     <published>2016-08-28T04:16:02.000Z</published>
-    <updated>2016-08-30T03:18:54.000Z</updated>
+    <updated>2016-09-23T14:37:30.000Z</updated>
     
     <content type="html">&lt;p&gt;个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。&lt;/p&gt;
 &lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，&lt;/p&gt;
@@ -70,7 +93,7 @@
     <link href="https://madordie.github.io/2016/07/28/note/"/>
     <id>https://madordie.github.io/2016/07/28/note/</id>
     <published>2016-07-28T06:52:22.000Z</published>
-    <updated>2016-08-28T04:16:11.000Z</updated>
+    <updated>2016-09-23T14:38:14.000Z</updated>
     
     <content type="html">&lt;p&gt;开发中的小笔记。记录开发中的点滴滴点。&lt;/p&gt;
 &lt;ul&gt;
@@ -103,6 +126,8 @@
 &lt;ul&gt;
 &lt;li&gt;16G手机存储空间不够，图片转到了云端，会出现相册中的照片无法选择的情况&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;无埋点技术的讨论&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 </content>
