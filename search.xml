@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[DEBUG的小记]]></title>
+      <title><![CDATA[Debug 小记]]></title>
       <url>https://madordie.github.io/2016/10/12/debug-note/</url>
       <content type="html"><![CDATA[<h1 id="UIView-m-190-UIViewReportBrokenSuperviewChain"><a href="#UIView-m-190-UIViewReportBrokenSuperviewChain" class="headerlink" title="UIView.m:190 - UIViewReportBrokenSuperviewChain"></a>UIView.m:190 - UIViewReportBrokenSuperviewChain</h1><h2 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190</div><div class="line">invalid mode &apos;kCFRunLoopCommonModes&apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</div><div class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</div></pre></td></tr></table></figure>
 <h2 id="异常分析"><a href="#异常分析" class="headerlink" title="异常分析"></a>异常分析</h2><p>  APP crash在<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[keyWindow addSubview:weakSelf];</div></pre></td></tr></table></figure></p>
