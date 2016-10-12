@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -86,22 +86,16 @@
 
 
 
-<meta name="description" content="个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。
-起因  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，
-问题  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码">
+<meta name="description" content="UIView.m:190 - UIViewReportBrokenSuperviewChain异常信息：  123*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UI素材与代码解耦的讨论与思考">
-<meta property="og:url" content="https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/index.html">
+<meta property="og:title" content="DEBUG的小记">
+<meta property="og:url" content="https://madordie.github.io/2016/10/12/debug-note/index.html">
 <meta property="og:site_name" content="Keith's blog">
-<meta property="og:description" content="个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。
-起因  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，
-问题  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码">
-<meta property="og:updated_time" content="2016-09-23T14:37:30.000Z">
+<meta property="og:description" content="UIView.m:190 - UIViewReportBrokenSuperviewChain异常信息：  123*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple">
+<meta property="og:updated_time" content="2016-10-12T10:17:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UI素材与代码解耦的讨论与思考">
-<meta name="twitter:description" content="个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。
-起因  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，
-问题  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码">
+<meta name="twitter:title" content="DEBUG的小记">
+<meta name="twitter:description" content="UIView.m:190 - UIViewReportBrokenSuperviewChain异常信息：  123*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple">
 
 
 
@@ -122,9 +116,9 @@
 
 
 
-  <link rel="canonical" href="https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/"/>
+  <link rel="canonical" href="https://madordie.github.io/2016/10/12/debug-note/"/>
 
-  <title> UI素材与代码解耦的讨论与思考 | Keith's blog </title>
+  <title> DEBUG的小记 | Keith's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -297,7 +291,7 @@
             
             
               
-                UI素材与代码解耦的讨论与思考
+                DEBUG的小记
               
             
           </h1>
@@ -309,8 +303,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-28T12:16:02+08:00" content="2016-08-28">
-              2016-08-28
+            <time itemprop="dateCreated" datetime="2016-10-12T21:51:04+08:00" content="2016-10-12">
+              2016-10-12
             </time>
           </span>
 
@@ -320,8 +314,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/28/ui-source-and-code-decoupling/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/28/ui-source-and-code-decoupling/" itemprop="commentsCount"></span>
+                <a href="/2016/10/12/debug-note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/12/debug-note/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -344,36 +338,20 @@
       
 
       
-        <p>个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。</p>
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码农的无休止的协作，所以可以进行着方面的解藕。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>  哪坏哪补。有问题就会有解决方案。群中说的<a href="#方案一">方案一</a>由于当时不方便，所以并没有弄明白。<a href="#方案二">方案二</a>、<a href="#方案三">方案三</a>是自己的一些解决方案。</p>
-<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a><a name="方案一">方案一</a></h3><p>  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。另外，@夏汁泡泡 还有一个简化就是这个处理的脚本可以放在<a href="https://developer.apple.com/library/ios/recipes/xcode_help-project_editor/Articles/AddingaRunScriptBuildPhase.html" target="_blank" rel="external">Add Run Script Build Phase</a>，暴露出来已知的问题：</p>
-<ul>
-<li>操作麻烦</li>
-<li>图片可能重复</li>
-<li>命名规范</li>
-</ul>
-<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a><a name="方案二">方案二</a></h3><p>  按照Pods的集成方式，可以将素材看作一个第三方库，直接将素材做成一个bundle，采用Pods私有库或者其他方式放入工程。暴露出来已知的问题：</p>
-<ul>
-<li>什么时候更新这个bundle</li>
-<li>多人合作时这个bundle冲突问题</li>
-<li>命名规范</li>
-</ul>
-<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a><a name="方案三">方案三</a></h3><p>  工程使用<code>xcassets</code>进行素材打包，然后使用子库进行持续集成。这样，设计师的素材可以放在另一个独立素材仓库，内含更新脚本，直接将素材生成对应的<code>xcassets</code>结构，并上传至子库。这样设计师做完素材直接扔在文件夹中，自动或手动跑一下脚本即可更新到素材仓库。暴露出来已知的问题：</p>
-<ul>
-<li>由于没有测试过，不知道如果素材比较多的话会不会发生冲突。因该不会吧，都是加文件或者修改😂 (有时间去研究一下之后更新)</li>
-<li>命名规范的问题依旧存在</li>
-</ul>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>  好了，重要的问题来了，上面的问题都是存在命名规范的问题。此问题如何化解呢？</p>
-<p>  素材的引入需根据素材名写入代码中，那么如何才能不用素材名呢？那时不可能的😝，毕竟你要有一个唯一标识符去标志着一个素材。可能有的人说可以做一个json用来保存代码的命名和素材的命名呀，我只想说MDZZ，那不是有两套需要维护的命名规则么。。得不偿失。</p>
-<p>  这个命名的问题其实不能复杂化。参看iOS的项目国际化操作，使用一个key作为文案的唯一标识符，需要显示该文案，通过这个唯一标识符就能直接取到。回头看下素材，是不是也能炮制一个呢？</p>
-<p>  如果素材名字有统一的规则，就不需要这样的key作为统一标识符，直接使用素材名字即可，这样维护一套素材命名规则总比两套更容易维护。所以，直接使用素材名即可。</p>
-<p>  如果素材不能统一命名规则，那么这样的对照文件存在也是很不错的。话又说回来，要进行UI素材和代码的解耦，素材名都不能统一，还如何解耦，此问题也不存在了。。</p>
-<p>  退一步，我们的目的是让素材让设计师自己维护，代码不去维护素材。设计师和码农的耦合在于图片本身的交换比较烦。不论采用哪种解耦方案，都是把图片的耦合转换为图片名字的耦合(也可以理解为素材对应的KEY的耦合)。结果是 <strong> 为了解除一个耦合,而引入了一个新的耦合 </strong> 。个人认为这样是不靠谱的。。除非有强力的人去推动设计师走标准的命名。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>  其实这个问题大可不必纠结，如果有强力的人去推动这个标准持续走下去那么这个问题才有价值。如果真的要进行题中说的代码解耦的话，我认为第三种是比较靠谱的。 <strong> 命名标准、命名标准、命名标准… </strong>。</p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>  经验有限，如果有更好的方案，望告知。拜谢！</p>
-
+        <h1 id="UIView-m-190-UIViewReportBrokenSuperviewChain"><a href="#UIView-m-190-UIViewReportBrokenSuperviewChain" class="headerlink" title="UIView.m:190 - UIViewReportBrokenSuperviewChain"></a>UIView.m:190 - UIViewReportBrokenSuperviewChain</h1><h2 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190</div><div class="line">invalid mode &apos;kCFRunLoopCommonModes&apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</div><div class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</div></pre></td></tr></table></figure>
+<h2 id="异常分析"><a href="#异常分析" class="headerlink" title="异常分析"></a>异常分析</h2><p>  APP crash在<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[keyWindow addSubview:weakSelf];</div></pre></td></tr></table></figure></p>
+<p>  <a href="#错误堆栈">错误堆栈信息</a>。</p>
+<p>  但是真正造成crash的代码为：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</div></pre></td></tr></table></figure>
+<p>  解决方案：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[self layoutIfNeeded];</div><div class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</div></pre></td></tr></table></figure></p>
+<p>  原因分析：<br>  下面这个说的很在理</p>
+<blockquote>
+<p><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="external">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
+<p>I had this issue with a library when moving over to Xcode 8 (Material-Controls-For-iOS - MDTextField). I found that the problem was coming from where the layer of one view (which had no superview) was being added to another.</p>
+<p>It looks like this may be the case for yourself also - your toolbar being created has not been added to a superview first. The fix I used was to add the view as a subview of the view that the layer was being added to, so in your case adding the toolbar as a subview of myModelView should stop the error.</p>
+</blockquote>
+<h2 id="碰到该问题的还有"><a href="#碰到该问题的还有" class="headerlink" title="碰到该问题的还有"></a>碰到该问题的还有</h2><p>  <a href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8" target="_blank" rel="external">Google出来的一个，但是并未看到相关回复。。。</a><br>  <a href="http://www.th7.cn/Program/IOS/201609/975582.shtml" target="_blank" rel="external">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a><br>  <a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="external">stackoverflow(这个分析的很到位)</a></p>
+<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190</div><div class="line">invalid mode &apos;kCFRunLoopCommonModes&apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</div><div class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</div><div class="line"></div><div class="line">(lldb) bt</div><div class="line">* thread #1: tid = 0x87c18, 0x000000018238c524 libobjc.A.dylib`objc_exception_throw, queue = &apos;com.apple.main-thread&apos;, stop reason = breakpoint 1.2</div><div class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib`objc_exception_throw</div><div class="line">    frame #1: 0x0000000183954094 CoreFoundation`+[NSException raise:format:arguments:] + 104</div><div class="line">    frame #2: 0x00000001843de898 Foundation`-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</div><div class="line">    frame #3: 0x0000000189a7cf9c UIKit`UIViewReportBrokenSuperviewChain + 472</div><div class="line">    frame #4: 0x0000000189a7d658 UIKit`_UIViewTopDownSubtreeTraversal + 1496</div><div class="line">    frame #5: 0x000000018a0f3390 UIKit`-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</div><div class="line">    frame #6: 0x00000001843832ac Foundation`-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</div><div class="line">    frame #7: 0x0000000184382dcc Foundation`-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</div><div class="line">    frame #8: 0x00000001843809e0 Foundation`-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</div><div class="line">    frame #9: 0x000000018989cfdc UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</div><div class="line">    frame #10: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #11: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #12: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #13: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #14: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #15: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #16: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #17: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #18: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #19: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #20: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #21: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #22: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #23: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #24: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #25: 0x00000001898a4bb0 UIKit`-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</div><div class="line">    frame #26: 0x00000001898a4b04 UIKit`-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</div><div class="line">    frame #27: 0x00000001898a4910 UIKit`-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</div><div class="line">    frame #28: 0x00000001897996dc UIKit`-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</div><div class="line">    frame #29: 0x0000000189798d90 UIKit`__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</div><div class="line">    frame #30: 0x0000000189798be8 UIKit`-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</div><div class="line">    frame #31: 0x00000001897a4ad0 UIKit`-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</div><div class="line">    frame #32: 0x00000001897a43bc UIKit`-[UIView(Hierarchy) addSubview:] + 828</div><div class="line">  * frame #33: 0x00000001004f78ec Project_ent`__31-[EsfCommentReportView show]_block_invoke((null)=&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</div><div class="line">    frame #34: 0x00000001897d2b88 UIKit`+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</div><div class="line">    frame #35: 0x00000001897d28e8 UIKit`+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</div><div class="line">    frame #36: 0x00000001004f77a0 Project_ent`-[EsfCommentReportView show](self=0x000000015fe32020, _cmd=&quot;show&quot;) + 492 at EsfCommentReportView.m:291</div><div class="line">    frame #37: 0x0000000100858a04 Project_ent`__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)=&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</div><div class="line">    frame #38: 0x00000001003f93e4 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController=0x000000015fd2e320, sourceType=2, afterCheckOrLogin=0x00000001008588d0, cancelLogin=(null)) + 236 at MyLoginViewController.m:123</div><div class="line">    frame #39: 0x00000001003f92b0 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController=0x000000015fd2e320, afterCheckOrLogin=0x00000001008588d0, cancelLogin=(null)) + 156 at MyLoginViewController.m:114</div><div class="line">    frame #40: 0x00000001003f9124 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController=0x000000015fd2e320, afterCheckOrLogin=0x00000001008588d0) + 120 at MyLoginViewController.m:104</div><div class="line">    frame #41: 0x0000000100858870 Project_ent`-[BuyerAdviserProfileViewController reportAction:](self=0x000000015fd2e320, _cmd=&quot;reportAction:&quot;, button=0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</div><div class="line">    frame #42: 0x00000001897d27b0 UIKit`-[UIApplication sendAction:to:from:forEvent:] + 96</div><div class="line">    frame #43: 0x00000001897d2730 UIKit`-[UIControl sendAction:to:forEvent:] + 80</div><div class="line">    frame #44: 0x00000001897bcbe4 UIKit`-[UIControl _sendActionsForEvents:withEvent:] + 452</div><div class="line">    frame #45: 0x00000001897d201c UIKit`-[UIControl touchesEnded:withEvent:] + 584</div><div class="line">    frame #46: 0x00000001897d1b44 UIKit`-[UIWindow _sendTouchesForEvent:] + 2484</div><div class="line">    frame #47: 0x00000001897ccd8c UIKit`-[UIWindow sendEvent:] + 2988</div><div class="line">    frame #48: 0x000000018979d858 UIKit`-[UIApplication sendEvent:] + 340</div><div class="line">    frame #49: 0x0000000189f8acb8 UIKit`__dispatchPreprocessedEventFromEventQueue + 2736</div><div class="line">    frame #50: 0x0000000189f84720 UIKit`__handleEventQueue + 784</div><div class="line">    frame #51: 0x0000000183902278 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</div><div class="line">    frame #52: 0x0000000183901bc0 CoreFoundation`__CFRunLoopDoSources0 + 524</div><div class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation`__CFRunLoopRun + 804</div><div class="line">    frame #54: 0x000000018382e048 CoreFoundation`CFRunLoopRunSpecific + 444</div><div class="line">    frame #55: 0x00000001852b1198 GraphicsServices`GSEventRunModal + 180</div><div class="line">    frame #56: 0x0000000189808628 UIKit`-[UIApplication _run] + 684</div><div class="line">    frame #57: 0x0000000189803360 UIKit`UIApplicationMain + 208</div><div class="line">    frame #58: 0x0000000100a3db78 Project_ent`main + 460 at main.swift:24</div><div class="line">    frame #59: 0x00000001828105b8 libdyld.dylib`start + 4</div><div class="line">(lldb)</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -393,28 +371,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/28/note/" rel="next" title="开发小记">
-                <i class="fa fa-chevron-left"></i> 开发小记
+              <a href="/2016/09/26/build-ipa-sh/" rel="next" title="Xcode8打包脚本">
+                <i class="fa fa-chevron-left"></i> Xcode8打包脚本
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/26/build-ipa-sh/" rel="prev" title="Xcode8打包脚本">
-                Xcode8打包脚本 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -429,10 +397,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/08/28/ui-source-and-code-decoupling/"
-     data-title="UI素材与代码解耦的讨论与思考"
+        <div class="ds-share flat" data-thread-key="2016/10/12/debug-note/"
+     data-title="DEBUG的小记"
      data-content=""
-     data-url="https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/">
+     data-url="https://madordie.github.io/2016/10/12/debug-note/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -459,8 +427,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/28/ui-source-and-code-decoupling/"
-           data-title="UI素材与代码解耦的讨论与思考" data-url="https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/">
+      <div class="ds-thread" data-thread-key="2016/10/12/debug-note/"
+           data-title="DEBUG的小记" data-url="https://madordie.github.io/2016/10/12/debug-note/">
       </div>
     
   </div>
@@ -588,7 +556,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一"><span class="nav-number">3.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二"><span class="nav-number">3.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三"><span class="nav-number">3.3.</span> <span class="nav-text">方案三</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考"><span class="nav-number">4.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">6.</span> <span class="nav-text">说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UIView-m-190-UIViewReportBrokenSuperviewChain"><span class="nav-number">1.</span> <span class="nav-text">UIView.m:190 - UIViewReportBrokenSuperviewChain</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常信息："><span class="nav-number">1.1.</span> <span class="nav-text">异常信息：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常分析"><span class="nav-number">1.2.</span> <span class="nav-text">异常分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#碰到该问题的还有"><span class="nav-number">1.3.</span> <span class="nav-text">碰到该问题的还有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误堆栈-lt-脱敏-gt"><span class="nav-number">1.4.</span> <span class="nav-text">错误堆栈 <脱敏></span></a></li></ol></li></ol></div>
             
           </div>
         </section>
