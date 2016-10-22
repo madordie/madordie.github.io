@@ -78,7 +78,7 @@
     <link href="https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/"/>
     <id>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</id>
     <published>2016-08-28T04:16:02.000Z</published>
-    <updated>2016-09-23T14:37:30.000Z</updated>
+    <updated>2016-10-22T13:15:15.000Z</updated>
     
     <content type="html">&lt;p&gt;个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。&lt;/p&gt;
 &lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，&lt;/p&gt;
@@ -101,6 +101,7 @@
 &lt;li&gt;由于没有测试过，不知道如果素材比较多的话会不会发生冲突。因该不会吧，都是加文件或者修改😂 (有时间去研究一下之后更新)&lt;/li&gt;
 &lt;li&gt;命名规范的问题依旧存在&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&quot;方案四&quot;&gt;&lt;a href=&quot;#方案四&quot; class=&quot;headerlink&quot; title=&quot;方案四&quot;&gt;&lt;/a&gt;&lt;a name=&quot;方案四&quot;&gt;方案四&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;  &lt;strong&gt; 字体库 &lt;/strong&gt;。最近同事提出关于用字体库去存储素材图片的方案。感觉非常的赞，虽然并未实践，但是这种方案就像emoji一样，不但减少了相同图片内容之间存在多个不同尺寸版本的问题，也能够比较好的进行压缩管理。设计师需要做的就是做出一套字体库，然后将所有的素材图全部按照设计字体的方案进行设计和制作，这样在使用的时候只需要导入一个字体文件就好了。对于这个字体文件如何管理都好说，毕竟只有一个字体文件。字体库的制作方面还不是很了解，所以只提着么一下吧嘿嘿。。&lt;/p&gt;
 &lt;h2 id=&quot;思考&quot;&gt;&lt;a href=&quot;#思考&quot; class=&quot;headerlink&quot; title=&quot;思考&quot;&gt;&lt;/a&gt;思考&lt;/h2&gt;&lt;p&gt;  好了，重要的问题来了，上面的问题都是存在命名规范的问题。此问题如何化解呢？&lt;/p&gt;
 &lt;p&gt;  素材的引入需根据素材名写入代码中，那么如何才能不用素材名呢？那时不可能的😝，毕竟你要有一个唯一标识符去标志着一个素材。可能有的人说可以做一个json用来保存代码的命名和素材的命名呀，我只想说MDZZ，那不是有两套需要维护的命名规则么。。得不偿失。&lt;/p&gt;
 &lt;p&gt;  这个命名的问题其实不能复杂化。参看iOS的项目国际化操作，使用一个key作为文案的唯一标识符，需要显示该文案，通过这个唯一标识符就能直接取到。回头看下素材，是不是也能炮制一个呢？&lt;/p&gt;
@@ -128,7 +129,7 @@
     <link href="https://madordie.github.io/2016/07/28/note/"/>
     <id>https://madordie.github.io/2016/07/28/note/</id>
     <published>2016-07-28T06:52:22.000Z</published>
-    <updated>2016-09-23T14:38:14.000Z</updated>
+    <updated>2016-10-20T05:53:21.000Z</updated>
     
     <content type="html">&lt;p&gt;开发中的小笔记。记录开发中的点滴滴点。&lt;/p&gt;
 &lt;ul&gt;
@@ -163,6 +164,10 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;无埋点技术的讨论&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;多个window的显示、删除、操作问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用HTTP架设日志实时显示系统&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 </content>

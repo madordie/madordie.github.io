@@ -3,6 +3,41 @@
 
     
   <url>
+    <loc>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</loc>
+    <lastmod>2016-10-22T13:15:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>UI素材与代码解耦的讨论与思考</title>
+        <pubTime>2016-08-28T04:16:02.000Z</pubTime>
+        
+        <tag>iOS </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/07/28/note/</loc>
+    <lastmod>2016-10-20T05:53:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>开发小记</title>
+        <pubTime>2016-07-28T06:52:22.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="笔记" url="https://madordie.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/2016/10/12/debug-note/</loc>
     <lastmod>2016-10-12T10:20:56.000Z</lastmod>
     <data>
@@ -25,41 +60,6 @@
         <title>Xcode8打包脚本</title>
         <pubTime>2016-09-26T06:55:09.000Z</pubTime>
         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/07/28/note/</loc>
-    <lastmod>2016-09-23T14:38:14.000Z</lastmod>
-    <data>
-        <display>
-        <title>开发小记</title>
-        <pubTime>2016-07-28T06:52:22.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="笔记" url="https://madordie.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</loc>
-    <lastmod>2016-09-23T14:37:30.000Z</lastmod>
-    <data>
-        <display>
-        <title>UI素材与代码解耦的讨论与思考</title>
-        <pubTime>2016-08-28T04:16:02.000Z</pubTime>
-        
-        <tag>iOS </tag>
-         
          
            
         </display>
