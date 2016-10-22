@@ -86,25 +86,16 @@
 
 
 
-<meta name="description" content="开发中的小笔记。记录开发中的点滴滴点。
-
-NAN
-当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)返回是否为nan。另外这里有一篇文章Objective-C 中 判断 NaN大致记录了一下12345678910111213//  math.h  #56#if defined(__GNUC__)#   define    HUGE_VAL     __bui">
+<meta name="description" content="开发中的小笔记。记录开发中的点滴滴点。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开发小记">
 <meta property="og:url" content="https://madordie.github.io/2016/07/28/note/index.html">
 <meta property="og:site_name" content="Keith's blog">
-<meta property="og:description" content="开发中的小笔记。记录开发中的点滴滴点。
-
-NAN
-当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)返回是否为nan。另外这里有一篇文章Objective-C 中 判断 NaN大致记录了一下12345678910111213//  math.h  #56#if defined(__GNUC__)#   define    HUGE_VAL     __bui">
-<meta property="og:updated_time" content="2016-10-20T05:53:21.000Z">
+<meta property="og:description" content="开发中的小笔记。记录开发中的点滴滴点。">
+<meta property="og:updated_time" content="2016-10-22T13:55:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开发小记">
-<meta name="twitter:description" content="开发中的小笔记。记录开发中的点滴滴点。
-
-NAN
-当NSUInteger 0 - 1时，运算结果为 NAN，iOS中有一个宏isnan(x)返回是否为nan。另外这里有一篇文章Objective-C 中 判断 NaN大致记录了一下12345678910111213//  math.h  #56#if defined(__GNUC__)#   define    HUGE_VAL     __bui">
+<meta name="twitter:description" content="开发中的小笔记。记录开发中的点滴滴点。">
 
 
 
@@ -367,6 +358,7 @@ NAN
 
       
         <p>开发中的小笔记。记录开发中的点滴滴点。</p>
+<a id="more"></a>
 <ul>
 <li>NAN<ul>
 <li>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885" target="_blank" rel="external">Objective-C 中 判断 NaN</a>大致记录了一下<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  math.h  #56</span></div><div class="line"></div><div class="line"><span class="meta">#if defined(__GNUC__)</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     __builtin_huge_val()</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    __builtin_huge_valf()</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    __builtin_huge_vall()</span></div><div class="line"><span class="meta">#   define    NAN          __builtin_nanf(<span class="meta-string">"0x7fc00000"</span>)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     1e500</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    1e50f</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    1e5000L</span></div><div class="line"><span class="meta">#   define    NAN          __nan()</span></div><div class="line"><span class="meta">#endif</span></div></pre></td></tr></table></figure>

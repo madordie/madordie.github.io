@@ -86,22 +86,16 @@
 
 
 
-<meta name="description" content="Xcode8  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。
-  先来重点：可用脚本：
-  12345678910111213141516171819202122232425#!/bin/bash#   追上fir API token 自动上传#   基于当前代码进行打包打包目录：MyProject/build/MyProj">
+<meta name="description" content="Xcode8下的打包脚本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Xcode8打包脚本">
 <meta property="og:url" content="https://madordie.github.io/2016/09/26/build-ipa-sh/index.html">
 <meta property="og:site_name" content="Keith's blog">
-<meta property="og:description" content="Xcode8  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。
-  先来重点：可用脚本：
-  12345678910111213141516171819202122232425#!/bin/bash#   追上fir API token 自动上传#   基于当前代码进行打包打包目录：MyProject/build/MyProj">
-<meta property="og:updated_time" content="2016-09-26T07:11:01.000Z">
+<meta property="og:description" content="Xcode8下的打包脚本">
+<meta property="og:updated_time" content="2016-10-22T13:55:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xcode8打包脚本">
-<meta name="twitter:description" content="Xcode8  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。
-  先来重点：可用脚本：
-  12345678910111213141516171819202122232425#!/bin/bash#   追上fir API token 自动上传#   基于当前代码进行打包打包目录：MyProject/build/MyProj">
+<meta name="twitter:description" content="Xcode8下的打包脚本">
 
 
 
@@ -344,7 +338,9 @@
       
 
       
-        <h2 id="Xcode8"><a href="#Xcode8" class="headerlink" title="Xcode8"></a>Xcode8</h2><p>  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。</p>
+        <p>Xcode8下的打包脚本</p>
+<a id="more"></a>
+<h2 id="Xcode8"><a href="#Xcode8" class="headerlink" title="Xcode8"></a>Xcode8</h2><p>  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。</p>
 <p>  先来重点：可用脚本：</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment">#   追上fir API token 自动上传</span></div><div class="line"><span class="comment">#   基于当前代码进行打包打包目录：MyProject/build/MyProject_ent.ipa</span></div><div class="line"></div><div class="line"><span class="built_in">cd</span> MyProject</div><div class="line"></div><div class="line">rm -rf ./build/*</div><div class="line"></div><div class="line">xcodebuild -archivePath <span class="string">"./build/xxx.xcarchive"</span> -workspace MyProject.xcworkspace -sdk iphoneos -scheme <span class="string">"MyProject_ent"</span> -configuration <span class="string">"Release Inhouse"</span> archive</div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;?xml version="</span>1.0<span class="string">" encoding="</span>UTF-8<span class="string">"?&gt;&lt;!DOCTYPE plist PUBLIC "</span>-//Apple//DTD PLIST 1.0//EN<span class="string">" "</span>http://www.apple.com/DTDs/PropertyList-1.0.dtd<span class="string">"&gt;&lt;plist version="</span>1.0<span class="string">"&gt;&lt;dict&gt;&lt;key&gt;method&lt;/key&gt;&lt;string&gt;enterprise&lt;/string&gt;&lt;key&gt;compileBitcode&lt;/key&gt;&lt;string&gt;YES&lt;/string&gt;&lt;/dict&gt;&lt;/plist&gt;"</span> &gt; ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line">xcodebuild -exportArchive -archivePath <span class="string">"./build/xxx.xcarchive"</span> -exportPath <span class="string">"./build/"</span> -exportOptionsPlist ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">cd</span> build/</div><div class="line"></div><div class="line">fir i ./MyProject_ent.ipa</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></div><div class="line">    git <span class="built_in">log</span> -10 &gt; git.log</div><div class="line">    fir p ./MyProject_ent.ipa -T <span class="variable">$1</span> -c git.log</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
 <p>  之前漏掉了一个错误：<code>The flag -exportFormat cannot be specified along with -exportOptionsPlist</code> 导致了最终包签名错误，而无法安装。</p>

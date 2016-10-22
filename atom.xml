@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2016-10-12T10:20:56.000Z</updated>
+  <updated>2016-10-22T13:55:33.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,9 +20,11 @@
     <link href="https://madordie.github.io/2016/10/12/debug-note/"/>
     <id>https://madordie.github.io/2016/10/12/debug-note/</id>
     <published>2016-10-12T13:51:04.000Z</published>
-    <updated>2016-10-12T10:20:56.000Z</updated>
+    <updated>2016-10-22T13:55:33.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;UIView-m-190-UIViewReportBrokenSuperviewChain&quot;&gt;&lt;a href=&quot;#UIView-m-190-UIViewReportBrokenSuperviewChain&quot; class=&quot;headerlink&quot; title=&quot;UIView.m:190 - UIViewReportBrokenSuperviewChain&quot;&gt;&lt;/a&gt;UIView.m:190 - UIViewReportBrokenSuperviewChain&lt;/h1&gt;&lt;h2 id=&quot;异常信息：&quot;&gt;&lt;a href=&quot;#异常信息：&quot; class=&quot;headerlink&quot; title=&quot;异常信息：&quot;&gt;&lt;/a&gt;异常信息：&lt;/h2&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;invalid mode &amp;apos;kCFRunLoopCommonModes&amp;apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;libc++abi.dylib: terminate_handler unexpectedly threw an exception&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    <content type="html">&lt;p&gt;Debug的日常&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;UIView-m-190-UIViewReportBrokenSuperviewChain&quot;&gt;&lt;a href=&quot;#UIView-m-190-UIViewReportBrokenSuperviewChain&quot; class=&quot;headerlink&quot; title=&quot;UIView.m:190 - UIViewReportBrokenSuperviewChain&quot;&gt;&lt;/a&gt;UIView.m:190 - UIViewReportBrokenSuperviewChain&lt;/h1&gt;&lt;h2 id=&quot;异常信息：&quot;&gt;&lt;a href=&quot;#异常信息：&quot; class=&quot;headerlink&quot; title=&quot;异常信息：&quot;&gt;&lt;/a&gt;异常信息：&lt;/h2&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;invalid mode &amp;apos;kCFRunLoopCommonModes&amp;apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;libc++abi.dylib: terminate_handler unexpectedly threw an exception&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;异常分析&quot;&gt;&lt;a href=&quot;#异常分析&quot; class=&quot;headerlink&quot; title=&quot;异常分析&quot;&gt;&lt;/a&gt;异常分析&lt;/h2&gt;&lt;p&gt;  APP crash在&lt;br&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;[keyWindow addSubview:weakSelf];&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;  &lt;a href=&quot;#错误堆栈&quot;&gt;错误堆栈信息&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;  但是真正造成crash的代码为：&lt;/p&gt;
@@ -43,7 +45,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;UIView-m-190-UIViewReportBrokenSuperviewChain&quot;&gt;&lt;a href=&quot;#UIView-m-190-UIViewReportBrokenSuperviewChain&quot; class=&quot;headerlink&quot; title=&quot;UI
+      &lt;p&gt;Debug的日常&lt;/p&gt;
     
     </summary>
     
@@ -55,9 +57,11 @@
     <link href="https://madordie.github.io/2016/09/26/build-ipa-sh/"/>
     <id>https://madordie.github.io/2016/09/26/build-ipa-sh/</id>
     <published>2016-09-26T06:55:09.000Z</published>
-    <updated>2016-09-26T07:11:01.000Z</updated>
+    <updated>2016-10-22T13:55:15.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Xcode8&quot;&gt;&lt;a href=&quot;#Xcode8&quot; class=&quot;headerlink&quot; title=&quot;Xcode8&quot;&gt;&lt;/a&gt;Xcode8&lt;/h2&gt;&lt;p&gt;  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。&lt;/p&gt;
+    <content type="html">&lt;p&gt;Xcode8下的打包脚本&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;Xcode8&quot;&gt;&lt;a href=&quot;#Xcode8&quot; class=&quot;headerlink&quot; title=&quot;Xcode8&quot;&gt;&lt;/a&gt;Xcode8&lt;/h2&gt;&lt;p&gt;  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。&lt;/p&gt;
 &lt;p&gt;  先来重点：可用脚本：&lt;/p&gt;
   &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/bin/bash&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#   追上fir API token 自动上传&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#   基于当前代码进行打包打包目录：MyProject/build/MyProject_ent.ipa&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; MyProject&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;rm -rf ./build/*&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xcodebuild -archivePath &lt;span class=&quot;string&quot;&gt;&quot;./build/xxx.xcarchive&quot;&lt;/span&gt; -workspace MyProject.xcworkspace -sdk iphoneos -scheme &lt;span class=&quot;string&quot;&gt;&quot;MyProject_ent&quot;&lt;/span&gt; -configuration &lt;span class=&quot;string&quot;&gt;&quot;Release Inhouse&quot;&lt;/span&gt; archive&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;?xml version=&quot;&lt;/span&gt;1.0&lt;span class=&quot;string&quot;&gt;&quot; encoding=&quot;&lt;/span&gt;UTF-8&lt;span class=&quot;string&quot;&gt;&quot;?&amp;gt;&amp;lt;!DOCTYPE plist PUBLIC &quot;&lt;/span&gt;-//Apple//DTD PLIST 1.0//EN&lt;span class=&quot;string&quot;&gt;&quot; &quot;&lt;/span&gt;http://www.apple.com/DTDs/PropertyList-1.0.dtd&lt;span class=&quot;string&quot;&gt;&quot;&amp;gt;&amp;lt;plist version=&quot;&lt;/span&gt;1.0&lt;span class=&quot;string&quot;&gt;&quot;&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;method&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;enterprise&amp;lt;/string&amp;gt;&amp;lt;key&amp;gt;compileBitcode&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;YES&amp;lt;/string&amp;gt;&amp;lt;/dict&amp;gt;&amp;lt;/plist&amp;gt;&quot;&lt;/span&gt; &amp;gt; ./build/&lt;span class=&quot;built_in&quot;&gt;export&lt;/span&gt;OptionsPlist.plist&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xcodebuild -exportArchive -archivePath &lt;span class=&quot;string&quot;&gt;&quot;./build/xxx.xcarchive&quot;&lt;/span&gt; -exportPath &lt;span class=&quot;string&quot;&gt;&quot;./build/&quot;&lt;/span&gt; -exportOptionsPlist ./build/&lt;span class=&quot;built_in&quot;&gt;export&lt;/span&gt;OptionsPlist.plist&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; build/&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fir i ./MyProject_ent.ipa&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [ -n &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$1&lt;/span&gt;&quot;&lt;/span&gt; ]; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    git &lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt; -10 &amp;gt; git.log&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    fir p ./MyProject_ent.ipa -T &lt;span class=&quot;variable&quot;&gt;$1&lt;/span&gt; -c git.log&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;  之前漏掉了一个错误：&lt;code&gt;The flag -exportFormat cannot be specified along with -exportOptionsPlist&lt;/code&gt; 导致了最终包签名错误，而无法安装。&lt;/p&gt;
@@ -66,7 +70,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Xcode8&quot;&gt;&lt;a href=&quot;#Xcode8&quot; class=&quot;headerlink&quot; title=&quot;Xcode8&quot;&gt;&lt;/a&gt;Xcode8&lt;/h2&gt;&lt;p&gt;  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用X
+      &lt;p&gt;Xcode8下的打包脚本&lt;/p&gt;
     
     </summary>
     
@@ -129,9 +133,10 @@
     <link href="https://madordie.github.io/2016/07/28/note/"/>
     <id>https://madordie.github.io/2016/07/28/note/</id>
     <published>2016-07-28T06:52:22.000Z</published>
-    <updated>2016-10-20T05:53:21.000Z</updated>
+    <updated>2016-10-22T13:55:43.000Z</updated>
     
     <content type="html">&lt;p&gt;开发中的小笔记。记录开发中的点滴滴点。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;NAN&lt;ul&gt;
 &lt;li&gt;当&lt;code&gt;NSUInteger 0 - 1&lt;/code&gt;时，运算结果为 NAN，iOS中有一个宏&lt;code&gt;isnan(x)&lt;/code&gt;返回是否为nan。另外这里有一篇文章&lt;a href=&quot;http://blog.csdn.net/toss156/article/details/7101885&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Objective-C 中 判断 NaN&lt;/a&gt;大致记录了一下&lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//  math.h  #56&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#if defined(__GNUC__)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VAL     __builtin_huge_val()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALF    __builtin_huge_valf()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALL    __builtin_huge_vall()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    NAN          __builtin_nanf(&lt;span class=&quot;meta-string&quot;&gt;&quot;0x7fc00000&quot;&lt;/span&gt;)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#else&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VAL     1e500&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALF    1e50f&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALL    1e5000L&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    NAN          __nan()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#endif&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -175,9 +180,6 @@
     <summary type="html">
     
       &lt;p&gt;开发中的小笔记。记录开发中的点滴滴点。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;NAN&lt;ul&gt;
-&lt;li&gt;当&lt;code&gt;NSUInteger 0 - 1&lt;/code&gt;时，运算结果为 NAN，iOS中有一个宏&lt;code&gt;isnan(x)&lt;/code&gt;返回是否为nan。另外这里有一篇文章&lt;a 
     
     </summary>
     
@@ -191,9 +193,11 @@
     <link href="https://madordie.github.io/2016/07/27/about-project-tableview/"/>
     <id>https://madordie.github.io/2016/07/27/about-project-tableview/</id>
     <published>2016-07-27T05:30:45.000Z</published>
-    <updated>2016-08-29T02:01:57.000Z</updated>
+    <updated>2016-10-22T13:54:31.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;论项目架构设计的重要性&quot;&gt;&lt;a href=&quot;#论项目架构设计的重要性&quot; class=&quot;headerlink&quot; title=&quot;论项目架构设计的重要性&quot;&gt;&lt;/a&gt;论项目架构设计的重要性&lt;/h1&gt;&lt;p&gt;前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修复上线的时候，对于不同的代码风格，需要找到问题的关键代码，这个过程是撕心裂肺的，但是如果同一套代码风格，心中就会有一个大致的位置，去修改时候就会比较快速的定位问题。&lt;/p&gt;
+    <content type="html">&lt;p&gt;前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修复上线的时候，对于不同的代码风格，需要找到问题的关键代码，这个过程是撕心裂肺的，但是如果同一套代码风格，心中就会有一个大致的位置，去修改时候就会比较快速的定位问题。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;论项目架构设计的重要性&quot;&gt;&lt;a href=&quot;#论项目架构设计的重要性&quot; class=&quot;headerlink&quot; title=&quot;论项目架构设计的重要性&quot;&gt;&lt;/a&gt;论项目架构设计的重要性&lt;/h1&gt;&lt;p&gt;前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修复上线的时候，对于不同的代码风格，需要找到问题的关键代码，这个过程是撕心裂肺的，但是如果同一套代码风格，心中就会有一个大致的位置，去修改时候就会比较快速的定位问题。&lt;/p&gt;
 &lt;p&gt;对于无法接受通用的代码风格，只钟爱自己一种代码风格的程序员来说：如果你是刚转行过来的，那么你要走的路还有很长，踩的坑还有很多。积极主动的踩坑，才能不会掉队。&lt;/p&gt;
 &lt;h1 id=&quot;从协议入手&quot;&gt;&lt;a href=&quot;#从协议入手&quot; class=&quot;headerlink&quot; title=&quot;从协议入手&quot;&gt;&lt;/a&gt;从协议入手&lt;/h1&gt;&lt;p&gt;&lt;code&gt;UITableView&lt;/code&gt;是项目中非常常见的iOS高级控件，在页面中所有相似的页面几乎都是由该控件进行完成。其广泛运用的不止是使用方便，最主要的是内部的复用优化也是相当给力的。&lt;/p&gt;
 &lt;h2 id=&quot;协议模式下的UITableView&quot;&gt;&lt;a href=&quot;#协议模式下的UITableView&quot; class=&quot;headerlink&quot; title=&quot;协议模式下的UITableView&quot;&gt;&lt;/a&gt;协议模式下的UITableView&lt;/h2&gt;&lt;p&gt;&lt;code&gt;UITableView&lt;/code&gt;是典型的 &lt;strong&gt;协议-代理模式&lt;/strong&gt; ，比例&lt;code&gt;id &amp;lt;UITableViewDataSource&amp;gt; dataSource&lt;/code&gt;和&lt;code&gt;id &amp;lt;UITableViewDelegate&amp;gt; delegate&lt;/code&gt;，所以使用对于这种比较规整的列表来说把协议继续扩展到下一级也是可以的。&lt;/p&gt;
@@ -222,7 +226,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;论项目架构设计的重要性&quot;&gt;&lt;a href=&quot;#论项目架构设计的重要性&quot; class=&quot;headerlink&quot; title=&quot;论项目架构设计的重要性&quot;&gt;&lt;/a&gt;论项目架构设计的重要性&lt;/h1&gt;&lt;p&gt;前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己
+      &lt;p&gt;前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修复上线的时候，对于不同的代码风格，需要找到问题的关键代码，这个过程是撕心裂肺的，但是如果同一套代码风格，心中就会有一个大致的位置，去修改时候就会比较快速的定位问题。&lt;/p&gt;
     
     </summary>
     
@@ -238,9 +242,10 @@
     <link href="https://madordie.github.io/2016/07/24/about-reprint-article/"/>
     <id>https://madordie.github.io/2016/07/24/about-reprint-article/</id>
     <published>2016-07-24T03:52:40.000Z</published>
-    <updated>2016-07-25T01:57:19.000Z</updated>
+    <updated>2016-10-22T13:54:42.000Z</updated>
     
     <content type="html">&lt;p&gt;一点删除原链接的转载文章的牢骚&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;缘由&quot;&gt;&lt;a href=&quot;#缘由&quot; class=&quot;headerlink&quot; title=&quot;缘由&quot;&gt;&lt;/a&gt;缘由&lt;/h1&gt;&lt;p&gt;前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并没有署名转载出处，所以应该是原创）。之后看了一下他的另一个文章，刚好我百度过这个文章的原作者的最后一个系列的，于是我又翻阅了一下看看是不是不一样，结果和我想的一样，除了删除了作者的署名之外其他的都是一样的。于是关掉了网页，心中默默的鄙视。&lt;/p&gt;
 &lt;h1 id=&quot;关于转载的别人文章&quot;&gt;&lt;a href=&quot;#关于转载的别人文章&quot; class=&quot;headerlink&quot; title=&quot;关于转载的别人文章&quot;&gt;&lt;/a&gt;关于转载的别人文章&lt;/h1&gt;&lt;p&gt;对于一些大神的技术文章都是喜欢的，爱不释手的那种，我也是。有的能转载的我就转载，不能转载的，我会复制下来，放在我自己的文件夹中，为的是方便查询。在转载的时候我会特意标示转载的地址。而且一般情况下我会在文章的开始写上几句简单的主要的思想（比如：&lt;a href=&quot;http://www.cnblogs.com/madordie/p/5159597.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《[转]蓝牙开发》&lt;/a&gt;、&lt;a href=&quot;http://www.cnblogs.com/madordie/p/4322044.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《[搬运] mac下安装GDB》&lt;/a&gt;、&lt;a href=&quot;http://www.cnblogs.com/madordie/p/4322042.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《［搬运］MAC 下安装 brew》&lt;/a&gt;），当然有时候没来得及的就忘了😂（比如：&lt;a href=&quot;http://www.cnblogs.com/madordie/p/4357685.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《[搬运] iOS 7 侧滑返回手势使用和错误集》&lt;/a&gt;）。&lt;/p&gt;
 &lt;p&gt;还有关于文章的排版，殊不知原作者为了让读者更好的阅读会对排版做的比较好，有的人为了阅读方便会去阅读原作者的文章。比如说我这种强迫症。&lt;/p&gt;
@@ -251,7 +256,6 @@
     <summary type="html">
     
       &lt;p&gt;一点删除原链接的转载文章的牢骚&lt;/p&gt;
-&lt;h1 id=&quot;缘由&quot;&gt;&lt;a href=&quot;#缘由&quot; class=&quot;headerlink&quot; title=&quot;缘由&quot;&gt;&lt;/a&gt;缘由&lt;/h1&gt;&lt;p&gt;前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是
     
     </summary>
     
@@ -265,7 +269,7 @@
     <link href="https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/"/>
     <id>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</id>
     <published>2016-07-12T01:53:14.000Z</published>
-    <updated>2016-08-29T02:01:35.000Z</updated>
+    <updated>2016-10-22T13:29:01.000Z</updated>
     
     <content type="html">&lt;p&gt;对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。&lt;/p&gt;
 &lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h1&gt;&lt;p&gt;众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。&lt;/p&gt;
@@ -304,9 +308,10 @@
     <link href="https://madordie.github.io/2016/07/05/use-hexo-setup-blog/"/>
     <id>https://madordie.github.io/2016/07/05/use-hexo-setup-blog/</id>
     <published>2016-07-05T10:03:31.000Z</published>
-    <updated>2016-07-25T01:57:32.000Z</updated>
+    <updated>2016-10-22T13:56:02.000Z</updated>
     
     <content type="html">&lt;p&gt;这个github.io搭建的过程参考，以及向百度推送的python、js脚本。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;参考博客&quot;&gt;&lt;a href=&quot;#参考博客&quot; class=&quot;headerlink&quot; title=&quot;参考博客&quot;&gt;&lt;/a&gt;参考博客&lt;/h1&gt;&lt;p&gt;感谢 &lt;a href=&quot;http://lovenight.github.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;岁月如歌&lt;/a&gt; 的这个&lt;a href=&quot;http://lovenight.github.io/2015/11/10/Hexo-3-1-1-静态博客搭建指南/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《Hexo 3.1.1 静态博客搭建指南》&lt;/a&gt;同时感谢这个&lt;a href=&quot;http://lovenight.github.io/2015/11/18/向百度推送hexo博客所有链接的Python脚本/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《向百度推送hexo博客所有链接的Python脚本》&lt;/a&gt;(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)&lt;/p&gt;
 &lt;p&gt;另外还有一个&lt;a href=&quot;http://emufan.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;soul&lt;/a&gt;的&lt;a href=&quot;http://emufan.com/2016/02/18/百度主动推送hexo生成的文章/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;百度主动推送hexo生成的文章&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;python自动推送脚本修改&quot;&gt;&lt;a href=&quot;#python自动推送脚本修改&quot; class=&quot;headerlink&quot; title=&quot;python自动推送脚本修改&quot;&gt;&lt;/a&gt;python自动推送脚本修改&lt;/h1&gt;&lt;p&gt;上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：&lt;/p&gt;
@@ -325,7 +330,6 @@
     <summary type="html">
     
       &lt;p&gt;这个github.io搭建的过程参考，以及向百度推送的python、js脚本。&lt;/p&gt;
-&lt;h1 id=&quot;参考博客&quot;&gt;&lt;a href=&quot;#参考博客&quot; class=&quot;headerlink&quot; title=&quot;参考博客&quot;&gt;&lt;/a&gt;参考博客&lt;/h1&gt;&lt;p&gt;感谢 &lt;a href=&quot;htt
     
     </summary>
     
