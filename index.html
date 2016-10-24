@@ -546,39 +546,12 @@
 
       
         
-          
-            <p>个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。</p>
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码农的无休止的协作，所以可以进行着方面的解藕。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>  哪坏哪补。有问题就会有解决方案。群中说的<a href="#方案一">方案一</a>由于当时不方便，所以并没有弄明白。<a href="#方案二">方案二</a>、<a href="#方案三">方案三</a>是自己的一些解决方案。</p>
-<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a><a name="方案一">方案一</a></h3><p>  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。另外，@夏汁泡泡 还有一个简化就是这个处理的脚本可以放在<a href="https://developer.apple.com/library/ios/recipes/xcode_help-project_editor/Articles/AddingaRunScriptBuildPhase.html" target="_blank" rel="external">Add Run Script Build Phase</a>，暴露出来已知的问题：</p>
-<ul>
-<li>操作麻烦</li>
-<li>图片可能重复</li>
-<li>命名规范</li>
-</ul>
-<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a><a name="方案二">方案二</a></h3><p>  按照Pods的集成方式，可以将素材看作一个第三方库，直接将素材做成一个bundle，采用Pods私有库或者其他方式放入工程。暴露出来已知的问题：</p>
-<ul>
-<li>什么时候更新这个bundle</li>
-<li>多人合作时这个bundle冲突问题</li>
-<li>命名规范</li>
-</ul>
-<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a><a name="方案三">方案三</a></h3><p>  工程使用<code>xcassets</code>进行素材打包，然后使用子库进行持续集成。这样，设计师的素材可以放在另一个独立素材仓库，内含更新脚本，直接将素材生成对应的<code>xcassets</code>结构，并上传至子库。这样设计师做完素材直接扔在文件夹中，自动或手动跑一下脚本即可更新到素材仓库。暴露出来已知的问题：</p>
-<ul>
-<li>由于没有测试过，不知道如果素材比较多的话会不会发生冲突。因该不会吧，都是加文件或者修改😂 (有时间去研究一下之后更新)</li>
-<li>命名规范的问题依旧存在</li>
-</ul>
-<h3 id="方案四"><a href="#方案四" class="headerlink" title="方案四"></a><a name="方案四">方案四</a></h3><p>  <strong> 字体库 </strong>。最近同事提出关于用字体库去存储素材图片的方案。感觉非常的赞，虽然并未实践，但是这种方案就像emoji一样，不但减少了相同图片内容之间存在多个不同尺寸版本的问题，也能够比较好的进行压缩管理。设计师需要做的就是做出一套字体库，然后将所有的素材图全部按照设计字体的方案进行设计和制作，这样在使用的时候只需要导入一个字体文件就好了。对于这个字体文件如何管理都好说，毕竟只有一个字体文件。字体库的制作方面还不是很了解，所以只提着么一下吧嘿嘿。。</p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>  好了，重要的问题来了，上面的问题都是存在命名规范的问题。此问题如何化解呢？</p>
-<p>  素材的引入需根据素材名写入代码中，那么如何才能不用素材名呢？那时不可能的😝，毕竟你要有一个唯一标识符去标志着一个素材。可能有的人说可以做一个json用来保存代码的命名和素材的命名呀，我只想说MDZZ，那不是有两套需要维护的命名规则么。。得不偿失。</p>
-<p>  这个命名的问题其实不能复杂化。参看iOS的项目国际化操作，使用一个key作为文案的唯一标识符，需要显示该文案，通过这个唯一标识符就能直接取到。回头看下素材，是不是也能炮制一个呢？</p>
-<p>  如果素材名字有统一的规则，就不需要这样的key作为统一标识符，直接使用素材名字即可，这样维护一套素材命名规则总比两套更容易维护。所以，直接使用素材名即可。</p>
-<p>  如果素材不能统一命名规则，那么这样的对照文件存在也是很不错的。话又说回来，要进行UI素材和代码的解耦，素材名都不能统一，还如何解耦，此问题也不存在了。。</p>
-<p>  退一步，我们的目的是让素材让设计师自己维护，代码不去维护素材。设计师和码农的耦合在于图片本身的交换比较烦。不论采用哪种解耦方案，都是把图片的耦合转换为图片名字的耦合(也可以理解为素材对应的KEY的耦合)。结果是 <strong> 为了解除一个耦合,而引入了一个新的耦合 </strong> 。个人认为这样是不靠谱的。。除非有强力的人去推动设计师走标准的命名。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>  其实这个问题大可不必纠结，如果有强力的人去推动这个标准持续走下去那么这个问题才有价值。如果真的要进行题中说的代码解耦的话，我认为第三种是比较靠谱的。 <strong> 命名标准、命名标准、命名标准… </strong>。</p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>  经验有限，如果有更好的方案，望告知。拜谢！</p>
-
-          
+          <p>个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/28/ui-source-and-code-decoupling/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1023,25 +996,12 @@
 
       
         
-          
-            <p>对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。</p>
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。</p>
-<h1 id="OC简单食用方法"><a href="#OC简单食用方法" class="headerlink" title="OC简单食用方法"></a>OC简单食用方法</h1><p>先来个例子代码：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">RACSignal *RSignal = [[<span class="keyword">self</span>.R rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.R.value)];</div><div class="line">RACSignal *GSignal = [[<span class="keyword">self</span>.G rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.G.value)];</div><div class="line">RACSignal *BSignal = [[<span class="keyword">self</span>.B rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.B.value)];</div><div class="line"></div><div class="line"><span class="built_in">NSString</span>*(^valueFormat)(<span class="built_in">NSNumber</span> *value) = ^(<span class="built_in">NSNumber</span> *value) &#123;</div><div class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.0f"</span>, [value doubleValue]*<span class="number">255</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">[RSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.RVaule.text = valueFormat(x);</div><div class="line">&#125;];</div><div class="line">[GSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.GValue.text = valueFormat(x);</div><div class="line">&#125;];</div><div class="line">[BSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.BValue.text = valueFormat(x);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<p>是不是超级简单！</p>
-<h2 id="顾虑"><a href="#顾虑" class="headerlink" title="顾虑"></a>顾虑</h2><p>可是我有一个问题：</p>
-<ul>
-<li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。</li>
-</ul>
-<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1><p>在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a>的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift" target="_blank" rel="external">README.md</a>中有这么一段话：</p>
-<blockquote>
-<h2 id="Objective-C-and-Swift"><a href="#Objective-C-and-Swift" class="headerlink" title="Objective-C and Swift"></a>Objective-C and Swift</h2><p>  Although ReactiveCocoa was started as an Objective-C framework, as of [version<br>  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].</p>
-<p>  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is<br>  a [bridge][Objective-C Bridging] to convert between the two. This<br>  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to<br>  use Cocoa extensions which haven’t been added to the Swift API yet.</p>
-<p>  The Objective-C API will continue to exist and be supported for the foreseeable<br>  future, but it won’t receive many improvements. For more information about using<br>  this API, please consult our [legacy documentation][].</p>
-<p>  <strong>We highly recommend that all new projects use the Swift API.</strong></p>
-</blockquote>
-
-          
+          <p>对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/12/reactivecocoa-ready-to-use/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

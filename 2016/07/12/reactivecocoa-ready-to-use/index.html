@@ -86,25 +86,16 @@
 
 
 
-<meta name="description" content="对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。
-说明众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。
-OC简单食用方法先来个例子代码：
-123456789101112131415161718RACSignal *RSignal = [[self.R rac_newValueChannelWi">
+<meta name="description" content="对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="准备食用RAC(ReactiveCocoa)的顾虑">
 <meta property="og:url" content="https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/index.html">
 <meta property="og:site_name" content="Keith's blog">
-<meta property="og:description" content="对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。
-说明众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。
-OC简单食用方法先来个例子代码：
-123456789101112131415161718RACSignal *RSignal = [[self.R rac_newValueChannelWi">
-<meta property="og:updated_time" content="2016-10-22T13:29:01.000Z">
+<meta property="og:description" content="对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。">
+<meta property="og:updated_time" content="2016-10-22T14:00:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="准备食用RAC(ReactiveCocoa)的顾虑">
-<meta name="twitter:description" content="对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。
-说明众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。
-OC简单食用方法先来个例子代码：
-123456789101112131415161718RACSignal *RSignal = [[self.R rac_newValueChannelWi">
+<meta name="twitter:description" content="对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。">
 
 
 
@@ -348,6 +339,7 @@ OC简单食用方法先来个例子代码：
 
       
         <p>对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。</p>
+<a id="more"></a>
 <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。</p>
 <h1 id="OC简单食用方法"><a href="#OC简单食用方法" class="headerlink" title="OC简单食用方法"></a>OC简单食用方法</h1><p>先来个例子代码：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">RACSignal *RSignal = [[<span class="keyword">self</span>.R rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.R.value)];</div><div class="line">RACSignal *GSignal = [[<span class="keyword">self</span>.G rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.G.value)];</div><div class="line">RACSignal *BSignal = [[<span class="keyword">self</span>.B rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.B.value)];</div><div class="line"></div><div class="line"><span class="built_in">NSString</span>*(^valueFormat)(<span class="built_in">NSNumber</span> *value) = ^(<span class="built_in">NSNumber</span> *value) &#123;</div><div class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.0f"</span>, [value doubleValue]*<span class="number">255</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">[RSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.RVaule.text = valueFormat(x);</div><div class="line">&#125;];</div><div class="line">[GSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.GValue.text = valueFormat(x);</div><div class="line">&#125;];</div><div class="line">[BSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.BValue.text = valueFormat(x);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>

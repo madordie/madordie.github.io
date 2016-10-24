@@ -82,9 +82,10 @@
     <link href="https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/"/>
     <id>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</id>
     <published>2016-08-28T04:16:02.000Z</published>
-    <updated>2016-10-22T13:15:15.000Z</updated>
+    <updated>2016-10-22T14:00:13.000Z</updated>
     
     <content type="html">&lt;p&gt;个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，&lt;/p&gt;
 &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码农的无休止的协作，所以可以进行着方面的解藕。&lt;/p&gt;
 &lt;h2 id=&quot;解决方案&quot;&gt;&lt;a href=&quot;#解决方案&quot; class=&quot;headerlink&quot; title=&quot;解决方案&quot;&gt;&lt;/a&gt;解决方案&lt;/h2&gt;&lt;p&gt;  哪坏哪补。有问题就会有解决方案。群中说的&lt;a href=&quot;#方案一&quot;&gt;方案一&lt;/a&gt;由于当时不方便，所以并没有弄明白。&lt;a href=&quot;#方案二&quot;&gt;方案二&lt;/a&gt;、&lt;a href=&quot;#方案三&quot;&gt;方案三&lt;/a&gt;是自己的一些解决方案。&lt;/p&gt;
@@ -119,7 +120,6 @@
     <summary type="html">
     
       &lt;p&gt;个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。&lt;/p&gt;
-&lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;  群里听到有人讨论这个话题，当时觉得比较新鲜，就十
     
     </summary>
     
@@ -269,9 +269,10 @@
     <link href="https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/"/>
     <id>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</id>
     <published>2016-07-12T01:53:14.000Z</published>
-    <updated>2016-10-22T13:29:01.000Z</updated>
+    <updated>2016-10-22T14:00:13.000Z</updated>
     
     <content type="html">&lt;p&gt;对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h1&gt;&lt;p&gt;众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。&lt;/p&gt;
 &lt;h1 id=&quot;OC简单食用方法&quot;&gt;&lt;a href=&quot;#OC简单食用方法&quot; class=&quot;headerlink&quot; title=&quot;OC简单食用方法&quot;&gt;&lt;/a&gt;OC简单食用方法&lt;/h1&gt;&lt;p&gt;先来个例子代码：&lt;/p&gt;
 &lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;RACSignal *RSignal = [[&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.R rac_newValueChannelWithNilValue:@&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] startWith:@(&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.R.value)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;RACSignal *GSignal = [[&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.G rac_newValueChannelWithNilValue:@&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] startWith:@(&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.G.value)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;RACSignal *BSignal = [[&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.B rac_newValueChannelWithNilValue:@&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] startWith:@(&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.B.value)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt;*(^valueFormat)(&lt;span class=&quot;built_in&quot;&gt;NSNumber&lt;/span&gt; *value) = ^(&lt;span class=&quot;built_in&quot;&gt;NSNumber&lt;/span&gt; *value) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; [&lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; stringWithFormat:&lt;span class=&quot;string&quot;&gt;@&quot;%.0f&quot;&lt;/span&gt;, [value doubleValue]*&lt;span class=&quot;number&quot;&gt;255&lt;/span&gt;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;[RSignal subscribeNext:^(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; x) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.RVaule.text = valueFormat(x);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;[GSignal subscribeNext:^(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; x) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.GValue.text = valueFormat(x);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;[BSignal subscribeNext:^(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; x) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.BValue.text = valueFormat(x);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;];&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -292,7 +293,6 @@
     <summary type="html">
     
       &lt;p&gt;对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。&lt;/p&gt;
-&lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h1&gt;&lt;p&gt;众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使
     
     </summary>
     
