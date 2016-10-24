@@ -8,7 +8,7 @@ categories:
 
 这个github.io搭建的过程参考，以及向百度推送的python、js脚本。
 
-
+<!--more-->
 
 # 参考博客
     

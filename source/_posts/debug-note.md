@@ -4,6 +4,10 @@ date: 2016-10-12 21:51:04
 tags:
 ---
 
+Debug的日常
+
+<!--more-->
+
 # UIView.m:190 - UIViewReportBrokenSuperviewChain
 
 ## 异常信息：

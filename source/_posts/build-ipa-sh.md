@@ -4,6 +4,10 @@ date: 2016-09-26 14:55:09
 tags:
 ---
 
+Xcode8下的打包脚本
+
+<!--more-->
+
 ## Xcode8
 
   好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。

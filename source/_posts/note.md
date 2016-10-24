@@ -9,7 +9,7 @@ categories:
 
 开发中的小笔记。记录开发中的点滴滴点。
 
-
+<!--more-->
 
 - NAN
   - 当`NSUInteger 0 - 1`时，运算结果为 NAN，iOS中有一个宏`isnan(x)`返回是否为nan。另外这里有一篇文章[Objective-C 中 判断 NaN](http://blog.csdn.net/toss156/article/details/7101885)大致记录了一下
@@ -54,3 +54,7 @@ categories:
   - 16G手机存储空间不够，图片转到了云端，会出现相册中的照片无法选择的情况
   
 - 无埋点技术的讨论
+
+- 多个window的显示、删除、操作问题
+
+- 使用HTTP架设日志实时显示系统
