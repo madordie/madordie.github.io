@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2016-10-22T13:55:33.000Z</updated>
+  <updated>2016-11-14T03:28:13.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,10 +20,17 @@
     <link href="https://madordie.github.io/2016/10/12/debug-note/"/>
     <id>https://madordie.github.io/2016/10/12/debug-note/</id>
     <published>2016-10-12T13:51:04.000Z</published>
-    <updated>2016-10-22T13:55:33.000Z</updated>
+    <updated>2016-11-14T03:28:13.000Z</updated>
     
     <content type="html">&lt;p&gt;Debug的日常&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Xcode8中解析-crash文件&quot;&gt;&lt;a href=&quot;#Xcode8中解析-crash文件&quot; class=&quot;headerlink&quot; title=&quot;Xcode8中解析.crash文件&quot;&gt;&lt;/a&gt;Xcode8中解析.crash文件&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;导出&lt;code&gt;x.crash&lt;/code&gt;文件，放置在&lt;code&gt;目录A&lt;/code&gt;下&lt;/li&gt;
+&lt;li&gt;复制&lt;code&gt;工程名.app.dSYM&lt;/code&gt;到&lt;code&gt;目录A&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置环境变量，运行&lt;code&gt;export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;拷贝脚本文件，运行&lt;code&gt;cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;解析，运行&lt;code&gt;./symbolicatecrash x.crash 工程名.app.dSYM &amp;gt; 自定义输出结果文件名&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h1 id=&quot;UIView-m-190-UIViewReportBrokenSuperviewChain&quot;&gt;&lt;a href=&quot;#UIView-m-190-UIViewReportBrokenSuperviewChain&quot; class=&quot;headerlink&quot; title=&quot;UIView.m:190 - UIViewReportBrokenSuperviewChain&quot;&gt;&lt;/a&gt;UIView.m:190 - UIViewReportBrokenSuperviewChain&lt;/h1&gt;&lt;h2 id=&quot;异常信息：&quot;&gt;&lt;a href=&quot;#异常信息：&quot; class=&quot;headerlink&quot; title=&quot;异常信息：&quot;&gt;&lt;/a&gt;异常信息：&lt;/h2&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;invalid mode &amp;apos;kCFRunLoopCommonModes&amp;apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;libc++abi.dylib: terminate_handler unexpectedly threw an exception&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;异常分析&quot;&gt;&lt;a href=&quot;#异常分析&quot; class=&quot;headerlink&quot; title=&quot;异常分析&quot;&gt;&lt;/a&gt;异常分析&lt;/h2&gt;&lt;p&gt;  APP crash在&lt;br&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;[keyWindow addSubview:weakSelf];&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;  &lt;a href=&quot;#错误堆栈&quot;&gt;错误堆栈信息&lt;/a&gt;。&lt;/p&gt;
