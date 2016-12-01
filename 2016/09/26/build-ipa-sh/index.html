@@ -92,7 +92,7 @@
 <meta property="og:url" content="https://madordie.github.io/2016/09/26/build-ipa-sh/index.html">
 <meta property="og:site_name" content="Keith's blog">
 <meta property="og:description" content="Xcode8下的打包脚本">
-<meta property="og:updated_time" content="2016-10-22T13:55:15.000Z">
+<meta property="og:updated_time" content="2016-11-14T08:16:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xcode8打包脚本">
 <meta name="twitter:description" content="Xcode8下的打包脚本">
@@ -345,6 +345,33 @@
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment">#   追上fir API token 自动上传</span></div><div class="line"><span class="comment">#   基于当前代码进行打包打包目录：MyProject/build/MyProject_ent.ipa</span></div><div class="line"></div><div class="line"><span class="built_in">cd</span> MyProject</div><div class="line"></div><div class="line">rm -rf ./build/*</div><div class="line"></div><div class="line">xcodebuild -archivePath <span class="string">"./build/xxx.xcarchive"</span> -workspace MyProject.xcworkspace -sdk iphoneos -scheme <span class="string">"MyProject_ent"</span> -configuration <span class="string">"Release Inhouse"</span> archive</div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;?xml version="</span>1.0<span class="string">" encoding="</span>UTF-8<span class="string">"?&gt;&lt;!DOCTYPE plist PUBLIC "</span>-//Apple//DTD PLIST 1.0//EN<span class="string">" "</span>http://www.apple.com/DTDs/PropertyList-1.0.dtd<span class="string">"&gt;&lt;plist version="</span>1.0<span class="string">"&gt;&lt;dict&gt;&lt;key&gt;method&lt;/key&gt;&lt;string&gt;enterprise&lt;/string&gt;&lt;key&gt;compileBitcode&lt;/key&gt;&lt;string&gt;YES&lt;/string&gt;&lt;/dict&gt;&lt;/plist&gt;"</span> &gt; ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line">xcodebuild -exportArchive -archivePath <span class="string">"./build/xxx.xcarchive"</span> -exportPath <span class="string">"./build/"</span> -exportOptionsPlist ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">cd</span> build/</div><div class="line"></div><div class="line">fir i ./MyProject_ent.ipa</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></div><div class="line">    git <span class="built_in">log</span> -10 &gt; git.log</div><div class="line">    fir p ./MyProject_ent.ipa -T <span class="variable">$1</span> -c git.log</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
 <p>  之前漏掉了一个错误：<code>The flag -exportFormat cannot be specified along with -exportOptionsPlist</code> 导致了最终包签名错误，而无法安装。</p>
 <p>  exportOptionsPlist参考的<a href="https://testerhome.com/topics/4619" target="_blank" rel="external">iOS 打包总结</a></p>
+<h2 id="手动上传"><a href="#手动上传" class="headerlink" title="手动上传"></a>手动上传</h2><p>#!/bin/bash</p>
+<h1 id="追上fir-API-token-自动上传"><a href="#追上fir-API-token-自动上传" class="headerlink" title="追上fir API token 自动上传"></a>追上fir API token 自动上传</h1><h1 id="基于当前代码进行打包打包目录：xxxx-build-xxxx-ent-ipa"><a href="#基于当前代码进行打包打包目录：xxxx-build-xxxx-ent-ipa" class="headerlink" title="基于当前代码进行打包打包目录：xxxx/build/xxxx_ent.ipa"></a>基于当前代码进行打包打包目录：xxxx/build/xxxx_ent.ipa</h1><p>workspace_name=xxxx<br>scheme_name=xxxx_ent</p>
+<p>cd $workspace_name</p>
+<p>rm -rf ./build/*</p>
+<p>xcodebuild -archivePath “./build/xxx.xcarchive” -workspace $workspace_name.xcworkspace -sdk iphoneos -scheme $scheme_name -configuration “Release Inhouse” archive</p>
+<p>cat &lt;&lt; EOF &gt; ./build/exportOptionsPlist.plist<br>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE plist PUBLIC “-//Apple//DTD PLIST 1.0//EN” “<a href="http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;" target="_blank" rel="external">http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</a></p>
+<p><plist version="1.0"><br>    <dict><br>        <key>method</key><br>        <string>enterprise</string><br>        <key>compileBitcode</key><br>            <false><br>    </false></dict><br></plist><br>EOF</p>
+<p>xcodebuild -exportArchive -archivePath “./build/xxx.xcarchive” -exportOptionsPlist “./build/exportOptionsPlist.plist” -exportPath “./build/“</p>
+<p>cd build/</p>
+<p>git log -10 &gt; git.log</p>
+<p>#拷贝ipa到临时文件夹中<br>cp ./$scheme_name.ipa ./tmp.zip</p>
+<p>#将ipa解压<br>unzip tmp.zip</p>
+<p>#app文件中Info.plist文件路径<br>app_infoplist_path=$(pwd)/Payload/*.app/Info.plist</p>
+<p>#取bundleIdentifier<br>bundleIdentifier=$(/usr/libexec/PlistBuddy -c “print CFBundleIdentifier” ${app_infoplist_path})</p>
+<p>#取build值<br>bundleVersion=$(/usr/libexec/PlistBuddy -c “print CFBundleVersion” ${app_infoplist_path})</p>
+<p>#显示名称<br>ipa_name=$workspace_name</p>
+<p>#ipa下载url<br>ipa_download_url=”<a href="https://git.oschina.net/madordie/install_ipa/raw/master/xxxx_ent.ipa" target="_blank" rel="external">https://git.oschina.net/madordie/install_ipa/raw/master/xxxx_ent.ipa</a>“</p>
+<p>#itms-services协议串<br>ios_install_url=”itms-services://?action=download-manifest&amp;url=<a href="https://git.oschina.net/madordie/install_ipa/raw/master/xxxx_ent.plist" target="_blank" rel="external">https://git.oschina.net/madordie/install_ipa/raw/master/xxxx_ent.plist</a>“</p>
+<p>#生成install.html文件</p>
+<p>cat &lt;&lt; EOF &gt; index.html<br>&lt;!DOCTYPE HTML&gt;</p>
+<p><html><br>  <head><br>    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><br>    <title>安装</title><br>  </head><br>  <body><br>    <br><br>    <br><br>    <br><br>    <br><br>    <p align="center"><br>        <font size="8"><br>            <a href="${ios_install_url}">点击这里安装</a><br>        </font><br>    </p></body></html></p>
+<pre><code>&lt;/div&gt;
+</code></pre><p>  <br><br>EOF</p>
+<p>#生成plist文件<br>cat &lt;&lt; EOF &gt; ${workspace_name}.plist<br>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE plist PUBLIC “-//Apple//DTD PLIST 1.0//EN” “<a href="http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;" target="_blank" rel="external">http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</a></p>
+<p><plist version="1.0"></plist></p>
+<p><dict><br>   <key>items</key><br>   <array><br>       <dict><br>           <key>assets</key><br>           <array><br>               <dict><br>                   <key>kind</key><br>                   <string>software-package</string><br>                   <key>url</key><br>                   <string>${ipa_download_url}</string><br>               </dict><br>               <dict><br>                   <key>kind</key><br>                   <string>display-image</string><br>                   <key>needs-shine</key><br>                   <true><br>                   <key>url</key><br>                   <string><a href="http://git.oschina.net/logo.svg" target="_blank" rel="external">http://git.oschina.net/logo.svg</a></string><br>               </true></dict><br>           <dict><br>                   <key>kind</key><br>                   <string>full-size-image</string><br>                   <key>needs-shine</key><br>                   <true><br>                   <key>url</key><br>                   <string><a href="http://git.oschina.net/logo.svg" target="_blank" rel="external">http://git.oschina.net/logo.svg</a></string><br>               </true></dict><br>           </array><key>metadata</key><br>           <dict><br>               <key>bundle-identifier</key><br>               <string>${bundleIdentifier}</string><br>               <key>bundle-version</key><br>               <string>${bundleVersion}</string><br>               <key>kind</key><br>               <string>software</string><br>               <key>subtitle</key><br>               <string>${ipa_name}</string><br>               <key>title</key><br>               <string>${ipa_name}</string><br>           </dict><br>       </dict><br>   </array><br></dict><br><br>EOF</p>
+<p>fir i $scheme_name.ipa</p>
 
       
     </div>
@@ -554,7 +581,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode8"><span class="nav-number">1.</span> <span class="nav-text">Xcode8</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode8"><span class="nav-number">1.</span> <span class="nav-text">Xcode8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手动上传"><span class="nav-number">2.</span> <span class="nav-text">手动上传</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#追上fir-API-token-自动上传"><span class="nav-number"></span> <span class="nav-text">追上fir API token 自动上传</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于当前代码进行打包打包目录：xxxx-build-xxxx-ent-ipa"><span class="nav-number"></span> <span class="nav-text">基于当前代码进行打包打包目录：xxxx/build/xxxx_ent.ipa</span></a></div>
             
           </div>
         </section>
