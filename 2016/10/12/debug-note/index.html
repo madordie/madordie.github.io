@@ -86,16 +86,16 @@
 
 
 
-<meta name="description" content="Debug的日常">
+<meta name="description" content="Debug的日常。持续更新中…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Debug 小记">
 <meta property="og:url" content="https://madordie.github.io/2016/10/12/debug-note/index.html">
 <meta property="og:site_name" content="Keith's blog">
-<meta property="og:description" content="Debug的日常">
-<meta property="og:updated_time" content="2016-12-01T09:06:44.000Z">
+<meta property="og:description" content="Debug的日常。持续更新中…">
+<meta property="og:updated_time" content="2016-12-01T10:09:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Debug 小记">
-<meta name="twitter:description" content="Debug的日常">
+<meta name="twitter:description" content="Debug的日常。持续更新中…">
 
 
 
@@ -338,14 +338,14 @@
       
 
       
-        <p>Debug的日常</p>
+        <p>Debug的日常。持续更新中…</p>
 <a id="more"></a>
-<h1 id="Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。"><a href="#Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。" class="headerlink" title="Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。"></a>Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。</h1><p>  <strong> Version 8.1 (8B62) </strong></p>
+<h1 id="2016-12-1-Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。"><a href="#2016-12-1-Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。" class="headerlink" title="2016.12.1 - Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。"></a>2016.12.1 - Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。</h1><p>  <strong> Version 8.1 (8B62) </strong></p>
   <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">keyboardShow</span><span class="params">(sender: Notification)</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> endFrame = <span class="type">CGRect</span>.zero        </div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> frame = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">CGRect</span> &#123;</div><div class="line">        endFrame = frame</div><div class="line">        <span class="comment">//  *** Debug是可以通过的。但是Release无法通过。</span></div><div class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as CGRect"</span>)</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> value = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">NSValue</span> &#123;</div><div class="line">        endFrame = value.cgRectValue</div><div class="line">        <span class="comment">//  *** Release会取出NSValue</span></div><div class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as NSValue"</span>)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>  由于Release无法调试，所以费了不少劲。首先Swift中的字典已经可以存放值类型，其本身也是值类型。所以我首先选择了第一种写法<code>let frame = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect</code>, 但是Release情况下却发生解包失败的情况。所以采用OC的传统写法<code>let value = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue</code>。就能解析出来。但是总感觉OC的方法不够swift😂。。。</p>
 <p>  有同事直接强制转换为NSValue是没有问题的，于是乎试了一下，发现直接校验NSValue就可以。但是swift中感觉不应该有这个转换了，毕竟本身就可以存储CGRect..</p>
 <p>  猜测原因：目前阶段Swift的字典和OC的字典数据结构还并未完全一致。。</p>
-<h1 id="Xcode8中解析-crash文件"><a href="#Xcode8中解析-crash文件" class="headerlink" title="Xcode8中解析.crash文件"></a>Xcode8中解析.crash文件</h1><ol>
+<h1 id="2016-11-14-Xcode8中解析-crash文件"><a href="#2016-11-14-Xcode8中解析-crash文件" class="headerlink" title="2016.11.14 - Xcode8中解析.crash文件"></a>2016.11.14 - Xcode8中解析.crash文件</h1><ol>
 <li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
 <li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
 <li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
@@ -574,7 +574,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。"><span class="nav-number">1.</span> <span class="nav-text">Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode8中解析-crash文件"><span class="nav-number">2.</span> <span class="nav-text">Xcode8中解析.crash文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UIView-m-190-UIViewReportBrokenSuperviewChain"><span class="nav-number">3.</span> <span class="nav-text">UIView.m:190 - UIViewReportBrokenSuperviewChain</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常信息："><span class="nav-number">3.1.</span> <span class="nav-text">异常信息：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常分析"><span class="nav-number">3.2.</span> <span class="nav-text">异常分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#碰到该问题的还有"><span class="nav-number">3.3.</span> <span class="nav-text">碰到该问题的还有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误堆栈-lt-脱敏-gt"><span class="nav-number">3.4.</span> <span class="nav-text">错误堆栈 <脱敏></span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2016-12-1-Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。"><span class="nav-number">1.</span> <span class="nav-text">2016.12.1 - Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2016-11-14-Xcode8中解析-crash文件"><span class="nav-number">2.</span> <span class="nav-text">2016.11.14 - Xcode8中解析.crash文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UIView-m-190-UIViewReportBrokenSuperviewChain"><span class="nav-number">3.</span> <span class="nav-text">UIView.m:190 - UIViewReportBrokenSuperviewChain</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常信息："><span class="nav-number">3.1.</span> <span class="nav-text">异常信息：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常分析"><span class="nav-number">3.2.</span> <span class="nav-text">异常分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#碰到该问题的还有"><span class="nav-number">3.3.</span> <span class="nav-text">碰到该问题的还有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误堆栈-lt-脱敏-gt"><span class="nav-number">3.4.</span> <span class="nav-text">错误堆栈 <脱敏></span></a></li></ol></li></ol></div>
             
           </div>
         </section>

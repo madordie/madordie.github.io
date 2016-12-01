@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2016-12-01T09:06:44.000Z</updated>
+  <updated>2016-12-01T10:09:57.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,16 +20,16 @@
     <link href="https://madordie.github.io/2016/10/12/debug-note/"/>
     <id>https://madordie.github.io/2016/10/12/debug-note/</id>
     <published>2016-10-12T13:51:04.000Z</published>
-    <updated>2016-12-01T09:06:44.000Z</updated>
+    <updated>2016-12-01T10:09:57.000Z</updated>
     
-    <content type="html">&lt;p&gt;Debug的日常&lt;/p&gt;
+    <content type="html">&lt;p&gt;Debug的日常。持续更新中…&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot;&gt;&lt;a href=&quot;#Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot; class=&quot;headerlink&quot; title=&quot;Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。&quot;&gt;&lt;/a&gt;Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。&lt;/h1&gt;&lt;p&gt;  &lt;strong&gt; Version 8.1 (8B62) &lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&quot;2016-12-1-Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot;&gt;&lt;a href=&quot;#2016-12-1-Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot; class=&quot;headerlink&quot; title=&quot;2016.12.1 - Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。&quot;&gt;&lt;/a&gt;2016.12.1 - Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。&lt;/h1&gt;&lt;p&gt;  &lt;strong&gt; Version 8.1 (8B62) &lt;/strong&gt;&lt;/p&gt;
   &lt;figure class=&quot;highlight swift&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;keyboardShow&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(sender: Notification)&lt;/span&gt;&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; endFrame = &lt;span class=&quot;type&quot;&gt;CGRect&lt;/span&gt;.zero        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; frame = sender.userInfo?[&lt;span class=&quot;type&quot;&gt;UIKeyboardFrameEndUserInfoKey&lt;/span&gt;] &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt;? &lt;span class=&quot;type&quot;&gt;CGRect&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        endFrame = frame&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//  *** Debug是可以通过的。但是Release无法通过。&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;type&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;&amp;lt;&amp;lt;INFO&amp;gt;&amp;gt;&amp;gt;: as CGRect&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; value = sender.userInfo?[&lt;span class=&quot;type&quot;&gt;UIKeyboardFrameEndUserInfoKey&lt;/span&gt;] &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt;? &lt;span class=&quot;type&quot;&gt;NSValue&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        endFrame = value.cgRectValue&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//  *** Release会取出NSValue&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;type&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;&amp;lt;&amp;lt;INFO&amp;gt;&amp;gt;&amp;gt;: as NSValue&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;  由于Release无法调试，所以费了不少劲。首先Swift中的字典已经可以存放值类型，其本身也是值类型。所以我首先选择了第一种写法&lt;code&gt;let frame = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect&lt;/code&gt;, 但是Release情况下却发生解包失败的情况。所以采用OC的传统写法&lt;code&gt;let value = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue&lt;/code&gt;。就能解析出来。但是总感觉OC的方法不够swift😂。。。&lt;/p&gt;
 &lt;p&gt;  有同事直接强制转换为NSValue是没有问题的，于是乎试了一下，发现直接校验NSValue就可以。但是swift中感觉不应该有这个转换了，毕竟本身就可以存储CGRect..&lt;/p&gt;
 &lt;p&gt;  猜测原因：目前阶段Swift的字典和OC的字典数据结构还并未完全一致。。&lt;/p&gt;
-&lt;h1 id=&quot;Xcode8中解析-crash文件&quot;&gt;&lt;a href=&quot;#Xcode8中解析-crash文件&quot; class=&quot;headerlink&quot; title=&quot;Xcode8中解析.crash文件&quot;&gt;&lt;/a&gt;Xcode8中解析.crash文件&lt;/h1&gt;&lt;ol&gt;
+&lt;h1 id=&quot;2016-11-14-Xcode8中解析-crash文件&quot;&gt;&lt;a href=&quot;#2016-11-14-Xcode8中解析-crash文件&quot; class=&quot;headerlink&quot; title=&quot;2016.11.14 - Xcode8中解析.crash文件&quot;&gt;&lt;/a&gt;2016.11.14 - Xcode8中解析.crash文件&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;导出&lt;code&gt;x.crash&lt;/code&gt;文件，放置在&lt;code&gt;目录A&lt;/code&gt;下&lt;/li&gt;
 &lt;li&gt;复制&lt;code&gt;工程名.app.dSYM&lt;/code&gt;到&lt;code&gt;目录A&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;配置环境变量，运行&lt;code&gt;export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer&lt;/code&gt;&lt;/li&gt;
@@ -57,7 +57,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;Debug的日常&lt;/p&gt;
+      &lt;p&gt;Debug的日常。持续更新中…&lt;/p&gt;
     
     </summary>
     
