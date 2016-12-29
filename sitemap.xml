@@ -2,16 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://madordie.github.io/2016/09/26/build-ipa-sh/</loc>
+    <loc>https://madordie.github.io/2016/12/23/uitextkit-ellipsis-sth-at-the-end/</loc>
     
-    <lastmod>2016-12-01T10:36:27.000Z</lastmod>
+    <lastmod>2016-12-26T10:30:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://madordie.github.io/2016/10/12/debug-note/</loc>
+    <loc>https://madordie.github.io/2016/12/23/elegant-to-use-swiftlint/</loc>
     
-    <lastmod>2016-12-01T10:14:29.000Z</lastmod>
+    <lastmod>2016-12-23T09:46:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2016/12/19/bandwagonhost-note/</loc>
+    
+    <lastmod>2016-12-21T05:56:43.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2016/12/19/bruch-up-regular-expressions/</loc>
+    
+    <lastmod>2016-12-19T07:04:03.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2016/11/14/debug-xcode8-analysis-crash-file/</loc>
+    
+    <lastmod>2016-12-19T06:59:15.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2016/10/11/debug-uiview-m-190/</loc>
+    
+    <lastmod>2016-12-19T06:59:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2016/12/01/debug-swift-notifa-frame/</loc>
+    
+    <lastmod>2016-12-19T06:59:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2016/09/26/build-ipa-sh/</loc>
+    
+    <lastmod>2016-12-01T10:36:27.000Z</lastmod>
     
   </url>
   
