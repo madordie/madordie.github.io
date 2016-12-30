@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2016-12-26T10:30:14.000Z</updated>
+  <updated>2016-12-30T11:15:40.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,9 +20,11 @@
     <link href="https://madordie.github.io/2016/12/23/uitextkit-ellipsis-sth-at-the-end/"/>
     <id>https://madordie.github.io/2016/12/23/uitextkit-ellipsis-sth-at-the-end/</id>
     <published>2016-12-23T08:37:37.000Z</published>
-    <updated>2016-12-26T10:30:14.000Z</updated>
+    <updated>2016-12-30T11:15:40.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;效果&quot;&gt;&lt;a href=&quot;#效果&quot; class=&quot;headerlink&quot; title=&quot;效果&quot;&gt;&lt;/a&gt;效果&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://7xvzwi.com1.z0.glb.clouddn.com/UITextKit-AppStore-more-scene.gif://7xvzwi.com1.z0.glb.clouddn.com/leanote_new_logo.png&quot; alt=&quot;效果图&quot;&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;看到AppStore的&lt;code&gt;更多&lt;/code&gt;效果，做的不错哎，本文尝试采用&lt;code&gt;exclusionPaths&lt;/code&gt;进行实现。不过有瑕疵。。来年用追加的方式在实现一下。感觉追加的方式比较简单。，&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;效果&quot;&gt;&lt;a href=&quot;#效果&quot; class=&quot;headerlink&quot; title=&quot;效果&quot;&gt;&lt;/a&gt;效果&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://7xvzwi.com1.z0.glb.clouddn.com/UITextKit-AppStore-more-scene.gif://7xvzwi.com1.z0.glb.clouddn.com/leanote_new_logo.png&quot; alt=&quot;效果图&quot;&gt;&lt;/p&gt;
 &lt;h1 id=&quot;简要说明&quot;&gt;&lt;a href=&quot;#简要说明&quot; class=&quot;headerlink&quot; title=&quot;简要说明&quot;&gt;&lt;/a&gt;简要说明&lt;/h1&gt;&lt;p&gt;  App Store中的查看更多动画是不是很给力？可是做起来确不知道如何下手？这里我提供一种UITextKit的方法来简单的实现一下。&lt;/p&gt;
 &lt;p&gt;  为了让例子简单，我就直接写了个more，那个view是自定义的，随便添加的，和本身的文本展示的并没有什么关系。&lt;/p&gt;
 &lt;p&gt;  为了让最后的那个moreView更加好用，增加了已经展开显示全部是否隐藏的控制。&lt;/p&gt;
@@ -33,7 +35,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;效果&quot;&gt;&lt;a href=&quot;#效果&quot; class=&quot;headerlink&quot; title=&quot;效果&quot;&gt;&lt;/a&gt;效果&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://7xvzwi.com1.z0.glb.clouddn.com/UITextKit-AppStore-mor
+      &lt;p&gt;看到AppStore的&lt;code&gt;更多&lt;/code&gt;效果，做的不错哎，本文尝试采用&lt;code&gt;exclusionPaths&lt;/code&gt;进行实现。不过有瑕疵。。来年用追加的方式在实现一下。感觉追加的方式比较简单。，&lt;/p&gt;
     
     </summary>
     
@@ -47,9 +49,11 @@
     <link href="https://madordie.github.io/2016/12/23/elegant-to-use-swiftlint/"/>
     <id>https://madordie.github.io/2016/12/23/elegant-to-use-swiftlint/</id>
     <published>2016-12-23T03:59:57.000Z</published>
-    <updated>2016-12-23T09:46:04.000Z</updated>
+    <updated>2016-12-30T11:15:48.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;SwiftLint&quot;&gt;&lt;a href=&quot;#SwiftLint&quot; class=&quot;headerlink&quot; title=&quot;SwiftLint&quot;&gt;&lt;/a&gt;SwiftLint&lt;/h1&gt;&lt;blockquote&gt;
+    <content type="html">&lt;p&gt;接入了SwiftLine，修改2000+的warning、300+error的一点笔记心得。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;SwiftLint&quot;&gt;&lt;a href=&quot;#SwiftLint&quot; class=&quot;headerlink&quot; title=&quot;SwiftLint&quot;&gt;&lt;/a&gt;SwiftLint&lt;/h1&gt;&lt;blockquote&gt;
 &lt;h2 id=&quot;SwiftLint-1&quot;&gt;&lt;a href=&quot;#SwiftLint-1&quot; class=&quot;headerlink&quot; title=&quot;SwiftLint&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://github.com/realm/SwiftLint&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SwiftLint&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A tool to enforce Swift style and conventions, loosely based on GitHub’s Swift Style Guide.&lt;br&gt;  SwiftLint hooks into Clang and SourceKit to use the AST representation of your source files for more accurate results.&lt;br&gt;  SwiftLint 是一个用于强制检查 Swift 代码风格和规定的一个工具，基本上以 GitHub’s Swift 代码风格指南为基础。&lt;br&gt;  SwiftLint Hook 了 Clang 和 SourceKit 从而能够使用 AST 来表示源代码文件的更多精确结果。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;对原有代码格式化&quot;&gt;&lt;a href=&quot;#对原有代码格式化&quot; class=&quot;headerlink&quot; title=&quot;对原有代码格式化&quot;&gt;&lt;/a&gt;对原有代码格式化&lt;/h2&gt;&lt;h3 id=&quot;TrailingWhitespaceRule&quot;&gt;&lt;a href=&quot;#TrailingWhitespaceRule&quot; class=&quot;headerlink&quot; title=&quot;TrailingWhitespaceRule&quot;&gt;&lt;/a&gt;TrailingWhitespaceRule&lt;/h3&gt;&lt;h4 id=&quot;现象&quot;&gt;&lt;a href=&quot;#现象&quot; class=&quot;headerlink&quot; title=&quot;现象&quot;&gt;&lt;/a&gt;现象&lt;/h4&gt;&lt;blockquote&gt;
@@ -94,8 +98,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;SwiftLint&quot;&gt;&lt;a href=&quot;#SwiftLint&quot; class=&quot;headerlink&quot; title=&quot;SwiftLint&quot;&gt;&lt;/a&gt;SwiftLint&lt;/h1&gt;&lt;blockquote&gt;
-&lt;h2 id=&quot;SwiftLint-1&quot;&gt;&lt;a href=&quot;#S
+      &lt;p&gt;接入了SwiftLine，修改2000+的warning、300+error的一点笔记心得。&lt;/p&gt;
     
     </summary>
     
@@ -107,9 +110,11 @@
     <link href="https://madordie.github.io/2016/12/19/bandwagonhost-note/"/>
     <id>https://madordie.github.io/2016/12/19/bandwagonhost-note/</id>
     <published>2016-12-19T12:37:11.000Z</published>
-    <updated>2016-12-30T03:39:03.000Z</updated>
+    <updated>2016-12-30T11:10:42.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h1&gt;&lt;ul&gt;
+    <content type="html">&lt;p&gt;原来吧，用用goagent、Lantern、XX-Net，确实，这玩意只能Google出来结果，但是有的站点打不开才是最骚的。。&lt;br&gt;同事搞了个搬瓦工挺便宜，于是乎就也搞了一个。不过强迫症犯了，尝试了各种SS版本以及各种优化，目的是找个流畅点的版本进行&lt;strong&gt;科学上网&lt;/strong&gt;。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;红线越不得！红线越不得！红线越不得！重要的事情说3遍。&lt;/li&gt;
 &lt;li&gt;参看第一条&lt;/li&gt;
 &lt;li&gt;参看第一条&lt;/li&gt;
@@ -158,10 +163,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;红线越不得！红线越不得！红线越不得！重要的事情说3遍。&lt;/li&gt;
-&lt;li&gt;参看第一条&lt;/li&gt;
-&lt;li&gt;参看第一
+      &lt;p&gt;原来吧，用用goagent、Lantern、XX-Net，确实，这玩意只能Google出来结果，但是有的站点打不开才是最骚的。。&lt;br&gt;同事搞了个搬瓦工挺便宜，于是乎就也搞了一个。不过强迫症犯了，尝试了各种SS版本以及各种优化，目的是找个流畅点的版本进行&lt;strong&gt;科学上网&lt;/strong&gt;。&lt;/p&gt;
     
     </summary>
     
@@ -173,11 +175,111 @@
     <link href="https://madordie.github.io/2016/12/19/bruch-up-regular-expressions/"/>
     <id>https://madordie.github.io/2016/12/19/bruch-up-regular-expressions/</id>
     <published>2016-12-19T07:03:09.000Z</published>
-    <updated>2016-12-19T07:04:03.000Z</updated>
+    <updated>2016-12-30T11:12:05.000Z</updated>
     
-    <content type="html"></content>
+    <content type="html">&lt;p&gt;正则表达式基础学习笔记。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;前面&quot;&gt;&lt;a href=&quot;#前面&quot; class=&quot;headerlink&quot; title=&quot;前面&quot;&gt;&lt;/a&gt;前面&lt;/h1&gt;&lt;p&gt;  上次找了个很好的文章，可是手残没保存。。找不到了😭，现在重新找了一个文章：&lt;a href=&quot;https://luke0922.gitbooks.io/learnregularexpressionin30minutes/content/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;正则表达式30分钟入门教程&lt;/a&gt;&lt;br&gt;  正如作者说的：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h1 id=&quot;声明&quot;&gt;&lt;a href=&quot;#声明&quot; class=&quot;headerlink&quot; title=&quot;声明&quot;&gt;&lt;/a&gt;声明&lt;/h1&gt;&lt;p&gt;本文非原创，是改编自&lt;a href=&quot;http://deerchao.net/tutorials/regex/regex.htm#mission&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《正则表达式30分钟入门教程》&lt;/a&gt;，因为原作者的排版个人不是很喜欢，而且内容上个人觉得有些地方需要改进，所以在 gitbook 上开了一本书。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  OSC的&lt;a href=&quot;http://tool.oschina.net/regex&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在线正则表达式测试&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;开搞&quot;&gt;&lt;a href=&quot;#开搞&quot; class=&quot;headerlink&quot; title=&quot;开搞&quot;&gt;&lt;/a&gt;开搞&lt;/h1&gt;&lt;h2 id=&quot;元字符&quot;&gt;&lt;a href=&quot;#元字符&quot; class=&quot;headerlink&quot; title=&quot;元字符&quot;&gt;&lt;/a&gt;元字符&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;\&lt;/code&gt; : 转义&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\b&lt;/code&gt; : 单词开始或结束&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;^&lt;/code&gt; : 字符串开始&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$&lt;/code&gt; : 字符串结束&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\d&lt;/code&gt; : 一个数字&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\s&lt;/code&gt; : 任意空白字符：空格、制表符、换行符、中文全角空格、等&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\w&lt;/code&gt; : 字母/数字/下划线/汉字 可见字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.&lt;/code&gt; : 除换行符以外的任意字符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;重复&quot;&gt;&lt;a href=&quot;#重复&quot; class=&quot;headerlink&quot; title=&quot;重复&quot;&gt;&lt;/a&gt;重复&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;{n}&lt;/code&gt; : 前置位重复匹配 [n] 次&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{n,m}&lt;/code&gt; : 前置位重复匹配 [n-m] 次&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{n,}&lt;/code&gt; : 前置位重复匹配 [n-∞] 次&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*&lt;/code&gt; : 数量区间：[0-N]&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;+&lt;/code&gt; : 数量区间：[1-N]&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;?&lt;/code&gt; : 数量区间：[0-1]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;字符类&quot;&gt;&lt;a href=&quot;#字符类&quot; class=&quot;headerlink&quot; title=&quot;字符类&quot;&gt;&lt;/a&gt;字符类&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[nml]&lt;/code&gt; : 可以匹配到 n/m/l&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;条件&quot;&gt;&lt;a href=&quot;#条件&quot; class=&quot;headerlink&quot; title=&quot;条件&quot;&gt;&lt;/a&gt;条件&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;|&lt;/code&gt; : &lt;strong&gt;或&lt;/strong&gt;语句。存在逻辑短路&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(m)&lt;/code&gt; : &lt;strong&gt;分组&lt;/strong&gt;语句。子式，可以指定重复什么的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;反义&quot;&gt;&lt;a href=&quot;#反义&quot; class=&quot;headerlink&quot; title=&quot;反义&quot;&gt;&lt;/a&gt;反义&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;\W&lt;/code&gt; : 任意&lt;strong&gt;不是&lt;/strong&gt;（字符、数字、下划线、汉字）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\S&lt;/code&gt; : 任意&lt;strong&gt;不是&lt;/strong&gt; 空白符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\D&lt;/code&gt; : 任意&lt;strong&gt;不是&lt;/strong&gt; 数字&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\B&lt;/code&gt; : 任意&lt;strong&gt;不是&lt;/strong&gt; 单词开头或结尾&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\^x&lt;/code&gt; : 除x以外的任意字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[\^abc]&lt;/code&gt; : 除abc这几个字母以外的任意字符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;后向引用&quot;&gt;&lt;a href=&quot;#后向引用&quot; class=&quot;headerlink&quot; title=&quot;后向引用&quot;&gt;&lt;/a&gt;后向引用&lt;/h2&gt;&lt;p&gt;  &lt;code&gt;(\w+)&lt;/code&gt;这样用&lt;code&gt;()&lt;/code&gt;的部分称为一个分组，其匹配到的内容可以使用&lt;code&gt;\n&lt;/code&gt;来表示，&lt;code&gt;n&lt;/code&gt;代表该分组为第n个分组。分组下标从&lt;code&gt;1&lt;/code&gt;开始。&lt;br&gt;  也可以自定义子表达式组名: &lt;code&gt;(?&amp;lt;Word&amp;gt;M) \k&amp;lt;Word&amp;gt;&lt;/code&gt; : 或 &lt;code&gt;(?&amp;#39;Word&amp;#39;M) \k&amp;#39;Word&amp;#39;&lt;/code&gt;，其中M为子式。&lt;/p&gt;
+&lt;h2 id=&quot;常用分组语法&quot;&gt;&lt;a href=&quot;#常用分组语法&quot; class=&quot;headerlink&quot; title=&quot;常用分组语法&quot;&gt;&lt;/a&gt;常用分组语法&lt;/h2&gt;&lt;h3 id=&quot;捕获&quot;&gt;&lt;a href=&quot;#捕获&quot; class=&quot;headerlink&quot; title=&quot;捕获&quot;&gt;&lt;/a&gt;捕获&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(exp)&lt;/code&gt; : 匹配exp,并捕获文本到自动命名的组里&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?exp)&lt;/code&gt; : 匹配exp,并捕获文本到名称为name的组里，也可以写成(?’name’exp)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?:exp)&lt;/code&gt; : 匹配exp,不捕获匹配的文本，也不给此分组分配组号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;零宽断言&quot;&gt;&lt;a href=&quot;#零宽断言&quot; class=&quot;headerlink&quot; title=&quot;零宽断言&quot;&gt;&lt;/a&gt;零宽断言&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(?=exp)&lt;/code&gt; : 匹配exp前面的位置&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?&amp;lt;=exp)&lt;/code&gt; : 匹配exp后面的位置&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?!exp)&lt;/code&gt; : 匹配后面跟的不是exp的位置&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?&amp;lt;!exp)&lt;/code&gt; : 匹配前面不是exp的位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;注释&quot;&gt;&lt;a href=&quot;#注释&quot; class=&quot;headerlink&quot; title=&quot;注释&quot;&gt;&lt;/a&gt;注释&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(?#comment)&lt;/code&gt; : 这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;贪婪与懒惰&quot;&gt;&lt;a href=&quot;#贪婪与懒惰&quot; class=&quot;headerlink&quot; title=&quot;贪婪与懒惰&quot;&gt;&lt;/a&gt;贪婪与懒惰&lt;/h2&gt;&lt;p&gt;  贪婪：匹配的尽可能长&lt;br&gt;  懒惰：匹配的尽可能短&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;*?&lt;/code&gt; : 重复任意次，但尽可能少重复&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;+?&lt;/code&gt; : 重复1次或更多次，但尽可能少重复&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;??&lt;/code&gt; : 重复0次或1次，但尽可能少重复&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{n,m}?&lt;/code&gt; : 重复n到m次，但尽可能少重复&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{n,}?&lt;/code&gt; : 重复n次以上，但尽可能少重复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;平衡组-递归匹配&quot;&gt;&lt;a href=&quot;#平衡组-递归匹配&quot; class=&quot;headerlink&quot; title=&quot;平衡组/递归匹配&quot;&gt;&lt;/a&gt;平衡组/递归匹配&lt;/h2&gt;&lt;p&gt;  # 我开始看不懂了😂&lt;/p&gt;
+&lt;h2 id=&quot;其他&quot;&gt;&lt;a href=&quot;#其他&quot; class=&quot;headerlink&quot; title=&quot;其他&quot;&gt;&lt;/a&gt;其他&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;\a&lt;/code&gt; : 报警字符(打印它的效果是电脑嘀一声)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\b&lt;/code&gt; : 通常是单词分界位置，但如果在字符类里使用代表退格&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\t&lt;/code&gt; : 制表符，Tab&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\r&lt;/code&gt; : 回车&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\v&lt;/code&gt; : 竖向制表符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\f&lt;/code&gt; : 换页符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\n&lt;/code&gt; : 换行符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\e&lt;/code&gt; : Escape&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\0nn&lt;/code&gt; : ASCII代码中八进制代码为nn的字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\xnn&lt;/code&gt; : ASCII代码中十六进制代码为nn的字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\unnnn&lt;/code&gt; : Unicode代码中十六进制代码为nnnn的字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\cN&lt;/code&gt; : ASCII控制字符。比如\cC代表Ctrl+C&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\A&lt;/code&gt; : 字符串开头(类似^，但不受处理多行选项的影响)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\Z&lt;/code&gt; : 字符串结尾或行尾(不受处理多行选项的影响)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\z&lt;/code&gt; : 字符串结尾(类似$，但不受处理多行选项的影响)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\G&lt;/code&gt; : 当前搜索的开头&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\p{name}&lt;/code&gt; : Unicode中命名为name的字符类，例如\p{IsGreek}&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?&amp;gt;exp)&lt;/code&gt; : 贪婪子表达式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?&amp;lt;x&amp;gt;-&amp;lt;y&amp;gt;exp)&lt;/code&gt; : 平衡组&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?im-nsx:exp)&lt;/code&gt; : 在子表达式exp中改变处理选项&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?im-nsx)&lt;/code&gt; : 为表达式后面的部分改变处理选项&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?(exp)yes|no)&lt;/code&gt; : 把exp当作零宽正向先行断言，如果在这个位置能匹配，使用yes作为此组的表达式；否则使用no&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?(exp)yes)&lt;/code&gt; : 同上，只是使用空表达式作为no&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?(name)yes|no)&lt;/code&gt; : 如果命名为name的组捕获到了内容，使用yes作为表达式；否则使用no&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(?(name)yes)&lt;/code&gt; : 同上，只是使用空表达式作为no&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;栗子&quot;&gt;&lt;a href=&quot;#栗子&quot; class=&quot;headerlink&quot; title=&quot;栗子&quot;&gt;&lt;/a&gt;栗子&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;5-12位QQ：&lt;code&gt;^\d{5,12}$&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;IPv4地址：&lt;code&gt;((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;go go&lt;/code&gt;、&lt;code&gt;kitty kitty&lt;/code&gt;这样的叠词：&lt;code&gt;\b(\w+)\b\s+\1\b&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;后向引用：&lt;code&gt;\b(\w+)\b\s+\1\b&lt;/code&gt; == &lt;code&gt;\b(?&amp;lt;Word&amp;gt;\w+)\b\s+\k&amp;lt;Word&amp;gt;\b&lt;/code&gt; == &lt;code&gt;\b(?&amp;#39;Word&amp;#39;\w+)\b\s+\k&amp;#39;Word&amp;#39;\b&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;最后&quot;&gt;&lt;a href=&quot;#最后&quot; class=&quot;headerlink&quot; title=&quot;最后&quot;&gt;&lt;/a&gt;最后&lt;/h1&gt;&lt;p&gt;  知识研究了一下语法，还未详细测试。思考：这玩意真心厉害😂。&lt;/p&gt;
+</content>
     
     <summary type="html">
+    
+      &lt;p&gt;正则表达式基础学习笔记。&lt;/p&gt;
     
     </summary>
     
@@ -191,9 +293,11 @@
     <link href="https://madordie.github.io/2016/12/01/debug-swift-notifa-frame/"/>
     <id>https://madordie.github.io/2016/12/01/debug-swift-notifa-frame/</id>
     <published>2016-11-30T16:00:00.000Z</published>
-    <updated>2016-12-19T06:59:04.000Z</updated>
+    <updated>2016-12-30T11:18:29.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot;&gt;&lt;a href=&quot;#Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot; class=&quot;headerlink&quot; title=&quot;Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。&quot;&gt;&lt;/a&gt;Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。&lt;/h1&gt;&lt;p&gt;  –&amp;gt;更新于2016.12.1&lt;/p&gt;
+    <content type="html">&lt;p&gt;swift中获取OC存储的Frame两种获取方案。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot;&gt;&lt;a href=&quot;#Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot; class=&quot;headerlink&quot; title=&quot;Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。&quot;&gt;&lt;/a&gt;Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。&lt;/h1&gt;&lt;p&gt;  –&amp;gt;更新于2016.12.1&lt;/p&gt;
 &lt;p&gt;  &lt;strong&gt; Version 8.1 (8B62) &lt;/strong&gt;&lt;/p&gt;
   &lt;figure class=&quot;highlight swift&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;keyboardShow&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(sender: Notification)&lt;/span&gt;&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; endFrame = &lt;span class=&quot;type&quot;&gt;CGRect&lt;/span&gt;.zero        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; frame = sender.userInfo?[&lt;span class=&quot;type&quot;&gt;UIKeyboardFrameEndUserInfoKey&lt;/span&gt;] &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt;? &lt;span class=&quot;type&quot;&gt;CGRect&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        endFrame = frame&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//  *** Debug是可以通过的。但是Release无法通过。&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;type&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;&amp;lt;&amp;lt;INFO&amp;gt;&amp;gt;&amp;gt;: as CGRect&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; value = sender.userInfo?[&lt;span class=&quot;type&quot;&gt;UIKeyboardFrameEndUserInfoKey&lt;/span&gt;] &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt;? &lt;span class=&quot;type&quot;&gt;NSValue&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        endFrame = value.cgRectValue&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//  *** Release会取出NSValue&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;type&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;&amp;lt;&amp;lt;INFO&amp;gt;&amp;gt;&amp;gt;: as NSValue&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;  由于Release无法调试，所以费了不少劲。首先Swift中的字典已经可以存放值类型，其本身也是值类型。所以我首先选择了第一种写法&lt;code&gt;let frame = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect&lt;/code&gt;, 但是Release情况下却发生解包失败的情况。所以采用OC的传统写法&lt;code&gt;let value = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue&lt;/code&gt;。就能解析出来。但是总感觉OC的方法不够swift😂。。。&lt;/p&gt;
@@ -203,7 +307,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot;&gt;&lt;a href=&quot;#Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。&quot; clas
+      &lt;p&gt;swift中获取OC存储的Frame两种获取方案。&lt;/p&gt;
     
     </summary>
     
@@ -217,21 +321,22 @@
     <link href="https://madordie.github.io/2016/11/14/debug-xcode8-analysis-crash-file/"/>
     <id>https://madordie.github.io/2016/11/14/debug-xcode8-analysis-crash-file/</id>
     <published>2016-11-14T04:43:22.000Z</published>
-    <updated>2016-12-19T06:59:15.000Z</updated>
+    <updated>2016-12-30T11:18:17.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;Xcode8中解析-crash文件&quot;&gt;&lt;a href=&quot;#Xcode8中解析-crash文件&quot; class=&quot;headerlink&quot; title=&quot;Xcode8中解析.crash文件&quot;&gt;&lt;/a&gt;Xcode8中解析.crash文件&lt;/h1&gt;&lt;ol&gt;
+    <content type="html">&lt;p&gt;5步解析&lt;code&gt;.crash&lt;/code&gt;文件&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Xcode8中解析-crash文件&quot;&gt;&lt;a href=&quot;#Xcode8中解析-crash文件&quot; class=&quot;headerlink&quot; title=&quot;Xcode8中解析.crash文件&quot;&gt;&lt;/a&gt;Xcode8中解析.crash文件&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;导出&lt;code&gt;x.crash&lt;/code&gt;文件，放置在&lt;code&gt;目录A&lt;/code&gt;下&lt;/li&gt;
 &lt;li&gt;复制&lt;code&gt;工程名.app.dSYM&lt;/code&gt;到&lt;code&gt;目录A&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;配置环境变量，运行&lt;code&gt;export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;拷贝脚本文件，运行&lt;code&gt;cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;解析，运行&lt;code&gt;./symbolicatecrash x.crash 工程名.app.dSYM &amp;gt; 自定义输出结果文件名&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;到&lt;code&gt;目录A&lt;/code&gt;解析，运行&lt;code&gt;./symbolicatecrash x.crash 工程名.app.dSYM &amp;gt; 自定义输出结果文件名&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Xcode8中解析-crash文件&quot;&gt;&lt;a href=&quot;#Xcode8中解析-crash文件&quot; class=&quot;headerlink&quot; title=&quot;Xcode8中解析.crash文件&quot;&gt;&lt;/a&gt;Xcode8中解析.crash文件&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;导出&lt;c
+      &lt;p&gt;5步解析&lt;code&gt;.crash&lt;/code&gt;文件&lt;/p&gt;
     
     </summary>
     
@@ -245,9 +350,11 @@
     <link href="https://madordie.github.io/2016/10/11/debug-uiview-m-190/"/>
     <id>https://madordie.github.io/2016/10/11/debug-uiview-m-190/</id>
     <published>2016-10-11T04:43:22.000Z</published>
-    <updated>2016-12-19T06:59:14.000Z</updated>
+    <updated>2016-12-30T11:19:29.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;UIView-m-190-UIViewReportBrokenSuperviewChain&quot;&gt;&lt;a href=&quot;#UIView-m-190-UIViewReportBrokenSuperviewChain&quot; class=&quot;headerlink&quot; title=&quot;UIView.m:190 - UIViewReportBrokenSuperviewChain&quot;&gt;&lt;/a&gt;UIView.m:190 - UIViewReportBrokenSuperviewChain&lt;/h1&gt;&lt;h2 id=&quot;异常信息：&quot;&gt;&lt;a href=&quot;#异常信息：&quot; class=&quot;headerlink&quot; title=&quot;异常信息：&quot;&gt;&lt;/a&gt;异常信息：&lt;/h2&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;invalid mode &amp;apos;kCFRunLoopCommonModes&amp;apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;libc++abi.dylib: terminate_handler unexpectedly threw an exception&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    <content type="html">&lt;p&gt;CRASH:&lt;br&gt;&lt;code&gt;void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()&lt;/code&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;UIView-m-190-UIViewReportBrokenSuperviewChain&quot;&gt;&lt;a href=&quot;#UIView-m-190-UIViewReportBrokenSuperviewChain&quot; class=&quot;headerlink&quot; title=&quot;UIView.m:190 - UIViewReportBrokenSuperviewChain&quot;&gt;&lt;/a&gt;UIView.m:190 - UIViewReportBrokenSuperviewChain&lt;/h1&gt;&lt;h2 id=&quot;异常信息：&quot;&gt;&lt;a href=&quot;#异常信息：&quot; class=&quot;headerlink&quot; title=&quot;异常信息：&quot;&gt;&lt;/a&gt;异常信息：&lt;/h2&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;invalid mode &amp;apos;kCFRunLoopCommonModes&amp;apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;libc++abi.dylib: terminate_handler unexpectedly threw an exception&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;异常分析&quot;&gt;&lt;a href=&quot;#异常分析&quot; class=&quot;headerlink&quot; title=&quot;异常分析&quot;&gt;&lt;/a&gt;异常分析&lt;/h2&gt;&lt;p&gt;  APP crash在&lt;br&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;[keyWindow addSubview:weakSelf];&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;  &lt;a href=&quot;#错误堆栈&quot;&gt;错误堆栈信息&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;  但是真正造成crash的代码为：&lt;/p&gt;
@@ -268,7 +375,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;UIView-m-190-UIViewReportBrokenSuperviewChain&quot;&gt;&lt;a href=&quot;#UIView-m-190-UIViewReportBrokenSuperviewChain&quot; class=&quot;headerlink&quot; title=&quot;UI
+      &lt;p&gt;CRASH:&lt;br&gt;&lt;code&gt;void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     

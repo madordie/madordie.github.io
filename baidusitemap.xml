@@ -3,91 +3,8 @@
 
     
   <url>
-    <loc>https://madordie.github.io/2016/12/19/bandwagonhost-note/</loc>
-    <lastmod>2016-12-30T03:39:03.000Z</lastmod>
-    <data>
-        <display>
-        <title>科学上网之搬瓦工ss搭建笔记</title>
-        <pubTime>2016-12-19T12:37:11.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/12/23/uitextkit-ellipsis-sth-at-the-end/</loc>
-    <lastmod>2016-12-26T10:30:14.000Z</lastmod>
-    <data>
-        <display>
-        <title>如何实现AppStore查看更多的方法</title>
-        <pubTime>2016-12-23T08:37:37.000Z</pubTime>
-        
-        <tag>iOS </tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/12/23/elegant-to-use-swiftlint/</loc>
-    <lastmod>2016-12-23T09:46:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>优雅的使用SwiftLint</title>
-        <pubTime>2016-12-23T03:59:57.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/12/19/bruch-up-regular-expressions/</loc>
-    <lastmod>2016-12-19T07:04:03.000Z</lastmod>
-    <data>
-        <display>
-        <title>正则表达式学习笔记</title>
-        <pubTime>2016-12-19T07:03:09.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="正则表达式" url="https://madordie.github.io/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/11/14/debug-xcode8-analysis-crash-file/</loc>
-    <lastmod>2016-12-19T06:59:15.000Z</lastmod>
-    <data>
-        <display>
-        <title>DEBUG - Xcode8解析.crash</title>
-        <pubTime>2016-11-14T04:43:22.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="DEBUG" url="https://madordie.github.io/categories/DEBUG/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://madordie.github.io/2016/10/11/debug-uiview-m-190/</loc>
-    <lastmod>2016-12-19T06:59:14.000Z</lastmod>
+    <lastmod>2016-12-30T11:19:29.000Z</lastmod>
     <data>
         <display>
         <title>DEBUG - UIView.h#190</title>
@@ -105,7 +22,7 @@
     
   <url>
     <loc>https://madordie.github.io/2016/12/01/debug-swift-notifa-frame/</loc>
-    <lastmod>2016-12-19T06:59:04.000Z</lastmod>
+    <lastmod>2016-12-30T11:18:29.000Z</lastmod>
     <data>
         <display>
         <title>DEBUG - swift中取出通知中的frame</title>
@@ -116,6 +33,89 @@
              
               <breadCrumb title="DEBUG" url="https://madordie.github.io/categories/DEBUG/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/11/14/debug-xcode8-analysis-crash-file/</loc>
+    <lastmod>2016-12-30T11:18:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>DEBUG - Xcode8解析.crash</title>
+        <pubTime>2016-11-14T04:43:22.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="DEBUG" url="https://madordie.github.io/categories/DEBUG/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/12/23/elegant-to-use-swiftlint/</loc>
+    <lastmod>2016-12-30T11:15:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>优雅的使用SwiftLint</title>
+        <pubTime>2016-12-23T03:59:57.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/12/23/uitextkit-ellipsis-sth-at-the-end/</loc>
+    <lastmod>2016-12-30T11:15:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>如何实现AppStore查看更多的方法</title>
+        <pubTime>2016-12-23T08:37:37.000Z</pubTime>
+        
+        <tag>iOS </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/12/19/bruch-up-regular-expressions/</loc>
+    <lastmod>2016-12-30T11:12:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>正则表达式学习笔记</title>
+        <pubTime>2016-12-19T07:03:09.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="正则表达式" url="https://madordie.github.io/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/12/19/bandwagonhost-note/</loc>
+    <lastmod>2016-12-30T11:10:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>科学上网之搬瓦工ss搭建笔记</title>
+        <pubTime>2016-12-19T12:37:11.000Z</pubTime>
+        
+         
+           
         </display>
     </data>
     </url>
@@ -137,6 +137,23 @@
 
     
   <url>
+    <loc>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</loc>
+    <lastmod>2016-10-22T14:00:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>UI素材与代码解耦的讨论与思考</title>
+        <pubTime>2016-08-28T04:16:02.000Z</pubTime>
+        
+        <tag>iOS </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</loc>
     <lastmod>2016-10-22T14:00:13.000Z</lastmod>
     <data>
@@ -147,23 +164,6 @@
         <tag>iOS </tag>
          
         <tag>ReactiveCocoa </tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</loc>
-    <lastmod>2016-10-22T14:00:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>UI素材与代码解耦的讨论与思考</title>
-        <pubTime>2016-08-28T04:16:02.000Z</pubTime>
-        
-        <tag>iOS </tag>
          
          
            
