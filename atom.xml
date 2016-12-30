@@ -103,17 +103,40 @@
   </entry>
   
   <entry>
-    <title>bandwagonhost-note</title>
+    <title>科学上网之搬瓦工ss搭建笔记</title>
     <link href="https://madordie.github.io/2016/12/19/bandwagonhost-note/"/>
     <id>https://madordie.github.io/2016/12/19/bandwagonhost-note/</id>
     <published>2016-12-19T12:37:11.000Z</published>
-    <updated>2016-12-21T05:56:43.000Z</updated>
+    <updated>2016-12-30T03:39:03.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;CentOS&quot;&gt;&lt;a href=&quot;#CentOS&quot; class=&quot;headerlink&quot; title=&quot;CentOS&quot;&gt;&lt;/a&gt;CentOS&lt;/h1&gt;&lt;h2 id=&quot;git&quot;&gt;&lt;a href=&quot;#git&quot; class=&quot;headerlink&quot; title=&quot;git&quot;&gt;&lt;/a&gt;git&lt;/h2&gt;&lt;ol&gt;
+    <content type="html">&lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;红线越不得！红线越不得！红线越不得！重要的事情说3遍。&lt;/li&gt;
+&lt;li&gt;参看第一条&lt;/li&gt;
+&lt;li&gt;参看第一条&lt;/li&gt;
+&lt;li&gt;参看第一条&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;目前安装的-rss&quot;&gt;&lt;a href=&quot;#目前安装的-rss&quot; class=&quot;headerlink&quot; title=&quot;目前安装的 rss&quot;&gt;&lt;/a&gt;目前安装的 rss&lt;/h1&gt;&lt;p&gt;  尝试了各种版本的系统，各种ss分支，最后用了rss，然后又花了一下，觉得速度可以了，延迟的问题无解。ping过去就是那么慢。。&lt;br&gt;  注意：为了重启不配置，要把里面没有自启动的添加到启动项。具体方法 Google一下。我加在了 &lt;code&gt;/etc/rc.local&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;shadowsocks-rss&quot;&gt;&lt;a href=&quot;#shadowsocks-rss&quot; class=&quot;headerlink&quot; title=&quot;shadowsocks-rss&quot;&gt;&lt;/a&gt;shadowsocks-rss&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/breakwa11/shadowsocks-rss/wiki&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ShadowsocksR 服务端安装教程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/shadowsocksr/ShadowsocksX-NG/releases&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;macOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://itunes.apple.com/cn/app/id1178584911&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;优化&quot;&gt;&lt;a href=&quot;#优化&quot; class=&quot;headerlink&quot; title=&quot;优化&quot;&gt;&lt;/a&gt;优化&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://shadowsocks.org/en/config/advanced.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官方优化方案&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.dou-bi.co/netspeeder-jc1/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Net Speeder&lt;/a&gt; &lt;code&gt;wget http://linux.linzhihao.cn/shell/netspeeder.sh &amp;amp; bash netspeeder.sh&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;本地访问VPS脚本&quot;&gt;&lt;a href=&quot;#本地访问VPS脚本&quot; class=&quot;headerlink&quot; title=&quot;本地访问VPS脚本&quot;&gt;&lt;/a&gt;本地访问VPS脚本&lt;/h2&gt;&lt;p&gt;  我比较懒，密码都是随机的也不想改，所以做了一个脚本用来直接ssh登陆。&lt;br&gt;  后来我发现我需要下载一些文件，于是乎我增加了两个参数。。&lt;br&gt;  安装系统的时候修改一下，将&lt;code&gt;password&lt;/code&gt;修改为随机生成的密码，这样也不用记录，直接复制粘贴。。&lt;br&gt;  同时将&lt;code&gt;12345&lt;/code&gt;替换为端口号。&lt;br&gt;  将&lt;code&gt;1.2.3.4&lt;/code&gt;替换为服务器IP，这个只需要写一次就好，基本上也不会改。。&lt;br&gt;  这样搞完之后在&lt;code&gt;~/.profile&lt;/code&gt;中增加&lt;code&gt;alias vps=&amp;quot;/Users/Madordie/shell/Mac_shell/ss.sh&amp;quot;&lt;/code&gt;，然后执行&lt;code&gt;source ~/.profile&lt;/code&gt;即可。&lt;/p&gt;
+&lt;p&gt;  这样就可以使用下面的简写：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- SSH登陆`vps`
+- 下载文件`vps /server_path /local_path`，自行修改后面俩参数
+&lt;/code&gt;&lt;/pre&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ cat ~/shell/Mac_shell/ss.sh &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#!/bin/bash&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;echo &amp;apos;password&amp;apos;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;port=12345&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;ip=1.2.3.4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;usr=root&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;if [ $# -eq 0 ]; then&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ssh $usr@$ip -p $port&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;elif [ $# -eq 2 ]; then &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    scp -P $port $usr@$ip:$1 $2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;else&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    echo &amp;quot;($*)你要干嘛。。&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fi&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&quot;尝试的时候各种用的环境搭建&quot;&gt;&lt;a href=&quot;#尝试的时候各种用的环境搭建&quot; class=&quot;headerlink&quot; title=&quot;尝试的时候各种用的环境搭建&quot;&gt;&lt;/a&gt;尝试的时候各种用的环境搭建&lt;/h1&gt;&lt;p&gt;  很显然上面的已经足够了，这个只是留个笔记，用来快速搭建某个环境啥的。。&lt;/p&gt;
+&lt;h2 id=&quot;CentOS&quot;&gt;&lt;a href=&quot;#CentOS&quot; class=&quot;headerlink&quot; title=&quot;CentOS&quot;&gt;&lt;/a&gt;CentOS&lt;/h2&gt;&lt;h3 id=&quot;git&quot;&gt;&lt;a href=&quot;#git&quot; class=&quot;headerlink&quot; title=&quot;git&quot;&gt;&lt;/a&gt;git&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;直接安装&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;yum install git&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&quot;go&quot;&gt;&lt;a href=&quot;#go&quot; class=&quot;headerlink&quot; title=&quot;go&quot;&gt;&lt;/a&gt;go&lt;/h2&gt;&lt;ol&gt;
+&lt;h3 id=&quot;go&quot;&gt;&lt;a href=&quot;#go&quot; class=&quot;headerlink&quot; title=&quot;go&quot;&gt;&lt;/a&gt;go&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;下载二进制文件：&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;wget https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
@@ -128,15 +151,17 @@
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&quot;shadowsocks-plus&quot;&gt;&lt;a href=&quot;#shadowsocks-plus&quot; class=&quot;headerlink&quot; title=&quot;shadowsocks-plus&quot;&gt;&lt;/a&gt;shadowsocks-plus&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;git clone https://github.com/shadowsocks-plus/shadowsocks-plus&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;cd shadowsocks-plus&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;go get github.com/shadowsocks-plus/shadowsocks-plus&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;env GOPATH=/usr/lib/go  go build server.go&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;go build local.go&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;scp&quot;&gt;&lt;a href=&quot;#scp&quot; class=&quot;headerlink&quot; title=&quot;scp&quot;&gt;&lt;/a&gt;scp&lt;/h2&gt;&lt;p&gt;  &lt;code&gt;scp -P 8888 root@127.0.0.10:/root/my_key/ca.cert.pem .&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Ubuntu&quot;&gt;&lt;a href=&quot;#Ubuntu&quot; class=&quot;headerlink&quot; title=&quot;Ubuntu&quot;&gt;&lt;/a&gt;Ubuntu&lt;/h1&gt;&lt;h2 id=&quot;更新&quot;&gt;&lt;a href=&quot;#更新&quot; class=&quot;headerlink&quot; title=&quot;更新&quot;&gt;&lt;/a&gt;更新&lt;/h2&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;git-1&quot;&gt;&lt;a href=&quot;#git-1&quot; class=&quot;headerlink&quot; title=&quot;git&quot;&gt;&lt;/a&gt;git&lt;/h2&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install git&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;go-1&quot;&gt;&lt;a href=&quot;#go-1&quot; class=&quot;headerlink&quot; title=&quot;go&quot;&gt;&lt;/a&gt;go&lt;/h2&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install golang&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+&lt;h2 id=&quot;scp&quot;&gt;&lt;a href=&quot;#scp&quot; class=&quot;headerlink&quot; title=&quot;scp&quot;&gt;&lt;/a&gt;scp&lt;/h2&gt;&lt;p&gt;  &lt;code&gt;scp -P 8888 root@127.0.0.10:/root/my_key/ca.cert.pem .&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Ubuntu&quot;&gt;&lt;a href=&quot;#Ubuntu&quot; class=&quot;headerlink&quot; title=&quot;Ubuntu&quot;&gt;&lt;/a&gt;Ubuntu&lt;/h2&gt;&lt;h3 id=&quot;更新&quot;&gt;&lt;a href=&quot;#更新&quot; class=&quot;headerlink&quot; title=&quot;更新&quot;&gt;&lt;/a&gt;更新&lt;/h3&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;git-1&quot;&gt;&lt;a href=&quot;#git-1&quot; class=&quot;headerlink&quot; title=&quot;git&quot;&gt;&lt;/a&gt;git&lt;/h3&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install git&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;go-1&quot;&gt;&lt;a href=&quot;#go-1&quot; class=&quot;headerlink&quot; title=&quot;go&quot;&gt;&lt;/a&gt;go&lt;/h3&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install golang&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;CentOS&quot;&gt;&lt;a href=&quot;#CentOS&quot; class=&quot;headerlink&quot; title=&quot;CentOS&quot;&gt;&lt;/a&gt;CentOS&lt;/h1&gt;&lt;h2 id=&quot;git&quot;&gt;&lt;a href=&quot;#git&quot; class=&quot;headerlink&quot; title=&quot;git
+      &lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;红线越不得！红线越不得！红线越不得！重要的事情说3遍。&lt;/li&gt;
+&lt;li&gt;参看第一条&lt;/li&gt;
+&lt;li&gt;参看第一
     
     </summary>
     

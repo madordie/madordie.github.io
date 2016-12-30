@@ -539,7 +539,7 @@
               
                 
                 <a class="post-title-link" href="/2016/12/19/bandwagonhost-note/" itemprop="url">
-                  bandwagonhost-note
+                  科学上网之搬瓦工ss搭建笔记
                 </a>
               
             
@@ -589,11 +589,34 @@
       
         
           
-            <h1 id="CentOS"><a href="#CentOS" class="headerlink" title="CentOS"></a>CentOS</h1><h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><ol>
+            <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><ul>
+<li>红线越不得！红线越不得！红线越不得！重要的事情说3遍。</li>
+<li>参看第一条</li>
+<li>参看第一条</li>
+<li>参看第一条</li>
+</ul>
+<h1 id="目前安装的-rss"><a href="#目前安装的-rss" class="headerlink" title="目前安装的 rss"></a>目前安装的 rss</h1><p>  尝试了各种版本的系统，各种ss分支，最后用了rss，然后又花了一下，觉得速度可以了，延迟的问题无解。ping过去就是那么慢。。<br>  注意：为了重启不配置，要把里面没有自启动的添加到启动项。具体方法 Google一下。我加在了 <code>/etc/rc.local</code></p>
+<h2 id="shadowsocks-rss"><a href="#shadowsocks-rss" class="headerlink" title="shadowsocks-rss"></a>shadowsocks-rss</h2><ul>
+<li><a href="https://github.com/breakwa11/shadowsocks-rss/wiki" target="_blank" rel="external">wiki</a></li>
+<li><a href="https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup" target="_blank" rel="external">ShadowsocksR 服务端安装教程</a></li>
+<li><a href="https://github.com/shadowsocksr/ShadowsocksX-NG/releases" target="_blank" rel="external">macOS</a></li>
+<li><a href="https://itunes.apple.com/cn/app/id1178584911" target="_blank" rel="external">iOS</a></li>
+</ul>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><ul>
+<li><a href="http://shadowsocks.org/en/config/advanced.html" target="_blank" rel="external">官方优化方案</a></li>
+<li><a href="https://www.dou-bi.co/netspeeder-jc1/" target="_blank" rel="external">Net Speeder</a> <code>wget http://linux.linzhihao.cn/shell/netspeeder.sh &amp; bash netspeeder.sh</code></li>
+</ul>
+<h2 id="本地访问VPS脚本"><a href="#本地访问VPS脚本" class="headerlink" title="本地访问VPS脚本"></a>本地访问VPS脚本</h2><p>  我比较懒，密码都是随机的也不想改，所以做了一个脚本用来直接ssh登陆。<br>  后来我发现我需要下载一些文件，于是乎我增加了两个参数。。<br>  安装系统的时候修改一下，将<code>password</code>修改为随机生成的密码，这样也不用记录，直接复制粘贴。。<br>  同时将<code>12345</code>替换为端口号。<br>  将<code>1.2.3.4</code>替换为服务器IP，这个只需要写一次就好，基本上也不会改。。<br>  这样搞完之后在<code>~/.profile</code>中增加<code>alias vps=&quot;/Users/Madordie/shell/Mac_shell/ss.sh&quot;</code>，然后执行<code>source ~/.profile</code>即可。</p>
+<p>  这样就可以使用下面的简写：</p>
+<pre><code>- SSH登陆`vps`
+- 下载文件`vps /server_path /local_path`，自行修改后面俩参数
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ cat ~/shell/Mac_shell/ss.sh </div><div class="line"></div><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">echo &apos;password&apos;</div><div class="line">port=12345</div><div class="line">ip=1.2.3.4</div><div class="line">usr=root</div><div class="line"></div><div class="line">if [ $# -eq 0 ]; then</div><div class="line">    ssh $usr@$ip -p $port</div><div class="line">elif [ $# -eq 2 ]; then </div><div class="line">    scp -P $port $usr@$ip:$1 $2</div><div class="line">else</div><div class="line">    echo &quot;($*)你要干嘛。。&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h1 id="尝试的时候各种用的环境搭建"><a href="#尝试的时候各种用的环境搭建" class="headerlink" title="尝试的时候各种用的环境搭建"></a>尝试的时候各种用的环境搭建</h1><p>  很显然上面的已经足够了，这个只是留个笔记，用来快速搭建某个环境啥的。。</p>
+<h2 id="CentOS"><a href="#CentOS" class="headerlink" title="CentOS"></a>CentOS</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><ol>
 <li>直接安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install git</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="go"><a href="#go" class="headerlink" title="go"></a>go</h2><ol>
+<h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><ol>
 <li><p>下载二进制文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz</div></pre></td></tr></table></figure>
 </li>
@@ -608,11 +631,10 @@
 </ol>
 </li>
 </ol>
-<h2 id="shadowsocks-plus"><a href="#shadowsocks-plus" class="headerlink" title="shadowsocks-plus"></a>shadowsocks-plus</h2><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/shadowsocks-plus/shadowsocks-plus</div><div class="line">cd shadowsocks-plus</div><div class="line">go get github.com/shadowsocks-plus/shadowsocks-plus</div><div class="line">env GOPATH=/usr/lib/go  go build server.go</div><div class="line">go build local.go</div></pre></td></tr></table></figure>
-</code></pre><h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><p>  <code>scp -P 8888 root@127.0.0.10:/root/my_key/ca.cert.pem .</code></p>
-<h1 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h1><h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div></pre></td></tr></table></figure>
-<h2 id="git-1"><a href="#git-1" class="headerlink" title="git"></a>git</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure>
-<h2 id="go-1"><a href="#go-1" class="headerlink" title="go"></a>go</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install golang</div></pre></td></tr></table></figure>
+<h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><p>  <code>scp -P 8888 root@127.0.0.10:/root/my_key/ca.cert.pem .</code></p>
+<h2 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h2><h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div></pre></td></tr></table></figure>
+<h3 id="git-1"><a href="#git-1" class="headerlink" title="git"></a>git</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure>
+<h3 id="go-1"><a href="#go-1" class="headerlink" title="go"></a>go</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install golang</div></pre></td></tr></table></figure>
           
         
       
