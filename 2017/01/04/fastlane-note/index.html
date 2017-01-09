@@ -92,7 +92,7 @@
 <meta property="og:url" content="https://madordie.github.io/2017/01/04/fastlane-note/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！">
-<meta property="og:updated_time" content="2017-01-06T10:57:06.000Z">
+<meta property="og:updated_time" content="2017-01-09T11:35:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fastlane自动化笔记">
 <meta name="twitter:description" content="之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！">
@@ -340,8 +340,13 @@
       
         <p>之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！</p>
 <a id="more"></a>
+<h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><ul>
+<li>Fastlane只是一个 <strong>控制整体流程和实现的框架容器</strong>(<a href="http://icyleaf.com" target="_blank" rel="external">@icyleaf</a>)。其下有很多使用ruby开发的小工具，比如：测试、打包、发布、等功能，也可自己开发某功能，或者相互调用、传参更改等自定义。这个对理解和使用很重要！</li>
+</ul>
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>  Fastlane已被Fabric收购，所以按照其安装也很随意(<a href="https://fabric.io/features/distribution" target="_blank" rel="external">戳我配置</a>)。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">default_platform :ios</div><div class="line"></div><div class="line">platform :ios do</div><div class="line"></div><div class="line">  lane :ent do</div><div class="line">    gym(</div><div class="line">        clean: true,</div><div class="line">        workspace: &quot;./Fangduoduo/Fangduoduo.xcworkspace&quot;,</div><div class="line">        scheme: &quot;Fangduoduo_ent&quot;,</div><div class="line">        include_bitcode: false,</div><div class="line">        export_method: &quot;enterprise&quot;,</div><div class="line">        )</div><div class="line">  end</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>
 <h1 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h1><ul>
+<li><a href="http://icyleaf.com/2016/07/fastlane-in-action/" target="_blank" rel="external">深入浅出 Fastlane 一看你就懂</a></li>
 <li><a href="http://blog.fir.im/fir_im_weekly160505" target="_blank" rel="external">fir.im weekly - 「 持续集成 」实践教程合集</a></li>
 <li><a href="https://everettjf.github.io/2015/09/08/ios-ci-with-fastlane" target="_blank" rel="external">使用fastlane实现iOS持续集成</a></li>
 <li><a href="https://docs.fastlane.tools" target="_blank" rel="external">fastlane docs</a></li>
@@ -563,7 +568,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文章"><span class="nav-number">2.</span> <span class="nav-text">文章</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本知识"><span class="nav-number">1.</span> <span class="nav-text">基本知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文章"><span class="nav-number">3.</span> <span class="nav-text">文章</span></a></li></ol></div>
             
           </div>
         </section>
