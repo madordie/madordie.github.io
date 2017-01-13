@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-01-09T12:28:12.000Z</updated>
+  <updated>2017-01-13T09:43:56.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,15 +20,18 @@
     <link href="https://madordie.github.io/2017/01/04/fastlane-note/"/>
     <id>https://madordie.github.io/2017/01/04/fastlane-note/</id>
     <published>2017-01-04T10:14:07.000Z</published>
-    <updated>2017-01-09T12:28:12.000Z</updated>
+    <updated>2017-01-13T09:43:56.000Z</updated>
     
-    <content type="html">&lt;p&gt;之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！&lt;/p&gt;
+    <content type="html">&lt;p&gt;之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！&lt;br&gt;回看之前的&lt;a href=&quot;https://madordie.github.io/2016/09/26/build-ipa-sh&quot;&gt;打包&lt;/a&gt;确实比较僵硬。自动化还是很棒的。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;基本知识&quot;&gt;&lt;a href=&quot;#基本知识&quot; class=&quot;headerlink&quot; title=&quot;基本知识&quot;&gt;&lt;/a&gt;基本知识&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;Fastlane只是一个 &lt;strong&gt;控制整体流程和实现的框架容器&lt;/strong&gt;(&lt;a href=&quot;http://icyleaf.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@icyleaf&lt;/a&gt;)。其下有很多使用ruby开发的小工具，比如：测试、打包、发布、等功能，也可自己开发某功能，或者相互调用、传参更改等自定义。这个对理解和使用很重要！&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; class=&quot;headerlink&quot; title=&quot;配置&quot;&gt;&lt;/a&gt;配置&lt;/h1&gt;&lt;p&gt;  Fastlane已被Fabric收购，所以按照其安装也很随意(&lt;a href=&quot;https://fabric.io/features/distribution&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戳我配置&lt;/a&gt;)。&lt;/p&gt;
-  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;default_platform :ios&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;platform :ios do&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  lane :ent do&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    gym(&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        clean: true,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        workspace: &amp;quot;./xx/xx.xcworkspace&amp;quot;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        scheme: &amp;quot;Fangduoduo_ent&amp;quot;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        include_bitcode: false,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        export_method: &amp;quot;enterprise&amp;quot;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        )&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  end&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;end&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&quot;基本知识&quot;&gt;&lt;a href=&quot;#基本知识&quot; class=&quot;headerlink&quot; title=&quot;基本知识&quot;&gt;&lt;/a&gt;基本知识&lt;/h1&gt;&lt;p&gt;  (&lt;a href=&quot;http://icyleaf.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@icyleaf&lt;/a&gt;)在&lt;a href=&quot;https://icyleaf.com/2016/07/intro-fastlane-automation-for-ios-and-android/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Fastlane - iOS 和 Android 的自动化构建工具&lt;/a&gt;中说到：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fastlane 提供的流程的众多工具都是可以独立存在和使用（提供 cli 命令），也可以统一由 fastlane 来控制。它在使用中提出了两个概念：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- action: Fastlane 的插件，截至当前内置 165 个至多，不过每个动作的颗粒度大小不一。查看详情
+- lane: Fastlane 的任务（或者可以理解为命令），一个可以包含多个 lanes，通过 fastlane cli 传入制定的 lane 来执行。
+&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;p&gt;  自我感觉这句话这个对理解和使用很重要！&lt;/p&gt;
+&lt;h1 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; class=&quot;headerlink&quot; title=&quot;配置&quot;&gt;&lt;/a&gt;配置&lt;/h1&gt;&lt;p&gt;  Fastlane已被Fabric收购，所以按照其安装也很随意(&lt;a href=&quot;https://fabric.io/features/distribution&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戳我配置&lt;/a&gt;)。&lt;br&gt;  对于打包，&lt;/p&gt;
 &lt;h1 id=&quot;文章&quot;&gt;&lt;a href=&quot;#文章&quot; class=&quot;headerlink&quot; title=&quot;文章&quot;&gt;&lt;/a&gt;文章&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;http://icyleaf.com/2016/07/fastlane-in-action/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;深入浅出 Fastlane 一看你就懂&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://blog.fir.im/fir_im_weekly160505&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;fir.im weekly - 「 持续集成 」实践教程合集&lt;/a&gt;&lt;/li&gt;
@@ -45,7 +48,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！&lt;/p&gt;
+      &lt;p&gt;之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！&lt;br&gt;回看之前的&lt;a href=&quot;https://madordie.github.io/2016/09/26/build-ipa-sh&quot;&gt;打包&lt;/a&gt;确实比较僵硬。自动化还是很棒的。&lt;/p&gt;
     
     </summary>
     
@@ -428,10 +431,11 @@
     <link href="https://madordie.github.io/2016/09/26/build-ipa-sh/"/>
     <id>https://madordie.github.io/2016/09/26/build-ipa-sh/</id>
     <published>2016-09-26T06:55:09.000Z</published>
-    <updated>2016-12-01T10:36:27.000Z</updated>
+    <updated>2017-01-13T09:35:45.000Z</updated>
     
-    <content type="html">&lt;p&gt;Xcode8下的打包脚本&lt;/p&gt;
+    <content type="html">&lt;p&gt;Jenkins自动构建脚本解决方案。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;  2017.1.13更新：&lt;br&gt;  好吧，其实有更加强悍的打包工具，虽然早有耳闻但是没弄。然后最近搭建了一下，这打包脚本也不用了，毕竟有成套工具嘛。嘿嘿&lt;br&gt;  不过最后上传osc的脚本还是很可以的。&lt;br&gt;  传送门：&lt;a href=&quot;https://madordie.github.io/2017/01/04/fastlane-note/#more&quot;&gt;Fastlane自动化笔记&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Xcode8&quot;&gt;&lt;a href=&quot;#Xcode8&quot; class=&quot;headerlink&quot; title=&quot;Xcode8&quot;&gt;&lt;/a&gt;Xcode8&lt;/h2&gt;&lt;p&gt;  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。&lt;/p&gt;
 &lt;p&gt;  先来重点：可用脚本：&lt;/p&gt;
   &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/bin/bash&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#   追上fir API token 自动上传&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#   基于当前代码进行打包打包目录：MyProject/build/MyProject_ent.ipa&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; MyProject&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;rm -rf ./build/*&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xcodebuild -archivePath &lt;span class=&quot;string&quot;&gt;&quot;./build/xxx.xcarchive&quot;&lt;/span&gt; -workspace MyProject.xcworkspace -sdk iphoneos -scheme &lt;span class=&quot;string&quot;&gt;&quot;MyProject_ent&quot;&lt;/span&gt; -configuration &lt;span class=&quot;string&quot;&gt;&quot;Release Inhouse&quot;&lt;/span&gt; archive&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;?xml version=&quot;&lt;/span&gt;1.0&lt;span class=&quot;string&quot;&gt;&quot; encoding=&quot;&lt;/span&gt;UTF-8&lt;span class=&quot;string&quot;&gt;&quot;?&amp;gt;&amp;lt;!DOCTYPE plist PUBLIC &quot;&lt;/span&gt;-//Apple//DTD PLIST 1.0//EN&lt;span class=&quot;string&quot;&gt;&quot; &quot;&lt;/span&gt;http://www.apple.com/DTDs/PropertyList-1.0.dtd&lt;span class=&quot;string&quot;&gt;&quot;&amp;gt;&amp;lt;plist version=&quot;&lt;/span&gt;1.0&lt;span class=&quot;string&quot;&gt;&quot;&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;method&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;enterprise&amp;lt;/string&amp;gt;&amp;lt;key&amp;gt;compileBitcode&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;YES&amp;lt;/string&amp;gt;&amp;lt;/dict&amp;gt;&amp;lt;/plist&amp;gt;&quot;&lt;/span&gt; &amp;gt; ./build/&lt;span class=&quot;built_in&quot;&gt;export&lt;/span&gt;OptionsPlist.plist&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;xcodebuild -exportArchive -archivePath &lt;span class=&quot;string&quot;&gt;&quot;./build/xxx.xcarchive&quot;&lt;/span&gt; -exportPath &lt;span class=&quot;string&quot;&gt;&quot;./build/&quot;&lt;/span&gt; -exportOptionsPlist ./build/&lt;span class=&quot;built_in&quot;&gt;export&lt;/span&gt;OptionsPlist.plist&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; build/&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fir i ./MyProject_ent.ipa&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [ -n &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$1&lt;/span&gt;&quot;&lt;/span&gt; ]; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    git &lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt; -10 &amp;gt; git.log&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    fir p ./MyProject_ent.ipa -T &lt;span class=&quot;variable&quot;&gt;$1&lt;/span&gt; -c git.log&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -442,7 +446,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;Xcode8下的打包脚本&lt;/p&gt;
+      &lt;p&gt;Jenkins自动构建脚本解决方案。&lt;/p&gt;
     
     </summary>
     
