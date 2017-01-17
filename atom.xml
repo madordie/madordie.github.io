@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-01-17T11:05:07.000Z</updated>
+  <updated>2017-01-17T11:12:00.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -16,13 +16,15 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>swift-build-times</title>
+    <title>关于 Swift 编译时性能优化的一些思考</title>
     <link href="https://madordie.github.io/2017/01/17/swift-build-times/"/>
     <id>https://madordie.github.io/2017/01/17/swift-build-times/</id>
     <published>2017-01-17T05:47:17.000Z</published>
-    <updated>2017-01-17T11:05:07.000Z</updated>
+    <updated>2017-01-17T11:12:00.000Z</updated>
     
-    <content type="html">&lt;hr&gt;
+    <content type="html">&lt;p&gt;原文出自：&lt;a href=&quot;https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;关于 Swift 编译时性能优化的一些思考&lt;/a&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;hr&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;原文链接 : &lt;a href=&quot;https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31#.w81y3zhjr&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Regarding Swift build time optimizations&lt;/a&gt;&lt;/li&gt;
@@ -33,7 +35,7 @@
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/005SiNxygw1f3p3jimjllj31jk0dwqft.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;关于-Swift-编译时性能优化的一些思考&quot;&gt;&lt;a href=&quot;#关于-Swift-编译时性能优化的一些思考&quot; class=&quot;headerlink&quot; title=&quot;关于 Swift 编译时性能优化的一些思考&quot;&gt;&lt;/a&gt;关于 Swift 编译时性能优化的一些思考&lt;/h3&gt;&lt;p&gt;上周，我读了 &lt;a href=&quot;https://medium.com/@nickoneill&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@nickoneill&lt;/a&gt; 一篇优秀的帖子 &lt;a href=&quot;https://medium.com/swift-programming/speeding-up-slow-swift-build-times-922feeba5780#.k0pngnkns&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Speeding Up Slow Swift Build Times&lt;/a&gt; 之后，我发现用一个略不同以往的角度去读Swift代码，并不是很难。&lt;/p&gt;
+&lt;h4 id=&quot;关于-Swift-编译时性能优化的一些思考&quot;&gt;&lt;a href=&quot;#关于-Swift-编译时性能优化的一些思考&quot; class=&quot;headerlink&quot; title=&quot;关于 Swift 编译时性能优化的一些思考&quot;&gt;&lt;/a&gt;关于 Swift 编译时性能优化的一些思考&lt;/h4&gt;&lt;p&gt;上周，我读了 &lt;a href=&quot;https://medium.com/@nickoneill&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@nickoneill&lt;/a&gt; 一篇优秀的帖子 &lt;a href=&quot;https://medium.com/swift-programming/speeding-up-slow-swift-build-times-922feeba5780#.k0pngnkns&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Speeding Up Slow Swift Build Times&lt;/a&gt; 之后，我发现用一个略不同以往的角度去读Swift代码，并不是很难。&lt;/p&gt;
 &lt;p&gt;一行之前很简洁的代码，现在却出现了新的问题——它是否应该重构为9行代码来达到更快的编译速度？ (&lt;em&gt;nil coalescing 运算符就是一个例子&lt;/em&gt;)孰轻孰重？简洁的代码还是对编译器友好的代码？ 我觉得，它取决于项目的大小和开发者的想法。&lt;/p&gt;
 &lt;h4 id=&quot;但请等等…-这里有一个Xcode插件&quot;&gt;&lt;a href=&quot;#但请等等…-这里有一个Xcode插件&quot; class=&quot;headerlink&quot; title=&quot;但请等等… 这里有一个Xcode插件&quot;&gt;&lt;/a&gt;但请等等… 这里有一个Xcode插件&lt;/h4&gt;&lt;p&gt;在讲一些例子之前，我首先想到了通过手工提取日志信息是非常耗时的事情。通过命令行工具实现会相对容易一些，但是我把它往前推进了一步：集成为&lt;a href=&quot;https://github.com/RobertGummesson/BuildTimeAnalyzer-for-Xcode&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Xcode插件&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/005SiNxygw1f3p3hhivppj30m809lwis.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -118,10 +120,7 @@ class CMExpandingTextField: UITextField {
     
     <summary type="html">
     
-      &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;原文链接 : &lt;a href=&quot;https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31#.w81y3z
+      &lt;p&gt;原文出自：&lt;a href=&quot;https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md&quot;&gt;关于 Swift 编译时性能优化的一些思考&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     

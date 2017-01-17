@@ -4,10 +4,10 @@
     
   <url>
     <loc>https://madordie.github.io/2017/01/17/swift-build-times/</loc>
-    <lastmod>2017-01-17T11:05:07.000Z</lastmod>
+    <lastmod>2017-01-17T11:12:00.000Z</lastmod>
     <data>
         <display>
-        <title>swift-build-times</title>
+        <title>关于 Swift 编译时性能优化的一些思考</title>
         <pubTime>2017-01-17T05:47:17.000Z</pubTime>
         
          
