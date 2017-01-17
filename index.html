@@ -293,6 +293,198 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/17/swift-build-times/" itemprop="url">
+                  swift-build-times
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-17T13:47:17+08:00" content="2017-01-17">
+              2017-01-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/17/swift-build-times/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/17/swift-build-times/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<blockquote>
+<ul>
+<li>原文链接 : <a href="https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31#.w81y3zhjr" target="_blank" rel="external">Regarding Swift build time optimizations</a></li>
+<li>原文作者 : <a href="https://medium.com/@RobertGummesson" target="_blank" rel="external">Robert Gummesson</a></li>
+<li>译文出自 : <a href="https://github.com/xitu/gold-miner" target="_blank" rel="external">掘金翻译计划</a></li>
+<li>译者 : <a href="http://www.yanglonglong.com" target="_blank" rel="external">杨龙龙</a></li>
+<li>校对者: <a href="https://github.com/shenAlexy" target="_blank" rel="external">申冠华</a>, <a href="https://github.com/Jack-Kingdom" target="_blank" rel="external">Jack King</a></li>
+</ul>
+</blockquote>
+<p><img src="http://ww3.sinaimg.cn/large/005SiNxygw1f3p3jimjllj31jk0dwqft.jpg" alt=""></p>
+<h3 id="关于-Swift-编译时性能优化的一些思考"><a href="#关于-Swift-编译时性能优化的一些思考" class="headerlink" title="关于 Swift 编译时性能优化的一些思考"></a>关于 Swift 编译时性能优化的一些思考</h3><p>上周，我读了 <a href="https://medium.com/@nickoneill" target="_blank" rel="external">@nickoneill</a> 一篇优秀的帖子 <a href="https://medium.com/swift-programming/speeding-up-slow-swift-build-times-922feeba5780#.k0pngnkns" target="_blank" rel="external">Speeding Up Slow Swift Build Times</a> 之后，我发现用一个略不同以往的角度去读Swift代码，并不是很难。</p>
+<p>一行之前很简洁的代码，现在却出现了新的问题——它是否应该重构为9行代码来达到更快的编译速度？ (<em>nil coalescing 运算符就是一个例子</em>)孰轻孰重？简洁的代码还是对编译器友好的代码？ 我觉得，它取决于项目的大小和开发者的想法。</p>
+<h4 id="但请等等…-这里有一个Xcode插件"><a href="#但请等等…-这里有一个Xcode插件" class="headerlink" title="但请等等… 这里有一个Xcode插件"></a>但请等等… 这里有一个Xcode插件</h4><p>在讲一些例子之前，我首先想到了通过手工提取日志信息是非常耗时的事情。通过命令行工具实现会相对容易一些，但是我把它往前推进了一步：集成为<a href="https://github.com/RobertGummesson/BuildTimeAnalyzer-for-Xcode" target="_blank" rel="external">Xcode插件</a>。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005SiNxygw1f3p3hhivppj30m809lwis.jpg" alt=""></p>
+<p>在这个例子中，最初的目的仅仅是识别并修复代码中最耗时的地方，但是现在我觉得它成为了一个必须要迭代的过程。这样我才可以更加高效地构建代码，并且防止在项目中出现耗时的函数。</p>
+<h4 id="不少惊喜"><a href="#不少惊喜" class="headerlink" title="不少惊喜"></a>不少惊喜</h4><p>我经常在不同的 Git 分支中跳转，并且等待一个暖慢的项目编译简直是在浪费我的生命。因此我思考了很长时间，一个玩具项目（大约两万行 Swift 代码）会编译如此长的时间。</p>
+<p>当我知道是什么原因导致它如此慢之后，我不得不承认我震惊了，一行代码居然需要几秒的编译时间。</p>
+<p>让我们来看几个例子。</p>
+<h4 id="Nil-合并运算符"><a href="#Nil-合并运算符" class="headerlink" title="Nil 合并运算符"></a>Nil 合并运算符</h4><p>编译器肯定不喜欢这里的第一种方法。在展开下面两处简写的代码之后，构建时间减少了 <strong>99.4%</strong>。</p>
+<pre><code>// 构建时间： 5238.3ms
+return CGSize(width: size.width + (rightView?.bounds.width ?? 0) + (leftView?.bounds.width ?? 0) + 22, height: bounds.height)
+
+// 构建时间： 32.4ms
+var padding: CGFloat = 22
+if let rightView = rightView {
+    padding += rightView.bounds.width
+}
+
+if let leftView = leftView {
+    padding += leftView.bounds.width
+}
+return CGSizeMake(size.width + padding, bounds.height)
+</code></pre><h4 id="ArrayOfStuff-Stuff"><a href="#ArrayOfStuff-Stuff" class="headerlink" title="ArrayOfStuff + [Stuff]"></a>ArrayOfStuff + [Stuff]</h4><p>这个看起来像下面这样：</p>
+<pre><code>return ArrayOfStuff + [Stuff]  
+// 而不是  
+ArrayOfStuff.append(stuff)  
+return ArrayOfStuff
+</code></pre><p>我经常这么做，并且它影响了每次构建的时间。下面是最糟糕的一个例子，改写后构建时间可以减少 <strong>97.9%</strong>。</p>
+<pre><code>// 构建时间： 1250.3ms
+let systemOptions = [ 7, 14, 30, -1 ]
+let systemNames = (0...2).map{ String(format: localizedFormat, systemOptions[$0]) } + [NSLocalizedString(&quot;everything&quot;, comment: &quot;&quot;)]
+// Some code in-between 
+labelNames = Array(systemNames[0..&lt;count]) + [systemNames.last!]
+
+// 构建时间： 25.5ms
+let systemOptions = [ 7, 14, 30, -1 ]
+var systemNames = systemOptions.dropLast().map{ String(format: localizedFormat, $0) }
+systemNames.append(NSLocalizedString(&quot;everything&quot;, comment: &quot;&quot;))
+// Some code in-between
+labelNames = Array(systemNames[0..&lt;count])
+labelNames.append(systemNames.last!)
+</code></pre><h4 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h4><p>仅仅是通过替换三元运算符为 if else 语句就能减少 <strong>92.9%</strong> 的构建时间。如果使用一个for循环替换 <em>map</em> 函数，它又能减少另一个 75%（但是我的眼睛可就受不了咯😉）。</p>
+<pre><code>// 构建时间： 239.0ms
+let labelNames = type == 0 ? (1...5).map{type0ToString($0)} : (0...2).map{type1ToString($0)}
+
+// 构建时间： 16.9ms
+var labelNames: [String]
+if type == 0 {
+    labelNames = (1...5).map{type0ToString($0)}
+} else {
+    labelNames = (0...2).map{type1ToString($0)}
+}
+</code></pre><h4 id="转换-CGFloat-到-CGFloat"><a href="#转换-CGFloat-到-CGFloat" class="headerlink" title="转换 CGFloat 到 CGFloat"></a>转换 CGFloat 到 CGFloat</h4><p>这里我所说的并不一定正确。变量已经使用了 CGFloat 并且有一些括号也是多余的。在清理了这些冗余之后，构建时间能减少 <strong>99.9%</strong>。</p>
+<pre><code>// 构建时间： 3431.7 ms
+return CGFloat(M_PI) * (CGFloat((hour + hourDelta + CGFloat(minute + minuteDelta) / 60) * 5) - 15) * unit / 180
+
+// 构建时间： 3.0ms
+return CGFloat(M_PI) * ((hour + hourDelta + (minute + minuteDelta) / 60) * 5 - 15) * unit / 180
+</code></pre><h4 id="Round"><a href="#Round" class="headerlink" title="Round()"></a>Round()</h4><p>这个一个非常奇怪的例子，下面的例子中变量是一个局部变量与实例变量的混合。这个问题可能不是四舍五入本身，而是结合代码的方法。去掉四舍五入的方法大概能减少 <strong>97.6%</strong> 的构建时间。</p>
+<pre><code>// 构建时间： 1433.7ms
+let expansion = a — b — c + round(d * 0.66) + e
+// 构建时间： 34.7ms
+let expansion = a — b — c + d * 0.66 + e
+</code></pre><p>注意：所有的测试都在 MacBook Air (13-inch, Mid 2013)中进行。</p>
+<h4 id="尝试它"><a href="#尝试它" class="headerlink" title="尝试它"></a>尝试它</h4><p>无论你是否面临过构建时间太长的问题，编写对编译器友好的代码都是非常有用的。我确定你自己会在其中找到一些惊喜。作为参考，这里有完整的代码，在我的工程中可以5秒内完成编译…</p>
+<pre><code>import UIKit
+
+class CMExpandingTextField: UITextField {
+
+    func textFieldEditingChanged() {
+        invalidateIntrinsicContentSize()
+    }
+
+    override func intrinsicContentSize() -&gt; CGSize {
+        if isFirstResponder(), let text = text {
+            let size = text.sizeWithAttributes(typingAttributes)
+            return CGSize(width: size.width + (rightView?.bounds.width ?? 0) + (leftView?.bounds.width ?? 0) + 22, height: bounds.height)
+        }
+        return super.intrinsicContentSize()
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/04/fastlane-note/" itemprop="url">
                   Fastlane自动化笔记
                 </a>
@@ -684,128 +876,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/19/bruch-up-regular-expressions/" itemprop="url">
-                  正则表达式学习笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-19T15:03:09+08:00" content="2016-12-19">
-              2016-12-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/正则表达式/" itemprop="url" rel="index">
-                    <span itemprop="name">正则表达式</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/19/bruch-up-regular-expressions/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/19/bruch-up-regular-expressions/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>正则表达式基础学习笔记。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/19/bruch-up-regular-expressions/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -851,7 +921,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
