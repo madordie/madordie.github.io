@@ -25,9 +25,117 @@ tags:
   - [macOS](https://github.com/shadowsocksr/ShadowsocksX-NG/releases)
   - [iOS](https://itunes.apple.com/cn/app/id1178584911)
   
+  [2017.1.18更新]：
+  新版rss版本可能自动启动连接成功无法上网。服务器日志会出现`tcprelay.py:935 can not parse header when handling connection from`的错误，这个是由于在启动的时候默认才用了混淆。在配置的时候需要注意一下。也可直接在`user-config.json`中修改或者删除。[配置说明](https://github.com/breakwa11/shadowsocks-rss/wiki/config.json)
+  
 ## 优化
   - [官方优化方案](http://shadowsocks.org/en/config/advanced.html)
   - [Net Speeder](https://www.dou-bi.co/netspeeder-jc1/) `wget http://linux.linzhihao.cn/shell/netspeeder.sh & bash netspeeder.sh`
+
+## history
+  chacha20的插件忘记了按照哪种方式安装的了。将我安装的历史命令放出来：
+
+  ```
+    1  yum install git
+    2  git clone -b manyuser https://github.com/breakwa11/shadowsocks.git
+    3  cd ~/shadowsocks
+    4  bash initcfg.sh
+    5  cd ~/shadowsocks/shadowsocks
+    6  python server.py -p 443 -k password -m chacha20
+    7  python server.py -p 443 -k password -m aes-256-cfb 
+    8  python server.py -p 443 -k password -m rc4-md5
+    9  yum install epel-release
+   10  yum install libsodium
+   11  python server.py -p 443 -k password -m chacha20
+   12  yum install libsodium
+   13  python server.py -p 443 -k password -m chacha20
+   14  yum install libsodium
+   15  yum install libsodium update
+   16  yum update
+   17  yum install libsodium
+   18  yum -y groupinstall "Development Tools"
+   19  wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
+   20  tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
+   21  ./configure && make -j2 && make install
+   22  echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
+   23  ldconfig
+   24  yum install libsodium
+   25  cd ../
+   26  ls
+   27  python server.py -p 443 -k password -m chacha20
+   28  echo "python server.py -p 443 -k password -m chacha20 -d start"
+   29  echo "python server.py -p 443 -k password -m chacha20 -d start" >> /etc/rc.local 
+   30  reboot
+   31  cd //
+   32  cd ~/
+   33  cd shadowsocks/
+   34  ls
+   35  cd shadowsocks/
+   36  ls
+   37  cd ../
+   38  ls
+   39  pwd
+   40  vim /etc/rc.local 
+   41  reboot
+   42  cd shadowsocks/
+   43  python server.py -p 443 -k password -m chacha20 -d start
+   44  python ~/shadowsocks/shadowsocks/server.py -p 443 -k password -m chacha20 -d start
+   45  vim /etc/rc.local 
+   46  reboot
+   47  rm -f /sbin/modprobe
+   48  ln -s /bin/true /sbin/modprobe
+   49  rm -f /sbin/sysctl
+   50  ln -s /bin/true /sbin/sysctl
+   51  vi /etc/sysctl.conf
+   52  sysctl -p
+   53  reboot
+   54  wget http://packages.sw.be/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.i386.rpm
+   55  vim /etc/rc.local 
+   56  reboot
+   57  python server.py status
+   58  cd shadowsocks/shadowsocks/
+   59  python server.py status
+   60  exit
+   61  vim /etc/rc.local 
+   62  reboot
+   63  ls
+   64  rpm -ivh http://soft.91yun.org/ISO/Linux/CentOS/kernel/kernel-firmware-2.6.32-504.3.3.el6.noarch.rpm
+   65  rpm -ivh http://soft.91yun.org/ISO/Linux/CentOS/kernel/kernel-2.6.32-504.3.3.el6.x86_64.rpm --force
+   66  rpm -qa | grep kernel
+   67  wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/code/master/vm_check.sh && bash vm_check.sh
+   68  ls
+   69  reboot
+   70  vi /etc/security/limits.conf
+   71  vim /etc/rc.local 
+   72  vim /etc/sysctl.conf
+   73  sysctl -p
+   74  reboot
+   75  ls
+   76  wget https://github.com/snooda/net-speeder/archive/master.zip
+   77  unzip master.zip
+   78  ls
+   79  rm -rf master.zip virt-what-1.12*
+   80  ls
+   81  wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+   82  rpm -ivh epel-release-6-8.noarch.rpm
+   83  yum install libnet libpcap libnet-devel libpcap-devel
+   84  sh build.sh -DCOOKED
+   85  ls
+   86  cd net-speeder-master/
+   87  ls
+   88  sh build.sh -DCOOKED
+   89  ifconfig
+   90  ./net_speeder venet0 "ip"
+   91  service netspeederd start
+   92  wget –no-check-certificate https://raw.githubusercontent.com/tennfy/debian_netspeeder_tennfy/master/debian_netspeeder_tennfy.sh
+   93  chmod a+x debian_netspeeder_tennfy.sh
+   94  wget http://linux.linzhihao.cn/shell/netspeeder.sh
+   95  bash netspeeder.sh
+   96  service netspeederd start
+   97  service netspeederd status
+   98  reboot
+  ```
+
 
 ## 本地访问VPS脚本
   我比较懒，密码都是随机的也不想改，所以做了一个脚本用来直接ssh登陆。
