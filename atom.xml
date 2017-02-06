@@ -92,15 +92,35 @@
   </entry>
   
   <entry>
-    <title>「转」关于 Swift 编译时性能优化的一些思考</title>
+    <title>Swift 编译时性能优化笔记</title>
     <link href="https://madordie.github.io/2017/01/17/swift-build-times/"/>
     <id>https://madordie.github.io/2017/01/17/swift-build-times/</id>
     <published>2017-01-17T05:47:17.000Z</published>
-    <updated>2017-01-17T11:13:13.000Z</updated>
+    <updated>2017-02-06T08:37:12.000Z</updated>
     
-    <content type="html">&lt;p&gt;原文出自：&lt;a href=&quot;https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;关于 Swift 编译时性能优化的一些思考&lt;/a&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;针对运算符-的优化&quot;&gt;&lt;a href=&quot;#针对运算符-的优化&quot; class=&quot;headerlink&quot; title=&quot;针对运算符??的优化&quot;&gt;&lt;/a&gt;针对运算符&lt;code&gt;??&lt;/code&gt;的优化&lt;/h3&gt;&lt;p&gt;在使用&lt;code&gt;??&lt;/code&gt;时，并不是所有的都需要优化，包裹在循环中的&lt;code&gt;??&lt;/code&gt;会比较耗时比较厉害，目前不知道为啥，估计编译的时候需要检查的此时比较多吧😂。&lt;/p&gt;
+&lt;h4 id=&quot;尝试显式解包&quot;&gt;&lt;a href=&quot;#尝试显式解包&quot; class=&quot;headerlink&quot; title=&quot;尝试显式解包&quot;&gt;&lt;/a&gt;尝试显式解包&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;思路&lt;/strong&gt;：&lt;code&gt;??&lt;/code&gt;编译慢，就不用&lt;code&gt;??&lt;/code&gt;，直接使用&lt;code&gt;if else&lt;/code&gt;&lt;br&gt;&lt;strong&gt;实施&lt;/strong&gt;: 由于工程中使用的&lt;code&gt;??&lt;/code&gt;比较多，所以比较修改起来比较麻烦。但是可以解决问题。真不行写方法转化调用喽。。&lt;/p&gt;
+&lt;h4 id=&quot;错误的尝试了重载运算符-方式&quot;&gt;&lt;a href=&quot;#错误的尝试了重载运算符-方式&quot; class=&quot;headerlink&quot; title=&quot;错误的尝试了重载运算符??方式&quot;&gt;&lt;/a&gt;错误的尝试了重载运算符&lt;code&gt;??&lt;/code&gt;方式&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;思路&lt;/strong&gt;: &lt;code&gt;??&lt;/code&gt;运算符编译耗时较多，直觉是&lt;code&gt;??&lt;/code&gt;实现有复杂的操作,重新按照显式解包的方案进行实现。&lt;br&gt;&lt;strong&gt;实施&lt;/strong&gt;: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分析&lt;code&gt;??&lt;/code&gt;的使用场景，左侧为T?,右侧为T，返回值T&lt;/li&gt;
+&lt;li&gt;重载函数名定义&lt;code&gt;public func ?? &amp;lt;T&amp;gt;(left: T?, right: T) -&amp;gt; T&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;实现&lt;/li&gt;
+&lt;li&gt;编译&lt;/li&gt;
+&lt;li&gt;error：&lt;code&gt;Ambiguous use of operator &amp;#39;??&amp;#39;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;思考：这丫的在重载运算符的时候不能使用泛型吧。。&lt;/li&gt;
+&lt;li&gt;更改函数为&lt;code&gt;public func ?? &amp;lt;Any&amp;gt;(left: Any?, right: Any) -&amp;gt; Any&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;PL. OK了，可是问题来了，系统的&lt;code&gt;??&lt;/code&gt;是可以返回对应的类型，可是这样重载之后返回一个&lt;code&gt;Any&lt;/code&gt;，代码中如果出现&lt;code&gt;let str = str1 ?? &amp;quot;&amp;quot;&lt;/code&gt;则str类型就变为&lt;code&gt;Any&lt;/code&gt;而不是&lt;code&gt;String&lt;/code&gt;。&lt;strong&gt;巨坑&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;顾不了那么多了，真不行一个一个跑。于是先修改一个较为严重的&lt;code&gt;String&lt;/code&gt;类型。&lt;/li&gt;
+&lt;li&gt;尝试编译，结果时间惊人的没有变化。。依旧居高不下&lt;/li&gt;
+&lt;li&gt;以失败告终。。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;: 这个&lt;code&gt;??&lt;/code&gt;耗时较多并不是因为&lt;code&gt;??&lt;/code&gt;的实现有问题，&lt;strong&gt;猜测&lt;/strong&gt;是在为&lt;code&gt;??&lt;/code&gt;准备左右参数的时候需要进行一层层的解包确定类型，再加上&lt;code&gt;??&lt;/code&gt;可能有重载版本，进行类型匹配的时候比较耗时。&lt;/p&gt;
+&lt;h4 id=&quot;尝试扩展方法进行优化&quot;&gt;&lt;a href=&quot;#尝试扩展方法进行优化&quot; class=&quot;headerlink&quot; title=&quot;尝试扩展方法进行优化&quot;&gt;&lt;/a&gt;尝试扩展方法进行优化&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;思路&lt;/strong&gt;: 既然运算符会导致编译慢，那么就尝试使用方法直接进行转换。&lt;br&gt;&lt;strong&gt;实现&lt;/strong&gt;: 代码如下：&lt;br&gt;&lt;figure class=&quot;highlight swift&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Operator&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;///  ==&amp;gt; ??&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;func&lt;/span&gt; `&lt;span class=&quot;title&quot;&gt;try&lt;/span&gt;`&amp;lt;T&amp;gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;number&quot;&gt;_&lt;/span&gt; origin: T?, &lt;span class=&quot;number&quot;&gt;_&lt;/span&gt; then: T)&lt;/span&gt;&lt;/span&gt; -&amp;gt; &lt;span class=&quot;type&quot;&gt;T&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; value = origin &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; then&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; value&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;测试发现上述方法可以优化时间。&lt;/p&gt;
 &lt;hr&gt;
+&lt;h3 id=&quot;以下原文出自：关于-Swift-编译时性能优化的一些思考&quot;&gt;&lt;a href=&quot;#以下原文出自：关于-Swift-编译时性能优化的一些思考&quot; class=&quot;headerlink&quot; title=&quot;以下原文出自：关于 Swift 编译时性能优化的一些思考&quot;&gt;&lt;/a&gt;以下原文出自：&lt;a href=&quot;https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;关于 Swift 编译时性能优化的一些思考&lt;/a&gt;&lt;/h3&gt;&lt;hr&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;原文链接 : &lt;a href=&quot;https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31#.w81y3zhjr&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Regarding Swift build time optimizations&lt;/a&gt;&lt;/li&gt;
@@ -196,7 +216,7 @@ class CMExpandingTextField: UITextField {
     
     <summary type="html">
     
-      &lt;p&gt;原文出自：&lt;a href=&quot;https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md&quot;&gt;关于 Swift 编译时性能优化的一些思考&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。&lt;/p&gt;
     
     </summary>
     

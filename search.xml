@@ -68,11 +68,31 @@
     </entry>
     
     <entry>
-      <title><![CDATA[「转」关于 Swift 编译时性能优化的一些思考]]></title>
+      <title><![CDATA[Swift 编译时性能优化笔记]]></title>
       <url>https://madordie.github.io/2017/01/17/swift-build-times/</url>
-      <content type="html"><![CDATA[<p>原文出自：<a href="https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md" target="_blank" rel="external">关于 Swift 编译时性能优化的一些思考</a></p>
+      <content type="html"><![CDATA[<p>Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。</p>
 <a id="more"></a>
+<h3 id="针对运算符-的优化"><a href="#针对运算符-的优化" class="headerlink" title="针对运算符??的优化"></a>针对运算符<code>??</code>的优化</h3><p>在使用<code>??</code>时，并不是所有的都需要优化，包裹在循环中的<code>??</code>会比较耗时比较厉害，目前不知道为啥，估计编译的时候需要检查的此时比较多吧😂。</p>
+<h4 id="尝试显式解包"><a href="#尝试显式解包" class="headerlink" title="尝试显式解包"></a>尝试显式解包</h4><p><strong>思路</strong>：<code>??</code>编译慢，就不用<code>??</code>，直接使用<code>if else</code><br><strong>实施</strong>: 由于工程中使用的<code>??</code>比较多，所以比较修改起来比较麻烦。但是可以解决问题。真不行写方法转化调用喽。。</p>
+<h4 id="错误的尝试了重载运算符-方式"><a href="#错误的尝试了重载运算符-方式" class="headerlink" title="错误的尝试了重载运算符??方式"></a>错误的尝试了重载运算符<code>??</code>方式</h4><p><strong>思路</strong>: <code>??</code>运算符编译耗时较多，直觉是<code>??</code>实现有复杂的操作,重新按照显式解包的方案进行实现。<br><strong>实施</strong>: </p>
+<ul>
+<li>分析<code>??</code>的使用场景，左侧为T?,右侧为T，返回值T</li>
+<li>重载函数名定义<code>public func ?? &lt;T&gt;(left: T?, right: T) -&gt; T</code></li>
+<li>实现</li>
+<li>编译</li>
+<li>error：<code>Ambiguous use of operator &#39;??&#39;</code></li>
+<li>思考：这丫的在重载运算符的时候不能使用泛型吧。。</li>
+<li>更改函数为<code>public func ?? &lt;Any&gt;(left: Any?, right: Any) -&gt; Any</code></li>
+<li>PL. OK了，可是问题来了，系统的<code>??</code>是可以返回对应的类型，可是这样重载之后返回一个<code>Any</code>，代码中如果出现<code>let str = str1 ?? &quot;&quot;</code>则str类型就变为<code>Any</code>而不是<code>String</code>。<strong>巨坑</strong></li>
+<li>顾不了那么多了，真不行一个一个跑。于是先修改一个较为严重的<code>String</code>类型。</li>
+<li>尝试编译，结果时间惊人的没有变化。。依旧居高不下</li>
+<li>以失败告终。。</li>
+</ul>
+<p><strong>总结</strong>: 这个<code>??</code>耗时较多并不是因为<code>??</code>的实现有问题，<strong>猜测</strong>是在为<code>??</code>准备左右参数的时候需要进行一层层的解包确定类型，再加上<code>??</code>可能有重载版本，进行类型匹配的时候比较耗时。</p>
+<h4 id="尝试扩展方法进行优化"><a href="#尝试扩展方法进行优化" class="headerlink" title="尝试扩展方法进行优化"></a>尝试扩展方法进行优化</h4><p><strong>思路</strong>: 既然运算符会导致编译慢，那么就尝试使用方法直接进行转换。<br><strong>实现</strong>: 代码如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Operator</span> </span>&#123;</div><div class="line">    <span class="comment">///  ==&gt; ??</span></div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> `<span class="title">try</span>`&lt;T&gt;<span class="params">(<span class="number">_</span> origin: T?, <span class="number">_</span> then: T)</span></span> -&gt; <span class="type">T</span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> value = origin <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> then</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> value</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试发现上述方法可以优化时间。</p>
 <hr>
+<h3 id="以下原文出自：关于-Swift-编译时性能优化的一些思考"><a href="#以下原文出自：关于-Swift-编译时性能优化的一些思考" class="headerlink" title="以下原文出自：关于 Swift 编译时性能优化的一些思考"></a>以下原文出自：<a href="https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md" target="_blank" rel="external">关于 Swift 编译时性能优化的一些思考</a></h3><hr>
 <blockquote>
 <ul>
 <li>原文链接 : <a href="https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31#.w81y3zhjr" target="_blank" rel="external">Regarding Swift build time optimizations</a></li>
