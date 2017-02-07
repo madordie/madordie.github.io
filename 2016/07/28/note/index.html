@@ -92,7 +92,7 @@
 <meta property="og:url" content="https://madordie.github.io/2016/07/28/note/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="开发中的小笔记。记录开发中的点滴滴点。">
-<meta property="og:updated_time" content="2016-10-22T13:55:43.000Z">
+<meta property="og:updated_time" content="2017-02-07T06:08:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开发小记">
 <meta name="twitter:description" content="开发中的小笔记。记录开发中的点滴滴点。">
@@ -360,7 +360,11 @@
         <p>开发中的小笔记。记录开发中的点滴滴点。</p>
 <a id="more"></a>
 <ul>
-<li>NAN<ul>
+<li><p>批量删除空格组成的空行中的空格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  sed -i &apos;&apos; &apos;s/^[[:space:]][[:space:]]*$//g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
+</li>
+<li><p>NAN</p>
+<ul>
 <li>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885" target="_blank" rel="external">Objective-C 中 判断 NaN</a>大致记录了一下<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  math.h  #56</span></div><div class="line"></div><div class="line"><span class="meta">#if defined(__GNUC__)</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     __builtin_huge_val()</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    __builtin_huge_valf()</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    __builtin_huge_vall()</span></div><div class="line"><span class="meta">#   define    NAN          __builtin_nanf(<span class="meta-string">"0x7fc00000"</span>)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     1e500</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    1e50f</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    1e5000L</span></div><div class="line"><span class="meta">#   define    NAN          __nan()</span></div><div class="line"><span class="meta">#endif</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -523,7 +527,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

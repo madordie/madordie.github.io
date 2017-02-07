@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-01-18T10:46:36.000Z</updated>
+  <updated>2017-02-07T04:22:58.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sonarqube-note</title>
+    <link href="https://madordie.github.io/2017/02/07/sonarqube-note/"/>
+    <id>https://madordie.github.io/2017/02/07/sonarqube-note/</id>
+    <published>2017-02-07T02:16:58.000Z</published>
+    <updated>2017-02-07T04:22:58.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerlink&quot; title=&quot;步骤&quot;&gt;&lt;/a&gt;步骤&lt;/h3&gt;&lt;p&gt;Get Started in Two Minutes&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download and unzip the SonarQube distribution (let’s say in “C:\sonarqube” or “/etc/sonarqube”)&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Start the SonarQube server:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;# On Windows, execute:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;C:\sonarqube\bin\windows-x86-xx\StartSonar.bat&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# On other operating system, execute:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;/etc/sonarqube/bin/[OS]/sonar.sh console&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Download and unzip the SonarQube Scanner (let’s say in “C:\sonar-scanner” or “/etc/sonar-scanner”)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Download and unzip some project samples (let’s say in “C:\sonar-scanning-examples” or “/etc/sonar-scanning-examples”)&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Analyze a project:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;# On Windows:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;cd C:\sonar-scanning-examples\sonarqube-scanner&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;C:\sonar-scanner\bin\sonar-scanner.bat&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# On other operating system:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;cd /etc/sonar-scanning-examples/sonarqube-scanner&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;/etc/sonar-scanner/bin/sonar-scanner&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Browse the results at &lt;a href=&quot;http://localhost:9000&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:9000&lt;/a&gt; (default System administrator credentials are admin/admin)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.sonarqube.org/downloads/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SonarQube DOWNLOAD&lt;/a&gt;下载到最新版本(&lt;code&gt;SonarQube 6.2&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cp sonarqube-6.2 ~/sonarqube&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;文档&quot;&gt;&lt;a href=&quot;#文档&quot; class=&quot;headerlink&quot; title=&quot;文档&quot;&gt;&lt;/a&gt;文档&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.sonarqube.org/display/HOME/SonarQube+Platform&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;docs.sonarqube.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerlink&quot; title=&quot;步骤&quot;&gt;&lt;/a&gt;步骤&lt;/h3&gt;&lt;p&gt;Get Started in Two Minutes&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download and unzip the SonarQu
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>「转」真实世界中的 Swift 性能优化</title>
@@ -360,7 +404,7 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/2016/12/19/bandwagonhost-note/"/>
     <id>https://madordie.github.io/2016/12/19/bandwagonhost-note/</id>
     <published>2016-12-19T12:37:11.000Z</published>
-    <updated>2017-01-18T10:23:40.000Z</updated>
+    <updated>2017-02-07T06:08:49.000Z</updated>
     
     <content type="html">&lt;p&gt;原来吧，用用goagent、Lantern、XX-Net，确实，这玩意只能Google出来结果，但是有的站点打不开才是最骚的。。&lt;br&gt;同事搞了个搬瓦工挺便宜，于是乎就也搞了一个。不过强迫症犯了，尝试了各种SS版本以及各种优化，目的是找个流畅点的版本进行&lt;strong&gt;科学上网&lt;/strong&gt;。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -390,6 +434,7 @@ class CMExpandingTextField: UITextField {
 &lt;pre&gt;&lt;code&gt;- SSH登陆`vps`
 - 下载文件`vps /server_path /local_path`，自行修改后面俩参数
 &lt;/code&gt;&lt;/pre&gt;  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ cat ~/shell/Mac_shell/ss.sh &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#!/bin/bash&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;echo &amp;apos;password&amp;apos;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;port=12345&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;ip=1.2.3.4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;usr=root&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;if [ $# -eq 0 ]; then&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ssh $usr@$ip -p $port&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;elif [ $# -eq 2 ]; then &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    scp -P $port $usr@$ip:$1 $2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;else&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    echo &amp;quot;($*)你要干嘛。。&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fi&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;2017-2-7更新&lt;/strong&gt;: &lt;a href=&quot;https://github.com/jiangxianli/SSHAutoLogin&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;一个SSH登录服务器的shell脚本&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;尝试的时候各种用的环境搭建&quot;&gt;&lt;a href=&quot;#尝试的时候各种用的环境搭建&quot; class=&quot;headerlink&quot; title=&quot;尝试的时候各种用的环境搭建&quot;&gt;&lt;/a&gt;尝试的时候各种用的环境搭建&lt;/h1&gt;&lt;p&gt;  很显然上面的已经足够了，这个只是留个笔记，用来快速搭建某个环境啥的。。&lt;/p&gt;
 &lt;h2 id=&quot;CentOS&quot;&gt;&lt;a href=&quot;#CentOS&quot; class=&quot;headerlink&quot; title=&quot;CentOS&quot;&gt;&lt;/a&gt;CentOS&lt;/h2&gt;&lt;h3 id=&quot;git&quot;&gt;&lt;a href=&quot;#git&quot; class=&quot;headerlink&quot; title=&quot;git&quot;&gt;&lt;/a&gt;git&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;直接安装&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;yum install git&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -721,12 +766,16 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/2016/07/28/note/"/>
     <id>https://madordie.github.io/2016/07/28/note/</id>
     <published>2016-07-28T06:52:22.000Z</published>
-    <updated>2016-10-22T13:55:43.000Z</updated>
+    <updated>2017-02-07T06:08:53.000Z</updated>
     
     <content type="html">&lt;p&gt;开发中的小笔记。记录开发中的点滴滴点。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;NAN&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;批量删除空格组成的空行中的空格&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;#!/base/sh&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;find . -name &amp;apos;*.swift&amp;apos; | while read file; do&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  sed -i &amp;apos;&amp;apos; &amp;apos;s/^[[:space:]][[:space:]]*$//g&amp;apos; $file&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;done&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;NAN&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;当&lt;code&gt;NSUInteger 0 - 1&lt;/code&gt;时，运算结果为 NAN，iOS中有一个宏&lt;code&gt;isnan(x)&lt;/code&gt;返回是否为nan。另外这里有一篇文章&lt;a href=&quot;http://blog.csdn.net/toss156/article/details/7101885&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Objective-C 中 判断 NaN&lt;/a&gt;大致记录了一下&lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//  math.h  #56&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#if defined(__GNUC__)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VAL     __builtin_huge_val()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALF    __builtin_huge_valf()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALL    __builtin_huge_vall()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    NAN          __builtin_nanf(&lt;span class=&quot;meta-string&quot;&gt;&quot;0x7fc00000&quot;&lt;/span&gt;)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#else&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VAL     1e500&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALF    1e50f&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    HUGE_VALL    1e5000L&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#   define    NAN          __nan()&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#endif&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

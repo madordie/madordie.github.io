@@ -3,6 +3,54 @@
 
     
   <url>
+    <loc>https://madordie.github.io/2016/07/28/note/</loc>
+    <lastmod>2017-02-07T06:08:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>开发小记</title>
+        <pubTime>2016-07-28T06:52:22.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="笔记" url="https://madordie.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2016/12/19/bandwagonhost-note/</loc>
+    <lastmod>2017-02-07T06:08:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>科学上网之搬瓦工ss搭建笔记</title>
+        <pubTime>2016-12-19T12:37:11.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/2017/02/07/sonarqube-note/</loc>
+    <lastmod>2017-02-07T04:22:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>sonarqube-note</title>
+        <pubTime>2017-02-07T02:16:58.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/2017/01/17/swift-build-times/</loc>
     <lastmod>2017-02-06T08:37:12.000Z</lastmod>
     <data>
@@ -24,21 +72,6 @@
         <display>
         <title>「转」真实世界中的 Swift 性能优化</title>
         <pubTime>2017-01-17T11:14:57.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/12/19/bandwagonhost-note/</loc>
-    <lastmod>2017-01-18T10:23:40.000Z</lastmod>
-    <data>
-        <display>
-        <title>科学上网之搬瓦工ss搭建笔记</title>
-        <pubTime>2016-12-19T12:37:11.000Z</pubTime>
         
          
            
@@ -184,6 +217,23 @@
 
     
   <url>
+    <loc>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</loc>
+    <lastmod>2016-10-22T14:00:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>UI素材与代码解耦的讨论与思考</title>
+        <pubTime>2016-08-28T04:16:02.000Z</pubTime>
+        
+        <tag>iOS </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</loc>
     <lastmod>2016-10-22T14:00:13.000Z</lastmod>
     <data>
@@ -194,23 +244,6 @@
         <tag>iOS </tag>
          
         <tag>ReactiveCocoa </tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/08/28/ui-source-and-code-decoupling/</loc>
-    <lastmod>2016-10-22T14:00:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>UI素材与代码解耦的讨论与思考</title>
-        <pubTime>2016-08-28T04:16:02.000Z</pubTime>
-        
-        <tag>iOS </tag>
          
          
            
@@ -233,24 +266,6 @@
            
              
               <breadCrumb title="教程" url="https://madordie.github.io/categories/%E6%95%99%E7%A8%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2016/07/28/note/</loc>
-    <lastmod>2016-10-22T13:55:43.000Z</lastmod>
-    <data>
-        <display>
-        <title>开发小记</title>
-        <pubTime>2016-07-28T06:52:22.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="笔记" url="https://madordie.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
           
         </display>
     </data>
