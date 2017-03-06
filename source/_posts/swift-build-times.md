@@ -1,13 +1,61 @@
 ---
-title: 「转」关于 Swift 编译时性能优化的一些思考
+title: Swift 编译时性能优化笔记
 date: 2017-01-17 13:47:17
 tags:
 ---
 
-
-原文出自：[关于 Swift 编译时性能优化的一些思考](https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md)
+Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。
 
 <!--more-->
+
+### 针对运算符`??`的优化
+
+在使用`??`时，并不是所有的都需要优化，包裹在循环中的`??`会比较耗时比较厉害，目前不知道为啥，估计编译的时候需要检查的此时比较多吧😂。
+
+#### 尝试显式解包
+
+__思路__：`??`编译慢，就不用`??`，直接使用`if else`
+__实施__: 由于工程中使用的`??`比较多，所以比较修改起来比较麻烦。但是可以解决问题。真不行写方法转化调用喽。。
+
+#### 错误的尝试了重载运算符`??`方式
+
+__思路__: `??`运算符编译耗时较多，直觉是`??`实现有复杂的操作,重新按照显式解包的方案进行实现。
+__实施__: 
+- 分析`??`的使用场景，左侧为T?,右侧为T，返回值T
+- 重载函数名定义`public func ?? <T>(left: T?, right: T) -> T`
+- 实现
+- 编译
+- error：`Ambiguous use of operator '??'`
+- 思考：这丫的在重载运算符的时候不能使用泛型吧。。
+- 更改函数为`public func ?? <Any>(left: Any?, right: Any) -> Any`
+- PL. OK了，可是问题来了，系统的`??`是可以返回对应的类型，可是这样重载之后返回一个`Any`，代码中如果出现`let str = str1 ?? ""`则str类型就变为`Any`而不是`String`。__巨坑__
+- 顾不了那么多了，真不行一个一个跑。于是先修改一个较为严重的`String`类型。
+- 尝试编译，结果时间惊人的没有变化。。依旧居高不下
+- 以失败告终。。
+
+__总结__: 这个`??`耗时较多并不是因为`??`的实现有问题，__猜测__是在为`??`准备左右参数的时候需要进行一层层的解包确定类型，再加上`??`可能有重载版本，进行类型匹配的时候比较耗时。
+
+#### 尝试扩展方法进行优化
+
+__思路__: 既然运算符会导致编译慢，那么就尝试使用方法直接进行转换。
+__实现__: 代码如下：
+```swift
+struct Operator {
+    ///  ==> ??
+    static func `try`<T>(_ origin: T?, _ then: T) -> T {
+        guard let value = origin else {
+            return then
+        }
+        return value
+    }
+}
+```
+
+测试发现上述方法可以优化时间。
+
+---------
+
+### 以下原文出自：[关于 Swift 编译时性能优化的一些思考](https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md)
 
 ---------
 

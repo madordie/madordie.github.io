@@ -17,6 +17,12 @@ tags:
   SwiftLint Hook 了 Clang 和 SourceKit 从而能够使用 AST 来表示源代码文件的更多精确结果。
   
 ## 对原有代码格式化
+
+### 自动格式化
+  ```bash
+  swiftlint autocorrect
+  ```
+
 ### TrailingWhitespaceRule
 
 #### 现象

@@ -11,6 +11,22 @@ categories:
 
 <!--more-->
 
+- 批量正则替换的另一种思路
+  ```
+  #!/base/sh
+  find . -name '*.swift' | while read file; do
+    perl -i -lpe 's/if \(([^\)].*)\) \{/if $1 \{/g' $file
+  done
+  ```
+
+- 批量删除空格组成的空行中的空格
+  ```
+  #!/base/sh
+  find . -name '*.swift' | while read file; do
+    sed -i '' 's/^[[:space:]][[:space:]]*$//g' $file
+  done
+  ```
+
 - NAN
   - 当`NSUInteger 0 - 1`时，运算结果为 NAN，iOS中有一个宏`isnan(x)`返回是否为nan。另外这里有一篇文章[Objective-C 中 判断 NaN](http://blog.csdn.net/toss156/article/details/7101885)大致记录了一下
   ```objc

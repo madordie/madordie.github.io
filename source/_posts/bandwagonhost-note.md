@@ -169,6 +169,7 @@ tags:
 
   ```
   
+__2017-2-7更新__: [一个SSH登录服务器的shell脚本](https://github.com/jiangxianli/SSHAutoLogin)
 
 # 尝试的时候各种用的环境搭建
   很显然上面的已经足够了，这个只是留个笔记，用来快速搭建某个环境啥的。。
