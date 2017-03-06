@@ -338,14 +338,15 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/2016/12/23/elegant-to-use-swiftlint/"/>
     <id>https://madordie.github.io/2016/12/23/elegant-to-use-swiftlint/</id>
     <published>2016-12-23T03:59:57.000Z</published>
-    <updated>2016-12-30T11:15:48.000Z</updated>
+    <updated>2017-02-07T06:36:21.000Z</updated>
     
     <content type="html">&lt;p&gt;接入了SwiftLine，修改2000+的warning、300+error的一点笔记心得。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;SwiftLint&quot;&gt;&lt;a href=&quot;#SwiftLint&quot; class=&quot;headerlink&quot; title=&quot;SwiftLint&quot;&gt;&lt;/a&gt;SwiftLint&lt;/h1&gt;&lt;blockquote&gt;
 &lt;h2 id=&quot;SwiftLint-1&quot;&gt;&lt;a href=&quot;#SwiftLint-1&quot; class=&quot;headerlink&quot; title=&quot;SwiftLint&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://github.com/realm/SwiftLint&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SwiftLint&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A tool to enforce Swift style and conventions, loosely based on GitHub’s Swift Style Guide.&lt;br&gt;  SwiftLint hooks into Clang and SourceKit to use the AST representation of your source files for more accurate results.&lt;br&gt;  SwiftLint 是一个用于强制检查 Swift 代码风格和规定的一个工具，基本上以 GitHub’s Swift 代码风格指南为基础。&lt;br&gt;  SwiftLint Hook 了 Clang 和 SourceKit 从而能够使用 AST 来表示源代码文件的更多精确结果。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;对原有代码格式化&quot;&gt;&lt;a href=&quot;#对原有代码格式化&quot; class=&quot;headerlink&quot; title=&quot;对原有代码格式化&quot;&gt;&lt;/a&gt;对原有代码格式化&lt;/h2&gt;&lt;h3 id=&quot;TrailingWhitespaceRule&quot;&gt;&lt;a href=&quot;#TrailingWhitespaceRule&quot; class=&quot;headerlink&quot; title=&quot;TrailingWhitespaceRule&quot;&gt;&lt;/a&gt;TrailingWhitespaceRule&lt;/h3&gt;&lt;h4 id=&quot;现象&quot;&gt;&lt;a href=&quot;#现象&quot; class=&quot;headerlink&quot; title=&quot;现象&quot;&gt;&lt;/a&gt;现象&lt;/h4&gt;&lt;blockquote&gt;
+&lt;h2 id=&quot;对原有代码格式化&quot;&gt;&lt;a href=&quot;#对原有代码格式化&quot; class=&quot;headerlink&quot; title=&quot;对原有代码格式化&quot;&gt;&lt;/a&gt;对原有代码格式化&lt;/h2&gt;&lt;h3 id=&quot;自动格式化&quot;&gt;&lt;a href=&quot;#自动格式化&quot; class=&quot;headerlink&quot; title=&quot;自动格式化&quot;&gt;&lt;/a&gt;自动格式化&lt;/h3&gt;  &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;swiftlint autocorrect&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;TrailingWhitespaceRule&quot;&gt;&lt;a href=&quot;#TrailingWhitespaceRule&quot; class=&quot;headerlink&quot; title=&quot;TrailingWhitespaceRule&quot;&gt;&lt;/a&gt;TrailingWhitespaceRule&lt;/h3&gt;&lt;h4 id=&quot;现象&quot;&gt;&lt;a href=&quot;#现象&quot; class=&quot;headerlink&quot; title=&quot;现象&quot;&gt;&lt;/a&gt;现象&lt;/h4&gt;&lt;blockquote&gt;
 &lt;p&gt;xxx.swift:34: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;  规则实现：&lt;a href=&quot;https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/TrailingWhitespaceRule.swift&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;TrailingWhitespaceRule.swift&lt;/a&gt;&lt;/p&gt;
@@ -761,11 +762,14 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/2016/07/28/note/"/>
     <id>https://madordie.github.io/2016/07/28/note/</id>
     <published>2016-07-28T06:52:22.000Z</published>
-    <updated>2017-02-07T06:08:53.000Z</updated>
+    <updated>2017-02-09T10:37:10.000Z</updated>
     
     <content type="html">&lt;p&gt;开发中的小笔记。记录开发中的点滴滴点。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;p&gt;批量正则替换的另一种思路&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;#!/base/sh&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;find . -name &amp;apos;*.swift&amp;apos; | while read file; do&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  perl -i -lpe &amp;apos;s/if \(([^\)].*)\) \&amp;#123;/if $1 \&amp;#123;/g&amp;apos; $file&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;done&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;批量删除空格组成的空行中的空格&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;#!/base/sh&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;find . -name &amp;apos;*.swift&amp;apos; | while read file; do&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  sed -i &amp;apos;&amp;apos; &amp;apos;s/^[[:space:]][[:space:]]*$//g&amp;apos; $file&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;done&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;

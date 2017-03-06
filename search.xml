@@ -263,7 +263,8 @@ class CMExpandingTextField: UITextField {
 <h1 id="SwiftLint"><a href="#SwiftLint" class="headerlink" title="SwiftLint"></a>SwiftLint</h1><blockquote>
 <h2 id="SwiftLint-1"><a href="#SwiftLint-1" class="headerlink" title="SwiftLint"></a><a href="https://github.com/realm/SwiftLint" target="_blank" rel="external">SwiftLint</a></h2><p>A tool to enforce Swift style and conventions, loosely based on GitHub’s Swift Style Guide.<br>  SwiftLint hooks into Clang and SourceKit to use the AST representation of your source files for more accurate results.<br>  SwiftLint 是一个用于强制检查 Swift 代码风格和规定的一个工具，基本上以 GitHub’s Swift 代码风格指南为基础。<br>  SwiftLint Hook 了 Clang 和 SourceKit 从而能够使用 AST 来表示源代码文件的更多精确结果。</p>
 </blockquote>
-<h2 id="对原有代码格式化"><a href="#对原有代码格式化" class="headerlink" title="对原有代码格式化"></a>对原有代码格式化</h2><h3 id="TrailingWhitespaceRule"><a href="#TrailingWhitespaceRule" class="headerlink" title="TrailingWhitespaceRule"></a>TrailingWhitespaceRule</h3><h4 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h4><blockquote>
+<h2 id="对原有代码格式化"><a href="#对原有代码格式化" class="headerlink" title="对原有代码格式化"></a>对原有代码格式化</h2><h3 id="自动格式化"><a href="#自动格式化" class="headerlink" title="自动格式化"></a>自动格式化</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">swiftlint autocorrect</div></pre></td></tr></table></figure>
+<h3 id="TrailingWhitespaceRule"><a href="#TrailingWhitespaceRule" class="headerlink" title="TrailingWhitespaceRule"></a>TrailingWhitespaceRule</h3><h4 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h4><blockquote>
 <p>xxx.swift:34: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)</p>
 </blockquote>
 <p>  规则实现：<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/TrailingWhitespaceRule.swift" target="_blank" rel="external">TrailingWhitespaceRule.swift</a></p>
@@ -578,6 +579,9 @@ class CMExpandingTextField: UITextField {
       <content type="html"><![CDATA[<p>开发中的小笔记。记录开发中的点滴滴点。</p>
 <a id="more"></a>
 <ul>
+<li><p>批量正则替换的另一种思路</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  perl -i -lpe &apos;s/if \(([^\)].*)\) \&#123;/if $1 \&#123;/g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
+</li>
 <li><p>批量删除空格组成的空行中的空格</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  sed -i &apos;&apos; &apos;s/^[[:space:]][[:space:]]*$//g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
 </li>

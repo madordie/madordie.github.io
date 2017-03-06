@@ -92,7 +92,7 @@
 <meta property="og:url" content="https://madordie.github.io/2016/07/28/note/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="开发中的小笔记。记录开发中的点滴滴点。">
-<meta property="og:updated_time" content="2017-02-07T06:08:53.000Z">
+<meta property="og:updated_time" content="2017-02-09T10:37:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开发小记">
 <meta name="twitter:description" content="开发中的小笔记。记录开发中的点滴滴点。">
@@ -360,6 +360,9 @@
         <p>开发中的小笔记。记录开发中的点滴滴点。</p>
 <a id="more"></a>
 <ul>
+<li><p>批量正则替换的另一种思路</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  perl -i -lpe &apos;s/if \(([^\)].*)\) \&#123;/if $1 \&#123;/g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
+</li>
 <li><p>批量删除空格组成的空行中的空格</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  sed -i &apos;&apos; &apos;s/^[[:space:]][[:space:]]*$//g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
 </li>
