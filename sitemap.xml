@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/2017/04/08/rx-dictionary/</loc>
+    
+    <lastmod>2017-04-08T06:42:53.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2017/01/04/fastlane-note/</loc>
+    
+    <lastmod>2017-04-08T06:41:38.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-03-25T04:20:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2016/07/24/about-reprint-article/</loc>
+    
+    <lastmod>2017-03-25T04:12:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/2016/07/27/about-project-tableview/</loc>
+    
+    <lastmod>2017-03-25T04:09:09.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/2016/07/05/about-me/</loc>
     
     <lastmod>2017-03-08T08:25:34.000Z</lastmod>
@@ -54,13 +89,6 @@
     <loc>https://madordie.github.io/2017/01/17/real-world-swift-performance/</loc>
     
     <lastmod>2017-01-18T10:46:36.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/2017/01/04/fastlane-note/</loc>
-    
-    <lastmod>2017-01-13T09:43:56.000Z</lastmod>
     
   </url>
   
@@ -128,20 +156,6 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/2016/07/24/about-reprint-article/</loc>
-    
-    <lastmod>2016-10-22T13:54:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/2016/07/27/about-project-tableview/</loc>
-    
-    <lastmod>2016-10-22T13:54:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://madordie.github.io/2016/07/05/about-change-blog/</loc>
     
     <lastmod>2016-07-25T00:09:51.000Z</lastmod>
@@ -152,13 +166,6 @@
     <loc>https://madordie.github.io/tags/index.html</loc>
     
     <lastmod>2016-07-24T23:37:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/categories/index.html</loc>
-    
-    <lastmod>2016-07-24T23:37:32.000Z</lastmod>
     
   </url>
   
