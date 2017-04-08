@@ -8,8 +8,6 @@ tags:
 
  - __孙继刚__
  - 坐标: 上海
- - 手机: +86 17701873282
- - 微信: madordie
  - e-mail: <e.madordie@gmail.com>
  - blog: [https://madordie.github.io](https://madordie.github.io)
 
@@ -55,4 +53,4 @@ tags:
 
 ## 自我评价
 
-	热衷于技术。一个典型处女座强迫症重度患者。并伴有代码洁癖。
+热衷于技术。一个典型处女座强迫症重度患者。并伴有代码洁癖。

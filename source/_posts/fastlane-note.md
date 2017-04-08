@@ -6,7 +6,7 @@ tags:
 ---
 
 之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！
-回看之前的[打包](https://madordie.github.io/2016/09/26/build-ipa-sh)确实比较僵硬。自动化还是很棒的。
+回看之前的[build-ipa-sh.md](https://madordie.github.io/2016/09/26/build-ipa-sh)确实比较僵硬。自动化还是很棒的。
 
 <!--more-->
 
