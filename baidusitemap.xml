@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+
     
   <url>
     <loc>https://madordie.github.io/2017/04/08/rx-dictionary/</loc>
@@ -25,7 +26,7 @@
         <title>Fastlane自动化笔记</title>
         <pubTime>2017-01-04T10:14:07.000Z</pubTime>
         
-        <tag>Fastlane </tag>
+        <tag>Fastlane</tag>
          
          
            
@@ -61,9 +62,9 @@
         <title>项目中的UITableView</title>
         <pubTime>2016-07-27T05:30:45.000Z</pubTime>
         
-        <tag>iOS </tag>
+        <tag>iOS</tag>
          
-        <tag>牢骚 </tag>
+        <tag>牢骚</tag>
          
          
            
@@ -258,7 +259,7 @@
         <title>如何实现AppStore查看更多的方法</title>
         <pubTime>2016-12-23T08:37:37.000Z</pubTime>
         
-        <tag>iOS </tag>
+        <tag>iOS</tag>
          
          
            
@@ -293,7 +294,7 @@
         <title>UI素材与代码解耦的讨论与思考</title>
         <pubTime>2016-08-28T04:16:02.000Z</pubTime>
         
-        <tag>iOS </tag>
+        <tag>iOS</tag>
          
          
            
@@ -310,9 +311,9 @@
         <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
         <pubTime>2016-07-12T01:53:14.000Z</pubTime>
         
-        <tag>iOS </tag>
+        <tag>iOS</tag>
          
-        <tag>ReactiveCocoa </tag>
+        <tag>ReactiveCocoa</tag>
          
          
            
@@ -329,7 +330,7 @@
         <title>使用hexo搭建博客</title>
         <pubTime>2016-07-05T10:03:31.000Z</pubTime>
         
-        <tag>hexo </tag>
+        <tag>hexo</tag>
          
          
            
