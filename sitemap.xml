@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/about/index.html</loc>
+    
+    <lastmod>2017-05-17T02:07:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/2016/07/12/reactivecocoa-ready-to-use/</loc>
     
     <lastmod>2017-05-16T04:28:17.000Z</lastmod>
@@ -131,13 +138,6 @@
     <loc>https://madordie.github.io/2016/07/05/about-me/</loc>
     
     <lastmod>2017-03-08T08:25:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/about/index.html</loc>
-    
-    <lastmod>2017-03-06T15:11:27.000Z</lastmod>
     
   </url>
   
