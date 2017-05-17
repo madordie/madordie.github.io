@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/2016/07/28/note/</loc>
+    
+    <lastmod>2017-05-17T07:16:25.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/2017/05/16/bang-fastimagecache/</loc>
     
     <lastmod>2017-05-17T05:37:47.000Z</lastmod>
@@ -30,14 +37,14 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/2017/01/04/fastlane-note/</loc>
+    <loc>https://madordie.github.io/2016/12/19/bandwagonhost-note/</loc>
     
     <lastmod>2017-05-16T04:28:15.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://madordie.github.io/2016/12/19/bandwagonhost-note/</loc>
+    <loc>https://madordie.github.io/2017/01/04/fastlane-note/</loc>
     
     <lastmod>2017-05-16T04:28:15.000Z</lastmod>
     
@@ -110,13 +117,6 @@
     <loc>https://madordie.github.io/2016/07/27/about-project-tableview/</loc>
     
     <lastmod>2017-05-16T04:23:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/2016/07/28/note/</loc>
-    
-    <lastmod>2017-04-22T10:21:24.000Z</lastmod>
     
   </url>
   
