@@ -4,6 +4,27 @@
 
     
   <url>
+    <loc>https://madordie.github.io/2017/05/16/push-pop-navigation-bar-hidden/</loc>
+    <lastmod>2017-05-18T09:12:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>侧滑导航栏消失问题笔记</title>
+        <pubTime>2017-05-16T04:16:47.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="DEBUG" url="https://madordie.github.io/categories/iOS/DEBUG/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/2016/07/28/note/</loc>
     <lastmod>2017-05-17T07:16:25.000Z</lastmod>
     <data>
@@ -55,27 +76,6 @@
           
              
               <breadCrumb title="ReactiveCocoa" url="https://madordie.github.io/categories/iOS/ReactiveCocoa/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/2017/05/16/push-pop-navigation-bar-hidden/</loc>
-    <lastmod>2017-05-16T04:28:16.000Z</lastmod>
-    <data>
-        <display>
-        <title>侧滑导航栏消失问题笔记</title>
-        <pubTime>2017-05-16T04:16:47.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-             
-              <breadCrumb title="DEBUG" url="https://madordie.github.io/categories/iOS/DEBUG/"/>
           
         </display>
     </data>
