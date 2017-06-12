@@ -96,7 +96,7 @@
 <meta property="og:url" content="https://madordie.github.io/2017/06/12/ios11-beta/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="iOS11 预览版安装体验笔记。">
-<meta property="og:updated_time" content="2017-06-12T09:27:18.000Z">
+<meta property="og:updated_time" content="2017-06-12T09:31:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios11-beta">
 <meta name="twitter:description" content="iOS11 预览版安装体验笔记。">
@@ -367,10 +367,11 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>iOS11 预览版安装体验笔记。</p>
 <a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>毕竟beta版，升级需谨慎。目前来看体验上还是有点卡的～～😂</p>
 <h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="失效的automaticallyAdjustsScrollViewInsets"><a href="#失效的automaticallyAdjustsScrollViewInsets" class="headerlink" title="失效的automaticallyAdjustsScrollViewInsets"></a>失效的<code>automaticallyAdjustsScrollViewInsets</code></h3><p>API 声明：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@available</span>(iOS <span class="number">2.0</span>, *)</div><div class="line">open <span class="class"><span class="keyword">class</span> <span class="title">UIViewController</span> : <span class="title">UIResponder</span>, ... </span>&#123;</div><div class="line">	...</div><div class="line">	<span class="meta">@available</span>(iOS, introduced: <span class="number">7.0</span>, deprecated: <span class="number">11.0</span>)</div><div class="line">	open <span class="keyword">var</span> automaticallyAdjustsScrollViewInsets: <span class="type">Bool</span> <span class="comment">// Defaults to YES</span></div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>相应的的替换方案：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@available(iOS 2.0, *)</div><div class="line">open class UIScrollView : UIView, ... &#123;</div><div class="line">	...</div><div class="line">    /* Configure the behavior of adjustedContentInset.</div><div class="line">     Default is UIScrollViewContentInsetAdjustmentAutomatic.</div><div class="line">     */</div><div class="line">    @available(iOS 11.0, *)</div><div class="line">    open var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@available</span>(iOS <span class="number">2.0</span>, *)</div><div class="line">open <span class="class"><span class="keyword">class</span> <span class="title">UIScrollView</span> : <span class="title">UIView</span>, ... </span>&#123;</div><div class="line">	...</div><div class="line">    <span class="comment">/* Configure the behavior of adjustedContentInset.</span></div><div class="line">     Default is UIScrollViewContentInsetAdjustmentAutomatic.</div><div class="line">     */</div><div class="line">    <span class="meta">@available</span>(iOS <span class="number">11.0</span>, *)</div><div class="line">    open <span class="keyword">var</span> contentInsetAdjustmentBehavior: <span class="type">UIScrollViewContentInsetAdjustmentBehavior</span></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>iOS11 版本中立即失效。</p>
 
       
@@ -602,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">1.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失效的automaticallyAdjustsScrollViewInsets"><span class="nav-number">1.1.</span> <span class="nav-text">失效的automaticallyAdjustsScrollViewInsets</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">2.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失效的automaticallyAdjustsScrollViewInsets"><span class="nav-number">2.1.</span> <span class="nav-text">失效的automaticallyAdjustsScrollViewInsets</span></a></li></ol></li></ol></div>
             
 
           </div>
