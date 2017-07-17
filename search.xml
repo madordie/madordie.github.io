@@ -4,11 +4,44 @@
   
     
     <entry>
+      <title><![CDATA[自定义数据填充Sketch插件]]></title>
+      <url>https://madordie.github.io/2017/07/17/format-sketchplugin/</url>
+      <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="先来个README-md"><a href="#先来个README-md" class="headerlink" title="先来个README.md"></a>先来个README.md</h2><blockquote>
+<h2 id="format-sketchplugin"><a href="#format-sketchplugin" class="headerlink" title="format-sketchplugin"></a><a href="https://github.com/madordie/format-sketchplugin" target="_blank" rel="external">format-sketchplugin</a></h2><p>为Sketch自动生成自定义填充数据源插件。</p>
+<p><img src="https://github.com/madordie/format-sketchplugin/blob/master/Images/Untitled.gif?raw=true" alt="预览"></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
+<li>下载<a href="https://github.com/madordie/format-sketchplugin/releases" target="_blank" rel="external">Release</a>上的包，并双击打开</li>
+<li>选择要随机填充的文本数据(支持多选，文本数据按照回车进行随机，会默认删除空数据)</li>
+<li>选择随机填充的图片文件夹(只支持单选文件夹，选中文件夹内的<code>.png</code>、 <code>.PNG</code>、 <code>.jpg</code>、 <code>.JPG</code>、 <code>.jpeg</code>、 <code>.JPEG</code>、 <code>.gif</code>、 <code>.GIF</code>文件将会被识别并作为数据源)</li>
+<li>将插件生成目录拖拽至窗口即完成设置</li>
+<li>文本、图片文件夹 可在保存前重复多次选择</li>
+<li>点击<code>制作</code>，即可在生成目录看到插件生成</li>
+</ul>
+<h2 id="生成说明"><a href="#生成说明" class="headerlink" title="生成说明"></a>生成说明</h2><ul>
+<li>文本数据按照文本文件名作为标示</li>
+<li>图片文件夹按照图片文件夹名作为标示</li>
+<li>保存时，文本数据会读取至插件内</li>
+<li>保存时，图片文件夹会复制至插件内(不识别子目录，并只拷贝可识别的素材)</li>
+</ul>
+</blockquote>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> sketchplugin </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[ios11-beta]]></title>
       <url>https://madordie.github.io/2017/06/12/ios11-beta/</url>
       <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>iOS11 预览版安装体验笔记。</p>
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>毕竟beta版，升级需谨慎。目前来看体验上还是有点卡的～～😂</p>
+<p>卡顿让我实在无法忍受，并与6.15号重置回iOS10.3.2 。。。</p>
 <h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="失效的automaticallyAdjustsScrollViewInsets"><a href="#失效的automaticallyAdjustsScrollViewInsets" class="headerlink" title="失效的automaticallyAdjustsScrollViewInsets"></a>失效的<code>automaticallyAdjustsScrollViewInsets</code></h3><p>API 声明：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@available</span>(iOS <span class="number">2.0</span>, *)</div><div class="line">open <span class="class"><span class="keyword">class</span> <span class="title">UIViewController</span> : <span class="title">UIResponder</span>, ... </span>&#123;</div><div class="line">	...</div><div class="line">	<span class="meta">@available</span>(iOS, introduced: <span class="number">7.0</span>, deprecated: <span class="number">11.0</span>)</div><div class="line">	open <span class="keyword">var</span> automaticallyAdjustsScrollViewInsets: <span class="type">Bool</span> <span class="comment">// Defaults to YES</span></div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>相应的的替换方案：</p>
@@ -1048,6 +1081,7 @@ class CMExpandingTextField: UITextField {
       <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Jenkins自动构建脚本解决方案。</p>
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>  2017.1.13更新：<br>  好吧，其实有更加强悍的打包工具，虽然早有耳闻但是没弄。然后最近搭建了一下，这打包脚本也不用了，毕竟有成套工具嘛。嘿嘿<br>  不过最后上传osc的脚本还是很可以的。<br>  传送门：<a href="https://madordie.github.io/2017/01/04/fastlane-note/#more">Fastlane自动化笔记</a></p>
+<p>  2017.6.14更新:<br>  <a href="https://github.com/supermarin/xcpretty" target="_blank" rel="external">xcpretty</a>格式化输出日志。很溜，输出效果和 <code>fastlane</code> 差不多哈哈</p>
 <h2 id="Xcode8"><a href="#Xcode8" class="headerlink" title="Xcode8"></a>Xcode8</h2><p>  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。</p>
 <p>  先来重点：可用脚本：</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment">#   追上fir API token 自动上传</span></div><div class="line"><span class="comment">#   基于当前代码进行打包打包目录：MyProject/build/MyProject_ent.ipa</span></div><div class="line"></div><div class="line"><span class="built_in">cd</span> MyProject</div><div class="line"></div><div class="line">rm -rf ./build/*</div><div class="line"></div><div class="line">xcodebuild -archivePath <span class="string">"./build/xxx.xcarchive"</span> -workspace MyProject.xcworkspace -sdk iphoneos -scheme <span class="string">"MyProject_ent"</span> -configuration <span class="string">"Release Inhouse"</span> archive</div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;?xml version="</span>1.0<span class="string">" encoding="</span>UTF-8<span class="string">"?&gt;&lt;!DOCTYPE plist PUBLIC "</span>-//Apple//DTD PLIST 1.0//EN<span class="string">" "</span>http://www.apple.com/DTDs/PropertyList-1.0.dtd<span class="string">"&gt;&lt;plist version="</span>1.0<span class="string">"&gt;&lt;dict&gt;&lt;key&gt;method&lt;/key&gt;&lt;string&gt;enterprise&lt;/string&gt;&lt;key&gt;compileBitcode&lt;/key&gt;&lt;string&gt;YES&lt;/string&gt;&lt;/dict&gt;&lt;/plist&gt;"</span> &gt; ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line">xcodebuild -exportArchive -archivePath <span class="string">"./build/xxx.xcarchive"</span> -exportPath <span class="string">"./build/"</span> -exportOptionsPlist ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">cd</span> build/</div><div class="line"></div><div class="line">fir i ./MyProject_ent.ipa</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></div><div class="line">    git <span class="built_in">log</span> -10 &gt; git.log</div><div class="line">    fir p ./MyProject_ent.ipa -T <span class="variable">$1</span> -c git.log</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
@@ -1335,7 +1369,7 @@ class CMExpandingTextField: UITextField {
       <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><ul>
 <li><strong>孙继刚</strong></li>
 <li>坐标: 上海</li>
-<li>e-mail: <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;&#101;&#x2e;&#x6d;&#97;&#100;&#111;&#x72;&#100;&#105;&#x65;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#101;&#x2e;&#x6d;&#97;&#100;&#111;&#x72;&#100;&#105;&#x65;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a></li>
+<li>e-mail: <a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#101;&#x2e;&#x6d;&#x61;&#x64;&#111;&#x72;&#100;&#105;&#x65;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#101;&#x2e;&#x6d;&#x61;&#x64;&#111;&#x72;&#100;&#105;&#x65;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;</a></li>
 <li>blog: <a href="https://madordie.github.io">https://madordie.github.io</a></li>
 </ul>
 <h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><ul>
