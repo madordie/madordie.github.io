@@ -2,6 +2,8 @@
 title: 「转」真实世界中的 Swift 性能优化
 date: 2017-01-17 19:14:57
 tags:
+categories:
+    - Swift
 ---
 
 原文链接：[真实世界中的 Swift 性能优化](https://realm.io/cn/news/real-world-swift-performance/)

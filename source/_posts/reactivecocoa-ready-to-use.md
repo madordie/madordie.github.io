@@ -2,6 +2,7 @@
 title: 准备食用RAC(ReactiveCocoa)的顾虑
 date: 2016-07-12 09:53:14
 tags: 
+categories:
   - iOS
   - ReactiveCocoa
 ---

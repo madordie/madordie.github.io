@@ -2,6 +2,8 @@
 title: sonarqube-note
 date: 2017-02-07 10:16:58
 tags:
+categories:
+	- 工具
 ---
 
 ### 步骤

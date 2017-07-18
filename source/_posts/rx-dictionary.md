@@ -2,6 +2,7 @@
 title: RxSwift语法笔记
 date: 2017-04-08 14:03:18
 tags:
+categories:
 	- swift
 	- RxSwift
 ---

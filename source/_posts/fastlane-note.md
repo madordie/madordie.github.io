@@ -2,6 +2,7 @@
 title: Fastlane自动化笔记
 date: 2017-01-04 18:14:07
 tags:
+categories:
   - Fastlane
 ---
 

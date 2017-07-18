@@ -2,11 +2,17 @@
 title: Swift 编译时性能优化笔记
 date: 2017-01-17 13:47:17
 tags:
+categories:
+    - Swift
 ---
 
 Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。
 
 <!--more-->
+
+### Xcode8.2 
+
+添加`User-Defind`新的`SWIFT_WHOLE_MODULE_OPTIMIZATION = YES`可以过滤为修改framework。
 
 ### 针对运算符`??`的优化
 

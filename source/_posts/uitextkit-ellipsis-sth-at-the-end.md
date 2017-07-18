@@ -2,6 +2,7 @@
 title: 如何实现AppStore查看更多的方法
 date: 2016-12-23 16:37:37
 tags:
+categories:
   - iOS
 ---
 
