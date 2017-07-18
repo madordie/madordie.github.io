@@ -828,17 +828,12 @@ class CMExpandingTextField: UITextField {
 <li>红线越不得！红线越不得！红线越不得！重要的事情说3遍。</li>
 <li>参看第一条</li>
 <li>参看第一条</li>
-<li>参看第一条</li>
+<li><p>参看第一条</p>
+<p>2017 07 18 say goog bay !</p>
+</li>
 </ul>
-<p>2017 07 18  say good bye!  😂</p>
 ]]></content>
       
-        <categories>
-            
-            <category> 工具 </category>
-            
-        </categories>
-        
         
     </entry>
     
