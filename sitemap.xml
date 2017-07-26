@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io//404.html</loc>
+    
+    <lastmod>2017-07-26T10:47:39.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/fastlane-note/</loc>
     
     <lastmod>2017-07-22T07:55:26.000Z</lastmod>
@@ -208,13 +215,6 @@
     <loc>https://madordie.github.io/tags/index.html</loc>
     
     <lastmod>2016-07-24T23:37:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io//404.html</loc>
-    
-    <lastmod>2016-07-06T11:19:23.000Z</lastmod>
     
   </url>
   
