@@ -8,6 +8,7 @@ tags:
 
  - __孙继刚__
  - 坐标: 上海
+ - QQ: 453870736
  - e-mail: <e.madordie@gmail.com>
  - blog: [https://madordie.github.io](https://madordie.github.io)
 
@@ -33,7 +34,8 @@ tags:
  - 上海商路网络科技有限公司
  	- 2014.10 - 2015.5
  	- 将<肌肤管家>APP从外包接手并大部分重构至普通开发者可维护。
- 	- 独立开发并维护该社区活动类APP。
+       - 对接其智能硬件设备。
+       - 独立开发并维护该社区活动类APP。
 
 
  ## 个人技能
