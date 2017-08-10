@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-08-10T04:10:43.000Z</updated>
+  <updated>2017-08-10T06:12:47.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS逆向-class-dump工具</title>
+    <link href="https://madordie.github.io/reverse-ios-class-dump/"/>
+    <id>https://madordie.github.io/reverse-ios-class-dump/</id>
+    <published>2017-08-10T04:40:27.000Z</published>
+    <updated>2017-08-10T06:12:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="external">stevenygard.com</a>下载最新的包。</p>
+<p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
+<p>在<code>~/.base_profile</code>中添加<code>export PATH=/opt/class-dump:$PATH</code></p>
+<p>运行<code>source ~/.base_profile</code></p>
+<p>最后确认一下OK ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ class-dump --v</div><div class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
+<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="https://madordie.github.io/reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ls WeChat.decrypted</div><div class="line">WeChat.decrypted</div><div class="line">$ class-dump -H WeChat.decrypted -o ./Headers/</div><div class="line">$ ls Headers</div><div class="line">Headers</div></pre></td></tr></table></figure>
+<p>即得头文件目录：<code>Headers</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;安装class-dump&quot;&gt;&lt;a href=&quot;#安装class-dump&quot; class=&quot;headerlink&quot; title=&quot;安装class-dump&quot;&gt;&lt;/a&gt;安装class-dump&lt;/h2&gt;&lt;p&gt;去&lt;a href=&quot;http://stevenygard.com/projects/class-dump/&quot;&gt;stevenygard.com&lt;/a&gt;下载最新的包。&lt;/p&gt;
+&lt;p&gt;将包中的&lt;code&gt;class-dump&lt;/code&gt;可执行文件复制到&lt;code&gt;/opt/class-dump&lt;/code&gt;。(我的逆向相关工具均在这下面😂）&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;~/.base_profile&lt;/code&gt;中添加&lt;code&gt;export PATH=/opt/class-dump:$PATH&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;运行&lt;code&gt;source ~/.base_profile&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;最后确认一下OK ：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ class-dump --v&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+      <category term="逆向" scheme="https://madordie.github.io/categories/iOS/%E9%80%86%E5%90%91/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>iOS逆向-砸壳</title>
@@ -193,13 +231,14 @@
     <link href="https://madordie.github.io/swiftgg-unowned-or-weak-lifetime-and-performance/"/>
     <id>https://madordie.github.io/swiftgg-unowned-or-weak-lifetime-and-performance/</id>
     <published>2017-05-18T12:55:17.000Z</published>
-    <updated>2017-05-19T01:41:32.000Z</updated>
+    <updated>2017-08-10T06:12:00.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
 <p>作者：Umberto Raimondi，原文链接，原文日期：2016-10-27<br>译者：shanks；校对：Crystal Sun；定稿：CMB</p>
 </blockquote>
 <p>每当处理循环引用（retain cycles）时，需要考量对象生命周期来选择unowned或者weak标识符，这已经成为了一个共识。但是有时仍然会心存疑问，在具体的使用中应该选择哪一个，或者退一步讲，保守的只使用 weak 是不是一个好的选择呢？</p>
 <p>本文首先对循环引用的基础知识做一个简要介绍，然后会分析 Swift 源代码的一些片段，讲解 unowned 和 weak 在生命周期和性能上的差异点，希望看完本文以后，在的使用场景中，能使用正确的弱引用类型。</p>
+<a id="more"></a>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h2><ul>
 <li>基础知识</li>
 <li>问题来了: unowened 还是 weak?</li>
@@ -356,12 +395,17 @@
 <blockquote>
 <p>本文由 SwiftGG 翻译组翻译，已经获得作者翻译授权，最新文章请访问 <a href="http://swift.gg。" target="_blank" rel="external">http://swift.gg。</a></p>
 </blockquote>
+<hr>
+<p>文章转自 <a href="http://swift.gg/2017/05/16/unowned-or-weak-lifetime-and-performance/" target="_blank" rel="external">SwiftGG</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;blockquote&gt;
-&lt;p&gt;作者：Umberto Raimondi，原文链接，
+      &lt;blockquote&gt;
+&lt;p&gt;作者：Umberto Raimondi，原文链接，原文日期：2016-10-27&lt;br&gt;译者：shanks；校对：Crystal Sun；定稿：CMB&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;每当处理循环引用（retain cycles）时，需要考量对象生命周期来选择unowned或者weak标识符，这已经成为了一个共识。但是有时仍然会心存疑问，在具体的使用中应该选择哪一个，或者退一步讲，保守的只使用 weak 是不是一个好的选择呢？&lt;/p&gt;
+&lt;p&gt;本文首先对循环引用的基础知识做一个简要介绍，然后会分析 Swift 源代码的一些片段，讲解 unowned 和 weak 在生命周期和性能上的差异点，希望看完本文以后，在的使用场景中，能使用正确的弱引用类型。&lt;/p&gt;
     
     </summary>
     
@@ -1219,45 +1263,6 @@ class CMExpandingTextField: UITextField {
     <summary type="html">
     
       &lt;p&gt;5步解析&lt;code&gt;.crash&lt;/code&gt;文件&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="DEBUG" scheme="https://madordie.github.io/categories/DEBUG/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>DEBUG - UIView.h#190</title>
-    <link href="https://madordie.github.io/debug-uiview-m-190/"/>
-    <id>https://madordie.github.io/debug-uiview-m-190/</id>
-    <published>2016-10-11T04:43:22.000Z</published>
-    <updated>2016-12-30T11:19:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>CRASH:<br><code>void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()</code></p>
-<a id="more"></a>
-<h1 id="UIView-m-190-UIViewReportBrokenSuperviewChain"><a href="#UIView-m-190-UIViewReportBrokenSuperviewChain" class="headerlink" title="UIView.m:190 - UIViewReportBrokenSuperviewChain"></a>UIView.m:190 - UIViewReportBrokenSuperviewChain</h1><h2 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190</div><div class="line">invalid mode &apos;kCFRunLoopCommonModes&apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</div><div class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</div></pre></td></tr></table></figure>
-<h2 id="异常分析"><a href="#异常分析" class="headerlink" title="异常分析"></a>异常分析</h2><p>  APP crash在<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[keyWindow addSubview:weakSelf];</div></pre></td></tr></table></figure></p>
-<p>  <a href="#错误堆栈">错误堆栈信息</a>。</p>
-<p>  但是真正造成crash的代码为：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</div></pre></td></tr></table></figure>
-<p>  解决方案：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[self layoutIfNeeded];</div><div class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</div></pre></td></tr></table></figure></p>
-<p>  原因分析：<br>  下面这个说的很在理</p>
-<blockquote>
-<p><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="external">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
-<p>I had this issue with a library when moving over to Xcode 8 (Material-Controls-For-iOS - MDTextField). I found that the problem was coming from where the layer of one view (which had no superview) was being added to another.</p>
-<p>It looks like this may be the case for yourself also - your toolbar being created has not been added to a superview first. The fix I used was to add the view as a subview of the view that the layer was being added to, so in your case adding the toolbar as a subview of myModelView should stop the error.</p>
-</blockquote>
-<h2 id="碰到该问题的还有"><a href="#碰到该问题的还有" class="headerlink" title="碰到该问题的还有"></a>碰到该问题的还有</h2><ul>
-<li><a href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8" target="_blank" rel="external">Google出来的一个，但是并未看到相关回复。。。</a></li>
-<li><a href="http://www.th7.cn/Program/IOS/201609/975582.shtml" target="_blank" rel="external">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a></li>
-<li><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="external">stackoverflow(这个分析的很到位)</a></li>
-</ul>
-<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190</div><div class="line">invalid mode &apos;kCFRunLoopCommonModes&apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</div><div class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</div><div class="line"></div><div class="line">(lldb) bt</div><div class="line">* thread #1: tid = 0x87c18, 0x000000018238c524 libobjc.A.dylib`objc_exception_throw, queue = &apos;com.apple.main-thread&apos;, stop reason = breakpoint 1.2</div><div class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib`objc_exception_throw</div><div class="line">    frame #1: 0x0000000183954094 CoreFoundation`+[NSException raise:format:arguments:] + 104</div><div class="line">    frame #2: 0x00000001843de898 Foundation`-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</div><div class="line">    frame #3: 0x0000000189a7cf9c UIKit`UIViewReportBrokenSuperviewChain + 472</div><div class="line">    frame #4: 0x0000000189a7d658 UIKit`_UIViewTopDownSubtreeTraversal + 1496</div><div class="line">    frame #5: 0x000000018a0f3390 UIKit`-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</div><div class="line">    frame #6: 0x00000001843832ac Foundation`-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</div><div class="line">    frame #7: 0x0000000184382dcc Foundation`-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</div><div class="line">    frame #8: 0x00000001843809e0 Foundation`-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</div><div class="line">    frame #9: 0x000000018989cfdc UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</div><div class="line">    frame #10: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #11: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #12: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #13: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #14: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #15: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #16: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #17: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #18: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #19: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #20: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #21: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #22: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #23: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #24: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #25: 0x00000001898a4bb0 UIKit`-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</div><div class="line">    frame #26: 0x00000001898a4b04 UIKit`-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</div><div class="line">    frame #27: 0x00000001898a4910 UIKit`-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</div><div class="line">    frame #28: 0x00000001897996dc UIKit`-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</div><div class="line">    frame #29: 0x0000000189798d90 UIKit`__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</div><div class="line">    frame #30: 0x0000000189798be8 UIKit`-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</div><div class="line">    frame #31: 0x00000001897a4ad0 UIKit`-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</div><div class="line">    frame #32: 0x00000001897a43bc UIKit`-[UIView(Hierarchy) addSubview:] + 828</div><div class="line">  * frame #33: 0x00000001004f78ec Project_ent`__31-[EsfCommentReportView show]_block_invoke((null)=&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</div><div class="line">    frame #34: 0x00000001897d2b88 UIKit`+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</div><div class="line">    frame #35: 0x00000001897d28e8 UIKit`+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</div><div class="line">    frame #36: 0x00000001004f77a0 Project_ent`-[EsfCommentReportView show](self=0x000000015fe32020, _cmd=&quot;show&quot;) + 492 at EsfCommentReportView.m:291</div><div class="line">    frame #37: 0x0000000100858a04 Project_ent`__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)=&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</div><div class="line">    frame #38: 0x00000001003f93e4 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController=0x000000015fd2e320, sourceType=2, afterCheckOrLogin=0x00000001008588d0, cancelLogin=(null)) + 236 at MyLoginViewController.m:123</div><div class="line">    frame #39: 0x00000001003f92b0 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController=0x000000015fd2e320, afterCheckOrLogin=0x00000001008588d0, cancelLogin=(null)) + 156 at MyLoginViewController.m:114</div><div class="line">    frame #40: 0x00000001003f9124 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController=0x000000015fd2e320, afterCheckOrLogin=0x00000001008588d0) + 120 at MyLoginViewController.m:104</div><div class="line">    frame #41: 0x0000000100858870 Project_ent`-[BuyerAdviserProfileViewController reportAction:](self=0x000000015fd2e320, _cmd=&quot;reportAction:&quot;, button=0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</div><div class="line">    frame #42: 0x00000001897d27b0 UIKit`-[UIApplication sendAction:to:from:forEvent:] + 96</div><div class="line">    frame #43: 0x00000001897d2730 UIKit`-[UIControl sendAction:to:forEvent:] + 80</div><div class="line">    frame #44: 0x00000001897bcbe4 UIKit`-[UIControl _sendActionsForEvents:withEvent:] + 452</div><div class="line">    frame #45: 0x00000001897d201c UIKit`-[UIControl touchesEnded:withEvent:] + 584</div><div class="line">    frame #46: 0x00000001897d1b44 UIKit`-[UIWindow _sendTouchesForEvent:] + 2484</div><div class="line">    frame #47: 0x00000001897ccd8c UIKit`-[UIWindow sendEvent:] + 2988</div><div class="line">    frame #48: 0x000000018979d858 UIKit`-[UIApplication sendEvent:] + 340</div><div class="line">    frame #49: 0x0000000189f8acb8 UIKit`__dispatchPreprocessedEventFromEventQueue + 2736</div><div class="line">    frame #50: 0x0000000189f84720 UIKit`__handleEventQueue + 784</div><div class="line">    frame #51: 0x0000000183902278 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</div><div class="line">    frame #52: 0x0000000183901bc0 CoreFoundation`__CFRunLoopDoSources0 + 524</div><div class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation`__CFRunLoopRun + 804</div><div class="line">    frame #54: 0x000000018382e048 CoreFoundation`CFRunLoopRunSpecific + 444</div><div class="line">    frame #55: 0x00000001852b1198 GraphicsServices`GSEventRunModal + 180</div><div class="line">    frame #56: 0x0000000189808628 UIKit`-[UIApplication _run] + 684</div><div class="line">    frame #57: 0x0000000189803360 UIKit`UIApplicationMain + 208</div><div class="line">    frame #58: 0x0000000100a3db78 Project_ent`main + 460 at main.swift:24</div><div class="line">    frame #59: 0x00000001828105b8 libdyld.dylib`start + 4</div><div class="line">(lldb)</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;CRASH:&lt;br&gt;&lt;code&gt;void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     

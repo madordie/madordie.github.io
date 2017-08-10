@@ -98,7 +98,7 @@
 <meta property="og:description" content="作者：Umberto Raimondi，原文链接，原文日期：2016-10-27译者：shanks；校对：Crystal Sun；定稿：CMB  每当处理循环引用（retain cycles）时，需要考量对象生命周期来选择unowned或者weak标识符，这已经成为了一个共识。但是有时仍然会心存疑问，在具体的使用中应该选择哪一个，或者退一步讲，保守的只使用 weak 是不是一个好的选择呢？ 本文">
 <meta property="og:image" content="https://madordie.github.io/images/unownedbig.png">
 <meta property="og:image" content="https://madordie.github.io/images/swiftc.png">
-<meta property="og:updated_time" content="2017-05-19T01:41:32.000Z">
+<meta property="og:updated_time" content="2017-08-10T06:12:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「转」Unowned 还是 Weak？生命周期和性能对比">
 <meta name="twitter:description" content="作者：Umberto Raimondi，原文链接，原文日期：2016-10-27译者：shanks；校对：Crystal Sun；定稿：CMB  每当处理循环引用（retain cycles）时，需要考量对象生命周期来选择unowned或者weak标识符，这已经成为了一个共识。但是有时仍然会心存疑问，在具体的使用中应该选择哪一个，或者退一步讲，保守的只使用 weak 是不是一个好的选择呢？ 本文">
@@ -419,6 +419,7 @@
 </blockquote>
 <p>每当处理循环引用（retain cycles）时，需要考量对象生命周期来选择unowned或者weak标识符，这已经成为了一个共识。但是有时仍然会心存疑问，在具体的使用中应该选择哪一个，或者退一步讲，保守的只使用 weak 是不是一个好的选择呢？</p>
 <p>本文首先对循环引用的基础知识做一个简要介绍，然后会分析 Swift 源代码的一些片段，讲解 unowned 和 weak 在生命周期和性能上的差异点，希望看完本文以后，在的使用场景中，能使用正确的弱引用类型。</p>
+<a id="more"></a>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h2><ul>
 <li>基础知识</li>
 <li>问题来了: unowened 还是 weak?</li>
@@ -575,6 +576,8 @@
 <blockquote>
 <p>本文由 SwiftGG 翻译组翻译，已经获得作者翻译授权，最新文章请访问 <a href="http://swift.gg。" target="_blank" rel="external">http://swift.gg。</a></p>
 </blockquote>
+<hr>
+<p>文章转自 <a href="http://swift.gg/2017/05/16/unowned-or-weak-lifetime-and-performance/" target="_blank" rel="external">SwiftGG</a></p>
 
       
     </div>
@@ -708,7 +711,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
