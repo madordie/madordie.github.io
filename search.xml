@@ -4,6 +4,57 @@
   
     
     <entry>
+      <title><![CDATA[iOS逆向-砸壳]]></title>
+      <url>https://madordie.github.io/reverse-ios-dump-decrypted/</url>
+      <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+<li>越狱设备</li>
+<li><code>Cydia</code>中搜索<code>cycript</code>并安装</li>
+</ul>
+<a id="more"></a>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><a href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略" class="headerlink" title="制作并上传dumpdecrypted.dylib （已经OK的可忽略"></a>制作并上传<code>dumpdecrypted.dylib</code> （已经OK的可忽略</h3><h4 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h4><p>目前我制作目录暂时在<code>~/Desktop</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/stefanesser/dumpdecrypted.git ~/Desktop</div><div class="line">$ cd ～／Desktop/dumpdecrypted</div><div class="line">$ make</div><div class="line">$ ls dumpdecrypted.dylib</div></pre></td></tr></table></figure>
+<p>没什么错误的话，即得<code>dumpdecrypted.dylib</code>。</p>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>将<code>dumpdecrypted.dylib</code>放在越狱设备的<code>/var/root/</code>下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ls dumpdecrypted.dylib</div><div class="line">$ scp dumpdecrypted.dylib root@10.12.14.16:/var/root/</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">dumpdecrypted.dylib                           100%  193KB   3.0MB/s   00:00</div><div class="line">$</div></pre></td></tr></table></figure>
+<h3 id="登录进越狱设备"><a href="#登录进越狱设备" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
+<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="https://madordie.github.io/reverse-ios-ssh/">配置传送门</a></p>
+<h3 id="找到可执行文件路径"><a href="#找到可执行文件路径" class="headerlink" title="找到可执行文件路径"></a>找到可执行文件路径</h3><p>这里以<code>WeChat</code>为例子啦～</p>
+<p>记得先打开呀～～～</p>
+<p><code>ps -e</code>： 显示所有程序<br><code>grep</code>: 这里是过滤一下。。具体用法Google。所有的程序有点多，我知道名字，所以直接过滤一下。也可忽略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ ps -e | grep WeChat</div><div class="line">705 ??         0:02.20 /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</div><div class="line">707 ttys000    0:00.01 grep WeChat</div><div class="line">$ cycript -p 705</div><div class="line">$ cycript -p 705</div><div class="line">cy# [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0]</div><div class="line">#&quot;file:///var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/&quot;</div><div class="line">cy# exit(0)</div><div class="line">MS:Error: _krncall(mach_vm_read_overwrite(task, data, sizeof(*baton), reinterpret_cast&lt;mach_vm_address_t&gt;(baton), &amp;error)) =4</div><div class="line">*** _assert(status == 0):../Inject.cpp(143):InjectLibrary</div><div class="line">$</div></pre></td></tr></table></figure>
+<p>此处获得两个目录：</p>
+<ul>
+<li><code>/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</code></li>
+<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</code></li>
+</ul>
+<h3 id="开砸"><a href="#开砸" class="headerlink" title="开砸"></a>开砸</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">$ cd ~</div><div class="line">$ cp dumpdecrypted.dylib /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</div><div class="line">$ cd /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</div><div class="line">$ DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</div><div class="line">mach-o decryption dumper</div><div class="line"></div><div class="line">DISCLAIMER: This tool is only meant for security research purposes, not for application crackers.</div><div class="line"></div><div class="line">[+] detected 64bit ARM binary in memory.</div><div class="line">[+] offset to cryptid found: @0x1000c0ca8(from 0x1000c0000) = ca8</div><div class="line">[+] Found encrypted data at address 00004000 of length 51200000 bytes - type 1.</div><div class="line">[+] Opening /private/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat for reading.</div><div class="line">[+] Reading header</div><div class="line">[+] Detecting header type</div><div class="line">[+] Executable is a plain MACH-O image</div><div class="line">[+] Opening WeChat.decrypted for writing.</div><div class="line">[+] Copying the not encrypted start of the file</div><div class="line">[+] Dumping the decrypted data into the file</div><div class="line">[+] Copying the not encrypted remainder of the file</div><div class="line">[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset ca8</div><div class="line">[+] Closing original file</div><div class="line">[+] Closing dump file</div><div class="line">$ ls</div><div class="line">00000000000000000000000000000000  LocalInfo.lst  MMResourceMgr    MMappedKV  MemoryStat  SMReport.dat  SafeMode.dat  WeChat.decrypted  dumpdecrypted.dylib  heavy_user_id_mapping.dat</div><div class="line">$ ls WeChat.decrypted</div><div class="line">WeChat.decrypted</div><div class="line">$ pwd</div><div class="line">/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents</div></pre></td></tr></table></figure>
+<p>最后得到文件:</p>
+<ul>
+<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted</code></li>
+</ul>
+<h3 id="将-decrypted拷贝出来"><a href="#将-decrypted拷贝出来" class="headerlink" title="将*.decrypted拷贝出来"></a>将<code>*.decrypted</code>拷贝出来</h3><p>我这里直接使用<code>scp</code>吧～。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ cd /Users/Madordie/Desktop/Madordie/iOS/xxx</div><div class="line">$ scp root@10.12.14.16:/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted .</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">WeChat.decrypted                              100%   61MB   4.7MB/s   00:12</div><div class="line">$ ls WeChat.decrypted</div><div class="line">WeChat.decrypted</div></pre></td></tr></table></figure>
+<p>至此在主机上得到：</p>
+<ul>
+<li><code>/Users/Madordie/Desktop/Madordie/iOS/xxx/WeChat.decrypted</code></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>为什么将<code>dumpdecrypted.dylib</code>  <code>copy</code> 至<code>*/Documents/</code>下？<br>  ：别的目录没有权限～～（<code>dumpdecrypted.dylib: stat() failed with errno=1</code> ）</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> iOS </category>
+            
+            <category> 逆向 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS逆向-设备ssh免密登录]]></title>
       <url>https://madordie.github.io/reverse-ios-ssh/</url>
       <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
@@ -1361,7 +1412,7 @@ class CMExpandingTextField: UITextField {
 <li><strong>孙继刚</strong></li>
 <li>坐标: 上海</li>
 <li>QQ: 453870736</li>
-<li>e-mail: <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#101;&#46;&#109;&#97;&#x64;&#x6f;&#x72;&#100;&#105;&#101;&#x40;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#101;&#46;&#109;&#97;&#x64;&#x6f;&#x72;&#100;&#105;&#101;&#x40;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a></li>
+<li>e-mail: <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x65;&#46;&#109;&#x61;&#x64;&#x6f;&#114;&#100;&#x69;&#x65;&#x40;&#x67;&#109;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;">&#x65;&#46;&#109;&#x61;&#x64;&#x6f;&#114;&#100;&#x69;&#x65;&#x40;&#x67;&#109;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;</a></li>
 <li>blog: <a href="https://madordie.github.io">https://madordie.github.io</a></li>
 </ul>
 <h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><ul>

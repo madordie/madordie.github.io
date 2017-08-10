@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="开发中的小笔记。记录开发中的点滴滴点。">
+<meta name="description" content="前提 越狱设备 Cydia中搜索cycript并安装">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开发小记">
-<meta property="og:url" content="https://madordie.github.io/note/index.html">
+<meta property="og:title" content="iOS逆向-砸壳">
+<meta property="og:url" content="https://madordie.github.io/reverse-ios-dump-decrypted/index.html">
 <meta property="og:site_name" content="Keith's Blog">
-<meta property="og:description" content="开发中的小笔记。记录开发中的点滴滴点。">
-<meta property="og:updated_time" content="2017-05-17T07:16:47.000Z">
+<meta property="og:description" content="前提 越狱设备 Cydia中搜索cycript并安装">
+<meta property="og:updated_time" content="2017-08-10T04:10:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开发小记">
-<meta name="twitter:description" content="开发中的小笔记。记录开发中的点滴滴点。">
+<meta name="twitter:title" content="iOS逆向-砸壳">
+<meta name="twitter:description" content="前提 越狱设备 Cydia中搜索cycript并安装">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://madordie.github.io/note/"/>
+  <link rel="canonical" href="https://madordie.github.io/reverse-ios-dump-decrypted/"/>
 
 
 
 
 
-  <title> 开发小记 | Keith's Blog </title>
+  <title> iOS逆向-砸壳 | Keith's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -282,7 +282,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/note/">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/reverse-ios-dump-decrypted/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keith">
@@ -303,7 +303,7 @@
             
             
               
-                开发小记
+                iOS逆向-砸壳
               
             
           </h1>
@@ -318,8 +318,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-28T14:52:22+08:00">
-                2016-07-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T20:31:50+08:00">
+                2017-08-09
               </time>
             
 
@@ -341,8 +341,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">笔记</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
                   </a>
                 </span>
 
@@ -359,9 +370,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/note/#comments" itemprop="discussionUrl">
+                <a href="/reverse-ios-dump-decrypted/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="note/" itemprop="commentCount"></span>
+                        data-disqus-identifier="reverse-ios-dump-decrypted/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -387,56 +398,40 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>开发中的小笔记。记录开发中的点滴滴点。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+<li>越狱设备</li>
+<li><code>Cydia</code>中搜索<code>cycript</code>并安装</li>
+</ul>
 <a id="more"></a>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><a href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略" class="headerlink" title="制作并上传dumpdecrypted.dylib （已经OK的可忽略"></a>制作并上传<code>dumpdecrypted.dylib</code> （已经OK的可忽略</h3><h4 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h4><p>目前我制作目录暂时在<code>~/Desktop</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/stefanesser/dumpdecrypted.git ~/Desktop</div><div class="line">$ cd ～／Desktop/dumpdecrypted</div><div class="line">$ make</div><div class="line">$ ls dumpdecrypted.dylib</div></pre></td></tr></table></figure>
+<p>没什么错误的话，即得<code>dumpdecrypted.dylib</code>。</p>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>将<code>dumpdecrypted.dylib</code>放在越狱设备的<code>/var/root/</code>下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ls dumpdecrypted.dylib</div><div class="line">$ scp dumpdecrypted.dylib root@10.12.14.16:/var/root/</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">dumpdecrypted.dylib                           100%  193KB   3.0MB/s   00:00</div><div class="line">$</div></pre></td></tr></table></figure>
+<h3 id="登录进越狱设备"><a href="#登录进越狱设备" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
+<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="https://madordie.github.io/reverse-ios-ssh/">配置传送门</a></p>
+<h3 id="找到可执行文件路径"><a href="#找到可执行文件路径" class="headerlink" title="找到可执行文件路径"></a>找到可执行文件路径</h3><p>这里以<code>WeChat</code>为例子啦～</p>
+<p>记得先打开呀～～～</p>
+<p><code>ps -e</code>： 显示所有程序<br><code>grep</code>: 这里是过滤一下。。具体用法Google。所有的程序有点多，我知道名字，所以直接过滤一下。也可忽略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ ps -e | grep WeChat</div><div class="line">705 ??         0:02.20 /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</div><div class="line">707 ttys000    0:00.01 grep WeChat</div><div class="line">$ cycript -p 705</div><div class="line">$ cycript -p 705</div><div class="line">cy# [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0]</div><div class="line">#&quot;file:///var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/&quot;</div><div class="line">cy# exit(0)</div><div class="line">MS:Error: _krncall(mach_vm_read_overwrite(task, data, sizeof(*baton), reinterpret_cast&lt;mach_vm_address_t&gt;(baton), &amp;error)) =4</div><div class="line">*** _assert(status == 0):../Inject.cpp(143):InjectLibrary</div><div class="line">$</div></pre></td></tr></table></figure>
+<p>此处获得两个目录：</p>
 <ul>
-<li><p>获取代码执行时间</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#<span class="keyword">import</span> &lt;mach/mach_time.h&gt;</div><div class="line"><span class="keyword">static</span> <span class="type">NSMutableDictionary</span> *__times;</div><div class="line"><span class="keyword">static</span> inline void debug_start_of(<span class="type">NSString</span> *key)</div><div class="line">&#123;</div><div class="line">    __times = __times ?: [<span class="type">NSMutableDictionary</span> new];</div><div class="line"></div><div class="line">    uint64_t start = mach_absolute_time();</div><div class="line">    __times[key] = @(start);</div><div class="line">&#125;</div><div class="line"><span class="keyword">static</span> inline void debug_stop_of(<span class="type">NSString</span> *key)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (__times) &#123;</div><div class="line">        uint64_t end = mach_absolute_time();</div><div class="line">        uint64_t start = [__times[key] unsignedLongLongValue];</div><div class="line">        <span class="keyword">if</span> (start != <span class="number">0</span>) &#123;</div><div class="line">            uint64_t elapsed = end - start;</div><div class="line">            mach_timebase_info_data_t info;</div><div class="line">            <span class="keyword">if</span> (mach_timebase_info(&amp;info) != <span class="type">KERN_SUCCESS</span>) &#123;</div><div class="line">                printf(<span class="string">"mach_timebase_info failed\n"</span>);</div><div class="line">            &#125;</div><div class="line">            uint64_t nanosecs = elapsed * info.numer / info.denom;</div><div class="line">            uint64_t millisecs = nanosecs / <span class="number">1000000</span>;</div><div class="line"></div><div class="line">            printf(<span class="string">"[DEBUG code rt] %s:%llu ms\n"</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>], millisecs);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            printf(<span class="string">"[DEBUG code rt] %s error: no start\n"</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>批量正则替换的另一种思路</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  perl -i -lpe &apos;s/if \(([^\)].*)\) \&#123;/if $1 \&#123;/g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
-</li>
-<li><p>批量删除空格组成的空行中的空格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  sed -i &apos;&apos; &apos;s/^[[:space:]][[:space:]]*$//g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
-</li>
-<li><p>NAN</p>
-<ul>
-<li><code>A</code>对<code>B</code>除余时，如果<code>B == 0</code> 则会造成NAN，<code>truncatingRemainder(dividingBy:)</code>是<code>swift</code>的方法，也会造成此问题</li>
-<li>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885" target="_blank" rel="external">Objective-C 中 判断 NaN</a>大致记录了一下<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  math.h  #56</span></div><div class="line"></div><div class="line"><span class="meta">#if defined(__GNUC__)</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     __builtin_huge_val()</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    __builtin_huge_valf()</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    __builtin_huge_vall()</span></div><div class="line"><span class="meta">#   define    NAN          __builtin_nanf(<span class="meta-string">"0x7fc00000"</span>)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     1e500</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    1e50f</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    1e5000L</span></div><div class="line"><span class="meta">#   define    NAN          __nan()</span></div><div class="line"><span class="meta">#endif</span></div></pre></td></tr></table></figure>
-</li>
+<li><code>/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</code></li>
+<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</code></li>
 </ul>
-</li>
-</ul>
+<h3 id="开砸"><a href="#开砸" class="headerlink" title="开砸"></a>开砸</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">$ cd ~</div><div class="line">$ cp dumpdecrypted.dylib /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</div><div class="line">$ cd /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</div><div class="line">$ DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</div><div class="line">mach-o decryption dumper</div><div class="line"></div><div class="line">DISCLAIMER: This tool is only meant for security research purposes, not for application crackers.</div><div class="line"></div><div class="line">[+] detected 64bit ARM binary in memory.</div><div class="line">[+] offset to cryptid found: @0x1000c0ca8(from 0x1000c0000) = ca8</div><div class="line">[+] Found encrypted data at address 00004000 of length 51200000 bytes - type 1.</div><div class="line">[+] Opening /private/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat for reading.</div><div class="line">[+] Reading header</div><div class="line">[+] Detecting header type</div><div class="line">[+] Executable is a plain MACH-O image</div><div class="line">[+] Opening WeChat.decrypted for writing.</div><div class="line">[+] Copying the not encrypted start of the file</div><div class="line">[+] Dumping the decrypted data into the file</div><div class="line">[+] Copying the not encrypted remainder of the file</div><div class="line">[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset ca8</div><div class="line">[+] Closing original file</div><div class="line">[+] Closing dump file</div><div class="line">$ ls</div><div class="line">00000000000000000000000000000000  LocalInfo.lst  MMResourceMgr    MMappedKV  MemoryStat  SMReport.dat  SafeMode.dat  WeChat.decrypted  dumpdecrypted.dylib  heavy_user_id_mapping.dat</div><div class="line">$ ls WeChat.decrypted</div><div class="line">WeChat.decrypted</div><div class="line">$ pwd</div><div class="line">/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents</div></pre></td></tr></table></figure>
+<p>最后得到文件:</p>
 <ul>
-<li>另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//  math.h  #178</span></div><div class="line"></div><div class="line"><span class="meta">#define isnan(x)                                                         \</span></div><div class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</div><div class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</div><div class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</div></pre></td></tr></table></figure>
-</li>
+<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted</code></li>
 </ul>
+<h3 id="将-decrypted拷贝出来"><a href="#将-decrypted拷贝出来" class="headerlink" title="将*.decrypted拷贝出来"></a>将<code>*.decrypted</code>拷贝出来</h3><p>我这里直接使用<code>scp</code>吧～。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ cd /Users/Madordie/Desktop/Madordie/iOS/xxx</div><div class="line">$ scp root@10.12.14.16:/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted .</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">WeChat.decrypted                              100%   61MB   4.7MB/s   00:12</div><div class="line">$ ls WeChat.decrypted</div><div class="line">WeChat.decrypted</div></pre></td></tr></table></figure>
+<p>至此在主机上得到：</p>
 <ul>
-<li><p>论项目架构设计的重要性 </p>
-<ul>
-<li>规范化</li>
-<li>筛选的坑 </li>
-<li>常见布局BUG </li>
-<li>线程安全</li>
+<li><code>/Users/Madordie/Desktop/Madordie/iOS/xxx/WeChat.decrypted</code></li>
 </ul>
-</li>
-<li><p>百度地图的坑</p>
-<ul>
-<li>设置经纬度缓慢</li>
-<li>刷新缓慢</li>
-</ul>
-</li>
-<li><p>选择图片时候默认方法选择不到系统的云端图片，但是默认单张选择器却可以！</p>
-<ul>
-<li>16G手机存储空间不够，图片转到了云端，会出现相册中的照片无法选择的情况</li>
-</ul>
-</li>
-<li><p>无埋点技术的讨论</p>
-</li>
-<li><p>多个window的显示、删除、操作问题</p>
-</li>
-<li><p>使用HTTP架设日志实时显示系统</p>
-</li>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>为什么将<code>dumpdecrypted.dylib</code>  <code>copy</code> 至<code>*/Documents/</code>下？<br>  ：别的目录没有权限～～（<code>dumpdecrypted.dylib: stat() failed with errno=1</code> ）</li>
 </ul>
 
       
@@ -474,18 +469,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/ui-source-and-code-decoupling/" rel="next" title="UI素材与代码解耦的讨论与思考">
-                <i class="fa fa-chevron-left"></i> UI素材与代码解耦的讨论与思考
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/about-project-tableview/" rel="prev" title="项目中的UITableView">
-                项目中的UITableView <i class="fa fa-chevron-right"></i>
+              <a href="/reverse-ios-ssh/" rel="prev" title="iOS逆向-设备ssh免密登录">
+                iOS逆向-设备ssh免密登录 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,8 +537,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -653,6 +653,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><span class="nav-number">2.1.</span> <span class="nav-text">制作并上传dumpdecrypted.dylib （已经OK的可忽略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#制作"><span class="nav-number">2.1.1.</span> <span class="nav-text">制作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传"><span class="nav-number">2.1.2.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录进越狱设备"><span class="nav-number">2.2.</span> <span class="nav-text">登录进越狱设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到可执行文件路径"><span class="nav-number">2.3.</span> <span class="nav-text">找到可执行文件路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开砸"><span class="nav-number">2.4.</span> <span class="nav-text">开砸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将-decrypted拷贝出来"><span class="nav-number">2.5.</span> <span class="nav-text">将*.decrypted拷贝出来</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -791,9 +807,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://madordie.github.io/note/';
-          this.page.identifier = 'note/';
-          this.page.title = '开发小记';
+          this.page.url = 'https://madordie.github.io/reverse-ios-dump-decrypted/';
+          this.page.identifier = 'reverse-ios-dump-decrypted/';
+          this.page.title = 'iOS逆向-砸壳';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://madordie.disqus.com/embed.js';
