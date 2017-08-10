@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/reverse-ios-dump-decrypted/</loc>
+    
+    <lastmod>2017-08-10T09:34:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/reverse-ios-class-dump/</loc>
     
     <lastmod>2017-08-10T06:12:47.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://madordie.github.io/swiftgg-unowned-or-weak-lifetime-and-performance/</loc>
     
     <lastmod>2017-08-10T06:12:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/reverse-ios-dump-decrypted/</loc>
-    
-    <lastmod>2017-08-10T04:10:43.000Z</lastmod>
     
   </url>
   

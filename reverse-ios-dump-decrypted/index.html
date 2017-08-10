@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="前提 越狱设备 Cydia中搜索cycript并安装">
+<meta name="description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别进行安装尝试 使用cycript进行砸壳准备 Cydia中搜索cycript并安装 ">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS逆向-砸壳">
+<meta property="og:title" content="iOS逆向-砸壳(cycript/clutch)">
 <meta property="og:url" content="https://madordie.github.io/reverse-ios-dump-decrypted/index.html">
 <meta property="og:site_name" content="Keith's Blog">
-<meta property="og:description" content="前提 越狱设备 Cydia中搜索cycript并安装">
-<meta property="og:updated_time" content="2017-08-10T04:10:43.000Z">
+<meta property="og:description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别进行安装尝试 使用cycript进行砸壳准备 Cydia中搜索cycript并安装 ">
+<meta property="og:updated_time" content="2017-08-10T09:34:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS逆向-砸壳">
-<meta name="twitter:description" content="前提 越狱设备 Cydia中搜索cycript并安装">
+<meta name="twitter:title" content="iOS逆向-砸壳(cycript/clutch)">
+<meta name="twitter:description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别进行安装尝试 使用cycript进行砸壳准备 Cydia中搜索cycript并安装 ">
 
 
 
@@ -133,7 +133,7 @@
 
 
 
-  <title> iOS逆向-砸壳 | Keith's Blog </title>
+  <title> iOS逆向-砸壳(cycript/clutch) | Keith's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -327,7 +327,7 @@
             
             
               
-                iOS逆向-砸壳
+                iOS逆向-砸壳(cycript/clutch)
               
             
           </h1>
@@ -422,9 +422,13 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
 <li>越狱设备</li>
-<li><code>Cydia</code>中搜索<code>cycript</code>并安装</li>
+</ul>
+<p>目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～</p>
+<p>下面分别进行安装尝试</p>
+<h1 id="使用cycript进行砸壳"><a href="#使用cycript进行砸壳" class="headerlink" title="使用cycript进行砸壳"></a>使用cycript进行砸壳</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><code>Cydia</code>中搜索<code>cycript</code>并安装 </li>
 </ul>
 <a id="more"></a>
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><a href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略" class="headerlink" title="制作并上传dumpdecrypted.dylib （已经OK的可忽略"></a>制作并上传<code>dumpdecrypted.dylib</code> （已经OK的可忽略</h3><h4 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h4><p>目前我制作目录暂时在<code>~/Desktop</code>。</p>
@@ -457,6 +461,30 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li>为什么将<code>dumpdecrypted.dylib</code>  <code>copy</code> 至<code>*/Documents/</code>下？<br>  ：别的目录没有权限～～（<code>dumpdecrypted.dylib: stat() failed with errno=1</code> ）</li>
 </ul>
+<h1 id="使用clutch进行砸壳"><a href="#使用clutch进行砸壳" class="headerlink" title="使用clutch进行砸壳"></a>使用clutch进行砸壳</h1><h2 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h2><h3 id="下载上传clutch-无须重复做"><a href="#下载上传clutch-无须重复做" class="headerlink" title="下载上传clutch(无须重复做)"></a>下载上传clutch(无须重复做)</h3><p><code>clutch</code>可以从<a href="https://github.com/KJCracks/Clutch" target="_blank" rel="external">https://github.com/KJCracks/Clutch</a>下载编译。</p>
+<p>当然也可以从<a href="https://github.com/KJCracks/Clutch/releases" target="_blank" rel="external">https://github.com/KJCracks/Clutch/releases</a>直接下载。</p>
+<p>目前下载到目录<code>~/Clutch-2.0.4</code></p>
+<p>上传到设备：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cd ~</div><div class="line">$ scp Clutch-2.0.4 root@10.12.14.16:/usr/bin/</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">Clutch-2.0.4                                  100% 1204KB   4.7MB/s   00:00</div></pre></td></tr></table></figure>
+<h3 id="登录进越狱设备-1"><a href="#登录进越狱设备-1" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
+<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="https://madordie.github.io/reverse-ios-ssh/">配置传送门</a></p>
+<h3 id="修改权限"><a href="#修改权限" class="headerlink" title="修改权限"></a>修改权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cd ~</div><div class="line">$ cd /usr/bin</div><div class="line">$ mv Clutch-2.0.4 clutch</div><div class="line">$ chmod +x clutch</div></pre></td></tr></table></figure>
+<h3 id="砸壳"><a href="#砸壳" class="headerlink" title="砸壳"></a>砸壳</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ clutch -i</div><div class="line">Installed apps:</div><div class="line">1:   钉钉 &lt;com.laiwang.DingTalk&gt;</div><div class="line">2:   韩剧TV-最新热门韩剧大全 &lt;com.baoyun.hanju&gt;</div><div class="line">3:   PG Client - a better client for dribbble &lt;com.az.azdribbble&gt;</div><div class="line">4:   窝牛－设计装修我们的家 &lt;com.lingduohome.acorn&gt;</div><div class="line">$ clutch -d 1</div><div class="line">com.laiwang.DingTalk contains watchOS 2 compatible application. It&apos;s not possible to dump watchOS 2 apps with Clutch 2.0.4 at this moment.</div><div class="line">Zipping DingTalk.app</div><div class="line">ASLR slide: 0x10001c000</div><div class="line">Dumping &lt;DingTalk&gt; (arm64)</div><div class="line">Patched cryptid (64bit segment)</div><div class="line">Writing new checksum</div><div class="line">DONE: /private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</div><div class="line">Finished dumping com.laiwang.DingTalk in 40.6 seconds</div><div class="line">$</div></pre></td></tr></table></figure>
+<p>生成最终路径:</p>
+<ul>
+<li><code>/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</code></li>
+</ul>
+<h3 id="传至本地"><a href="#传至本地" class="headerlink" title="传至本地"></a>传至本地</h3><p>注意路径中有<code>()</code>这样的字符，需要转义一下。如下：</p>
+<p>在本地终端中使用<code>scp</code>拉取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ scp root@10.12.14.16:&apos;/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa&apos; .</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ip 100%   48MB   3.6MB/s   00:13</div><div class="line">$ ls com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa</div><div class="line">com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</div><div class="line">$ pwd</div><div class="line">/Users/Madordie/Desktop/Madordie/ios-reverse</div></pre></td></tr></table></figure>
+<p>至此在主机上得到：</p>
+<ul>
+<li><code>/Users/Madordie/Desktop/Madordie/ios-reverse/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa</code></li>
+</ul>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>并不是每一个都可以支持这种工具砸壳，失败了用第一种试试。。。</li>
+</ul>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>目前发现这两种砸壳工具。但是并不是每一个APP都可以使用2种工具。有的只有一个有效，有的两个都有效，还有一种两个都失败的😂</p>
 
       
     </div>
@@ -691,7 +719,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><span class="nav-number">2.1.</span> <span class="nav-text">制作并上传dumpdecrypted.dylib （已经OK的可忽略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#制作"><span class="nav-number">2.1.1.</span> <span class="nav-text">制作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传"><span class="nav-number">2.1.2.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录进越狱设备"><span class="nav-number">2.2.</span> <span class="nav-text">登录进越狱设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到可执行文件路径"><span class="nav-number">2.3.</span> <span class="nav-text">找到可执行文件路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开砸"><span class="nav-number">2.4.</span> <span class="nav-text">开砸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将-decrypted拷贝出来"><span class="nav-number">2.5.</span> <span class="nav-text">将*.decrypted拷贝出来</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用cycript进行砸壳"><span class="nav-number">2.</span> <span class="nav-text">使用cycript进行砸壳</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">2.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><span class="nav-number">2.2.1.</span> <span class="nav-text">制作并上传dumpdecrypted.dylib （已经OK的可忽略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#制作"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">制作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录进越狱设备"><span class="nav-number">2.2.2.</span> <span class="nav-text">登录进越狱设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到可执行文件路径"><span class="nav-number">2.2.3.</span> <span class="nav-text">找到可执行文件路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开砸"><span class="nav-number">2.2.4.</span> <span class="nav-text">开砸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将-decrypted拷贝出来"><span class="nav-number">2.2.5.</span> <span class="nav-text">将*.decrypted拷贝出来</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用clutch进行砸壳"><span class="nav-number">3.</span> <span class="nav-text">使用clutch进行砸壳</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤-1"><span class="nav-number">3.1.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载上传clutch-无须重复做"><span class="nav-number">3.1.1.</span> <span class="nav-text">下载上传clutch(无须重复做)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录进越狱设备-1"><span class="nav-number">3.1.2.</span> <span class="nav-text">登录进越狱设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改权限"><span class="nav-number">3.1.3.</span> <span class="nav-text">修改权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#砸壳"><span class="nav-number">3.1.4.</span> <span class="nav-text">砸壳</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传至本地"><span class="nav-number">3.1.5.</span> <span class="nav-text">传至本地</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-1"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
             
 
           </div>
@@ -837,7 +865,7 @@
         var disqus_config = function () {
           this.page.url = 'https://madordie.github.io/reverse-ios-dump-decrypted/';
           this.page.identifier = 'reverse-ios-dump-decrypted/';
-          this.page.title = 'iOS逆向-砸壳';
+          this.page.title = 'iOS逆向-砸壳(cycript/clutch)';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://madordie.disqus.com/embed.js';
