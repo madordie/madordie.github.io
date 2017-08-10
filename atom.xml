@@ -58,17 +58,17 @@
     <link href="https://madordie.github.io/reverse-ios-dump-decrypted/"/>
     <id>https://madordie.github.io/reverse-ios-dump-decrypted/</id>
     <published>2017-08-09T12:31:50.000Z</published>
-    <updated>2017-08-10T09:34:00.000Z</updated>
+    <updated>2017-08-10T09:44:59.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
 <li>越狱设备</li>
 </ul>
 <p>目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～</p>
-<p>下面分别进行安装尝试</p>
+<p>下面分别对<code>cycript</code>、<code>clutch</code>进行砸壳:</p>
+<a id="more"></a>
 <h1 id="使用cycript进行砸壳"><a href="#使用cycript进行砸壳" class="headerlink" title="使用cycript进行砸壳"></a>使用cycript进行砸壳</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
 <li><code>Cydia</code>中搜索<code>cycript</code>并安装 </li>
 </ul>
-<a id="more"></a>
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><a href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略" class="headerlink" title="制作并上传dumpdecrypted.dylib （已经OK的可忽略"></a>制作并上传<code>dumpdecrypted.dylib</code> （已经OK的可忽略</h3><h4 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h4><p>目前我制作目录暂时在<code>~/Desktop</code>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/stefanesser/dumpdecrypted.git ~/Desktop</div><div class="line">$ cd ～／Desktop/dumpdecrypted</div><div class="line">$ make</div><div class="line">$ ls dumpdecrypted.dylib</div></pre></td></tr></table></figure>
 <p>没什么错误的话，即得<code>dumpdecrypted.dylib</code>。</p>
@@ -131,10 +131,7 @@
 &lt;li&gt;越狱设备&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～&lt;/p&gt;
-&lt;p&gt;下面分别进行安装尝试&lt;/p&gt;
-&lt;h1 id=&quot;使用cycript进行砸壳&quot;&gt;&lt;a href=&quot;#使用cycript进行砸壳&quot; class=&quot;headerlink&quot; title=&quot;使用cycript进行砸壳&quot;&gt;&lt;/a&gt;使用cycript进行砸壳&lt;/h1&gt;&lt;h2 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;headerlink&quot; title=&quot;准备&quot;&gt;&lt;/a&gt;准备&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Cydia&lt;/code&gt;中搜索&lt;code&gt;cycript&lt;/code&gt;并安装 &lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;下面分别对&lt;code&gt;cycript&lt;/code&gt;、&lt;code&gt;clutch&lt;/code&gt;进行砸壳:&lt;/p&gt;
     
     </summary>
     

@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别进行安装尝试 使用cycript进行砸壳准备 Cydia中搜索cycript并安装 ">
+<meta name="description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别对cycript、clutch进行砸壳:">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS逆向-砸壳(cycript/clutch)">
 <meta property="og:url" content="https://madordie.github.io/reverse-ios-dump-decrypted/index.html">
 <meta property="og:site_name" content="Keith's Blog">
-<meta property="og:description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别进行安装尝试 使用cycript进行砸壳准备 Cydia中搜索cycript并安装 ">
-<meta property="og:updated_time" content="2017-08-10T09:34:00.000Z">
+<meta property="og:description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别对cycript、clutch进行砸壳:">
+<meta property="og:updated_time" content="2017-08-10T09:44:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS逆向-砸壳(cycript/clutch)">
-<meta name="twitter:description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别进行安装尝试 使用cycript进行砸壳准备 Cydia中搜索cycript并安装 ">
+<meta name="twitter:description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别对cycript、clutch进行砸壳:">
 
 
 
@@ -426,11 +426,11 @@
 <li>越狱设备</li>
 </ul>
 <p>目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～</p>
-<p>下面分别进行安装尝试</p>
+<p>下面分别对<code>cycript</code>、<code>clutch</code>进行砸壳:</p>
+<a id="more"></a>
 <h1 id="使用cycript进行砸壳"><a href="#使用cycript进行砸壳" class="headerlink" title="使用cycript进行砸壳"></a>使用cycript进行砸壳</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
 <li><code>Cydia</code>中搜索<code>cycript</code>并安装 </li>
 </ul>
-<a id="more"></a>
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><a href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略" class="headerlink" title="制作并上传dumpdecrypted.dylib （已经OK的可忽略"></a>制作并上传<code>dumpdecrypted.dylib</code> （已经OK的可忽略</h3><h4 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h4><p>目前我制作目录暂时在<code>~/Desktop</code>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/stefanesser/dumpdecrypted.git ~/Desktop</div><div class="line">$ cd ～／Desktop/dumpdecrypted</div><div class="line">$ make</div><div class="line">$ ls dumpdecrypted.dylib</div></pre></td></tr></table></figure>
 <p>没什么错误的话，即得<code>dumpdecrypted.dylib</code>。</p>
