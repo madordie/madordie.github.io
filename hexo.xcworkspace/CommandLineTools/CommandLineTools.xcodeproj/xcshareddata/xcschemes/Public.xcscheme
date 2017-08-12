@@ -20,6 +20,20 @@
                ReferencedContainer = "container:CommandLineTools.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "32F48C221F3E9D7A00434955"
+               BuildableName = "Backup"
+               BlueprintName = "Backup"
+               ReferencedContainer = "container:CommandLineTools.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
