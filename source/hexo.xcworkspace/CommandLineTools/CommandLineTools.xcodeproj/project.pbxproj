@@ -291,7 +291,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../../\nhexo d -g\ngit commit -am \"public backup\"";
+			shellScript = "cd ../../../\nhexo d -g";
 		};
 /* End PBXShellScriptBuildPhase section */
 
