@@ -1,5 +1,5 @@
 ---
-title: iOS逆向-砸壳
+title: iOS逆向-砸壳(cycript/clutch)
 date: 2017-08-09 20:31:50
 tags:
 categories:
@@ -7,12 +7,21 @@ categories:
     - 逆向
 ---
 
-## 前提
+# 准备工作
 
 - 越狱设备
-- `Cydia`中搜索`cycript`并安装
+
+目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～
+
+下面分别对`cycript`、`clutch`进行砸壳:
 
 <!--more-->
+
+# 使用cycript进行砸壳
+
+##  准备
+
+- `Cydia`中搜索`cycript`并安装 
 
 ## 步骤
 
@@ -103,8 +112,6 @@ DISCLAIMER: This tool is only meant for security research purposes, not for appl
 [+] Setting the LC_ENCRYPTION_INFO->cryptid to 0 at offset ca8
 [+] Closing original file
 [+] Closing dump file
-$ ls
-00000000000000000000000000000000  LocalInfo.lst  MMResourceMgr    MMappedKV  MemoryStat  SMReport.dat  SafeMode.dat  WeChat.decrypted  dumpdecrypted.dylib  heavy_user_id_mapping.dat
 $ ls WeChat.decrypted
 WeChat.decrypted
 $ pwd
@@ -134,3 +141,91 @@ WeChat.decrypted
 
 - 为什么将`dumpdecrypted.dylib`  `copy` 至`*/Documents/`下？
     ：别的目录没有权限～～（`dumpdecrypted.dylib: stat() failed with errno=1` ）
+
+# 使用clutch进行砸壳
+
+## 步骤
+
+### 下载上传clutch(无须重复做)
+
+`clutch`可以从[https://github.com/KJCracks/Clutch](https://github.com/KJCracks/Clutch)下载编译。
+
+当然也可以从[https://github.com/KJCracks/Clutch/releases](https://github.com/KJCracks/Clutch/releases)直接下载。
+
+目前下载到目录`~/Clutch-2.0.4`
+
+上传到设备：
+
+```shell
+$ cd ~
+$ scp Clutch-2.0.4 root@10.12.14.16:/usr/bin/
+root@10.12.14.16's password:
+Clutch-2.0.4                                  100% 1204KB   4.7MB/s   00:00
+```
+
+### 登录进越狱设备
+
+可以使用`ssh root@IP`进行登录。
+
+当然也可以使用`ssh ipad`，这样免密登录登录。 [配置传送门](https://madordie.github.io/reverse-ios-ssh/)
+
+### 修改权限
+
+```shell
+$ cd ~
+$ cd /usr/bin
+$ mv Clutch-2.0.4 clutch
+$ chmod +x clutch
+```
+
+### 砸壳
+
+```shell
+$ clutch -i
+Installed apps:
+1:   钉钉 <com.laiwang.DingTalk>
+2:   韩剧TV-最新热门韩剧大全 <com.baoyun.hanju>
+3:   PG Client - a better client for dribbble <com.az.azdribbble>
+4:   窝牛－设计装修我们的家 <com.lingduohome.acorn>
+$ clutch -d 1
+com.laiwang.DingTalk contains watchOS 2 compatible application. It's not possible to dump watchOS 2 apps with Clutch 2.0.4 at this moment.
+Zipping DingTalk.app
+ASLR slide: 0x10001c000
+Dumping <DingTalk> (arm64)
+Patched cryptid (64bit segment)
+Writing new checksum
+DONE: /private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa
+Finished dumping com.laiwang.DingTalk in 40.6 seconds
+$
+```
+
+生成最终路径:
+
+- `/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa`
+
+### 传至本地
+
+注意路径中有`()`这样的字符，需要转义一下。如下：
+
+在本地终端中使用`scp`拉取：
+
+```shell
+$ scp root@10.12.14.16:'/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa' .
+root@10.12.14.16's password:
+com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ip 100%   48MB   3.6MB/s   00:13
+$ ls com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa
+com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa
+$ pwd
+/Users/Madordie/Desktop/Madordie/ios-reverse
+```
+至此在主机上得到：
+
+- `/Users/Madordie/Desktop/Madordie/ios-reverse/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa`
+
+## 总结
+
+- 并不是每一个都可以支持这种工具砸壳，失败了用第一种试试。。。
+
+# 最后
+
+目前发现这两种砸壳工具。但是并不是每一个APP都可以使用2种工具。有的只有一个有效，有的两个都有效，还有一种两个都失败的😂

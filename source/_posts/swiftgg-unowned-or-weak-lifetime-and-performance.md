@@ -13,6 +13,8 @@ categories:
 
 本文首先对循环引用的基础知识做一个简要介绍，然后会分析 Swift 源代码的一些片段，讲解 unowned 和 weak 在生命周期和性能上的差异点，希望看完本文以后，在的使用场景中，能使用正确的弱引用类型。
 
+<!--more-->
+
 ## 目录:
 - 基础知识
 - 问题来了: unowened 还是 weak?
@@ -657,3 +659,7 @@ HeapObject *swift::swift_weakLoadStrong(WeakReference *ref) {
 5、Mike Ash 在他的 Friday Q&A 中的一篇文章中讨论了如何实现 weak 引用的一种实践方法，这种方法与目前 Swift 的方法对比起来有一些过时，但是其中的解释依然值得参考。
 
 > 本文由 SwiftGG 翻译组翻译，已经获得作者翻译授权，最新文章请访问 http://swift.gg。
+
+-----
+
+文章转自 [SwiftGG](http://swift.gg/2017/05/16/unowned-or-weak-lifetime-and-performance/)
