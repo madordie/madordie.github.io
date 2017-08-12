@@ -14,20 +14,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "32F48C2E1F3E9E1D00434955"
-               BuildableName = "Public"
-               BlueprintName = "Public"
-               ReferencedContainer = "container:CommandLineTools.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "32F48C221F3E9D7A00434955"
                BuildableName = "Backup"
                BlueprintName = "Backup"
@@ -47,9 +33,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "32F48C2E1F3E9E1D00434955"
-            BuildableName = "Public"
-            BlueprintName = "Public"
+            BlueprintIdentifier = "32F48C221F3E9D7A00434955"
+            BuildableName = "Backup"
+            BlueprintName = "Backup"
             ReferencedContainer = "container:CommandLineTools.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -71,9 +57,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "32F48C2E1F3E9E1D00434955"
-            BuildableName = "Public"
-            BlueprintName = "Public"
+            BlueprintIdentifier = "32F48C221F3E9D7A00434955"
+            BuildableName = "Backup"
+            BlueprintName = "Backup"
             ReferencedContainer = "container:CommandLineTools.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -90,9 +76,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "32F48C2E1F3E9E1D00434955"
-            BuildableName = "Public"
-            BlueprintName = "Public"
+            BlueprintIdentifier = "32F48C221F3E9D7A00434955"
+            BuildableName = "Backup"
+            BlueprintName = "Backup"
             ReferencedContainer = "container:CommandLineTools.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
