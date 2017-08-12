@@ -1,0 +1,1151 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Keith's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。 作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。 当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目中的UITableView">
+<meta property="og:url" content="https://madordie.github.io/about-project-tableview/index.html">
+<meta property="og:site_name" content="Keith's Blog">
+<meta property="og:description" content="前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。 作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。 当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修">
+<meta property="og:updated_time" content="2017-05-16T04:23:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="项目中的UITableView">
+<meta name="twitter:description" content="前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。 作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。 当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://madordie.github.io/about-project-tableview/"/>
+
+
+
+
+
+  <title> 项目中的UITableView | Keith's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?26275fd2191bb3c1f8248947481e9ac4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Keith's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不疯魔,不成活</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/about-project-tableview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keith">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keith's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                项目中的UITableView
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-27T13:30:45+08:00">
+                2016-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/牢骚/" itemprop="url" rel="index">
+                    <span itemprop="name">牢骚</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/about-project-tableview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="about-project-tableview/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/about-project-tableview/" class="leancloud_visitors" data-flag-title="项目中的UITableView">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。</p>
+<p>作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。</p>
+<p>当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修复上线的时候，对于不同的代码风格，需要找到问题的关键代码，这个过程是撕心裂肺的，但是如果同一套代码风格，心中就会有一个大致的位置，去修改时候就会比较快速的定位问题。</p>
+<a id="more"></a>
+<h1 id="从协议入手"><a href="#从协议入手" class="headerlink" title="从协议入手"></a>从协议入手</h1><p><code>UITableView</code>是项目中非常常见的iOS高级控件，在页面中所有相似的页面几乎都是由该控件进行完成。其广泛运用的不止是使用方便，最主要的是内部的复用优化也是相当给力的。</p>
+<h2 id="协议模式下的UITableView"><a href="#协议模式下的UITableView" class="headerlink" title="协议模式下的UITableView"></a>协议模式下的UITableView</h2><p><code>UITableView</code>是典型的 <strong>协议-代理模式</strong> ，比例<code>id &lt;UITableViewDataSource&gt; dataSource</code>和<code>id &lt;UITableViewDelegate&gt; delegate</code>，所以使用对于这种比较规整的列表来说把协议继续扩展到下一级也是可以的。</p>
+<p>为了统一<code>UITableView.dataSource</code>和<code>UITableView.delegate</code>，构建如下协议：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  直接填充Cell的cellModel</span></div><div class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">CellModelProtocol</span> &lt;<span class="title">NSObject</span>&gt;</span></div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)cellClassName;  <span class="comment">//  cellModel绑定的类名</span></div><div class="line">- (<span class="keyword">void</span>)cellModelForCell:(<span class="built_in">UITableViewCell</span> *)cell; <span class="comment">//  cellModel填充上面绑定的cell</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>那么只需要在代理中做如下设置:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#pragma mark <span class="meta-string">&lt;UITableViewDelegate, UITableViewDataSource&gt;</span></span></div><div class="line">- (<span class="built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="built_in">UITableView</span>*)tableView</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line">- (<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span>*)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.viewModel.dataSource.count;</div><div class="line">&#125;</div><div class="line">- (<span class="built_in">UITableViewCell</span>*)tableView:(<span class="built_in">UITableView</span>*)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span>*)indexPath</div><div class="line">&#123;</div><div class="line">      <span class="keyword">id</span>&lt;CellModelProtocol&gt; cellModel = <span class="keyword">self</span>.viewModel.dataSource[indexPath.row];</div><div class="line">      <span class="built_in">UITableViewCell</span>* cell = [tableView dequeueReusableCellWithIdentifier:[cellModel cellClassName]];</div><div class="line">      cell.frame = tableView.bounds;</div><div class="line">      [cellModel cellModelForCell:cell];</div><div class="line">      [cell sizeToFit];</div><div class="line">      <span class="keyword">return</span> cell;</div><div class="line">&#125;</div><div class="line">- (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span>*)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span>*)indexPath</div><div class="line">&#123;</div><div class="line">      <span class="keyword">id</span>&lt;CellModelProtocol&gt; cellModel = <span class="keyword">self</span>.viewModel.dataSource[indexPath.row];</div><div class="line">      <span class="built_in">UITableViewCell</span>* cell = [tableView ktj_cacheHeightCellForReuseIDFA:[cellModel cellClassName]];</div><div class="line">      [cellModel cellModelForCell:cell];</div><div class="line">      <span class="keyword">return</span> [cell sizeThatFits:tableView.bounds.size].height;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而在cell中，默认在<code>sizeThatFits:</code>中进行布局的设置和算高即可。如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  xxxCell.m</span></div><div class="line"></div><div class="line">- (<span class="built_in">CGSize</span>)sizeThatFits:(<span class="built_in">CGSize</span>)size &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">CGRect</span> frame = <span class="built_in">CGRectZero</span>;</div><div class="line">    <span class="comment">//  根据Cell的实际内容进行布局并设置高度</span></div><div class="line">    frame.origin = <span class="built_in">CGPointMake</span>(<span class="number">10</span>, <span class="number">15</span>);</div><div class="line">    frame.size = [<span class="keyword">self</span>.infoLabel sizeThatFits:<span class="built_in">CGSizeMake</span>(size.width-frame.origin.x*<span class="number">2</span>, size.height)];</div><div class="line">    <span class="keyword">self</span>.infoLabel.frame = frame;</div><div class="line">    </div><div class="line">    size.height = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span>.infoLabel.frame)+frame.origin.y;</div><div class="line">    <span class="keyword">return</span> size;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果cell采用autolayout，则计算采用<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell/blob/e3ee86ce419d18d3ff735056f1474f2863e43003/Classes/UITableView%2BFDTemplateLayoutCell.m" target="_blank" rel="external">UITableView-FDTemplateLayoutCell</a>的计算方法。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UITableViewCell</span> (<span class="title">KTJCellAutoLayoutForSize</span>)</span></div><div class="line"><span class="comment">//  autolout布局计算高度</span></div><div class="line">- (<span class="built_in">CGSize</span>)ktj_ALCellSizeThatFits:(<span class="built_in">CGSize</span>)size &#123;</div><div class="line">    <span class="comment">// Add a hard width constraint to make dynamic content views (like labels) expand vertically instead</span></div><div class="line">    <span class="comment">// of growing horizontally, in a flow-layout manner.</span></div><div class="line">    <span class="built_in">NSLayoutConstraint</span> *tempWidthConstraint =</div><div class="line">    [<span class="built_in">NSLayoutConstraint</span> constraintWithItem:<span class="keyword">self</span>.contentView</div><div class="line">                                 attribute:<span class="built_in">NSLayoutAttributeWidth</span></div><div class="line">                                 relatedBy:<span class="built_in">NSLayoutRelationEqual</span></div><div class="line">                                    toItem:<span class="literal">nil</span></div><div class="line">                                 attribute:<span class="built_in">NSLayoutAttributeNotAnAttribute</span></div><div class="line">                                multiplier:<span class="number">1.0</span></div><div class="line">                                  constant:size.width];</div><div class="line">    [<span class="keyword">self</span>.contentView addConstraint:tempWidthConstraint];</div><div class="line">    <span class="comment">// Auto layout engine does its math</span></div><div class="line">    size = [<span class="keyword">self</span>.contentView systemLayoutSizeFittingSize:<span class="built_in">UILayoutFittingCompressedSize</span>];</div><div class="line">    size.height += <span class="number">1</span>;</div><div class="line">    [<span class="keyword">self</span>.contentView removeConstraint:tempWidthConstraint];</div><div class="line">    <span class="keyword">return</span> size;</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>另外在<code>&lt;UITableViewDelegate, UITableViewDataSource&gt;</code>中只写了1组，只有cell，没有header、footer的情况，如果需要，炮制即可。</p>
+<p>说一下这个其中的<code>ktj_cacheHeightCellForReuseIDFA:</code>类别方法。这个方法是为了算高进行缓存的一个cell，这个cell保存在 <code>NSCache</code>中。所以为了统一，需要在数据初始化时候注册所有的cell。当然你也可以根据类名直接生成，这个自主决定。</p>
+<p>说到算高，需要说一下这其中的<code>dequeueReusableCellWithIdentifier:</code>方法。该方法是从tableView的缓存池中取出指定ID的cell。请注意是 <strong>取出</strong> ，并且<code>UITableView</code>并没有暴露出如何放进缓存池，也没有必要暴露出放进缓存池的方法。</p>
+<p>而且<code>UITableView</code>只有一个地方能够接收Cell那就是<code>tableView:cellForRowAtIndexPath:</code>。所以请保证<code>dequeueReusableCellWithIdentifier:</code>取出的方法 <strong>需要通过<code>tableView:cellForRowAtIndexPath:</code>返回给<code>UITableView</code></strong> 。这就是我上面说的<code>ktj_cacheHeightCellForReuseIDFA:</code>方法为何要做一个 cache去缓存我取出的cell，目的是为了减少cell的浪费。</p>
+<p>同理，对于<code>UITableView</code>的<code>headerView</code>、<code>footerView</code>来说，可以炮制以上协议、方法。不再赘述</p>
+<p>PS.</p>
+<ol>
+<li><a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell" target="_blank" rel="external">UITableView-FDTemplateLayoutCell</a>: <a href="https://github.com/sunnyxx" target="_blank" rel="external">sunnyxx</a>打造的优化UITableView的一个库，6000的star，很赞。</li>
+</ol>
+<h1 id="规范化的代码风格"><a href="#规范化的代码风格" class="headerlink" title="规范化的代码风格"></a>规范化的代码风格</h1><p>对于多人开发，最崩溃的事情就要数去读别人的代码。就算不是多人开发，接手别人的代码也是让人最崩溃的事情。如果有不用考虑这件事的叫我！</p>
+<p>不同的公司可以有不同的代码风格，但是一个公司的代码风格需要保持一致，这样就不会出现一人请假，无人能接受项目的尴尬局面，就算能接，也是需要为了加一个逻辑判断，需要花费很大的精力去处理。</p>
+<p>至于其中的代码不统一的坑，恐怕要等踩过才知道吧😂。</p>
+<h1 id="业务逻辑的拆分"><a href="#业务逻辑的拆分" class="headerlink" title="业务逻辑的拆分"></a>业务逻辑的拆分</h1><p>对于复杂的业务逻辑，对其拆分是非常重要的，不拆分很可能写出来的代码一个文件 &gt;1000 行。复杂的业务逻辑对于写出来需要一气呵成，修改起来也就出现了牵一发动全身(虽然拆分完成之后可能也会关键逻辑代码不可拆分，但是会好很多)。</p>
+<h2 id="筛选重构"><a href="#筛选重构" class="headerlink" title="筛选重构"></a>筛选重构</h2><p>筛选主要处理的是筛选项，针对众多筛选条件拆分为不同的业务逻辑模块是必须的。遵照拆分的原则，于是乎根据UI划分出来位置、价格、户型、筛选、排序这么几个模块。针对每个模块自行处理选中数据、UI展示。对外只暴露选中项输入和选中回调。</p>
+<p>对于每个数据大致都可分为一个列表，然后可选中1项或多项。于是乎，这个代码如果不拉出来是要写好多次的，拉出来，但是选中需要把选中的逻辑扔出来，方便自定义。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/note/" rel="next" title="开发小记">
+                <i class="fa fa-chevron-left"></i> 开发小记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/about-reprint-article/" rel="prev" title="关于转载的文章">
+                关于转载的文章 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Keith" />
+          <p class="site-author-name" itemprop="name">Keith</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个热衷于技术的狂热粉</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto:keith_127@126.com" target="_blank" title="Email">
+                  
+                  Email
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/madordie" target="_blank" title="GitHub">
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/madordie" target="_blank" title="微博">
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/madordie/" target="_blank" title="博客园">
+                  
+                  博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://madordie.leanote.com" target="_blank" title="Leanote">
+                  
+                  Leanote
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从协议入手"><span class="nav-number">1.</span> <span class="nav-text">从协议入手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协议模式下的UITableView"><span class="nav-number">1.1.</span> <span class="nav-text">协议模式下的UITableView</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#规范化的代码风格"><span class="nav-number">2.</span> <span class="nav-text">规范化的代码风格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#业务逻辑的拆分"><span class="nav-number">3.</span> <span class="nav-text">业务逻辑的拆分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#筛选重构"><span class="nav-number">3.1.</span> <span class="nav-text">筛选重构</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Keith</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      人次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://madordie.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://madordie.github.io/about-project-tableview/';
+          this.page.identifier = 'about-project-tableview/';
+          this.page.title = '项目中的UITableView';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://madordie.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("2J1SRhOLinnCHVowdOcg2nRx-gzGzoHsz", "urDdiCbFngvx8l3grpAA1VUl");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
