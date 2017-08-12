@@ -42,7 +42,7 @@ assert (os.path.exists(baidu_sitemap) or os.path.exists(
 
 # 从站点地图中读取网址列表
 def getUrls():
-    urls = []
+    urls = ['https://madordie.github.io']
     for _ in sitemap:
         if os.path.exists(_):
             with open(_, "r") as f:
@@ -60,7 +60,6 @@ def getUrls():
 def postUrls(urls):
     urls = set(urls)  # 先去重
     print("一共提取出 %s 个网址" % len(urls))
-    print(urls)
     data = "\n".join(urls)
     return requests.post(url, data=data).text
 
@@ -71,4 +70,3 @@ if __name__ == '__main__':
     result = postUrls(urls)
     print("提交结果：")
     print(result)
-#    msvcrt.getch()

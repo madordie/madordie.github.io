@@ -303,7 +303,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../../\nhexo d -g";
+			shellScript = "cd ../../../\nhexo d -g\npython auto-push-sitemap.py";
 		};
 		32F48C371F3E9F9100434955 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
