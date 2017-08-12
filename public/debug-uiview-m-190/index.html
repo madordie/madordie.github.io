@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,20 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
 
 
 
@@ -68,10 +82,10 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="madordie, keith" />
 
 
 
@@ -82,7 +96,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -108,8 +122,9 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
@@ -133,11 +148,7 @@
 
 
 
-  <title> DEBUG - UIView.h#190 | Keith's Blog </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>DEBUG - UIView.h#190 | Keith's Blog</title>
   
 
 
@@ -157,11 +168,9 @@
 
 
 
+</head>
 
-
-
-
-
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -184,7 +193,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">不疯魔,不成活</p>
+        <h1 class="site-subtitle" itemprop="description">不疯魔,不成活</h1>
       
   </div>
 
@@ -214,18 +223,8 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -235,11 +234,21 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
           </a>
         </li>
       
@@ -271,7 +280,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+      <input autocomplete="off"
              placeholder="搜索..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
@@ -305,13 +314,17 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/debug-uiview-m-190/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keith">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -323,14 +336,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                DEBUG - UIView.h#190
-              
-            
-          </h1>
+          <h2 class="post-title" itemprop="name headline">DEBUG - UIView.h#190</h2>
         
 
         <div class="post-meta">
@@ -378,17 +384,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/debug-uiview-m-190/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="debug-uiview-m-190/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -415,7 +410,9 @@
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -444,33 +441,21 @@
 <h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190</div><div class="line">invalid mode &apos;kCFRunLoopCommonModes&apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</div><div class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</div><div class="line"></div><div class="line">(lldb) bt</div><div class="line">* thread #1: tid = 0x87c18, 0x000000018238c524 libobjc.A.dylib`objc_exception_throw, queue = &apos;com.apple.main-thread&apos;, stop reason = breakpoint 1.2</div><div class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib`objc_exception_throw</div><div class="line">    frame #1: 0x0000000183954094 CoreFoundation`+[NSException raise:format:arguments:] + 104</div><div class="line">    frame #2: 0x00000001843de898 Foundation`-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</div><div class="line">    frame #3: 0x0000000189a7cf9c UIKit`UIViewReportBrokenSuperviewChain + 472</div><div class="line">    frame #4: 0x0000000189a7d658 UIKit`_UIViewTopDownSubtreeTraversal + 1496</div><div class="line">    frame #5: 0x000000018a0f3390 UIKit`-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</div><div class="line">    frame #6: 0x00000001843832ac Foundation`-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</div><div class="line">    frame #7: 0x0000000184382dcc Foundation`-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</div><div class="line">    frame #8: 0x00000001843809e0 Foundation`-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</div><div class="line">    frame #9: 0x000000018989cfdc UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</div><div class="line">    frame #10: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #11: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #12: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #13: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #14: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #15: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #16: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #17: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #18: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #19: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #20: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #21: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #22: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #23: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #24: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #25: 0x00000001898a4bb0 UIKit`-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</div><div class="line">    frame #26: 0x00000001898a4b04 UIKit`-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</div><div class="line">    frame #27: 0x00000001898a4910 UIKit`-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</div><div class="line">    frame #28: 0x00000001897996dc UIKit`-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</div><div class="line">    frame #29: 0x0000000189798d90 UIKit`__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</div><div class="line">    frame #30: 0x0000000189798be8 UIKit`-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</div><div class="line">    frame #31: 0x00000001897a4ad0 UIKit`-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</div><div class="line">    frame #32: 0x00000001897a43bc UIKit`-[UIView(Hierarchy) addSubview:] + 828</div><div class="line">  * frame #33: 0x00000001004f78ec Project_ent`__31-[EsfCommentReportView show]_block_invoke((null)=&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</div><div class="line">    frame #34: 0x00000001897d2b88 UIKit`+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</div><div class="line">    frame #35: 0x00000001897d28e8 UIKit`+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</div><div class="line">    frame #36: 0x00000001004f77a0 Project_ent`-[EsfCommentReportView show](self=0x000000015fe32020, _cmd=&quot;show&quot;) + 492 at EsfCommentReportView.m:291</div><div class="line">    frame #37: 0x0000000100858a04 Project_ent`__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)=&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</div><div class="line">    frame #38: 0x00000001003f93e4 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController=0x000000015fd2e320, sourceType=2, afterCheckOrLogin=0x00000001008588d0, cancelLogin=(null)) + 236 at MyLoginViewController.m:123</div><div class="line">    frame #39: 0x00000001003f92b0 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController=0x000000015fd2e320, afterCheckOrLogin=0x00000001008588d0, cancelLogin=(null)) + 156 at MyLoginViewController.m:114</div><div class="line">    frame #40: 0x00000001003f9124 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController=0x000000015fd2e320, afterCheckOrLogin=0x00000001008588d0) + 120 at MyLoginViewController.m:104</div><div class="line">    frame #41: 0x0000000100858870 Project_ent`-[BuyerAdviserProfileViewController reportAction:](self=0x000000015fd2e320, _cmd=&quot;reportAction:&quot;, button=0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</div><div class="line">    frame #42: 0x00000001897d27b0 UIKit`-[UIApplication sendAction:to:from:forEvent:] + 96</div><div class="line">    frame #43: 0x00000001897d2730 UIKit`-[UIControl sendAction:to:forEvent:] + 80</div><div class="line">    frame #44: 0x00000001897bcbe4 UIKit`-[UIControl _sendActionsForEvents:withEvent:] + 452</div><div class="line">    frame #45: 0x00000001897d201c UIKit`-[UIControl touchesEnded:withEvent:] + 584</div><div class="line">    frame #46: 0x00000001897d1b44 UIKit`-[UIWindow _sendTouchesForEvent:] + 2484</div><div class="line">    frame #47: 0x00000001897ccd8c UIKit`-[UIWindow sendEvent:] + 2988</div><div class="line">    frame #48: 0x000000018979d858 UIKit`-[UIApplication sendEvent:] + 340</div><div class="line">    frame #49: 0x0000000189f8acb8 UIKit`__dispatchPreprocessedEventFromEventQueue + 2736</div><div class="line">    frame #50: 0x0000000189f84720 UIKit`__handleEventQueue + 784</div><div class="line">    frame #51: 0x0000000183902278 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</div><div class="line">    frame #52: 0x0000000183901bc0 CoreFoundation`__CFRunLoopDoSources0 + 524</div><div class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation`__CFRunLoopRun + 804</div><div class="line">    frame #54: 0x000000018382e048 CoreFoundation`CFRunLoopRunSpecific + 444</div><div class="line">    frame #55: 0x00000001852b1198 GraphicsServices`GSEventRunModal + 180</div><div class="line">    frame #56: 0x0000000189808628 UIKit`-[UIApplication _run] + 684</div><div class="line">    frame #57: 0x0000000189803360 UIKit`UIApplicationMain + 208</div><div class="line">    frame #58: 0x0000000100a3db78 Project_ent`main + 460 at main.swift:24</div><div class="line">    frame #59: 0x00000001828105b8 libdyld.dylib`start + 4</div><div class="line">(lldb)</div></pre></td></tr></table></figure>
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
 
       
-        
+      
       
 
       
@@ -498,17 +483,15 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
-      
-        
-<script>
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
       
     </div>
   </div>
@@ -544,6 +527,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -562,18 +546,18 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
+               src="/images/avatar.gif"
                alt="Keith" />
           <p class="site-author-name" itemprop="name">Keith</p>
            
-              <p class="site-description motion-element" itemprop="description">一个热衷于技术的狂热粉</p>
-          
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives">
+              <a href="/archives/">
                 <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -617,37 +601,38 @@
           
             
               <span class="links-of-author-item">
-                <a href="mailto:keith_127@126.com" target="_blank" title="Email">
+                <a href="mailto:keith_127@126.com" target="_blank" title="E-Mail">
                   
-                  Email
+                    
+                      E-Mail
+                    
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="https://github.com/madordie" target="_blank" title="GitHub">
                   
-                  GitHub
+                    
+                      GitHub
+                    
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/madordie" target="_blank" title="微博">
+                <a href="http://www.cnblogs.com/madordie/" target="_blank" title="原博客园">
                   
-                  微博
+                    
+                      原博客园
+                    
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.cnblogs.com/madordie/" target="_blank" title="博客园">
+                <a href="http://madordie.leanote.com" target="_blank" title="原Leanote">
                   
-                  博客园
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://madordie.leanote.com" target="_blank" title="Leanote">
-                  
-                  Leanote
+                    
+                      原Leanote
+                    
                 </a>
               </span>
             
@@ -740,6 +725,12 @@
 </div>
 
 
+
+
+
+
+
+
         
       </div>
     </footer>
@@ -776,6 +767,12 @@
 
 
 
+
+
+
+
+
+
   
   <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
@@ -798,42 +795,40 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
 
 
 
   
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
 
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-    
-      <script id="dsq-count-scr" src="https://madordie.disqus.com/count.js" async></script>
+
+  
+
     
 
     
@@ -867,16 +862,6 @@
 
 
 
-  
-
-
-
-
-
-  
-
-
-
 
 
 
@@ -885,126 +870,317 @@
   <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
+    var isXml = true;
     // Search DB path;
     var search_path = "search.xml";
-    if (search_path.length == 0) {
+    if (search_path.length === 0) {
       search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
     }
     var path = "/" + search_path;
     // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
 
     function proceedsearch() {
       $("body")
         .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
         .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
       $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
     }
+
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
       $.ajax({
         url: path,
-        dataType: "xml",
+        dataType: isXml ? "xml" : "json",
         async: true,
-        success: function( xmlResponse ) {
+        success: function(res) {
           // get the contents from search data
           isfetched = true;
           $('.popup').detach().appendTo('.header-inner');
-          var datas = $( "entry", xmlResponse ).map(function() {
+          var datas = isXml ? $("entry", res).map(function() {
             return {
-              title: $( "title", this ).text(),
+              title: $("title", this).text(),
               content: $("content",this).text(),
-              url: $( "url" , this).text()
+              url: $("url" , this).text()
             };
-          }).get();
-          var $input = document.getElementById(search_id);
-          var $resultContent = document.getElementById(content_id);
-          $input.addEventListener('input', function(){
-            var matchcounts = 0;
-            var str='<ul class=\"search-result-list\">';
-            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-            $resultContent.innerHTML = "";
-            if (this.value.trim().length > 1) {
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
               // perform local searching
               datas.forEach(function(data) {
                 var isMatch = false;
-                var content_index = [];
-                var data_title = data.title.trim().toLowerCase();
-                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                var data_url = decodeURIComponent(data.url);
-                var index_title = -1;
-                var index_content = -1;
-                var first_occur = -1;
-                // only match artiles with not empty titles and contents
-                if(data_title != '') {
-                  keywords.forEach(function(keyword, i) {
-                    index_title = data_title.indexOf(keyword);
-                    index_content = data_content.indexOf(keyword);
-                    if( index_title >= 0 || index_content >= 0 ){
-                      isMatch = true;
-                      if (i == 0) {
-                        first_occur = index_content;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
                       }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
                     }
 
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
                   });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
                 }
+
                 // show search results
+
                 if (isMatch) {
-                  matchcounts += 1;
-                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                  var content = data.content.trim().replace(/<[^>]+>/g,"");
-                  if (first_occur >= 0) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
                     // cut out 100 characters
-                    var start = first_occur - 20;
-                    var end = first_occur + 80;
+                    var start = position - 20;
+                    var end = position + 80;
                     if(start < 0){
                       start = 0;
                     }
-                    if(start == 0){
-                      end = 50;
+                    if (end < position + word.length) {
+                      end = position + word.length;
                     }
                     if(end > content.length){
                       end = content.length;
                     }
-                    var match_content = content.substring(start, end);
-                    // highlight all keywords
-                    keywords.forEach(function(keyword){
-                      var regS = new RegExp(keyword, "gi");
-                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                    });
-
-                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
                   }
-                  str += "</li>";
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
                 }
-              })};
-            str += "</ul>";
-            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-            $resultContent.innerHTML = str;
-          });
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
           proceedsearch();
         }
-      });}
+      });
+    }
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
       e.stopPropagation();
-      if (isfetched == false) {
+      if (isfetched === false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
       } else {
         proceedsearch();
       };
     });
 
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    });
+    $('.popup-btn-close').click(onPopupClose);
     $('.popup').click(function(e){
       e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
     });
   </script>
 
@@ -1015,7 +1191,7 @@
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("2J1SRhOLinnCHVowdOcg2nRx-gzGzoHsz", "urDdiCbFngvx8l3grpAA1VUl");</script>
   <script>
     function showTime(Counter) {
@@ -1120,6 +1296,25 @@
   </script>
 
 
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
 
   
 

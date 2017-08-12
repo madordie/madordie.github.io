@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,20 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
 
 
 
@@ -68,10 +82,10 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="madordie, keith" />
 
 
 
@@ -82,7 +96,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -106,8 +120,9 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
@@ -131,11 +146,7 @@
 
 
 
-  <title> Keith's Blog </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>Keith's Blog - 不疯魔,不成活</title>
   
 
 
@@ -155,11 +166,9 @@
 
 
 
+</head>
 
-
-
-
-
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -184,7 +193,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">不疯魔,不成活</p>
+        <h1 class="site-subtitle" itemprop="description">不疯魔,不成活</h1>
       
   </div>
 
@@ -214,18 +223,8 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -235,11 +234,21 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
           </a>
         </li>
       
@@ -271,7 +280,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+      <input autocomplete="off"
              placeholder="搜索..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
@@ -305,13 +314,17 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/about-reprint-article/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keith">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -323,17 +336,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/about-reprint-article/" itemprop="url">
-                  关于转载的文章
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/about-reprint-article/" itemprop="url">关于转载的文章</a></h2>
         
 
         <div class="post-meta">
@@ -381,17 +386,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/about-reprint-article/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="about-reprint-article/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -418,7 +412,9 @@
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -437,18 +433,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -462,6 +455,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -474,13 +471,17 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/reactivecocoa-ready-to-use/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keith">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -492,17 +493,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/reactivecocoa-ready-to-use/" itemprop="url">
-                  准备食用RAC(ReactiveCocoa)的顾虑
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/reactivecocoa-ready-to-use/" itemprop="url">准备食用RAC(ReactiveCocoa)的顾虑</a></h2>
         
 
         <div class="post-meta">
@@ -561,17 +554,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/reactivecocoa-ready-to-use/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="reactivecocoa-ready-to-use/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -598,7 +580,9 @@
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -617,18 +601,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -642,6 +623,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -654,13 +639,17 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/use-hexo-setup-blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keith">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -672,17 +661,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/use-hexo-setup-blog/" itemprop="url">
-                  使用hexo搭建博客
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/use-hexo-setup-blog/" itemprop="url">使用hexo搭建博客</a></h2>
         
 
         <div class="post-meta">
@@ -730,17 +711,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/use-hexo-setup-blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="use-hexo-setup-blog/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -767,7 +737,9 @@
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -786,18 +758,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -811,6 +780,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -823,13 +796,17 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/about-change-blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keith">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -841,17 +818,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/about-change-blog/" itemprop="url">
-                  博客迁移公告
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/about-change-blog/" itemprop="url">博客迁移公告</a></h2>
         
 
         <div class="post-meta">
@@ -899,17 +868,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/about-change-blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="about-change-blog/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -936,7 +894,9 @@
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -957,18 +917,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -982,6 +939,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -994,13 +955,17 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/about-me/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keith">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1012,17 +977,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/about-me/" itemprop="url">
-                  个人资料页
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/about-me/" itemprop="url">个人资料页</a></h2>
         
 
         <div class="post-meta">
@@ -1047,17 +1004,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/about-me/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="about-me/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1085,7 +1031,9 @@
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1094,73 +1042,69 @@
       
         
           
-            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><ul>
-<li><strong>孙继刚</strong></li>
-<li>坐标: 上海</li>
-<li>QQ: 453870736</li>
-<li>e-mail: <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#101;&#46;&#109;&#97;&#100;&#x6f;&#x72;&#100;&#x69;&#101;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;">&#101;&#46;&#109;&#97;&#100;&#x6f;&#x72;&#100;&#x69;&#101;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;</a></li>
-<li>blog: <a href="https://madordie.github.io">https://madordie.github.io</a></li>
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="基本资料"><a href="#基本资料" class="headerlink" title="基本资料"></a>基本资料</h2><p><strong>孙继刚</strong><br>男/ 1992-9/ 党员/ 汉族<br>QQ: 453870736<br>博客：<a href="https://madordie.github.io">https://madordie.github.io</a><br>GitHub：<a href="https://github.com/madordie" target="_blank" rel="external">https://github.com/madordie</a><br>E-mail: <a href="mailto:keith_127@126.com" target="_blank" rel="external">keith_127@126.com</a></p>
+<h2 id="教育背景"><a href="#教育背景" class="headerlink" title="教育背景"></a>教育背景</h2><p>2011.09-2015.06     南阳理工学院   软件工程(移动设备应用开发方向)       本科</p>
+<p>简介：移动设备应用开发主要面向移动设备所培养的软件工程师。主要分为嵌入式、安卓、iOS三个分支。其中嵌入式系统为主要发展方向，为快速适应市场的需求，同时开设安卓、iOS基础课程。所学课程涵盖软件工程、嵌入式系统等方面。</p>
+<h2 id="专业技能"><a href="#专业技能" class="headerlink" title="专业技能"></a>专业技能</h2><ul>
+<li>擅长C、Objective-C、Swift开发，有较为扎实的iOS环境开发经验。</li>
+<li>熟悉shell、ruby、python、等语言。</li>
+<li>有良好的编程习惯，较强的分析问题、解决问题的能力，并能积极总结所遇到的问题及解决方案。</li>
+<li>对项目整体架构有一定的认识和把控，能够搭建较为适合当前项目发展的架构。</li>
+<li>能够搭建gitlab、Jenkins服务器，并熟练使用Jenkins进行打包、自定义操作、更新iconfont等操作。</li>
+<li>善于制作工具组件提高开发效率，比如：Jenkins打不同环境包、统一更新iconfont、制作sketch自定义填充插件等。</li>
+<li>熟练使用AutoLayout进行代码、IB适配，以及frame的适配。</li>
+<li>熟练使用Cocoapods进行项目拆分、并能够编写部分ruby脚本进行一些自定义操作。</li>
+<li>熟练使用MVVM、MVC、等模式。</li>
+<li>能够使用RxSwift进行响应式编程。</li>
+<li>熟练掌握GCD、NSThread等多线程编程技术。</li>
+<li>熟练掌握SwiftLint的配置以及规则定制。</li>
+<li>熟悉iOS核心动画、CALayer的开发。</li>
+<li>对cocos2d游戏开发有一定的了解。</li>
 </ul>
-<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><ul>
-<li>深圳房多多网络科技有限公司<ul>
-<li>2015.8.24 - 今</li>
-<li>为IM选择较为稳定、适合快速迭代的IMSDK。</li>
-<li>负责C端IM模块的底层设计与开发，为IM业务逻辑提供数据支持。</li>
-<li>降低iOS的整体crash，分析并解决较为隐蔽的crash。</li>
-<li>负责C端主要项目模块，比如：自定义刷新动画组件、IM定制缓存数据库、等。</li>
-<li>为房多多建立公共代码库。</li>
-</ul>
-</li>
-</ul>
+<h2 id="工作经验"><a href="#工作经验" class="headerlink" title="工作经验"></a>工作经验</h2><h3 id="房多多"><a href="#房多多" class="headerlink" title="房多多"></a>房多多</h3><p>2015.08-至今          深圳房好多网络科技有限公司（上海分公司）<br>新房、二手房交易服务平台。<br>工作职责：（团队项目）</p>
 <ul>
-<li>福州淘股网络技术有限公司<ul>
-<li>2015.5 - 2015.8</li>
-<li>为淘股吧iOS端的构建提供项目架构设计与支持。</li>
-<li>统一主题变更的思路以及方案。</li>
-<li>以数据作为整体驱动的思想，构建从网络到UI再到网络的项目架构。</li>
+<li>主要业务模块的开发(比如：大首页、筛选、IM基础框架、等)。</li>
+<li>创建sketch自动填充文本、图片素材插件生成工具。</li>
+<li>创建iconfont自动更新组件。</li>
+<li>开辟CocoaPods的组件化道路。</li>
+<li>创建Jenkins的自动化。</li>
+<li>顽固crash的研究修复。</li>
+<li>开发语言：C、OC、Swift</li>
 </ul>
-</li>
-</ul>
+<h3 id="淘股吧"><a href="#淘股吧" class="headerlink" title="淘股吧"></a>淘股吧</h3><p>2015.05-2015.08   福州淘股网络技术有限公司<br>一个有逼格的股票社区。<br>工作职责：（团队项目）</p>
 <ul>
-<li>上海商路网络科技有限公司<ul>
-<li>2014.10 - 2015.5</li>
-<li>将&lt;肌肤管家&gt;APP从外包接手并大部分重构至普通开发者可维护。<ul>
-<li>对接其智能硬件设备。</li>
-<li>独立开发并维护该社区活动类APP。</li>
+<li>项目的基础结构重新设计。</li>
+<li>多主题的插件开发。</li>
+<li>K线图根据数据自动绘制组件。</li>
+<li>开发语言：OC、C</li>
 </ul>
-</li>
+<h3 id="肌肤管家"><a href="#肌肤管家" class="headerlink" title="肌肤管家"></a>肌肤管家</h3><p>2014.10-2015.05   上海商路网络科技有限公司<br>使用自主研发的肌肤测试仪进行水、油、脂肪的参数的测量、分享、交流社区类APP。<br>工作职责：(个人项目)</p>
+<ul>
+<li>项目2.x的所有版本迭代，包括社区、IM、活动等。</li>
+<li>一代硬件肌肤测试仪功能开发。</li>
+<li>主要采用IB+autolayout进行页面适配布局。<br>开发语言：OC、C</li>
 </ul>
-</li>
+<h3 id="eTalk"><a href="#eTalk" class="headerlink" title="eTalk"></a>eTalk</h3><p>2014.04-2014.06<br>大学毕设。局域网的自定义协议聊天工具。自己搭建C的服务+iOS的客户端。<br>工作职责：(个人项目)</p>
+<ul>
+<li>基于TCP进行多iOS端链接C的服务端。</li>
+<li>采用自定义协议进行通信。</li>
+<li>完成联系人的增、删、查、改功能；用户的自定义表情、头像、单点／多点登录等功能<br>开发语言：OC、C、shell</li>
 </ul>
-<h2 id="个人技能"><a href="#个人技能" class="headerlink" title="个人技能"></a>个人技能</h2><ul>
-<li>熟练掌握C/C++、Objective-c、Swift等编程语言</li>
-<li>熟悉shell、ruby、python等脚本语言</li>
-<li>有良好的编程习惯、较强的分析并解决问题的能力，并能积极的分析并总结所遇到的问题</li>
-<li>对项目架构有一定的认识和把握，能够搭建较为优秀的项目框架</li>
-<li>对面向对象编程、面向切片编程、等编程思想在实践中的应用有一定的认识和理解</li>
-<li>对编码基础知识：线程、网络、布局、适配、Debug调试、等基础知识运用自如</li>
-</ul>
-<h2 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h2><ul>
-<li>2011.6 - 2015.6 南阳理工大学 软件工程专业移动设备应用开发方向</li>
-</ul>
-<h2 id="自我评价"><a href="#自我评价" class="headerlink" title="自我评价"></a>自我评价</h2><p>热衷于技术。一个典型处女座强迫症重度患者。并伴有代码洁癖。</p>
+<h2 id="个人特质"><a href="#个人特质" class="headerlink" title="个人特质"></a>个人特质</h2><p>热衷于技术。一个典型处女座强迫症重度患者。并伴有代码洁癖。<br>思维活跃、知识面广、具有很强的接受和学习新知识的能力。<br>做事认真负责， 善与人交流、有团队意识，为人积极乐观。</p>
 
           
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -1174,6 +1118,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1206,6 +1154,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -1215,18 +1164,18 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
+               src="/images/avatar.gif"
                alt="Keith" />
           <p class="site-author-name" itemprop="name">Keith</p>
            
-              <p class="site-description motion-element" itemprop="description">一个热衷于技术的狂热粉</p>
-          
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives">
+              <a href="/archives/">
                 <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -1270,37 +1219,38 @@
           
             
               <span class="links-of-author-item">
-                <a href="mailto:keith_127@126.com" target="_blank" title="Email">
+                <a href="mailto:keith_127@126.com" target="_blank" title="E-Mail">
                   
-                  Email
+                    
+                      E-Mail
+                    
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="https://github.com/madordie" target="_blank" title="GitHub">
                   
-                  GitHub
+                    
+                      GitHub
+                    
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/madordie" target="_blank" title="微博">
+                <a href="http://www.cnblogs.com/madordie/" target="_blank" title="原博客园">
                   
-                  微博
+                    
+                      原博客园
+                    
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.cnblogs.com/madordie/" target="_blank" title="博客园">
+                <a href="http://madordie.leanote.com" target="_blank" title="原Leanote">
                   
-                  博客园
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://madordie.leanote.com" target="_blank" title="Leanote">
-                  
-                  Leanote
+                    
+                      原Leanote
+                    
                 </a>
               </span>
             
@@ -1377,6 +1327,12 @@
 </div>
 
 
+
+
+
+
+
+
         
       </div>
     </footer>
@@ -1413,6 +1369,12 @@
 
 
 
+
+
+
+
+
+
   
   <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
@@ -1435,28 +1397,32 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+  
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
@@ -1465,8 +1431,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://madordie.disqus.com/count.js" async></script>
     
 
     
@@ -1488,16 +1452,6 @@
 
 
 
-  
-
-
-
-
-
-  
-
-
-
 
 
 
@@ -1506,126 +1460,317 @@
   <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
+    var isXml = true;
     // Search DB path;
     var search_path = "search.xml";
-    if (search_path.length == 0) {
+    if (search_path.length === 0) {
       search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
     }
     var path = "/" + search_path;
     // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
 
     function proceedsearch() {
       $("body")
         .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
         .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
       $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
     }
+
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
       $.ajax({
         url: path,
-        dataType: "xml",
+        dataType: isXml ? "xml" : "json",
         async: true,
-        success: function( xmlResponse ) {
+        success: function(res) {
           // get the contents from search data
           isfetched = true;
           $('.popup').detach().appendTo('.header-inner');
-          var datas = $( "entry", xmlResponse ).map(function() {
+          var datas = isXml ? $("entry", res).map(function() {
             return {
-              title: $( "title", this ).text(),
+              title: $("title", this).text(),
               content: $("content",this).text(),
-              url: $( "url" , this).text()
+              url: $("url" , this).text()
             };
-          }).get();
-          var $input = document.getElementById(search_id);
-          var $resultContent = document.getElementById(content_id);
-          $input.addEventListener('input', function(){
-            var matchcounts = 0;
-            var str='<ul class=\"search-result-list\">';
-            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-            $resultContent.innerHTML = "";
-            if (this.value.trim().length > 1) {
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
               // perform local searching
               datas.forEach(function(data) {
                 var isMatch = false;
-                var content_index = [];
-                var data_title = data.title.trim().toLowerCase();
-                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                var data_url = decodeURIComponent(data.url);
-                var index_title = -1;
-                var index_content = -1;
-                var first_occur = -1;
-                // only match artiles with not empty titles and contents
-                if(data_title != '') {
-                  keywords.forEach(function(keyword, i) {
-                    index_title = data_title.indexOf(keyword);
-                    index_content = data_content.indexOf(keyword);
-                    if( index_title >= 0 || index_content >= 0 ){
-                      isMatch = true;
-                      if (i == 0) {
-                        first_occur = index_content;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
                       }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
                     }
 
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
                   });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
                 }
+
                 // show search results
+
                 if (isMatch) {
-                  matchcounts += 1;
-                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                  var content = data.content.trim().replace(/<[^>]+>/g,"");
-                  if (first_occur >= 0) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
                     // cut out 100 characters
-                    var start = first_occur - 20;
-                    var end = first_occur + 80;
+                    var start = position - 20;
+                    var end = position + 80;
                     if(start < 0){
                       start = 0;
                     }
-                    if(start == 0){
-                      end = 50;
+                    if (end < position + word.length) {
+                      end = position + word.length;
                     }
                     if(end > content.length){
                       end = content.length;
                     }
-                    var match_content = content.substring(start, end);
-                    // highlight all keywords
-                    keywords.forEach(function(keyword){
-                      var regS = new RegExp(keyword, "gi");
-                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                    });
-
-                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
                   }
-                  str += "</li>";
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
                 }
-              })};
-            str += "</ul>";
-            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-            $resultContent.innerHTML = str;
-          });
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
           proceedsearch();
         }
-      });}
+      });
+    }
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
       e.stopPropagation();
-      if (isfetched == false) {
+      if (isfetched === false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
       } else {
         proceedsearch();
       };
     });
 
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    });
+    $('.popup-btn-close').click(onPopupClose);
     $('.popup').click(function(e){
       e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
     });
   </script>
 
@@ -1636,7 +1781,7 @@
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("2J1SRhOLinnCHVowdOcg2nRx-gzGzoHsz", "urDdiCbFngvx8l3grpAA1VUl");</script>
   <script>
     function showTime(Counter) {
@@ -1741,6 +1886,25 @@
   </script>
 
 
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
 
   
 
