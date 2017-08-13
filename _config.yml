@@ -10,6 +10,9 @@ author: Keith
 language: zh-Hans
 timezone: 
 
+# 自动生成sitemap
+sitemap:
+  path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
 
