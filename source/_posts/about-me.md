@@ -7,7 +7,6 @@ tags:
 ## 基本资料
 
 __孙继刚__
-男/ 1992-9/ 党员/ 汉族
 QQ: 453870736
 博客：https://madordie.github.io
 GitHub：https://github.com/madordie
