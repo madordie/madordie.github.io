@@ -2,9 +2,10 @@
 title: RxSwift语法笔记
 date: 2017-04-08 14:03:18
 tags:
+    - 响应式编程
+    - RxSwift
 categories:
-	- swift
-	- RxSwift
+    - iOS
 ---
 
 记录RxSwift在使用过程中的一些常用语法。

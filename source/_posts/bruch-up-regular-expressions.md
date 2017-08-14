@@ -2,8 +2,9 @@
 title: 正则表达式学习笔记
 date: 2016-12-19 15:03:09
 tags:
-categories:
     - 正则表达式
+categories:
+    - 工具
 ---
 
 正则表达式基础学习笔记。

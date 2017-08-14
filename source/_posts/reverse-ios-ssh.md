@@ -2,9 +2,9 @@
 title: iOS逆向-设备ssh免密登录
 date: 2017-08-09 15:31:30
 tags:
+    - 逆向
 categories:
     - iOS
-    - 逆向
 ---
 
 ## 前提条件

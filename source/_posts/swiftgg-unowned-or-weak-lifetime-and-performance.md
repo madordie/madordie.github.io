@@ -2,8 +2,9 @@
 title: 「转」Unowned 还是 Weak？生命周期和性能对比
 date: 2017-05-18 20:55:17
 tags:
+    - Unowned与Weak
 categories:
-	Swift
+	- iOS
 ---
 
 >作者：Umberto Raimondi，原文链接，原文日期：2016-10-27

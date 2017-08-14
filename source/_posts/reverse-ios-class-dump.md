@@ -2,9 +2,9 @@
 title: iOS逆向-class-dump工具
 date: 2017-08-10 12:40:27
 tags:
+    - 逆向
 categories:
     - iOS
-    - 逆向
 ---
 
 ## 安装class-dump

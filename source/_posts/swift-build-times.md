@@ -2,8 +2,9 @@
 title: Swift 编译时性能优化笔记
 date: 2017-01-17 13:47:17
 tags:
+    - 优化
 categories:
-    - Swift
+    - iOS
 ---
 
 Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。

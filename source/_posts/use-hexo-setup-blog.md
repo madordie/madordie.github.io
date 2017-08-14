@@ -1,9 +1,10 @@
 ---
-title: 使用hexo搭建博客
+title: hexo的博客让百度收录
 date: 2016-07-05 18:03:31
-tags: hexo
+tags:
+    - SEO
 categories: 
-    - 教程
+    - 工具
 ---
 
 这个github.io搭建的过程参考，以及向百度推送的python、js脚本。

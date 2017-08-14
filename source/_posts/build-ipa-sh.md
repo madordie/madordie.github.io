@@ -2,8 +2,9 @@
 title: Xcode8打包脚本
 date: 2016-09-26 14:55:09
 tags:
+    - 构建
 categories:
-    - 工具
+    - iOS
 ---
 
 Jenkins自动构建脚本解决方案。

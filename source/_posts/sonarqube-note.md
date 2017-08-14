@@ -2,6 +2,8 @@
 title: sonarqube-note
 date: 2017-02-07 10:16:58
 tags:
+    - 构建
+    - Sonarqube
 categories:
 	- 工具
 ---

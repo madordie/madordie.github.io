@@ -2,8 +2,9 @@
 title: 如何实现AppStore查看更多的方法
 date: 2016-12-23 16:37:37
 tags:
+    - 效果
 categories:
-  - iOS
+      - iOS
 ---
 
 看到AppStore的`更多`效果，做的不错哎，本文尝试采用`exclusionPaths`进行实现。不过有瑕疵。。来年用追加的方式在实现一下。感觉追加的方式比较简单。，

@@ -2,6 +2,8 @@
 title: ios11-beta
 date: 2017-06-12 17:20:58
 tags:
+categories:
+    - iOS
 ---
 
 iOS11 预览版安装体验笔记。

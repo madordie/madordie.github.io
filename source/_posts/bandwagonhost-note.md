@@ -2,6 +2,9 @@
 title: 科学上网之搬瓦工ss搭建笔记
 date: 2016-12-19 20:37:11
 tags:
+    - ss
+categories:
+    - 工具
 ---
 
 原来吧，用用goagent、Lantern、XX-Net，确实，这玩意只能Google出来结果，但是有的站点打不开才是最骚的。。

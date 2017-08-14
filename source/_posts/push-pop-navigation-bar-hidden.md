@@ -1,10 +1,10 @@
 ---
 title: 侧滑导航栏消失问题笔记
 date: 2017-05-16 12:16:47
-tags: 
+tags:
+    - Debug
 categories:
 	- iOS
-	- DEBUG
 ---
 
 如果前页面和后页面不同，则会出现轻微侧滑时导航栏莫名其妙没了😂

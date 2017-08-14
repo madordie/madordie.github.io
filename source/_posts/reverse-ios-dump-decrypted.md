@@ -2,9 +2,9 @@
 title: iOS逆向-砸壳(cycript/clutch)
 date: 2017-08-09 20:31:50
 tags:
+    - 逆向
 categories:
     - iOS
-    - 逆向
 ---
 
 # 准备工作

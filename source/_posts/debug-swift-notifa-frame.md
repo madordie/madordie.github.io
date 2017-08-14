@@ -1,9 +1,10 @@
 ---
 title: DEBUG - swift中取出通知中的frame
 date: 2016-12-01
-tags: 
+tags:
+    - Debug
 categories:
-    - DEBUG
+    - iOS
 ---
 
 swift中获取OC存储的Frame两种获取方案。

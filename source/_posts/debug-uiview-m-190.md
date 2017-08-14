@@ -1,10 +1,10 @@
 ---
 title: DEBUG - UIView.h#190
 date: 2016-10-11 12:43:22
-tags: 
+tags:
+    - Debug
 categories:
-    - DEBUG
-
+    - iOS
 ---
 
 CRASH:

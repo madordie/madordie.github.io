@@ -2,6 +2,7 @@
 title: 「转」iOS图片加载速度极限优化—FastImageCache解析
 date: 2017-05-16 10:55:00
 tags:
+    - FastImageCache
 categories:
 	- iOS
 ---

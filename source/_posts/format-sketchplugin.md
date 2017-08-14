@@ -2,7 +2,9 @@
 title: 自定义数据填充Sketch插件
 date: 2017-07-17 14:45:12
 tags: 
-	- sketchplugin
+	- Sketchplugin
+categories:
+    - 工具
 ---
 
 ## 先来个README.md

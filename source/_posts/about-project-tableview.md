@@ -1,9 +1,9 @@
 ---
 title: 项目中的UITableView
 tags:
+    - UITableView
 categories:
-  - iOS
-  - 牢骚
+    - iOS
 ---
 
 前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。

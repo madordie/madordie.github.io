@@ -2,8 +2,10 @@
 title: 优雅的使用SwiftLint
 date: 2016-12-23 11:59:57
 tags:
+    - 构建
+    - SwiftLint
 categories:
-    - 工具
+    - iOS
 ---
 
 接入了SwiftLine，修改2000+的warning、300+error的一点笔记心得。

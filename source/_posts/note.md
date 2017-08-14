@@ -1,9 +1,10 @@
 ---
 title: 开发小记
 date: 2016-07-28 14:52:22
-tags: 
-categories:
+tags:
     - 笔记
+categories:
+    - iOS
 ---
 
 

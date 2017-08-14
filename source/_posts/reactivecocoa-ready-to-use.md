@@ -1,10 +1,10 @@
 ---
 title: 准备食用RAC(ReactiveCocoa)的顾虑
 date: 2016-07-12 09:53:14
-tags: 
+tags:
+    - ReactiveCocoa
 categories:
-  - iOS
-  - ReactiveCocoa
+      - iOS
 ---
 
 对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。

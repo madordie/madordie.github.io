@@ -1,9 +1,10 @@
 ---
 title: DEBUG - Xcode8解析.crash
 date: 2016-11-14 12:43:22
-tags: 
+tags:
+    - Debug
 categories:
-    - DEBUG
+    - iOS
 ---
 
 5步解析`.crash`文件
