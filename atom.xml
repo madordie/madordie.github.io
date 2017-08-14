@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-08-14T02:04:06.000Z</updated>
+  <updated>2017-08-14T04:09:06.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,6 +14,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS逆向-monkeydev工具</title>
+    <link href="https://madordie.github.io/reverse-ios-monkeydev/"/>
+    <id>https://madordie.github.io/reverse-ios-monkeydev/</id>
+    <published>2017-08-14T03:05:57.000Z</published>
+    <updated>2017-08-14T04:09:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>MonkeyDev wiki<br>这是一个为越狱和非越狱开发人员准备的工具，主要包括四个模块:</p>
+<p> Logos Tweak</p>
+<p>使用theos提供的logify.pl工具将<em>.xm文件转成</em>.mm文件进行编译，集成了CydiaSubstrate，可以使用MSHookMessageEx和MSHookFunction来Hook OC函数和指定地址。</p>
+<p>CaptainHook Tweak</p>
+<p>使用CaptainHook提供的头文件进行OC 函数的Hook，以及属性的获取。</p>
+<p>Command-line Tool</p>
+<p>可以直接创建运行于越狱设备的命令行工具</p>
+<p>MonkeyApp</p>
+<p>这是自动给第三方应用集成Reveal、Cycript和注入dylib的模块，支持调试dylib和第三方应用，支持Pod给第三放应用集成SDK，只需要准备一个砸壳后的ipa或者app文件即可。</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<ul>
+<li><a href="https://github.com/AloneMonkey/MonkeyDev/wiki" target="_blank" rel="external">MonkeyDev wiki</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;MonkeyDev wiki&lt;br&gt;这是一个为越狱和非越狱开发人员准备的工具，主要包括四个模块:&lt;/p&gt;
+&lt;p&gt; Logos Tweak&lt;/p&gt;
+&lt;p&gt;使用theos提供的logify.pl工具将&lt;em&gt;.xm文件转成&lt;/em&gt;.mm文件进行编译，集成了CydiaSubstrate，可以使用MSHookMessageEx和MSHookFunction来Hook OC函数和指定地址。&lt;/p&gt;
+&lt;p&gt;CaptainHook Tweak&lt;/p&gt;
+&lt;p&gt;使用CaptainHook提供的头文件进行OC 函数的Hook，以及属性的获取。&lt;/p&gt;
+&lt;p&gt;Command-line Tool&lt;/p&gt;
+&lt;p&gt;可以直接创建运行于越狱设备的命令行工具&lt;/p&gt;
+&lt;p&gt;MonkeyApp&lt;/p&gt;
+&lt;p&gt;这是自动给第三方应用集成Reveal、Cycript和注入dylib的模块，支持调试dylib和第三方应用，支持Pod给第三放应用集成SDK，只需要准备一个砸壳后的ipa或者app文件即可。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+    
+      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
+    
+  </entry>
   
   <entry>
     <title>iOS逆向-class-dump工具</title>
@@ -1299,37 +1347,6 @@ class CMExpandingTextField: UITextField {
     <summary type="html">
     
       &lt;p&gt;swift中获取OC存储的Frame两种获取方案。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DEBUG - Xcode8解析.crash</title>
-    <link href="https://madordie.github.io/debug-xcode8-analysis-crash-file/"/>
-    <id>https://madordie.github.io/debug-xcode8-analysis-crash-file/</id>
-    <published>2016-11-14T04:43:22.000Z</published>
-    <updated>2017-08-14T02:00:24.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
-<a id="more"></a>
-<h1 id="Xcode8中解析-crash文件"><a href="#Xcode8中解析-crash文件" class="headerlink" title="Xcode8中解析.crash文件"></a>Xcode8中解析.crash文件</h1><ol>
-<li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
-<li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
-<li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
-<li>拷贝脚本文件，运行<code>cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A</code></li>
-<li>到<code>目录A</code>解析，运行<code>./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名</code></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;5步解析&lt;code&gt;.crash&lt;/code&gt;文件&lt;/p&gt;
     
     </summary>
     

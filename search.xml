@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[iOS逆向-monkeydev工具]]></title>
+    <url>%2Freverse-ios-monkeydev%2F</url>
+    <content type="text"><![CDATA[MonkeyDev wiki这是一个为越狱和非越狱开发人员准备的工具，主要包括四个模块: Logos Tweak 使用theos提供的logify.pl工具将.xm文件转成.mm文件进行编译，集成了CydiaSubstrate，可以使用MSHookMessageEx和MSHookFunction来Hook OC函数和指定地址。 CaptainHook Tweak 使用CaptainHook提供的头文件进行OC 函数的Hook，以及属性的获取。 Command-line Tool 可以直接创建运行于越狱设备的命令行工具 MonkeyApp 这是自动给第三方应用集成Reveal、Cycript和注入dylib的模块，支持调试dylib和第三方应用，支持Pod给第三放应用集成SDK，只需要准备一个砸壳后的ipa或者app文件即可。 MonkeyDev wiki]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>逆向</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[iOS逆向-class-dump工具]]></title>
     <url>%2Freverse-ios-class-dump%2F</url>
     <content type="text"><![CDATA[安装class-dump去stevenygard.com下载最新的包。 将包中的class-dump可执行文件复制到/opt/class-dump。(我的逆向相关工具均在这下面😂） 在~/.base_profile中添加export PATH=/opt/class-dump:$PATH 运行source ~/.base_profile 最后确认一下安装OK ： 12$ class-dump --vclass-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33 功能使用一个记录一个吧～ 用来导出ipa/.decrypted头文件此处只能导出未加密的ipa，或者砸过壳的。具体砸壳过程传送门 12345$ ls WeChat.decryptedWeChat.decrypted$ class-dump -H WeChat.decrypted -o ./Headers/$ ls HeadersHeaders 即得头文件目录：Headers]]></content>

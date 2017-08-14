@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Debug," />
+  <meta name="keywords" content="madordie, keith" />
 
 
 
@@ -104,17 +104,15 @@
 
 
 
-<meta name="description" content="5步解析.crash文件">
-<meta name="keywords" content="Debug">
-<meta property="og:type" content="article">
-<meta property="og:title" content="DEBUG - Xcode8解析.crash">
-<meta property="og:url" content="https://madordie.github.io/debug-xcode8-analysis-crash-file/index.html">
+<meta name="description" content="一个热衷于技术的狂热粉">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Keith's Blog">
+<meta property="og:url" content="https://madordie.github.io/page/7/index.html">
 <meta property="og:site_name" content="Keith's Blog">
-<meta property="og:description" content="5步解析.crash文件">
-<meta property="og:updated_time" content="2017-08-14T02:00:24.000Z">
+<meta property="og:description" content="一个热衷于技术的狂热粉">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DEBUG - Xcode8解析.crash">
-<meta name="twitter:description" content="5步解析.crash文件">
+<meta name="twitter:title" content="Keith's Blog">
+<meta name="twitter:description" content="一个热衷于技术的狂热粉">
 
 
 
@@ -143,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="https://madordie.github.io/debug-xcode8-analysis-crash-file/"/>
+  <link rel="canonical" href="https://madordie.github.io/page/7/"/>
 
 
 
 
 
-  <title>DEBUG - Xcode8解析.crash | Keith's Blog</title>
+  <title>Keith's Blog - 不疯魔,不成活</title>
   
 
 
@@ -178,7 +176,9 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,9 +281,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/debug-xcode8-analysis-crash-file/">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/about-me/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keith">
@@ -313,7 +313,9 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">DEBUG - Xcode8解析.crash</h2>
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/about-me/" itemprop="url">个人资料页</a></h2>
         
 
         <div class="post-meta">
@@ -325,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-14T12:43:22+08:00">
-                2016-11-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-05T00:00:00+08:00">
+                2016-07-05
               </time>
             
 
@@ -335,28 +337,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -385,16 +365,60 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
-<a id="more"></a>
-<h1 id="Xcode8中解析-crash文件"><a href="#Xcode8中解析-crash文件" class="headerlink" title="Xcode8中解析.crash文件"></a>Xcode8中解析.crash文件</h1><ol>
-<li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
-<li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
-<li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
-<li>拷贝脚本文件，运行<code>cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A</code></li>
-<li>到<code>目录A</code>解析，运行<code>./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名</code></li>
-</ol>
+        
+          
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="基本资料"><a href="#基本资料" class="headerlink" title="基本资料"></a>基本资料</h2><p><strong>孙继刚</strong><br>QQ: 453870736<br>博客：<a href="https://madordie.github.io">https://madordie.github.io</a><br>GitHub：<a href="https://github.com/madordie" target="_blank" rel="external">https://github.com/madordie</a><br>E-mail: <a href="mailto:keith_127@126.com" target="_blank" rel="external">keith_127@126.com</a></p>
+<h2 id="教育背景"><a href="#教育背景" class="headerlink" title="教育背景"></a>教育背景</h2><p>2011.09-2015.06     南阳理工学院   软件工程(移动设备应用开发方向)       本科</p>
+<p>简介：移动设备应用开发主要面向移动设备所培养的软件工程师。主要分为嵌入式、安卓、iOS三个分支。其中嵌入式系统为主要发展方向，为快速适应市场的需求，同时开设安卓、iOS基础课程。所学课程涵盖软件工程、嵌入式系统等方面。</p>
+<h2 id="专业技能"><a href="#专业技能" class="headerlink" title="专业技能"></a>专业技能</h2><ul>
+<li>擅长C、Objective-C、Swift开发，有较为扎实的iOS环境开发经验。</li>
+<li>熟悉shell、ruby、python、等语言。</li>
+<li>有良好的编程习惯，较强的分析问题、解决问题的能力，并能积极总结所遇到的问题及解决方案。</li>
+<li>对项目整体架构有一定的认识和把控，能够搭建较为适合当前项目发展的架构。</li>
+<li>能够搭建gitlab、Jenkins服务器，并熟练使用Jenkins进行打包、自定义操作、更新iconfont等操作。</li>
+<li>善于制作工具组件提高开发效率，比如：Jenkins打不同环境包、统一更新iconfont、制作sketch自定义填充插件等。</li>
+<li>熟练使用AutoLayout进行代码、IB适配，以及frame的适配。</li>
+<li>熟练使用Cocoapods进行项目拆分、并能够编写部分ruby脚本进行一些自定义操作。</li>
+<li>熟练使用MVVM、MVC、等模式。</li>
+<li>能够使用RxSwift进行响应式编程。</li>
+<li>熟练掌握GCD、NSThread等多线程编程技术。</li>
+<li>熟练掌握SwiftLint的配置以及规则定制。</li>
+<li>熟悉iOS核心动画、CALayer的开发。</li>
+<li>对cocos2d游戏开发有一定的了解。</li>
+</ul>
+<h2 id="工作经验"><a href="#工作经验" class="headerlink" title="工作经验"></a>工作经验</h2><h3 id="房多多"><a href="#房多多" class="headerlink" title="房多多"></a>房多多</h3><p>2015.08-至今          深圳房好多网络科技有限公司（上海分公司）<br>新房、二手房交易服务平台。<br>工作职责：（团队项目）</p>
+<ul>
+<li>主要业务模块的开发(比如：大首页、筛选、IM基础框架、等)。</li>
+<li>创建sketch自动填充文本、图片素材插件生成工具。</li>
+<li>创建iconfont自动更新组件。</li>
+<li>开辟CocoaPods的组件化道路。</li>
+<li>创建Jenkins的自动化。</li>
+<li>顽固crash的研究修复。</li>
+<li>开发语言：C、OC、Swift</li>
+</ul>
+<h3 id="淘股吧"><a href="#淘股吧" class="headerlink" title="淘股吧"></a>淘股吧</h3><p>2015.05-2015.08   福州淘股网络技术有限公司<br>一个有逼格的股票社区。<br>工作职责：（团队项目）</p>
+<ul>
+<li>项目的基础结构重新设计。</li>
+<li>多主题的插件开发。</li>
+<li>K线图根据数据自动绘制组件。</li>
+<li>开发语言：OC、C</li>
+</ul>
+<h3 id="肌肤管家"><a href="#肌肤管家" class="headerlink" title="肌肤管家"></a>肌肤管家</h3><p>2014.10-2015.05   上海商路网络科技有限公司<br>使用自主研发的肌肤测试仪进行水、油、脂肪的参数的测量、分享、交流社区类APP。<br>工作职责：(个人项目)</p>
+<ul>
+<li>项目2.x的所有版本迭代，包括社区、IM、活动等。</li>
+<li>一代硬件肌肤测试仪功能开发。</li>
+<li>主要采用IB+autolayout进行页面适配布局。<br>开发语言：OC、C</li>
+</ul>
+<h3 id="eTalk"><a href="#eTalk" class="headerlink" title="eTalk"></a>eTalk</h3><p>2014.04-2014.06<br>大学毕设。局域网的自定义协议聊天工具。自己搭建C的服务+iOS的客户端。<br>工作职责：(个人项目)</p>
+<ul>
+<li>基于TCP进行多iOS端链接C的服务端。</li>
+<li>采用自定义协议进行通信。</li>
+<li>完成联系人的增、删、查、改功能；用户的自定义表情、头像、单点／多点登录等功能<br>开发语言：OC、C、shell</li>
+</ul>
+<h2 id="个人特质"><a href="#个人特质" class="headerlink" title="个人特质"></a>个人特质</h2><p>热衷于技术。一个典型处女座强迫症重度患者。并伴有代码洁癖。<br>思维活跃、知识面广、具有很强的接受和学习新知识的能力。<br>做事认真负责， 善与人交流、有团队意识，为人积极乐观。</p>
 
+          
+        
       
     </div>
     
@@ -409,40 +433,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Debug/" rel="tag"># Debug</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/debug-swift-notifa-frame/" rel="next" title="DEBUG - swift中取出通知中的frame">
-                <i class="fa fa-chevron-left"></i> DEBUG - swift中取出通知中的frame
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/debug-uiview-m-190/" rel="prev" title="DEBUG - UIView.h#190">
-                DEBUG - UIView.h#190 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -452,11 +450,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+  </nav>
+
 
 
           </div>
@@ -464,17 +465,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -495,17 +485,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -612,22 +593,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode8中解析-crash文件"><span class="nav-number">1.</span> <span class="nav-text">Xcode8中解析.crash文件</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -776,10 +741,10 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-
+  
 
   
 
@@ -795,18 +760,6 @@
 
     
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'https://madordie.github.io/debug-xcode8-analysis-crash-file/';
-          this.page.identifier = 'debug-xcode8-analysis-crash-file/';
-          this.page.title = 'DEBUG - Xcode8解析.crash';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://madordie.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
     
 
   
