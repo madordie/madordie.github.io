@@ -5,6 +5,12 @@
       location = "group:../_config.yml">
    </FileRef>
    <FileRef
+      location = "group:../themes/next/_config.yml">
+   </FileRef>
+   <FileRef
+      location = "group:hexo.xcworkspace/CommandLineTools/CommandLineTools.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:_posts">
    </FileRef>
    <FileRef

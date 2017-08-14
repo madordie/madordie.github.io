@@ -43,14 +43,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		32379BF51F3AEBB1005152F7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		32CB85D71F3AEBFE00BBDE9C /* Location */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Location; sourceTree = BUILT_PRODUCTS_DIR; };
 		32CB85D91F3AEBFE00BBDE9C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		32F48C231F3E9D7A00434955 /* Backup */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Backup; sourceTree = BUILT_PRODUCTS_DIR; };
 		32F48C251F3E9D7A00434955 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		32F48C2F1F3E9E1D00434955 /* Public */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Public; sourceTree = BUILT_PRODUCTS_DIR; };
 		32F48C311F3E9E1D00434955 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		32F48C3E1F3EA08C00434955 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,11 +79,9 @@
 		32379BE91F3AEBB1005152F7 = {
 			isa = PBXGroup;
 			children = (
-				32379BF41F3AEBB1005152F7 /* CommandLineTools */,
 				32CB85D81F3AEBFE00BBDE9C /* Location */,
 				32F48C241F3E9D7A00434955 /* Backup */,
 				32F48C301F3E9E1D00434955 /* Public */,
-				32F48C3D1F3EA08C00434955 /* Update Theme */,
 				32379BF31F3AEBB1005152F7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,14 +94,6 @@
 				32F48C2F1F3E9E1D00434955 /* Public */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		32379BF41F3AEBB1005152F7 /* CommandLineTools */ = {
-			isa = PBXGroup;
-			children = (
-				32379BF51F3AEBB1005152F7 /* main.swift */,
-			);
-			path = CommandLineTools;
 			sourceTree = "<group>";
 		};
 		32CB85D81F3AEBFE00BBDE9C /* Location */ = {
@@ -130,14 +118,6 @@
 				32F48C311F3E9E1D00434955 /* main.swift */,
 			);
 			path = Public;
-			sourceTree = "<group>";
-		};
-		32F48C3D1F3EA08C00434955 /* Update Theme */ = {
-			isa = PBXGroup;
-			children = (
-				32F48C3E1F3EA08C00434955 /* main.swift */,
-			);
-			path = "Update Theme";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,7 +255,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../../\nhexo s -g";
+			shellScript = "cd ../../../\nhexo clean\nhexo s -g";
 		};
 /* End PBXShellScriptBuildPhase section */
 

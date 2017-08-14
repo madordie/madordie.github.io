@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-08-10T10:56:13.000Z</updated>
+  <updated>2017-08-14T02:04:06.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/reverse-ios-class-dump/"/>
     <id>https://madordie.github.io/reverse-ios-class-dump/</id>
     <published>2017-08-10T04:40:27.000Z</published>
-    <updated>2017-08-10T10:56:13.000Z</updated>
+    <updated>2017-08-14T02:04:06.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="external">stevenygard.com</a>下载最新的包。</p>
 <p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
@@ -48,8 +48,8 @@
     
       <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
-      <category term="逆向" scheme="https://madordie.github.io/categories/iOS/%E9%80%86%E5%90%91/"/>
     
+      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
@@ -58,7 +58,7 @@
     <link href="https://madordie.github.io/reverse-ios-dump-decrypted/"/>
     <id>https://madordie.github.io/reverse-ios-dump-decrypted/</id>
     <published>2017-08-09T12:31:50.000Z</published>
-    <updated>2017-08-10T10:27:18.000Z</updated>
+    <updated>2017-08-14T02:04:17.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
 <li>越狱设备</li>
@@ -137,8 +137,8 @@
     
       <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
-      <category term="逆向" scheme="https://madordie.github.io/categories/iOS/%E9%80%86%E5%90%91/"/>
     
+      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
@@ -147,7 +147,7 @@
     <link href="https://madordie.github.io/reverse-ios-ssh/"/>
     <id>https://madordie.github.io/reverse-ios-ssh/</id>
     <published>2017-08-09T07:31:30.000Z</published>
-    <updated>2017-08-09T08:36:38.000Z</updated>
+    <updated>2017-08-14T02:04:27.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
 <li>已越狱设备</li>
@@ -185,8 +185,8 @@
     
       <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
-      <category term="逆向" scheme="https://madordie.github.io/categories/iOS/%E9%80%86%E5%90%91/"/>
     
+      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
@@ -195,7 +195,7 @@
     <link href="https://madordie.github.io/format-sketchplugin/"/>
     <id>https://madordie.github.io/format-sketchplugin/</id>
     <published>2017-07-17T06:45:12.000Z</published>
-    <updated>2017-07-17T07:33:44.000Z</updated>
+    <updated>2017-08-14T02:01:51.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="先来个README-md"><a href="#先来个README-md" class="headerlink" title="先来个README.md"></a>先来个README.md</h2><blockquote>
 <h2 id="format-sketchplugin"><a href="#format-sketchplugin" class="headerlink" title="format-sketchplugin"></a><a href="https://github.com/madordie/format-sketchplugin" target="_blank" rel="external">format-sketchplugin</a></h2><p>为Sketch自动生成自定义填充数据源插件。</p>
@@ -223,8 +223,10 @@
     
     </summary>
     
+      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
-      <category term="sketchplugin" scheme="https://madordie.github.io/tags/sketchplugin/"/>
+    
+      <category term="Sketchplugin" scheme="https://madordie.github.io/tags/Sketchplugin/"/>
     
   </entry>
   
@@ -233,7 +235,7 @@
     <link href="https://madordie.github.io/ios11-beta/"/>
     <id>https://madordie.github.io/ios11-beta/</id>
     <published>2017-06-12T09:20:58.000Z</published>
-    <updated>2017-06-15T05:08:52.000Z</updated>
+    <updated>2017-08-14T02:02:00.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>iOS11 预览版安装体验笔记。</p>
 <a id="more"></a>
@@ -252,6 +254,8 @@
     
     </summary>
     
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
     
   </entry>
   
@@ -260,7 +264,7 @@
     <link href="https://madordie.github.io/swiftgg-unowned-or-weak-lifetime-and-performance/"/>
     <id>https://madordie.github.io/swiftgg-unowned-or-weak-lifetime-and-performance/</id>
     <published>2017-05-18T12:55:17.000Z</published>
-    <updated>2017-08-10T06:12:00.000Z</updated>
+    <updated>2017-08-14T02:07:26.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
 <p>作者：Umberto Raimondi，原文链接，原文日期：2016-10-27<br>译者：shanks；校对：Crystal Sun；定稿：CMB</p>
@@ -438,8 +442,10 @@
     
     </summary>
     
-      <category term="Swift" scheme="https://madordie.github.io/categories/Swift/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
+    
+      <category term="Unowned与Weak" scheme="https://madordie.github.io/tags/Unowned%E4%B8%8EWeak/"/>
     
   </entry>
   
@@ -448,7 +454,7 @@
     <link href="https://madordie.github.io/push-pop-navigation-bar-hidden/"/>
     <id>https://madordie.github.io/push-pop-navigation-bar-hidden/</id>
     <published>2017-05-16T04:16:47.000Z</published>
-    <updated>2017-05-18T09:16:49.000Z</updated>
+    <updated>2017-08-14T02:02:25.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>如果前页面和后页面不同，则会出现轻微侧滑时导航栏莫名其妙没了😂</p>
 <p><a href="https://github.com/madordie/Demo-PushAndPop" target="_blank" rel="external">Demo-PushAndPop</a></p>
@@ -475,8 +481,8 @@
     
       <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
-      <category term="DEBUG" scheme="https://madordie.github.io/categories/iOS/DEBUG/"/>
     
+      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
     
   </entry>
   
@@ -485,7 +491,7 @@
     <link href="https://madordie.github.io/bang-fastimagecache/"/>
     <id>https://madordie.github.io/bang-fastimagecache/</id>
     <published>2017-05-16T02:55:00.000Z</published>
-    <updated>2017-05-17T05:37:47.000Z</updated>
+    <updated>2017-08-14T02:20:29.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文：<a href="http://blog.cnbang.net/tech/2578/" target="_blank" rel="external">iOS图片加载速度极限优化—FastImageCache解析</a></p>
 <p><a href="https://github.com/path/FastImageCache" target="_blank" rel="external">FastImageCache</a>是Path团队开发的一个开源库，用于提升图片的加载和渲染速度，让基于图片的列表滑动起来更顺畅，来看看它是怎么做的。</p>
@@ -548,6 +554,8 @@
       <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
+      <category term="FastImageCache" scheme="https://madordie.github.io/tags/FastImageCache/"/>
+    
   </entry>
   
   <entry>
@@ -555,7 +563,7 @@
     <link href="https://madordie.github.io/debug-SwiftValue-unsignedIntegerValue/"/>
     <id>https://madordie.github.io/debug-SwiftValue-unsignedIntegerValue/</id>
     <published>2017-04-17T06:05:09.000Z</published>
-    <updated>2017-05-16T04:23:37.000Z</updated>
+    <updated>2017-08-14T01:59:55.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>crash:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let attr = try? NSMutableAttributedString(data: data,</div><div class="line">                                          options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,</div><div class="line">                                                    NSCharacterEncodingDocumentAttribute: String.Encoding.utf8],</div><div class="line">                                          documentAttributes:nil)</div><div class="line">// log:</div><div class="line">2017-04-17 14:04:38.140 [41275:463875] -[_SwiftValue unsignedIntegerValue]: unrecognized selector sent to instance 0x608000256620</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -568,8 +576,10 @@
     
     </summary>
     
-      <category term="DEBUG" scheme="https://madordie.github.io/categories/DEBUG/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
+    
+      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
     
   </entry>
   
@@ -578,7 +588,7 @@
     <link href="https://madordie.github.io/rx-dictionary/"/>
     <id>https://madordie.github.io/rx-dictionary/</id>
     <published>2017-04-08T06:03:18.000Z</published>
-    <updated>2017-05-16T04:24:30.000Z</updated>
+    <updated>2017-08-14T02:15:02.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录RxSwift在使用过程中的一些常用语法。</p>
 <a id="more"></a>
@@ -703,10 +713,12 @@
     
     </summary>
     
-      <category term="swift" scheme="https://madordie.github.io/categories/swift/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
-      <category term="RxSwift" scheme="https://madordie.github.io/categories/swift/RxSwift/"/>
     
+      <category term="响应式编程" scheme="https://madordie.github.io/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="RxSwift" scheme="https://madordie.github.io/tags/RxSwift/"/>
     
   </entry>
   
@@ -715,7 +727,7 @@
     <link href="https://madordie.github.io/sonarqube-note/"/>
     <id>https://madordie.github.io/sonarqube-note/</id>
     <published>2017-02-07T02:16:58.000Z</published>
-    <updated>2017-05-16T04:24:39.000Z</updated>
+    <updated>2017-08-14T02:15:12.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>Get Started in Two Minutes</p>
 <ol>
@@ -747,6 +759,10 @@
       <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
+      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+    
+      <category term="Sonarqube" scheme="https://madordie.github.io/tags/Sonarqube/"/>
+    
   </entry>
   
   <entry>
@@ -754,7 +770,7 @@
     <link href="https://madordie.github.io/real-world-swift-performance/"/>
     <id>https://madordie.github.io/real-world-swift-performance/</id>
     <published>2017-01-17T11:14:57.000Z</published>
-    <updated>2017-05-16T04:24:24.000Z</updated>
+    <updated>2017-08-14T02:06:37.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文链接：<a href="https://realm.io/cn/news/real-world-swift-performance/" target="_blank" rel="external">真实世界中的 Swift 性能优化</a></p>
 <a id="more"></a>
@@ -822,8 +838,10 @@
     
     </summary>
     
-      <category term="Swift" scheme="https://madordie.github.io/categories/Swift/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
+    
+      <category term="优化" scheme="https://madordie.github.io/tags/%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
@@ -832,7 +850,7 @@
     <link href="https://madordie.github.io/swift-build-times/"/>
     <id>https://madordie.github.io/swift-build-times/</id>
     <published>2017-01-17T05:47:17.000Z</published>
-    <updated>2017-05-16T04:27:21.000Z</updated>
+    <updated>2017-08-14T02:06:43.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。</p>
 <a id="more"></a>
@@ -957,8 +975,10 @@ class CMExpandingTextField: UITextField {
     
     </summary>
     
-      <category term="Swift" scheme="https://madordie.github.io/categories/Swift/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
+    
+      <category term="优化" scheme="https://madordie.github.io/tags/%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
@@ -967,7 +987,7 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/fastlane-note/"/>
     <id>https://madordie.github.io/fastlane-note/</id>
     <published>2017-01-04T10:14:07.000Z</published>
-    <updated>2017-07-22T07:55:26.000Z</updated>
+    <updated>2017-08-14T02:20:27.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！<br>回看之前的<a href="https://madordie.github.io/build-ipa-sh">build-ipa-sh.md</a>确实比较僵硬。自动化还是很棒的。</p>
 <a id="more"></a>
@@ -999,8 +1019,12 @@ class CMExpandingTextField: UITextField {
     
     </summary>
     
-      <category term="Fastlane" scheme="https://madordie.github.io/categories/Fastlane/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
+    
+      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+    
+      <category term="Fastlane" scheme="https://madordie.github.io/tags/Fastlane/"/>
     
   </entry>
   
@@ -1009,7 +1033,7 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/uitextkit-ellipsis-sth-at-the-end/"/>
     <id>https://madordie.github.io/uitextkit-ellipsis-sth-at-the-end/</id>
     <published>2016-12-23T08:37:37.000Z</published>
-    <updated>2017-05-16T04:24:54.000Z</updated>
+    <updated>2017-08-14T02:15:57.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>看到AppStore的<code>更多</code>效果，做的不错哎，本文尝试采用<code>exclusionPaths</code>进行实现。不过有瑕疵。。来年用追加的方式在实现一下。感觉追加的方式比较简单。，</p>
 <a id="more"></a>
@@ -1031,6 +1055,8 @@ class CMExpandingTextField: UITextField {
       <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
+      <category term="效果" scheme="https://madordie.github.io/tags/%E6%95%88%E6%9E%9C/"/>
+    
   </entry>
   
   <entry>
@@ -1038,7 +1064,7 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/elegant-to-use-swiftlint/"/>
     <id>https://madordie.github.io/elegant-to-use-swiftlint/</id>
     <published>2016-12-23T03:59:57.000Z</published>
-    <updated>2017-05-16T04:28:14.000Z</updated>
+    <updated>2017-08-14T02:20:22.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>接入了SwiftLine，修改2000+的warning、300+error的一点笔记心得。</p>
 <a id="more"></a>
@@ -1092,8 +1118,12 @@ class CMExpandingTextField: UITextField {
     
     </summary>
     
-      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
+    
+      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+    
+      <category term="SwiftLint" scheme="https://madordie.github.io/tags/SwiftLint/"/>
     
   </entry>
   
@@ -1102,7 +1132,7 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/bandwagonhost-note/"/>
     <id>https://madordie.github.io/bandwagonhost-note/</id>
     <published>2016-12-19T12:37:11.000Z</published>
-    <updated>2017-07-18T08:09:50.000Z</updated>
+    <updated>2017-08-14T01:58:11.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原来吧，用用goagent、Lantern、XX-Net，确实，这玩意只能Google出来结果，但是有的站点打不开才是最骚的。。<br>同事搞了个搬瓦工挺便宜，于是乎就也搞了一个。不过强迫症犯了，尝试了各种SS版本以及各种优化，目的是找个流畅点的版本进行<strong>科学上网</strong>。</p>
 <a id="more"></a>
@@ -1122,6 +1152,10 @@ class CMExpandingTextField: UITextField {
     
     </summary>
     
+      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="ss" scheme="https://madordie.github.io/tags/ss/"/>
     
   </entry>
   
@@ -1130,7 +1164,7 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/bruch-up-regular-expressions/"/>
     <id>https://madordie.github.io/bruch-up-regular-expressions/</id>
     <published>2016-12-19T07:03:09.000Z</published>
-    <updated>2016-12-30T11:12:05.000Z</updated>
+    <updated>2017-08-14T02:13:21.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>正则表达式基础学习笔记。</p>
 <a id="more"></a>
@@ -1238,8 +1272,10 @@ class CMExpandingTextField: UITextField {
     
     </summary>
     
-      <category term="正则表达式" scheme="https://madordie.github.io/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
+    
+      <category term="正则表达式" scheme="https://madordie.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
   </entry>
   
@@ -1248,7 +1284,7 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/debug-swift-notifa-frame/"/>
     <id>https://madordie.github.io/debug-swift-notifa-frame/</id>
     <published>2016-11-30T16:00:00.000Z</published>
-    <updated>2016-12-30T11:18:29.000Z</updated>
+    <updated>2017-08-14T02:20:29.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>swift中获取OC存储的Frame两种获取方案。</p>
 <a id="more"></a>
@@ -1266,8 +1302,10 @@ class CMExpandingTextField: UITextField {
     
     </summary>
     
-      <category term="DEBUG" scheme="https://madordie.github.io/categories/DEBUG/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
+    
+      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
     
   </entry>
   
@@ -1276,7 +1314,7 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/debug-xcode8-analysis-crash-file/"/>
     <id>https://madordie.github.io/debug-xcode8-analysis-crash-file/</id>
     <published>2016-11-14T04:43:22.000Z</published>
-    <updated>2016-12-30T11:18:17.000Z</updated>
+    <updated>2017-08-14T02:00:24.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
 <a id="more"></a>
@@ -1295,8 +1333,10 @@ class CMExpandingTextField: UITextField {
     
     </summary>
     
-      <category term="DEBUG" scheme="https://madordie.github.io/categories/DEBUG/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
+    
+      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
     
   </entry>
   

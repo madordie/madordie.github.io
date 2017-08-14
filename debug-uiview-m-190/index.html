@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="madordie, keith" />
+  <meta name="keywords" content="Debug," />
 
 
 
@@ -105,13 +105,13 @@
 
 
 <meta name="description" content="CRASH:void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()">
-<meta name="keywords">
+<meta name="keywords" content="Debug">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DEBUG - UIView.h#190">
 <meta property="og:url" content="https://madordie.github.io/debug-uiview-m-190/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="CRASH:void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()">
-<meta property="og:updated_time" content="2016-12-30T11:19:29.000Z">
+<meta property="og:updated_time" content="2017-08-14T02:00:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DEBUG - UIView.h#190">
 <meta name="twitter:description" content="CRASH:void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()">
@@ -224,6 +224,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
@@ -234,12 +244,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            归档
+            标签
           </a>
         </li>
       
@@ -338,8 +348,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DEBUG/" itemprop="url" rel="index">
-                    <span itemprop="name">DEBUG</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -395,6 +405,7 @@
 <li><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="external">stackoverflow(这个分析的很到位)</a></li>
 </ul>
 <h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6.1/UIView.m:190</div><div class="line">invalid mode &apos;kCFRunLoopCommonModes&apos; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</div><div class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</div><div class="line"></div><div class="line">(lldb) bt</div><div class="line">* thread #1: tid = 0x87c18, 0x000000018238c524 libobjc.A.dylib`objc_exception_throw, queue = &apos;com.apple.main-thread&apos;, stop reason = breakpoint 1.2</div><div class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib`objc_exception_throw</div><div class="line">    frame #1: 0x0000000183954094 CoreFoundation`+[NSException raise:format:arguments:] + 104</div><div class="line">    frame #2: 0x00000001843de898 Foundation`-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</div><div class="line">    frame #3: 0x0000000189a7cf9c UIKit`UIViewReportBrokenSuperviewChain + 472</div><div class="line">    frame #4: 0x0000000189a7d658 UIKit`_UIViewTopDownSubtreeTraversal + 1496</div><div class="line">    frame #5: 0x000000018a0f3390 UIKit`-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</div><div class="line">    frame #6: 0x00000001843832ac Foundation`-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</div><div class="line">    frame #7: 0x0000000184382dcc Foundation`-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</div><div class="line">    frame #8: 0x00000001843809e0 Foundation`-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</div><div class="line">    frame #9: 0x000000018989cfdc UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</div><div class="line">    frame #10: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #11: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #12: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #13: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #14: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #15: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #16: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #17: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #18: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #19: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #20: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #21: 0x000000018989cf14 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</div><div class="line">    frame #22: 0x0000000184380510 Foundation`-[NSISEngine withBehaviors:performModifications:] + 168</div><div class="line">    frame #23: 0x000000018989cde8 UIKit`__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</div><div class="line">    frame #24: 0x00000001897995e0 UIKit`-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</div><div class="line">    frame #25: 0x00000001898a4bb0 UIKit`-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</div><div class="line">    frame #26: 0x00000001898a4b04 UIKit`-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</div><div class="line">    frame #27: 0x00000001898a4910 UIKit`-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</div><div class="line">    frame #28: 0x00000001897996dc UIKit`-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</div><div class="line">    frame #29: 0x0000000189798d90 UIKit`__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</div><div class="line">    frame #30: 0x0000000189798be8 UIKit`-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</div><div class="line">    frame #31: 0x00000001897a4ad0 UIKit`-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</div><div class="line">    frame #32: 0x00000001897a43bc UIKit`-[UIView(Hierarchy) addSubview:] + 828</div><div class="line">  * frame #33: 0x00000001004f78ec Project_ent`__31-[EsfCommentReportView show]_block_invoke((null)=&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</div><div class="line">    frame #34: 0x00000001897d2b88 UIKit`+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</div><div class="line">    frame #35: 0x00000001897d28e8 UIKit`+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</div><div class="line">    frame #36: 0x00000001004f77a0 Project_ent`-[EsfCommentReportView show](self=0x000000015fe32020, _cmd=&quot;show&quot;) + 492 at EsfCommentReportView.m:291</div><div class="line">    frame #37: 0x0000000100858a04 Project_ent`__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)=&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</div><div class="line">    frame #38: 0x00000001003f93e4 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController=0x000000015fd2e320, sourceType=2, afterCheckOrLogin=0x00000001008588d0, cancelLogin=(null)) + 236 at MyLoginViewController.m:123</div><div class="line">    frame #39: 0x00000001003f92b0 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController=0x000000015fd2e320, afterCheckOrLogin=0x00000001008588d0, cancelLogin=(null)) + 156 at MyLoginViewController.m:114</div><div class="line">    frame #40: 0x00000001003f9124 Project_ent`+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self=MyLoginViewController, _cmd=&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController=0x000000015fd2e320, afterCheckOrLogin=0x00000001008588d0) + 120 at MyLoginViewController.m:104</div><div class="line">    frame #41: 0x0000000100858870 Project_ent`-[BuyerAdviserProfileViewController reportAction:](self=0x000000015fd2e320, _cmd=&quot;reportAction:&quot;, button=0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</div><div class="line">    frame #42: 0x00000001897d27b0 UIKit`-[UIApplication sendAction:to:from:forEvent:] + 96</div><div class="line">    frame #43: 0x00000001897d2730 UIKit`-[UIControl sendAction:to:forEvent:] + 80</div><div class="line">    frame #44: 0x00000001897bcbe4 UIKit`-[UIControl _sendActionsForEvents:withEvent:] + 452</div><div class="line">    frame #45: 0x00000001897d201c UIKit`-[UIControl touchesEnded:withEvent:] + 584</div><div class="line">    frame #46: 0x00000001897d1b44 UIKit`-[UIWindow _sendTouchesForEvent:] + 2484</div><div class="line">    frame #47: 0x00000001897ccd8c UIKit`-[UIWindow sendEvent:] + 2988</div><div class="line">    frame #48: 0x000000018979d858 UIKit`-[UIApplication sendEvent:] + 340</div><div class="line">    frame #49: 0x0000000189f8acb8 UIKit`__dispatchPreprocessedEventFromEventQueue + 2736</div><div class="line">    frame #50: 0x0000000189f84720 UIKit`__handleEventQueue + 784</div><div class="line">    frame #51: 0x0000000183902278 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</div><div class="line">    frame #52: 0x0000000183901bc0 CoreFoundation`__CFRunLoopDoSources0 + 524</div><div class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation`__CFRunLoopRun + 804</div><div class="line">    frame #54: 0x000000018382e048 CoreFoundation`CFRunLoopRunSpecific + 444</div><div class="line">    frame #55: 0x00000001852b1198 GraphicsServices`GSEventRunModal + 180</div><div class="line">    frame #56: 0x0000000189808628 UIKit`-[UIApplication _run] + 684</div><div class="line">    frame #57: 0x0000000189803360 UIKit`UIApplicationMain + 208</div><div class="line">    frame #58: 0x0000000100a3db78 Project_ent`main + 460 at main.swift:24</div><div class="line">    frame #59: 0x00000001828105b8 libdyld.dylib`start + 4</div><div class="line">(lldb)</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -408,6 +419,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Debug/" rel="tag"># Debug</a>
+          
+        </div>
       
 
       
@@ -525,7 +542,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -536,7 +553,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
