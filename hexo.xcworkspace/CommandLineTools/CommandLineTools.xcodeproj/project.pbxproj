@@ -280,7 +280,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../../\nhexo n reverse-ios-monkeydev";
+			shellScript = "cd ../../../\nhexo n push-queue-for-navigation";
 		};
 		32F48C2A1F3E9D8400434955 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

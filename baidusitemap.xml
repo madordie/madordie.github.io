@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://madordie.github.io/push-queue-for-navigation/</loc>
+    <lastmod>2017-08-16T02:19:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>如何正确的连续推新页面</title>
+        <pubTime>2017-08-16T02:05:46.000Z</pubTime>
+        
+        <tag>Debug</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/reverse-ios-monkeydev/</loc>
     <lastmod>2017-08-14T04:09:06.000Z</lastmod>
     <data>
@@ -24,14 +44,14 @@
 
     
   <url>
-    <loc>https://madordie.github.io/about-project-tableview/</loc>
+    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     <data>
         <display>
-        <title>项目中的UITableView</title>
-        <pubTime>2016-07-27T05:30:45.000Z</pubTime>
+        <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
+        <pubTime>2017-05-16T02:55:00.000Z</pubTime>
         
-        <tag>UITableView</tag>
+        <tag>FastImageCache</tag>
          
          
            
@@ -64,14 +84,14 @@
 
     
   <url>
-    <loc>https://madordie.github.io/debug-swift-notifa-frame/</loc>
+    <loc>https://madordie.github.io/about-project-tableview/</loc>
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     <data>
         <display>
-        <title>DEBUG - swift中取出通知中的frame</title>
-        <pubTime>2016-11-30T16:00:00.000Z</pubTime>
+        <title>项目中的UITableView</title>
+        <pubTime>2016-07-27T05:30:45.000Z</pubTime>
         
-        <tag>Debug</tag>
+        <tag>UITableView</tag>
          
          
            
@@ -84,14 +104,14 @@
 
     
   <url>
-    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
+    <loc>https://madordie.github.io/debug-swift-notifa-frame/</loc>
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     <data>
         <display>
-        <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
-        <pubTime>2017-05-16T02:55:00.000Z</pubTime>
+        <title>DEBUG - swift中取出通知中的frame</title>
+        <pubTime>2016-11-30T16:00:00.000Z</pubTime>
         
-        <tag>FastImageCache</tag>
+        <tag>Debug</tag>
          
          
            

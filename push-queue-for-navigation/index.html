@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Sketchplugin," />
+  <meta name="keywords" content="Debug," />
 
 
 
@@ -104,19 +104,17 @@
 
 
 
-<meta name="description" content="先来个README.md format-sketchplugin为Sketch自动生成自定义填充数据源插件。  使用方法 下载Release上的包，并双击打开 选择要随机填充的文本数据(支持多选，文本数据按照回车进行随机，会默认删除空数据) 选择随机填充的图片文件夹(只支持单选文件夹，选中文件夹内的.png、 .PNG、 .jpg、 .JPG、 .jpeg、 .JPEG、 .gif、 .GIF文件">
-<meta name="keywords" content="Sketchplugin">
+<meta name="description" content="题记当使用某个页面还没有进行viewDidAppear:的时候再进行一次推页面是不安全的。苹果在iPhone5C iOS7.1.2中Push时给出的警告：  “nested push animation can result in corrupted navigation bar. Finishing up a navigation transition in an unexpected stat">
+<meta name="keywords" content="Debug">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自定义数据填充Sketch插件">
-<meta property="og:url" content="https://madordie.github.io/format-sketchplugin/index.html">
+<meta property="og:title" content="如何正确的连续推新页面">
+<meta property="og:url" content="https://madordie.github.io/push-queue-for-navigation/index.html">
 <meta property="og:site_name" content="Keith's Blog">
-<meta property="og:description" content="先来个README.md format-sketchplugin为Sketch自动生成自定义填充数据源插件。  使用方法 下载Release上的包，并双击打开 选择要随机填充的文本数据(支持多选，文本数据按照回车进行随机，会默认删除空数据) 选择随机填充的图片文件夹(只支持单选文件夹，选中文件夹内的.png、 .PNG、 .jpg、 .JPG、 .jpeg、 .JPEG、 .gif、 .GIF文件">
-<meta property="og:image" content="https://github.com/madordie/format-sketchplugin/blob/master/Images/Untitled.gif?raw=true">
-<meta property="og:updated_time" content="2017-08-14T02:01:51.000Z">
+<meta property="og:description" content="题记当使用某个页面还没有进行viewDidAppear:的时候再进行一次推页面是不安全的。苹果在iPhone5C iOS7.1.2中Push时给出的警告：  “nested push animation can result in corrupted navigation bar. Finishing up a navigation transition in an unexpected stat">
+<meta property="og:updated_time" content="2017-08-16T02:19:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自定义数据填充Sketch插件">
-<meta name="twitter:description" content="先来个README.md format-sketchplugin为Sketch自动生成自定义填充数据源插件。  使用方法 下载Release上的包，并双击打开 选择要随机填充的文本数据(支持多选，文本数据按照回车进行随机，会默认删除空数据) 选择随机填充的图片文件夹(只支持单选文件夹，选中文件夹内的.png、 .PNG、 .jpg、 .JPG、 .jpeg、 .JPEG、 .gif、 .GIF文件">
-<meta name="twitter:image" content="https://github.com/madordie/format-sketchplugin/blob/master/Images/Untitled.gif?raw=true">
+<meta name="twitter:title" content="如何正确的连续推新页面">
+<meta name="twitter:description" content="题记当使用某个页面还没有进行viewDidAppear:的时候再进行一次推页面是不安全的。苹果在iPhone5C iOS7.1.2中Push时给出的警告：  “nested push animation can result in corrupted navigation bar. Finishing up a navigation transition in an unexpected stat">
 
 
 
@@ -145,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="https://madordie.github.io/format-sketchplugin/"/>
+  <link rel="canonical" href="https://madordie.github.io/push-queue-for-navigation/"/>
 
 
 
 
 
-  <title>自定义数据填充Sketch插件 | Keith's Blog</title>
+  <title>如何正确的连续推新页面 | Keith's Blog</title>
   
 
 
@@ -298,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/format-sketchplugin/">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/push-queue-for-navigation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keith">
@@ -315,7 +313,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">自定义数据填充Sketch插件</h2>
+          <h2 class="post-title" itemprop="name headline">如何正确的连续推新页面</h2>
         
 
         <div class="post-meta">
@@ -327,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T14:45:12+08:00">
-                2017-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T10:05:46+08:00">
+                2017-08-16
               </time>
             
 
@@ -350,8 +348,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -387,24 +385,46 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="先来个README-md"><a href="#先来个README-md" class="headerlink" title="先来个README.md"></a>先来个README.md</h2><blockquote>
-<h2 id="format-sketchplugin"><a href="#format-sketchplugin" class="headerlink" title="format-sketchplugin"></a><a href="https://github.com/madordie/format-sketchplugin" target="_blank" rel="external">format-sketchplugin</a></h2><p>为Sketch自动生成自定义填充数据源插件。</p>
-<p><img src="https://github.com/madordie/format-sketchplugin/blob/master/Images/Untitled.gif?raw=true" alt="预览"></p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
-<li>下载<a href="https://github.com/madordie/format-sketchplugin/releases" target="_blank" rel="external">Release</a>上的包，并双击打开</li>
-<li>选择要随机填充的文本数据(支持多选，文本数据按照回车进行随机，会默认删除空数据)</li>
-<li>选择随机填充的图片文件夹(只支持单选文件夹，选中文件夹内的<code>.png</code>、 <code>.PNG</code>、 <code>.jpg</code>、 <code>.JPG</code>、 <code>.jpeg</code>、 <code>.JPEG</code>、 <code>.gif</code>、 <code>.GIF</code>文件将会被识别并作为数据源)</li>
-<li>将插件生成目录拖拽至窗口即完成设置</li>
-<li>文本、图片文件夹 可在保存前重复多次选择</li>
-<li>点击<code>制作</code>，即可在生成目录看到插件生成</li>
-</ul>
-<h2 id="生成说明"><a href="#生成说明" class="headerlink" title="生成说明"></a>生成说明</h2><ul>
-<li>文本数据按照文本文件名作为标示</li>
-<li>图片文件夹按照图片文件夹名作为标示</li>
-<li>保存时，文本数据会读取至插件内</li>
-<li>保存时，图片文件夹会复制至插件内(不识别子目录，并只拷贝可识别的素材)</li>
-</ul>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="题记"><a href="#题记" class="headerlink" title="题记"></a>题记</h2><p>当使用某个页面还没有进行viewDidAppear:的时候再进行一次推页面是不安全的。苹果在iPhone5C iOS7.1.2中Push时给出的警告：</p>
+<blockquote>
+<p>“nested push animation can result in corrupted navigation bar. Finishing up a navigation transition in an unexpected state. Navigation Bar subview tree might get corrupted.”</p>
 </blockquote>
+<p>这说明这个不安全的操作可能会导致应用Crash，Crash统计系统统计的原因为：</p>
+<blockquote>
+<p>“Can’t add self as subview”。</p>
+</blockquote>
+<p>本文尝试解决该Crash，实现嵌套安全的去推页面。</p>
+<a id="more"></a>
+<h2 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h2><p>苹果给出的警告中指出嵌套推页面可能导致导航栏损坏，其导航栏子视图树可能损坏。也就是说当我对VC1进行Push出VC2时候要注意，必须要等到VC1显示周期完全结束，才能进行PushVC2操作。</p>
+<p>此问题的发生并不是简单的一个代码块中使用同一个导航控制器进行连续Push操作。回想一下<code>ViewController</code>的生命周期。其实标志着<code>ViewController</code>完全显示的是<code>viewDidAppear:</code>调用，那么在此方法生命周期之前的方法中进行Push均有可能造成“nested push animation can result in corrupted navigation bar”。</p>
+<p>由于iOS7.1.2的iPhone5C被升级，无法必现此BUG，所以没有截图。可以自己找个测一下。。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="方案一：通过延时避开此时间段。"><a href="#方案一：通过延时避开此时间段。" class="headerlink" title="方案一：通过延时避开此时间段。"></a>方案一：通过延时避开此时间段。</h3><p>在很多源码中会看到这样一行代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//  0.1是我随手写的。。是一个根据自己情况估算上一个PUSH的耗时，</div><div class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">    [self.navigationController pushViewController:vc animated:YES];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>如上代码，在<a href="https://github.com/search?utf8=✓&amp;q=dispatch_after+pushViewController%3A&amp;type=Code&amp;ref=searchresults" target="_blank" rel="external">GitHub中很常见</a>，起初并不懂其用意，当遇到这个问题时候我才明白。</p>
+<p>还有一种代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//  objccn.io</div><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">    // Some UIKit call that had timing issues but works fine</div><div class="line">    // in the next runloop.</div><div class="line">    [self updatePopoverSize];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这种代码是切换到下个代码周期，来避开嵌套的时序问题。<a href="https://objccn.io/issue-2-4/" target="_blank" rel="external">objc.io</a>有这么个文章说了这个问题的弊端：</p>
+<blockquote>
+<p>用 <code>dispatch_async</code> 修复时序问题</p>
+<p>在使用 UIKit 的时候遇到了一些时序上的麻烦？很多时候，这样进行“修正”看来非常完美：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">    // Some UIKit call that had timing issues but works fine</div><div class="line">    // in the next runloop.</div><div class="line">    [self updatePopoverSize];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</blockquote>
+<p>千万别这么做！相信我，这种做法将会在之后你的 app 规模大一些的时候让你找不着北。这种代码非常难以调试，并且你很快就会陷入用更多的 dispatch 来修复所谓的莫名其妙的”时序问题”。审视你的代码，并且找到合适的地方来进行调用（比如在 viewWillAppear 里调用，而不是 viewDidLoad 之类的）才是解决这个问题的正确做法。我在自己的代码中也还留有一些这样的 hack，但是我为它们基本都做了正确的文档工作，并且对应的 issue 也被一一记录过。</p>
+<p>记住这不是真正的 <code>GCD</code> 特性，而只是一个在 <code>GCD</code> 下很容易实现的常见反面模式。事实上你可以使用 <code>performSelector:afterDelay:</code> 方法来实现同样的操作，其中 <code>delay</code> 是在对应时间后的 <code>runloop</code>。</p>
+<p>其实这样设计很简单，目的就是通过<code>GCD</code>的延迟提交来“巧妙”的避开Push的时间，很显然这个时间对于机型、系统版本、当前手机状况来说很难把握。但是不得不说的是确实有些作用，那就是能避开部分问题。所以本来小概率发生的事情，这个再过滤一些，这个BUG就微乎其微了。</p>
+<h3 id="方案二：强制在viewDidAppear-之后进行Push。"><a href="#方案二：强制在viewDidAppear-之后进行Push。" class="headerlink" title="方案二：强制在viewDidAppear:之后进行Push。"></a>方案二：强制在<code>viewDidAppear:</code>之后进行Push。</h3><p>不得不说这样的做法我曾经用过一个页面，不多说，麻烦程度自己测一下。</p>
+<p>如果说多人合作项目呢，如果说页面比较多、工作比较忙呢？呵呵哒</p>
+<h3 id="方案三：对UINavigationController所Push的VC进行队列化。"><a href="#方案三：对UINavigationController所Push的VC进行队列化。" class="headerlink" title="方案三：对UINavigationController所Push的VC进行队列化。"></a>方案三：对<code>UINavigationController</code>所Push的VC进行队列化。</h3><p>对于VC是否已经Push结束，<code>UINavigationController</code>最清楚，而这一结果刚好通过代理传递出来。所以可以利用这一点对Push的VCs进行队列化，防止其进行嵌套Push。</p>
+<p>那么问题就可以得到很好的解决。</p>
+<p>对 方案三 的详细封装</p>
+<p>对于该问题的最简单的、便于合作、便于更改的就是方案三了，对方案三进行展开可得如下步骤：</p>
+<p>设置<code>UINavigationController</code>的代理，并实现<code>willShowViewController</code>、<code>didShowViewController</code>方法。</p>
+<p>拦截到<code>UINavigationController</code>的Push方法，通过步骤1的代理判断到是否正在Show,如果不在Show则显示，如果正在Show则把当前的VC入队列。<br>在didShowViewController中判断队列中是否有数据，如果有则说明发生了重叠，该队列中第一个进行Push。<br>为了更好的兼容所遇到的Push情况，使用0.5秒作为兜底，对队列进行放开。<br>结束，就是这样子。</p>
+<p>说下我实现的方法，其实重点在于如何拦截Push操作。</p>
+<p>我最开始采用了继承<code>UINavigationController</code>的方法，因为继承但一，不会干扰其他的类。值得一赞。</p>
+<p>对于要解决其问题，所有的都需要进行继承，过于麻烦，于是增加了第二种方案：HOOK。</p>
+<p>两种方案为了达到统一的效果，所以拉出其中的代理，就完成了统一。</p>
+<p><a href="https://github.com/madordie/KTJPushQueueForNavigation.git" target="_blank" rel="external">代码＋Demo</a></p>
 
       
     </div>
@@ -422,7 +442,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Sketchplugin/" rel="tag"># Sketchplugin</a>
+            <a href="/tags/Debug/" rel="tag"># Debug</a>
           
         </div>
       
@@ -435,18 +455,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/reverse-ios-ssh/" rel="next" title="iOS逆向-设备ssh免密登录">
-                <i class="fa fa-chevron-left"></i> iOS逆向-设备ssh免密登录
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/ios11-beta/" rel="prev" title="ios11-beta">
-                ios11-beta <i class="fa fa-chevron-right"></i>
+              <a href="/reverse-ios-monkeydev/" rel="prev" title="iOS逆向-monkeydev工具">
+                iOS逆向-monkeydev工具 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -633,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先来个README-md"><span class="nav-number">1.</span> <span class="nav-text">先来个README.md</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#format-sketchplugin"><span class="nav-number">2.</span> <span class="nav-text">format-sketchplugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成说明"><span class="nav-number">4.</span> <span class="nav-text">生成说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题记"><span class="nav-number">1.</span> <span class="nav-text">题记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题所在"><span class="nav-number">2.</span> <span class="nav-text">问题所在</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一：通过延时避开此时间段。"><span class="nav-number">3.1.</span> <span class="nav-text">方案一：通过延时避开此时间段。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二：强制在viewDidAppear-之后进行Push。"><span class="nav-number">3.2.</span> <span class="nav-text">方案二：强制在viewDidAppear:之后进行Push。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三：对UINavigationController所Push的VC进行队列化。"><span class="nav-number">3.3.</span> <span class="nav-text">方案三：对UINavigationController所Push的VC进行队列化。</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -809,9 +825,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://madordie.github.io/format-sketchplugin/';
-          this.page.identifier = 'format-sketchplugin/';
-          this.page.title = '自定义数据填充Sketch插件';
+          this.page.url = 'https://madordie.github.io/push-queue-for-navigation/';
+          this.page.identifier = 'push-queue-for-navigation/';
+          this.page.title = '如何正确的连续推新页面';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://madordie.disqus.com/embed.js';
