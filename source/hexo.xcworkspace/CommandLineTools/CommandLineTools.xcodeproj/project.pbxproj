@@ -293,7 +293,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../../\ngit add .\ngit commit -am \"backup\"";
+			shellScript = "cd ../../../\ngit add .\ngit commit -am \"backup\"\ngit push https://github.com/madordie/madordie.github.io.git hexo";
 		};
 		32F48C361F3E9E2E00434955 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-08-16T02:19:23.000Z</updated>
+  <updated>2017-08-14T04:09:06.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,76 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>如何正确的连续推新页面</title>
-    <link href="https://madordie.github.io/push-queue-for-navigation/"/>
-    <id>https://madordie.github.io/push-queue-for-navigation/</id>
-    <published>2017-08-16T02:05:46.000Z</published>
-    <updated>2017-08-16T02:19:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="题记"><a href="#题记" class="headerlink" title="题记"></a>题记</h2><p>当使用某个页面还没有进行viewDidAppear:的时候再进行一次推页面是不安全的。苹果在iPhone5C iOS7.1.2中Push时给出的警告：</p>
-<blockquote>
-<p>“nested push animation can result in corrupted navigation bar. Finishing up a navigation transition in an unexpected state. Navigation Bar subview tree might get corrupted.”</p>
-</blockquote>
-<p>这说明这个不安全的操作可能会导致应用Crash，Crash统计系统统计的原因为：</p>
-<blockquote>
-<p>“Can’t add self as subview”。</p>
-</blockquote>
-<p>本文尝试解决该Crash，实现嵌套安全的去推页面。</p>
-<a id="more"></a>
-<h2 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h2><p>苹果给出的警告中指出嵌套推页面可能导致导航栏损坏，其导航栏子视图树可能损坏。也就是说当我对VC1进行Push出VC2时候要注意，必须要等到VC1显示周期完全结束，才能进行PushVC2操作。</p>
-<p>此问题的发生并不是简单的一个代码块中使用同一个导航控制器进行连续Push操作。回想一下<code>ViewController</code>的生命周期。其实标志着<code>ViewController</code>完全显示的是<code>viewDidAppear:</code>调用，那么在此方法生命周期之前的方法中进行Push均有可能造成“nested push animation can result in corrupted navigation bar”。</p>
-<p>由于iOS7.1.2的iPhone5C被升级，无法必现此BUG，所以没有截图。可以自己找个测一下。。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="方案一：通过延时避开此时间段。"><a href="#方案一：通过延时避开此时间段。" class="headerlink" title="方案一：通过延时避开此时间段。"></a>方案一：通过延时避开此时间段。</h3><p>在很多源码中会看到这样一行代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//  0.1是我随手写的。。是一个根据自己情况估算上一个PUSH的耗时，</div><div class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">    [self.navigationController pushViewController:vc animated:YES];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>如上代码，在<a href="https://github.com/search?utf8=✓&amp;q=dispatch_after+pushViewController%3A&amp;type=Code&amp;ref=searchresults" target="_blank" rel="external">GitHub中很常见</a>，起初并不懂其用意，当遇到这个问题时候我才明白。</p>
-<p>还有一种代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//  objccn.io</div><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">    // Some UIKit call that had timing issues but works fine</div><div class="line">    // in the next runloop.</div><div class="line">    [self updatePopoverSize];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>这种代码是切换到下个代码周期，来避开嵌套的时序问题。<a href="https://objccn.io/issue-2-4/" target="_blank" rel="external">objc.io</a>有这么个文章说了这个问题的弊端：</p>
-<blockquote>
-<p>用 <code>dispatch_async</code> 修复时序问题</p>
-<p>在使用 UIKit 的时候遇到了一些时序上的麻烦？很多时候，这样进行“修正”看来非常完美：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">    // Some UIKit call that had timing issues but works fine</div><div class="line">    // in the next runloop.</div><div class="line">    [self updatePopoverSize];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</blockquote>
-<p>千万别这么做！相信我，这种做法将会在之后你的 app 规模大一些的时候让你找不着北。这种代码非常难以调试，并且你很快就会陷入用更多的 dispatch 来修复所谓的莫名其妙的”时序问题”。审视你的代码，并且找到合适的地方来进行调用（比如在 viewWillAppear 里调用，而不是 viewDidLoad 之类的）才是解决这个问题的正确做法。我在自己的代码中也还留有一些这样的 hack，但是我为它们基本都做了正确的文档工作，并且对应的 issue 也被一一记录过。</p>
-<p>记住这不是真正的 <code>GCD</code> 特性，而只是一个在 <code>GCD</code> 下很容易实现的常见反面模式。事实上你可以使用 <code>performSelector:afterDelay:</code> 方法来实现同样的操作，其中 <code>delay</code> 是在对应时间后的 <code>runloop</code>。</p>
-<p>其实这样设计很简单，目的就是通过<code>GCD</code>的延迟提交来“巧妙”的避开Push的时间，很显然这个时间对于机型、系统版本、当前手机状况来说很难把握。但是不得不说的是确实有些作用，那就是能避开部分问题。所以本来小概率发生的事情，这个再过滤一些，这个BUG就微乎其微了。</p>
-<h3 id="方案二：强制在viewDidAppear-之后进行Push。"><a href="#方案二：强制在viewDidAppear-之后进行Push。" class="headerlink" title="方案二：强制在viewDidAppear:之后进行Push。"></a>方案二：强制在<code>viewDidAppear:</code>之后进行Push。</h3><p>不得不说这样的做法我曾经用过一个页面，不多说，麻烦程度自己测一下。</p>
-<p>如果说多人合作项目呢，如果说页面比较多、工作比较忙呢？呵呵哒</p>
-<h3 id="方案三：对UINavigationController所Push的VC进行队列化。"><a href="#方案三：对UINavigationController所Push的VC进行队列化。" class="headerlink" title="方案三：对UINavigationController所Push的VC进行队列化。"></a>方案三：对<code>UINavigationController</code>所Push的VC进行队列化。</h3><p>对于VC是否已经Push结束，<code>UINavigationController</code>最清楚，而这一结果刚好通过代理传递出来。所以可以利用这一点对Push的VCs进行队列化，防止其进行嵌套Push。</p>
-<p>那么问题就可以得到很好的解决。</p>
-<p>对 方案三 的详细封装</p>
-<p>对于该问题的最简单的、便于合作、便于更改的就是方案三了，对方案三进行展开可得如下步骤：</p>
-<p>设置<code>UINavigationController</code>的代理，并实现<code>willShowViewController</code>、<code>didShowViewController</code>方法。</p>
-<p>拦截到<code>UINavigationController</code>的Push方法，通过步骤1的代理判断到是否正在Show,如果不在Show则显示，如果正在Show则把当前的VC入队列。<br>在didShowViewController中判断队列中是否有数据，如果有则说明发生了重叠，该队列中第一个进行Push。<br>为了更好的兼容所遇到的Push情况，使用0.5秒作为兜底，对队列进行放开。<br>结束，就是这样子。</p>
-<p>说下我实现的方法，其实重点在于如何拦截Push操作。</p>
-<p>我最开始采用了继承<code>UINavigationController</code>的方法，因为继承但一，不会干扰其他的类。值得一赞。</p>
-<p>对于要解决其问题，所有的都需要进行继承，过于麻烦，于是增加了第二种方案：HOOK。</p>
-<p>两种方案为了达到统一的效果，所以拉出其中的代理，就完成了统一。</p>
-<p><a href="https://github.com/madordie/KTJPushQueueForNavigation.git" target="_blank" rel="external">代码＋Demo</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题记&quot;&gt;&lt;a href=&quot;#题记&quot; class=&quot;headerlink&quot; title=&quot;题记&quot;&gt;&lt;/a&gt;题记&lt;/h2&gt;&lt;p&gt;当使用某个页面还没有进行viewDidAppear:的时候再进行一次推页面是不安全的。苹果在iPhone5C iOS7.1.2中Push时给出的警告：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;“nested push animation can result in corrupted navigation bar. Finishing up a navigation transition in an unexpected state. Navigation Bar subview tree might get corrupted.”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这说明这个不安全的操作可能会导致应用Crash，Crash统计系统统计的原因为：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;“Can’t add self as subview”。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;本文尝试解决该Crash，实现嵌套安全的去推页面。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
-    
-  </entry>
   
   <entry>
     <title>iOS逆向-monkeydev工具</title>
@@ -1394,6 +1324,36 @@ class CMExpandingTextField: UITextField {
     
     
       <category term="正则表达式" scheme="https://madordie.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DEBUG - swift中取出通知中的frame</title>
+    <link href="https://madordie.github.io/debug-swift-notifa-frame/"/>
+    <id>https://madordie.github.io/debug-swift-notifa-frame/</id>
+    <published>2016-11-30T16:00:00.000Z</published>
+    <updated>2017-08-14T02:20:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>swift中获取OC存储的Frame两种获取方案。</p>
+<a id="more"></a>
+<h1 id="Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。"><a href="#Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。" class="headerlink" title="Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。"></a>Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。</h1><p>  –&gt;更新于2016.12.1</p>
+<p>  <strong> Version 8.1 (8B62) </strong></p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">keyboardShow</span><span class="params">(sender: Notification)</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> endFrame = <span class="type">CGRect</span>.zero        </div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> frame = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">CGRect</span> &#123;</div><div class="line">        endFrame = frame</div><div class="line">        <span class="comment">//  *** Debug是可以通过的。但是Release无法通过。</span></div><div class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as CGRect"</span>)</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> value = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">NSValue</span> &#123;</div><div class="line">        endFrame = value.cgRectValue</div><div class="line">        <span class="comment">//  *** Release会取出NSValue</span></div><div class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as NSValue"</span>)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>  由于Release无法调试，所以费了不少劲。首先Swift中的字典已经可以存放值类型，其本身也是值类型。所以我首先选择了第一种写法<code>let frame = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect</code>, 但是Release情况下却发生解包失败的情况。所以采用OC的传统写法<code>let value = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue</code>。就能解析出来。但是总感觉OC的方法不够swift😂。。。</p>
+<p>  有同事直接强制转换为NSValue是没有问题的，于是乎试了一下，发现直接校验NSValue就可以。但是swift中感觉不应该有这个转换了，毕竟本身就可以存储CGRect..</p>
+<p>  猜测原因：目前阶段Swift的字典和OC的字典数据结构还并未完全一致。。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;swift中获取OC存储的Frame两种获取方案。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+    
+      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
     
   </entry>
   
