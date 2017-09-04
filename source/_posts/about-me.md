@@ -9,7 +9,7 @@ __孙继刚__
 QQ: 453870736
 博客：https://madordie.github.io
 GitHub：https://github.com/madordie
-E-mail: [keith_127@126.com](mailto:keith_127@126.com)
+E-mail: [e.madordie@gmail.com](mailto:e.madordie@gmail.com)
 
 ## 教育背景
 
