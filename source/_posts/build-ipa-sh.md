@@ -432,3 +432,31 @@ Jenkins自动构建脚本解决方案。
   git commit -am $bundleVersion
   git push -f origin master
   ```
+
+## 将符号表dsym上传至bugly
+
+```sh
+# post dsym for bugly
+cd Fangduoduo
+
+unzip -o Fangduoduo_ent.app.dSYM.zip -d dsym
+app_infoplist_path=$(pwd)/Fangduoduo/Info.plist
+package='xxx.fangdd.com'
+version=$(/usr/libexec/PlistBuddy -c "print CFBundleVersion" ${app_infoplist_path})
+
+java -jar /Users/FDD/.jenkins/workspace/lib/bugly/buglySymboliOS.jar \
+    -i dsym/Fangduoduo_ent \
+    -dsym \
+    -u \
+    -id buglyid \
+    -key buglykey \
+    -package ${package} \
+    -version ${version}
+
+```
+
+## 修改环境代码
+
+```sh
+sed -i '' "s/#define RELEASE_MODE [[:digit:]]/#define RELEASE_MODE ${mode}/g" ./Fangduoduo/config/AppConfig.h
+```
