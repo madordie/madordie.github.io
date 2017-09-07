@@ -436,23 +436,29 @@ Jenkins自动构建脚本解决方案。
 ## 将符号表dsym上传至bugly
 
 ```sh
-# post dsym for bugly
-cd Fangduoduo
+path='/Users/xx/.jenkins/workspace/xzx'
+schem='xx'
+package='xx'
+bugly_id='xx'
+bugly_key='xx'
 
-unzip -o Fangduoduo_ent.app.dSYM.zip -d dsym
-app_infoplist_path=$(pwd)/Fangduoduo/Info.plist
-package='xxx.fangdd.com'
+cp ${path}/xx/Info.plist ./Info.plist
+cp ${path}/xx.app.dSYM.zip ./dsym.zip
+
+# ------------ post dsym ------------ #
+
+unzip -o dsym.zip -d dsym
+app_infoplist_path='Info.plist'
 version=$(/usr/libexec/PlistBuddy -c "print CFBundleVersion" ${app_infoplist_path})
 
-java -jar /Users/FDD/.jenkins/workspace/lib/bugly/buglySymboliOS.jar \
-    -i dsym/Fangduoduo_ent \
-    -dsym \
-    -u \
-    -id buglyid \
-    -key buglykey \
-    -package ${package} \
-    -version ${version}
-
+java -jar ./bugly/buglySymboliOS.jar \
+-i dsym/${schem} \
+-dsym \
+-u \
+-id ${bugly_id} \
+-key ${bugly_key} \
+-package ${package} \
+-version ${version}
 ```
 
 ## 修改环境代码
