@@ -445,6 +445,7 @@ bugly_key='xx'
 cp ${path}/xx/Info.plist ./Info.plist
 cp ${path}/xx.app.dSYM.zip ./dsym.zip
 
+
 # ------------ post dsym ------------ #
 
 unzip -o dsym.zip -d dsym
@@ -452,14 +453,18 @@ app_infoplist_path='Info.plist'
 version=$(/usr/libexec/PlistBuddy -c "print CFBundleVersion" ${app_infoplist_path})
 
 java -jar ./bugly/buglySymboliOS.jar \
--i dsym/${schem} \
--dsym \
--u \
--id ${bugly_id} \
--key ${bugly_key} \
--package ${package} \
--version ${version}
-```
+    -i dsym/${scheme} \
+    -dsym \
+    -u \
+    -id ${bugly_id} \
+    -key ${bugly_key} \
+    -package ${package} \
+    -version ${version}
+
+# ------------ UUID ------------ #
+
+unzip -o ./dsym/${scheme}.zip
+xcrun dwarfdump --uuid ./${scheme} >> ./uuids-${version}.txt```
 
 ## 修改环境代码
 
