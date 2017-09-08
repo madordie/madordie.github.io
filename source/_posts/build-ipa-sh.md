@@ -489,3 +489,8 @@ brew services start jenkins
 nohup jenkins > ~/fdd-backup/jenkins.log g 2>&1 &
 ```
 无法签名...
+
+上面2个方案并不是不能运行，而是需要额外配置。。😂
+
+------
+- https://gxnotes.com/article/61107.html
