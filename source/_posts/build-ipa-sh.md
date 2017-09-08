@@ -471,3 +471,5 @@ xcrun dwarfdump --uuid ./${scheme} >> ./uuids-${version}.txt```
 ```sh
 sed -i '' "s/#define RELEASE_MODE [[:digit:]]/#define RELEASE_MODE ${mode}/g" ./Fangduoduo/config/AppConfig.h
 ```
+----
+- [Installing Jenkins OS X Homebrew](http://flummox-engineering.blogspot.com/2016/01/installing-jenkins-os-x-homebrew.html)
