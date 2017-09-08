@@ -471,6 +471,21 @@ xcrun dwarfdump --uuid ./${scheme} >> ./uuids-${version}.txt```
 ```sh
 sed -i '' "s/#define RELEASE_MODE [[:digit:]]/#define RELEASE_MODE ${mode}/g" ./Fangduoduo/config/AppConfig.h
 ```
-----
+
+## Jenkins
+
+### 安装
+
 - [Installing Jenkins OS X Homebrew](http://flummox-engineering.blogspot.com/2016/01/installing-jenkins-os-x-homebrew.html)
-- 后台运行Jenkins `nohup jenkins > ~/fdd-backup/jenkins.log g 2>&1 &`
+
+### 后台运行
+
+```sh
+brew services start jenkins
+```
+无法识别gerrit....
+
+```sh
+nohup jenkins > ~/fdd-backup/jenkins.log g 2>&1 &
+```
+无法签名...
