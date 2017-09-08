@@ -473,3 +473,4 @@ sed -i '' "s/#define RELEASE_MODE [[:digit:]]/#define RELEASE_MODE ${mode}/g" ./
 ```
 ----
 - [Installing Jenkins OS X Homebrew](http://flummox-engineering.blogspot.com/2016/01/installing-jenkins-os-x-homebrew.html)
+- 后台运行Jenkins `nohup jenkins > ~/fdd-backup/jenkins.log g 2>&1 &`
