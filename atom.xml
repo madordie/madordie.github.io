@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-08-14T04:09:06.000Z</updated>
+  <updated>2017-09-14T03:48:49.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,6 +14,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AppStore的折叠效果</title>
+    <link href="https://madordie.github.io/appstore-truncate/"/>
+    <id>https://madordie.github.io/appstore-truncate/</id>
+    <published>2017-09-14T03:46:18.000Z</published>
+    <updated>2017-09-14T03:48:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="UITextView-More"><a href="#UITextView-More" class="headerlink" title="UITextView-More"></a><a href="https://github.com/madordie/UITextView-More" target="_blank" rel="external">UITextView-More</a></h2><p>使用UITextKit 实现“更多”的折叠效果</p>
+<p><img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="预览"></p>
+<a id="more"></a>
+<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><h3 id="获取最后一行Rect"><a href="#获取最后一行Rect" class="headerlink" title="获取最后一行Rect"></a>获取最后一行Rect</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> lastRect = <span class="type">CGRect</span>.zero</div><div class="line">layoutManager.enumerateEnclosingRects(forGlyphRange: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: textStorage.string.characters.<span class="built_in">count</span>), withinSelectedGlyphRange: <span class="type">NSRange</span>(location: <span class="type">NSNotFound</span>, length: <span class="number">0</span>), <span class="keyword">in</span>: textContainer, using: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (rect, isStop) <span class="keyword">in</span></div><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> _self = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line"><span class="keyword">var</span> newRect = rect</div><div class="line">newRect.origin.y += _self.textContainerInset.top</div><div class="line">lastRect = newRect</div><div class="line">&#125;)</div><div class="line"><span class="built_in">print</span>(lastRect)</div></pre></td></tr></table></figure>
+<h3 id="增加-exclusionPaths"><a href="#增加-exclusionPaths" class="headerlink" title="增加 exclusionPaths"></a>增加 <code>exclusionPaths</code></h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">textContainer.exclusionPaths = [<span class="type">UIBezierPath</span>.<span class="keyword">init</span>(rect: rect)]</div></pre></td></tr></table></figure>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
+<li><code>UITextView</code>默认携带左右边距，通过<code>UITextView.textContainer.lineFragmentPadding</code>获取</li>
+<li><code>UITextView</code>默认携带上下左右边距(<code>UITextView.textContainerInset</code>)，其中左右和<code>lineFragmentPadding</code>相加</li>
+<li>此处并没有对<a href="https://github.com/madordie/UITextView-More/blob/master/TruncateTextView.swift" target="_blank" rel="external">TruncateTextView</a>进行过多的设置，主要是因为继承在UITextView下，<a href="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif" target="_blank" rel="external">GIF</a>中的这部分设置放在了<a href="https://github.com/madordie/UITextView-More/blob/master/Demo-AppStore-More/ViewController.swift" target="_blank" rel="external">ViewController.swift</a>中</li>
+<li>此处使用的是<code>frame</code>，可以在<code>UIView.sizeToFit()</code>之后获取到<code>UIView</code>的<code>Size</code>。约束也大抵如此</li>
+</ul>
+<hr>
+<ul>
+<li>感谢<a href="https://github.com/lexiaoyao20" target="_blank" rel="external">乐逍遥</a>提供的例子，才找到了<code>open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange</code>方法😂</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;UITextView-More&quot;&gt;&lt;a href=&quot;#UITextView-More&quot; class=&quot;headerlink&quot; title=&quot;UITextView-More&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://github.com/madordie/UITextView-More&quot;&gt;UITextView-More&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;使用UITextKit 实现“更多”的折叠效果&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true&quot; alt=&quot;预览&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+    
+      <category term="效果" scheme="https://madordie.github.io/tags/%E6%95%88%E6%9E%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS自动化-Jenkins环境搭建</title>
+    <link href="https://madordie.github.io/ios-automation-jenkins-configuration/"/>
+    <id>https://madordie.github.io/ios-automation-jenkins-configuration/</id>
+    <published>2017-09-10T01:49:32.000Z</published>
+    <updated>2017-09-14T03:55:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>忙着适配iOS11  还没更新呢….</p>
+<p><a href="https://madordie.github.io/ios11-beta/">iOS11-beta</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;忙着适配iOS11  还没更新呢….&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;htt
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+    
+      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+    
+      <category term="Jenkins" scheme="https://madordie.github.io/tags/Jenkins/"/>
+    
+  </entry>
   
   <entry>
     <title>iOS逆向-monkeydev工具</title>
@@ -279,22 +344,23 @@
   </entry>
   
   <entry>
-    <title>ios11-beta</title>
+    <title>iOS11-beta</title>
     <link href="https://madordie.github.io/ios11-beta/"/>
     <id>https://madordie.github.io/ios11-beta/</id>
     <published>2017-06-12T09:20:58.000Z</published>
-    <updated>2017-08-14T02:02:00.000Z</updated>
+    <updated>2017-09-14T03:55:52.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>iOS11 预览版安装体验笔记。</p>
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>毕竟beta版，升级需谨慎。目前来看体验上还是有点卡的～～😂</p>
 <p>卡顿让我实在无法忍受，并与6.15号重置回iOS10.3.2 。。。</p>
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="失效的automaticallyAdjustsScrollViewInsets"><a href="#失效的automaticallyAdjustsScrollViewInsets" class="headerlink" title="失效的automaticallyAdjustsScrollViewInsets"></a>失效的<code>automaticallyAdjustsScrollViewInsets</code></h3><p>API 声明：</p>
+<p>9.13 GM出来了，再安装～～</p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="失效的automaticallyAdjustsScrollViewInsets"><a href="#失效的automaticallyAdjustsScrollViewInsets" class="headerlink" title="失效的automaticallyAdjustsScrollViewInsets"></a>失效的<code>automaticallyAdjustsScrollViewInsets</code></h3><p>iOS11 版本中 <strong>立即失效</strong>。</p>
+<p>API 声明：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@available</span>(iOS <span class="number">2.0</span>, *)</div><div class="line">open <span class="class"><span class="keyword">class</span> <span class="title">UIViewController</span> : <span class="title">UIResponder</span>, ... </span>&#123;</div><div class="line">	...</div><div class="line">	<span class="meta">@available</span>(iOS, introduced: <span class="number">7.0</span>, deprecated: <span class="number">11.0</span>)</div><div class="line">	open <span class="keyword">var</span> automaticallyAdjustsScrollViewInsets: <span class="type">Bool</span> <span class="comment">// Defaults to YES</span></div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>相应的的替换方案：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@available</span>(iOS <span class="number">2.0</span>, *)</div><div class="line">open <span class="class"><span class="keyword">class</span> <span class="title">UIScrollView</span> : <span class="title">UIView</span>, ... </span>&#123;</div><div class="line">	...</div><div class="line">    <span class="comment">/* Configure the behavior of adjustedContentInset.</span></div><div class="line">     Default is UIScrollViewContentInsetAdjustmentAutomatic.</div><div class="line">     */</div><div class="line">    <span class="meta">@available</span>(iOS <span class="number">11.0</span>, *)</div><div class="line">    open <span class="keyword">var</span> contentInsetAdjustmentBehavior: <span class="type">UIScrollViewContentInsetAdjustmentBehavior</span></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>iOS11 版本中立即失效。</p>
-]]></content>
+<h3 id="筛选view"><a href="#筛选view" class="headerlink" title="筛选view"></a>筛选view</h3><h3 id="WKWebView"><a href="#WKWebView" class="headerlink" title="WKWebView"></a>WKWebView</h3>]]></content>
     
     <summary type="html">
     
@@ -643,7 +709,7 @@
 <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>按照<a href="https://blog.callmewhy.com/2015/09/21/rxswift-getting-started-0/" target="_blank" rel="external">RxSwift 入坑手册 Part0 - 基础概念</a>格式进行补充。</p>
 <h2 id="SupportCode"><a href="#SupportCode" class="headerlink" title="SupportCode"></a>SupportCode</h2><p>在进入正题之前，先看下项目里的 <code>SupportCode.swift</code> ，主要为 <code>playground</code> 提供了两个便利函数。</p>
 <p>一个是 <code>example</code> 函数，专门用来写示例代码的，统一输出 log 便于标记浏览，同时还能保持变量不污染全局：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">example</span><span class="params">(description: String, action: <span class="params">()</span></span></span> -&gt; ()) &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"\n--- \(description) example ---"</span>)</div><div class="line">    action()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">example</span><span class="params">(description: String, action: <span class="params">()</span></span></span> -&gt; ()) &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"\n--- <span class="subst">\(description)</span> example ---"</span>)</div><div class="line">    action()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>另一个是 <code>delay</code> 函数，通过 <code>dispatch_after</code> 用来演示延时的：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">delay</span><span class="params">(delay:Double, closure:<span class="params">()</span></span></span>-&gt;()) &#123;</div><div class="line">    dispatch_after(</div><div class="line">        dispatch_time(</div><div class="line">            <span class="type">DISPATCH_TIME_NOW</span>,</div><div class="line">            <span class="type">Int64</span>(delay * <span class="type">Double</span>(<span class="type">NSEC_PER_SEC</span>))</div><div class="line">        ),</div><div class="line">        dispatch_get_main_queue(), closure)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>主要介绍了 Rx 的基础： <code>Observable</code> 。 <code>Observable&lt;Element&gt;</code> 是观察者模式中被观察的对象，相当于一个事件序列 (<code>GeneratorType</code>) ，会向订阅者发送新产生的事件信息。事件信息分为三种：</p>
@@ -679,7 +745,7 @@
 <p>如果把 <code>Observable</code> 理解成不断输出事件的水管，那 <code>Subject</code> 就是套在上面的水龙头。它既怼着一根不断出水的水管，同时也向外面输送着新鲜水源。如果你直接用水杯接着水管的水，那可能导出来什么王水胶水完全把持不住；如果你在水龙头下面接着水，那你可以随心所欲的调成你想要的水速和水温。</p>
 <p>（好吧上面一段文档里没有，是我瞎掰的，如果理解错了还望打脸(￣ε(#￣)☆╰╮(￣▽￣///))</p>
 <p>在开始下面的代码之前，先定义一个辅助函数用于输出数据：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">writeSequenceToConsole</span>&lt;O: ObservableType&gt;<span class="params">(name: String, sequence: O)</span></span> &#123;</div><div class="line">    sequence</div><div class="line">        .subscribe &#123; e <span class="keyword">in</span></div><div class="line">            <span class="built_in">print</span>(<span class="string">"Subscription: \(name), event: \(e)"</span>)</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">writeSequenceToConsole</span>&lt;O: ObservableType&gt;<span class="params">(name: String, sequence: O)</span></span> &#123;</div><div class="line">    sequence</div><div class="line">        .subscribe &#123; e <span class="keyword">in</span></div><div class="line">            <span class="built_in">print</span>(<span class="string">"Subscription: <span class="subst">\(name)</span>, event: <span class="subst">\(e)</span>"</span>)</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="PublishSubject"><a href="#PublishSubject" class="headerlink" title="PublishSubject"></a>PublishSubject</h3><p><code>PublishSubject</code> 会发送订阅者从订阅之后的事件序列。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"PublishSubject"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> subject = <span class="type">PublishSubject</span>&lt;<span class="type">String</span>&gt;()</div><div class="line">    writeSequenceToConsole(<span class="string">"1"</span>, sequence: subject)</div><div class="line">    subject.on(.<span class="type">Next</span>(<span class="string">"a"</span>))</div><div class="line">    subject.on(.<span class="type">Next</span>(<span class="string">"b"</span>))</div><div class="line">    writeSequenceToConsole(<span class="string">"2"</span>, sequence: subject)</div><div class="line">    subject.on(.<span class="type">Next</span>(<span class="string">"c"</span>))</div><div class="line">    subject.on(.<span class="type">Next</span>(<span class="string">"d"</span>))</div><div class="line">&#125;</div><div class="line">--- <span class="type">PublishSubject</span> example ---</div><div class="line"><span class="type">Subscription</span>: <span class="number">1</span>, event: <span class="type">Next</span>(a)</div><div class="line"><span class="type">Subscription</span>: <span class="number">1</span>, event: <span class="type">Next</span>(b)</div><div class="line"><span class="type">Subscription</span>: <span class="number">1</span>, event: <span class="type">Next</span>(<span class="built_in">c</span>)</div><div class="line"><span class="type">Subscription</span>: <span class="number">2</span>, event: <span class="type">Next</span>(<span class="built_in">c</span>)</div><div class="line"><span class="type">Subscription</span>: <span class="number">1</span>, event: <span class="type">Next</span>(d)</div><div class="line"><span class="type">Subscription</span>: <span class="number">2</span>, event: <span class="type">Next</span>(d)</div></pre></td></tr></table></figure>
 <h3 id="ReplaySubject"><a href="#ReplaySubject" class="headerlink" title="ReplaySubject"></a>ReplaySubject</h3><p><code>ReplaySubject</code> 在新的订阅对象订阅的时候会补发所有已经发送过的数据队列， <code>bufferSize</code> 是缓冲区的大小，决定了补发队列的最大值。如果 <code>bufferSize</code> 是1，那么新的订阅者出现的时候就会补发上一个事件，如果是2，则补两个，以此类推。</p>
@@ -718,9 +784,9 @@
 <h3 id="startWith"><a href="#startWith" class="headerlink" title="startWith"></a>startWith</h3><p><code>startWith</code> 会在队列开始之前插入一个事件元素。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"startWith"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> subscription = sequenceOf(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</div><div class="line">        .startWith(<span class="number">3</span>)</div><div class="line">        .subscribe &#123;</div><div class="line">            <span class="built_in">print</span>($<span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line">--- startWith example ---</div><div class="line"><span class="type">Next</span>(<span class="number">3</span>)</div><div class="line"><span class="type">Next</span>(<span class="number">4</span>)</div><div class="line"><span class="type">Next</span>(<span class="number">5</span>)</div><div class="line"><span class="type">Next</span>(<span class="number">6</span>)</div><div class="line"><span class="type">Completed</span></div></pre></td></tr></table></figure>
 <h3 id="combineLatest"><a href="#combineLatest" class="headerlink" title="combineLatest"></a>combineLatest</h3><p>如果存在两条事件队列，需要同时监听，那么每当有新的事件发生的时候，<code>combineLatest</code> 会将每个队列的最新的一个元素进行合并。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"combineLatest 1"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> intOb1 = <span class="type">PublishSubject</span>&lt;<span class="type">String</span>&gt;()</div><div class="line">    <span class="keyword">let</span> intOb2 = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    combineLatest(intOb1, intOb2) &#123;</div><div class="line">        <span class="string">"\($0) \($1)"</span></div><div class="line">        &#125;</div><div class="line">        .subscribe &#123;</div><div class="line">            <span class="built_in">print</span>($<span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"A"</span>))</div><div class="line">    intOb2.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"B"</span>))</div><div class="line">    intOb2.on(.<span class="type">Next</span>(<span class="number">2</span>))</div><div class="line">&#125;</div><div class="line">--- combineLatest <span class="number">1</span> example ---</div><div class="line"><span class="type">Next</span>(<span class="type">A</span> <span class="number">1</span>)</div><div class="line"><span class="type">Next</span>(<span class="type">B</span> <span class="number">1</span>)</div><div class="line"><span class="type">Next</span>(<span class="type">B</span> <span class="number">2</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"combineLatest 1"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> intOb1 = <span class="type">PublishSubject</span>&lt;<span class="type">String</span>&gt;()</div><div class="line">    <span class="keyword">let</span> intOb2 = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    combineLatest(intOb1, intOb2) &#123;</div><div class="line">        <span class="string">"<span class="subst">\($<span class="number">0</span>)</span> <span class="subst">\($<span class="number">1</span>)</span>"</span></div><div class="line">        &#125;</div><div class="line">        .subscribe &#123;</div><div class="line">            <span class="built_in">print</span>($<span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"A"</span>))</div><div class="line">    intOb2.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"B"</span>))</div><div class="line">    intOb2.on(.<span class="type">Next</span>(<span class="number">2</span>))</div><div class="line">&#125;</div><div class="line">--- combineLatest <span class="number">1</span> example ---</div><div class="line"><span class="type">Next</span>(<span class="type">A</span> <span class="number">1</span>)</div><div class="line"><span class="type">Next</span>(<span class="type">B</span> <span class="number">1</span>)</div><div class="line"><span class="type">Next</span>(<span class="type">B</span> <span class="number">2</span>)</div></pre></td></tr></table></figure>
 <h3 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h3><p><code>zip</code> 人如其名，就是合并两条队列用的，不过它会等到两个队列的元素一一对应地凑齐了之后再合并，正如<a href="http://weibo.com/mrgreenhand" target="_blank" rel="external">百折不撓的米斯特菜</a>所提醒的， <code>zip</code> 就像是拉链一样，两根拉链拉着拉着合并到了一根上：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"zip 1"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> intOb1 = <span class="type">PublishSubject</span>&lt;<span class="type">String</span>&gt;()</div><div class="line">    <span class="keyword">let</span> intOb2 = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    <span class="built_in">zip</span>(intOb1, intOb2) &#123;</div><div class="line">        <span class="string">"\($0) \($1)"</span></div><div class="line">        &#125;</div><div class="line">        .subscribe &#123;</div><div class="line">            <span class="built_in">print</span>($<span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"A"</span>))</div><div class="line">    intOb2.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"B"</span>))</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"C"</span>))</div><div class="line">    intOb2.on(.<span class="type">Next</span>(<span class="number">2</span>))</div><div class="line">&#125;</div><div class="line">--- <span class="built_in">zip</span> <span class="number">1</span> example ---</div><div class="line"><span class="type">Next</span>(<span class="type">A</span> <span class="number">1</span>)</div><div class="line"><span class="type">Next</span>(<span class="type">B</span> <span class="number">2</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"zip 1"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> intOb1 = <span class="type">PublishSubject</span>&lt;<span class="type">String</span>&gt;()</div><div class="line">    <span class="keyword">let</span> intOb2 = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    <span class="built_in">zip</span>(intOb1, intOb2) &#123;</div><div class="line">        <span class="string">"<span class="subst">\($<span class="number">0</span>)</span> <span class="subst">\($<span class="number">1</span>)</span>"</span></div><div class="line">        &#125;</div><div class="line">        .subscribe &#123;</div><div class="line">            <span class="built_in">print</span>($<span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"A"</span>))</div><div class="line">    intOb2.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"B"</span>))</div><div class="line">    intOb1.on(.<span class="type">Next</span>(<span class="string">"C"</span>))</div><div class="line">    intOb2.on(.<span class="type">Next</span>(<span class="number">2</span>))</div><div class="line">&#125;</div><div class="line">--- <span class="built_in">zip</span> <span class="number">1</span> example ---</div><div class="line"><span class="type">Next</span>(<span class="type">A</span> <span class="number">1</span>)</div><div class="line"><span class="type">Next</span>(<span class="type">B</span> <span class="number">2</span>)</div></pre></td></tr></table></figure>
 <h3 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h3><p><code>merge</code> 就是 <code>merge</code> 啦，把两个队列按照顺序组合在一起。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"merge 1"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> subject1 = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    <span class="keyword">let</span> subject2 = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    sequenceOf(subject1, subject2)</div><div class="line">        .merge()</div><div class="line">        .subscribeNext &#123; int <span class="keyword">in</span></div><div class="line">            <span class="built_in">print</span>(int)</div><div class="line">        &#125;</div><div class="line">    subject1.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    subject1.on(.<span class="type">Next</span>(<span class="number">2</span>))</div><div class="line">    subject2.on(.<span class="type">Next</span>(<span class="number">3</span>))</div><div class="line">    subject1.on(.<span class="type">Next</span>(<span class="number">4</span>))</div><div class="line">    subject2.on(.<span class="type">Next</span>(<span class="number">5</span>))</div><div class="line">&#125;</div><div class="line">--- merge <span class="number">1</span> example ---</div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">5</span></div></pre></td></tr></table></figure>
 <h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>当你的事件序列是一个事件序列的序列 (<code>Observable&lt;Observable&lt;T&gt;&gt;</code>) 的时候，（可以理解成二维序列？），可以使用 <code>switch</code> 将序列的序列平铺成一维，并且在出现新的序列的时候，自动切换到最新的那个序列上。和 <code>merge</code> 相似的是，它也是起到了将多个序列『拍平』成一条序列的作用。</p>
@@ -741,7 +807,7 @@
 <h3 id="subscribeError"><a href="#subscribeError" class="headerlink" title="subscribeError"></a>subscribeError</h3><p><code>subscribeError</code> 只订阅 <code>.Error</code> 失败事件。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"subscribeError"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> sequenceOfInts = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    sequenceOfInts</div><div class="line">        .subscribeError &#123; error <span class="keyword">in</span></div><div class="line">            <span class="built_in">print</span>(error)</div><div class="line">        &#125;</div><div class="line">    sequenceOfInts.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    sequenceOfInts.on(.<span class="type">Error</span>(<span class="type">NSError</span>(domain: <span class="string">"Examples"</span>, code: -<span class="number">1</span>, userInfo: <span class="literal">nil</span>)))</div><div class="line">&#125;</div><div class="line">--- subscribeError example ---</div><div class="line"><span class="type">Error</span> <span class="type">Domain</span>=<span class="type">Examples</span> <span class="type">Code</span>=-<span class="number">1</span> <span class="string">"The operation couldn’t be completed. (Examples error -1.)"</span></div></pre></td></tr></table></figure>
 <h3 id="doOn"><a href="#doOn" class="headerlink" title="doOn"></a>doOn</h3><p><code>doOn</code> 可以监听事件，并且在事件发生之前调用。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"doOn"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> sequenceOfInts = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    sequenceOfInts</div><div class="line">        .doOn &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="string">"Intercepted event \($0)"</span>)</div><div class="line">        &#125;</div><div class="line">        .subscribe &#123;</div><div class="line">            <span class="built_in">print</span>($<span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">    sequenceOfInts.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    sequenceOfInts.on(.<span class="type">Completed</span>)</div><div class="line">&#125;</div><div class="line">--- doOn example ---</div><div class="line"><span class="type">Intercepted</span> event <span class="type">Next</span>(<span class="number">1</span>)</div><div class="line"><span class="type">Next</span>(<span class="number">1</span>)</div><div class="line"><span class="type">Intercepted</span> event <span class="type">Completed</span></div><div class="line"><span class="type">Completed</span></div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"doOn"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> sequenceOfInts = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    sequenceOfInts</div><div class="line">        .doOn &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="string">"Intercepted event <span class="subst">\($<span class="number">0</span>)</span>"</span>)</div><div class="line">        &#125;</div><div class="line">        .subscribe &#123;</div><div class="line">            <span class="built_in">print</span>($<span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">    sequenceOfInts.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    sequenceOfInts.on(.<span class="type">Completed</span>)</div><div class="line">&#125;</div><div class="line">--- doOn example ---</div><div class="line"><span class="type">Intercepted</span> event <span class="type">Next</span>(<span class="number">1</span>)</div><div class="line"><span class="type">Next</span>(<span class="number">1</span>)</div><div class="line"><span class="type">Intercepted</span> event <span class="type">Completed</span></div><div class="line"><span class="type">Completed</span></div></pre></td></tr></table></figure>
 <h2 id="Conditional"><a href="#Conditional" class="headerlink" title="Conditional"></a>Conditional</h2><p>我们可以对多个事件序列做一些复杂的逻辑判断。</p>
 <h3 id="takeUntil"><a href="#takeUntil" class="headerlink" title="takeUntil"></a>takeUntil</h3><p><code>takeUntil</code> 其实就是 <code>take</code> ，它会在终于等到那个事件之后触发 <code>.Completed</code> 事件。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">example(<span class="string">"takeUntil"</span>) &#123;</div><div class="line">    <span class="keyword">let</span> originalSequence = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    <span class="keyword">let</span> whenThisSendsNextWorldStops = <span class="type">PublishSubject</span>&lt;<span class="type">Int</span>&gt;()</div><div class="line">    originalSequence</div><div class="line">        .takeUntil(whenThisSendsNextWorldStops)</div><div class="line">        .subscribe &#123;</div><div class="line">            <span class="built_in">print</span>($<span class="number">0</span>)</div><div class="line">        &#125;</div><div class="line">    originalSequence.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    originalSequence.on(.<span class="type">Next</span>(<span class="number">2</span>))</div><div class="line">    whenThisSendsNextWorldStops.on(.<span class="type">Next</span>(<span class="number">1</span>))</div><div class="line">    originalSequence.on(.<span class="type">Next</span>(<span class="number">3</span>))</div><div class="line">&#125;</div><div class="line">--- takeUntil example ---</div><div class="line"><span class="type">Next</span>(<span class="number">1</span>)</div><div class="line"><span class="type">Next</span>(<span class="number">2</span>)</div><div class="line"><span class="type">Completed</span></div></pre></td></tr></table></figure>
@@ -1204,156 +1270,6 @@ class CMExpandingTextField: UITextField {
     
     
       <category term="ss" scheme="https://madordie.github.io/tags/ss/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>正则表达式学习笔记</title>
-    <link href="https://madordie.github.io/bruch-up-regular-expressions/"/>
-    <id>https://madordie.github.io/bruch-up-regular-expressions/</id>
-    <published>2016-12-19T07:03:09.000Z</published>
-    <updated>2017-08-14T02:13:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>正则表达式基础学习笔记。</p>
-<a id="more"></a>
-<h1 id="前面"><a href="#前面" class="headerlink" title="前面"></a>前面</h1><p>  上次找了个很好的文章，可是手残没保存。。找不到了😭，现在重新找了一个文章：<a href="https://luke0922.gitbooks.io/learnregularexpressionin30minutes/content/index.html" target="_blank" rel="external">正则表达式30分钟入门教程</a><br>  正如作者说的：</p>
-<blockquote>
-<h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>本文非原创，是改编自<a href="http://deerchao.net/tutorials/regex/regex.htm#mission" target="_blank" rel="external">《正则表达式30分钟入门教程》</a>，因为原作者的排版个人不是很喜欢，而且内容上个人觉得有些地方需要改进，所以在 gitbook 上开了一本书。</p>
-</blockquote>
-<p>  OSC的<a href="http://tool.oschina.net/regex" target="_blank" rel="external">在线正则表达式测试</a></p>
-<h1 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h1><h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><ul>
-<li><code>\</code> : 转义</li>
-<li><code>\b</code> : 单词开始或结束</li>
-<li><code>^</code> : 字符串开始</li>
-<li><code>$</code> : 字符串结束</li>
-<li><code>\d</code> : 一个数字</li>
-<li><code>\s</code> : 任意空白字符：空格、制表符、换行符、中文全角空格、等</li>
-<li><code>\w</code> : 字母/数字/下划线/汉字 可见字符</li>
-<li><code>.</code> : 除换行符以外的任意字符</li>
-</ul>
-<h2 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h2><ul>
-<li><code>{n}</code> : 前置位重复匹配 [n] 次</li>
-<li><code>{n,m}</code> : 前置位重复匹配 [n-m] 次</li>
-<li><code>{n,}</code> : 前置位重复匹配 [n-∞] 次</li>
-<li><code>*</code> : 数量区间：[0-N]</li>
-<li><code>+</code> : 数量区间：[1-N]</li>
-<li><code>?</code> : 数量区间：[0-1]</li>
-</ul>
-<h2 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h2><ul>
-<li><code>[nml]</code> : 可以匹配到 n/m/l</li>
-</ul>
-<h2 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h2><ul>
-<li><code>|</code> : <strong>或</strong>语句。存在逻辑短路</li>
-<li><code>(m)</code> : <strong>分组</strong>语句。子式，可以指定重复什么的</li>
-</ul>
-<h2 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h2><ul>
-<li><code>\W</code> : 任意<strong>不是</strong>（字符、数字、下划线、汉字）</li>
-<li><code>\S</code> : 任意<strong>不是</strong> 空白符</li>
-<li><code>\D</code> : 任意<strong>不是</strong> 数字</li>
-<li><code>\B</code> : 任意<strong>不是</strong> 单词开头或结尾</li>
-<li><code>\^x</code> : 除x以外的任意字符</li>
-<li><code>[\^abc]</code> : 除abc这几个字母以外的任意字符</li>
-</ul>
-<h2 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h2><p>  <code>(\w+)</code>这样用<code>()</code>的部分称为一个分组，其匹配到的内容可以使用<code>\n</code>来表示，<code>n</code>代表该分组为第n个分组。分组下标从<code>1</code>开始。<br>  也可以自定义子表达式组名: <code>(?&lt;Word&gt;M) \k&lt;Word&gt;</code> : 或 <code>(?&#39;Word&#39;M) \k&#39;Word&#39;</code>，其中M为子式。</p>
-<h2 id="常用分组语法"><a href="#常用分组语法" class="headerlink" title="常用分组语法"></a>常用分组语法</h2><h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><ul>
-<li><code>(exp)</code> : 匹配exp,并捕获文本到自动命名的组里</li>
-<li><code>(?exp)</code> : 匹配exp,并捕获文本到名称为name的组里，也可以写成(?’name’exp)</li>
-<li><code>(?:exp)</code> : 匹配exp,不捕获匹配的文本，也不给此分组分配组号</li>
-</ul>
-<h3 id="零宽断言"><a href="#零宽断言" class="headerlink" title="零宽断言"></a>零宽断言</h3><ul>
-<li><code>(?=exp)</code> : 匹配exp前面的位置</li>
-<li><code>(?&lt;=exp)</code> : 匹配exp后面的位置</li>
-<li><code>(?!exp)</code> : 匹配后面跟的不是exp的位置</li>
-<li><code>(?&lt;!exp)</code> : 匹配前面不是exp的位置</li>
-</ul>
-<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ul>
-<li><code>(?#comment)</code> : 这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读</li>
-</ul>
-<h2 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h2><p>  贪婪：匹配的尽可能长<br>  懒惰：匹配的尽可能短</p>
-<ul>
-<li><code>*?</code> : 重复任意次，但尽可能少重复</li>
-<li><code>+?</code> : 重复1次或更多次，但尽可能少重复</li>
-<li><code>??</code> : 重复0次或1次，但尽可能少重复</li>
-<li><code>{n,m}?</code> : 重复n到m次，但尽可能少重复</li>
-<li><code>{n,}?</code> : 重复n次以上，但尽可能少重复</li>
-</ul>
-<h2 id="平衡组-递归匹配"><a href="#平衡组-递归匹配" class="headerlink" title="平衡组/递归匹配"></a>平衡组/递归匹配</h2><p>  # 我开始看不懂了😂</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li><code>\a</code> : 报警字符(打印它的效果是电脑嘀一声)</li>
-<li><code>\b</code> : 通常是单词分界位置，但如果在字符类里使用代表退格</li>
-<li><code>\t</code> : 制表符，Tab</li>
-<li><code>\r</code> : 回车</li>
-<li><code>\v</code> : 竖向制表符</li>
-<li><code>\f</code> : 换页符</li>
-<li><code>\n</code> : 换行符</li>
-<li><code>\e</code> : Escape</li>
-<li><code>\0nn</code> : ASCII代码中八进制代码为nn的字符</li>
-<li><code>\xnn</code> : ASCII代码中十六进制代码为nn的字符</li>
-<li><code>\unnnn</code> : Unicode代码中十六进制代码为nnnn的字符</li>
-<li><code>\cN</code> : ASCII控制字符。比如\cC代表Ctrl+C</li>
-<li><code>\A</code> : 字符串开头(类似^，但不受处理多行选项的影响)</li>
-<li><code>\Z</code> : 字符串结尾或行尾(不受处理多行选项的影响)</li>
-<li><code>\z</code> : 字符串结尾(类似$，但不受处理多行选项的影响)</li>
-<li><code>\G</code> : 当前搜索的开头</li>
-<li><code>\p{name}</code> : Unicode中命名为name的字符类，例如\p{IsGreek}</li>
-<li><code>(?&gt;exp)</code> : 贪婪子表达式</li>
-<li><code>(?&lt;x&gt;-&lt;y&gt;exp)</code> : 平衡组</li>
-<li><code>(?im-nsx:exp)</code> : 在子表达式exp中改变处理选项</li>
-<li><code>(?im-nsx)</code> : 为表达式后面的部分改变处理选项</li>
-<li><code>(?(exp)yes|no)</code> : 把exp当作零宽正向先行断言，如果在这个位置能匹配，使用yes作为此组的表达式；否则使用no</li>
-<li><code>(?(exp)yes)</code> : 同上，只是使用空表达式作为no</li>
-<li><code>(?(name)yes|no)</code> : 如果命名为name的组捕获到了内容，使用yes作为表达式；否则使用no</li>
-<li><code>(?(name)yes)</code> : 同上，只是使用空表达式作为no</li>
-</ul>
-<h2 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a>栗子</h2><ul>
-<li>5-12位QQ：<code>^\d{5,12}$</code></li>
-<li>IPv4地址：<code>((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)</code></li>
-<li><code>go go</code>、<code>kitty kitty</code>这样的叠词：<code>\b(\w+)\b\s+\1\b</code></li>
-<li>后向引用：<code>\b(\w+)\b\s+\1\b</code> == <code>\b(?&lt;Word&gt;\w+)\b\s+\k&lt;Word&gt;\b</code> == <code>\b(?&#39;Word&#39;\w+)\b\s+\k&#39;Word&#39;\b</code></li>
-</ul>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>  知识研究了一下语法，还未详细测试。思考：这玩意真心厉害😂。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;正则表达式基础学习笔记。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="正则表达式" scheme="https://madordie.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DEBUG - swift中取出通知中的frame</title>
-    <link href="https://madordie.github.io/debug-swift-notifa-frame/"/>
-    <id>https://madordie.github.io/debug-swift-notifa-frame/</id>
-    <published>2016-11-30T16:00:00.000Z</published>
-    <updated>2017-08-14T02:20:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>swift中获取OC存储的Frame两种获取方案。</p>
-<a id="more"></a>
-<h1 id="Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。"><a href="#Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。" class="headerlink" title="Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。"></a>Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。</h1><p>  –&gt;更新于2016.12.1</p>
-<p>  <strong> Version 8.1 (8B62) </strong></p>
-  <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">keyboardShow</span><span class="params">(sender: Notification)</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> endFrame = <span class="type">CGRect</span>.zero        </div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> frame = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">CGRect</span> &#123;</div><div class="line">        endFrame = frame</div><div class="line">        <span class="comment">//  *** Debug是可以通过的。但是Release无法通过。</span></div><div class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as CGRect"</span>)</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> value = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">NSValue</span> &#123;</div><div class="line">        endFrame = value.cgRectValue</div><div class="line">        <span class="comment">//  *** Release会取出NSValue</span></div><div class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as NSValue"</span>)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>  由于Release无法调试，所以费了不少劲。首先Swift中的字典已经可以存放值类型，其本身也是值类型。所以我首先选择了第一种写法<code>let frame = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect</code>, 但是Release情况下却发生解包失败的情况。所以采用OC的传统写法<code>let value = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue</code>。就能解析出来。但是总感觉OC的方法不够swift😂。。。</p>
-<p>  有同事直接强制转换为NSValue是没有问题的，于是乎试了一下，发现直接校验NSValue就可以。但是swift中感觉不应该有这个转换了，毕竟本身就可以存储CGRect..</p>
-<p>  猜测原因：目前阶段Swift的字典和OC的字典数据结构还并未完全一致。。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;swift中获取OC存储的Frame两种获取方案。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
     
   </entry>
   
