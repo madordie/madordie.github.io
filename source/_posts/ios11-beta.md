@@ -18,6 +18,8 @@ iOS11 预览版安装体验笔记。
 
 9.13 GM出来了，再安装～～
 
+适配有先后，iOS11马上就要发了，而iPhoneX还需要等一小段时间。所以iOS11的适配比iPhoneX有更高的优先级～
+
 ## API
 
 ### 失效的`automaticallyAdjustsScrollViewInsets`
