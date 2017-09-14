@@ -1,5 +1,5 @@
 ---
-title: ios11-beta
+title: iOS11-beta
 date: 2017-06-12 17:20:58
 tags:
 categories:
@@ -16,9 +16,13 @@ iOS11 预览版安装体验笔记。
 
 卡顿让我实在无法忍受，并与6.15号重置回iOS10.3.2 。。。
 
+9.13 GM出来了，再安装～～
+
 ## API
 
 ### 失效的`automaticallyAdjustsScrollViewInsets`
+
+iOS11 版本中 __立即失效__。
 
 API 声明：
 
@@ -46,5 +50,7 @@ open class UIScrollView : UIView, ... {
     ...
 }
 ```
+### 筛选view
 
-iOS11 版本中立即失效。
+### WKWebView
+

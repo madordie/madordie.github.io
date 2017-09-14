@@ -4,8 +4,23 @@
 
     
   <url>
+    <loc>https://madordie.github.io/about-me/</loc>
+    <lastmod>2017-09-08T13:26:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>个人资料页</title>
+        <pubTime>2016-07-04T16:00:00.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/build-ipa-sh/</loc>
-    <lastmod>2017-09-08T09:30:07.000Z</lastmod>
+    <lastmod>2017-09-08T09:43:37.000Z</lastmod>
     <data>
         <display>
         <title>Xcode8打包脚本</title>
@@ -18,21 +33,6 @@
              
               <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/about-me/</loc>
-    <lastmod>2017-09-04T03:18:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>个人资料页</title>
-        <pubTime>2016-07-04T16:00:00.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
