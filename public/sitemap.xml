@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/ios11-beta/</loc>
+    
+    <lastmod>2017-09-14T03:55:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
+    
+    <lastmod>2017-09-14T03:55:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/appstore-truncate/</loc>
+    
+    <lastmod>2017-09-14T03:48:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/about-me/</loc>
     
     <lastmod>2017-09-08T13:26:35.000Z</lastmod>
@@ -180,13 +201,6 @@
     <loc>https://madordie.github.io/note/</loc>
     
     <lastmod>2017-08-14T02:02:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/ios11-beta/</loc>
-    
-    <lastmod>2017-08-14T02:02:00.000Z</lastmod>
     
   </url>
   

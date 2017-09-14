@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AppStore的折叠效果]]></title>
+    <url>%2Fappstore-truncate%2F</url>
+    <content type="text"><![CDATA[UITextView-More使用UITextKit 实现“更多”的折叠效果 主要代码获取最后一行Rect12345678var lastRect = CGRect.zerolayoutManager.enumerateEnclosingRects(forGlyphRange: NSRange(location: 0, length: textStorage.string.characters.count), withinSelectedGlyphRange: NSRange(location: NSNotFound, length: 0), in: textContainer, using: &#123; [weak self] (rect, isStop) inguard let _self = self else &#123; return &#125;var newRect = rectnewRect.origin.y += _self.textContainerInset.toplastRect = newRect&#125;)print(lastRect) 增加 exclusionPaths1textContainer.exclusionPaths = [UIBezierPath.init(rect: rect)] 备注 UITextView默认携带左右边距，通过UITextView.textContainer.lineFragmentPadding获取 UITextView默认携带上下左右边距(UITextView.textContainerInset)，其中左右和lineFragmentPadding相加 此处并没有对TruncateTextView进行过多的设置，主要是因为继承在UITextView下，GIF中的这部分设置放在了ViewController.swift中 此处使用的是frame，可以在UIView.sizeToFit()之后获取到UIView的Size。约束也大抵如此 感谢乐逍遥提供的例子，才找到了open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange方法😂]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>效果</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iOS自动化-Jenkins环境搭建]]></title>
+    <url>%2Fios-automation-jenkins-configuration%2F</url>
+    <content type="text"><![CDATA[忙着适配iOS11 还没更新呢…. iOS11-beta]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>构建</tag>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[iOS逆向-monkeydev工具]]></title>
     <url>%2Freverse-ios-monkeydev%2F</url>
     <content type="text"><![CDATA[MonkeyDev wiki这是一个为越狱和非越狱开发人员准备的工具，主要包括四个模块: Logos Tweak 使用theos提供的logify.pl工具将.xm文件转成.mm文件进行编译，集成了CydiaSubstrate，可以使用MSHookMessageEx和MSHookFunction来Hook OC函数和指定地址。 CaptainHook Tweak 使用CaptainHook提供的头文件进行OC 函数的Hook，以及属性的获取。 Command-line Tool 可以直接创建运行于越狱设备的命令行工具 MonkeyApp 这是自动给第三方应用集成Reveal、Cycript和注入dylib的模块，支持调试dylib和第三方应用，支持Pod给第三放应用集成SDK，只需要准备一个砸壳后的ipa或者app文件即可。 MonkeyDev wiki]]></content>
@@ -56,9 +79,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[ios11-beta]]></title>
+    <title><![CDATA[iOS11-beta]]></title>
     <url>%2Fios11-beta%2F</url>
-    <content type="text"><![CDATA[iOS11 预览版安装体验笔记。 写在前面毕竟beta版，升级需谨慎。目前来看体验上还是有点卡的～～😂 卡顿让我实在无法忍受，并与6.15号重置回iOS10.3.2 。。。 API失效的automaticallyAdjustsScrollViewInsetsAPI 声明： 1234567@available(iOS 2.0, *)open class UIViewController : UIResponder, ... &#123; ... @available(iOS, introduced: 7.0, deprecated: 11.0) open var automaticallyAdjustsScrollViewInsets: Bool // Defaults to YES ...&#125; 相应的的替换方案： 12345678910@available(iOS 2.0, *)open class UIScrollView : UIView, ... &#123; ... /* Configure the behavior of adjustedContentInset. Default is UIScrollViewContentInsetAdjustmentAutomatic. */ @available(iOS 11.0, *) open var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior ...&#125; iOS11 版本中立即失效。]]></content>
+    <content type="text"><![CDATA[iOS11 预览版安装体验笔记。 写在前面毕竟beta版，升级需谨慎。目前来看体验上还是有点卡的～～😂 卡顿让我实在无法忍受，并与6.15号重置回iOS10.3.2 。。。 9.13 GM出来了，再安装～～ API失效的automaticallyAdjustsScrollViewInsetsiOS11 版本中 立即失效。 API 声明： 1234567@available(iOS 2.0, *)open class UIViewController : UIResponder, ... &#123; ... @available(iOS, introduced: 7.0, deprecated: 11.0) open var automaticallyAdjustsScrollViewInsets: Bool // Defaults to YES ...&#125; 相应的的替换方案： 12345678910@available(iOS 2.0, *)open class UIScrollView : UIView, ... &#123; ... /* Configure the behavior of adjustedContentInset. Default is UIScrollViewContentInsetAdjustmentAutomatic. */ @available(iOS 11.0, *) open var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior ...&#125; 筛选viewWKWebView]]></content>
       <categories>
         <category>iOS</category>
       </categories>

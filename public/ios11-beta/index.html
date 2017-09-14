@@ -107,13 +107,13 @@
 <meta name="description" content="iOS11 预览版安装体验笔记。">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ios11-beta">
+<meta property="og:title" content="iOS11-beta">
 <meta property="og:url" content="https://madordie.github.io/ios11-beta/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="iOS11 预览版安装体验笔记。">
-<meta property="og:updated_time" content="2017-08-14T02:02:00.000Z">
+<meta property="og:updated_time" content="2017-09-14T03:55:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ios11-beta">
+<meta name="twitter:title" content="iOS11-beta">
 <meta name="twitter:description" content="iOS11 预览版安装体验笔记。">
 
 
@@ -149,7 +149,7 @@
 
 
 
-  <title>ios11-beta | Keith's Blog</title>
+  <title>iOS11-beta | Keith's Blog</title>
   
 
 
@@ -313,7 +313,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">ios11-beta</h2>
+          <h2 class="post-title" itemprop="name headline">iOS11-beta</h2>
         
 
         <div class="post-meta">
@@ -389,12 +389,13 @@
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>毕竟beta版，升级需谨慎。目前来看体验上还是有点卡的～～😂</p>
 <p>卡顿让我实在无法忍受，并与6.15号重置回iOS10.3.2 。。。</p>
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="失效的automaticallyAdjustsScrollViewInsets"><a href="#失效的automaticallyAdjustsScrollViewInsets" class="headerlink" title="失效的automaticallyAdjustsScrollViewInsets"></a>失效的<code>automaticallyAdjustsScrollViewInsets</code></h3><p>API 声明：</p>
+<p>9.13 GM出来了，再安装～～</p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="失效的automaticallyAdjustsScrollViewInsets"><a href="#失效的automaticallyAdjustsScrollViewInsets" class="headerlink" title="失效的automaticallyAdjustsScrollViewInsets"></a>失效的<code>automaticallyAdjustsScrollViewInsets</code></h3><p>iOS11 版本中 <strong>立即失效</strong>。</p>
+<p>API 声明：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@available</span>(iOS <span class="number">2.0</span>, *)</div><div class="line">open <span class="class"><span class="keyword">class</span> <span class="title">UIViewController</span> : <span class="title">UIResponder</span>, ... </span>&#123;</div><div class="line">	...</div><div class="line">	<span class="meta">@available</span>(iOS, introduced: <span class="number">7.0</span>, deprecated: <span class="number">11.0</span>)</div><div class="line">	open <span class="keyword">var</span> automaticallyAdjustsScrollViewInsets: <span class="type">Bool</span> <span class="comment">// Defaults to YES</span></div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>相应的的替换方案：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@available</span>(iOS <span class="number">2.0</span>, *)</div><div class="line">open <span class="class"><span class="keyword">class</span> <span class="title">UIScrollView</span> : <span class="title">UIView</span>, ... </span>&#123;</div><div class="line">	...</div><div class="line">    <span class="comment">/* Configure the behavior of adjustedContentInset.</span></div><div class="line">     Default is UIScrollViewContentInsetAdjustmentAutomatic.</div><div class="line">     */</div><div class="line">    <span class="meta">@available</span>(iOS <span class="number">11.0</span>, *)</div><div class="line">    open <span class="keyword">var</span> contentInsetAdjustmentBehavior: <span class="type">UIScrollViewContentInsetAdjustmentBehavior</span></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>iOS11 版本中立即失效。</p>
-
+<h3 id="筛选view"><a href="#筛选view" class="headerlink" title="筛选view"></a>筛选view</h3><h3 id="WKWebView"><a href="#WKWebView" class="headerlink" title="WKWebView"></a>WKWebView</h3>
       
     </div>
     
@@ -514,7 +515,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -536,7 +537,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -616,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">2.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失效的automaticallyAdjustsScrollViewInsets"><span class="nav-number">2.1.</span> <span class="nav-text">失效的automaticallyAdjustsScrollViewInsets</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">2.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失效的automaticallyAdjustsScrollViewInsets"><span class="nav-number">2.1.</span> <span class="nav-text">失效的automaticallyAdjustsScrollViewInsets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#筛选view"><span class="nav-number">2.2.</span> <span class="nav-text">筛选view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WKWebView"><span class="nav-number">2.3.</span> <span class="nav-text">WKWebView</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -794,7 +795,7 @@
         var disqus_config = function () {
           this.page.url = 'https://madordie.github.io/ios11-beta/';
           this.page.identifier = 'ios11-beta/';
-          this.page.title = 'ios11-beta';
+          this.page.title = 'iOS11-beta';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://madordie.disqus.com/embed.js';
