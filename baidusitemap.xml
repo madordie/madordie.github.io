@@ -4,13 +4,17 @@
 
     
   <url>
-    <loc>https://madordie.github.io/ios11-beta/</loc>
-    <lastmod>2017-09-14T04:01:14.000Z</lastmod>
+    <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
+    <lastmod>2017-09-14T09:24:33.000Z</lastmod>
     <data>
         <display>
-        <title>iOS11-beta</title>
-        <pubTime>2017-06-12T09:20:58.000Z</pubTime>
+        <title>iOS自动化-Jenkins环境搭建</title>
+        <pubTime>2017-09-10T01:49:32.000Z</pubTime>
         
+        <tag>构建</tag>
+         
+        <tag>Jenkins</tag>
+         
          
            
              
@@ -22,17 +26,13 @@
 
     
   <url>
-    <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
-    <lastmod>2017-09-14T03:55:50.000Z</lastmod>
+    <loc>https://madordie.github.io/ios11-beta/</loc>
+    <lastmod>2017-09-14T04:01:14.000Z</lastmod>
     <data>
         <display>
-        <title>iOS自动化-Jenkins环境搭建</title>
-        <pubTime>2017-09-10T01:49:32.000Z</pubTime>
+        <title>iOS11-beta</title>
+        <pubTime>2017-06-12T09:20:58.000Z</pubTime>
         
-        <tag>构建</tag>
-         
-        <tag>Jenkins</tag>
-         
          
            
              
@@ -141,14 +141,14 @@
 
     
   <url>
-    <loc>https://madordie.github.io/about-project-tableview/</loc>
+    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     <data>
         <display>
-        <title>项目中的UITableView</title>
-        <pubTime>2016-07-27T05:30:45.000Z</pubTime>
+        <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
+        <pubTime>2017-05-16T02:55:00.000Z</pubTime>
         
-        <tag>UITableView</tag>
+        <tag>FastImageCache</tag>
          
          
            
@@ -181,14 +181,14 @@
 
     
   <url>
-    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
+    <loc>https://madordie.github.io/about-project-tableview/</loc>
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     <data>
         <display>
-        <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
-        <pubTime>2017-05-16T02:55:00.000Z</pubTime>
+        <title>项目中的UITableView</title>
+        <pubTime>2016-07-27T05:30:45.000Z</pubTime>
         
-        <tag>FastImageCache</tag>
+        <tag>UITableView</tag>
          
          
            
