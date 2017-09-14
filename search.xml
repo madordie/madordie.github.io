@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[iOS自动化-Jenkins编译工程]]></title>
+    <url>%2Fios-automation-jenkins-build%2F</url>
+    <content type="text"><![CDATA[忙于iOS11的兼容]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>构建</tag>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[AppStore的折叠效果]]></title>
     <url>%2Fappstore-truncate%2F</url>
     <content type="text"><![CDATA[UITextView-More使用UITextKit 实现“更多”的折叠效果 主要代码获取最后一行Rect12345678var lastRect = CGRect.zerolayoutManager.enumerateEnclosingRects(forGlyphRange: NSRange(location: 0, length: textStorage.string.characters.count), withinSelectedGlyphRange: NSRange(location: NSNotFound, length: 0), in: textContainer, using: &#123; [weak self] (rect, isStop) inguard let _self = self else &#123; return &#125;var newRect = rectnewRect.origin.y += _self.textContainerInset.toplastRect = newRect&#125;)print(lastRect) 增加 exclusionPaths1textContainer.exclusionPaths = [UIBezierPath.init(rect: rect)] 备注 UITextView默认携带左右边距，通过UITextView.textContainer.lineFragmentPadding获取 UITextView默认携带上下左右边距(UITextView.textContainerInset)，其中左右和lineFragmentPadding相加 此处并没有对TruncateTextView进行过多的设置，主要是因为继承在UITextView下，GIF中的这部分设置放在了ViewController.swift中 此处使用的是frame，可以在UIView.sizeToFit()之后获取到UIView的Size。约束也大抵如此 感谢乐逍遥提供的例子，才找到了open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange方法😂]]></content>
