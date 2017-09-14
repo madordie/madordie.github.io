@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<meta name="baidu-site-verification" content="HgM1IFrAdg" />
+<meta name="google-site-verification" content="Xu6-fD_SQrKSpCcK_-6s1MT72UJ2SYJLWPut6Uk1AAI" />
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="优化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Keith's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。">
+<meta name="keywords" content="优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 编译时性能优化笔记">
+<meta property="og:url" content="https://madordie.github.io/swift-build-times/index.html">
+<meta property="og:site_name" content="Keith's Blog">
+<meta property="og:description" content="Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/005SiNxygw1f3p3jimjllj31jk0dwqft.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005SiNxygw1f3p3hhivppj30m809lwis.jpg">
+<meta property="og:updated_time" content="2017-08-14T02:06:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 编译时性能优化笔记">
+<meta name="twitter:description" content="Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/005SiNxygw1f3p3jimjllj31jk0dwqft.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://madordie.github.io/swift-build-times/"/>
+
+
+
+
+
+  <title>Swift 编译时性能优化笔记 | Keith's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?26275fd2191bb3c1f8248947481e9ac4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Keith's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">不疯魔,不成活</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/swift-build-times/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keith">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keith's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Swift 编译时性能优化笔记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-17T13:47:17+08:00">
+                2017-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。</p>
+<a id="more"></a>
+<h3 id="Xcode8-2"><a href="#Xcode8-2" class="headerlink" title="Xcode8.2"></a>Xcode8.2</h3><p>添加<code>User-Defind</code>新的<code>SWIFT_WHOLE_MODULE_OPTIMIZATION = YES</code>可以过滤为修改framework。</p>
+<h3 id="针对运算符-的优化"><a href="#针对运算符-的优化" class="headerlink" title="针对运算符??的优化"></a>针对运算符<code>??</code>的优化</h3><p>在使用<code>??</code>时，并不是所有的都需要优化，包裹在循环中的<code>??</code>会比较耗时比较厉害，目前不知道为啥，估计编译的时候需要检查的此时比较多吧😂。</p>
+<h4 id="尝试显式解包"><a href="#尝试显式解包" class="headerlink" title="尝试显式解包"></a>尝试显式解包</h4><p><strong>思路</strong>：<code>??</code>编译慢，就不用<code>??</code>，直接使用<code>if else</code><br><strong>实施</strong>: 由于工程中使用的<code>??</code>比较多，所以比较修改起来比较麻烦。但是可以解决问题。真不行写方法转化调用喽。。</p>
+<h4 id="错误的尝试了重载运算符-方式"><a href="#错误的尝试了重载运算符-方式" class="headerlink" title="错误的尝试了重载运算符??方式"></a>错误的尝试了重载运算符<code>??</code>方式</h4><p><strong>思路</strong>: <code>??</code>运算符编译耗时较多，直觉是<code>??</code>实现有复杂的操作,重新按照显式解包的方案进行实现。<br><strong>实施</strong>: </p>
+<ul>
+<li>分析<code>??</code>的使用场景，左侧为T?,右侧为T，返回值T</li>
+<li>重载函数名定义<code>public func ?? &lt;T&gt;(left: T?, right: T) -&gt; T</code></li>
+<li>实现</li>
+<li>编译</li>
+<li>error：<code>Ambiguous use of operator &#39;??&#39;</code></li>
+<li>思考：这丫的在重载运算符的时候不能使用泛型吧。。</li>
+<li>更改函数为<code>public func ?? &lt;Any&gt;(left: Any?, right: Any) -&gt; Any</code></li>
+<li>PL. OK了，可是问题来了，系统的<code>??</code>是可以返回对应的类型，可是这样重载之后返回一个<code>Any</code>，代码中如果出现<code>let str = str1 ?? &quot;&quot;</code>则str类型就变为<code>Any</code>而不是<code>String</code>。<strong>巨坑</strong></li>
+<li>顾不了那么多了，真不行一个一个跑。于是先修改一个较为严重的<code>String</code>类型。</li>
+<li>尝试编译，结果时间惊人的没有变化。。依旧居高不下</li>
+<li>以失败告终。。</li>
+</ul>
+<p><strong>总结</strong>: 这个<code>??</code>耗时较多并不是因为<code>??</code>的实现有问题，<strong>猜测</strong>是在为<code>??</code>准备左右参数的时候需要进行一层层的解包确定类型，再加上<code>??</code>可能有重载版本，进行类型匹配的时候比较耗时。</p>
+<h4 id="尝试扩展方法进行优化"><a href="#尝试扩展方法进行优化" class="headerlink" title="尝试扩展方法进行优化"></a>尝试扩展方法进行优化</h4><p><strong>思路</strong>: 既然运算符会导致编译慢，那么就尝试使用方法直接进行转换。<br><strong>实现</strong>: 代码如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Operator</span> </span>&#123;</div><div class="line">    <span class="comment">///  ==&gt; ??</span></div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> `<span class="title">try</span>`&lt;T&gt;<span class="params">(<span class="number">_</span> origin: T?, <span class="number">_</span> then: T)</span></span> -&gt; <span class="type">T</span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> value = origin <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> then</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> value</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试发现上述方法可以优化时间。</p>
+<hr>
+<h3 id="以下原文出自：关于-Swift-编译时性能优化的一些思考"><a href="#以下原文出自：关于-Swift-编译时性能优化的一些思考" class="headerlink" title="以下原文出自：关于 Swift 编译时性能优化的一些思考"></a>以下原文出自：<a href="https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md" target="_blank" rel="external">关于 Swift 编译时性能优化的一些思考</a></h3><hr>
+<blockquote>
+<ul>
+<li>原文链接 : <a href="https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31#.w81y3zhjr" target="_blank" rel="external">Regarding Swift build time optimizations</a></li>
+<li>原文作者 : <a href="https://medium.com/@RobertGummesson" target="_blank" rel="external">Robert Gummesson</a></li>
+<li>译文出自 : <a href="https://github.com/xitu/gold-miner" target="_blank" rel="external">掘金翻译计划</a></li>
+<li>译者 : <a href="http://www.yanglonglong.com" target="_blank" rel="external">杨龙龙</a></li>
+<li>校对者: <a href="https://github.com/shenAlexy" target="_blank" rel="external">申冠华</a>, <a href="https://github.com/Jack-Kingdom" target="_blank" rel="external">Jack King</a></li>
+</ul>
+</blockquote>
+<p><img src="http://ww3.sinaimg.cn/large/005SiNxygw1f3p3jimjllj31jk0dwqft.jpg" alt=""></p>
+<h4 id="关于-Swift-编译时性能优化的一些思考"><a href="#关于-Swift-编译时性能优化的一些思考" class="headerlink" title="关于 Swift 编译时性能优化的一些思考"></a>关于 Swift 编译时性能优化的一些思考</h4><p>上周，我读了 <a href="https://medium.com/@nickoneill" target="_blank" rel="external">@nickoneill</a> 一篇优秀的帖子 <a href="https://medium.com/swift-programming/speeding-up-slow-swift-build-times-922feeba5780#.k0pngnkns" target="_blank" rel="external">Speeding Up Slow Swift Build Times</a> 之后，我发现用一个略不同以往的角度去读Swift代码，并不是很难。</p>
+<p>一行之前很简洁的代码，现在却出现了新的问题——它是否应该重构为9行代码来达到更快的编译速度？ (<em>nil coalescing 运算符就是一个例子</em>)孰轻孰重？简洁的代码还是对编译器友好的代码？ 我觉得，它取决于项目的大小和开发者的想法。</p>
+<h4 id="但请等等…-这里有一个Xcode插件"><a href="#但请等等…-这里有一个Xcode插件" class="headerlink" title="但请等等… 这里有一个Xcode插件"></a>但请等等… 这里有一个Xcode插件</h4><p>在讲一些例子之前，我首先想到了通过手工提取日志信息是非常耗时的事情。通过命令行工具实现会相对容易一些，但是我把它往前推进了一步：集成为<a href="https://github.com/RobertGummesson/BuildTimeAnalyzer-for-Xcode" target="_blank" rel="external">Xcode插件</a>。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005SiNxygw1f3p3hhivppj30m809lwis.jpg" alt=""></p>
+<p>在这个例子中，最初的目的仅仅是识别并修复代码中最耗时的地方，但是现在我觉得它成为了一个必须要迭代的过程。这样我才可以更加高效地构建代码，并且防止在项目中出现耗时的函数。</p>
+<h4 id="不少惊喜"><a href="#不少惊喜" class="headerlink" title="不少惊喜"></a>不少惊喜</h4><p>我经常在不同的 Git 分支中跳转，并且等待一个暖慢的项目编译简直是在浪费我的生命。因此我思考了很长时间，一个玩具项目（大约两万行 Swift 代码）会编译如此长的时间。</p>
+<p>当我知道是什么原因导致它如此慢之后，我不得不承认我震惊了，一行代码居然需要几秒的编译时间。</p>
+<p>让我们来看几个例子。</p>
+<h4 id="Nil-合并运算符"><a href="#Nil-合并运算符" class="headerlink" title="Nil 合并运算符"></a>Nil 合并运算符</h4><p>编译器肯定不喜欢这里的第一种方法。在展开下面两处简写的代码之后，构建时间减少了 <strong>99.4%</strong>。</p>
+<pre><code>// 构建时间： 5238.3ms
+return CGSize(width: size.width + (rightView?.bounds.width ?? 0) + (leftView?.bounds.width ?? 0) + 22, height: bounds.height)
+
+// 构建时间： 32.4ms
+var padding: CGFloat = 22
+if let rightView = rightView {
+    padding += rightView.bounds.width
+}
+
+if let leftView = leftView {
+    padding += leftView.bounds.width
+}
+return CGSizeMake(size.width + padding, bounds.height)
+</code></pre><h4 id="ArrayOfStuff-Stuff"><a href="#ArrayOfStuff-Stuff" class="headerlink" title="ArrayOfStuff + [Stuff]"></a>ArrayOfStuff + [Stuff]</h4><p>这个看起来像下面这样：</p>
+<pre><code>return ArrayOfStuff + [Stuff]  
+// 而不是  
+ArrayOfStuff.append(stuff)  
+return ArrayOfStuff
+</code></pre><p>我经常这么做，并且它影响了每次构建的时间。下面是最糟糕的一个例子，改写后构建时间可以减少 <strong>97.9%</strong>。</p>
+<pre><code>// 构建时间： 1250.3ms
+let systemOptions = [ 7, 14, 30, -1 ]
+let systemNames = (0...2).map{ String(format: localizedFormat, systemOptions[$0]) } + [NSLocalizedString(&quot;everything&quot;, comment: &quot;&quot;)]
+// Some code in-between 
+labelNames = Array(systemNames[0..&lt;count]) + [systemNames.last!]
+
+// 构建时间： 25.5ms
+let systemOptions = [ 7, 14, 30, -1 ]
+var systemNames = systemOptions.dropLast().map{ String(format: localizedFormat, $0) }
+systemNames.append(NSLocalizedString(&quot;everything&quot;, comment: &quot;&quot;))
+// Some code in-between
+labelNames = Array(systemNames[0..&lt;count])
+labelNames.append(systemNames.last!)
+</code></pre><h4 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h4><p>仅仅是通过替换三元运算符为 if else 语句就能减少 <strong>92.9%</strong> 的构建时间。如果使用一个for循环替换 <em>map</em> 函数，它又能减少另一个 75%（但是我的眼睛可就受不了咯😉）。</p>
+<pre><code>// 构建时间： 239.0ms
+let labelNames = type == 0 ? (1...5).map{type0ToString($0)} : (0...2).map{type1ToString($0)}
+
+// 构建时间： 16.9ms
+var labelNames: [String]
+if type == 0 {
+    labelNames = (1...5).map{type0ToString($0)}
+} else {
+    labelNames = (0...2).map{type1ToString($0)}
+}
+</code></pre><h4 id="转换-CGFloat-到-CGFloat"><a href="#转换-CGFloat-到-CGFloat" class="headerlink" title="转换 CGFloat 到 CGFloat"></a>转换 CGFloat 到 CGFloat</h4><p>这里我所说的并不一定正确。变量已经使用了 CGFloat 并且有一些括号也是多余的。在清理了这些冗余之后，构建时间能减少 <strong>99.9%</strong>。</p>
+<pre><code>// 构建时间： 3431.7 ms
+return CGFloat(M_PI) * (CGFloat((hour + hourDelta + CGFloat(minute + minuteDelta) / 60) * 5) - 15) * unit / 180
+
+// 构建时间： 3.0ms
+return CGFloat(M_PI) * ((hour + hourDelta + (minute + minuteDelta) / 60) * 5 - 15) * unit / 180
+</code></pre><h4 id="Round"><a href="#Round" class="headerlink" title="Round()"></a>Round()</h4><p>这个一个非常奇怪的例子，下面的例子中变量是一个局部变量与实例变量的混合。这个问题可能不是四舍五入本身，而是结合代码的方法。去掉四舍五入的方法大概能减少 <strong>97.6%</strong> 的构建时间。</p>
+<pre><code>// 构建时间： 1433.7ms
+let expansion = a — b — c + round(d * 0.66) + e
+// 构建时间： 34.7ms
+let expansion = a — b — c + d * 0.66 + e
+</code></pre><p>注意：所有的测试都在 MacBook Air (13-inch, Mid 2013)中进行。</p>
+<h4 id="尝试它"><a href="#尝试它" class="headerlink" title="尝试它"></a>尝试它</h4><p>无论你是否面临过构建时间太长的问题，编写对编译器友好的代码都是非常有用的。我确定你自己会在其中找到一些惊喜。作为参考，这里有完整的代码，在我的工程中可以5秒内完成编译…</p>
+<pre><code>import UIKit
+
+class CMExpandingTextField: UITextField {
+
+    func textFieldEditingChanged() {
+        invalidateIntrinsicContentSize()
+    }
+
+    override func intrinsicContentSize() -&gt; CGSize {
+        if isFirstResponder(), let text = text {
+            let size = text.sizeWithAttributes(typingAttributes)
+            return CGSize(width: size.width + (rightView?.bounds.width ?? 0) + (leftView?.bounds.width ?? 0) + 22, height: bounds.height)
+        }
+        return super.intrinsicContentSize()
+    }
+}
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/优化/" rel="tag"># 优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/real-world-swift-performance/" rel="next" title="「转」真实世界中的 Swift 性能优化">
+                <i class="fa fa-chevron-left"></i> 「转」真实世界中的 Swift 性能优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/fastlane-note/" rel="prev" title="Fastlane自动化笔记">
+                Fastlane自动化笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Keith" />
+          <p class="site-author-name" itemprop="name">Keith</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto:keith_127@126.com" target="_blank" title="E-Mail">
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/madordie" target="_blank" title="GitHub">
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/madordie/" target="_blank" title="原博客园">
+                  
+                    
+                      原博客园
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://madordie.leanote.com" target="_blank" title="原Leanote">
+                  
+                    
+                      原Leanote
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xcode8-2"><span class="nav-number">1.</span> <span class="nav-text">Xcode8.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#针对运算符-的优化"><span class="nav-number">2.</span> <span class="nav-text">针对运算符??的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试显式解包"><span class="nav-number">2.1.</span> <span class="nav-text">尝试显式解包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误的尝试了重载运算符-方式"><span class="nav-number">2.2.</span> <span class="nav-text">错误的尝试了重载运算符??方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试扩展方法进行优化"><span class="nav-number">2.3.</span> <span class="nav-text">尝试扩展方法进行优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以下原文出自：关于-Swift-编译时性能优化的一些思考"><span class="nav-number">3.</span> <span class="nav-text">以下原文出自：关于 Swift 编译时性能优化的一些思考</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-Swift-编译时性能优化的一些思考"><span class="nav-number">3.1.</span> <span class="nav-text">关于 Swift 编译时性能优化的一些思考</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#但请等等…-这里有一个Xcode插件"><span class="nav-number">3.2.</span> <span class="nav-text">但请等等… 这里有一个Xcode插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不少惊喜"><span class="nav-number">3.3.</span> <span class="nav-text">不少惊喜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nil-合并运算符"><span class="nav-number">3.4.</span> <span class="nav-text">Nil 合并运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayOfStuff-Stuff"><span class="nav-number">3.5.</span> <span class="nav-text">ArrayOfStuff + [Stuff]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三元运算符"><span class="nav-number">3.6.</span> <span class="nav-text">三元运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转换-CGFloat-到-CGFloat"><span class="nav-number">3.7.</span> <span class="nav-text">转换 CGFloat 到 CGFloat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Round"><span class="nav-number">3.8.</span> <span class="nav-text">Round()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试它"><span class="nav-number">3.9.</span> <span class="nav-text">尝试它</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Keith</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      人次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://madordie.github.io/swift-build-times/';
+          this.page.identifier = 'swift-build-times/';
+          this.page.title = 'Swift 编译时性能优化笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://madordie.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
