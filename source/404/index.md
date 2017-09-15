@@ -13,68 +13,68 @@ sorry ~~~
 
 你要找的是？
 
-[归档](https://madordie.github.io/archives/)
+[归档](../archives/)
 
-[iOS逆向-monkeydev工具](https://madordie.github.io/reverse-ios-monkeydev/)
+[个人资料页](../about-me/)
 
-[iOS逆向-class-dump工具](https://madordie.github.io/reverse-ios-class-dump/)
+[iOS逆向-monkeydev工具](./reverse-ios-monkeydev/)
 
-[iOS逆向-砸壳(cycript/clutch)](https://madordie.github.io/reverse-ios-dump-decrypted/)
+[iOS逆向-class-dump工具](./reverse-ios-class-dump/)
 
-[iOS逆向-设备ssh免密登录](https://madordie.github.io/reverse-ios-ssh/)
+[iOS逆向-砸壳(cycript/clutch)](./reverse-ios-dump-decrypted/)
 
-[自定义数据填充Sketch插件](https://madordie.github.io/format-sketchplugin/)
+[iOS逆向-设备ssh免密登录](./reverse-ios-ssh/)
 
-[ios11-beta](https://madordie.github.io/ios11-beta/)
+[自定义数据填充Sketch插件](./format-sketchplugin/)
 
-[「转」Unowned 还是 Weak？生命周期和性能对比](https://madordie.github.io/swiftgg-unowned-or-weak-lifetime-and-performance/)
+[ios11-beta](./ios11-beta/)
 
-[侧滑导航栏消失问题笔记](https://madordie.github.io/push-pop-navigation-bar-hidden/)
+[「转」Unowned 还是 Weak？生命周期和性能对比](./swiftgg-unowned-or-weak-lifetime-and-performance/)
 
-[「转」iOS图片加载速度极限优化—FastImageCache解析](https://madordie.github.io/bang-fastimagecache/)
+[侧滑导航栏消失问题笔记](./push-pop-navigation-bar-hidden/)
 
-[debug-_SwiftValue-unsignedIntegerValue](https://madordie.github.io/debug-SwiftValue-unsignedIntegerValue/)
+[「转」iOS图片加载速度极限优化—FastImageCache解析](./bang-fastimagecache/)
 
-[RxSwift语法笔记](https://madordie.github.io/rx-dictionary/)
+[debug-_SwiftValue-unsignedIntegerValue](./debug-SwiftValue-unsignedIntegerValue/)
 
-[sonarqube-note](https://madordie.github.io/sonarqube-note/)
+[RxSwift语法笔记](./rx-dictionary/)
 
-[「转」真实世界中的 Swift 性能优化](https://madordie.github.io/real-world-swift-performance/)
+[sonarqube-note](./sonarqube-note/)
 
-[Swift 编译时性能优化笔记](https://madordie.github.io/swift-build-times/)
+[「转」真实世界中的 Swift 性能优化](./real-world-swift-performance/)
 
-[Fastlane自动化笔记](https://madordie.github.io/fastlane-note/)
+[Swift 编译时性能优化笔记](./swift-build-times/)
 
-[如何实现AppStore查看更多的方法](https://madordie.github.io/uitextkit-ellipsis-sth-at-the-end/)
+[Fastlane自动化笔记](./fastlane-note/)
 
-[优雅的使用SwiftLint](https://madordie.github.io/elegant-to-use-swiftlint/)
+[如何实现AppStore查看更多的方法](./uitextkit-ellipsis-sth-at-the-end/)
 
-[科学上网之搬瓦工ss搭建笔记](https://madordie.github.io/bandwagonhost-note/)
+[优雅的使用SwiftLint](./elegant-to-use-swiftlint/)
 
-[正则表达式学习笔记](https://madordie.github.io/bruch-up-regular-expressions/)
+[科学上网之搬瓦工ss搭建笔记](./bandwagonhost-note/)
 
-[DEBUG - swift中取出通知中的frame](https://madordie.github.io/debug-swift-notifa-frame/)
+[正则表达式学习笔记](./bruch-up-regular-expressions/)
 
-[DEBUG - Xcode8解析.crash](https://madordie.github.io/debug-xcode8-analysis-crash-file/)
+[DEBUG - swift中取出通知中的frame](./debug-swift-notifa-frame/)
 
-[DEBUG - UIView.h#190](https://madordie.github.io/debug-uiview-m-190/)
+[DEBUG - Xcode8解析.crash](./debug-xcode8-analysis-crash-file/)
 
-[Xcode8打包脚本](https://madordie.github.io/build-ipa-sh/)
+[DEBUG - UIView.h#190](./debug-uiview-m-190/)
 
-[UI素材与代码解耦的讨论与思考](https://madordie.github.io/ui-source-and-code-decoupling/)
+[Xcode8打包脚本](./build-ipa-sh/)
 
-[开发小记](https://madordie.github.io/note/)
+[UI素材与代码解耦的讨论与思考](./ui-source-and-code-decoupling/)
 
-[项目中的UITableView](https://madordie.github.io/about-project-tableview/)
+[开发小记](./note/)
 
-[关于转载的文章](https://madordie.github.io/about-reprint-article/)
+[项目中的UITableView](./about-project-tableview/)
 
-[准备食用RAC(ReactiveCocoa)的顾虑](https://madordie.github.io/reactivecocoa-ready-to-use/)
+[关于转载的文章](./about-reprint-article/)
 
-[hexo的博客让百度收录](https://madordie.github.io/use-hexo-setup-blog/)
+[准备食用RAC(ReactiveCocoa)的顾虑](./reactivecocoa-ready-to-use/)
 
-[博客迁移公告](https://madordie.github.io/about-change-blog/)
+[hexo的博客让百度收录](./use-hexo-setup-blog/)
 
-[个人资料页](https://madordie.github.io/about-me/)
+[博客迁移公告](./about-change-blog/)
 
-[如何正确的连续推新页面](https://madordie.github.io/push-queue-for-navigation/)
+[如何正确的连续推新页面](./push-queue-for-navigation/)

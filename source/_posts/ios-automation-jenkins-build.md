@@ -8,4 +8,6 @@ categories:
     - iOS
 ---
 
-[忙于iOS11的兼容](https://madordie.github.io/ios11-beta/)
+[忙于iOS11的兼容](./ios11-beta/)
+
+
