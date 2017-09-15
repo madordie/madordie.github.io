@@ -28,7 +28,11 @@ iOS11 版本中 __立即失效__。
 
 最容易出问题的就是无导航的顶部刷新会莫名其妙的缩不进去～～
 
+![效果图](/images/ios11-beta-1.jpg)
+
 还有就是如果没有使用这个`automaticallyAdjustsScrollViewInsets`，为了达到那种戳进去的代码直接设置`frame.y = 0`。这种操作不但会出现导航栏莫名其妙的戳出来，还有`UITableView.section.header`莫名错位的问题。
+
+![效果图](/images/ios11-beta-2.gif)
 
 API 声明：
 
