@@ -81,6 +81,3 @@ decisionHandler(.allow)
 
 测试了一下确实不崩溃了，但是具体的解决方案还要看作者的在[Issues#302](https://github.com/marcuswestin/WebViewJavascriptBridge/issues/302)中的回复。
 
-
-### WKWebView
-
