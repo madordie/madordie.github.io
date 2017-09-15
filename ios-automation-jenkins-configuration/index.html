@@ -104,17 +104,17 @@
 
 
 
-<meta name="description" content="介绍  JenkinsBuild great things at any scaleThe leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.  如官网所说Build great t">
+<meta name="description" content="iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍  JenkinsBuild great things at any scaleThe leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and aut">
 <meta name="keywords" content="构建,Jenkins">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS自动化-Jenkins环境搭建">
 <meta property="og:url" content="https://madordie.github.io/ios-automation-jenkins-configuration/index.html">
 <meta property="og:site_name" content="Keith's Blog">
-<meta property="og:description" content="介绍  JenkinsBuild great things at any scaleThe leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.  如官网所说Build great t">
-<meta property="og:updated_time" content="2017-09-14T09:24:33.000Z">
+<meta property="og:description" content="iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍  JenkinsBuild great things at any scaleThe leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and aut">
+<meta property="og:updated_time" content="2017-09-15T03:32:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS自动化-Jenkins环境搭建">
-<meta name="twitter:description" content="介绍  JenkinsBuild great things at any scaleThe leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.  如官网所说Build great t">
+<meta name="twitter:description" content="iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍  JenkinsBuild great things at any scaleThe leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and aut">
 
 
 
@@ -385,7 +385,11 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
+<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
+<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
+</ul>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
 <p> <strong>Jenkins</strong><br><em>Build great things at any scale</em><br>The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.</p>
 </blockquote>
 <p>如<a href="https://jenkins.io" target="_blank" rel="external">官网</a>所说<code>Build great things at any scale</code></p>
@@ -408,7 +412,7 @@
 </li>
 </ul>
 </blockquote>
-<p>这里使用<code>brew</code>，因为<strong>很方便</strong>：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 安装</span></div><div class="line">$ brew update &amp;&amp; brew install jenkins</div><div class="line"></div><div class="line"><span class="comment"># 更新</span></div><div class="line">$ brew upgrade &amp; brew upgrade jenkins</div><div class="line"></div><div class="line"><span class="comment"># 后台运行 还支持`stop`、`restart`等 (这种方式还是有差别的，下面会说明)</span></div><div class="line">$ brew services start jenkins</div></pre></td></tr></table></figure></p>
+<p>这里使用<code>brew</code>，因为<strong>很方便</strong>：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 安装</span></div><div class="line">$ brew update &amp;&amp; brew install jenkins</div><div class="line"></div><div class="line"><span class="comment"># 更新</span></div><div class="line">$ brew update &amp; brew upgrade jenkins</div><div class="line"></div><div class="line"><span class="comment"># 后台运行 还支持`stop`、`restart`等 (这种方式还是有差别的，下面会说明)</span></div><div class="line">$ brew services start jenkins</div></pre></td></tr></table></figure></p>
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>建议先来看一波<code>--help</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ jenkins --help</div></pre></td></tr></table></figure>
 <p>下面是常用的几种方案，此处如果第一次安装，建议采用<code>方案一</code>或者<code>方案二</code>，暂时不建议新手使用后台运行的方案～～（会在打包的时候出现证书的问题）</p>
@@ -423,7 +427,7 @@
 <p>在浏览器打开<a href="http://10.12.12.10:8080" target="_blank" rel="external">http://10.12.12.10:8080</a>就可以正常加载啦～</p>
 <p>退出运行：<code>control + C</code> 组合键。</p>
 <h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>直接<code>open</code>，看不到日志输出，所对应的运行环境和方案一相同。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ open /Applications/Jenkins/jenkins.war</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ open /usr/<span class="built_in">local</span>/opt/jenkins/libexec/jenkins.war</div></pre></td></tr></table></figure>
 <p>命令结束，稍等片刻(初始化相关目录、环境)，在浏览器打开<a href="http://10.12.12.10:8080" target="_blank" rel="external">http://10.12.12.10:8080</a>就可以正常加载啦～</p>
 <h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>使用<code>brew</code>直接挂在后台作为服务运行起来</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo brew services start jenkins</div></pre></td></tr></table></figure>
@@ -433,9 +437,16 @@
 <p>需要说的是<code>launchctl</code>是macOS下系统提供的后台运行方案，<code>brew</code>等，均来自于此。</p>
 <p>在<code>launchctl</code>后台中需要一个<code>plist</code>，但是<code>brew</code>已经做好了，放置在<code>~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</code>。需要说的是<code>launchctl</code>是macOS下系统提供的后台运行方案，<code>brew</code>等，均来自于此，具体的配置参数都和<code>launchctl</code>一样的，搜索一下很多。<code>brew</code>为我们已经准备好了一个，直接使用<code>方案三</code>就行。</p>
 <p>具体操作可以Google一下，很多的～</p>
+<h2 id="安装完成后的配置"><a href="#安装完成后的配置" class="headerlink" title="安装完成后的配置"></a>安装完成后的配置</h2><p>在Jenkins初始化完毕为了验证管理员身份，需要将Jenkins机器上的一个字符串输入到<a href="http://10.12.12.10:8080" target="_blank" rel="external">http://10.12.12.10:8080</a>中进行验证，具体文件目录在输入的界面就能看到，不要大惊小怪。</p>
+<p>之后开始选择安装插件。这里可以选择推荐的～～，也可以自己勾选。为了方便，这里直接选择推荐的方案进行安装。</p>
+<p>经过漫长的等待，终于将插件安装完毕，并启动了起来～～</p>
+<p>接下来开始去配置工程吧！传送门：<a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></p>
 <h2 id="可能会碰到的错误"><a href="#可能会碰到的错误" class="headerlink" title="可能会碰到的错误"></a>可能会碰到的错误</h2><h3 id="Error-Permission-denied"><a href="#Error-Permission-denied" class="headerlink" title="Error: Permission denied - *"></a>Error: Permission denied - <em>*</em></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew services start jenkins</div><div class="line">Error: Permission denied - ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</div></pre></td></tr></table></figure>
 <p>这种很明显<code>Permission denied</code>，在命令行前添加<code>sudo</code>，然后输入密码即可。如下：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo brew services start jenkins</div></pre></td></tr></table></figure>
+<h3 id="方案二后的地址哪里来的？"><a href="#方案二后的地址哪里来的？" class="headerlink" title="方案二后的地址哪里来的？"></a><code>方案二</code>后的地址哪里来的？</h3><p>这里推荐的安装方案是<code>brew install jenkins</code></p>
+<p>通过下面的方式找到<code>brew</code>安装的位置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ $ brew services list</div><div class="line">Name       Status  User Plist</div><div class="line">beanstalkd stopped</div><div class="line">influxdb   stopped</div><div class="line">jenkins    started keith  ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</div><div class="line">nginx      stopped</div><div class="line">sonarqube  stopped</div><div class="line">FDDdeiMac:~ FDD$ cat ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</div><div class="line">...</div><div class="line">&lt;string&gt;/usr/<span class="built_in">local</span>/opt/jenkins/libexec/jenkins.war&lt;/string&gt;</div><div class="line">...</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -666,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行"><span class="nav-number">3.</span> <span class="nav-text">运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一"><span class="nav-number">3.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二"><span class="nav-number">3.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三"><span class="nav-number">3.3.</span> <span class="nav-text">方案三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他方案"><span class="nav-number">3.4.</span> <span class="nav-text">其他方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可能会碰到的错误"><span class="nav-number">4.</span> <span class="nav-text">可能会碰到的错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Permission-denied"><span class="nav-number">4.1.</span> <span class="nav-text">Error: Permission denied - *</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行"><span class="nav-number">3.</span> <span class="nav-text">运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一"><span class="nav-number">3.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二"><span class="nav-number">3.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三"><span class="nav-number">3.3.</span> <span class="nav-text">方案三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他方案"><span class="nav-number">3.4.</span> <span class="nav-text">其他方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装完成后的配置"><span class="nav-number">4.</span> <span class="nav-text">安装完成后的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可能会碰到的错误"><span class="nav-number">5.</span> <span class="nav-text">可能会碰到的错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Permission-denied"><span class="nav-number">5.1.</span> <span class="nav-text">Error: Permission denied - *</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二后的地址哪里来的？"><span class="nav-number">5.2.</span> <span class="nav-text">方案二后的地址哪里来的？</span></a></li></ol></li></ol></div>
             
 
           </div>
