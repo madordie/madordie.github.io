@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<meta name="baidu-site-verification" content="HgM1IFrAdg" />
+<meta name="google-site-verification" content="Xu6-fD_SQrKSpCcK_-6s1MT72UJ2SYJLWPut6Uk1AAI" />
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="逆向," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Keith's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别对cycript、clutch进行砸壳:">
+<meta name="keywords" content="逆向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS逆向-砸壳(cycript/clutch)">
+<meta property="og:url" content="https://madordie.github.io/reverse-ios-dump-decrypted/index.html">
+<meta property="og:site_name" content="Keith's Blog">
+<meta property="og:description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别对cycript、clutch进行砸壳:">
+<meta property="og:updated_time" content="2017-09-15T03:05:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS逆向-砸壳(cycript/clutch)">
+<meta name="twitter:description" content="准备工作 越狱设备  目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～ 下面分别对cycript、clutch进行砸壳:">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://madordie.github.io/reverse-ios-dump-decrypted/"/>
+
+
+
+
+
+  <title>iOS逆向-砸壳(cycript/clutch) | Keith's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?26275fd2191bb3c1f8248947481e9ac4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Keith's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">不疯魔,不成活</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/reverse-ios-dump-decrypted/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keith">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keith's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS逆向-砸壳(cycript/clutch)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T20:31:50+08:00">
+                2017-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>越狱设备</li>
+</ul>
+<p>目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～</p>
+<p>下面分别对<code>cycript</code>、<code>clutch</code>进行砸壳:</p>
+<a id="more"></a>
+<h1 id="使用cycript进行砸壳"><a href="#使用cycript进行砸壳" class="headerlink" title="使用cycript进行砸壳"></a>使用cycript进行砸壳</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><code>Cydia</code>中搜索<code>cycript</code>并安装 </li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><a href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略" class="headerlink" title="制作并上传dumpdecrypted.dylib （已经OK的可忽略"></a>制作并上传<code>dumpdecrypted.dylib</code> （已经OK的可忽略</h3><h4 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h4><p>目前我制作目录暂时在<code>~/Desktop</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/stefanesser/dumpdecrypted.git ~/Desktop</div><div class="line">$ cd ～／Desktop/dumpdecrypted</div><div class="line">$ make</div><div class="line">$ ls dumpdecrypted.dylib</div></pre></td></tr></table></figure>
+<p>没什么错误的话，即得<code>dumpdecrypted.dylib</code>。</p>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>将<code>dumpdecrypted.dylib</code>放在越狱设备的<code>/var/root/</code>下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ls dumpdecrypted.dylib</div><div class="line">$ scp dumpdecrypted.dylib root@10.12.14.16:/var/root/</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">dumpdecrypted.dylib                           100%  193KB   3.0MB/s   00:00</div><div class="line">$</div></pre></td></tr></table></figure>
+<h3 id="登录进越狱设备"><a href="#登录进越狱设备" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
+<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="../reverse-ios-ssh/">配置传送门</a></p>
+<h3 id="找到可执行文件路径"><a href="#找到可执行文件路径" class="headerlink" title="找到可执行文件路径"></a>找到可执行文件路径</h3><p>这里以<code>WeChat</code>为例子啦～</p>
+<p>记得先打开呀～～～</p>
+<p><code>ps -e</code>： 显示所有程序<br><code>grep</code>: 这里是过滤一下。。具体用法Google。所有的程序有点多，我知道名字，所以直接过滤一下。也可忽略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ ps -e | grep WeChat</div><div class="line">705 ??         0:02.20 /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</div><div class="line">707 ttys000    0:00.01 grep WeChat</div><div class="line">$ cycript -p 705</div><div class="line">$ cycript -p 705</div><div class="line">cy# [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0]</div><div class="line">#&quot;file:///var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/&quot;</div><div class="line">cy# exit(0)</div><div class="line">MS:Error: _krncall(mach_vm_read_overwrite(task, data, sizeof(*baton), reinterpret_cast&lt;mach_vm_address_t&gt;(baton), &amp;error)) =4</div><div class="line">*** _assert(status == 0):../Inject.cpp(143):InjectLibrary</div><div class="line">$</div></pre></td></tr></table></figure>
+<p>此处获得两个目录：</p>
+<ul>
+<li><code>/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</code></li>
+<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</code></li>
+</ul>
+<h3 id="开砸"><a href="#开砸" class="headerlink" title="开砸"></a>开砸</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">$ cd ~</div><div class="line">$ cp dumpdecrypted.dylib /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</div><div class="line">$ cd /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</div><div class="line">$ DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</div><div class="line">mach-o decryption dumper</div><div class="line"></div><div class="line">DISCLAIMER: This tool is only meant for security research purposes, not for application crackers.</div><div class="line"></div><div class="line">[+] detected 64bit ARM binary in memory.</div><div class="line">[+] offset to cryptid found: @0x1000c0ca8(from 0x1000c0000) = ca8</div><div class="line">[+] Found encrypted data at address 00004000 of length 51200000 bytes - type 1.</div><div class="line">[+] Opening /private/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat for reading.</div><div class="line">[+] Reading header</div><div class="line">[+] Detecting header type</div><div class="line">[+] Executable is a plain MACH-O image</div><div class="line">[+] Opening WeChat.decrypted for writing.</div><div class="line">[+] Copying the not encrypted start of the file</div><div class="line">[+] Dumping the decrypted data into the file</div><div class="line">[+] Copying the not encrypted remainder of the file</div><div class="line">[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset ca8</div><div class="line">[+] Closing original file</div><div class="line">[+] Closing dump file</div><div class="line">$ ls WeChat.decrypted</div><div class="line">WeChat.decrypted</div><div class="line">$ pwd</div><div class="line">/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents</div></pre></td></tr></table></figure>
+<p>最后得到文件:</p>
+<ul>
+<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted</code></li>
+</ul>
+<h3 id="将-decrypted拷贝出来"><a href="#将-decrypted拷贝出来" class="headerlink" title="将*.decrypted拷贝出来"></a>将<code>*.decrypted</code>拷贝出来</h3><p>我这里直接使用<code>scp</code>吧～。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ cd /Users/Madordie/Desktop/Madordie/iOS/xxx</div><div class="line">$ scp root@10.12.14.16:/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted .</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">WeChat.decrypted                              100%   61MB   4.7MB/s   00:12</div><div class="line">$ ls WeChat.decrypted</div><div class="line">WeChat.decrypted</div></pre></td></tr></table></figure>
+<p>至此在主机上得到：</p>
+<ul>
+<li><code>/Users/Madordie/Desktop/Madordie/iOS/xxx/WeChat.decrypted</code></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>为什么将<code>dumpdecrypted.dylib</code>  <code>copy</code> 至<code>*/Documents/</code>下？<br>  ：别的目录没有权限～～（<code>dumpdecrypted.dylib: stat() failed with errno=1</code> ）</li>
+</ul>
+<h1 id="使用clutch进行砸壳"><a href="#使用clutch进行砸壳" class="headerlink" title="使用clutch进行砸壳"></a>使用clutch进行砸壳</h1><h2 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h2><h3 id="下载上传clutch-无须重复做"><a href="#下载上传clutch-无须重复做" class="headerlink" title="下载上传clutch(无须重复做)"></a>下载上传clutch(无须重复做)</h3><p><code>clutch</code>可以从<a href="https://github.com/KJCracks/Clutch" target="_blank" rel="external">https://github.com/KJCracks/Clutch</a>下载编译。</p>
+<p>当然也可以从<a href="https://github.com/KJCracks/Clutch/releases" target="_blank" rel="external">https://github.com/KJCracks/Clutch/releases</a>直接下载。</p>
+<p>目前下载到目录<code>~/Clutch-2.0.4</code></p>
+<p>上传到设备：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cd ~</div><div class="line">$ scp Clutch-2.0.4 root@10.12.14.16:/usr/bin/</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">Clutch-2.0.4                                  100% 1204KB   4.7MB/s   00:00</div></pre></td></tr></table></figure>
+<h3 id="登录进越狱设备-1"><a href="#登录进越狱设备-1" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
+<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="../reverse-ios-ssh/">配置传送门</a></p>
+<h3 id="修改权限"><a href="#修改权限" class="headerlink" title="修改权限"></a>修改权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cd ~</div><div class="line">$ cd /usr/bin</div><div class="line">$ mv Clutch-2.0.4 clutch</div><div class="line">$ chmod +x clutch</div></pre></td></tr></table></figure>
+<h3 id="砸壳"><a href="#砸壳" class="headerlink" title="砸壳"></a>砸壳</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ clutch -i</div><div class="line">Installed apps:</div><div class="line">1:   钉钉 &lt;com.laiwang.DingTalk&gt;</div><div class="line">2:   韩剧TV-最新热门韩剧大全 &lt;com.baoyun.hanju&gt;</div><div class="line">3:   PG Client - a better client for dribbble &lt;com.az.azdribbble&gt;</div><div class="line">4:   窝牛－设计装修我们的家 &lt;com.lingduohome.acorn&gt;</div><div class="line">$ clutch -d 1</div><div class="line">com.laiwang.DingTalk contains watchOS 2 compatible application. It&apos;s not possible to dump watchOS 2 apps with Clutch 2.0.4 at this moment.</div><div class="line">Zipping DingTalk.app</div><div class="line">ASLR slide: 0x10001c000</div><div class="line">Dumping &lt;DingTalk&gt; (arm64)</div><div class="line">Patched cryptid (64bit segment)</div><div class="line">Writing new checksum</div><div class="line">DONE: /private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</div><div class="line">Finished dumping com.laiwang.DingTalk in 40.6 seconds</div><div class="line">$</div></pre></td></tr></table></figure>
+<p>生成最终路径:</p>
+<ul>
+<li><code>/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</code></li>
+</ul>
+<h3 id="传至本地"><a href="#传至本地" class="headerlink" title="传至本地"></a>传至本地</h3><p>注意路径中有<code>()</code>这样的字符，需要转义一下。如下：</p>
+<p>在本地终端中使用<code>scp</code>拉取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ scp root@10.12.14.16:&apos;/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa&apos; .</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ip 100%   48MB   3.6MB/s   00:13</div><div class="line">$ ls com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa</div><div class="line">com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</div><div class="line">$ pwd</div><div class="line">/Users/Madordie/Desktop/Madordie/ios-reverse</div></pre></td></tr></table></figure>
+<p>至此在主机上得到：</p>
+<ul>
+<li><code>/Users/Madordie/Desktop/Madordie/ios-reverse/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa</code></li>
+</ul>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>并不是每一个都可以支持这种工具砸壳，失败了用第一种试试。。。</li>
+</ul>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>目前发现这两种砸壳工具。但是并不是每一个APP都可以使用2种工具。有的只有一个有效，有的两个都有效，还有一种两个都失败的😂</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/逆向/" rel="tag"># 逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/reverse-ios-class-dump/" rel="next" title="iOS逆向-class-dump工具">
+                <i class="fa fa-chevron-left"></i> iOS逆向-class-dump工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/reverse-ios-ssh/" rel="prev" title="iOS逆向-设备ssh免密登录">
+                iOS逆向-设备ssh免密登录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Keith" />
+          <p class="site-author-name" itemprop="name">Keith</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto:keith_127@126.com" target="_blank" title="E-Mail">
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/madordie" target="_blank" title="GitHub">
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/madordie/" target="_blank" title="原博客园">
+                  
+                    
+                      原博客园
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://madordie.leanote.com" target="_blank" title="原Leanote">
+                  
+                    
+                      原Leanote
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用cycript进行砸壳"><span class="nav-number">2.</span> <span class="nav-text">使用cycript进行砸壳</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">2.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><span class="nav-number">2.2.1.</span> <span class="nav-text">制作并上传dumpdecrypted.dylib （已经OK的可忽略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#制作"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">制作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录进越狱设备"><span class="nav-number">2.2.2.</span> <span class="nav-text">登录进越狱设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到可执行文件路径"><span class="nav-number">2.2.3.</span> <span class="nav-text">找到可执行文件路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开砸"><span class="nav-number">2.2.4.</span> <span class="nav-text">开砸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将-decrypted拷贝出来"><span class="nav-number">2.2.5.</span> <span class="nav-text">将*.decrypted拷贝出来</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用clutch进行砸壳"><span class="nav-number">3.</span> <span class="nav-text">使用clutch进行砸壳</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤-1"><span class="nav-number">3.1.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载上传clutch-无须重复做"><span class="nav-number">3.1.1.</span> <span class="nav-text">下载上传clutch(无须重复做)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录进越狱设备-1"><span class="nav-number">3.1.2.</span> <span class="nav-text">登录进越狱设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改权限"><span class="nav-number">3.1.3.</span> <span class="nav-text">修改权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#砸壳"><span class="nav-number">3.1.4.</span> <span class="nav-text">砸壳</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传至本地"><span class="nav-number">3.1.5.</span> <span class="nav-text">传至本地</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-1"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Keith</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      人次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://madordie.github.io/reverse-ios-dump-decrypted/';
+          this.page.identifier = 'reverse-ios-dump-decrypted/';
+          this.page.title = 'iOS逆向-砸壳(cycript/clutch)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://madordie.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

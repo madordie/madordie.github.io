@@ -8,6 +8,9 @@ categories:
     - iOS
 ---
 
+- [iOS自动化-Jenkins环境搭建](../ios-automation-jenkins-configuration)
+- [iOS自动化-Jenkins编译工程](../ios-automation-jenkins-build)
+
 ## 介绍
 
 >  **Jenkins**
@@ -47,7 +50,7 @@ brew install jenkins-lts
 $ brew update && brew install jenkins
 
 # 更新
-$ brew upgrade & brew upgrade jenkins
+$ brew update & brew upgrade jenkins
 
 # 后台运行 还支持`stop`、`restart`等 (这种方式还是有差别的，下面会说明)
 $ brew services start jenkins
@@ -87,7 +90,7 @@ $ jenkins
 直接`open`，看不到日志输出，所对应的运行环境和方案一相同。
 
 ```sh
-$ open /Applications/Jenkins/jenkins.war
+$ open /usr/local/opt/jenkins/libexec/jenkins.war
 ```
 
 命令结束，稍等片刻(初始化相关目录、环境)，在浏览器打开[http://10.12.12.10:8080](http://10.12.12.10:8080)就可以正常加载啦～
@@ -114,6 +117,16 @@ $ sudo brew services start jenkins
 
 具体操作可以Google一下，很多的～
 
+## 安装完成后的配置
+
+在Jenkins初始化完毕为了验证管理员身份，需要将Jenkins机器上的一个字符串输入到[http://10.12.12.10:8080](http://10.12.12.10:8080)中进行验证，具体文件目录在输入的界面就能看到，不要大惊小怪。
+
+之后开始选择安装插件。这里可以选择推荐的～～，也可以自己勾选。为了方便，这里直接选择推荐的方案进行安装。
+
+经过漫长的等待，终于将插件安装完毕，并启动了起来～～
+
+接下来开始去配置工程吧！传送门：[iOS自动化-Jenkins编译工程](../ios-automation-jenkins-build)
+
 ## 可能会碰到的错误
 
 ### Error: Permission denied - ***
@@ -126,4 +139,24 @@ Error: Permission denied - ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist
 
 ```sh
 $ sudo brew services start jenkins
+```
+
+### `方案二`后的地址哪里来的？
+
+这里推荐的安装方案是`brew install jenkins`
+
+通过下面的方式找到`brew`安装的位置
+
+```sh
+$ $ brew services list
+Name       Status  User Plist
+beanstalkd stopped
+influxdb   stopped
+jenkins    started keith  ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist
+nginx      stopped
+sonarqube  stopped
+FDDdeiMac:~ FDD$ cat ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist
+...
+<string>/usr/local/opt/jenkins/libexec/jenkins.war</string>
+...
 ```

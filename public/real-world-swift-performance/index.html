@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<meta name="baidu-site-verification" content="HgM1IFrAdg" />
+<meta name="google-site-verification" content="Xu6-fD_SQrKSpCcK_-6s1MT72UJ2SYJLWPut6Uk1AAI" />
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="优化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Keith's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="原文链接：真实世界中的 Swift 性能优化">
+<meta name="keywords" content="优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「转」真实世界中的 Swift 性能优化">
+<meta property="og:url" content="https://madordie.github.io/real-world-swift-performance/index.html">
+<meta property="og:site_name" content="Keith's Blog">
+<meta property="og:description" content="原文链接：真实世界中的 Swift 性能优化">
+<meta property="og:updated_time" content="2017-08-14T02:06:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「转」真实世界中的 Swift 性能优化">
+<meta name="twitter:description" content="原文链接：真实世界中的 Swift 性能优化">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://madordie.github.io/real-world-swift-performance/"/>
+
+
+
+
+
+  <title>「转」真实世界中的 Swift 性能优化 | Keith's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?26275fd2191bb3c1f8248947481e9ac4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Keith's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">不疯魔,不成活</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/real-world-swift-performance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keith">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keith's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">「转」真实世界中的 Swift 性能优化</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-17T19:14:57+08:00">
+                2017-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文链接：<a href="https://realm.io/cn/news/real-world-swift-performance/" target="_blank" rel="external">真实世界中的 Swift 性能优化</a></p>
+<a id="more"></a>
+<hr>
+<p>有太多的因素会导致您的应用变得缓慢。在本次讲演中，我们将自底向上地来探索应用的性能优化。来看一看在真实世界中进行数据解析、数据映射和数据存储的时候，Swift 的特性（协议、泛型、结构体和类）是如何影响应用性能的，我们将确定影响性能提升的瓶颈所在，并体验 Swift 带来的「迅捷」体验。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>今天我打算同大家谈论 Swift 性能优化方面的内容。当我们构建软件的时候，特别是移动软件，由于人们的精力、时间有限，人们往往更喜欢有一个流畅的用户体验，而不是等着您的应用在那加载。如果应用运行速度过慢，并且不能给用户带来他们所想要的结果的话，那么这会让人们感到不爽。因此，让您的代码能够快速运行是无比重要的一件事。</p>
+<p>那么有什么因素会导致代码运行缓慢呢？当您在编写代码并选择架构的时候，深刻认识到这些架构所带来的影响是非常重要的。我将首先谈一谈：如何理解内联、动态调度与静态调度之间的权衡，以及相关结构是如何分配内存的，还有怎样选择最适合的架构。</p>
+<h2 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h2><p>对象的内存分配 (allocation) 和内存释放 (deallocation) 是代码中最大的开销之一，同时通常也是不可避免的。Swift 会自行分配和释放内存，此外它存在两种类型的分配方式。</p>
+<p>第一个是基于栈 (stack-based) 的内存分配。Swift 会尽可能选择在栈上分配内存。栈是一种非常简单的数据结构；数据从栈的底部推入 (push)，从栈的顶部弹出 (pop)。由于我们只能够修改栈的末端，因此我们可以通过维护一个指向栈末端的指针来实现这种数据结构，并且在其中进行内存的分配和释放只需要重新分配该整数即可。</p>
+<p>第二个是基于堆 (heap-based) 的内存分配。这使得内存分配将具备更加动态的生命周期，但是这需要更为复杂的数据结构。要在堆上进行内存分配的话，您需要锁定堆当中的一个空闲块 (free block)，其大小能够容纳您的对象。因此，我们需要找到未使用的块，然后在其中分配内存。当我们需要释放内存的时候，我们就必须搜索何处能够重新插入该内存块。这个操作很缓慢。主要是为了线程安全，我们必须要对这些东西进行锁定和同步。</p>
+<h2 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h2><p>我们还有引用计数 (reference counting) 的概念，这个操作相对不怎么耗费性能，但是由于使用次数很多，因此它带来的性能影响仍然是很大的。引用计数是 Objective-C 和 Swift 中用于确定何时该释放对象的安全机制。目前，Swift 当中的引用计数是强制自动管理的，这意味着它很容易被开发者们所忽略。然而，当您打开 Instrument 查看何处影响了代码运行的速度的时候，您会发现 20,000 多次的 Swift 持有 (retain) 和释放 (release)，这些操作占用了 90% 的代码运行时间！<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">perform</span><span class="params">(with object: Object)</span></span> &#123;</div><div class="line">    object.doAThing()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这是因为如果有这样一个函数接收了一个对象作为参数，并且执行了这个对象的 doAThing() 方法，编译器会自动插入对象持有和释放操作，以确保在这个方法的生命周期当中，这个对象不会被回收掉。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">perform</span><span class="params">(with object: Object)</span></span> &#123;</div><div class="line">    __swift_retain(object)</div><div class="line">    object.doAThing()</div><div class="line">    __swift_release(object)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这些对象持有和释放操作是原子操作 (atomic operations)，所以它们运转缓慢就很正常了。或者，是因为我们不知道如何让它们能够运行得更快一些。</p>
+<h2 id="调度与对象"><a href="#调度与对象" class="headerlink" title="调度与对象"></a>调度与对象</h2><p>此外还有调度 (dispatch) 的概念。Swift 拥有三种类型的调度方式。Swift 会尽可能将函数内联 (inline)，这样的话使用这个函数将不会有额外的性能开销。这个函数可以直接调用。静态调度 (static dispatch) 本质上是通过 V-table 进行的查找和跳转，这个操作会花费一纳秒的时间。然后动态调度 (dynamic dispatch) 将会花费大概五纳秒的时间，如果您只有几个这样的方法调用的话，这实际上并不会带来多大的问题，问题是当您在一个嵌套循环或者执行上千次操作当中使用了动态调度的话，那么它所带来的性能耗费将成百上千地累积起来，最终影响应用性能。</p>
+<p>Swift 同样也有两种类型的对象。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></div><div class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>,</div><div class="line">                item: <span class="number">1</span>)</div></pre></td></tr></table></figure></p>
+<p>这是一个类，类当中的数据都会在堆上分配内存。您可以在此处看到，这里我们创建了一个名为 Index 的类。其中包含了两个属性，一个 section 和一个 item。当我们创建了这个对象的时候，堆上便创建了一个指向此 Index 的指针，因此在堆上便存放了这个 section 和 item 的数据和空间。</p>
+<p>如果我们对其建立引用，就会发现我们现在有两个指向堆上相同区域的指针了，它们之间是共享内存的。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></div><div class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>,</div><div class="line">                item: <span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> i2 = i</div></pre></td></tr></table></figure></p>
+<p>这个时候，Swift 会自动插入对象持有操作。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></div><div class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>,</div><div class="line">                item: <span class="number">1</span>)</div><div class="line"></div><div class="line">__swift_retain(i)</div><div class="line"><span class="keyword">let</span> i2 = i</div></pre></td></tr></table></figure></p>
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><p>很多人都会说：要编写性能优异的 Swift 代码，最简单的方式就是使用结构体了，结构体通常是一个很好的结构，因为结构体会存储在栈上，并且通常会使用静态调度或者内联调度。</p>
+<p>存储在栈上的 Swift 结构体将占用三个 Word 大小。如果您的结构体当中的数据数量低于三种的话，那么结构体的值会自动在栈上内联。Word 是 CPU 当中内置整数的大小，它是 CPU 所工作的区块。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Index</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></div><div class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>, item: <span class="number">1</span>)</div></pre></td></tr></table></figure></p>
+<p>在这里您可以看到，当我们创建这个结构体的时候，带有 section 和 item 值得 Index 结构体将会直接下放到栈当中，这个时候不会有额外的内存分配发生。那么如果我们在别处将其赋值到另一个变量的时候，会发生什么呢？<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Index</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></div><div class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>, item: <span class="number">1</span>)</div><div class="line"><span class="keyword">let</span> i2 = i</div></pre></td></tr></table></figure></p>
+<p>如果我们将 i 赋给 i2，这会将我们存储在栈当中的值直接再次复制一遍，这个时候并不会出现引用的情况。这就是所谓的「值类型」。</p>
+<p>那么如果结构体当中存放了引用类型的话又会怎样呢？持有内联指针的结构体。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">let</span> id: <span class="type">String</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> u = <span class="type">User</span>(name: <span class="string">"Joe"</span>, id: <span class="string">"1234"</span>)</div></pre></td></tr></table></figure></p>
+<p>当我们将其赋值给别的变量的时候，我们就持有了共享两个结构体的相同指针，因此我们必须要对这两个指针进行持有操作，而不是在对象上执行单独的持有操作。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">let</span> id: <span class="type">String</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> u = <span class="type">User</span>(name: <span class="string">"Joe"</span>,</div><div class="line">             id: <span class="string">"1234"</span>)</div><div class="line">__swift_retain(u.name._textStorage)</div><div class="line">__swift_retain(u.id._textStorage)</div><div class="line"><span class="keyword">let</span> u2 = u</div></pre></td></tr></table></figure></p>
+<p>如果其中包含了类的话，那么性能耗费会更大。</p>
+<h2 id="抽象类型"><a href="#抽象类型" class="headerlink" title="抽象类型"></a>抽象类型</h2><p>正如我们此前所述，Swift 提供了许多不同的抽象类型 (abstraction)，从而允许我们自行决定代码该如何运行，以及决定代码的性能特性。现在我们来看一看抽象类型是如何在实际环境当中使用的。这里有一段很简单的代码：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Circle</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> radius: <span class="type">Double</span></div><div class="line">    <span class="keyword">let</span> center: <span class="type">Point</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">draw</span><span class="params">()</span></span> &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> circles = (<span class="number">1</span>..&lt;<span class="number">100_000_000</span>).<span class="built_in">map</span> &#123; <span class="number">_</span> <span class="keyword">in</span> <span class="type">Circle</span>(...) &#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> circle <span class="keyword">in</span> circles &#123;</div><div class="line">    circle.draw()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里有一个带有 radius 和 center 属性的 Circle 结构体。它将占用三个 Word 大小的空间，并存储在栈上。我们创建了一亿个 Circle，然后我们遍历这些 Circle 并调用这个函数。在我的电脑上，这段操作在发布模式下耗费了 0.3 秒的时间。那么当需求发生变更的时候，会发生什么事呢？</p>
+<p>我们不仅需要绘圆，还需要能够处理多种类型的形状。让我们假设我们还需要绘线。我非常喜欢面向协议编程，因为它允许我在不使用继承的情况下实现多态性，并且它允许我们只需要考虑这个「抽象类型」即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">protocol Drawable &#123;</div><div class="line">    func draw()</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Circle: Drawable &#123;</div><div class="line">    let radius: Double</div><div class="line">    let center: Point</div><div class="line">    func draw() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let drawables: [Drawable] = (1..&lt;100_000_000).map &#123; _ in Circle(...) &#125;</div><div class="line"></div><div class="line">for drawable in drawables &#123;</div><div class="line">    drawable.draw()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们需要做的，就是将这个 draw 方法析取到协议当中，然后将数组的引用类型变更为这个协议，这样做导致这段代码花费了 4.0 秒的时间来运行。速率减慢了 1300%，这是为什么呢？</p>
+<p>这是因为此前的代码可以被静态调度，从而在没有任何堆应用建立的情况下仍能够执行。这就是协议是如何实现的。</p>
+<p>例如，如大家所见，这里是我们此前的 Circle 结构体。在这个 for 循环当中，Swift 编译器所做的就是前往 V-table 进行查找，或者直接将 draw 函数内联。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">struct Circle &#123;</div><div class="line">    let radius: Double</div><div class="line">    let center: Point</div><div class="line">    func draw() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var circles = (1..&lt;100_000_000).map &#123; _ in Circle(...) &#125;</div><div class="line"></div><div class="line">for circle in circles &#123;</div><div class="line">    circle.draw()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我们用协议来替代的时候，此时它并不知道这个对象是结构体还是类。因为这里可能是任何一个实现此协议的类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">protocol Drawable &#123;</div><div class="line">    func draw()</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Circle: Drawable &#123;</div><div class="line">    let radius: Double</div><div class="line">    let center: Point</div><div class="line"></div><div class="line">    func draw() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var drawables: [Drawable] = (1..&lt;100_000_000).map &#123; _ in return Circle(...) &#125;</div><div class="line"></div><div class="line">for drawable in drawables &#123;</div><div class="line">    drawable.draw()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么我们该如何去调度这个 draw 函数呢？答案就位于协议记录表 (protocol witness table，也称为虚函数表) 当中。它其中存放了您应用当中每个实现协议的对象名，并且在底层实现当中，这个表本质上充当了这些类型的别名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">protocol Drawable &#123;</div><div class="line">    func draw()</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Circle: Drawable &#123;</div><div class="line">    let radius: Double</div><div class="line">    let center: Point</div><div class="line"></div><div class="line">    func draw() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var drawables: [Drawable] = (1..&lt;100_000_000).map &#123; _ in</div><div class="line">    return Circle(...)</div><div class="line">&#125;</div><div class="line"></div><div class="line">for drawable in drawables &#123;</div><div class="line">    drawable.draw()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这里的代码当中，我们该如何获取协议记录表呢？答案就是从这个既有容器 (existential container) 当中获取，这个容器目前拥有一个三个字大小的结构体，并且存放在其内部的值缓冲区当中，此外还与协议记录表建立了引用关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct Circle: Drawable &#123;</div><div class="line">    let radius: Double</div><div class="line">    let center: Point</div><div class="line"></div><div class="line">    func draw() &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里 Circle 类型存放在了三个字大小的缓冲区当中，并且不会被单独引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct Line: Drawable &#123;</div><div class="line">    let origin: Point</div><div class="line">    let end: Point</div><div class="line"></div><div class="line">    func draw() &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>举个例子，对于我们的 Line 类型来说，它其中包含了四个字的存储空间，因为它拥有两个点类型。这个 Line 结构体需要超过四个字以上的存储空间。我们该如何处理它呢？这会对性能有影响么？好吧，它的确会：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">protocol Drawable &#123;</div><div class="line">    func draw()</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Line: Drawable &#123;</div><div class="line">    let origin: Point</div><div class="line">    let end: Point</div><div class="line">    func draw() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let drawables: [Drawable] = (1..&lt;100_000_000).map &#123; _ in Line(...) &#125;</div><div class="line"></div><div class="line">for drawable in drawables &#123;</div><div class="line">    drawable.draw()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这需要花费 45 秒钟的时间来运行。为什么这里要花这么久的时间呢，发生了什么事呢？</p>
+<p>绝大部分的时间都花费在对结构体进行内存分配上了，因为现在它们无法存放在只有三个字大小的缓冲区当中了。因此这些结构会在堆上进行内存分配，此外这也与协议有一点关系。由于既有容器只能够存储三个字大小的结构体，或者也可以与对象建立引用关系，我们同样需要某种名为值记录表 (value witness table)。这就是我们用来处理任意值的东西。</p>
+<p>因此在这里，编译器将创建一个值记录表，对每个���缓冲区、内敛结构体来说，都有三个字大小的缓冲区，然后它将负责对值或者类进行内存分配、拷贝、销毁和内存释放等操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">func draw(drawable: Drawable) &#123;</div><div class="line">    drawable.draw()</div><div class="line">&#125;</div><div class="line"></div><div class="line">let value: Drawable = Line()</div><div class="line">draw(local: value)</div><div class="line"></div><div class="line">// Generates</div><div class="line">func draw(value: ECTDrawable) &#123;</div><div class="line">    var drawable: ECTDrawable = ECTDrawable()</div><div class="line">    let vwt = value.vwt</div><div class="line">    let pwt = value.pwt</div><div class="line">    drawable.vwt = value.vwt</div><div class="line">    drawable.pwt = value.pwt</div><div class="line">    vwt.allocateBuffAndCopyValue(&amp;drawable, value)</div><div class="line">    pwt.draw(vwt.projectBuffer(&amp;drawable)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里是一个例子，这就是这个过程的中间产物。如果我们只有一个 draw 函数，那么它将会接受我们创建的 Line 作为参数，因此我们将它传递给这个 draw 函数即可。</p>
+<p>实际情况时，它将这个 Drawable 协议传递到既有容器当中，然后在函数内部再次进行创建。这会对值和协议记录表进行赋值，然后分配一个新的缓冲区，然后将其他结构、类或者类似对象的值拷贝进这个缓冲区当中。然后就使用协议记录表当中的 draw 函数，把真实的 Drable 对象传递给这个函数。</p>
+<p>您可以看到，值记录表和协议记录表将会存放在栈上，而 Line 将会被存放在堆上，从而最后将线绘制出来。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>对我们进行数据建模的方式进行简单的更改将会对性能造成巨大的影响。让我们来看一看该如何来避免这些情况的发生。</p>
+<p>首先让我们来说一说泛型。大家可能会说了，我给各位展示了协议会导致性能的下降，那么我们为什么还要使用泛型呢？答案在于：泛型允许我们做什么。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">struct Stack&lt;T: Type&gt; &#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>假设我们这里有一个带有泛型 T 的 Stack 结构体，它受到一个协议类型的约束。编译器所要做的，就是将这个 T 提换成相应的协议，或者替换为我们传入的具体类型。这些操作会一直沿着函数链 (function chain) 执行，并且编译器会创建直接对此类型进行操作的专用版本。</p>
+<p>这样我们就无需再使用值记录表或者协议记录表了，并且还移除了既有容器，这可能是一个非常好的解决方式，这使得我们仍然能够写出真正快速运行的泛型代码，并且还具备 Swift 所提供的良好多态性。这就是所谓的静态多态性 (static polymorphism)。</p>
+<p>您还可以通过使用枚举来改进数据模型，而不是从服务器中获取大量的字符串。例如，假设您正在构建一个社交应用，您需要对账户建立状态的管理，以前您可能会使用字符串来进行控制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">enum AccountStatus: String, RawRepresentable &#123;</div><div class="line">case .banned, .verified, incomplete</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果我们改用枚举的话，那么我们就无需进行内存分配了，当我们传递这个类型的时候，我们只是将枚举值进行传递，这是一个加快代码运行速度的好方法，同时也可以为整个应用程序提供更安全、更可读的代码。</p>
+<p>此外，使用 u-模型或者演示者 (Presenter) 或者不同的抽象类型的形式，来构建特定类型的模型也是非常有用的，这使得我们能够精简掉应用当中许多不必要的部分。</p>
+<p>好的，我的讲演到此结束，内容很短，感谢诸位的参与！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/优化/" rel="tag"># 优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sonarqube-note/" rel="next" title="sonarqube-note">
+                <i class="fa fa-chevron-left"></i> sonarqube-note
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/swift-build-times/" rel="prev" title="Swift 编译时性能优化笔记">
+                Swift 编译时性能优化笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Keith" />
+          <p class="site-author-name" itemprop="name">Keith</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto:keith_127@126.com" target="_blank" title="E-Mail">
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/madordie" target="_blank" title="GitHub">
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/madordie/" target="_blank" title="原博客园">
+                  
+                    
+                      原博客园
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://madordie.leanote.com" target="_blank" title="原Leanote">
+                  
+                    
+                      原Leanote
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分配"><span class="nav-number">2.</span> <span class="nav-text">内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用计数"><span class="nav-number">3.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调度与对象"><span class="nav-number">4.</span> <span class="nav-text">调度与对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体"><span class="nav-number">5.</span> <span class="nav-text">结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类型"><span class="nav-number">6.</span> <span class="nav-text">抽象类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">7.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Keith</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      人次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://madordie.github.io/real-world-swift-performance/';
+          this.page.identifier = 'real-world-swift-performance/';
+          this.page.title = '「转」真实世界中的 Swift 性能优化';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://madordie.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

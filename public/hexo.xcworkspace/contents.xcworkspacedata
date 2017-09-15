@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../_config.yml">
+   </FileRef>
+   <FileRef
+      location = "group:../themes/next/_config.yml">
+   </FileRef>
+   <FileRef
+      location = "group:hexo.xcworkspace/CommandLineTools/CommandLineTools.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:_posts">
+   </FileRef>
+   <FileRef
+      location = "group:404">
+   </FileRef>
+   <FileRef
+      location = "group:about">
+   </FileRef>
+   <FileRef
+      location = "group:categories">
+   </FileRef>
+   <FileRef
+      location = "group:images">
+   </FileRef>
+   <FileRef
+      location = "group:tags">
+   </FileRef>
+   <FileRef
+      location = "group:uploads">
+   </FileRef>
+</Workspace>
