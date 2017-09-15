@@ -3,6 +3,50 @@
 
 
     
+  <url>
+    <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
+    <lastmod>2017-09-15T03:32:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS自动化-Jenkins环境搭建</title>
+        <pubTime>2017-09-10T01:49:32.000Z</pubTime>
+        
+        <tag>构建</tag>
+         
+        <tag>Jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/ios-automation-jenkins-build/</loc>
+    <lastmod>2017-09-15T03:21:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS自动化-Jenkins编译工程</title>
+        <pubTime>2017-09-14T09:27:15.000Z</pubTime>
+        
+        <tag>构建</tag>
+         
+        <tag>Jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://madordie.github.io/reverse-ios-dump-decrypted/</loc>
@@ -86,28 +130,6 @@
     </url>
 
     
-  <url>
-    <loc>https://madordie.github.io/ios-automation-jenkins-build/</loc>
-    <lastmod>2017-09-15T03:04:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>iOS自动化-Jenkins编译工程</title>
-        <pubTime>2017-09-14T09:27:15.000Z</pubTime>
-        
-        <tag>构建</tag>
-         
-        <tag>Jenkins</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
     
   <url>
     <loc>https://madordie.github.io/ios11-beta/</loc>
@@ -117,28 +139,6 @@
         <title>iOS11-beta</title>
         <pubTime>2017-06-12T09:20:58.000Z</pubTime>
         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
-    <lastmod>2017-09-14T09:24:33.000Z</lastmod>
-    <data>
-        <display>
-        <title>iOS自动化-Jenkins环境搭建</title>
-        <pubTime>2017-09-10T01:49:32.000Z</pubTime>
-        
-        <tag>构建</tag>
-         
-        <tag>Jenkins</tag>
-         
          
            
              
