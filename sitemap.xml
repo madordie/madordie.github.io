@@ -2,16 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://madordie.github.io/ios11-beta/</loc>
+    <loc>https://madordie.github.io//404.html</loc>
     
-    <lastmod>2017-09-15T02:52:56.000Z</lastmod>
+    <lastmod>2017-09-15T03:00:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/about/index.html</loc>
+    
+    <lastmod>2017-09-15T02:58:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/reverse-ios-dump-decrypted/</loc>
+    
+    <lastmod>2017-09-15T02:58:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/reverse-ios-class-dump/</loc>
+    
+    <lastmod>2017-09-15T02:58:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/fastlane-note/</loc>
+    
+    <lastmod>2017-09-15T02:58:15.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/build-ipa-sh/</loc>
+    
+    <lastmod>2017-09-15T02:57:15.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/ios-automation-jenkins-build/</loc>
     
-    <lastmod>2017-09-14T09:28:23.000Z</lastmod>
+    <lastmod>2017-09-15T02:56:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/ios11-beta/</loc>
+    
+    <lastmod>2017-09-15T02:52:56.000Z</lastmod>
     
   </url>
   
@@ -37,27 +79,6 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/build-ipa-sh/</loc>
-    
-    <lastmod>2017-09-08T09:43:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/about/index.html</loc>
-    
-    <lastmod>2017-09-04T03:18:03.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io//404.html</loc>
-    
-    <lastmod>2017-08-17T01:55:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://madordie.github.io/push-queue-for-navigation/</loc>
     
     <lastmod>2017-08-16T02:27:44.000Z</lastmod>
@@ -79,13 +100,6 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
-    
-    <lastmod>2017-08-14T02:20:29.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://madordie.github.io/debug-swift-notifa-frame/</loc>
     
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
@@ -93,9 +107,9 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/fastlane-note/</loc>
+    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
     
-    <lastmod>2017-08-14T02:20:27.000Z</lastmod>
+    <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     
   </url>
   
@@ -180,20 +194,6 @@
     <loc>https://madordie.github.io/reverse-ios-ssh/</loc>
     
     <lastmod>2017-08-14T02:04:27.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/reverse-ios-dump-decrypted/</loc>
-    
-    <lastmod>2017-08-14T02:04:17.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/reverse-ios-class-dump/</loc>
-    
-    <lastmod>2017-08-14T02:04:06.000Z</lastmod>
     
   </url>
   
