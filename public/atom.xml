@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-09-15T03:21:30.000Z</updated>
+  <updated>2017-09-15T07:42:54.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/ios-automation-jenkins-build/"/>
     <id>https://madordie.github.io/ios-automation-jenkins-build/</id>
     <published>2017-09-14T09:27:15.000Z</published>
-    <updated>2017-09-15T03:21:30.000Z</updated>
+    <updated>2017-09-15T07:42:54.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../ios11-beta/">忙于iOS11的兼容</a></p>
 <ul>
@@ -28,11 +28,40 @@
 <li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
 </ul>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～</p>
+<p>从这个文章中你将要实现以下功能：</p>
+<ul>
+<li>在Jenkins创建工程</li>
+<li>build出ipa</li>
+<li>将ipa上传至fir</li>
+<li>钉钉机器人群通知</li>
+<li>将dsym上传至bugly</li>
+</ul>
+<a id="more"></a>
+<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
+<p>确保以下插件已经被安装：</p>
+<ul>
+<li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin" target="_blank" rel="external">Git Plugin</a></li>
+<li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin" target="_blank" rel="external">Tool Environment Plugin</a></li>
+</ul>
+<p>嗯，开始创建工程，然后配置打包吧</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;&lt;a href=&quot;../ios11-beta/&quot;&gt;忙于iOS11的兼容&lt;/a
+      &lt;p&gt;&lt;a href=&quot;../ios11-beta/&quot;&gt;忙于iOS11的兼容&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;../ios-automation-jenkins-configuration&quot;&gt;iOS自动化-Jenkins环境搭建&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;../ios-automation-jenkins-build&quot;&gt;iOS自动化-Jenkins编译工程&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～&lt;/p&gt;
+&lt;p&gt;从这个文章中你将要实现以下功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在Jenkins创建工程&lt;/li&gt;
+&lt;li&gt;build出ipa&lt;/li&gt;
+&lt;li&gt;将ipa上传至fir&lt;/li&gt;
+&lt;li&gt;钉钉机器人群通知&lt;/li&gt;
+&lt;li&gt;将dsym上传至bugly&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -88,7 +117,7 @@
     <link href="https://madordie.github.io/ios-automation-jenkins-configuration/"/>
     <id>https://madordie.github.io/ios-automation-jenkins-configuration/</id>
     <published>2017-09-10T01:49:32.000Z</published>
-    <updated>2017-09-15T03:32:20.000Z</updated>
+    <updated>2017-09-15T07:42:45.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
 <li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
@@ -98,6 +127,11 @@
 <p> <strong>Jenkins</strong><br><em>Build great things at any scale</em><br>The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.</p>
 </blockquote>
 <p>如<a href="https://jenkins.io" target="_blank" rel="external">官网</a>所说<code>Build great things at any scale</code></p>
+<p>从这篇文章中你将会实现：</p>
+<ul>
+<li>在Mac上搭建jenkins</li>
+<li>在局域网中正常访问jenkins</li>
+</ul>
 <a id="more"></a>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>当然你首先需要一个macOS的系统，为后来的构建做基础。</p>
 <p>Jenkins中可以使用<code>pkg</code>、<code>war</code>的方式运行，当然还有在<a href="https://jenkins.io/doc/book/getting-started/installing/" target="_blank" rel="external">Installing Jenkins</a>中提供一些安装方式：</p>
@@ -145,6 +179,7 @@
 <h2 id="安装完成后的配置"><a href="#安装完成后的配置" class="headerlink" title="安装完成后的配置"></a>安装完成后的配置</h2><p>在Jenkins初始化完毕为了验证管理员身份，需要将Jenkins机器上的一个字符串输入到<a href="http://10.12.12.10:8080" target="_blank" rel="external">http://10.12.12.10:8080</a>中进行验证，具体文件目录在输入的界面就能看到，不要大惊小怪。</p>
 <p>之后开始选择安装插件。这里可以选择推荐的～～，也可以自己勾选。为了方便，这里直接选择推荐的方案进行安装。</p>
 <p>经过漫长的等待，终于将插件安装完毕，并启动了起来～～</p>
+<p>Jenkins权限，嗯，这个很重要，可以去<code>系统管理 -&gt; Configure Global Security</code>  中进行设置。</p>
 <p>接下来开始去配置工程吧！传送门：<a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></p>
 <h2 id="可能会碰到的错误"><a href="#可能会碰到的错误" class="headerlink" title="可能会碰到的错误"></a>可能会碰到的错误</h2><h3 id="Error-Permission-denied"><a href="#Error-Permission-denied" class="headerlink" title="Error: Permission denied - *"></a>Error: Permission denied - <em>*</em></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew services start jenkins</div><div class="line">Error: Permission denied - ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</div></pre></td></tr></table></figure>
 <p>这种很明显<code>Permission denied</code>，在命令行前添加<code>sudo</code>，然后输入密码即可。如下：</p>
@@ -152,6 +187,11 @@
 <h3 id="方案二后的地址哪里来的？"><a href="#方案二后的地址哪里来的？" class="headerlink" title="方案二后的地址哪里来的？"></a><code>方案二</code>后的地址哪里来的？</h3><p>这里推荐的安装方案是<code>brew install jenkins</code></p>
 <p>通过下面的方式找到<code>brew</code>安装的位置</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ $ brew services list</div><div class="line">Name       Status  User Plist</div><div class="line">beanstalkd stopped</div><div class="line">influxdb   stopped</div><div class="line">jenkins    started keith  ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</div><div class="line">nginx      stopped</div><div class="line">sonarqube  stopped</div><div class="line">FDDdeiMac:~ FDD$ cat ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</div><div class="line">...</div><div class="line">&lt;string&gt;/usr/<span class="built_in">local</span>/opt/jenkins/libexec/jenkins.war&lt;/string&gt;</div><div class="line">...</div></pre></td></tr></table></figure>
+<h3 id="给Jenkins绑定一个IP"><a href="#给Jenkins绑定一个IP" class="headerlink" title="给Jenkins绑定一个IP"></a>给Jenkins绑定一个IP</h3><p>讲道理这个不应该在这里聊的😂，不过还是说一下吧。。</p>
+<p>一般局域网中都是直接自动获取IP信息的也就是DHCP，但是Jenkins总改IP也不好。。于是绑定一下吧。</p>
+<p>在mac 中 <code>系统偏好设置 -&gt; 网络</code> 记录下来当前获取到的IP。</p>
+<p>在<code>高级</code>中将<code>使用DHCP</code>修改为<code>使用DHCP(手动设定地址)</code>，然后将上面的地址填进去就好啦～</p>
+<p>当然你也可以指定其他的地址，只要别人没有占用😂，你开心就好～</p>
 ]]></content>
     
     <summary type="html">
@@ -164,6 +204,11 @@
 &lt;p&gt; &lt;strong&gt;Jenkins&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Build great things at any scale&lt;/em&gt;&lt;br&gt;The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;如&lt;a href=&quot;https://jenkins.io&quot;&gt;官网&lt;/a&gt;所说&lt;code&gt;Build great things at any scale&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;从这篇文章中你将会实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在Mac上搭建jenkins&lt;/li&gt;
+&lt;li&gt;在局域网中正常访问jenkins&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     

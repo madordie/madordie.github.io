@@ -104,17 +104,17 @@
 
 
 
-<meta name="description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～">
+<meta name="description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～ 从这个文章中你将要实现以下功能：  在Jenkins创建工程 build出ipa 将ipa上传至fir 钉钉机器人群通知 将dsym上传至bugly">
 <meta name="keywords" content="构建,Jenkins">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS自动化-Jenkins编译工程">
 <meta property="og:url" content="https://madordie.github.io/ios-automation-jenkins-build/index.html">
 <meta property="og:site_name" content="Keith's Blog">
-<meta property="og:description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～">
-<meta property="og:updated_time" content="2017-09-15T03:21:30.000Z">
+<meta property="og:description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～ 从这个文章中你将要实现以下功能：  在Jenkins创建工程 build出ipa 将ipa上传至fir 钉钉机器人群通知 将dsym上传至bugly">
+<meta property="og:updated_time" content="2017-09-15T07:42:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS自动化-Jenkins编译工程">
-<meta name="twitter:description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～">
+<meta name="twitter:description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～ 从这个文章中你将要实现以下功能：  在Jenkins创建工程 build出ipa 将ipa上传至fir 钉钉机器人群通知 将dsym上传至bugly">
 
 
 
@@ -391,6 +391,22 @@
 <li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
 </ul>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～</p>
+<p>从这个文章中你将要实现以下功能：</p>
+<ul>
+<li>在Jenkins创建工程</li>
+<li>build出ipa</li>
+<li>将ipa上传至fir</li>
+<li>钉钉机器人群通知</li>
+<li>将dsym上传至bugly</li>
+</ul>
+<a id="more"></a>
+<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
+<p>确保以下插件已经被安装：</p>
+<ul>
+<li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin" target="_blank" rel="external">Git Plugin</a></li>
+<li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin" target="_blank" rel="external">Tool Environment Plugin</a></li>
+</ul>
+<p>嗯，开始创建工程，然后配置打包吧</p>
 
       
     </div>
@@ -617,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本环境安装"><span class="nav-number">2.</span> <span class="nav-text">脚本环境安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件安装"><span class="nav-number">3.</span> <span class="nav-text">插件安装</span></a></li></ol></div>
             
 
           </div>
