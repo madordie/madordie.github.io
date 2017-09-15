@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-09-15T09:13:41.000Z</updated>
+  <updated>2017-09-15T10:13:41.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/ios-automation-jenkins-build/"/>
     <id>https://madordie.github.io/ios-automation-jenkins-build/</id>
     <published>2017-09-14T09:27:15.000Z</published>
-    <updated>2017-09-15T09:13:41.000Z</updated>
+    <updated>2017-09-15T10:13:41.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../ios11-beta/">忙于iOS11的兼容</a></p>
 <ul>
@@ -37,7 +37,7 @@
 <li>将dsym上传至bugly</li>
 </ul>
 <a id="more"></a>
-<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><p>这里大多数操作都是用脚本来进行的，不为别的，就为自由～</p>
+<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><p>这里大多数操作都是用脚本来进行的，不为别的，就为自由和以后～</p>
 <h3 id="fastlane"><a href="#fastlane" class="headerlink" title="fastlane"></a>fastlane</h3><p>此乃自动化神器。<a href="https://docs.fastlane.tools" target="_blank" rel="external">文档在此</a>。<a href="https://github.com/fastlane/fastlane" target="_blank" rel="external">开源哟～</a></p>
 <p>此处主要用来编译、打包。</p>
 <p>安装方法：</p>
@@ -58,7 +58,26 @@
 <li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin" target="_blank" rel="external">Git Plugin</a></li>
 <li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin" target="_blank" rel="external">Tool Environment Plugin</a></li>
 </ul>
-<p>嗯，开始创建工程，然后配置打包吧</p>
+<p>嗯，开始创建工程，然后配置打包吧！</p>
+<h2 id="工程创建"><a href="#工程创建" class="headerlink" title="工程创建"></a>工程创建</h2><p>左侧的<code>新建(New Item)</code>我就不说了吧～，点击输入项目名字，然后选择第一个<code>构建一个自由风格的软件项目</code>就行啦～～</p>
+<p>此处项目名字暂且成为<code>test</code>。这里只说一些比较重要的，没有活不成的那种配置。别的自己研究一下或者点击右侧❓就能看到介绍。</p>
+<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>此处点击<code>Git</code>，展开之后输入<code>Repository URL</code>即可。</p>
+<p><code>Repository URL</code>输入完毕之后点击别处，Jenkins的Git插件会自动校验该URL是否能够clone下来代码。出现红色就自己根据错误修改一下咯。。</p>
+<p>另外此处支持<code>ssh</code> 的方式，大致样式为：<code>ssh://sunjigang@github.com:29418/projects/aaa</code>。</p>
+<p><code>Branches to build</code> 写上你的构建分支～，根据自己需求来，<code>master</code>一般为仓库的默认分支。</p>
+<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><p>此处表示该项目的构建触发条件。（可选）</p>
+<p>我们这里说一下<code>Poll SCM</code>：</p>
+<p>定时检查源码变更。条件是 一定要配置<code>Git</code>这样的源码管理。</p>
+<p>例子：</p>
+<ul>
+<li><code>H/15 * * * *</code>：每15分钟构建一次</li>
+<li><code>0 2 * * *</code>： 每天2:00构建一次</li>
+</ul>
+<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>此处为构建的核心😂。当然，我们为了自由，此处全部使用<code>shell</code>脚本。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 工程名</span></div><div class="line">workspace=<span class="string">'xxx.xcworkspace'</span></div><div class="line"><span class="comment"># 构建scheme</span></div><div class="line">scheme=<span class="string">'xxx'</span></div><div class="line"><span class="comment"># 打包类型：app-store, ad-hoc, package, enterprise, development, and developer-id.</span></div><div class="line">export_method=<span class="string">'enterprise'</span></div><div class="line"><span class="comment"># fir的token，在fir-&gt;用户-&gt;token 获取</span></div><div class="line">fir_token=<span class="string">'c5077e0368888b9750ae848b9fe00***'</span></div><div class="line"><span class="comment"># fir上传短链接，效果为 https://fir.im/xxx</span></div><div class="line">fir_url=<span class="string">'xxx'</span></div><div class="line"><span class="comment"># 钉钉机器人token</span></div><div class="line">dingtalk_token=<span class="string">'6d09e43ddc62e540be914ff2e901e28b921d55c5ad457f6f3571f9f881287***'</span></div><div class="line"><span class="comment"># 钉钉机器人发送的内容</span></div><div class="line">dingtalk_content=<span class="string">"iOSXXX已经上传至 http://fir.im/<span class="variable">$&#123;fir_url&#125;</span> ,吧啦吧啦吧啦～"</span></div><div class="line"></div><div class="line"><span class="comment"># 构建</span></div><div class="line">fastlane gym</div><div class="line">    --workspace <span class="variable">$workspace</span> \</div><div class="line">    --scheme <span class="variable">$scheme</span> \</div><div class="line">    --export_method <span class="variable">$export_method</span> \</div><div class="line">    clean</div><div class="line"></div><div class="line"><span class="comment"># fir</span></div><div class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls *.ipa)</div><div class="line">git <span class="built_in">log</span> -10 &gt; git.log</div><div class="line">fir p <span class="variable">$ipa</span> -T <span class="variable">$fir_token</span> <span class="_">-s</span> <span class="variable">$fir_url</span> -c git.log</div><div class="line"></div><div class="line"><span class="comment"># 钉钉通知</span></div><div class="line">curl <span class="string">"https://oapi.dingtalk.com/robot/send?access_token=<span class="variable">$&#123;dingtalk_token&#125;</span>"</span> -H <span class="string">'Content-Type: application/json'</span>    <span class="_">-d</span> <span class="string">'</span></div><div class="line">&#123;"msgtype": "text",</div><div class="line">    "text": &#123;</div><div class="line">        "content":$&#123;dingtalk_content&#125;</div><div class="line">    &#125;</div><div class="line">&#125;'</div></pre></td></tr></table></figure>
+<p>至此 已经完成了打包、上传fir、钉钉机器人通知。</p>
+<p>上述脚本只是配置的例子，可以根据自己需求，自己编写和配置。</p>
+<h3 id="上传dsym至Bugly"><a href="#上传dsym至Bugly" class="headerlink" title="上传dsym至Bugly"></a>上传dsym至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
 ]]></content>
     
     <summary type="html">

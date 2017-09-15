@@ -143,18 +143,23 @@ fir p $ipa -T $fir_token -s $fir_url -c git.log
 
 # 钉钉通知
 curl "https://oapi.dingtalk.com/robot/send?access_token=${dingtalk_token}" -H 'Content-Type: application/json'    -d '
-{"msgtype": "text",
-    "text": {
-        "content":${dingtalk_content}
-    }
-}'
+    {"msgtype": "text",
+        "text": {
+            "content":${dingtalk_content}
+        }
+    }'
 ```
 
 至此 已经完成了打包、上传fir、钉钉机器人通知。
 
-上述脚本只是配置的例子，可以根据自己需求，自己编写和配置。
+上述脚本只是配置的例子，可以根据自己需求，自己编写和配置。特别是
+
+- `.xcworkspace`的位置，要找清楚呀
+- `scheme`无法找到是因为你在提交代码的时候没有将其设置为shared
+- `fastlane gym` 支持很多参数，是对`xcodebuild`的封装，[源码及文档在此](https://github.com/fastlane/fastlane/tree/master/gym)
 
 ### 上传dsym至Bugly
 
 这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。
+
 
