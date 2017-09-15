@@ -111,7 +111,7 @@
 <meta property="og:url" content="https://madordie.github.io/reverse-ios-class-dump/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="安装class-dump去stevenygard.com下载最新的包。 将包中的class-dump可执行文件复制到/opt/class-dump。(我的逆向相关工具均在这下面😂） 在~/.base_profile中添加export PATH=/opt/class-dump:$PATH 运行source ~/.base_profile 最后确认一下安装OK ： 12$ class-dump --">
-<meta property="og:updated_time" content="2017-09-15T02:58:16.000Z">
+<meta property="og:updated_time" content="2017-09-15T03:05:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS逆向-class-dump工具">
 <meta name="twitter:description" content="安装class-dump去stevenygard.com下载最新的包。 将包中的class-dump可执行文件复制到/opt/class-dump。(我的逆向相关工具均在这下面😂） 在~/.base_profile中添加export PATH=/opt/class-dump:$PATH 运行source ~/.base_profile 最后确认一下安装OK ： 12$ class-dump --">
@@ -393,7 +393,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ class-dump --v</div><div class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
-<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="./reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
+<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="../reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ls WeChat.decrypted</div><div class="line">WeChat.decrypted</div><div class="line">$ class-dump -H WeChat.decrypted -o ./Headers/</div><div class="line">$ ls Headers</div><div class="line">Headers</div></pre></td></tr></table></figure>
 <p>即得头文件目录：<code>Headers</code></p>
 

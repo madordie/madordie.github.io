@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-09-15T02:56:28.000Z</updated>
+  <updated>2017-09-15T03:04:21.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,14 +20,18 @@
     <link href="https://madordie.github.io/ios-automation-jenkins-build/"/>
     <id>https://madordie.github.io/ios-automation-jenkins-build/</id>
     <published>2017-09-14T09:27:15.000Z</published>
-    <updated>2017-09-15T02:56:28.000Z</updated>
+    <updated>2017-09-15T03:04:21.000Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="./ios11-beta/">忙于iOS11的兼容</a></p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../ios11-beta/">忙于iOS11的兼容</a></p>
+<ul>
+<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
+<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;&lt;a href=&quot;./ios11-beta/&quot;&gt;忙于iOS11的兼容&lt;/a&gt;
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;&lt;a href=&quot;../ios11-beta/&quot;&gt;忙于iOS11的兼容&lt;/a
     
     </summary>
     
@@ -209,7 +213,7 @@
     <link href="https://madordie.github.io/reverse-ios-class-dump/"/>
     <id>https://madordie.github.io/reverse-ios-class-dump/</id>
     <published>2017-08-10T04:40:27.000Z</published>
-    <updated>2017-09-15T02:58:16.000Z</updated>
+    <updated>2017-09-15T03:05:02.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="external">stevenygard.com</a>下载最新的包。</p>
 <p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
@@ -219,7 +223,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ class-dump --v</div><div class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
-<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="./reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
+<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="../reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ls WeChat.decrypted</div><div class="line">WeChat.decrypted</div><div class="line">$ class-dump -H WeChat.decrypted -o ./Headers/</div><div class="line">$ ls Headers</div><div class="line">Headers</div></pre></td></tr></table></figure>
 <p>即得头文件目录：<code>Headers</code></p>
 ]]></content>
@@ -247,7 +251,7 @@
     <link href="https://madordie.github.io/reverse-ios-dump-decrypted/"/>
     <id>https://madordie.github.io/reverse-ios-dump-decrypted/</id>
     <published>2017-08-09T12:31:50.000Z</published>
-    <updated>2017-09-15T02:58:16.000Z</updated>
+    <updated>2017-09-15T03:05:02.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
 <li>越狱设备</li>
@@ -264,7 +268,7 @@
 <h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>将<code>dumpdecrypted.dylib</code>放在越狱设备的<code>/var/root/</code>下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ls dumpdecrypted.dylib</div><div class="line">$ scp dumpdecrypted.dylib root@10.12.14.16:/var/root/</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">dumpdecrypted.dylib                           100%  193KB   3.0MB/s   00:00</div><div class="line">$</div></pre></td></tr></table></figure>
 <h3 id="登录进越狱设备"><a href="#登录进越狱设备" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
-<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="./reverse-ios-ssh/">配置传送门</a></p>
+<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="../reverse-ios-ssh/">配置传送门</a></p>
 <h3 id="找到可执行文件路径"><a href="#找到可执行文件路径" class="headerlink" title="找到可执行文件路径"></a>找到可执行文件路径</h3><p>这里以<code>WeChat</code>为例子啦～</p>
 <p>记得先打开呀～～～</p>
 <p><code>ps -e</code>： 显示所有程序<br><code>grep</code>: 这里是过滤一下。。具体用法Google。所有的程序有点多，我知道名字，所以直接过滤一下。也可忽略</p>
@@ -294,7 +298,7 @@
 <p>上传到设备：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cd ~</div><div class="line">$ scp Clutch-2.0.4 root@10.12.14.16:/usr/bin/</div><div class="line">root@10.12.14.16&apos;s password:</div><div class="line">Clutch-2.0.4                                  100% 1204KB   4.7MB/s   00:00</div></pre></td></tr></table></figure>
 <h3 id="登录进越狱设备-1"><a href="#登录进越狱设备-1" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
-<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="./reverse-ios-ssh/">配置传送门</a></p>
+<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="../reverse-ios-ssh/">配置传送门</a></p>
 <h3 id="修改权限"><a href="#修改权限" class="headerlink" title="修改权限"></a>修改权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cd ~</div><div class="line">$ cd /usr/bin</div><div class="line">$ mv Clutch-2.0.4 clutch</div><div class="line">$ chmod +x clutch</div></pre></td></tr></table></figure>
 <h3 id="砸壳"><a href="#砸壳" class="headerlink" title="砸壳"></a>砸壳</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ clutch -i</div><div class="line">Installed apps:</div><div class="line">1:   钉钉 &lt;com.laiwang.DingTalk&gt;</div><div class="line">2:   韩剧TV-最新热门韩剧大全 &lt;com.baoyun.hanju&gt;</div><div class="line">3:   PG Client - a better client for dribbble &lt;com.az.azdribbble&gt;</div><div class="line">4:   窝牛－设计装修我们的家 &lt;com.lingduohome.acorn&gt;</div><div class="line">$ clutch -d 1</div><div class="line">com.laiwang.DingTalk contains watchOS 2 compatible application. It&apos;s not possible to dump watchOS 2 apps with Clutch 2.0.4 at this moment.</div><div class="line">Zipping DingTalk.app</div><div class="line">ASLR slide: 0x10001c000</div><div class="line">Dumping &lt;DingTalk&gt; (arm64)</div><div class="line">Patched cryptid (64bit segment)</div><div class="line">Writing new checksum</div><div class="line">DONE: /private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</div><div class="line">Finished dumping com.laiwang.DingTalk in 40.6 seconds</div><div class="line">$</div></pre></td></tr></table></figure>
 <p>生成最终路径:</p>
@@ -1187,9 +1191,9 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/fastlane-note/"/>
     <id>https://madordie.github.io/fastlane-note/</id>
     <published>2017-01-04T10:14:07.000Z</published>
-    <updated>2017-09-15T02:58:15.000Z</updated>
+    <updated>2017-09-15T03:05:02.000Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！<br>回看之前的<a href="./build-ipa-sh">build-ipa-sh.md</a>确实比较僵硬。自动化还是很棒的。</p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！<br>回看之前的<a href="../build-ipa-sh">build-ipa-sh.md</a>确实比较僵硬。自动化还是很棒的。</p>
 <a id="more"></a>
 <h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><p>  (<a href="http://icyleaf.com" target="_blank" rel="external">@icyleaf</a>)在<a href="https://icyleaf.com/2016/07/intro-fastlane-automation-for-ios-and-android/" target="_blank" rel="external">Fastlane - iOS 和 Android 的自动化构建工具</a>中说到：</p>
 <blockquote>
@@ -1215,7 +1219,7 @@ class CMExpandingTextField: UITextField {
     
     <summary type="html">
     
-      &lt;p&gt;之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！&lt;br&gt;回看之前的&lt;a href=&quot;./build-ipa-sh&quot;&gt;build-ipa-sh.md&lt;/a&gt;确实比较僵硬。自动化还是很棒的。&lt;/p&gt;
+      &lt;p&gt;之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！&lt;br&gt;回看之前的&lt;a href=&quot;../build-ipa-sh&quot;&gt;build-ipa-sh.md&lt;/a&gt;确实比较僵硬。自动化还是很棒的。&lt;/p&gt;
     
     </summary>
     
