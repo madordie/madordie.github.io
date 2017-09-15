@@ -19,7 +19,7 @@ baidusitemap:
 # 百度统计
 baidu_analytics: 26275fd2191bb3c1f8248947481e9ac4
 # 谷歌分析
-#google_analytics: 106555472-1
+#google_analytics: 106555472
 # 站内搜索
 search:
   path: search.xml
