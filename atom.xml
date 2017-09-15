@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-09-15T07:42:54.000Z</updated>
+  <updated>2017-09-15T09:13:41.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/ios-automation-jenkins-build/"/>
     <id>https://madordie.github.io/ios-automation-jenkins-build/</id>
     <published>2017-09-14T09:27:15.000Z</published>
-    <updated>2017-09-15T07:42:54.000Z</updated>
+    <updated>2017-09-15T09:13:41.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../ios11-beta/">忙于iOS11的兼容</a></p>
 <ul>
@@ -37,7 +37,22 @@
 <li>将dsym上传至bugly</li>
 </ul>
 <a id="more"></a>
-<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
+<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><p>这里大多数操作都是用脚本来进行的，不为别的，就为自由～</p>
+<h3 id="fastlane"><a href="#fastlane" class="headerlink" title="fastlane"></a>fastlane</h3><p>此乃自动化神器。<a href="https://docs.fastlane.tools" target="_blank" rel="external">文档在此</a>。<a href="https://github.com/fastlane/fastlane" target="_blank" rel="external">开源哟～</a></p>
+<p>此处主要用来编译、打包。</p>
+<p>安装方法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew cask install fastlane</div></pre></td></tr></table></figure>
+<p>此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。</p>
+<h3 id="fir-im-cli"><a href="#fir-im-cli" class="headerlink" title="fir.im-cli"></a>fir.im-cli</h3><p><a href="https://fir.im" target="_blank" rel="external">fir.im</a>提供的应用内测托管工具。<a href="https://github.com/FIRHQ/fir-cli/blob/master/README.md" target="_blank" rel="external">开源官网</a>。</p>
+<p>安装方法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem install fir-cli</div></pre></td></tr></table></figure>
+<p>此工具也提供打包ipa、apk、上传符号表至BugHD、等功能。但是我们在这里选择了<code>fastlane gym</code></p>
+<p>上传加速：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sh -c <span class="string">"<span class="variable">$(curl -sSL https://gist.githubusercontent.com/trawor/5dda140dee86836b8e60/raw/turbo-qiniu.sh)</span>"</span></div></pre></td></tr></table></figure>
+<p>上传加速代码已经<a href="http://blog.fir.im/turbo-qiniu/" target="_blank" rel="external">开源至此</a>。</p>
+<p><a href="http://bughd.com" target="_blank" rel="external">BugHD</a>: 已停止线上免费服务，开始卖私有部署了。</p>
+<p>另外，fir 也有<a href="http://blog.fir.im/jenkins/" target="_blank" rel="external">Jenkins插件</a>，但是这里选择脚本方式。</p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
 <p>确保以下插件已经被安装：</p>
 <ul>
 <li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin" target="_blank" rel="external">Git Plugin</a></li>
