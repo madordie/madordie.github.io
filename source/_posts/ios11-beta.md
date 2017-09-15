@@ -28,6 +28,8 @@ iOS11 版本中 __立即失效__。
 
 最容易出问题的就是无导航的顶部刷新会莫名其妙的缩不进去～～
 
+还有就是如果没有使用这个`automaticallyAdjustsScrollViewInsets`，为了达到那种戳进去的代码直接设置`frame.y = 0`。这种操作不但会出现导航栏莫名其妙的戳出来，还有`UITableView.section.header`莫名错位的问题。
+
 API 声明：
 
 ``` swift
@@ -54,7 +56,27 @@ open class UIScrollView : UIView, ... {
     ...
 }
 ```
-### 筛选view
+### `decisionHandler(.allow)` was called more than once
+
+崩溃信息：
+
+```
+#0 Thread
+NSInternalInconsistencyException
+Completion handler passed to -[WKWebViewJavascriptBridge webView:decidePolicyForNavigationAction:decisionHandler:] was called more than once
+```
+这是[WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge)在iOS11上的一个[Issues#302](https://github.com/marcuswestin/WebViewJavascriptBridge/issues/302)。
+
+据同事说可以通过如下代码解决：
+```swift
+if WebViewJavascriptBridgeBase().isWebViewJavascriptBridgeURL(url) {
+    return
+}
+decisionHandler(.allow)
+```
+
+测试了一下确实不崩溃了，但是具体的解决方案还要看作者的在[Issues#302](https://github.com/marcuswestin/WebViewJavascriptBridge/issues/302)中的回复。
+
 
 ### WKWebView
 
