@@ -8,6 +8,7 @@ categories:
     - iOS
 ---
 
-[忙于iOS11的兼容](./ios11-beta/)
+[忙于iOS11的兼容](../ios11-beta/)
 
-
+- [iOS自动化-Jenkins环境搭建](../ios-automation-jenkins-configuration)
+- [iOS自动化-Jenkins编译工程](../ios-automation-jenkins-build)

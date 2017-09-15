@@ -32,7 +32,7 @@ class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33
 
 ### 用来导出`ipa`/`.decrypted`头文件
 
-此处只能导出未加密的`ipa`，或者砸过壳的。[具体砸壳过程传送门](./reverse-ios-dump-decrypted/)
+此处只能导出未加密的`ipa`，或者砸过壳的。[具体砸壳过程传送门](../reverse-ios-dump-decrypted/)
 
 ```shell
 $ ls WeChat.decrypted

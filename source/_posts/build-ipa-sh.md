@@ -15,7 +15,7 @@ Jenkins自动构建脚本解决方案。
   2017.1.13更新：
   好吧，其实有更加强悍的打包工具，虽然早有耳闻但是没弄。然后最近搭建了一下，这打包脚本也不用了，毕竟有成套工具嘛。嘿嘿
   不过最后上传osc的脚本还是很可以的。
-  传送门：[Fastlane自动化笔记](./fastlane-note/#more)
+  传送门：[Fastlane自动化笔记](../fastlane-note/#more)
 
   2017.6.14更新:
   [xcpretty](https://github.com/supermarin/xcpretty)格式化输出日志。很溜，输出效果和 `fastlane` 差不多哈哈

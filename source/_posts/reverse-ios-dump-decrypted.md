@@ -57,7 +57,7 @@ $
 
 可以使用`ssh root@IP`进行登录。
 
-当然也可以使用`ssh ipad`，这样免密登录登录。 [配置传送门](./reverse-ios-ssh/)
+当然也可以使用`ssh ipad`，这样免密登录登录。 [配置传送门](../reverse-ios-ssh/)
 
 ### 找到可执行文件路径
 
@@ -167,7 +167,7 @@ Clutch-2.0.4                                  100% 1204KB   4.7MB/s   00:00
 
 可以使用`ssh root@IP`进行登录。
 
-当然也可以使用`ssh ipad`，这样免密登录登录。 [配置传送门](./reverse-ios-ssh/)
+当然也可以使用`ssh ipad`，这样免密登录登录。 [配置传送门](../reverse-ios-ssh/)
 
 ### 修改权限
 
