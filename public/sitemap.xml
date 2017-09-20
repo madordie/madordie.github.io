@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io//404.html</loc>
+    
+    <lastmod>2017-09-20T02:30:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/ios-automation-jenkins-build/</loc>
     
-    <lastmod>2017-09-15T10:21:23.000Z</lastmod>
+    <lastmod>2017-09-17T09:20:26.000Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
     
     <lastmod>2017-09-15T07:42:45.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io//404.html</loc>
-    
-    <lastmod>2017-09-15T03:05:02.000Z</lastmod>
     
   </url>
   

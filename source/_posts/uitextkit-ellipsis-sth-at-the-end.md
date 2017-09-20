@@ -12,7 +12,7 @@ categories:
 <!--more-->
 
 # 效果
-<img src="http://7xvzwi.com1.z0.glb.clouddn.com/UITextKit-AppStore-more-scene.gif://7xvzwi.com1.z0.glb.clouddn.com/leanote_new_logo.png" alt="效果图">
+<img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="效果图">
 
 # 简要说明
   App Store中的查看更多动画是不是很给力？可是做起来确不知道如何下手？这里我提供一种UITextKit的方法来简单的实现一下。
