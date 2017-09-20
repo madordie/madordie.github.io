@@ -9,9 +9,21 @@ sorry ~~~
 
 改过一次文章链接，去掉日期再试试？
 
-您要找的内容可能在火星，点击 <keith_127@126.com> 告诉我，马上帮你找回来！！！
+您要找的内容可能在火星，点击 [e.madordie@gmail.com](mailto:e.madordie@gmail.com) 告诉我，马上帮你找回来！！！
+
+或者联系QQ：453870736
 
 你要找的是？
+
+debug-note 拆分为下面的几个了😂
+
+[DEBUG - swift中取出通知中的frame](../debug-swift-notifa-frame/)
+
+[DEBUG - Xcode8解析.crash](../debug-xcode8-analysis-crash-file/)
+
+[DEBUG - UIView.h#190](../debug-uiview-m-190/)
+
+[debug-_SwiftValue-unsignedIntegerValue](../debug-SwiftValue-unsignedIntegerValue/)
 
 [归档](../archives/)
 
@@ -35,8 +47,6 @@ sorry ~~~
 
 [「转」iOS图片加载速度极限优化—FastImageCache解析](../bang-fastimagecache/)
 
-[debug-_SwiftValue-unsignedIntegerValue](../debug-SwiftValue-unsignedIntegerValue/)
-
 [RxSwift语法笔记](../rx-dictionary/)
 
 [sonarqube-note](../sonarqube-note/)
@@ -54,12 +64,6 @@ sorry ~~~
 [科学上网之搬瓦工ss搭建笔记](../bandwagonhost-note/)
 
 [正则表达式学习笔记](../bruch-up-regular-expressions/)
-
-[DEBUG - swift中取出通知中的frame](../debug-swift-notifa-frame/)
-
-[DEBUG - Xcode8解析.crash](../debug-xcode8-analysis-crash-file/)
-
-[DEBUG - UIView.h#190](../debug-uiview-m-190/)
 
 [Xcode8打包脚本](../build-ipa-sh/)
 
