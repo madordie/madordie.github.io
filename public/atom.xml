@@ -1338,17 +1338,18 @@ class CMExpandingTextField: UITextField {
     <link href="https://madordie.github.io/uitextkit-ellipsis-sth-at-the-end/"/>
     <id>https://madordie.github.io/uitextkit-ellipsis-sth-at-the-end/</id>
     <published>2016-12-23T08:37:37.000Z</published>
-    <updated>2017-09-20T02:41:09.000Z</updated>
+    <updated>2017-09-20T03:07:51.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>– 2017.9.20 更新 –<br>看到AppStore的<code>更多</code>效果，做的不错哎，本文尝试采用<code>UITextKit</code>进行实现。</p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="效果图"></p>
+<p> <img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="效果图"></p>
 <a id="more"></a>
-<h2 id="简要说明"><a href="#简要说明" class="headerlink" title="简要说明"></a>简要说明</h2><p>  App Store中的查看更多动画是不是很给力？可是做起来确不知道如何下手？这里我提供一种UITextKit的方法来简单的实现一下。</p>
-<p>  为了让例子简单，我就直接写了个more，那个view是自定义的，随便添加的，和本身的文本展示的并没有什么关系。</p>
-<p>  为了让最后的那个moreView更加好用，增加了已经展开显示全部是否隐藏的控制。</p>
+<p>App Store中的查看更多动画是不是很给力？可是做起来确不知道如何下手？这里我提供一种UITextKit的方法来简单的实现一下。</p>
+<p>为了让例子简单，我就直接写了个more，那个view是自定义的，随便添加的，和本身的文本展示的并没有什么关系。</p>
+<p>为了让最后的那个moreView更加好用，增加了已经展开显示全部是否隐藏的控制。</p>
 <h3 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h3><h4 id="获取最后一行Rect"><a href="#获取最后一行Rect" class="headerlink" title="获取最后一行Rect"></a>获取最后一行Rect</h4>  <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> lastRect = <span class="type">CGRect</span>.zero</div><div class="line">layoutManager.enumerateEnclosingRects(forGlyphRange: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: textStorage.string.characters.<span class="built_in">count</span>), withinSelectedGlyphRange: <span class="type">NSRange</span>(location: <span class="type">NSNotFound</span>, length: <span class="number">0</span>), <span class="keyword">in</span>: textContainer, using: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (rect, isStop) <span class="keyword">in</span></div><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> _self = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line"><span class="keyword">var</span> newRect = rect</div><div class="line">newRect.origin.y += _self.textContainerInset.top</div><div class="line">lastRect = newRect</div><div class="line">&#125;)</div><div class="line"><span class="built_in">print</span>(lastRect)</div></pre></td></tr></table></figure>
 <h4 id="增加-exclusionPaths"><a href="#增加-exclusionPaths" class="headerlink" title="增加 exclusionPaths"></a>增加 <code>exclusionPaths</code></h4>  <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">textContainer.exclusionPaths = [<span class="type">UIBezierPath</span>.<span class="keyword">init</span>(rect: rect)]</div></pre></td></tr></table></figure>
 <h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><ul>
+<li><a href="https://github.com/madordie/UITextView-More" target="_blank" rel="external">github</a></li>
 <li><code>UITextView</code>默认携带左右边距，通过<code>UITextView.textContainer.lineFragmentPadding</code>获取</li>
 <li><code>UITextView</code>默认携带上下左右边距(<code>UITextView.textContainerInset</code>)，其中左右和<code>lineFragmentPadding</code>相加</li>
 <li>此处并没有对<a href="https://github.com/madordie/UITextView-More/blob/master/TruncateTextView.swift" target="_blank" rel="external">TruncateTextView</a>进行过多的设置，主要是因为继承在UITextView下，<a href="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif" target="_blank" rel="external">GIF</a>中的这部分设置放在了<a href="https://github.com/madordie/UITextView-More/blob/master/Demo-AppStore-More/ViewController.swift" target="_blank" rel="external">ViewController.swift</a>中</li>
@@ -1363,7 +1364,7 @@ class CMExpandingTextField: UITextField {
     <summary type="html">
     
       &lt;p&gt;– 2017.9.20 更新 –&lt;br&gt;看到AppStore的&lt;code&gt;更多&lt;/code&gt;效果，做的不错哎，本文尝试采用&lt;code&gt;UITextKit&lt;/code&gt;进行实现。&lt;/p&gt;
-&lt;h2 id=&quot;效果&quot;&gt;&lt;a href=&quot;#效果&quot; class=&quot;headerlink&quot; title=&quot;效果&quot;&gt;&lt;/a&gt;效果&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true&quot; alt=&quot;效果图&quot;&gt;&lt;/p&gt;
+&lt;p&gt; &lt;img src=&quot;https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true&quot; alt=&quot;效果图&quot;&gt;&lt;/p&gt;
     
     </summary>
     
