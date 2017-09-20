@@ -7,9 +7,11 @@ categories:
       - iOS
 ---
 
+-- 2017.9.20 更新 --
 看到AppStore的`更多`效果，做的不错哎，本文尝试采用`UITextKit`进行实现。
 
 ## 效果
+
 <img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="效果图">
 
 <!--more-->
