@@ -107,13 +107,13 @@
 <meta name="description" content="Jenkins自动构建脚本解决方案。">
 <meta name="keywords" content="构建">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xcode8打包脚本">
+<meta property="og:title" content="Xcode打包脚本">
 <meta property="og:url" content="https://madordie.github.io/build-ipa-sh/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="Jenkins自动构建脚本解决方案。">
-<meta property="og:updated_time" content="2017-09-15T03:05:02.000Z">
+<meta property="og:updated_time" content="2017-09-26T06:13:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xcode8打包脚本">
+<meta name="twitter:title" content="Xcode打包脚本">
 <meta name="twitter:description" content="Jenkins自动构建脚本解决方案。">
 
 
@@ -149,7 +149,7 @@
 
 
 
-  <title>Xcode8打包脚本 | Keith's Blog</title>
+  <title>Xcode打包脚本 | Keith's Blog</title>
   
 
 
@@ -322,7 +322,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Xcode8打包脚本</h2>
+          <h2 class="post-title" itemprop="name headline">Xcode打包脚本</h2>
         
 
         <div class="post-meta">
@@ -396,8 +396,9 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Jenkins自动构建脚本解决方案。</p>
 <a id="more"></a>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>  2017.1.13更新：<br>  好吧，其实有更加强悍的打包工具，虽然早有耳闻但是没弄。然后最近搭建了一下，这打包脚本也不用了，毕竟有成套工具嘛。嘿嘿<br>  不过最后上传osc的脚本还是很可以的。<br>  传送门：<a href="../fastlane-note/#more">Fastlane自动化笔记</a></p>
-<p>  2017.6.14更新:<br>  <a href="https://github.com/supermarin/xcpretty" target="_blank" rel="external">xcpretty</a>格式化输出日志。很溜，输出效果和 <code>fastlane</code> 差不多哈哈</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>2017.9.26更新：<br>xcode9更新又无法构建咯</p>
+<p>2017.6.14更新:<br><a href="https://github.com/supermarin/xcpretty" target="_blank" rel="external">xcpretty</a>格式化输出日志。很溜，输出效果和 <code>fastlane</code> 差不多哈哈</p>
+<p>2017.1.13更新：<br>  好吧，其实有更加强悍的打包工具，虽然早有耳闻但是没弄。然后最近搭建了一下，这打包脚本也不用了，毕竟有成套工具嘛。嘿嘿<br>  不过最后上传osc的脚本还是很可以的。<br>  传送门：<a href="../fastlane-note/#more">Fastlane自动化笔记</a></p>
 <h2 id="Xcode8"><a href="#Xcode8" class="headerlink" title="Xcode8"></a>Xcode8</h2><p>  好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。</p>
 <p>  先来重点：可用脚本：</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment">#   追上fir API token 自动上传</span></div><div class="line"><span class="comment">#   基于当前代码进行打包打包目录：MyProject/build/MyProject_ent.ipa</span></div><div class="line"></div><div class="line"><span class="built_in">cd</span> MyProject</div><div class="line"></div><div class="line">rm -rf ./build/*</div><div class="line"></div><div class="line">xcodebuild -archivePath <span class="string">"./build/xxx.xcarchive"</span> -workspace MyProject.xcworkspace -sdk iphoneos -scheme <span class="string">"MyProject_ent"</span> -configuration <span class="string">"Release Inhouse"</span> archive</div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;?xml version="</span>1.0<span class="string">" encoding="</span>UTF-8<span class="string">"?&gt;&lt;!DOCTYPE plist PUBLIC "</span>-//Apple//DTD PLIST 1.0//EN<span class="string">" "</span>http://www.apple.com/DTDs/PropertyList-1.0.dtd<span class="string">"&gt;&lt;plist version="</span>1.0<span class="string">"&gt;&lt;dict&gt;&lt;key&gt;method&lt;/key&gt;&lt;string&gt;enterprise&lt;/string&gt;&lt;key&gt;compileBitcode&lt;/key&gt;&lt;string&gt;YES&lt;/string&gt;&lt;/dict&gt;&lt;/plist&gt;"</span> &gt; ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line">xcodebuild -exportArchive -archivePath <span class="string">"./build/xxx.xcarchive"</span> -exportPath <span class="string">"./build/"</span> -exportOptionsPlist ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">cd</span> build/</div><div class="line"></div><div class="line">fir i ./MyProject_ent.ipa</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></div><div class="line">    git <span class="built_in">log</span> -10 &gt; git.log</div><div class="line">    fir p ./MyProject_ent.ipa -T <span class="variable">$1</span> -c git.log</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
@@ -545,7 +546,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -825,7 +826,7 @@
         var disqus_config = function () {
           this.page.url = 'https://madordie.github.io/build-ipa-sh/';
           this.page.identifier = 'build-ipa-sh/';
-          this.page.title = 'Xcode8打包脚本';
+          this.page.title = 'Xcode打包脚本';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://madordie.disqus.com/embed.js';

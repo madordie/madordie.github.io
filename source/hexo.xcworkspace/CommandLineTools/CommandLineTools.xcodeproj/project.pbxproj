@@ -280,7 +280,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../../\nhexo n ios-automation-jenkins-build";
+			shellScript = "cd ../../../\nhexo n debug-xcode9-build-ipa";
 		};
 		32F48C2A1F3E9D8400434955 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

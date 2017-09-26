@@ -111,7 +111,7 @@
 <meta property="og:url" content="https://madordie.github.io/note/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="开发中的小笔记。记录开发中的点滴滴点。">
-<meta property="og:updated_time" content="2017-08-14T02:02:14.000Z">
+<meta property="og:updated_time" content="2017-09-20T08:51:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开发小记">
 <meta name="twitter:description" content="开发中的小笔记。记录开发中的点滴滴点。">
@@ -396,53 +396,18 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>开发中的小笔记。记录开发中的点滴滴点。</p>
 <a id="more"></a>
-<ul>
-<li><p>获取代码执行时间</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#<span class="keyword">import</span> &lt;mach/mach_time.h&gt;</div><div class="line"><span class="keyword">static</span> <span class="type">NSMutableDictionary</span> *__times;</div><div class="line"><span class="keyword">static</span> inline void debug_start_of(<span class="type">NSString</span> *key)</div><div class="line">&#123;</div><div class="line">    __times = __times ?: [<span class="type">NSMutableDictionary</span> new];</div><div class="line"></div><div class="line">    uint64_t start = mach_absolute_time();</div><div class="line">    __times[key] = @(start);</div><div class="line">&#125;</div><div class="line"><span class="keyword">static</span> inline void debug_stop_of(<span class="type">NSString</span> *key)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (__times) &#123;</div><div class="line">        uint64_t end = mach_absolute_time();</div><div class="line">        uint64_t start = [__times[key] unsignedLongLongValue];</div><div class="line">        <span class="keyword">if</span> (start != <span class="number">0</span>) &#123;</div><div class="line">            uint64_t elapsed = end - start;</div><div class="line">            mach_timebase_info_data_t info;</div><div class="line">            <span class="keyword">if</span> (mach_timebase_info(&amp;info) != <span class="type">KERN_SUCCESS</span>) &#123;</div><div class="line">                printf(<span class="string">"mach_timebase_info failed\n"</span>);</div><div class="line">            &#125;</div><div class="line">            uint64_t nanosecs = elapsed * info.numer / info.denom;</div><div class="line">            uint64_t millisecs = nanosecs / <span class="number">1000000</span>;</div><div class="line"></div><div class="line">            printf(<span class="string">"[DEBUG code rt] %s:%llu ms\n"</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>], millisecs);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            printf(<span class="string">"[DEBUG code rt] %s error: no start\n"</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>批量正则替换的另一种思路</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  perl -i -lpe &apos;s/if \(([^\)].*)\) \&#123;/if $1 \&#123;/g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
-</li>
-<li><p>批量删除空格组成的空行中的空格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  sed -i &apos;&apos; &apos;s/^[[:space:]][[:space:]]*$//g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
-</li>
-<li><p>NAN</p>
-<ul>
+<h2 id="批量替换json文件中的注释"><a href="#批量替换json文件中的注释" class="headerlink" title="批量替换json文件中的注释"></a>批量替换json文件中的注释</h2><p>备份至.bat</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ perl -i.bat -lpe <span class="string">'s/\/\/[^"]+$//g'</span> xx</div></pre></td></tr></table></figure>
+<h2 id="批量正则替换的另一种思路"><a href="#批量正则替换的另一种思路" class="headerlink" title="批量正则替换的另一种思路"></a>批量正则替换的另一种思路</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  perl -i -lpe &apos;s/if \(([^\)].*)\) \&#123;/if $1 \&#123;/g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
+<h2 id="批量删除空格组成的空行中的空格"><a href="#批量删除空格组成的空行中的空格" class="headerlink" title="批量删除空格组成的空行中的空格"></a>批量删除空格组成的空行中的空格</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/base/sh</div><div class="line">find . -name &apos;*.swift&apos; | while read file; do</div><div class="line">  sed -i &apos;&apos; &apos;s/^[[:space:]][[:space:]]*$//g&apos; $file</div><div class="line">done</div></pre></td></tr></table></figure>
+<h2 id="获取代码执行时间"><a href="#获取代码执行时间" class="headerlink" title="获取代码执行时间"></a>获取代码执行时间</h2>  <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#<span class="keyword">import</span> &lt;mach/mach_time.h&gt;</div><div class="line"><span class="keyword">static</span> <span class="type">NSMutableDictionary</span> *__times;</div><div class="line"><span class="keyword">static</span> inline void debug_start_of(<span class="type">NSString</span> *key)</div><div class="line">&#123;</div><div class="line">  __times = __times ?: [<span class="type">NSMutableDictionary</span> new];</div><div class="line"></div><div class="line">  uint64_t start = mach_absolute_time();</div><div class="line">  __times[key] = @(start);</div><div class="line">&#125;</div><div class="line"><span class="keyword">static</span> inline void debug_stop_of(<span class="type">NSString</span> *key)</div><div class="line">&#123;</div><div class="line">  <span class="keyword">if</span> (__times) &#123;</div><div class="line">    uint64_t end = mach_absolute_time();</div><div class="line">    uint64_t start = [__times[key] unsignedLongLongValue];</div><div class="line">    <span class="keyword">if</span> (start != <span class="number">0</span>) &#123;</div><div class="line">      uint64_t elapsed = end - start;</div><div class="line">      mach_timebase_info_data_t info;</div><div class="line">      <span class="keyword">if</span> (mach_timebase_info(&amp;info) != <span class="type">KERN_SUCCESS</span>) &#123;</div><div class="line">        printf(<span class="string">"mach_timebase_info failed\n"</span>);</div><div class="line">      &#125;</div><div class="line">      uint64_t nanosecs = elapsed * info.numer / info.denom;</div><div class="line">      uint64_t millisecs = nanosecs / <span class="number">1000000</span>;</div><div class="line"></div><div class="line">      printf(<span class="string">"[DEBUG code rt] %s:%llu ms\n"</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>], millisecs);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      printf(<span class="string">"[DEBUG code rt] %s error: no start\n"</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>]);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h2><ul>
 <li><code>A</code>对<code>B</code>除余时，如果<code>B == 0</code> 则会造成NAN，<code>truncatingRemainder(dividingBy:)</code>是<code>swift</code>的方法，也会造成此问题</li>
 <li>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885" target="_blank" rel="external">Objective-C 中 判断 NaN</a>大致记录了一下<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  math.h  #56</span></div><div class="line"></div><div class="line"><span class="meta">#if defined(__GNUC__)</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     __builtin_huge_val()</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    __builtin_huge_valf()</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    __builtin_huge_vall()</span></div><div class="line"><span class="meta">#   define    NAN          __builtin_nanf(<span class="meta-string">"0x7fc00000"</span>)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#   define    HUGE_VAL     1e500</span></div><div class="line"><span class="meta">#   define    HUGE_VALF    1e50f</span></div><div class="line"><span class="meta">#   define    HUGE_VALL    1e5000L</span></div><div class="line"><span class="meta">#   define    NAN          __nan()</span></div><div class="line"><span class="meta">#endif</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-</ul>
 <ul>
 <li>另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//  math.h  #178</span></div><div class="line"></div><div class="line"><span class="meta">#define isnan(x)                                                         \</span></div><div class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</div><div class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</div><div class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>论项目架构设计的重要性 </p>
-<ul>
-<li>规范化</li>
-<li>筛选的坑 </li>
-<li>常见布局BUG </li>
-<li>线程安全</li>
-</ul>
-</li>
-<li><p>百度地图的坑</p>
-<ul>
-<li>设置经纬度缓慢</li>
-<li>刷新缓慢</li>
-</ul>
-</li>
-<li><p>选择图片时候默认方法选择不到系统的云端图片，但是默认单张选择器却可以！</p>
-<ul>
-<li>16G手机存储空间不够，图片转到了云端，会出现相册中的照片无法选择的情况</li>
-</ul>
-</li>
-<li><p>无埋点技术的讨论</p>
-</li>
-<li><p>多个window的显示、删除、操作问题</p>
-</li>
-<li><p>使用HTTP架设日志实时显示系统</p>
 </li>
 </ul>
 
@@ -546,8 +511,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -562,7 +536,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -654,6 +628,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#批量替换json文件中的注释"><span class="nav-number">1.</span> <span class="nav-text">批量替换json文件中的注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量正则替换的另一种思路"><span class="nav-number">2.</span> <span class="nav-text">批量正则替换的另一种思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量删除空格组成的空行中的空格"><span class="nav-number">3.</span> <span class="nav-text">批量删除空格组成的空行中的空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取代码执行时间"><span class="nav-number">4.</span> <span class="nav-text">获取代码执行时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAN"><span class="nav-number">5.</span> <span class="nav-text">NAN</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
