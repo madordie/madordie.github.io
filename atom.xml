@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-09-17T09:20:26.000Z</updated>
+  <updated>2017-09-26T07:59:13.000Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,6 +14,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Xcode9编译失败</title>
+    <link href="https://madordie.github.io/debug-xcode9-build-ipa/"/>
+    <id>https://madordie.github.io/debug-xcode9-build-ipa/</id>
+    <published>2017-09-26T06:16:32.000Z</published>
+    <updated>2017-09-26T07:59:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="错误输出"><a href="#错误输出" class="headerlink" title="错误输出"></a>错误输出</h2><blockquote>
+<p>error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.</p>
+<p>Error Domain=IDEProvisioningErrorDomain Code=9 “”Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.” UserInfo={NSLocalizedDescription=”Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features., NSLocalizedRecoverySuggestion=Add a profile to the “provisioningProfiles” dictionary in your Export Options property list.}</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="错误原因"><a href="#错误原因" class="headerlink" title="错误原因"></a>错误原因</h2><p>在升级Xcode9正式版之后，Jenkins也就升级了，于是乎用原来的套路打包之后就是上面的错误 5555…</p>
+<p>如果使用<code>xcodebuild</code>进行处理，那么这个会发生在选择证书的步骤，错误大致就是这样。</p>
+<p><code>$xcodebuild --help</code> 可以看到一些信息，而且在最后还特意提出了一个“-exportOptionsPlist”参数。具体内容见<code>xcodebuild --help</code></p>
+<h2 id="解决问题才是关键"><a href="#解决问题才是关键" class="headerlink" title="解决问题才是关键"></a>解决问题才是关键</h2><ol>
+<li><p>使用xcode9进行一次<code>archive</code></p>
+</li>
+<li><p>选择相关证书啊神马的，保持<code>thinning</code>不变就好</p>
+</li>
+<li><p>导出</p>
+</li>
+<li><p>导出目录有一个<code>ExportOptionsPlist.plist</code>，这个就是打包时候需要的plist</p>
+</li>
+</ol>
+<h2 id="脚本构建"><a href="#脚本构建" class="headerlink" title="脚本构建"></a>脚本构建</h2><p><code>ipa</code>即为目标变量，具体的参看<a href="../build-ipa-sh">打包脚本</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">rm -rf ./build/*</div><div class="line">cat &lt;&lt; EOF &gt; ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</div><div class="line">&lt;!DOCTYPE plist PUBLIC <span class="string">"-//Apple//DTD PLIST 1.0//EN"</span> <span class="string">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span>&gt;</div><div class="line">&lt;plist version=<span class="string">"1.0"</span>&gt;</div><div class="line">&lt;dict&gt;</div><div class="line">    &lt;key&gt;compileBitcode&lt;/key&gt;</div><div class="line">    &lt;<span class="literal">true</span>/&gt;</div><div class="line">    &lt;key&gt;method&lt;/key&gt;</div><div class="line">    &lt;string&gt;enterprise&lt;/string&gt;</div><div class="line">    &lt;key&gt;provisioningProfiles&lt;/key&gt;</div><div class="line">    &lt;dict&gt;</div><div class="line">        &lt;key&gt;ershoufanglzg.fangdd.com&lt;/key&gt;</div><div class="line">        &lt;string&gt;ershoufanglzg_dis&lt;/string&gt;</div><div class="line">    &lt;/dict&gt;</div><div class="line">    &lt;key&gt;signingCertificate&lt;/key&gt;</div><div class="line">    &lt;string&gt;iPhone Distribution&lt;/string&gt;</div><div class="line">    &lt;key&gt;signingStyle&lt;/key&gt;</div><div class="line">    &lt;string&gt;manual&lt;/string&gt;</div><div class="line">    &lt;key&gt;stripSwiftSymbols&lt;/key&gt;</div><div class="line">    &lt;<span class="literal">true</span>/&gt;</div><div class="line">    &lt;key&gt;teamID&lt;/key&gt;</div><div class="line">    &lt;string&gt;J3B467DURT&lt;/string&gt;</div><div class="line">    &lt;key&gt;thinning&lt;/key&gt;</div><div class="line">    &lt;string&gt;&amp;lt;none&amp;gt;&lt;/string&gt;</div><div class="line">&lt;/dict&gt;</div><div class="line">&lt;/plist&gt;</div><div class="line">EOF</div><div class="line"></div><div class="line">xcodebuild -archivePath <span class="string">"./build/xxx.xcarchive"</span> -workspace Fangduoduo.xcworkspace -sdk iphoneos -scheme <span class="string">"Fangduoduo_ent"</span> -configuration <span class="string">"Release Inhouse"</span> archive</div><div class="line">xcodebuild -exportArchive -archivePath <span class="string">"./build/xxx.xcarchive"</span> -exportPath <span class="string">"./build/"</span> -exportOptionsPlist ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls ./build/*.ipa)</div></pre></td></tr></table></figure>
+<h2 id="xcodebuild-–help"><a href="#xcodebuild-–help" class="headerlink" title="xcodebuild –help"></a>xcodebuild –help</h2><blockquote>
+<p>Available keys for -exportOptionsPlist:</p>
+<p>compileBitcode : Bool</p>
+<p>For non-App Store exports, should Xcode re-compile the app from bitcode? Defaults to YES.</p>
+<p>embedOnDemandResourcesAssetPacksInBundle : Bool</p>
+<p>For non-App Store exports, if the app uses On Demand Resources and this is YES, asset packs are embedded in the app bundle so that the app can be tested without a server to host asset packs. Defaults to YES unless onDemandResourcesAssetPacksBaseURL is specified.</p>
+<p>iCloudContainerEnvironment : String</p>
+<p>If the app is using CloudKit, this configures the “com.apple.developer.icloud-container-environment” entitlement. Available options vary depending on the type of provisioning profile used, but may include: Development and Production.</p>
+<p>installerSigningCertificate : String</p>
+<p>For manual signing only. Provide a certificate name, SHA-1 hash, or automatic selector to use for signing. Automatic selectors allow Xcode to pick the newest installed certificate of a particular type. The available automatic selectors are “Mac Installer Distribution” and “Developer ID Installer”. Defaults to an automatic certificate selector matching the current distribution method.</p>
+<p>manifest : Dictionary</p>
+<p>For non-App Store exports, users can download your app over the web by opening your distribution manifest file in a web browser. To generate a distribution manifest, the value of this key should be a dictionary with three sub-keys: appURL, displayImageURL, fullSizeImageURL. The additional sub-key assetPackManifestURL is required when using on-demand resources.</p>
+<p>method : String</p>
+<p>Describes how Xcode should export the archive. Available options: app-store, package, ad-hoc, enterprise, development, developer-id, and mac-application. The list of options varies based on the type of archive. Defaults to development.</p>
+<p>onDemandResourcesAssetPacksBaseURL : String</p>
+<p>For non-App Store exports, if the app uses On Demand Resources and embedOnDemandResourcesAssetPacksInBundle isn’t YES, this should be a base URL specifying where asset packs are going to be hosted. This configures the app to download asset packs from the specified URL.</p>
+<p>provisioningProfiles : Dictionary</p>
+<p>For manual signing only. Specify the provisioning profile to use for each executable in your app. Keys in this dictionary are the bundle identifiers of executables; values are the provisioning profile name or UUID to use.</p>
+<p>signingCertificate : String</p>
+<p>For manual signing only. Provide a certificate name, SHA-1 hash, or automatic selector to use for signing. Automatic selectors allow Xcode to pick the newest installed certificate of a particular type. The available automatic selectors are “Mac App Distribution”, “iOS Developer”, “iOS Distribution”, “Developer ID Application”, and “Mac Developer”. Defaults to an automatic certificate selector matching the current distribution method.</p>
+<p>signingStyle : String</p>
+<p>The signing style to use when re-signing the app for distribution. Options are manual or automatic. Apps that were automatically signed when archived can be signed manually or automatically during distribution, and default to automatic. Apps that were manually signed when archived must be manually signed during distribtion, so the value of signingStyle is ignored.</p>
+<p>stripSwiftSymbols : Bool</p>
+<p>Should symbols be stripped from Swift libraries in your IPA? Defaults to YES.</p>
+<p>teamID : String</p>
+<p>The Developer Portal team to use for this export. Defaults to the team used to build the archive.</p>
+<p>thinning : String</p>
+<p>For non-App Store exports, should Xcode thin the package for one or more device variants? Available options: <none> (Xcode produces a non-thinned universal app), <thin-for-all-variants> (Xcode produces a universal app and all available thinned variants), or a model identifier for a specific device (e.g. “iPhone7,1”). Defaults to <none>.</none></thin-for-all-variants></none></p>
+<p>uploadBitcode : Bool</p>
+<p>For App Store exports, should the package include bitcode? Defaults to YES.</p>
+<p>uploadSymbols : Bool</p>
+<p>For App Store exports, should the package include symbols? Defaults to YES.</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;错误输出&quot;&gt;&lt;a href=&quot;#错误输出&quot; class=&quot;headerlink&quot; title=&quot;错误输出&quot;&gt;&lt;/a&gt;错误输出&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.&lt;/p&gt;
+&lt;p&gt;Error Domain=IDEProvisioningErrorDomain Code=9 “”Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.” UserInfo={NSLocalizedDescription=”Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features., NSLocalizedRecoverySuggestion=Add a profile to the “provisioningProfiles” dictionary in your Export Options property list.}&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+    
+      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>iOS自动化-Jenkins编译工程</title>
@@ -1372,74 +1450,6 @@ class CMExpandingTextField: UITextField {
     
     
       <category term="效果" scheme="https://madordie.github.io/tags/%E6%95%88%E6%9E%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>优雅的使用SwiftLint</title>
-    <link href="https://madordie.github.io/elegant-to-use-swiftlint/"/>
-    <id>https://madordie.github.io/elegant-to-use-swiftlint/</id>
-    <published>2016-12-23T03:59:57.000Z</published>
-    <updated>2017-08-14T02:20:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>接入了SwiftLine，修改2000+的warning、300+error的一点笔记心得。</p>
-<a id="more"></a>
-<h1 id="SwiftLint"><a href="#SwiftLint" class="headerlink" title="SwiftLint"></a>SwiftLint</h1><blockquote>
-<h2 id="SwiftLint-1"><a href="#SwiftLint-1" class="headerlink" title="SwiftLint"></a><a href="https://github.com/realm/SwiftLint" target="_blank" rel="external">SwiftLint</a></h2><p>A tool to enforce Swift style and conventions, loosely based on GitHub’s Swift Style Guide.<br>  SwiftLint hooks into Clang and SourceKit to use the AST representation of your source files for more accurate results.<br>  SwiftLint 是一个用于强制检查 Swift 代码风格和规定的一个工具，基本上以 GitHub’s Swift 代码风格指南为基础。<br>  SwiftLint Hook 了 Clang 和 SourceKit 从而能够使用 AST 来表示源代码文件的更多精确结果。</p>
-</blockquote>
-<h2 id="对原有代码格式化"><a href="#对原有代码格式化" class="headerlink" title="对原有代码格式化"></a>对原有代码格式化</h2><h3 id="自动格式化"><a href="#自动格式化" class="headerlink" title="自动格式化"></a>自动格式化</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">swiftlint autocorrect</div></pre></td></tr></table></figure>
-<h3 id="TrailingWhitespaceRule"><a href="#TrailingWhitespaceRule" class="headerlink" title="TrailingWhitespaceRule"></a>TrailingWhitespaceRule</h3><h4 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h4><blockquote>
-<p>xxx.swift:34: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)</p>
-</blockquote>
-<p>  规则实现：<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/TrailingWhitespaceRule.swift" target="_blank" rel="external">TrailingWhitespaceRule.swift</a></p>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>  Xcode中的”空白行”。其实并不空白，含有空的字符。最明显的表现为git提交的时候会有明显的黄色警告。</p>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>  Xcode中有选项可以直接控制，具体路径为<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Xcode </div><div class="line">-&gt; Preferences</div><div class="line">-&gt; Text Editing</div><div class="line">-&gt; While editing</div><div class="line">-&gt; [V] Including whitespace-only lines</div></pre></td></tr></table></figure></p>
-<h3 id="ColonRule"><a href="#ColonRule" class="headerlink" title="ColonRule"></a>ColonRule</h3><h4 id="现象-1"><a href="#现象-1" class="headerlink" title="现象"></a>现象</h4><blockquote>
-<p>xxx.swift:13:71: warning: Colon Violation: Colons should be next to the identifier when specifying a type. (colon)</p>
-</blockquote>
-<h4 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h4><p>  变量方法的 <code>:</code> 的右边应该有一个空格才能识别出来，且左侧不能留空格。所以写代码的时候随手写上还是比较好的。。<br>  栗子：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//  OK:</div><div class="line">var responseData: [String : Any]? = nil // 返回结果，请求之前为nil</div><div class="line"></div><div class="line">//  warning: 第一个&apos;:&apos;处左侧有空格</div><div class="line">var responseData : [String : Any]? = nil // 返回结果，请求之前为nil</div><div class="line"></div><div class="line">//  warning: 第一个&apos;:&apos;处右侧无空格</div><div class="line">var responseData:[String : Any]? = nil // 返回结果，请求之前为nil</div></pre></td></tr></table></figure></p>
-<h4 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h4><p>  规范书写</p>
-<h3 id="LineLengthRule"><a href="#LineLengthRule" class="headerlink" title="LineLengthRule"></a>LineLengthRule</h3><h4 id="现象-2"><a href="#现象-2" class="headerlink" title="现象"></a>现象</h4><blockquote>
-<p>xxx.swift:90: warning: Line Length Violation: Line should be 100 characters or less: currently 101 characters (line_length)</p>
-</blockquote>
-<h4 id="原因-2"><a href="#原因-2" class="headerlink" title="原因"></a>原因</h4><p>  行数超了呗。。</p>
-<h4 id="解决办法-2"><a href="#解决办法-2" class="headerlink" title="解决办法"></a>解决办法</h4><ul>
-<li>方法名字写的简单易懂</li>
-</ul>
-<h3 id="ControlStatementRule"><a href="#ControlStatementRule" class="headerlink" title="ControlStatementRule"></a>ControlStatementRule</h3><h4 id="现象-3"><a href="#现象-3" class="headerlink" title="现象"></a>现象</h4><blockquote>
-<p>xxx.swift:169:21: warning: Control Statement Violation: if,for,while,do statements shouldn’t wrap their conditionals in parentheses. (control_statement)</p>
-</blockquote>
-<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/ControlStatementRule.swift" target="_blank" rel="external">ControlStatementRule</a></p>
-<h4 id="原因-3"><a href="#原因-3" class="headerlink" title="原因"></a>原因</h4><p>  swift中<code>if,for,while,do</code> 语句不应该用<code>()</code></p>
-<h3 id="UnusedClosureParameterRule"><a href="#UnusedClosureParameterRule" class="headerlink" title="UnusedClosureParameterRule"></a>UnusedClosureParameterRule</h3><h4 id="现象-4"><a href="#现象-4" class="headerlink" title="现象"></a>现象</h4><blockquote>
-<p>xxx.swift:103:62: warning: Unused Closure Parameter Violation: Unused parameter “response” in a closure should be replaced with _. (unused_closure_parameter)</p>
-</blockquote>
-<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/UnusedClosureParameterRule.swift" target="_blank" rel="external">UnusedClosureParameterRule</a></p>
-<h4 id="原因-4"><a href="#原因-4" class="headerlink" title="原因"></a>原因</h4><p>  <code>response</code> 没有使用，建议替换为 <code>_</code>。</p>
-<h3 id="CyclomaticComplexityRule"><a href="#CyclomaticComplexityRule" class="headerlink" title="CyclomaticComplexityRule"></a>CyclomaticComplexityRule</h3><h4 id="现象-5"><a href="#现象-5" class="headerlink" title="现象"></a>现象</h4><blockquote>
-<p>xxx.swift:69:5: warning: Cyclomatic Complexity Violation: Function should have complexity 10 or less: currently complexity equals 14 (cyclomatic_complexity)</p>
-</blockquote>
-<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/CyclomaticComplexityRule.swift" target="_blank" rel="external">CyclomaticComplexityRule</a></p>
-<h4 id="原因-5"><a href="#原因-5" class="headerlink" title="原因"></a>原因</h4><p>  😂，他说你这函数写的太复杂了。看实现是说不能有过多的<code>if {}</code></p>
-<h3 id="OpeningBraceRule"><a href="#OpeningBraceRule" class="headerlink" title="OpeningBraceRule"></a>OpeningBraceRule</h3><h4 id="现象-6"><a href="#现象-6" class="headerlink" title="现象"></a>现象</h4><blockquote>
-<p>xxx.swift:221:34: warning: Opening Brace Spacing Violation: Opening braces should be preceded by a single space and on the same line as the declaration. (opening_brace)</p>
-</blockquote>
-<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/OpeningBraceRule.swift" target="_blank" rel="external">OpeningBraceRule</a></p>
-<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>  <code>{}</code>的前面要有空格隔开</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接入了SwiftLine，修改2000+的warning、300+error的一点笔记心得。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
-    
-      <category term="SwiftLint" scheme="https://madordie.github.io/tags/SwiftLint/"/>
     
   </entry>
   
