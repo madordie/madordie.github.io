@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-09-28T11:33:27.378Z</updated>
+  <updated>2017-09-28T11:36:18.029Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/mac-high-sierra-open-with-external/"/>
     <id>https://madordie.github.io/mac-high-sierra-open-with-external/</id>
     <published>2017-09-28T11:06:47.000Z</published>
-    <updated>2017-09-28T11:33:27.378Z</updated>
+    <updated>2017-09-28T11:36:18.029Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：</p>
 <p><img src="/images/mac-high-sierra-open-with-external-1.gif" alt="效果图"></p>
@@ -49,8 +49,9 @@
 </li>
 <li><p>:wq</p>
 </li>
-<li>重启一下</li>
+<li>重启一下 （目的：重建索引）</li>
 </ol>
+<h3 id="至于我做了什么"><a href="#至于我做了什么" class="headerlink" title="至于我做了什么"></a>至于我做了什么</h3><p>讲道理，用Xcode的都知道吧？这个是注册的app支持的文件类型。 删除之后就可以了，就这么多😂</p>
 <h3 id="注意一下"><a href="#注意一下" class="headerlink" title="注意一下"></a>注意一下</h3><p><code>操作</code>中的<code>步骤9</code>可以有脚本，但是还是老实重启一下吧，有的脚本会使部分图标失效，巨烦。。还是重启一下比较靠谱。毕竟不着急</p>
 ]]></content>
     
