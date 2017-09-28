@@ -12,6 +12,8 @@ opt='p'
 if [ $opt = 's' ]; then
     hexo clean
     hexo s -g 
+elif [ $opt = 'n' ]; then
+    hexo n 'mac-high-sierra-open-with-external'
 elif [ $opt = 'p' ]; then
     hexo clean
     hexo d -g
