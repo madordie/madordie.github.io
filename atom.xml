@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-09-26T07:59:13.000Z</updated>
+  <updated>2017-09-28T11:33:27.378Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,6 +14,65 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mac10.13依旧让Xcode支持打开终端</title>
+    <link href="https://madordie.github.io/mac-high-sierra-open-with-external/"/>
+    <id>https://madordie.github.io/mac-high-sierra-open-with-external/</id>
+    <published>2017-09-28T11:06:47.000Z</published>
+    <updated>2017-09-28T11:33:27.378Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：</p>
+<p><img src="/images/mac-high-sierra-open-with-external-1.gif" alt="效果图"></p>
+<ol>
+<li>右击工程</li>
+<li>Open With External Editor</li>
+<li>终端弹出来了。。</li>
+</ol>
+<p>如果没有生效，就是你的电脑上装了什么可以打开<code>xx.xcodeproj</code>的应用程序，也就是在<code>Finder</code>下右击可以看到如下样式：</p>
+<p><img src="/images/mac-high-sierra-open-with-external-2.jpg" alt="效果图"></p>
+<p>呐～ Xcode为默认，备忘录为默认下面的第一个～～</p>
+<p>对，如果这样的话，那么按照上面3步，得到的结果是：这个文件被莫名其妙的保存在了备忘录～～  </p>
+<p>这不是我们要的🤷‍♂️，下面我们通过修改<code>备忘录.app</code>的配置文件来达到我们的效果。</p>
+<a id="more"></a>
+<h3 id="成因"><a href="#成因" class="headerlink" title="成因"></a>成因</h3><p>macSO10.13加强了备忘录，嗯的确变强了，可是并没有Xcode和终端常用。</p>
+<p>备忘录增加了导入的功能，支持了一些文件的打开(只是导入而已。。)，但是并不适合我。于是改一下吧～～</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ol>
+<li>在<code>应用程序</code>中找到<code>备忘录</code></li>
+<li>显示包内容</li>
+<li>找到 我们要修改的plist文件： <code>Contents/Info.plist</code></li>
+<li>做一下备份：复制一下。。</li>
+<li>确保 <4> 已完成</4></li>
+<li>直接修改<code>Info.plist</code>会提示没有权限，使用<code>sudo vim Info.plist</code>修改</li>
+<li><p>不管你用什么方法，删除下面的这些代码</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>General files and folders<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeRole<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>Viewer<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>LSItemContentTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.data<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.directory<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>:wq</p>
+</li>
+<li>重启一下</li>
+</ol>
+<h3 id="注意一下"><a href="#注意一下" class="headerlink" title="注意一下"></a>注意一下</h3><p><code>操作</code>中的<code>步骤9</code>可以有脚本，但是还是老实重启一下吧，有的脚本会使部分图标失效，巨烦。。还是重启一下比较靠谱。毕竟不着急</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/mac-high-sierra-open-with-external-1.gif&quot; alt=&quot;效果图&quot;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;右击工程&lt;/li&gt;
+&lt;li&gt;Open With External Editor&lt;/li&gt;
+&lt;li&gt;终端弹出来了。。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果没有生效，就是你的电脑上装了什么可以打开&lt;code&gt;xx.xcodeproj&lt;/code&gt;的应用程序，也就是在&lt;code&gt;Finder&lt;/code&gt;下右击可以看到如下样式：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/mac-high-sierra-open-with-external-2.jpg&quot; alt=&quot;效果图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;呐～ Xcode为默认，备忘录为默认下面的第一个～～&lt;/p&gt;
+&lt;p&gt;对，如果这样的话，那么按照上面3步，得到的结果是：这个文件被莫名其妙的保存在了备忘录～～  &lt;/p&gt;
+&lt;p&gt;这不是我们要的🤷‍♂️，下面我们通过修改&lt;code&gt;备忘录.app&lt;/code&gt;的配置文件来达到我们的效果。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Xcode9编译失败</title>
@@ -1408,48 +1467,6 @@ class CMExpandingTextField: UITextField {
       <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
       <category term="Fastlane" scheme="https://madordie.github.io/tags/Fastlane/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何实现AppStore查看更多的方法</title>
-    <link href="https://madordie.github.io/uitextkit-ellipsis-sth-at-the-end/"/>
-    <id>https://madordie.github.io/uitextkit-ellipsis-sth-at-the-end/</id>
-    <published>2016-12-23T08:37:37.000Z</published>
-    <updated>2017-09-20T03:07:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>– 2017.9.20 更新 –<br>看到AppStore的<code>更多</code>效果，做的不错哎，本文尝试采用<code>UITextKit</code>进行实现。</p>
-<p> <img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="效果图"></p>
-<a id="more"></a>
-<p>App Store中的查看更多动画是不是很给力？可是做起来确不知道如何下手？这里我提供一种UITextKit的方法来简单的实现一下。</p>
-<p>为了让例子简单，我就直接写了个more，那个view是自定义的，随便添加的，和本身的文本展示的并没有什么关系。</p>
-<p>为了让最后的那个moreView更加好用，增加了已经展开显示全部是否隐藏的控制。</p>
-<h3 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h3><h4 id="获取最后一行Rect"><a href="#获取最后一行Rect" class="headerlink" title="获取最后一行Rect"></a>获取最后一行Rect</h4>  <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> lastRect = <span class="type">CGRect</span>.zero</div><div class="line">layoutManager.enumerateEnclosingRects(forGlyphRange: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: textStorage.string.characters.<span class="built_in">count</span>), withinSelectedGlyphRange: <span class="type">NSRange</span>(location: <span class="type">NSNotFound</span>, length: <span class="number">0</span>), <span class="keyword">in</span>: textContainer, using: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (rect, isStop) <span class="keyword">in</span></div><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> _self = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line"><span class="keyword">var</span> newRect = rect</div><div class="line">newRect.origin.y += _self.textContainerInset.top</div><div class="line">lastRect = newRect</div><div class="line">&#125;)</div><div class="line"><span class="built_in">print</span>(lastRect)</div></pre></td></tr></table></figure>
-<h4 id="增加-exclusionPaths"><a href="#增加-exclusionPaths" class="headerlink" title="增加 exclusionPaths"></a>增加 <code>exclusionPaths</code></h4>  <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">textContainer.exclusionPaths = [<span class="type">UIBezierPath</span>.<span class="keyword">init</span>(rect: rect)]</div></pre></td></tr></table></figure>
-<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><ul>
-<li><a href="https://github.com/madordie/UITextView-More" target="_blank" rel="external">github</a></li>
-<li><code>UITextView</code>默认携带左右边距，通过<code>UITextView.textContainer.lineFragmentPadding</code>获取</li>
-<li><code>UITextView</code>默认携带上下左右边距(<code>UITextView.textContainerInset</code>)，其中左右和<code>lineFragmentPadding</code>相加</li>
-<li>此处并没有对<a href="https://github.com/madordie/UITextView-More/blob/master/TruncateTextView.swift" target="_blank" rel="external">TruncateTextView</a>进行过多的设置，主要是因为继承在UITextView下，<a href="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif" target="_blank" rel="external">GIF</a>中的这部分设置放在了<a href="https://github.com/madordie/UITextView-More/blob/master/Demo-AppStore-More/ViewController.swift" target="_blank" rel="external">ViewController.swift</a>中</li>
-<li>此处使用的是<code>frame</code>，可以在<code>UIView.sizeToFit()</code>之后获取到<code>UIView</code>的<code>Size</code>。约束也大抵如此</li>
-</ul>
-<hr>
-<ul>
-<li>感谢<a href="https://github.com/lexiaoyao20" target="_blank" rel="external">乐逍遥</a>提供的例子，才找到了<code>open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange</code>方法😂</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;– 2017.9.20 更新 –&lt;br&gt;看到AppStore的&lt;code&gt;更多&lt;/code&gt;效果，做的不错哎，本文尝试采用&lt;code&gt;UITextKit&lt;/code&gt;进行实现。&lt;/p&gt;
-&lt;p&gt; &lt;img src=&quot;https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true&quot; alt=&quot;效果图&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="效果" scheme="https://madordie.github.io/tags/%E6%95%88%E6%9E%9C/"/>
     
   </entry>
   
