@@ -155,7 +155,7 @@ $ sudo brew services start jenkins
 通过下面的方式找到`brew`安装的位置
 
 ```sh
-$ $ brew services list
+$ brew services list
 Name       Status  User Plist
 beanstalkd stopped
 influxdb   stopped
