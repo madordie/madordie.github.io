@@ -113,7 +113,7 @@
 <meta property="og:description" content="iOS11 预览版安装体验笔记。">
 <meta property="og:image" content="https://madordie.github.io/images/ios11-beta-1.jpg">
 <meta property="og:image" content="https://madordie.github.io/images/ios11-beta-2.gif">
-<meta property="og:updated_time" content="2017-09-15T02:52:56.000Z">
+<meta property="og:updated_time" content="2017-09-29T03:56:58.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS11-beta">
 <meta name="twitter:description" content="iOS11 预览版安装体验笔记。">
@@ -417,6 +417,16 @@
 <p>这是<a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="external">WebViewJavascriptBridge</a>在iOS11上的一个<a href="https://github.com/marcuswestin/WebViewJavascriptBridge/issues/302" target="_blank" rel="external">Issues#302</a>。</p>
 <p>据同事说可以通过如下代码解决：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="type">WebViewJavascriptBridgeBase</span>().isWebViewJavascriptBridgeURL(url) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">&#125;</div><div class="line">decisionHandler(.allow)</div></pre></td></tr></table></figure></p>
 <p>测试了一下确实不崩溃了，但是具体的解决方案还要看作者的在<a href="https://github.com/marcuswestin/WebViewJavascriptBridge/issues/302" target="_blank" rel="external">Issues#302</a>中的回复。</p>
+<h3 id="照片存储时候某些设备必crash"><a href="#照片存储时候某些设备必crash" class="headerlink" title="照片存储时候某些设备必crash"></a>照片存储时候某些设备必crash</h3><p>崩溃信息:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2017-09-29 11:36:17.338816+0800 Demo-iOS11-crash-save-photo[636:139456]</div><div class="line"> [access] This app has crashed because it attempted to access privacy-sensitive data without a usage description. </div><div class="line"> The app&apos;s Info.plist must contain an NSPhotoLibraryAddUsageDescription key with a string value explaining to the user how the app uses this data.</div></pre></td></tr></table></figure>
+<p>是的，这个Demo还有一个crash的提示。但是在大工程中，我并没有看到这样的玩意输出出来。。我做的复现操作较简单：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> img = <span class="type">UIImage</span>(named: <span class="string">"278.jpg"</span>)</div><div class="line"><span class="keyword">let</span> library = <span class="type">ALAssetsLibrary</span>()</div><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> orientation = <span class="type">ALAssetOrientation</span>(rawValue: img?.imageOrientation.rawValue ?? <span class="number">0</span>) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">library.writeImage(toSavedPhotosAlbum: img?.cgImage, orientation: orientation) &#123; (url, error) <span class="keyword">in</span></div><div class="line">    <span class="keyword">guard</span> error != <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="built_in">print</span>(<span class="string">"no crash"</span>); <span class="keyword">return</span> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就这么多代码，不管是打没打<code>Swift Error</code>、<code>All Exceptions</code>都无法定位到上面代码块，这才是最坑的。</p>
+<p>上面代码漏了一句关键的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">guard</span> <span class="type">ALAssetsLibrary</span>.authorizationStatus() == .authorized <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div></pre></td></tr></table></figure>
+<p>需要注意的是上面代码之判断了是否有权限，但是在iOS11上并不会弹出什么授权提示。就算在<code>Info.plist</code>中添加<code>NSPhotoLibraryUsageDescription</code>依旧无济于事。</p>
+<p>目前来看，iOS11中<strong>只有</strong>添加<code>NSPhotoLibraryAddUsageDescription</code>才可以。</p>
+<p>貌似还有别的什么问题，吃饭，下午继续</p>
 
       
     </div>
@@ -639,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">2.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失效的automaticallyAdjustsScrollViewInsets"><span class="nav-number">2.1.</span> <span class="nav-text">失效的automaticallyAdjustsScrollViewInsets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decisionHandler-allow-was-called-more-than-once"><span class="nav-number">2.2.</span> <span class="nav-text">decisionHandler(.allow) was called more than once</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">2.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失效的automaticallyAdjustsScrollViewInsets"><span class="nav-number">2.1.</span> <span class="nav-text">失效的automaticallyAdjustsScrollViewInsets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decisionHandler-allow-was-called-more-than-once"><span class="nav-number">2.2.</span> <span class="nav-text">decisionHandler(.allow) was called more than once</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#照片存储时候某些设备必crash"><span class="nav-number">2.3.</span> <span class="nav-text">照片存储时候某些设备必crash</span></a></li></ol></li></ol></div>
             
 
           </div>

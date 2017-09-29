@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-09-28T11:36:18.029Z</updated>
+  <updated>2017-09-29T02:40:05.303Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/mac-high-sierra-open-with-external/"/>
     <id>https://madordie.github.io/mac-high-sierra-open-with-external/</id>
     <published>2017-09-28T11:06:47.000Z</published>
-    <updated>2017-09-28T11:36:18.029Z</updated>
+    <updated>2017-09-29T02:40:05.303Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：</p>
 <p><img src="/images/mac-high-sierra-open-with-external-1.gif" alt="效果图"></p>
@@ -47,7 +47,7 @@
 <li><p>不管你用什么方法，删除下面的这些代码</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>General files and folders<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeRole<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>Viewer<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>LSItemContentTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.data<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.directory<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>:wq</p>
+<li><p><code>:wq</code></p>
 </li>
 <li>重启一下 （目的：重建索引）</li>
 </ol>
@@ -158,7 +158,7 @@
     <link href="https://madordie.github.io/ios-automation-jenkins-build/"/>
     <id>https://madordie.github.io/ios-automation-jenkins-build/</id>
     <published>2017-09-14T09:27:15.000Z</published>
-    <updated>2017-09-17T09:20:26.000Z</updated>
+    <updated>2017-09-29T02:59:25.979Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../ios11-beta/">忙于iOS11的兼容</a></p>
 <ul>
@@ -181,6 +181,7 @@
 <p>安装方法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew cask install fastlane</div></pre></td></tr></table></figure>
 <p>此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。</p>
+<p>在Xcode9 我使用的版本2.14.1打包出问题了。。具体在这里详见<a href="../debug-xcode9-build-ipa">Xcode9编译失败</a>。于是呼采用了<code>xcodebuild</code>进行打包</p>
 <h3 id="fir-im-cli"><a href="#fir-im-cli" class="headerlink" title="fir.im-cli"></a>fir.im-cli</h3><p><a href="https://fir.im" target="_blank" rel="external">fir.im</a>提供的应用内测托管工具。<a href="https://github.com/FIRHQ/fir-cli/blob/master/README.md" target="_blank" rel="external">开源官网</a>。</p>
 <p>安装方法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem install fir-cli</div></pre></td></tr></table></figure>
@@ -220,8 +221,8 @@
 <li><code>scheme</code>无法找到是因为你在提交代码的时候没有将其设置为shared</li>
 <li><code>fastlane gym</code> 支持很多参数，是对<code>xcodebuild</code>的封装，<a href="https://github.com/fastlane/fastlane/tree/master/gym" target="_blank" rel="external">源码及文档在此</a></li>
 </ul>
-<h3 id="上传dsym至Bugly"><a href="#上传dsym至Bugly" class="headerlink" title="上传dsym至Bugly"></a>上传dsym至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
-<p>为了隔离开</p>
+<h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
+<p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
 ]]></content>
     
     <summary type="html">
@@ -295,7 +296,7 @@
     <link href="https://madordie.github.io/ios-automation-jenkins-configuration/"/>
     <id>https://madordie.github.io/ios-automation-jenkins-configuration/</id>
     <published>2017-09-10T01:49:32.000Z</published>
-    <updated>2017-09-15T07:42:45.000Z</updated>
+    <updated>2017-09-29T02:40:44.135Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
 <li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
@@ -307,7 +308,7 @@
 <p>如<a href="https://jenkins.io" target="_blank" rel="external">官网</a>所说<code>Build great things at any scale</code></p>
 <p>从这篇文章中你将会实现：</p>
 <ul>
-<li>在Mac上搭建jenkins</li>
+<li>在Mac上多种方案安装并启动jenkins</li>
 <li>在局域网中正常访问jenkins</li>
 </ul>
 <a id="more"></a>
@@ -384,7 +385,7 @@
 &lt;p&gt;如&lt;a href=&quot;https://jenkins.io&quot;&gt;官网&lt;/a&gt;所说&lt;code&gt;Build great things at any scale&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;从这篇文章中你将会实现：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;在Mac上搭建jenkins&lt;/li&gt;
+&lt;li&gt;在Mac上多种方案安装并启动jenkins&lt;/li&gt;
 &lt;li&gt;在局域网中正常访问jenkins&lt;/li&gt;
 &lt;/ul&gt;
     
@@ -667,7 +668,7 @@
     <link href="https://madordie.github.io/ios11-beta/"/>
     <id>https://madordie.github.io/ios11-beta/</id>
     <published>2017-06-12T09:20:58.000Z</published>
-    <updated>2017-09-15T02:52:56.000Z</updated>
+    <updated>2017-09-29T03:56:58.185Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>iOS11 预览版安装体验笔记。</p>
 <a id="more"></a>
@@ -689,6 +690,16 @@
 <p>这是<a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="external">WebViewJavascriptBridge</a>在iOS11上的一个<a href="https://github.com/marcuswestin/WebViewJavascriptBridge/issues/302" target="_blank" rel="external">Issues#302</a>。</p>
 <p>据同事说可以通过如下代码解决：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="type">WebViewJavascriptBridgeBase</span>().isWebViewJavascriptBridgeURL(url) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">&#125;</div><div class="line">decisionHandler(.allow)</div></pre></td></tr></table></figure></p>
 <p>测试了一下确实不崩溃了，但是具体的解决方案还要看作者的在<a href="https://github.com/marcuswestin/WebViewJavascriptBridge/issues/302" target="_blank" rel="external">Issues#302</a>中的回复。</p>
+<h3 id="照片存储时候某些设备必crash"><a href="#照片存储时候某些设备必crash" class="headerlink" title="照片存储时候某些设备必crash"></a>照片存储时候某些设备必crash</h3><p>崩溃信息:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2017-09-29 11:36:17.338816+0800 Demo-iOS11-crash-save-photo[636:139456]</div><div class="line"> [access] This app has crashed because it attempted to access privacy-sensitive data without a usage description. </div><div class="line"> The app&apos;s Info.plist must contain an NSPhotoLibraryAddUsageDescription key with a string value explaining to the user how the app uses this data.</div></pre></td></tr></table></figure>
+<p>是的，这个Demo还有一个crash的提示。但是在大工程中，我并没有看到这样的玩意输出出来。。我做的复现操作较简单：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> img = <span class="type">UIImage</span>(named: <span class="string">"278.jpg"</span>)</div><div class="line"><span class="keyword">let</span> library = <span class="type">ALAssetsLibrary</span>()</div><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> orientation = <span class="type">ALAssetOrientation</span>(rawValue: img?.imageOrientation.rawValue ?? <span class="number">0</span>) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">library.writeImage(toSavedPhotosAlbum: img?.cgImage, orientation: orientation) &#123; (url, error) <span class="keyword">in</span></div><div class="line">    <span class="keyword">guard</span> error != <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="built_in">print</span>(<span class="string">"no crash"</span>); <span class="keyword">return</span> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就这么多代码，不管是打没打<code>Swift Error</code>、<code>All Exceptions</code>都无法定位到上面代码块，这才是最坑的。</p>
+<p>上面代码漏了一句关键的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">guard</span> <span class="type">ALAssetsLibrary</span>.authorizationStatus() == .authorized <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div></pre></td></tr></table></figure>
+<p>需要注意的是上面代码之判断了是否有权限，但是在iOS11上并不会弹出什么授权提示。就算在<code>Info.plist</code>中添加<code>NSPhotoLibraryUsageDescription</code>依旧无济于事。</p>
+<p>目前来看，iOS11中<strong>只有</strong>添加<code>NSPhotoLibraryAddUsageDescription</code>才可以。</p>
+<p>貌似还有别的什么问题，吃饭，下午继续</p>
 ]]></content>
     
     <summary type="html">

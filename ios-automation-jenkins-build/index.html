@@ -111,7 +111,7 @@
 <meta property="og:url" content="https://madordie.github.io/ios-automation-jenkins-build/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～ 从这个文章中你将要实现以下功能：  在Jenkins创建工程 build出ipa 将ipa上传至fir 钉钉机器人群通知 将dsym上传至bugly">
-<meta property="og:updated_time" content="2017-09-17T09:20:26.000Z">
+<meta property="og:updated_time" content="2017-09-29T02:59:25.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS自动化-Jenkins编译工程">
 <meta name="twitter:description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～ 从这个文章中你将要实现以下功能：  在Jenkins创建工程 build出ipa 将ipa上传至fir 钉钉机器人群通知 将dsym上传至bugly">
@@ -415,6 +415,7 @@
 <p>安装方法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew cask install fastlane</div></pre></td></tr></table></figure>
 <p>此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。</p>
+<p>在Xcode9 我使用的版本2.14.1打包出问题了。。具体在这里详见<a href="../debug-xcode9-build-ipa">Xcode9编译失败</a>。于是呼采用了<code>xcodebuild</code>进行打包</p>
 <h3 id="fir-im-cli"><a href="#fir-im-cli" class="headerlink" title="fir.im-cli"></a>fir.im-cli</h3><p><a href="https://fir.im" target="_blank" rel="external">fir.im</a>提供的应用内测托管工具。<a href="https://github.com/FIRHQ/fir-cli/blob/master/README.md" target="_blank" rel="external">开源官网</a>。</p>
 <p>安装方法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem install fir-cli</div></pre></td></tr></table></figure>
@@ -454,8 +455,8 @@
 <li><code>scheme</code>无法找到是因为你在提交代码的时候没有将其设置为shared</li>
 <li><code>fastlane gym</code> 支持很多参数，是对<code>xcodebuild</code>的封装，<a href="https://github.com/fastlane/fastlane/tree/master/gym" target="_blank" rel="external">源码及文档在此</a></li>
 </ul>
-<h3 id="上传dsym至Bugly"><a href="#上传dsym至Bugly" class="headerlink" title="上传dsym至Bugly"></a>上传dsym至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
-<p>为了隔离开</p>
+<h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
+<p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
 
       
     </div>
@@ -686,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本环境安装"><span class="nav-number">2.</span> <span class="nav-text">脚本环境安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fastlane"><span class="nav-number">2.1.</span> <span class="nav-text">fastlane</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fir-im-cli"><span class="nav-number">2.2.</span> <span class="nav-text">fir.im-cli</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件安装"><span class="nav-number">3.</span> <span class="nav-text">插件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程创建"><span class="nav-number">4.</span> <span class="nav-text">工程创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码管理"><span class="nav-number">4.1.</span> <span class="nav-text">源码管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建触发器"><span class="nav-number">4.2.</span> <span class="nav-text">构建触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建"><span class="nav-number">4.3.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传dsym至Bugly"><span class="nav-number">4.4.</span> <span class="nav-text">上传dsym至Bugly</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本环境安装"><span class="nav-number">2.</span> <span class="nav-text">脚本环境安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fastlane"><span class="nav-number">2.1.</span> <span class="nav-text">fastlane</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fir-im-cli"><span class="nav-number">2.2.</span> <span class="nav-text">fir.im-cli</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件安装"><span class="nav-number">3.</span> <span class="nav-text">插件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程创建"><span class="nav-number">4.</span> <span class="nav-text">工程创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码管理"><span class="nav-number">4.1.</span> <span class="nav-text">源码管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建触发器"><span class="nav-number">4.2.</span> <span class="nav-text">构建触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建"><span class="nav-number">4.3.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传dSYM至Bugly"><span class="nav-number">4.4.</span> <span class="nav-text">上传dSYM至Bugly</span></a></li></ol></li></ol></div>
             
 
           </div>
