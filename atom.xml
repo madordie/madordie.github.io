@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-09-29T02:40:05.303Z</updated>
+  <updated>2017-09-29T06:17:29.374Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -16,11 +16,53 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>mac10.13 pods 命令错误</title>
+    <link href="https://madordie.github.io/macos-high-sierra-cocoapods/"/>
+    <id>https://madordie.github.io/macos-high-sierra-cocoapods/</id>
+    <published>2017-09-29T06:03:58.000Z</published>
+    <updated>2017-09-29T06:17:29.374Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每逢升级大版本总要过搞点事情。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pod env</div><div class="line">-bash: /usr/<span class="built_in">local</span>/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory</div></pre></td></tr></table></figure>
+<p>不论是<code>pod env</code>、`pod update’ 等等均报上面的错误。</p>
+<p>如果Google发现：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/44396215/cocoapods-not-working-in-macos-high-sierra" target="_blank" rel="external">ruby - CocoaPods not working in macOS High Sierra - Stack Overflow</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6778" target="_blank" rel="external">CocoaPods CLI fails in High Sierra due to change of Ruby version #6778</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096" target="_blank" rel="external">High Sierra: bad interpreter #6898</a></li>
+</ul>
+<p>事情的缘由就是这样。</p>
+<p><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096" target="_blank" rel="external">#6898</a>中道出了简单直接的解决方案：</p>
+<blockquote>
+<p>for all others:</p>
+<p><code>gem install -n /usr/local/bin cocoapods</code></p>
+<p>fixes it</p>
+</blockquote>
+<p><strong>综合起来</strong>解决这个问题是这样的：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ gem uninstall cocoapods</div><div class="line">$ <span class="built_in">echo</span> <span class="string">'gem: --bindir /usr/local/bin'</span> &gt;&gt; ~/.gemrc</div><div class="line">$ sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<p>愉快的使用cocoapods吧～</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;每逢升级大版本总要过搞点事情。&lt;/p&gt;
+&lt;figure class=&quot;hig
+    
+    </summary>
+    
+      <category term="macOS" scheme="https://madordie.github.io/categories/macOS/"/>
+    
+    
+      <category term="cocoapods" scheme="https://madordie.github.io/tags/cocoapods/"/>
+    
+  </entry>
+  
+  <entry>
     <title>mac10.13依旧让Xcode支持打开终端</title>
     <link href="https://madordie.github.io/mac-high-sierra-open-with-external/"/>
     <id>https://madordie.github.io/mac-high-sierra-open-with-external/</id>
     <published>2017-09-28T11:06:47.000Z</published>
-    <updated>2017-09-29T02:40:05.303Z</updated>
+    <updated>2017-09-29T06:06:17.231Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：</p>
 <p><img src="/images/mac-high-sierra-open-with-external-1.gif" alt="效果图"></p>
@@ -72,6 +114,10 @@
     
     </summary>
     
+      <category term="macOS" scheme="https://madordie.github.io/categories/macOS/"/>
+    
+    
+      <category term="Xcode" scheme="https://madordie.github.io/tags/Xcode/"/>
     
   </entry>
   
@@ -158,7 +204,7 @@
     <link href="https://madordie.github.io/ios-automation-jenkins-build/"/>
     <id>https://madordie.github.io/ios-automation-jenkins-build/</id>
     <published>2017-09-14T09:27:15.000Z</published>
-    <updated>2017-09-29T02:59:25.979Z</updated>
+    <updated>2017-09-29T07:57:32.930Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../ios11-beta/">忙于iOS11的兼容</a></p>
 <ul>
@@ -223,6 +269,9 @@
 </ul>
 <h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
 <p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
+<p>其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 路径主要用来提取Info.plist以及dsym文件</span></div><div class="line">path=<span class="string">'/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo'</span></div><div class="line"><span class="comment"># scheme name</span></div><div class="line">scheme=<span class="string">'Fangduoduo_ent'</span></div><div class="line"><span class="comment"># ipa bundleId</span></div><div class="line">package=<span class="string">'xx.xx.com'</span></div><div class="line"><span class="comment"># bugly id</span></div><div class="line">bugly_id=<span class="string">'9xxx'</span></div><div class="line"><span class="comment"># bugly key</span></div><div class="line">bugly_key=<span class="string">'wHzxcxxx'</span></div><div class="line"></div><div class="line">rm -rf *dSYM*</div><div class="line">cp <span class="variable">$&#123;path&#125;</span>/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist</div><div class="line">cp -rf <span class="variable">$&#123;path&#125;</span>/build/*.xcarchive/dSYMs .</div><div class="line"></div><div class="line"><span class="comment"># ------------ post dsym ------------ #</span></div><div class="line"></div><div class="line">app_infoplist_path=<span class="string">'Info.plist'</span></div><div class="line">version=$(/usr/libexec/PlistBuddy -c <span class="string">"print CFBundleVersion"</span> <span class="variable">$&#123;app_infoplist_path&#125;</span>)</div><div class="line"></div><div class="line">java -jar ./bugly/buglySymboliOS.jar \</div><div class="line">	-i dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM \</div><div class="line">    -dsym \</div><div class="line">    -u \</div><div class="line">    -id <span class="variable">$&#123;bugly_id&#125;</span> \</div><div class="line">    -key <span class="variable">$&#123;bugly_key&#125;</span> \</div><div class="line">    -package <span class="variable">$&#123;package&#125;</span> \</div><div class="line">    -version <span class="variable">$&#123;version&#125;</span></div><div class="line">        </div><div class="line"><span class="comment"># @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。</span></div><div class="line">    </div><div class="line"><span class="comment"># ------------ UUID ------------ #</span></div><div class="line"></div><div class="line">unzip -o ./dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM.zip</div><div class="line">xcrun dwarfdump --uuid ./<span class="variable">$&#123;scheme&#125;</span> &gt;&gt; ./uuids-<span class="variable">$&#123;version&#125;</span>.txt</div></pre></td></tr></table></figure>
+<p>值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。</p>
 ]]></content>
     
     <summary type="html">
@@ -1432,52 +1481,6 @@ class CMExpandingTextField: UITextField {
     
     
       <category term="优化" scheme="https://madordie.github.io/tags/%E4%BC%98%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Fastlane自动化笔记</title>
-    <link href="https://madordie.github.io/fastlane-note/"/>
-    <id>https://madordie.github.io/fastlane-note/</id>
-    <published>2017-01-04T10:14:07.000Z</published>
-    <updated>2017-09-15T03:05:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！<br>回看之前的<a href="../build-ipa-sh">build-ipa-sh.md</a>确实比较僵硬。自动化还是很棒的。</p>
-<a id="more"></a>
-<h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><p>  (<a href="http://icyleaf.com" target="_blank" rel="external">@icyleaf</a>)在<a href="https://icyleaf.com/2016/07/intro-fastlane-automation-for-ios-and-android/" target="_blank" rel="external">Fastlane - iOS 和 Android 的自动化构建工具</a>中说到：</p>
-<blockquote>
-<p>Fastlane 提供的流程的众多工具都是可以独立存在和使用（提供 cli 命令），也可以统一由 fastlane 来控制。它在使用中提出了两个概念：</p>
-<pre><code>- action: Fastlane 的插件，截至当前内置 165 个至多，不过每个动作的颗粒度大小不一。查看详情
-- lane: Fastlane 的任务（或者可以理解为命令），一个可以包含多个 lanes，通过 fastlane cli 传入制定的 lane 来执行。
-</code></pre></blockquote>
-<p>  自我感觉这句话这个对理解和使用很重要！</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>  Fastlane已被Fabric收购，所以按照其安装也很随意(<a href="https://fabric.io/features/distribution" target="_blank" rel="external">戳我配置</a>)。<br>  对于打包，</p>
-<h1 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h1><ul>
-<li><a href="http://icyleaf.com/2016/07/fastlane-in-action/" target="_blank" rel="external">深入浅出 Fastlane 一看你就懂</a></li>
-<li><a href="http://blog.fir.im/fir_im_weekly160505" target="_blank" rel="external">fir.im weekly - 「 持续集成 」实践教程合集</a></li>
-<li><a href="https://everettjf.github.io/2015/09/08/ios-ci-with-fastlane" target="_blank" rel="external">使用fastlane实现iOS持续集成</a></li>
-<li><a href="https://docs.fastlane.tools" target="_blank" rel="external">fastlane docs</a></li>
-<li><a href="https://github.com/fastlane/fastlane" target="_blank" rel="external">fastlane GitHub</a></li>
-<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part01" target="_blank" rel="external">Fastlane实战（一）：移动开发自动化之道</a></li>
-<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part02" target="_blank" rel="external">Fastlane实战（二）：Action和Plugin机制</a></li>
-<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part03" target="_blank" rel="external">Fastlane实战（三）：Fastlane在Android平台的应用</a></li>
-<li><a href="http://www.infoq.com/cn/articles/fastlane-automatic-testing" target="_blank" rel="external">Fastlane实战（四）：自动化测试篇</a></li>
-<li><a href="http://www.infoq.com/cn/articles/fastlane-pro-tips" target="_blank" rel="external">Fastlane实战（五）：高级用法</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！&lt;br&gt;回看之前的&lt;a href=&quot;../build-ipa-sh&quot;&gt;build-ipa-sh.md&lt;/a&gt;确实比较僵硬。自动化还是很棒的。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
-    
-      <category term="Fastlane" scheme="https://madordie.github.io/tags/Fastlane/"/>
     
   </entry>
   

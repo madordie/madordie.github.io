@@ -4,6 +4,68 @@
 
     
   <url>
+    <loc>https://madordie.github.io/ios-automation-jenkins-build/</loc>
+    <lastmod>2017-09-29T07:57:32.930Z</lastmod>
+    <data>
+        <display>
+        <title>iOS自动化-Jenkins编译工程</title>
+        <pubTime>2017-09-14T09:27:15.000Z</pubTime>
+        
+        <tag>构建</tag>
+         
+        <tag>Jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/macos-high-sierra-cocoapods/</loc>
+    <lastmod>2017-09-29T06:17:29.374Z</lastmod>
+    <data>
+        <display>
+        <title>mac10.13 pods 命令错误</title>
+        <pubTime>2017-09-29T06:03:58.000Z</pubTime>
+        
+        <tag>cocoapods</tag>
+         
+         
+           
+             
+              <breadCrumb title="macOS" url="https://madordie.github.io/categories/macOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/mac-high-sierra-open-with-external/</loc>
+    <lastmod>2017-09-29T06:06:17.231Z</lastmod>
+    <data>
+        <display>
+        <title>mac10.13依旧让Xcode支持打开终端</title>
+        <pubTime>2017-09-28T11:06:47.000Z</pubTime>
+        
+        <tag>Xcode</tag>
+         
+         
+           
+             
+              <breadCrumb title="macOS" url="https://madordie.github.io/categories/macOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/ios11-beta/</loc>
     <lastmod>2017-09-29T05:40:37.311Z</lastmod>
     <data>
@@ -38,43 +100,6 @@
              
               <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/ios-automation-jenkins-build/</loc>
-    <lastmod>2017-09-29T02:59:25.979Z</lastmod>
-    <data>
-        <display>
-        <title>iOS自动化-Jenkins编译工程</title>
-        <pubTime>2017-09-14T09:27:15.000Z</pubTime>
-        
-        <tag>构建</tag>
-         
-        <tag>Jenkins</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/mac-high-sierra-open-with-external/</loc>
-    <lastmod>2017-09-29T02:40:05.303Z</lastmod>
-    <data>
-        <display>
-        <title>mac10.13依旧让Xcode支持打开终端</title>
-        <pubTime>2017-09-28T11:06:47.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
@@ -162,6 +187,26 @@
     
     
   <url>
+    <loc>https://madordie.github.io/reverse-ios-dump-decrypted/</loc>
+    <lastmod>2017-09-15T03:05:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS逆向-砸壳(cycript/clutch)</title>
+        <pubTime>2017-08-09T12:31:50.000Z</pubTime>
+        
+        <tag>逆向</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/reverse-ios-class-dump/</loc>
     <lastmod>2017-09-15T03:05:02.000Z</lastmod>
     <data>
@@ -192,26 +237,6 @@
         <tag>构建</tag>
          
         <tag>Fastlane</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/reverse-ios-dump-decrypted/</loc>
-    <lastmod>2017-09-15T03:05:02.000Z</lastmod>
-    <data>
-        <display>
-        <title>iOS逆向-砸壳(cycript/clutch)</title>
-        <pubTime>2017-08-09T12:31:50.000Z</pubTime>
-        
-        <tag>逆向</tag>
          
          
            
