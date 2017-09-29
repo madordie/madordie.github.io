@@ -113,7 +113,7 @@
 <meta property="og:description" content="iOS11 预览版安装体验笔记。">
 <meta property="og:image" content="https://madordie.github.io/images/ios11-beta-1.jpg">
 <meta property="og:image" content="https://madordie.github.io/images/ios11-beta-2.gif">
-<meta property="og:updated_time" content="2017-09-29T03:56:58.185Z">
+<meta property="og:updated_time" content="2017-09-29T05:24:37.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS11-beta">
 <meta name="twitter:description" content="iOS11 预览版安装体验笔记。">
@@ -426,7 +426,6 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">guard</span> <span class="type">ALAssetsLibrary</span>.authorizationStatus() == .authorized <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div></pre></td></tr></table></figure>
 <p>需要注意的是上面代码之判断了是否有权限，但是在iOS11上并不会弹出什么授权提示。就算在<code>Info.plist</code>中添加<code>NSPhotoLibraryUsageDescription</code>依旧无济于事。</p>
 <p>目前来看，iOS11中<strong>只有</strong>添加<code>NSPhotoLibraryAddUsageDescription</code>才可以。</p>
-<p>貌似还有别的什么问题，吃饭，下午继续</p>
 
       
     </div>
