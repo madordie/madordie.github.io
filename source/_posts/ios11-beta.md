@@ -81,3 +81,36 @@ decisionHandler(.allow)
 
 测试了一下确实不崩溃了，但是具体的解决方案还要看作者的在[Issues#302](https://github.com/marcuswestin/WebViewJavascriptBridge/issues/302)中的回复。
 
+### 照片存储时候某些设备必crash
+
+崩溃信息:
+
+```
+2017-09-29 11:36:17.338816+0800 Demo-iOS11-crash-save-photo[636:139456]
+ [access] This app has crashed because it attempted to access privacy-sensitive data without a usage description. 
+ The app's Info.plist must contain an NSPhotoLibraryAddUsageDescription key with a string value explaining to the user how the app uses this data.
+```
+
+是的，这个Demo还有一个crash的提示。但是在大工程中，我并没有看到这样的玩意输出出来。。我做的复现操作较简单：
+
+```swift
+let img = UIImage(named: "278.jpg")
+let library = ALAssetsLibrary()
+guard let orientation = ALAssetOrientation(rawValue: img?.imageOrientation.rawValue ?? 0) else { return }
+library.writeImage(toSavedPhotosAlbum: img?.cgImage, orientation: orientation) { (url, error) in
+    guard error != nil else { print("no crash"); return }
+}
+```
+就这么多代码，不管是打没打`Swift Error`、`All Exceptions`都无法定位到上面代码块，这才是最坑的。
+
+上面代码漏了一句关键的代码：
+
+```swift
+guard ALAssetsLibrary.authorizationStatus() == .authorized else { return }
+```
+
+需要注意的是上面代码之判断了是否有权限，但是在iOS11上并不会弹出什么授权提示。就算在`Info.plist`中添加`NSPhotoLibraryUsageDescription`依旧无济于事。
+
+目前来看，iOS11中**只有**添加`NSPhotoLibraryAddUsageDescription`才可以。
+
+貌似还有别的什么问题，吃饭，下午继续

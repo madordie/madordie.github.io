@@ -21,7 +21,7 @@ categories:
 
 从这篇文章中你将会实现：
 
-- 在Mac上搭建jenkins
+- 在Mac上多种方案安装并启动jenkins
 - 在局域网中正常访问jenkins
 
 <!--more-->

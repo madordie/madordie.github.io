@@ -45,6 +45,8 @@ $ brew cask install fastlane
 
 此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。
 
+在Xcode9 我使用的版本2.14.1打包出问题了。。具体在这里详见[Xcode9编译失败](../debug-xcode9-build-ipa)。于是呼采用了`xcodebuild`进行打包
+
 ### fir.im-cli
 
 [fir.im](https://fir.im)提供的应用内测托管工具。[开源官网](https://github.com/FIRHQ/fir-cli/blob/master/README.md)。
@@ -158,8 +160,8 @@ curl "https://oapi.dingtalk.com/robot/send?access_token=${dingtalk_token}" -H 'C
 - `scheme`无法找到是因为你在提交代码的时候没有将其设置为shared
 - `fastlane gym` 支持很多参数，是对`xcodebuild`的封装，[源码及文档在此](https://github.com/fastlane/fastlane/tree/master/gym)
 
-### 上传dsym至Bugly
+### 上传dSYM至Bugly
 
 这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。
 
-为了隔离开
+为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM
