@@ -300,6 +300,26 @@
 
     
   <url>
+    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
+    <lastmod>2017-08-14T02:20:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
+        <pubTime>2017-05-16T02:55:00.000Z</pubTime>
+        
+        <tag>FastImageCache</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/about-project-tableview/</loc>
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     <data>
@@ -328,26 +348,6 @@
         <pubTime>2016-11-30T16:00:00.000Z</pubTime>
         
         <tag>Debug</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
-    <lastmod>2017-08-14T02:20:29.000Z</lastmod>
-    <data>
-        <display>
-        <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
-        <pubTime>2017-05-16T02:55:00.000Z</pubTime>
-        
-        <tag>FastImageCache</tag>
          
          
            
