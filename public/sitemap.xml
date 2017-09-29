@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
+    <loc>https://madordie.github.io/ios11-beta/</loc>
     
-    <lastmod>2017-09-29T04:47:40.359Z</lastmod>
+    <lastmod>2017-09-29T05:24:37.001Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://madordie.github.io/ios11-beta/</loc>
+    <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
     
-    <lastmod>2017-09-29T03:56:58.185Z</lastmod>
+    <lastmod>2017-09-29T04:47:40.359Z</lastmod>
     
   </url>
   
@@ -65,14 +65,14 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/reverse-ios-dump-decrypted/</loc>
+    <loc>https://madordie.github.io/reverse-ios-class-dump/</loc>
     
     <lastmod>2017-09-15T03:05:02.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://madordie.github.io/reverse-ios-class-dump/</loc>
+    <loc>https://madordie.github.io/reverse-ios-dump-decrypted/</loc>
     
     <lastmod>2017-09-15T03:05:02.000Z</lastmod>
     
@@ -121,6 +121,13 @@
   </url>
   
   <url>
+    <loc>https://madordie.github.io/debug-swift-notifa-frame/</loc>
+    
+    <lastmod>2017-08-14T02:20:29.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/about-project-tableview/</loc>
     
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
@@ -129,13 +136,6 @@
   
   <url>
     <loc>https://madordie.github.io/bang-fastimagecache/</loc>
-    
-    <lastmod>2017-08-14T02:20:29.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/debug-swift-notifa-frame/</loc>
     
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     

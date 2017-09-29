@@ -112,5 +112,3 @@ guard ALAssetsLibrary.authorizationStatus() == .authorized else { return }
 需要注意的是上面代码之判断了是否有权限，但是在iOS11上并不会弹出什么授权提示。就算在`Info.plist`中添加`NSPhotoLibraryUsageDescription`依旧无济于事。
 
 目前来看，iOS11中**只有**添加`NSPhotoLibraryAddUsageDescription`才可以。
-
-貌似还有别的什么问题，吃饭，下午继续
