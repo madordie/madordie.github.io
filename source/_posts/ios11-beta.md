@@ -22,7 +22,7 @@ iOS11 预览版安装体验笔记。
 
 ## API
 
-### 失效的`automaticallyAdjustsScrollViewInsets`
+### <a name='automaticallyAdjustsScrollViewInsets'>失效的`automaticallyAdjustsScrollViewInsets`</a>
 
 iOS11 版本中 __立即失效__。
 
@@ -60,7 +60,8 @@ open class UIScrollView : UIView, ... {
     ...
 }
 ```
-### `decisionHandler(.allow)` was called more than once
+
+### <a name='decisionHandler'>`decisionHandler(.allow)` was called more than once</a>
 
 崩溃信息：
 
@@ -81,7 +82,7 @@ decisionHandler(.allow)
 
 测试了一下确实不崩溃了，但是具体的解决方案还要看作者的在[Issues#302](https://github.com/marcuswestin/WebViewJavascriptBridge/issues/302)中的回复。
 
-### 照片存储时候某些设备必crash
+### <a name='savePhoto'>照片存储时候某些设备必crash</a>
 
 崩溃信息:
 
@@ -91,7 +92,7 @@ decisionHandler(.allow)
  The app's Info.plist must contain an NSPhotoLibraryAddUsageDescription key with a string value explaining to the user how the app uses this data.
 ```
 
-是的，这个Demo还有一个crash的提示。但是在大工程中，我并没有看到这样的玩意输出出来。。我做的复现操作较简单：
+是的，这个[Demo](https://github.com/madordie/Demo-iOS11-crash-save-photo)还有一个crash的提示。但是在大工程中，我并没有看到这样的玩意输出出来。。我做的复现操作较简单：
 
 ```swift
 let img = UIImage(named: "278.jpg")
