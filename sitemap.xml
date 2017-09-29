@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
+    
+    <lastmod>2017-09-29T04:47:40.359Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/ios11-beta/</loc>
     
     <lastmod>2017-09-29T03:56:58.185Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://madordie.github.io/ios-automation-jenkins-build/</loc>
     
     <lastmod>2017-09-29T02:59:25.979Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/ios-automation-jenkins-configuration/</loc>
-    
-    <lastmod>2017-09-29T02:40:44.135Z</lastmod>
     
   </url>
   
@@ -72,14 +72,14 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/reverse-ios-class-dump/</loc>
+    <loc>https://madordie.github.io/fastlane-note/</loc>
     
     <lastmod>2017-09-15T03:05:02.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://madordie.github.io/fastlane-note/</loc>
+    <loc>https://madordie.github.io/reverse-ios-class-dump/</loc>
     
     <lastmod>2017-09-15T03:05:02.000Z</lastmod>
     
@@ -121,7 +121,7 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/debug-swift-notifa-frame/</loc>
+    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
     
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     
@@ -135,7 +135,7 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/bang-fastimagecache/</loc>
+    <loc>https://madordie.github.io/debug-swift-notifa-frame/</loc>
     
     <lastmod>2017-08-14T02:20:29.000Z</lastmod>
     
