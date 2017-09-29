@@ -111,7 +111,7 @@
 <meta property="og:url" content="https://madordie.github.io/ios-automation-jenkins-build/index.html">
 <meta property="og:site_name" content="Keith's Blog">
 <meta property="og:description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～ 从这个文章中你将要实现以下功能：  在Jenkins创建工程 build出ipa 将ipa上传至fir 钉钉机器人群通知 将dsym上传至bugly">
-<meta property="og:updated_time" content="2017-09-29T02:59:25.979Z">
+<meta property="og:updated_time" content="2017-09-29T07:57:32.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS自动化-Jenkins编译工程">
 <meta name="twitter:description" content="忙于iOS11的兼容  iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～ 从这个文章中你将要实现以下功能：  在Jenkins创建工程 build出ipa 将ipa上传至fir 钉钉机器人群通知 将dsym上传至bugly">
@@ -457,6 +457,9 @@
 </ul>
 <h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
 <p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
+<p>其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 路径主要用来提取Info.plist以及dsym文件</span></div><div class="line">path=<span class="string">'/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo'</span></div><div class="line"><span class="comment"># scheme name</span></div><div class="line">scheme=<span class="string">'Fangduoduo_ent'</span></div><div class="line"><span class="comment"># ipa bundleId</span></div><div class="line">package=<span class="string">'xx.xx.com'</span></div><div class="line"><span class="comment"># bugly id</span></div><div class="line">bugly_id=<span class="string">'9xxx'</span></div><div class="line"><span class="comment"># bugly key</span></div><div class="line">bugly_key=<span class="string">'wHzxcxxx'</span></div><div class="line"></div><div class="line">rm -rf *dSYM*</div><div class="line">cp <span class="variable">$&#123;path&#125;</span>/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist</div><div class="line">cp -rf <span class="variable">$&#123;path&#125;</span>/build/*.xcarchive/dSYMs .</div><div class="line"></div><div class="line"><span class="comment"># ------------ post dsym ------------ #</span></div><div class="line"></div><div class="line">app_infoplist_path=<span class="string">'Info.plist'</span></div><div class="line">version=$(/usr/libexec/PlistBuddy -c <span class="string">"print CFBundleVersion"</span> <span class="variable">$&#123;app_infoplist_path&#125;</span>)</div><div class="line"></div><div class="line">java -jar ./bugly/buglySymboliOS.jar \</div><div class="line">	-i dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM \</div><div class="line">    -dsym \</div><div class="line">    -u \</div><div class="line">    -id <span class="variable">$&#123;bugly_id&#125;</span> \</div><div class="line">    -key <span class="variable">$&#123;bugly_key&#125;</span> \</div><div class="line">    -package <span class="variable">$&#123;package&#125;</span> \</div><div class="line">    -version <span class="variable">$&#123;version&#125;</span></div><div class="line">        </div><div class="line"><span class="comment"># @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。</span></div><div class="line">    </div><div class="line"><span class="comment"># ------------ UUID ------------ #</span></div><div class="line"></div><div class="line">unzip -o ./dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM.zip</div><div class="line">xcrun dwarfdump --uuid ./<span class="variable">$&#123;scheme&#125;</span> &gt;&gt; ./uuids-<span class="variable">$&#123;version&#125;</span>.txt</div></pre></td></tr></table></figure>
+<p>值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。</p>
 
       
     </div>
@@ -585,7 +588,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -596,7 +599,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -607,7 +610,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

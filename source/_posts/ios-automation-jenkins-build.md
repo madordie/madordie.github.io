@@ -165,3 +165,44 @@ curl "https://oapi.dingtalk.com/robot/send?access_token=${dingtalk_token}" -H 'C
 这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。
 
 为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM
+
+其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。
+
+```sh
+# 路径主要用来提取Info.plist以及dsym文件
+path='/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo'
+# scheme name
+scheme='Fangduoduo_ent'
+# ipa bundleId
+package='xx.xx.com'
+# bugly id
+bugly_id='9xxx'
+# bugly key
+bugly_key='wHzxcxxx'
+
+rm -rf *dSYM*
+cp ${path}/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist
+cp -rf ${path}/build/*.xcarchive/dSYMs .
+
+# ------------ post dsym ------------ #
+
+app_infoplist_path='Info.plist'
+version=$(/usr/libexec/PlistBuddy -c "print CFBundleVersion" ${app_infoplist_path})
+
+java -jar ./bugly/buglySymboliOS.jar \
+	-i dSYMs/${scheme}.app.dSYM \
+    -dsym \
+    -u \
+    -id ${bugly_id} \
+    -key ${bugly_key} \
+    -package ${package} \
+    -version ${version}
+        
+# @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。
+    
+# ------------ UUID ------------ #
+
+unzip -o ./dSYMs/${scheme}.app.dSYM.zip
+xcrun dwarfdump --uuid ./${scheme} >> ./uuids-${version}.txt
+```
+值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。

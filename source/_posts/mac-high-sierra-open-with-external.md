@@ -2,6 +2,9 @@
 title: mac10.13依旧让Xcode支持打开终端
 date: 2017-09-28 19:06:47
 tags:
+    - Xcode
+categories:
+	- macOS
 ---
 
 在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：
