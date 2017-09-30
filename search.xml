@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[mac10.13 pods 命令错误]]></title>
     <url>%2Fmacos-high-sierra-cocoapods%2F</url>
-    <content type="text"><![CDATA[每逢升级大版本总要过搞点事情。 12$ pod env-bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory 不论是pod env、`pod update’ 等等均报上面的错误。 如果Google发现： ruby - CocoaPods not working in macOS High Sierra - Stack Overflow CocoaPods CLI fails in High Sierra due to change of Ruby version #6778 High Sierra: bad interpreter #6898 事情的缘由就是这样。 #6898中道出了简单直接的解决方案： for all others: gem install -n /usr/local/bin cocoapods fixes it 综合起来解决这个问题是这样的： 123$ gem uninstall cocoapods$ echo 'gem: --bindir /usr/local/bin' &gt;&gt; ~/.gemrc$ sudo gem install cocoapods 愉快的使用cocoapods吧～]]></content>
+    <content type="text"><![CDATA[每逢升级大版本总要过搞点事情。 12$ pod env-bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory 不论是pod env、pod update 等等均报上面的错误。 如果Google发现： ruby - CocoaPods not working in macOS High Sierra - Stack Overflow CocoaPods CLI fails in High Sierra due to change of Ruby version #6778 High Sierra: bad interpreter #6898 事情的缘由就是这样。 #6898中道出了简单直接的解决方案： for all others: gem install -n /usr/local/bin cocoapods fixes it 综合起来解决这个问题是这样的： 123$ gem uninstall cocoapods$ echo 'gem: --bindir /usr/local/bin' &gt;&gt; ~/.gemrc$ sudo gem install cocoapods 愉快的使用cocoapods吧～]]></content>
       <categories>
         <category>macOS</category>
       </categories>
