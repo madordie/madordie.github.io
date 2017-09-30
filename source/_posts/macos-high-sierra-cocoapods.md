@@ -14,7 +14,7 @@ $ pod env
 -bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory
 ```
 
-不论是`pod env`、`pod update' 等等均报上面的错误。
+不论是`pod env`、`pod update` 等等均报上面的错误。
 
 如果Google发现：
 
