@@ -12,13 +12,11 @@ opt='p'
 if [ $opt = 's' ]; then
     hexo clean
     hexo s -g 
-elif [ $opt = 'n' ]; then
-    hexo n 'macos-high-sierra-cocoapods'
 elif [ $opt = 'p' ]; then
     hexo clean
     hexo d -g
     python auto-push-sitemap.py
     git add .
     git commit -am "backup"
-    git push https://github.com/madordie/madordie.github.io.git hexo
+    git push https://github.com/madordie/madordie.github.io.git hexo    
 fi

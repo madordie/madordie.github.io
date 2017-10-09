@@ -12,8 +12,6 @@ opt='p'
 if [ $opt = 's' ]; then
     hexo clean
     hexo s -g 
-elif [ $opt = 'n' ]; then
-    hexo n 'macos-high-sierra-cocoapods'
 elif [ $opt = 'p' ]; then
     hexo clean
     hexo d -g

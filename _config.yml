@@ -31,8 +31,9 @@ search:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://madordie.github.io
 root: /
-permalink: :title/
+permalink: post/:url/
 permalink_defaults:
+  lang: en
 
 # Directory
 source_dir: source
