@@ -5,6 +5,20 @@
 # 无奈我还是用脚本吧～ 反正运行也是贼方便
 # ***
 
+rm -rf .tmp-*
+find `(pwd)`/../_posts/* -name "*.md" > .tmp-md_paths
+cat .tmp-md_paths | while read line; do
+    sed -n '/url: /p' ${line} | awk 'NR==1{print $2}' >> .tmp-urls
+done
+sort .tmp-urls | uniq > .tmp-uniq_urls
+mv .tmp-uniq_urls .tmp-urls
+
+if [ `cat .tmp-md_paths|wc -l` -ne `cat .tmp-urls|wc -l` ]; then
+    echo "url可能有重复，请核对"
+    cat .tmp-urls
+    exit 1
+fi
+
 cd ../../
 
 opt='p'
