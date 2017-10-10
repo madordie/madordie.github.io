@@ -36,7 +36,7 @@ function backup() {
     git add .
     git commit -am "backup"
     git push https://github.com/madordie/madordie.github.io.git hexo
-    echo -e '\n\n --> 已备份.\n'
+    echo -e ' --> 已备份.\n'
 }
 
 
@@ -51,12 +51,12 @@ elif [ $opt = 'b' ]; then
 elif [ $opt = 'p' ]; then
     hexo clean
     hexo d -g
-    echo -e '\n\n --> 已成功部署.\n'
+    echo -e ' --> 已成功部署.\n'
     sleep 1
     python auto-push-sitemap.py
-    echo -e '\n\n --> 已上传站图.\n'
+    echo -e ' --> 已上传站图.\n'
     sleep 1
     backup
 fi
 
-echo -e '\n\n -->  所有操作已完成.'
+echo -e ' -->  所有操作已完成.'
