@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/ios-automation-jenkins-build/</loc>
+    
+    <lastmod>2017-10-10T06:05:41.268Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/appstore-truncate/</loc>
     
     <lastmod>2017-10-10T05:34:54.501Z</lastmod>
@@ -222,13 +229,6 @@
     <loc>https://madordie.github.io/post/ios-automation-jenkins-configuration/</loc>
     
     <lastmod>2017-10-09T04:56:16.540Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/ios-automation-jenkins-build/</loc>
-    
-    <lastmod>2017-10-09T04:55:53.508Z</lastmod>
     
   </url>
   

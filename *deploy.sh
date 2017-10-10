@@ -40,5 +40,5 @@ elif [ $opt = 'p' ]; then
     git add .
     git commit -am "backup"
     git push https://github.com/madordie/madordie.github.io.git hexo
-    echo -e '\n\n --> push OK...\n'
+    echo -e '\n\n --> push OK...'
 fi
