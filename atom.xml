@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Keith&#39;s Blog</title>
+  <title>继刚的博客</title>
   <subtitle>不疯魔,不成活</subtitle>
   <link href="/atom.xml" rel="self"/>
   
@@ -9,7 +9,7 @@
   <id>https://madordie.github.io/</id>
   
   <author>
-    <name>Keith</name>
+    <name>继刚</name>
     
   </author>
   
