@@ -204,10 +204,9 @@
     <link href="https://madordie.github.io/post/ios-automation-jenkins-build/"/>
     <id>https://madordie.github.io/post/ios-automation-jenkins-build/</id>
     <published>2017-09-14T09:27:15.000Z</published>
-    <updated>2017-10-09T04:55:53.508Z</updated>
+    <updated>2017-10-10T06:05:41.268Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../ios11-beta/">忙于iOS11的兼容</a></p>
-<ul>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
 <li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
 <li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
 </ul>
@@ -244,7 +243,7 @@
 <li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin" target="_blank" rel="external">Tool Environment Plugin</a></li>
 </ul>
 <p>嗯，开始创建工程，然后配置打包吧！</p>
-<h2 id="工程创建"><a href="#工程创建" class="headerlink" title="工程创建"></a>工程创建</h2><p>左侧的<code>新建(New Item)</code>我就不说了吧～，点击输入项目名字，然后选择第一个<code>构建一个自由风格的软件项目</code>就行啦～～</p>
+<h2 id="工程相关配置"><a href="#工程相关配置" class="headerlink" title="工程相关配置"></a>工程相关配置</h2><p>左侧的<code>新建(New Item)</code>我就不说了吧～，点击输入项目名字，然后选择第一个<code>构建一个自由风格的软件项目</code>就行啦～～</p>
 <p>此处项目名字暂且成为<code>test</code>。这里只说一些比较重要的，没有活不成的那种配置。别的自己研究一下或者点击右侧❓就能看到介绍。</p>
 <h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>此处点击<code>Git</code>，展开之后输入<code>Repository URL</code>即可。</p>
 <p><code>Repository URL</code>输入完毕之后点击别处，Jenkins的Git插件会自动校验该URL是否能够clone下来代码。出现红色就自己根据错误修改一下咯。。</p>
@@ -272,12 +271,12 @@
 <p>其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 路径主要用来提取Info.plist以及dsym文件</span></div><div class="line">path=<span class="string">'/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo'</span></div><div class="line"><span class="comment"># scheme name</span></div><div class="line">scheme=<span class="string">'Fangduoduo_ent'</span></div><div class="line"><span class="comment"># ipa bundleId</span></div><div class="line">package=<span class="string">'xx.xx.com'</span></div><div class="line"><span class="comment"># bugly id</span></div><div class="line">bugly_id=<span class="string">'9xxx'</span></div><div class="line"><span class="comment"># bugly key</span></div><div class="line">bugly_key=<span class="string">'wHzxcxxx'</span></div><div class="line"></div><div class="line">rm -rf *dSYM*</div><div class="line">cp <span class="variable">$&#123;path&#125;</span>/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist</div><div class="line">cp -rf <span class="variable">$&#123;path&#125;</span>/build/*.xcarchive/dSYMs .</div><div class="line"></div><div class="line"><span class="comment"># ------------ post dsym ------------ #</span></div><div class="line"></div><div class="line">app_infoplist_path=<span class="string">'Info.plist'</span></div><div class="line">version=$(/usr/libexec/PlistBuddy -c <span class="string">"print CFBundleVersion"</span> <span class="variable">$&#123;app_infoplist_path&#125;</span>)</div><div class="line"></div><div class="line">java -jar ./bugly/buglySymboliOS.jar \</div><div class="line">	-i dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM \</div><div class="line">    -dsym \</div><div class="line">    -u \</div><div class="line">    -id <span class="variable">$&#123;bugly_id&#125;</span> \</div><div class="line">    -key <span class="variable">$&#123;bugly_key&#125;</span> \</div><div class="line">    -package <span class="variable">$&#123;package&#125;</span> \</div><div class="line">    -version <span class="variable">$&#123;version&#125;</span></div><div class="line">        </div><div class="line"><span class="comment"># @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。</span></div><div class="line">    </div><div class="line"><span class="comment"># ------------ UUID ------------ #</span></div><div class="line"></div><div class="line">unzip -o ./dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM.zip</div><div class="line">xcrun dwarfdump --uuid ./<span class="variable">$&#123;scheme&#125;</span> &gt;&gt; ./uuids-<span class="variable">$&#123;version&#125;</span>.txt</div></pre></td></tr></table></figure>
 <p>值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。</p>
+<p>如果还有问题，可以在<a href="../../about">关于</a>中找到我。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;a href=&quot;../ios11-beta/&quot;&gt;忙于iOS11的兼容&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
+      &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;../ios-automation-jenkins-configuration&quot;&gt;iOS自动化-Jenkins环境搭建&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;../ios-automation-jenkins-build&quot;&gt;iOS自动化-Jenkins编译工程&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;

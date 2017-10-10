@@ -9,8 +9,6 @@ categories:
     - iOS
 ---
 
-[忙于iOS11的兼容](../ios11-beta/)
-
 - [iOS自动化-Jenkins环境搭建](../ios-automation-jenkins-configuration)
 - [iOS自动化-Jenkins编译工程](../ios-automation-jenkins-build)
 
@@ -83,7 +81,7 @@ $ sh -c "$(curl -sSL https://gist.githubusercontent.com/trawor/5dda140dee86836b8
 
 嗯，开始创建工程，然后配置打包吧！
 
-## 工程创建
+## 工程相关配置
 
 左侧的`新建(New Item)`我就不说了吧～，点击输入项目名字，然后选择第一个`构建一个自由风格的软件项目`就行啦～～
 
@@ -206,4 +204,7 @@ java -jar ./bugly/buglySymboliOS.jar \
 unzip -o ./dSYMs/${scheme}.app.dSYM.zip
 xcrun dwarfdump --uuid ./${scheme} >> ./uuids-${version}.txt
 ```
+
 值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。
+
+如果还有问题，可以在[关于](../../about)中找到我。
