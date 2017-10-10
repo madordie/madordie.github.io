@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io//404.html</loc>
+    
+    <lastmod>2017-10-10T05:28:33.263Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/about/index.html</loc>
+    
+    <lastmod>2017-10-10T05:26:27.404Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/about-me/</loc>
     
-    <lastmod>2017-10-10T05:12:38.350Z</lastmod>
+    <lastmod>2017-10-10T05:24:02.848Z</lastmod>
     
   </url>
   
@@ -264,20 +278,6 @@
     <loc>https://madordie.github.io/post/appstore-truncate/</loc>
     
     <lastmod>2017-10-09T04:15:46.227Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io//404.html</loc>
-    
-    <lastmod>2017-09-20T02:30:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/about/index.html</loc>
-    
-    <lastmod>2017-09-15T02:58:55.000Z</lastmod>
     
   </url>
   
