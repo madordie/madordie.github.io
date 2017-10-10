@@ -9,7 +9,7 @@
 # s: 本地server
 # p: 部署远端server
 # b: 备份
-opt='p'
+opt='b'
 #********
 
 # 确认文章URL没有重复
@@ -36,7 +36,7 @@ function backup() {
     git add .
     git commit -am "backup"
     git push https://github.com/madordie/madordie.github.io.git hexo
-    echo -e '\n\n --> 已备份.'
+    echo -e '\n\n --> 已备份.\n'
 }
 
 
@@ -54,7 +54,7 @@ elif [ $opt = 'p' ]; then
     echo -e '\n\n --> 已成功部署.\n'
     sleep 1
     python auto-push-sitemap.py
-    echo -e '\n\n --> 已上传站图.'
+    echo -e '\n\n --> 已上传站图.\n'
     sleep 1
     backup
 fi
