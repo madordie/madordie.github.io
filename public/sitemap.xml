@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/about-me/</loc>
+    
+    <lastmod>2017-10-10T05:12:38.350Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/macos-high-sierra-cocoapods/</loc>
     
     <lastmod>2017-10-09T05:03:57.543Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>https://madordie.github.io/post/use-hexo-setup-blog/</loc>
     
     <lastmod>2017-10-09T05:01:03.357Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/about-me/</loc>
-    
-    <lastmod>2017-10-09T05:00:54.839Z</lastmod>
     
   </url>
   
