@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/appstore-truncate/</loc>
+    
+    <lastmod>2017-10-10T05:34:54.501Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/bang-fastimagecache/</loc>
+    
+    <lastmod>2017-10-10T05:34:24.597Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io//404.html</loc>
     
     <lastmod>2017-10-10T05:29:59.901Z</lastmod>
@@ -124,13 +138,6 @@
     <loc>https://madordie.github.io/post/bandwagonhost-note/</loc>
     
     <lastmod>2017-10-09T04:58:35.293Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/uitextkit-ellipsis-sth-at-the-end/</loc>
-    
-    <lastmod>2017-10-09T04:58:26.789Z</lastmod>
     
   </url>
   
@@ -261,23 +268,9 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/post/bang-fastimagecache/</loc>
-    
-    <lastmod>2017-10-09T04:16:55.607Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://madordie.github.io/post/about-project-tableview/</loc>
     
     <lastmod>2017-10-09T04:16:40.216Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/appstore-truncate/</loc>
-    
-    <lastmod>2017-10-09T04:15:46.227Z</lastmod>
     
   </url>
   
