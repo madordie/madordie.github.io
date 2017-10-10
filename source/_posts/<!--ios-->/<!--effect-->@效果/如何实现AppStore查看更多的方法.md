@@ -1,5 +1,5 @@
 ---
-title: AppStore的折叠效果
+title: 如何实现AppStore查看更多的方法
 date: 2017-09-14 11:46:18
 url: appstore-truncate
 tags:
