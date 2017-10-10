@@ -24,11 +24,16 @@ rm -rf .tmp-*
 # 操作处理
 cd ../
 
-opt='p'
+opt='b'
 
 if [ $opt = 's' ]; then
     hexo clean
     hexo s -g 
+elif [ $opt = 'b' ]; then
+    git add .
+    git commit -am "backup"
+    git push https://github.com/madordie/madordie.github.io.git hexo
+    echo -e '\n\n --> push OK...'
 elif [ $opt = 'p' ]; then
     hexo clean
     hexo d -g
