@@ -58,3 +58,5 @@ elif [ $opt = 'p' ]; then
     sleep 1
     backup
 fi
+
+echo -e '\n\n -->  所有操作已完成.'
