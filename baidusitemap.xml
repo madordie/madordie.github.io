@@ -4,6 +4,21 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/about-me/</loc>
+    <lastmod>2017-10-10T05:12:38.350Z</lastmod>
+    <data>
+        <display>
+        <title>个人资料页</title>
+        <pubTime>2016-07-04T16:00:00.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/macos-high-sierra-cocoapods/</loc>
     <lastmod>2017-10-09T05:03:57.543Z</lastmod>
     <data>
@@ -56,21 +71,6 @@
              
               <breadCrumb title="工具" url="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/about-me/</loc>
-    <lastmod>2017-10-09T05:00:54.839Z</lastmod>
-    <data>
-        <display>
-        <title>个人资料页</title>
-        <pubTime>2016-07-04T16:00:00.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
