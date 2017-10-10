@@ -25,7 +25,7 @@ debug-note 拆分为下面的几个了😂
 
 [debug-_SwiftValue-unsignedIntegerValue](../post/debug-SwiftValue-unsignedIntegerValue/)
 
-[归档](../post/archives/)
+[归档](../archives/)
 
 [个人资料页](../post/about-me/)
 
