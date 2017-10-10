@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/macos-high-sierra-cocoapods/</loc>
+    <lastmod>2017-10-10T06:08:43.664Z</lastmod>
+    <data>
+        <display>
+        <title>mac10.13 pods 命令错误</title>
+        <pubTime>2017-09-29T06:03:58.000Z</pubTime>
+        
+        <tag>cocoapods</tag>
+         
+         
+           
+             
+              <breadCrumb title="macOS" url="https://madordie.github.io/categories/macOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/ios-automation-jenkins-build/</loc>
     <lastmod>2017-10-10T06:05:41.268Z</lastmod>
     <data>
@@ -77,26 +97,6 @@
         
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/macos-high-sierra-cocoapods/</loc>
-    <lastmod>2017-10-09T05:03:57.543Z</lastmod>
-    <data>
-        <display>
-        <title>mac10.13 pods 命令错误</title>
-        <pubTime>2017-09-29T06:03:58.000Z</pubTime>
-        
-        <tag>cocoapods</tag>
-         
-         
-           
-             
-              <breadCrumb title="macOS" url="https://madordie.github.io/categories/macOS/"/>
-          
         </display>
     </data>
     </url>

@@ -5,40 +5,56 @@
 # 无奈我还是用脚本吧～ 反正运行也是贼方便
 # ***
 
-# checkout URL
-rm -rf .tmp-*
-find `(pwd)`/_posts/* -name "*.md" > .tmp-md_paths
-cat .tmp-md_paths | while read line; do
-    sed -n '/url: /p' ${line} | awk 'NR==1{print $2}' >> .tmp-urls
-done
-sort .tmp-urls | uniq > .tmp-uniq_urls
-mv .tmp-uniq_urls .tmp-urls
-
-if [ `cat .tmp-md_paths|wc -l` -ne `cat .tmp-urls|wc -l` ]; then
-    echo "url可能有重复，请核对"
-    cat .tmp-urls
-    exit 1
-fi
-rm -rf .tmp-*
-
-# 操作处理
-cd ../
-
+#********
+# s: 本地server
+# p: 部署远端server
+# b: 备份
 opt='p'
+#********
 
-if [ $opt = 's' ]; then
-    hexo clean
-    hexo s -g 
-elif [ $opt = 'p' ]; then
-    hexo clean
-    hexo d -g
-    echo -e '\n --> D OK...\n'
-    sleep 1
-    python auto-push-sitemap.py
-    echo -e '\n\n --> sitemap OK...\n'
-    sleep 1
+# 确认文章URL没有重复
+function checkout_URLs() {
+    rm -rf .tmp-*
+    find `(pwd)`/_posts/* -name "*.md" > .tmp-md_paths
+    cat .tmp-md_paths | while read line; do
+        sed -n '/url: /p' ${line} | awk 'NR==1{print $2}' >> .tmp-urls
+    done
+    sort .tmp-urls | uniq > .tmp-uniq_urls
+    mv .tmp-uniq_urls .tmp-urls
+
+    if [ `cat .tmp-md_paths|wc -l` -ne `cat .tmp-urls|wc -l` ]; then
+        echo "url可能有重复，请核对"
+        cat .tmp-urls
+        exit 1
+    fi
+    rm -rf .tmp-*
+    echo -e ' --> 文章URL已校验.\n'    
+}
+
+# 备份
+function backup() {
     git add .
     git commit -am "backup"
     git push https://github.com/madordie/madordie.github.io.git hexo
-    echo -e '\n\n --> push OK...'
+    echo -e '\n\n --> 已备份.'
+}
+
+
+# 操作序列
+checkout_URLs
+cd ../
+if [ $opt = 's' ]; then
+    hexo clean
+    hexo s -g 
+elif [ $opt = 'b' ]; then
+    backup
+elif [ $opt = 'p' ]; then
+    hexo clean
+    hexo d -g
+    echo -e '\n\n --> 已成功部署.\n'
+    sleep 1
+    python auto-push-sitemap.py
+    echo -e '\n\n --> 已上传站图.'
+    sleep 1
+    backup
 fi
