@@ -32,13 +32,13 @@ if [ $opt = 's' ]; then
 elif [ $opt = 'p' ]; then
     hexo clean
     hexo d -g
-    echo ' --> D OK...'
+    echo -e '\n\n\n --> D OK...'
     sleep 1
     python auto-push-sitemap.py
-    echo ' --> sitemap OK...'
+    echo -e '\n\n\n --> sitemap OK...'
     sleep 1
     git add .
     git commit -am "backup"
     git push https://github.com/madordie/madordie.github.io.git hexo
-    echo ' --> push OK...'
+    echo -e '\n\n\n --> push OK...'
 fi
