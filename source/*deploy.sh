@@ -50,7 +50,7 @@ elif [ $opt = 'b' ]; then
     backup
 elif [ $opt = 'p' ]; then
     hexo clean
-    hexo d -g
+    hexo d
     echo -e ' --> 已成功部署.\n'
     sleep 1
     python auto-push-sitemap.py
