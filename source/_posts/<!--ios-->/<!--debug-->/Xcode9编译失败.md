@@ -4,6 +4,7 @@ url: debug-xcode9-build-ipa
 date: 2017-09-26 14:16:32
 tags:
     - 构建
+    - Debug
 categories:
     - iOS
 ---

@@ -126,7 +126,7 @@
     <link href="https://madordie.github.io/post/debug-xcode9-build-ipa/"/>
     <id>https://madordie.github.io/post/debug-xcode9-build-ipa/</id>
     <published>2017-09-26T06:16:32.000Z</published>
-    <updated>2017-10-09T04:59:13.693Z</updated>
+    <updated>2017-10-11T02:58:40.376Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="错误输出"><a href="#错误输出" class="headerlink" title="错误输出"></a>错误输出</h2><blockquote>
 <p>error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.</p>
@@ -196,6 +196,8 @@
     
     
       <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+    
+      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
     
   </entry>
   
