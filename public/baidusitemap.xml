@@ -4,54 +4,54 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/push-pop-navigation-bar-hidden/</loc>
+    <lastmod>2017-10-11T03:05:55.200Z</lastmod>
+    <data>
+        <display>
+        <title>侧滑导航栏消失问题笔记</title>
+        <pubTime>2017-05-16T04:16:47.000Z</pubTime>
+        
+        <tag>debug</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/push-queue-for-navigation/</loc>
+    <lastmod>2017-10-11T03:05:55.190Z</lastmod>
+    <data>
+        <display>
+        <title>如何正确的连续推新页面</title>
+        <pubTime>2016-02-17T07:03:12.000Z</pubTime>
+        
+        <tag>debug</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
-    <lastmod>2017-10-11T03:01:38.009Z</lastmod>
+    <lastmod>2017-10-11T03:04:59.133Z</lastmod>
     <data>
         <display>
         <title>debug-_SwiftValue-unsignedIntegerValue</title>
         <pubTime>2017-04-17T06:05:09.000Z</pubTime>
         
-        <tag>DEBUG</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
-    <lastmod>2017-10-11T03:01:37.995Z</lastmod>
-    <data>
-        <display>
-        <title>DEBUG - Xcode8解析.crash</title>
-        <pubTime>2016-11-14T04:43:22.000Z</pubTime>
-        
-        <tag>DEBUG</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
-    <lastmod>2017-10-11T03:01:37.980Z</lastmod>
-    <data>
-        <display>
-        <title>DEBUG - UIView.h#190</title>
-        <pubTime>2016-10-11T04:43:22.000Z</pubTime>
-        
-        <tag>DEBUG</tag>
+        <tag>debug</tag>
          
          
            
@@ -65,13 +65,53 @@
     
   <url>
     <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
-    <lastmod>2017-10-11T03:01:37.910Z</lastmod>
+    <lastmod>2017-10-11T03:04:59.054Z</lastmod>
     <data>
         <display>
         <title>DEBUG - swift中取出通知中的frame</title>
         <pubTime>2016-11-30T16:00:00.000Z</pubTime>
         
-        <tag>DEBUG</tag>
+        <tag>debug</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
+    <lastmod>2017-10-11T03:04:58.941Z</lastmod>
+    <data>
+        <display>
+        <title>DEBUG - UIView.h#190</title>
+        <pubTime>2016-10-11T04:43:22.000Z</pubTime>
+        
+        <tag>debug</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
+    <lastmod>2017-10-11T03:04:58.869Z</lastmod>
+    <data>
+        <display>
+        <title>DEBUG - Xcode8解析.crash</title>
+        <pubTime>2016-11-14T04:43:22.000Z</pubTime>
+        
+        <tag>debug</tag>
          
          
            
@@ -85,7 +125,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/debug-xcode9-build-ipa/</loc>
-    <lastmod>2017-10-11T03:01:32.417Z</lastmod>
+    <lastmod>2017-10-11T03:04:58.815Z</lastmod>
     <data>
         <display>
         <title>Xcode9编译失败</title>
@@ -93,7 +133,7 @@
         
         <tag>构建</tag>
          
-        <tag>DEBUG</tag>
+        <tag>debug</tag>
          
          
            
@@ -595,46 +635,6 @@
         <pubTime>2016-07-12T01:53:14.000Z</pubTime>
         
         <tag>ReactiveCocoa</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/push-queue-for-navigation/</loc>
-    <lastmod>2017-10-09T04:56:59.605Z</lastmod>
-    <data>
-        <display>
-        <title>如何正确的连续推新页面</title>
-        <pubTime>2016-02-17T07:03:12.000Z</pubTime>
-        
-        <tag>Debug</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/push-pop-navigation-bar-hidden/</loc>
-    <lastmod>2017-10-09T04:56:51.783Z</lastmod>
-    <data>
-        <display>
-        <title>侧滑导航栏消失问题笔记</title>
-        <pubTime>2017-05-16T04:16:47.000Z</pubTime>
-        
-        <tag>Debug</tag>
          
          
            

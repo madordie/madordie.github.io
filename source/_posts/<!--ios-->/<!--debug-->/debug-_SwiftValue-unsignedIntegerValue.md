@@ -3,7 +3,7 @@ title: debug-_SwiftValue-unsignedIntegerValue
 url: debug-SwiftValue-unsignedIntegerValue
 date: 2017-04-17 14:05:09
 tags:
-    - DEBUG
+    - debug
 categories:
 	- iOS
 ---

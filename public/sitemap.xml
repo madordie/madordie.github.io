@@ -2,37 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/push-pop-navigation-bar-hidden/</loc>
+    
+    <lastmod>2017-10-11T03:05:55.200Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/push-queue-for-navigation/</loc>
+    
+    <lastmod>2017-10-11T03:05:55.190Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
     
-    <lastmod>2017-10-11T03:01:38.009Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
-    
-    <lastmod>2017-10-11T03:01:37.995Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
-    
-    <lastmod>2017-10-11T03:01:37.980Z</lastmod>
+    <lastmod>2017-10-11T03:04:59.133Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
     
-    <lastmod>2017-10-11T03:01:37.910Z</lastmod>
+    <lastmod>2017-10-11T03:04:59.054Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
+    
+    <lastmod>2017-10-11T03:04:58.941Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
+    
+    <lastmod>2017-10-11T03:04:58.869Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/debug-xcode9-build-ipa/</loc>
     
-    <lastmod>2017-10-11T03:01:32.417Z</lastmod>
+    <lastmod>2017-10-11T03:04:58.815Z</lastmod>
     
   </url>
   
@@ -222,20 +236,6 @@
     <loc>https://madordie.github.io/post/reactivecocoa-ready-to-use/</loc>
     
     <lastmod>2017-10-09T04:57:07.923Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/push-queue-for-navigation/</loc>
-    
-    <lastmod>2017-10-09T04:56:59.605Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/push-pop-navigation-bar-hidden/</loc>
-    
-    <lastmod>2017-10-09T04:56:51.783Z</lastmod>
     
   </url>
   
