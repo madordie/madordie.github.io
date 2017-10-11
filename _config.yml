@@ -29,8 +29,7 @@ search:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-#url: https://madordie.github.io
-url: http://madordie.coding.me/io
+url: https://madordie.github.io
 root: /
 permalink: post/:url/
 permalink_defaults:
@@ -92,6 +91,5 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy: 
   type: git
-#  repo: https://github.com/madordie/madordie.github.io.git
-  repo: https://git.coding.net/madordie/io.git
+  repo: https://github.com/madordie/madordie.github.io.git
 branch: master
