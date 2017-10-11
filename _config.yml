@@ -29,7 +29,8 @@ search:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://madordie.github.io
+#url: https://madordie.github.io
+url: http://madordie.coding.me/io
 root: /
 permalink: post/:url/
 permalink_defaults:
