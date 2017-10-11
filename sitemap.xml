@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/debug-xcode9-build-ipa/</loc>
+    
+    <lastmod>2017-10-11T02:58:40.376Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/macos-high-sierra-cocoapods/</loc>
     
     <lastmod>2017-10-10T06:08:43.664Z</lastmod>
@@ -110,13 +117,6 @@
     <loc>https://madordie.github.io/post/elegant-to-use-swiftlint/</loc>
     
     <lastmod>2017-10-09T04:59:22.669Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-xcode9-build-ipa/</loc>
-    
-    <lastmod>2017-10-09T04:59:13.693Z</lastmod>
     
   </url>
   
