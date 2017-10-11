@@ -3,7 +3,7 @@ title: DEBUG - swift中取出通知中的frame
 url: debug-swift-notifa-frame
 date: 2016-12-01
 tags:
-    - debug
+    - DEBUG
 categories:
     - iOS
 ---

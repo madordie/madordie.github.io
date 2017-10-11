@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
+    
+    <lastmod>2017-10-11T03:37:40.489Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
+    
+    <lastmod>2017-10-11T03:37:40.320Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
+    
+    <lastmod>2017-10-11T03:37:40.003Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/debug-xcode9-build-ipa/</loc>
+    
+    <lastmod>2017-10-11T03:37:39.832Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
+    
+    <lastmod>2017-10-11T03:37:39.822Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/push-pop-navigation-bar-hidden/</loc>
     
-    <lastmod>2017-10-11T03:05:55.200Z</lastmod>
+    <lastmod>2017-10-11T03:37:32.533Z</lastmod>
     
   </url>
   
@@ -12,41 +47,6 @@
     <loc>https://madordie.github.io/post/push-queue-for-navigation/</loc>
     
     <lastmod>2017-10-11T03:05:55.190Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
-    
-    <lastmod>2017-10-11T03:04:59.133Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
-    
-    <lastmod>2017-10-11T03:04:59.054Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
-    
-    <lastmod>2017-10-11T03:04:58.941Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
-    
-    <lastmod>2017-10-11T03:04:58.869Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-xcode9-build-ipa/</loc>
-    
-    <lastmod>2017-10-11T03:04:58.815Z</lastmod>
     
   </url>
   
