@@ -126,7 +126,7 @@
     <link href="https://madordie.github.io/post/debug-xcode9-build-ipa/"/>
     <id>https://madordie.github.io/post/debug-xcode9-build-ipa/</id>
     <published>2017-09-26T06:16:32.000Z</published>
-    <updated>2017-10-11T02:58:40.376Z</updated>
+    <updated>2017-10-11T03:01:32.417Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="错误输出"><a href="#错误输出" class="headerlink" title="错误输出"></a>错误输出</h2><blockquote>
 <p>error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.</p>
@@ -197,7 +197,7 @@
     
       <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
-      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
+      <category term="DEBUG" scheme="https://madordie.github.io/tags/DEBUG/"/>
     
   </entry>
   
@@ -1066,7 +1066,7 @@
     <link href="https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/"/>
     <id>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</id>
     <published>2017-04-17T06:05:09.000Z</published>
-    <updated>2017-10-09T04:17:25.249Z</updated>
+    <updated>2017-10-11T03:01:38.009Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>crash:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let attr = try? NSMutableAttributedString(data: data,</div><div class="line">                                          options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,</div><div class="line">                                                    NSCharacterEncodingDocumentAttribute: String.Encoding.utf8],</div><div class="line">                                          documentAttributes:nil)</div><div class="line">// log:</div><div class="line">2017-04-17 14:04:38.140 [41275:463875] -[_SwiftValue unsignedIntegerValue]: unrecognized selector sent to instance 0x608000256620</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -1082,7 +1082,7 @@
       <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="Debug" scheme="https://madordie.github.io/tags/Debug/"/>
+      <category term="DEBUG" scheme="https://madordie.github.io/tags/DEBUG/"/>
     
   </entry>
   

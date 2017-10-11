@@ -3,7 +3,7 @@ title: DEBUG - Xcode8解析.crash
 url: debug-xcode8-analysis-crash-file
 date: 2016-11-14 12:43:22
 tags:
-    - Debug
+    - DEBUG
 categories:
     - iOS
 ---

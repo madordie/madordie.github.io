@@ -4,8 +4,88 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
+    <lastmod>2017-10-11T03:01:38.009Z</lastmod>
+    <data>
+        <display>
+        <title>debug-_SwiftValue-unsignedIntegerValue</title>
+        <pubTime>2017-04-17T06:05:09.000Z</pubTime>
+        
+        <tag>DEBUG</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
+    <lastmod>2017-10-11T03:01:37.995Z</lastmod>
+    <data>
+        <display>
+        <title>DEBUG - Xcode8解析.crash</title>
+        <pubTime>2016-11-14T04:43:22.000Z</pubTime>
+        
+        <tag>DEBUG</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
+    <lastmod>2017-10-11T03:01:37.980Z</lastmod>
+    <data>
+        <display>
+        <title>DEBUG - UIView.h#190</title>
+        <pubTime>2016-10-11T04:43:22.000Z</pubTime>
+        
+        <tag>DEBUG</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
+    <lastmod>2017-10-11T03:01:37.910Z</lastmod>
+    <data>
+        <display>
+        <title>DEBUG - swift中取出通知中的frame</title>
+        <pubTime>2016-11-30T16:00:00.000Z</pubTime>
+        
+        <tag>DEBUG</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/debug-xcode9-build-ipa/</loc>
-    <lastmod>2017-10-11T02:58:40.376Z</lastmod>
+    <lastmod>2017-10-11T03:01:32.417Z</lastmod>
     <data>
         <display>
         <title>Xcode9编译失败</title>
@@ -13,7 +93,7 @@
         
         <tag>构建</tag>
          
-        <tag>Debug</tag>
+        <tag>DEBUG</tag>
          
          
            
@@ -293,26 +373,6 @@
         <tag>构建</tag>
          
         <tag>SwiftLint</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
-    <lastmod>2017-10-09T04:59:05.238Z</lastmod>
-    <data>
-        <display>
-        <title>DEBUG - Xcode8解析.crash</title>
-        <pubTime>2016-11-14T04:43:22.000Z</pubTime>
-        
-        <tag>Debug</tag>
          
          
            
@@ -657,66 +717,6 @@
         <tag>构建</tag>
          
         <tag>Fastlane</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
-    <lastmod>2017-10-09T04:17:33.401Z</lastmod>
-    <data>
-        <display>
-        <title>DEBUG - UIView.h#190</title>
-        <pubTime>2016-10-11T04:43:22.000Z</pubTime>
-        
-        <tag>Debug</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
-    <lastmod>2017-10-09T04:17:25.249Z</lastmod>
-    <data>
-        <display>
-        <title>debug-_SwiftValue-unsignedIntegerValue</title>
-        <pubTime>2017-04-17T06:05:09.000Z</pubTime>
-        
-        <tag>Debug</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
-    <lastmod>2017-10-09T04:17:16.473Z</lastmod>
-    <data>
-        <display>
-        <title>DEBUG - swift中取出通知中的frame</title>
-        <pubTime>2016-11-30T16:00:00.000Z</pubTime>
-        
-        <tag>Debug</tag>
          
          
            

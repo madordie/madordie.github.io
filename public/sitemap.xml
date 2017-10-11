@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
+    
+    <lastmod>2017-10-11T03:01:38.009Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
+    
+    <lastmod>2017-10-11T03:01:37.995Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
+    
+    <lastmod>2017-10-11T03:01:37.980Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
+    
+    <lastmod>2017-10-11T03:01:37.910Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/debug-xcode9-build-ipa/</loc>
     
-    <lastmod>2017-10-11T02:58:40.376Z</lastmod>
+    <lastmod>2017-10-11T03:01:32.417Z</lastmod>
     
   </url>
   
@@ -117,13 +145,6 @@
     <loc>https://madordie.github.io/post/elegant-to-use-swiftlint/</loc>
     
     <lastmod>2017-10-09T04:59:22.669Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
-    
-    <lastmod>2017-10-09T04:59:05.238Z</lastmod>
     
   </url>
   
@@ -243,27 +264,6 @@
     <loc>https://madordie.github.io/post/fastlane-note/</loc>
     
     <lastmod>2017-10-09T04:17:43.185Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-uiview-m-190/</loc>
-    
-    <lastmod>2017-10-09T04:17:33.401Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
-    
-    <lastmod>2017-10-09T04:17:25.249Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
-    
-    <lastmod>2017-10-09T04:17:16.473Z</lastmod>
     
   </url>
   
