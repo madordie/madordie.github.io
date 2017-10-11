@@ -4,9 +4,9 @@
   <subtitle>不疯魔,不成活</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://madordie.coding.me/io/"/>
+  <link href="https://madordie.github.io/"/>
   <updated>2017-10-10T06:08:43.664Z</updated>
-  <id>http://madordie.coding.me/io/</id>
+  <id>https://madordie.github.io/</id>
   
   <author>
     <name>继刚</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>mac10.13 pods 命令错误</title>
-    <link href="http://madordie.coding.me/io/post/macos-high-sierra-cocoapods/"/>
-    <id>http://madordie.coding.me/io/post/macos-high-sierra-cocoapods/</id>
+    <link href="https://madordie.github.io/post/macos-high-sierra-cocoapods/"/>
+    <id>https://madordie.github.io/post/macos-high-sierra-cocoapods/</id>
     <published>2017-09-29T06:03:58.000Z</published>
     <updated>2017-10-10T06:08:43.664Z</updated>
     
@@ -50,17 +50,17 @@
     
     </summary>
     
-      <category term="macOS" scheme="http://madordie.coding.me/io/categories/macOS/"/>
+      <category term="macOS" scheme="https://madordie.github.io/categories/macOS/"/>
     
     
-      <category term="cocoapods" scheme="http://madordie.coding.me/io/tags/cocoapods/"/>
+      <category term="cocoapods" scheme="https://madordie.github.io/tags/cocoapods/"/>
     
   </entry>
   
   <entry>
     <title>mac10.13依旧让Xcode支持打开终端</title>
-    <link href="http://madordie.coding.me/io/post/mac-high-sierra-open-with-external/"/>
-    <id>http://madordie.coding.me/io/post/mac-high-sierra-open-with-external/</id>
+    <link href="https://madordie.github.io/post/mac-high-sierra-open-with-external/"/>
+    <id>https://madordie.github.io/post/mac-high-sierra-open-with-external/</id>
     <published>2017-09-28T11:06:47.000Z</published>
     <updated>2017-10-09T04:59:40.197Z</updated>
     
@@ -114,17 +114,17 @@
     
     </summary>
     
-      <category term="macOS" scheme="http://madordie.coding.me/io/categories/macOS/"/>
+      <category term="macOS" scheme="https://madordie.github.io/categories/macOS/"/>
     
     
-      <category term="Xcode" scheme="http://madordie.coding.me/io/tags/Xcode/"/>
+      <category term="Xcode" scheme="https://madordie.github.io/tags/Xcode/"/>
     
   </entry>
   
   <entry>
     <title>Xcode9编译失败</title>
-    <link href="http://madordie.coding.me/io/post/debug-xcode9-build-ipa/"/>
-    <id>http://madordie.coding.me/io/post/debug-xcode9-build-ipa/</id>
+    <link href="https://madordie.github.io/post/debug-xcode9-build-ipa/"/>
+    <id>https://madordie.github.io/post/debug-xcode9-build-ipa/</id>
     <published>2017-09-26T06:16:32.000Z</published>
     <updated>2017-10-11T03:37:39.832Z</updated>
     
@@ -192,19 +192,19 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="构建" scheme="http://madordie.coding.me/io/tags/%E6%9E%84%E5%BB%BA/"/>
+      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
-      <category term="DEBUG" scheme="http://madordie.coding.me/io/tags/DEBUG/"/>
+      <category term="DEBUG" scheme="https://madordie.github.io/tags/DEBUG/"/>
     
   </entry>
   
   <entry>
     <title>iOS自动化-Jenkins编译工程</title>
-    <link href="http://madordie.coding.me/io/post/ios-automation-jenkins-build/"/>
-    <id>http://madordie.coding.me/io/post/ios-automation-jenkins-build/</id>
+    <link href="https://madordie.github.io/post/ios-automation-jenkins-build/"/>
+    <id>https://madordie.github.io/post/ios-automation-jenkins-build/</id>
     <published>2017-09-14T09:27:15.000Z</published>
     <updated>2017-10-10T06:05:41.268Z</updated>
     
@@ -294,19 +294,19 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="构建" scheme="http://madordie.coding.me/io/tags/%E6%9E%84%E5%BB%BA/"/>
+      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
-      <category term="Jenkins" scheme="http://madordie.coding.me/io/tags/Jenkins/"/>
+      <category term="Jenkins" scheme="https://madordie.github.io/tags/Jenkins/"/>
     
   </entry>
   
   <entry>
     <title>如何实现AppStore查看更多的方法</title>
-    <link href="http://madordie.coding.me/io/post/appstore-truncate/"/>
-    <id>http://madordie.coding.me/io/post/appstore-truncate/</id>
+    <link href="https://madordie.github.io/post/appstore-truncate/"/>
+    <id>https://madordie.github.io/post/appstore-truncate/</id>
     <published>2017-09-14T03:46:18.000Z</published>
     <updated>2017-10-10T05:34:54.501Z</updated>
     
@@ -334,17 +334,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="效果" scheme="http://madordie.coding.me/io/tags/%E6%95%88%E6%9E%9C/"/>
+      <category term="效果" scheme="https://madordie.github.io/tags/%E6%95%88%E6%9E%9C/"/>
     
   </entry>
   
   <entry>
     <title>iOS自动化-Jenkins环境搭建</title>
-    <link href="http://madordie.coding.me/io/post/ios-automation-jenkins-configuration/"/>
-    <id>http://madordie.coding.me/io/post/ios-automation-jenkins-configuration/</id>
+    <link href="https://madordie.github.io/post/ios-automation-jenkins-configuration/"/>
+    <id>https://madordie.github.io/post/ios-automation-jenkins-configuration/</id>
     <published>2017-09-10T01:49:32.000Z</published>
     <updated>2017-10-09T04:56:16.540Z</updated>
     
@@ -441,19 +441,19 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="构建" scheme="http://madordie.coding.me/io/tags/%E6%9E%84%E5%BB%BA/"/>
+      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
-      <category term="Jenkins" scheme="http://madordie.coding.me/io/tags/Jenkins/"/>
+      <category term="Jenkins" scheme="https://madordie.github.io/tags/Jenkins/"/>
     
   </entry>
   
   <entry>
     <title>iOS逆向-monkeydev工具</title>
-    <link href="http://madordie.coding.me/io/post/reverse-ios-monkeydev/"/>
-    <id>http://madordie.coding.me/io/post/reverse-ios-monkeydev/</id>
+    <link href="https://madordie.github.io/post/reverse-ios-monkeydev/"/>
+    <id>https://madordie.github.io/post/reverse-ios-monkeydev/</id>
     <published>2017-08-14T03:05:57.000Z</published>
     <updated>2017-10-09T04:57:40.597Z</updated>
     
@@ -491,17 +491,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="逆向" scheme="http://madordie.coding.me/io/tags/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
   <entry>
     <title>iOS逆向-class-dump工具</title>
-    <link href="http://madordie.coding.me/io/post/reverse-ios-class-dump/"/>
-    <id>http://madordie.coding.me/io/post/reverse-ios-class-dump/</id>
+    <link href="https://madordie.github.io/post/reverse-ios-class-dump/"/>
+    <id>https://madordie.github.io/post/reverse-ios-class-dump/</id>
     <published>2017-08-10T04:40:27.000Z</published>
     <updated>2017-10-09T04:57:22.748Z</updated>
     
@@ -529,17 +529,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="逆向" scheme="http://madordie.coding.me/io/tags/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
   <entry>
     <title>iOS逆向-砸壳(cycript/clutch)</title>
-    <link href="http://madordie.coding.me/io/post/reverse-ios-dump-decrypted/"/>
-    <id>http://madordie.coding.me/io/post/reverse-ios-dump-decrypted/</id>
+    <link href="https://madordie.github.io/post/reverse-ios-dump-decrypted/"/>
+    <id>https://madordie.github.io/post/reverse-ios-dump-decrypted/</id>
     <published>2017-08-09T12:31:50.000Z</published>
     <updated>2017-10-09T04:57:30.933Z</updated>
     
@@ -618,17 +618,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="逆向" scheme="http://madordie.coding.me/io/tags/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
   <entry>
     <title>iOS逆向-设备ssh免密登录</title>
-    <link href="http://madordie.coding.me/io/post/reverse-ios-ssh/"/>
-    <id>http://madordie.coding.me/io/post/reverse-ios-ssh/</id>
+    <link href="https://madordie.github.io/post/reverse-ios-ssh/"/>
+    <id>https://madordie.github.io/post/reverse-ios-ssh/</id>
     <published>2017-08-09T07:31:30.000Z</published>
     <updated>2017-10-09T04:57:48.373Z</updated>
     
@@ -666,17 +666,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="逆向" scheme="http://madordie.coding.me/io/tags/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
     
   </entry>
   
   <entry>
     <title>自定义数据填充Sketch插件</title>
-    <link href="http://madordie.coding.me/io/post/format-sketchplugin/"/>
-    <id>http://madordie.coding.me/io/post/format-sketchplugin/</id>
+    <link href="https://madordie.github.io/post/format-sketchplugin/"/>
+    <id>https://madordie.github.io/post/format-sketchplugin/</id>
     <published>2017-07-17T06:45:12.000Z</published>
     <updated>2017-10-09T04:59:31.525Z</updated>
     
@@ -706,17 +706,17 @@
     
     </summary>
     
-      <category term="工具" scheme="http://madordie.coding.me/io/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="Sketchplugin" scheme="http://madordie.coding.me/io/tags/Sketchplugin/"/>
+      <category term="Sketchplugin" scheme="https://madordie.github.io/tags/Sketchplugin/"/>
     
   </entry>
   
   <entry>
     <title>iOS11-beta</title>
-    <link href="http://madordie.coding.me/io/post/ios11-beta/"/>
-    <id>http://madordie.coding.me/io/post/ios11-beta/</id>
+    <link href="https://madordie.github.io/post/ios11-beta/"/>
+    <id>https://madordie.github.io/post/ios11-beta/</id>
     <published>2017-06-12T09:20:58.000Z</published>
     <updated>2017-10-09T04:56:25.675Z</updated>
     
@@ -757,15 +757,15 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
   </entry>
   
   <entry>
     <title>「转」Unowned 还是 Weak？生命周期和性能对比</title>
-    <link href="http://madordie.coding.me/io/post/swiftgg-unowned-or-weak-lifetime-and-performance/"/>
-    <id>http://madordie.coding.me/io/post/swiftgg-unowned-or-weak-lifetime-and-performance/</id>
+    <link href="https://madordie.github.io/post/swiftgg-unowned-or-weak-lifetime-and-performance/"/>
+    <id>https://madordie.github.io/post/swiftgg-unowned-or-weak-lifetime-and-performance/</id>
     <published>2017-05-18T12:55:17.000Z</published>
     <updated>2017-10-09T04:58:36.437Z</updated>
     
@@ -945,17 +945,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="Unowned与Weak" scheme="http://madordie.coding.me/io/tags/Unowned%E4%B8%8EWeak/"/>
+      <category term="Unowned与Weak" scheme="https://madordie.github.io/tags/Unowned%E4%B8%8EWeak/"/>
     
   </entry>
   
   <entry>
     <title>侧滑导航栏消失问题笔记</title>
-    <link href="http://madordie.coding.me/io/post/push-pop-navigation-bar-hidden/"/>
-    <id>http://madordie.coding.me/io/post/push-pop-navigation-bar-hidden/</id>
+    <link href="https://madordie.github.io/post/push-pop-navigation-bar-hidden/"/>
+    <id>https://madordie.github.io/post/push-pop-navigation-bar-hidden/</id>
     <published>2017-05-16T04:16:47.000Z</published>
     <updated>2017-10-11T03:37:32.533Z</updated>
     
@@ -982,17 +982,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="DEBUG" scheme="http://madordie.coding.me/io/tags/DEBUG/"/>
+      <category term="DEBUG" scheme="https://madordie.github.io/tags/DEBUG/"/>
     
   </entry>
   
   <entry>
     <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
-    <link href="http://madordie.coding.me/io/post/bang-fastimagecache/"/>
-    <id>http://madordie.coding.me/io/post/bang-fastimagecache/</id>
+    <link href="https://madordie.github.io/post/bang-fastimagecache/"/>
+    <id>https://madordie.github.io/post/bang-fastimagecache/</id>
     <published>2017-05-16T02:55:00.000Z</published>
     <updated>2017-10-10T05:34:24.597Z</updated>
     
@@ -1054,17 +1054,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="FastImageCache" scheme="http://madordie.coding.me/io/tags/FastImageCache/"/>
+      <category term="FastImageCache" scheme="https://madordie.github.io/tags/FastImageCache/"/>
     
   </entry>
   
   <entry>
     <title>debug-_SwiftValue-unsignedIntegerValue</title>
-    <link href="http://madordie.coding.me/io/post/debug-SwiftValue-unsignedIntegerValue/"/>
-    <id>http://madordie.coding.me/io/post/debug-SwiftValue-unsignedIntegerValue/</id>
+    <link href="https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/"/>
+    <id>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</id>
     <published>2017-04-17T06:05:09.000Z</published>
     <updated>2017-10-11T03:37:40.489Z</updated>
     
@@ -1079,17 +1079,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="DEBUG" scheme="http://madordie.coding.me/io/tags/DEBUG/"/>
+      <category term="DEBUG" scheme="https://madordie.github.io/tags/DEBUG/"/>
     
   </entry>
   
   <entry>
     <title>RxSwift语法笔记</title>
-    <link href="http://madordie.coding.me/io/post/rx-dictionary/"/>
-    <id>http://madordie.coding.me/io/post/rx-dictionary/</id>
+    <link href="https://madordie.github.io/post/rx-dictionary/"/>
+    <id>https://madordie.github.io/post/rx-dictionary/</id>
     <published>2017-04-08T06:03:18.000Z</published>
     <updated>2017-10-09T04:57:56.063Z</updated>
     
@@ -1216,19 +1216,19 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="响应式编程" scheme="http://madordie.coding.me/io/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
+      <category term="响应式编程" scheme="https://madordie.github.io/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
     
-      <category term="RxSwift" scheme="http://madordie.coding.me/io/tags/RxSwift/"/>
+      <category term="RxSwift" scheme="https://madordie.github.io/tags/RxSwift/"/>
     
   </entry>
   
   <entry>
     <title>sonarqube-note</title>
-    <link href="http://madordie.coding.me/io/post/sonarqube-note/"/>
-    <id>http://madordie.coding.me/io/post/sonarqube-note/</id>
+    <link href="https://madordie.github.io/post/sonarqube-note/"/>
+    <id>https://madordie.github.io/post/sonarqube-note/</id>
     <published>2017-02-07T02:16:58.000Z</published>
     <updated>2017-10-09T05:00:09.964Z</updated>
     
@@ -1259,19 +1259,19 @@
     
     </summary>
     
-      <category term="工具" scheme="http://madordie.coding.me/io/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="构建" scheme="http://madordie.coding.me/io/tags/%E6%9E%84%E5%BB%BA/"/>
+      <category term="构建" scheme="https://madordie.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
-      <category term="Sonarqube" scheme="http://madordie.coding.me/io/tags/Sonarqube/"/>
+      <category term="Sonarqube" scheme="https://madordie.github.io/tags/Sonarqube/"/>
     
   </entry>
   
   <entry>
     <title>「转」真实世界中的 Swift 性能优化</title>
-    <link href="http://madordie.coding.me/io/post/real-world-swift-performance/"/>
-    <id>http://madordie.coding.me/io/post/real-world-swift-performance/</id>
+    <link href="https://madordie.github.io/post/real-world-swift-performance/"/>
+    <id>https://madordie.github.io/post/real-world-swift-performance/</id>
     <published>2017-01-17T11:14:57.000Z</published>
     <updated>2017-10-09T04:57:15.629Z</updated>
     
@@ -1341,17 +1341,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="优化" scheme="http://madordie.coding.me/io/tags/%E4%BC%98%E5%8C%96/"/>
+      <category term="优化" scheme="https://madordie.github.io/tags/%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>Swift 编译时性能优化笔记</title>
-    <link href="http://madordie.coding.me/io/post/swift-build-times/"/>
-    <id>http://madordie.coding.me/io/post/swift-build-times/</id>
+    <link href="https://madordie.github.io/post/swift-build-times/"/>
+    <id>https://madordie.github.io/post/swift-build-times/</id>
     <published>2017-01-17T05:47:17.000Z</published>
     <updated>2017-10-09T05:00:20.020Z</updated>
     
@@ -1478,10 +1478,10 @@ class CMExpandingTextField: UITextField {
     
     </summary>
     
-      <category term="iOS" scheme="http://madordie.coding.me/io/categories/iOS/"/>
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
     
     
-      <category term="优化" scheme="http://madordie.coding.me/io/tags/%E4%BC%98%E5%8C%96/"/>
+      <category term="优化" scheme="https://madordie.github.io/tags/%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
