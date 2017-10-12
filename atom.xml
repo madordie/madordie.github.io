@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-10-10T06:08:43.664Z</updated>
+  <updated>2017-10-12T09:31:46.083Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,6 +14,144 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用CollectionView简化业务代码</title>
+    <link href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/"/>
+    <id>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</id>
+    <published>2017-12-09T16:00:00.000Z</published>
+    <updated>2017-10-12T09:31:46.083Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><code>UITableView</code>作为高级控件被开发者广泛使用，同样的，<code>UICollectionView</code>由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。</p>
+<p>在业务需求中，常规布局，大多数都是采用<code>UITableView</code>进行的，但是有痛点：</p>
+<ul>
+<li>当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但是要从<code>UITableView</code>迁移到<code>UICollectionView</code></li>
+<li><code>UITableViewDelegate</code>、<code>UITableViewDataSource</code> 恐怕每处使用都要写繁琐的相同的代码吧～</li>
+<li>很多人也会对其进行高度缓存啊神马的优化策略</li>
+<li>不知不觉这些代码堆在一起已经将<code>UIViewController</code>堆的相当的高</li>
+</ul>
+<p>然后呢，我们现在使用一个<code>CollectionView</code>将这些操作包装一下，达到这样一个流程:</p>
+<ol>
+<li><p>自定义Cell、CellModel</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LabelCell</span>: <span class="title">UICollectionViewCell</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> info = <span class="type">UILabel</span>()</div><div class="line">    ...</div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">sizeThatFits</span><span class="params">(<span class="number">_</span> size: CGSize)</span></span> -&gt; <span class="type">CGSize</span> &#123;</div><div class="line">        ...</div><div class="line">        <span class="keyword">return</span> <span class="type">CGSize</span>(width: size.width, height: info.frame.maxY + info.frame.minY)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LabelCell</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Model</span>: <span class="title">ListItemDefaultProtocol</span> </span>&#123;</div><div class="line">        <span class="keyword">var</span> info: <span class="type">String</span>?</div><div class="line">        <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(view: LabelCell)</span></span> &#123;</div><div class="line">            view.info.text = info</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>请求、处理数据格式化为<code>LabelCell.Model</code>这样的类</p>
+</li>
+<li><p>处理好的数据交给<code>CollectionView</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.sections = model.format(...)</div></pre></td></tr></table></figure>
+</li>
+<li><p>休息一会，完工了～</p>
+</li>
+</ol>
+<p>然后，来看看<code>Collection</code>里面都做了什么操作</p>
+<a id="more"></a>
+<h3 id="CollectionView"><a href="#CollectionView" class="headerlink" title="CollectionView"></a>CollectionView</h3><p>为了达到上面效果中的第三步，我们需要自定义一个<code>CollectionView</code>来处理刷新数据、设置代理、设置数据源、注册cell、等操作。</p>
+<p>需要说明的是，此处使用<a href="https://github.com/chiahsien/CHTCollectionViewWaterfallLayout" target="_blank" rel="external"><code>CHTCollectionViewWaterfallLayout</code></a>来处理瀑布流。</p>
+<p>创建一个<code>CollectionViewSection</code>的类/结构体来保存section信息。比如说：<code>sectionInset</code>、<code>minimumColumnSpacing</code>、<code>minimumInteritemSpacing</code>、<code>columnCount</code>、等</p>
+<p>在<code>CollectionView</code>中设置一个<code>var sections = [KTJCollectionViewSection]()</code>用于保存sections</p>
+<p>实现<code>UICollectionViewDataSource</code>、 <code>UICollectionViewDelegate</code>。此处省略约1千字…</p>
+<h3 id="ListItemDefaultProtocol：绑定Cell和Model"><a href="#ListItemDefaultProtocol：绑定Cell和Model" class="headerlink" title="ListItemDefaultProtocol：绑定Cell和Model"></a>ListItemDefaultProtocol：绑定Cell和Model</h3><p>上面<code>省略约1千字</code>中有一个并没有说：<code>CollectionViewSection</code>的<code>header</code>、<code>items</code>、<code>footer</code>如何实现。😂</p>
+<p>好了，此处这三个均采用协议<code>ListItemDefaultProtocol</code>来实现。（PS：大家都喜欢用父类，但父类只有一个，为了兼容和冲突，这里协议是最好不过的～，特别是swift中的协议）</p>
+<p>协议需要给出这么几个信息：</p>
+<ul>
+<li><code>reuseIdentifier</code> 用来复用的重用标识符</li>
+<li><code>cellClass</code> 用来注册用的类名</li>
+<li><code>func fillModel(item: AnyObject)</code> 用来给cell填充model的方法</li>
+</ul>
+<p>那么这个协议就出来了：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">KTJListItemProtocol</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> identifa: <span class="type">String</span> &#123; <span class="keyword">get</span> &#125;</div><div class="line">    <span class="keyword">var</span> registClass: <span class="type">AnyClass</span> &#123; <span class="keyword">get</span> &#125;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(item: AnyObject)</span></span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在<strong>swift</strong>协议支持默认实现，于是乎，就可以再写一个:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">ListItemDefaultProtocol</span>: <span class="title">KTJListItemProtocol</span> </span>&#123;</div><div class="line">    associatedtype <span class="type">ItemType</span>: <span class="type">UIView</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(view: ItemType)</span></span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ListItemDefaultProtocol</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> identifa: <span class="type">String</span> &#123; <span class="keyword">return</span>  <span class="type">NSStringFromClass</span>(<span class="type">ItemType</span>.<span class="keyword">self</span>)&#125;</div><div class="line">    <span class="keyword">var</span> registClass: <span class="type">AnyClass</span> &#123; <span class="keyword">return</span> <span class="type">ItemType</span>.<span class="keyword">self</span> &#125;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(item: AnyObject)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> reusableView = item <span class="keyword">as</span>? <span class="type">ItemType</span> &#123;</div><div class="line">            fillModel(view: reusableView)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后，就可以愉快的玩耍了～～</p>
+<p>最后Cell中的的代码效果就是<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView-simplify-business/LabelCell.swift" target="_blank" rel="external">这个样子</a>。<br>再加上<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView-simplify-business/ViewController.swift" target="_blank" rel="external">数据填充</a>是不是很简单了呢～～</p>
+<h3 id="以后如何开发"><a href="#以后如何开发" class="headerlink" title="以后如何开发"></a>以后如何开发</h3><p>真的如同前面的例子一样，只需要这么几步绕不过去的：</p>
+<ol>
+<li>处理接口吐出来的数据。</li>
+<li>创建新的UI样式，并做好接口数据中间件。</li>
+</ol>
+<p>统一使用<code>CollectionView</code>还有一个好处：不管前面谁写的一个UI，都能拉过来用。不用做中间层去从<code>TableViewCell</code>转<code>CollectionViewCell</code>。</p>
+<p>开发只需要关心业务，业务。安安心心做一个写业务的程序员吧～</p>
+<h3 id="关于Cell的跳转处理"><a href="#关于Cell的跳转处理" class="headerlink" title="关于Cell的跳转处理"></a>关于Cell的跳转处理</h3><p>乍一看，完美了。不过还有一个巨烦的跳转处理。。。不过，<strong>莫怕</strong></p>
+<p>跳转，有这么几种：</p>
+<ul>
+<li>支持路由的URL跳转，这个是最简单的，也是最爽的</li>
+<li>只能复杂的进行创建类、赋值、push啊神马的</li>
+</ul>
+<p>由于我们将数据全部处理好后扔给了<code>cellmodel</code>，而跳转、打点所需要的参数均在此处为最全的，我们可以将回调作为数据一起传递。。</p>
+<p>嗯, 事件需要传递的对象大约这个样子：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Jmp</span> </span>&#123;</div><div class="line">    <span class="comment">/// 支持URL跳转的URL</span></div><div class="line">    <span class="keyword">let</span> url: <span class="type">String</span>?</div><div class="line">    <span class="comment">/// 打点事件名</span></div><div class="line">    <span class="keyword">let</span> event: <span class="type">String</span>?</div><div class="line">    <span class="comment">/// 打点参数</span></div><div class="line">    <span class="keyword">let</span> attr: [<span class="type">AnyHashable</span>: <span class="type">Any</span>]?</div><div class="line">    <span class="comment">/// 不支持URL的直接回调</span></div><div class="line">    <span class="keyword">let</span> eventCallback: (() -&gt; <span class="type">Void</span>)?</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后cell对应的另一个类是这样的：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">KTJJmp</span>: <span class="title">NSObject</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> info: <span class="type">Jmp</span>?</div><div class="line">    <span class="keyword">let</span> action = #selector(topVCJmp)</div><div class="line">    <span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">topVCJmp</span><span class="params">()</span></span> &#123;</div><div class="line">        ... <span class="comment">// 打点</span></div><div class="line">        <span class="type">KTJURLJump</span>.jumpToViewOnTopVC(jmp: info)</div><div class="line">        info?.eventCallback?()</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">tap</span><span class="params">()</span></span> -&gt; <span class="type">UITapGestureRecognizer</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="type">UITapGestureRecognizer</span>(target: <span class="keyword">self</span>, action: #selector(topVCJmp))</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>两个类共同作用就是：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">JmpCell</span>: <span class="title">UICollectionViewCell</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> jmp = <span class="type">FDDJmp</span>()</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setup</span><span class="params">()</span></span> &#123;</div><div class="line">        ...</div><div class="line">        jmpBtn.addTarget(jmp, action: jmp.action, <span class="keyword">for</span>: .touchUpInside)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">JmpCellModel</span>: <span class="title">ListItemDefaultProtocol</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> jmp: <span class="type">Jmp</span>?</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(view: JmpCell)</span></span> &#123;</div><div class="line">        view.jmp.info = jmp</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>至于这个<code>JmpCellModel.jmp</code>怎么生成，这里就不说了。</p>
+<h3 id="关于算高那点事"><a href="#关于算高那点事" class="headerlink" title="关于算高那点事"></a>关于算高那点事</h3><h4 id="算高位置的选择"><a href="#算高位置的选择" class="headerlink" title="算高位置的选择"></a>算高位置的选择</h4><p>我也曾纠结过frame的代码应该写在哪里。。有写在初始化的，有单独写一个方法的，还有写在<code>func sizeThatFits(:) -&gt; CGSize</code></p>
+<p>由于当年对<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell" target="_blank" rel="external">UITableView-FDTemplateLayoutCell</a>中毒较深，所以沿用了最后一种方案。</p>
+<h4 id="算高使用的view的选择"><a href="#算高使用的view的选择" class="headerlink" title="算高使用的view的选择"></a>算高使用的view的选择</h4><p>在算高的时候，首先需要明确的是：<strong>高度是数据和当前最大宽度共同决定的</strong>，所以在算高的时候需要拿着数据、view然后才能去算高（PS：至于那些拿着数据硬算出一个高度的代码，此处不发表看法😂，早晚会后悔的）</p>
+<p>然后就是<code>UITableView</code>、<code>UICollectionView</code>的算高是通过一个单独的代理去获取的，并不提供view去计算。。这就是矛盾的地方。</p>
+<p>虽然<code>UITableView</code>、<code>UICollectionView</code>在算高的地方不提供View,但是有一个<code>dequeueReusableCell....</code>的方法可以获取到缓存池中的<code>Cell</code>呀</p>
+<p>如果你这样做了，那么你将会付出惨重的代码。这个方案我在<a href="http://www.cnblogs.com/madordie" target="_blank" rel="external">博客园</a>2015.03.17的<a href="http://www.cnblogs.com/madordie/p/4344209.html" target="_blank" rel="external">“iOS 优化性能之TableView”</a>中已经说了：</p>
+<blockquote>
+<p>dequeueReusableCellWithIdentifier:此函数的调用要注意以下几点：<br>    i.此函数的返回值是做为tableView:cellForRowAtIndexPath:的返回值的。这样保证拿出来的完整还给TableView。<br>    ii.如果此函数的返回值不是为了给tableView:cellForRowAtIndexPath:做返回值，那么你要注意这是在一个拿取别人稀缺资源的操作，需要注意珍惜这个返回值，能不浪费就不要浪费。<br>    iii.对于AL自动适应的TableView取Cell时候要注意保存。个人建议封装TableView，然后用来计算高度的Cell保存在TableView中。对于多种类型的Cell，则可以使用复用标识符作为Key的字典来存储。这样能够有效节约dequeueReusableCellWithIdentifier:调用次数。</p>
+</blockquote>
+<p><code>UICollectionView</code>也是如此。所以使用<code>dequeueReusableCell....</code>方法是<strong>很不靠谱的</strong>。</p>
+<p>在<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell/blob/912b3ce4a61198c0b79a3d85b977f8fdacd153ea/Classes/UITableView%2BFDTemplateLayoutCell.m#L134-#L155" target="_blank" rel="external">UITableView-FDTemplateLayoutCell</a>中使用了字典保存缓存算高的View，也是比较赞的。</p>
+<p>但是现在有了<code>CollectionView</code>，我们可以不用OC的<code>objc_setAssociatedObject(,,,)</code>去处理而直接使用了<code>NSCache</code>去处理就行了～</p>
+<p>如果看了<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift" target="_blank" rel="external"><code>CollectionView</code></a>就会发现，<code>ListItemProtocol</code>还有一个get方法<code>var newItem: AnyObject { get }</code>这个是用来算高的。</p>
+<p>在<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift" target="_blank" rel="external">CollectionView.swift</a>关于高度的代理设置中可以看到相关获取和设置。</p>
+<h4 id="算高的时候变局的控制"><a href="#算高的时候变局的控制" class="headerlink" title="算高的时候变局的控制"></a>算高的时候变局的控制</h4><p>高度的计算现在已经可以正常计算，但是对于<code>columnCount &gt; 1</code>的时候，牵扯到间隙的计算需要注意一次啊。毕竟<code>CHTCollectionViewWaterfallLayout</code>功能更强大。</p>
+<p>相关代码在<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift" target="_blank" rel="external">CollectionView.swift</a>的<code>func collectionView(:,layout:,sizeForItemAt:) -&gt; CGSize</code>函数中。</p>
+<h3 id="关于代理那点事"><a href="#关于代理那点事" class="headerlink" title="关于代理那点事"></a>关于代理那点事</h3><p>丫的，需求总是比想的多，但是办法也比问题多。</p>
+<p>对于<code>CollectionView</code>来说，代理都设置成了self，这样会导致有时候需要<code>UIScrollViewDelegate</code>干些事情的时候总是不那么自由。。。实乃新痛点，不过有办法。</p>
+<p>下面是几种方案：</p>
+<h4 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h4><p>直接KVO到<code>self.contentOffset</code>，这样一了百了。写什么代理，要什么自行车！（PS：swift提供闭包的代理，也是很好用的）</p>
+<p>如果不会，请自行<a href="https://www.google.com" target="_blank" rel="external">Google</a>。<a href="https://objccn.io/issue-7-3/" target="_blank" rel="external">ObjC-中国：KVC 和 KVO</a>，我只能帮你到这里</p>
+<h4 id="Rx系"><a href="#Rx系" class="headerlink" title="Rx系"></a>Rx系</h4><p>很抱歉，你不能用<code>self.rx.contentOffset</code>。原因是<a href="https://github.com/chiahsien/CHTCollectionViewWaterfallLayout" target="_blank" rel="external"><code>CHTCollectionViewWaterfallLayout</code></a>中有这么一行断言：</p>
+<blockquote>
+<p><code>NSAssert([self.delegate conformsToProtocol:@protocol(CHTCollectionViewDelegateWaterfallLayout)], @&quot;UICollectionView&#39;s delegate should conform to CHTCollectionViewDelegateWaterfallLayout protocol&quot;);</code></p>
+</blockquote>
+<p><strong>但是</strong>，你可以使用Rx里面的KVO呀～也是贼方便</p>
+<h4 id="RAC系"><a href="#RAC系" class="headerlink" title="RAC系"></a>RAC系</h4><p>抱歉，我不会。原因在此<a href="../reactivecocoa-ready-to-use">准备食用RAC(ReactiveCocoa)的顾虑</a></p>
+<h4 id="代理传递"><a href="#代理传递" class="headerlink" title="代理传递"></a>代理传递</h4><p>当然也可以使用代理进行传递出去。大致这个样子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">CollectionViewDelegate</span>: <span class="title">NSObjectProtocol</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">collectionView</span><span class="params">(<span class="number">_</span> collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)</span></span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CollectionView</span> </span>&#123;</div><div class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> allDelegate: <span class="type">CollectionViewDelegate</span>?</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">collectionView</span><span class="params">(<span class="number">_</span> collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)</span></span> &#123;</div><div class="line">    <span class="keyword">self</span>.allDelegate?.collectionView(<span class="keyword">self</span>, didSelectItemAt: indexPath)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这方案没啥聊的。。</p>
+<h3 id="OC咋办？"><a href="#OC咋办？" class="headerlink" title="OC咋办？"></a>OC咋办？</h3><p>这个OC也能用，只不过需要一些手段，比如说：继承、扩展、等</p>
+<p><code>ListItemProtocol</code>就是为了给OC使用留的，还有就是<code>CollectionViewSection</code>使用了类，而不是结构体。</p>
+<p>不过具体没有例子，不想写OC代码，太麻烦了。。主要是这种思路:)</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p><a href="https://github.com/madordie/collectionview-simplify-business" target="_blank" rel="external">Demo</a>部分没有写跳转相关内容，但是别的都有了😂</p>
+<h3 id="别的"><a href="#别的" class="headerlink" title="别的"></a>别的</h3><p>好像没了吧～，想起来了再补充咯</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;UITableView&lt;/code&gt;作为高级控件被开发者广泛使用，同样的，&lt;code&gt;UICollectionView&lt;/code&gt;由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。&lt;/p&gt;
+&lt;p&gt;在业务需求中，常规布局，大多数都是采用&lt;code&gt;UITableView&lt;/code&gt;进行的，但是有痛点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但是要从&lt;code&gt;UITableView&lt;/code&gt;迁移到&lt;code&gt;UICollectionView&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;UITableViewDelegate&lt;/code&gt;、&lt;code&gt;UITableViewDataSource&lt;/code&gt; 恐怕每处使用都要写繁琐的相同的代码吧～&lt;/li&gt;
+&lt;li&gt;很多人也会对其进行高度缓存啊神马的优化策略&lt;/li&gt;
+&lt;li&gt;不知不觉这些代码堆在一起已经将&lt;code&gt;UIViewController&lt;/code&gt;堆的相当的高&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后呢，我们现在使用一个&lt;code&gt;CollectionView&lt;/code&gt;将这些操作包装一下，达到这样一个流程:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;自定义Cell、CellModel&lt;/p&gt;
+&lt;figure class=&quot;highlight swift&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;LabelCell&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;UICollectionViewCell&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; info = &lt;span class=&quot;type&quot;&gt;UILabel&lt;/span&gt;()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;sizeThatFits&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;number&quot;&gt;_&lt;/span&gt; size: CGSize)&lt;/span&gt;&lt;/span&gt; -&amp;gt; &lt;span class=&quot;type&quot;&gt;CGSize&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        ...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;CGSize&lt;/span&gt;(width: size.width, height: info.frame.maxY + info.frame.minY)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;LabelCell&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Model&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;ListItemDefaultProtocol&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; info: &lt;span class=&quot;type&quot;&gt;String&lt;/span&gt;?&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fillModel&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(view: LabelCell)&lt;/span&gt;&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            view.info.text = info&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;请求、处理数据格式化为&lt;code&gt;LabelCell.Model&lt;/code&gt;这样的类&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;处理好的数据交给&lt;code&gt;CollectionView&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight swift&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;list.sections = model.format(...)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;休息一会，完工了～&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;然后，来看看&lt;code&gt;Collection&lt;/code&gt;里面都做了什么操作&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+    
+      <category term="tool" scheme="https://madordie.github.io/tags/tool/"/>
+    
+      <category term="UICollectionView" scheme="https://madordie.github.io/tags/UICollectionView/"/>
+    
+  </entry>
   
   <entry>
     <title>mac10.13 pods 命令错误</title>
@@ -1338,143 +1476,6 @@
     <summary type="html">
     
       &lt;p&gt;原文链接：&lt;a href=&quot;https://realm.io/cn/news/real-world-swift-performance/&quot;&gt;真实世界中的 Swift 性能优化&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="优化" scheme="https://madordie.github.io/tags/%E4%BC%98%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Swift 编译时性能优化笔记</title>
-    <link href="https://madordie.github.io/post/swift-build-times/"/>
-    <id>https://madordie.github.io/post/swift-build-times/</id>
-    <published>2017-01-17T05:47:17.000Z</published>
-    <updated>2017-10-09T05:00:20.020Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。</p>
-<a id="more"></a>
-<h3 id="Xcode8-2"><a href="#Xcode8-2" class="headerlink" title="Xcode8.2"></a>Xcode8.2</h3><p>添加<code>User-Defind</code>新的<code>SWIFT_WHOLE_MODULE_OPTIMIZATION = YES</code>可以过滤为修改framework。</p>
-<h3 id="针对运算符-的优化"><a href="#针对运算符-的优化" class="headerlink" title="针对运算符??的优化"></a>针对运算符<code>??</code>的优化</h3><p>在使用<code>??</code>时，并不是所有的都需要优化，包裹在循环中的<code>??</code>会比较耗时比较厉害，目前不知道为啥，估计编译的时候需要检查的此时比较多吧😂。</p>
-<h4 id="尝试显式解包"><a href="#尝试显式解包" class="headerlink" title="尝试显式解包"></a>尝试显式解包</h4><p><strong>思路</strong>：<code>??</code>编译慢，就不用<code>??</code>，直接使用<code>if else</code><br><strong>实施</strong>: 由于工程中使用的<code>??</code>比较多，所以比较修改起来比较麻烦。但是可以解决问题。真不行写方法转化调用喽。。</p>
-<h4 id="错误的尝试了重载运算符-方式"><a href="#错误的尝试了重载运算符-方式" class="headerlink" title="错误的尝试了重载运算符??方式"></a>错误的尝试了重载运算符<code>??</code>方式</h4><p><strong>思路</strong>: <code>??</code>运算符编译耗时较多，直觉是<code>??</code>实现有复杂的操作,重新按照显式解包的方案进行实现。<br><strong>实施</strong>: </p>
-<ul>
-<li>分析<code>??</code>的使用场景，左侧为T?,右侧为T，返回值T</li>
-<li>重载函数名定义<code>public func ?? &lt;T&gt;(left: T?, right: T) -&gt; T</code></li>
-<li>实现</li>
-<li>编译</li>
-<li>error：<code>Ambiguous use of operator &#39;??&#39;</code></li>
-<li>思考：这丫的在重载运算符的时候不能使用泛型吧。。</li>
-<li>更改函数为<code>public func ?? &lt;Any&gt;(left: Any?, right: Any) -&gt; Any</code></li>
-<li>PL. OK了，可是问题来了，系统的<code>??</code>是可以返回对应的类型，可是这样重载之后返回一个<code>Any</code>，代码中如果出现<code>let str = str1 ?? &quot;&quot;</code>则str类型就变为<code>Any</code>而不是<code>String</code>。<strong>巨坑</strong></li>
-<li>顾不了那么多了，真不行一个一个跑。于是先修改一个较为严重的<code>String</code>类型。</li>
-<li>尝试编译，结果时间惊人的没有变化。。依旧居高不下</li>
-<li>以失败告终。。</li>
-</ul>
-<p><strong>总结</strong>: 这个<code>??</code>耗时较多并不是因为<code>??</code>的实现有问题，<strong>猜测</strong>是在为<code>??</code>准备左右参数的时候需要进行一层层的解包确定类型，再加上<code>??</code>可能有重载版本，进行类型匹配的时候比较耗时。</p>
-<h4 id="尝试扩展方法进行优化"><a href="#尝试扩展方法进行优化" class="headerlink" title="尝试扩展方法进行优化"></a>尝试扩展方法进行优化</h4><p><strong>思路</strong>: 既然运算符会导致编译慢，那么就尝试使用方法直接进行转换。<br><strong>实现</strong>: 代码如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Operator</span> </span>&#123;</div><div class="line">    <span class="comment">///  ==&gt; ??</span></div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> `<span class="title">try</span>`&lt;T&gt;<span class="params">(<span class="number">_</span> origin: T?, <span class="number">_</span> then: T)</span></span> -&gt; <span class="type">T</span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> value = origin <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> then</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> value</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>测试发现上述方法可以优化时间。</p>
-<hr>
-<h3 id="以下原文出自：关于-Swift-编译时性能优化的一些思考"><a href="#以下原文出自：关于-Swift-编译时性能优化的一些思考" class="headerlink" title="以下原文出自：关于 Swift 编译时性能优化的一些思考"></a>以下原文出自：<a href="https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md" target="_blank" rel="external">关于 Swift 编译时性能优化的一些思考</a></h3><hr>
-<blockquote>
-<ul>
-<li>原文链接 : <a href="https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31#.w81y3zhjr" target="_blank" rel="external">Regarding Swift build time optimizations</a></li>
-<li>原文作者 : <a href="https://medium.com/@RobertGummesson" target="_blank" rel="external">Robert Gummesson</a></li>
-<li>译文出自 : <a href="https://github.com/xitu/gold-miner" target="_blank" rel="external">掘金翻译计划</a></li>
-<li>译者 : <a href="http://www.yanglonglong.com" target="_blank" rel="external">杨龙龙</a></li>
-<li>校对者: <a href="https://github.com/shenAlexy" target="_blank" rel="external">申冠华</a>, <a href="https://github.com/Jack-Kingdom" target="_blank" rel="external">Jack King</a></li>
-</ul>
-</blockquote>
-<p><img src="http://ww3.sinaimg.cn/large/005SiNxygw1f3p3jimjllj31jk0dwqft.jpg" alt=""></p>
-<h4 id="关于-Swift-编译时性能优化的一些思考"><a href="#关于-Swift-编译时性能优化的一些思考" class="headerlink" title="关于 Swift 编译时性能优化的一些思考"></a>关于 Swift 编译时性能优化的一些思考</h4><p>上周，我读了 <a href="https://medium.com/@nickoneill" target="_blank" rel="external">@nickoneill</a> 一篇优秀的帖子 <a href="https://medium.com/swift-programming/speeding-up-slow-swift-build-times-922feeba5780#.k0pngnkns" target="_blank" rel="external">Speeding Up Slow Swift Build Times</a> 之后，我发现用一个略不同以往的角度去读Swift代码，并不是很难。</p>
-<p>一行之前很简洁的代码，现在却出现了新的问题——它是否应该重构为9行代码来达到更快的编译速度？ (<em>nil coalescing 运算符就是一个例子</em>)孰轻孰重？简洁的代码还是对编译器友好的代码？ 我觉得，它取决于项目的大小和开发者的想法。</p>
-<h4 id="但请等等…-这里有一个Xcode插件"><a href="#但请等等…-这里有一个Xcode插件" class="headerlink" title="但请等等… 这里有一个Xcode插件"></a>但请等等… 这里有一个Xcode插件</h4><p>在讲一些例子之前，我首先想到了通过手工提取日志信息是非常耗时的事情。通过命令行工具实现会相对容易一些，但是我把它往前推进了一步：集成为<a href="https://github.com/RobertGummesson/BuildTimeAnalyzer-for-Xcode" target="_blank" rel="external">Xcode插件</a>。</p>
-<p><img src="http://ww1.sinaimg.cn/large/005SiNxygw1f3p3hhivppj30m809lwis.jpg" alt=""></p>
-<p>在这个例子中，最初的目的仅仅是识别并修复代码中最耗时的地方，但是现在我觉得它成为了一个必须要迭代的过程。这样我才可以更加高效地构建代码，并且防止在项目中出现耗时的函数。</p>
-<h4 id="不少惊喜"><a href="#不少惊喜" class="headerlink" title="不少惊喜"></a>不少惊喜</h4><p>我经常在不同的 Git 分支中跳转，并且等待一个暖慢的项目编译简直是在浪费我的生命。因此我思考了很长时间，一个玩具项目（大约两万行 Swift 代码）会编译如此长的时间。</p>
-<p>当我知道是什么原因导致它如此慢之后，我不得不承认我震惊了，一行代码居然需要几秒的编译时间。</p>
-<p>让我们来看几个例子。</p>
-<h4 id="Nil-合并运算符"><a href="#Nil-合并运算符" class="headerlink" title="Nil 合并运算符"></a>Nil 合并运算符</h4><p>编译器肯定不喜欢这里的第一种方法。在展开下面两处简写的代码之后，构建时间减少了 <strong>99.4%</strong>。</p>
-<pre><code>// 构建时间： 5238.3ms
-return CGSize(width: size.width + (rightView?.bounds.width ?? 0) + (leftView?.bounds.width ?? 0) + 22, height: bounds.height)
-
-// 构建时间： 32.4ms
-var padding: CGFloat = 22
-if let rightView = rightView {
-    padding += rightView.bounds.width
-}
-
-if let leftView = leftView {
-    padding += leftView.bounds.width
-}
-return CGSizeMake(size.width + padding, bounds.height)
-</code></pre><h4 id="ArrayOfStuff-Stuff"><a href="#ArrayOfStuff-Stuff" class="headerlink" title="ArrayOfStuff + [Stuff]"></a>ArrayOfStuff + [Stuff]</h4><p>这个看起来像下面这样：</p>
-<pre><code>return ArrayOfStuff + [Stuff]  
-// 而不是  
-ArrayOfStuff.append(stuff)  
-return ArrayOfStuff
-</code></pre><p>我经常这么做，并且它影响了每次构建的时间。下面是最糟糕的一个例子，改写后构建时间可以减少 <strong>97.9%</strong>。</p>
-<pre><code>// 构建时间： 1250.3ms
-let systemOptions = [ 7, 14, 30, -1 ]
-let systemNames = (0...2).map{ String(format: localizedFormat, systemOptions[$0]) } + [NSLocalizedString(&quot;everything&quot;, comment: &quot;&quot;)]
-// Some code in-between 
-labelNames = Array(systemNames[0..&lt;count]) + [systemNames.last!]
-
-// 构建时间： 25.5ms
-let systemOptions = [ 7, 14, 30, -1 ]
-var systemNames = systemOptions.dropLast().map{ String(format: localizedFormat, $0) }
-systemNames.append(NSLocalizedString(&quot;everything&quot;, comment: &quot;&quot;))
-// Some code in-between
-labelNames = Array(systemNames[0..&lt;count])
-labelNames.append(systemNames.last!)
-</code></pre><h4 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h4><p>仅仅是通过替换三元运算符为 if else 语句就能减少 <strong>92.9%</strong> 的构建时间。如果使用一个for循环替换 <em>map</em> 函数，它又能减少另一个 75%（但是我的眼睛可就受不了咯😉）。</p>
-<pre><code>// 构建时间： 239.0ms
-let labelNames = type == 0 ? (1...5).map{type0ToString($0)} : (0...2).map{type1ToString($0)}
-
-// 构建时间： 16.9ms
-var labelNames: [String]
-if type == 0 {
-    labelNames = (1...5).map{type0ToString($0)}
-} else {
-    labelNames = (0...2).map{type1ToString($0)}
-}
-</code></pre><h4 id="转换-CGFloat-到-CGFloat"><a href="#转换-CGFloat-到-CGFloat" class="headerlink" title="转换 CGFloat 到 CGFloat"></a>转换 CGFloat 到 CGFloat</h4><p>这里我所说的并不一定正确。变量已经使用了 CGFloat 并且有一些括号也是多余的。在清理了这些冗余之后，构建时间能减少 <strong>99.9%</strong>。</p>
-<pre><code>// 构建时间： 3431.7 ms
-return CGFloat(M_PI) * (CGFloat((hour + hourDelta + CGFloat(minute + minuteDelta) / 60) * 5) - 15) * unit / 180
-
-// 构建时间： 3.0ms
-return CGFloat(M_PI) * ((hour + hourDelta + (minute + minuteDelta) / 60) * 5 - 15) * unit / 180
-</code></pre><h4 id="Round"><a href="#Round" class="headerlink" title="Round()"></a>Round()</h4><p>这个一个非常奇怪的例子，下面的例子中变量是一个局部变量与实例变量的混合。这个问题可能不是四舍五入本身，而是结合代码的方法。去掉四舍五入的方法大概能减少 <strong>97.6%</strong> 的构建时间。</p>
-<pre><code>// 构建时间： 1433.7ms
-let expansion = a — b — c + round(d * 0.66) + e
-// 构建时间： 34.7ms
-let expansion = a — b — c + d * 0.66 + e
-</code></pre><p>注意：所有的测试都在 MacBook Air (13-inch, Mid 2013)中进行。</p>
-<h4 id="尝试它"><a href="#尝试它" class="headerlink" title="尝试它"></a>尝试它</h4><p>无论你是否面临过构建时间太长的问题，编写对编译器友好的代码都是非常有用的。我确定你自己会在其中找到一些惊喜。作为参考，这里有完整的代码，在我的工程中可以5秒内完成编译…</p>
-<pre><code>import UIKit
-
-class CMExpandingTextField: UITextField {
-
-    func textFieldEditingChanged() {
-        invalidateIntrinsicContentSize()
-    }
-
-    override func intrinsicContentSize() -&gt; CGSize {
-        if isFirstResponder(), let text = text {
-            let size = text.sizeWithAttributes(typingAttributes)
-            return CGSize(width: size.width + (rightView?.bounds.width ?? 0) + (leftView?.bounds.width ?? 0) + 22, height: bounds.height)
-        }
-        return super.intrinsicContentSize()
-    }
-}
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。&lt;/p&gt;
     
     </summary>
     

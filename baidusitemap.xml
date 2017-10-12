@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
+    <lastmod>2017-10-12T09:31:46.083Z</lastmod>
+    <data>
+        <display>
+        <title>用CollectionView简化业务代码</title>
+        <pubTime>2017-12-09T16:00:00.000Z</pubTime>
+        
+        <tag>tool</tag>
+         
+        <tag>UICollectionView</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
     <lastmod>2017-10-11T03:37:40.489Z</lastmod>
     <data>

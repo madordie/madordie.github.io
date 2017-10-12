@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
+    
+    <lastmod>2017-10-12T09:31:46.083Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
     
     <lastmod>2017-10-11T03:37:40.489Z</lastmod>
