@@ -84,13 +84,13 @@
 <meta name="description" content="UITableView作为高级控件被开发者广泛使用，同样的，UICollectionView由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。 在业务需求中，常规布局，大多数都是采用UITableView进行的，但是有痛点：  当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但">
 <meta name="keywords" content="tool,UICollectionView">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用CollectionView简化业务代码">
+<meta property="og:title" content="用CollectionView简化代码，专注于业务和UI">
 <meta property="og:url" content="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="UITableView作为高级控件被开发者广泛使用，同样的，UICollectionView由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。 在业务需求中，常规布局，大多数都是采用UITableView进行的，但是有痛点：  当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但">
-<meta property="og:updated_time" content="2017-10-12T09:31:46.083Z">
+<meta property="og:updated_time" content="2017-10-13T01:38:09.034Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用CollectionView简化业务代码">
+<meta name="twitter:title" content="用CollectionView简化代码，专注于业务和UI">
 <meta name="twitter:description" content="UITableView作为高级控件被开发者广泛使用，同样的，UICollectionView由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。 在业务需求中，常规布局，大多数都是采用UITableView进行的，但是有痛点：  当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但">
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <title>用CollectionView简化业务代码 | 继刚的博客</title>
+  <title>用CollectionView简化代码，专注于业务和UI | 继刚的博客</title>
   
 
 
@@ -300,7 +300,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">用CollectionView简化业务代码</h2>
+          <h2 class="post-title" itemprop="name headline">用CollectionView简化代码，专注于业务和UI</h2>
         
 
         <div class="post-meta">
@@ -453,7 +453,7 @@
 <p>如果不会，请自行<a href="https://www.google.com" target="_blank" rel="external">Google</a>。<a href="https://objccn.io/issue-7-3/" target="_blank" rel="external">ObjC-中国：KVC 和 KVO</a>，我只能帮你到这里</p>
 <h4 id="Rx系"><a href="#Rx系" class="headerlink" title="Rx系"></a>Rx系</h4><p>很抱歉，你不能用<code>self.rx.contentOffset</code>。原因是<a href="https://github.com/chiahsien/CHTCollectionViewWaterfallLayout" target="_blank" rel="external"><code>CHTCollectionViewWaterfallLayout</code></a>中有这么一行断言：</p>
 <blockquote>
-<p><code>NSAssert([self.delegate conformsToProtocol:@protocol(CHTCollectionViewDelegateWaterfallLayout)], @&quot;UICollectionView&#39;s delegate should conform to CHTCollectionViewDelegateWaterfallLayout protocol&quot;);</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="type">NSAssert</span>([<span class="keyword">self</span>.delegate conformsToProtocol:@<span class="class"><span class="keyword">protocol</span>(<span class="title">CHTCollectionViewDelegateWaterfallLayout</span>)], @"<span class="title">UICollectionView</span>'<span class="title">s</span> <span class="title">delegate</span> <span class="title">should</span> <span class="title">conform</span> <span class="title">to</span> <span class="title">CHTCollectionViewDelegateWaterfallLayout</span> <span class="title">protocol</span>");</span></div></pre></td></tr></table></figure>
 </blockquote>
 <p><strong>但是</strong>，你可以使用Rx里面的KVO呀～也是贼方便</p>
 <h4 id="RAC系"><a href="#RAC系" class="headerlink" title="RAC系"></a>RAC系</h4><p>抱歉，我不会。原因在此<a href="../reactivecocoa-ready-to-use">准备食用RAC(ReactiveCocoa)的顾虑</a></p>
@@ -862,7 +862,7 @@
         var disqus_config = function () {
           this.page.url = 'https://madordie.github.io/post/ios-tool-collectionview-simplify-business/';
           this.page.identifier = 'post/ios-tool-collectionview-simplify-business/';
-          this.page.title = '用CollectionView简化业务代码';
+          this.page.title = '用CollectionView简化代码，专注于业务和UI';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://madordie.disqus.com/embed.js';

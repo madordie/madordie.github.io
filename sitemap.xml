@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io//404.html</loc>
+    
+    <lastmod>2017-10-13T01:40:35.837Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
     
-    <lastmod>2017-10-12T09:31:46.083Z</lastmod>
+    <lastmod>2017-10-13T01:38:09.034Z</lastmod>
     
   </url>
   
@@ -82,13 +89,6 @@
     <loc>https://madordie.github.io/post/bang-fastimagecache/</loc>
     
     <lastmod>2017-10-10T05:34:24.597Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io//404.html</loc>
-    
-    <lastmod>2017-10-10T05:29:59.901Z</lastmod>
     
   </url>
   
