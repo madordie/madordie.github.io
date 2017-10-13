@@ -160,7 +160,7 @@ class KTJJmp: NSObject {
 两个类共同作用就是：
 ```swift
 class JmpCell: UICollectionViewCell {
-    let jmp = FDDJmp()
+    let jmp = JmpCellModel()
     func setup() {
         ...
         jmpBtn.addTarget(jmp, action: jmp.action, for: .touchUpInside)
