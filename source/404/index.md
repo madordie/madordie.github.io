@@ -15,6 +15,8 @@ sorry ~~~
 
 你要找的是？
 
+[Xcode9编译失败](../post/debug-xcode9-build-ipa/)
+
 debug-note 拆分为下面的几个了😂
 
 [DEBUG - swift中取出通知中的frame](../post/debug-swift-notifa-frame/)

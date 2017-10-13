@@ -1,5 +1,5 @@
 ---
-title: 用CollectionView简化业务代码
+title: 用CollectionView简化代码，专注于业务和UI
 url: ios-tool-collectionview-simplify-business
 date: 12/10/2017
 tags: 
@@ -231,7 +231,9 @@ class JmpCellModel: ListItemDefaultProtocol {
 
 很抱歉，你不能用`self.rx.contentOffset`。原因是[`CHTCollectionViewWaterfallLayout`](https://github.com/chiahsien/CHTCollectionViewWaterfallLayout)中有这么一行断言：
 
-> `NSAssert([self.delegate conformsToProtocol:@protocol(CHTCollectionViewDelegateWaterfallLayout)], @"UICollectionView's delegate should conform to CHTCollectionViewDelegateWaterfallLayout protocol");`
+> ```swift
+ NSAssert([self.delegate conformsToProtocol:@protocol(CHTCollectionViewDelegateWaterfallLayout)], @"UICollectionView's delegate should conform to CHTCollectionViewDelegateWaterfallLayout protocol");
+ ```
 
 **但是**，你可以使用Rx里面的KVO呀～也是贼方便
 
