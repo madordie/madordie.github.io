@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/README.html</loc>
+    
+    <lastmod>2017-10-16T14:23:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/reverse-ios-monkeydev/</loc>
+    
+    <lastmod>2017-10-16T12:27:32.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/about-reprint-article/</loc>
+    
+    <lastmod>2017-10-16T12:25:32.732Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
     
-    <lastmod>2017-10-16T02:26:02.924Z</lastmod>
+    <lastmod>2017-10-16T03:08:14.776Z</lastmod>
     
   </url>
   
@@ -135,13 +156,6 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/post/about-reprint-article/</loc>
-    
-    <lastmod>2017-10-09T05:00:29.135Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://madordie.github.io/post/swift-build-times/</loc>
     
     <lastmod>2017-10-09T05:00:20.020Z</lastmod>
@@ -215,13 +229,6 @@
     <loc>https://madordie.github.io/post/reverse-ios-ssh/</loc>
     
     <lastmod>2017-10-09T04:57:48.373Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/reverse-ios-monkeydev/</loc>
-    
-    <lastmod>2017-10-09T04:57:40.597Z</lastmod>
     
   </url>
   

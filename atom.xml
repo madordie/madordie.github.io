@@ -104,7 +104,7 @@
     <link href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/"/>
     <id>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</id>
     <published>2017-10-11T16:00:00.000Z</published>
-    <updated>2017-10-16T02:26:02.924Z</updated>
+    <updated>2017-10-16T03:08:14.776Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><code>UITableView</code>作为高级控件被开发者广泛使用，同样的，<code>UICollectionView</code>由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。</p>
 <p>在业务需求中，常规布局，大多数都是采用<code>UITableView</code>进行的，但是有痛点：</p>
@@ -677,7 +677,7 @@
     <link href="https://madordie.github.io/post/reverse-ios-monkeydev/"/>
     <id>https://madordie.github.io/post/reverse-ios-monkeydev/</id>
     <published>2017-08-14T03:05:57.000Z</published>
-    <updated>2017-10-09T04:57:40.597Z</updated>
+    <updated>2017-10-16T12:27:32.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
 <p>MonkeyDev wiki<br>这是一个为越狱和非越狱开发人员准备的工具，主要包括四个模块:</p>
