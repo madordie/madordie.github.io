@@ -42,7 +42,6 @@ function backup() {
 
 # 操作序列
 checkout_URLs
-cd ../
 if [ $opt = 's' ]; then
     hexo clean
     hexo s -g 
