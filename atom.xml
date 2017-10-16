@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2017-10-13T08:51:38.079Z</updated>
+  <updated>2017-10-16T02:26:02.834Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -16,11 +16,95 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>「转」一张思维导图，让正则表达式不再难懂</title>
+    <link href="https://madordie.github.io/post/reprinted-regular-mind-map/"/>
+    <id>https://madordie.github.io/post/reprinted-regular-mind-map/</id>
+    <published>2017-10-15T16:00:00.000Z</published>
+    <updated>2017-10-16T02:26:02.834Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="/images/bruch-up-regular-expressions-1.png" alt="思维导图"></p>
+<a id="more"></a>
+<h2 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h2><ul>
+<li>普通字符：字母、数字、汉字、下划线，匹配与之相同的一个字符</li>
+<li>简单转义字符：\n（换行）,\t（制表）,\（\本身）和 \^…（\^等有特殊作用的符号如要匹配自己的话要用转义）</li>
+<li><p>标准字符集合<br>注意区分大小写，大写是相反的意思，匹配相反是不匹配</p>
+<ul>
+<li>\d<br>  任意一个数字，0~9</li>
+<li>\w<br>  任意一个字母、数字、汉字或下划线，A~Z、a~z、0~9、_和任意一个汉字</li>
+<li>\s<br>  任意空白符，包括空格、制表符、换行符</li>
+<li>.<br>  小数点可以匹配任意一个字符，换行除外（如果要匹配包括”\n”在内的所有字符，一般用[\s\S]）</li>
+</ul>
+</li>
+<li><p>自定义字符集合<br>[ ]方括号匹配方式，能够匹配方括号中的任意一个字符,^表示取反</p>
+<ul>
+<li>[ab5@]<br>  匹配”a”或”b”或”5”或”@”</li>
+<li>[^abc]<br>  匹配a、b、c之外的任意字符</li>
+<li>[f-k]<br>  匹配“f”到”k”之间的字符</li>
+<li>[^A-F0-3]<br>  匹配“A”-“F”,”0”-“3”之外的任意一个字符</li>
+</ul>
+</li>
+</ul>
+<h2 id="量词-Quantifier"><a href="#量词-Quantifier" class="headerlink" title="量词(Quantifier)"></a>量词(Quantifier)</h2><p>修饰前面的一个表达式，如果要修饰多个表达式，就用( )把表达式包起来</p>
+<ul>
+<li>{n}<br>  表达式重复n次​</li>
+<li>{m,n}<br>  表达式至少重复m次，最多重复n次<ul>
+<li>贪婪模式 （默认）<br>匹配符合的最长的字符串</li>
+<li>非贪婪模式 （在量词后面加 ? 例：{m,n}? )<br>  匹配符合的最短的字符串</li>
+</ul>
+</li>
+<li>{m,}<br>  表达式至少重复m次</li>
+<li>？<br>  匹配表达式0或1次，相当于{0,1}</li>
+<li>+<br>  表达式至少出现一次，相当于{1,}</li>
+<li>*<br>  表达式不出现或出现任意次，相当于{0,}</li>
+</ul>
+<h2 id="字符边界"><a href="#字符边界" class="headerlink" title="字符边界"></a>字符边界</h2><pre><code>零宽：匹配的不是字符而是位置，符合某种条件的位置
+</code></pre><ul>
+<li>^<br>  与字符串开始的地方匹配</li>
+<li>$<br>  与字符串结束的地方匹配</li>
+<li>\b<br>  匹配一个单词的边界，当前位置前面的字符和后面的字符不全是\w</li>
+</ul>
+<h2 id="预搜索（零宽断言、环视）"><a href="#预搜索（零宽断言、环视）" class="headerlink" title="预搜索（零宽断言、环视）"></a>预搜索（零宽断言、环视）</h2><p>零宽：匹配的不是字符而是位置，符合某种条件的位置</p>
+<ul>
+<li>(?=exp)<br>  断言自身出现的位置的后面能匹配表达式exp</li>
+<li>(?!exp)<br>  断言自身出现的位置的后面不能匹配表达式exp</li>
+<li>(?&lt;=exp)<br>  断言自身出现的位置的前面能匹配表达式exp</li>
+<li>(?&lt;!exp)<br>  断言自身出现的位置的前面不能匹配表达式exp</li>
+</ul>
+<h2 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h2><p>对文本的处理方式</p>
+<ul>
+<li>IGNORECASE 忽略大小写模式<br>  匹配时忽略大小写<br>  默认是区分大小写的</li>
+<li>SINGLELINE 单行模式<br>  整个文本看作一个字符串，只有一个开头一个结尾<br>  使小数点”.”可以匹配包含换行符(\n)在内的任意字符</li>
+<li>MULTILINE 多行模式<br>  每行都是一个字符串<br>  在多行模式下，如果需要仅匹配字符串开始和结束位置，可以使用\A和\Z</li>
+</ul>
+<h2 id="选择符和分组"><a href="#选择符和分组" class="headerlink" title="选择符和分组"></a>选择符和分组</h2><p>分支结构、捕获组合非捕获组</p>
+<ul>
+<li>| 分支结构​<br>  左右表达式之间“或”关系，匹配左边或右边</li>
+<li>( ) 捕获组<br>  （1）、在被修饰匹配次数的时候，括号中的表达式可以作为整体被修饰<br>  （2）、取匹配结果的时候，括号中的表达式匹配到的内容可以被单独得到<br>  （3）、每一对括号会分配一个编号，使用（）的捕获根据左括号的顺序从1开始自动编号。捕获编号为零的第一个捕获是整个正则表达式模式匹配的文本<br>   反向引用：通过反向引用，可以对分组已捕获的字符串进行引用。</li>
+<li>(?:Expression) 非捕获组<br>  一些表达式中，不得不使用（），但又不需要保存（）中子表达式匹配的内容，这时可以用非捕获组来抵消（）带来的副作用。</li>
+</ul>
+<hr>
+<p>原文：<a href="https://my.oschina.net/u/3080373/blog/1550653" target="_blank" rel="external">一张思维导图，让正则表达式不再难懂</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/bruch-up-regular-expressions-1.png&quot; alt=&quot;思维导图&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="正则表达式" scheme="https://madordie.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>用CollectionView简化代码，专注于业务和UI</title>
     <link href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/"/>
     <id>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</id>
-    <published>2017-12-09T16:00:00.000Z</published>
-    <updated>2017-10-13T08:51:38.079Z</updated>
+    <published>2017-10-11T16:00:00.000Z</published>
+    <updated>2017-10-16T02:26:02.924Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><code>UITableView</code>作为高级控件被开发者广泛使用，同样的，<code>UICollectionView</code>由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。</p>
 <p>在业务需求中，常规布局，大多数都是采用<code>UITableView</code>进行的，但是有痛点：</p>
@@ -150,90 +234,6 @@
       <category term="tool" scheme="https://madordie.github.io/tags/tool/"/>
     
       <category term="UICollectionView" scheme="https://madordie.github.io/tags/UICollectionView/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「转」一张思维导图，让正则表达式不再难懂</title>
-    <link href="https://madordie.github.io/post/reprinted-regular-mind-map/"/>
-    <id>https://madordie.github.io/post/reprinted-regular-mind-map/</id>
-    <published>2017-10-16T02:13:44.054Z</published>
-    <updated>2017-10-16T02:20:46.467Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="/images/bruch-up-regular-expressions-1.png" alt="思维导图"></p>
-<a id="more"></a>
-<h2 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h2><ul>
-<li>普通字符：字母、数字、汉字、下划线，匹配与之相同的一个字符</li>
-<li>简单转义字符：\n（换行）,\t（制表）,\（\本身）和 \^…（\^等有特殊作用的符号如要匹配自己的话要用转义）</li>
-<li><p>标准字符集合<br>注意区分大小写，大写是相反的意思，匹配相反是不匹配</p>
-<ul>
-<li>\d<br>  任意一个数字，0~9</li>
-<li>\w<br>  任意一个字母、数字、汉字或下划线，A~Z、a~z、0~9、_和任意一个汉字</li>
-<li>\s<br>  任意空白符，包括空格、制表符、换行符</li>
-<li>.<br>  小数点可以匹配任意一个字符，换行除外（如果要匹配包括”\n”在内的所有字符，一般用[\s\S]）</li>
-</ul>
-</li>
-<li><p>自定义字符集合<br>[ ]方括号匹配方式，能够匹配方括号中的任意一个字符,^表示取反</p>
-<ul>
-<li>[ab5@]<br>  匹配”a”或”b”或”5”或”@”</li>
-<li>[^abc]<br>  匹配a、b、c之外的任意字符</li>
-<li>[f-k]<br>  匹配“f”到”k”之间的字符</li>
-<li>[^A-F0-3]<br>  匹配“A”-“F”,”0”-“3”之外的任意一个字符</li>
-</ul>
-</li>
-</ul>
-<h2 id="量词-Quantifier"><a href="#量词-Quantifier" class="headerlink" title="量词(Quantifier)"></a>量词(Quantifier)</h2><p>修饰前面的一个表达式，如果要修饰多个表达式，就用( )把表达式包起来</p>
-<ul>
-<li>{n}<br>  表达式重复n次​</li>
-<li>{m,n}<br>  表达式至少重复m次，最多重复n次<ul>
-<li>贪婪模式 （默认）<br>匹配符合的最长的字符串</li>
-<li>非贪婪模式 （在量词后面加 ? 例：{m,n}? )<br>  匹配符合的最短的字符串</li>
-</ul>
-</li>
-<li>{m,}<br>  表达式至少重复m次</li>
-<li>？<br>  匹配表达式0或1次，相当于{0,1}</li>
-<li>+<br>  表达式至少出现一次，相当于{1,}</li>
-<li>*<br>  表达式不出现或出现任意次，相当于{0,}</li>
-</ul>
-<h2 id="字符边界"><a href="#字符边界" class="headerlink" title="字符边界"></a>字符边界</h2><pre><code>零宽：匹配的不是字符而是位置，符合某种条件的位置
-</code></pre><ul>
-<li>^<br>  与字符串开始的地方匹配</li>
-<li>$<br>  与字符串结束的地方匹配</li>
-<li>\b<br>  匹配一个单词的边界，当前位置前面的字符和后面的字符不全是\w</li>
-</ul>
-<h2 id="预搜索（零宽断言、环视）"><a href="#预搜索（零宽断言、环视）" class="headerlink" title="预搜索（零宽断言、环视）"></a>预搜索（零宽断言、环视）</h2><p>零宽：匹配的不是字符而是位置，符合某种条件的位置</p>
-<ul>
-<li>(?=exp)<br>  断言自身出现的位置的后面能匹配表达式exp</li>
-<li>(?!exp)<br>  断言自身出现的位置的后面不能匹配表达式exp</li>
-<li>(?&lt;=exp)<br>  断言自身出现的位置的前面能匹配表达式exp</li>
-<li>(?&lt;!exp)<br>  断言自身出现的位置的前面不能匹配表达式exp</li>
-</ul>
-<h2 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h2><p>对文本的处理方式</p>
-<ul>
-<li>IGNORECASE 忽略大小写模式<br>  匹配时忽略大小写<br>  默认是区分大小写的</li>
-<li>SINGLELINE 单行模式<br>  整个文本看作一个字符串，只有一个开头一个结尾<br>  使小数点”.”可以匹配包含换行符(\n)在内的任意字符</li>
-<li>MULTILINE 多行模式<br>  每行都是一个字符串<br>  在多行模式下，如果需要仅匹配字符串开始和结束位置，可以使用\A和\Z</li>
-</ul>
-<h2 id="选择符和分组"><a href="#选择符和分组" class="headerlink" title="选择符和分组"></a>选择符和分组</h2><p>分支结构、捕获组合非捕获组</p>
-<ul>
-<li>| 分支结构​<br>  左右表达式之间“或”关系，匹配左边或右边</li>
-<li>( ) 捕获组<br>  （1）、在被修饰匹配次数的时候，括号中的表达式可以作为整体被修饰<br>  （2）、取匹配结果的时候，括号中的表达式匹配到的内容可以被单独得到<br>  （3）、每一对括号会分配一个编号，使用（）的捕获根据左括号的顺序从1开始自动编号。捕获编号为零的第一个捕获是整个正则表达式模式匹配的文本<br>   反向引用：通过反向引用，可以对分组已捕获的字符串进行引用。</li>
-<li>(?:Expression) 非捕获组<br>  一些表达式中，不得不使用（），但又不需要保存（）中子表达式匹配的内容，这时可以用非捕获组来抵消（）带来的副作用。</li>
-</ul>
-<hr>
-<p>原文：<a href="https://my.oschina.net/u/3080373/blog/1550653" target="_blank" rel="external">一张思维导图，让正则表达式不再难懂</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/images/bruch-up-regular-expressions-1.png&quot; alt=&quot;思维导图&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="正则表达式" scheme="https://madordie.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
   </entry>
   

@@ -4,12 +4,34 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
+    <lastmod>2017-10-16T02:26:02.924Z</lastmod>
+    <data>
+        <display>
+        <title>用CollectionView简化代码，专注于业务和UI</title>
+        <pubTime>2017-10-11T16:00:00.000Z</pubTime>
+        
+        <tag>tool</tag>
+         
+        <tag>UICollectionView</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/reprinted-regular-mind-map/</loc>
-    <lastmod>2017-10-16T02:20:46.467Z</lastmod>
+    <lastmod>2017-10-16T02:26:02.834Z</lastmod>
     <data>
         <display>
         <title>「转」一张思维导图，让正则表达式不再难懂</title>
-        <pubTime>2017-10-16T02:13:44.054Z</pubTime>
+        <pubTime>2017-10-15T16:00:00.000Z</pubTime>
         
         <tag>正则表达式</tag>
          
@@ -37,28 +59,6 @@
            
              
               <breadCrumb title="工具" url="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
-    <lastmod>2017-10-13T08:51:38.079Z</lastmod>
-    <data>
-        <display>
-        <title>用CollectionView简化代码，专注于业务和UI</title>
-        <pubTime>2017-12-09T16:00:00.000Z</pubTime>
-        
-        <tag>tool</tag>
-         
-        <tag>UICollectionView</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
           
         </display>
     </data>
