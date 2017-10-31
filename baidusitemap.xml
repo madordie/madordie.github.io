@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
+    <lastmod>2017-10-31T02:08:33.912Z</lastmod>
+    <data>
+        <display>
+        <title>用CollectionView简化代码，专注于业务和UI</title>
+        <pubTime>2017-10-11T16:00:00.000Z</pubTime>
+        
+        <tag>tool</tag>
+         
+        <tag>UICollectionView</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/reverse-ios-monkeydev/</loc>
     <lastmod>2017-10-16T12:27:32.000Z</lastmod>
     <data>
@@ -35,28 +57,6 @@
            
              
               <breadCrumb title="牢骚" url="https://madordie.github.io/categories/%E7%89%A2%E9%AA%9A/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
-    <lastmod>2017-10-16T03:08:14.776Z</lastmod>
-    <data>
-        <display>
-        <title>用CollectionView简化代码，专注于业务和UI</title>
-        <pubTime>2017-10-11T16:00:00.000Z</pubTime>
-        
-        <tag>tool</tag>
-         
-        <tag>UICollectionView</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
           
         </display>
     </data>
