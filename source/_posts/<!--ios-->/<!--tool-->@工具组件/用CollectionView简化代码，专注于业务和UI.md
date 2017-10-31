@@ -266,6 +266,16 @@ func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPat
 
 不过具体没有例子，不想写OC代码，太麻烦了。。主要是这种思路:)
 
+### 填充Cell的数据为什么会在CellModel中？
+
+对于Cell来说，Cell是干净的，没有任何继承、协议来限制Cell如何处理。那么Cell就可以接受来自任何模块的各种风格的Cell，这是我想要的减少侵入。
+
+cellModel中定义了Cell所对应的填充数据格式，在第一次写的时候难免会按照业务逻辑起一些业务逻辑的名字，在复用的时候又不能改名字，会对维护和开发加了一定量的复杂度，这不是我想要的。。
+
+于是乎每个CellModel根据自己的需要绑定需要绑定的Cell，去填充Cell所对应的数据就好。只需要侵入cellModel即可。代价最小，受益最大。
+
+PS.对于同一个List，需要注意cell的复用和多个cellModel同时绑定一个cell时，属性的设置。
+
 ### Demo
 
 [Demo](https://github.com/madordie/collectionview-simplify-business)部分没有写跳转相关内容，但是别的都有了😂
