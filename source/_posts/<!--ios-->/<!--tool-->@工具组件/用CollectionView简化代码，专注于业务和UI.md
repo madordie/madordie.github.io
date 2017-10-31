@@ -112,6 +112,7 @@ extension ListItemDefaultProtocol {
 
 1. 处理接口吐出来的数据。
 2. 创建新的UI样式，并做好接口数据中间件。
+3. 点击事件在处理数据的时候预先埋好，所有的数据、逻辑和UI数据一起被传递，不需要多次类型判断。
 
 统一使用`CollectionView`还有一个好处：不管前面谁写的一个UI，都能拉过来用。不用做中间层去从`TableViewCell`转`CollectionViewCell`。
 
