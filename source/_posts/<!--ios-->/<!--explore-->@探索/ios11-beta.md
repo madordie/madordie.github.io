@@ -114,3 +114,14 @@ guard ALAssetsLibrary.authorizationStatus() == .authorized else { return }
 需要注意的是上面代码之判断了是否有权限，但是在iOS11上并不会弹出什么授权提示。就算在`Info.plist`中添加`NSPhotoLibraryUsageDescription`依旧无济于事。
 
 目前来看，iOS11中**只有**添加`NSPhotoLibraryAddUsageDescription`才可以。
+
+### navigationItem.titleView 点击区域偏移
+
+所设置的View需要实现：
+```swift
+@implementation DNImageFoldTitleView
+- (CGSize)intrinsicContentSize {
+    return UILayoutFittingExpandedSize;
+}
+@end
+```
