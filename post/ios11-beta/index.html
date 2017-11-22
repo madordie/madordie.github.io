@@ -90,7 +90,7 @@
 <meta property="og:description" content="iOS11 预览版安装体验笔记。">
 <meta property="og:image" content="https://madordie.github.io/images/ios11-beta-1.jpg">
 <meta property="og:image" content="https://madordie.github.io/images/ios11-beta-2.gif">
-<meta property="og:updated_time" content="2017-10-09T04:56:25.675Z">
+<meta property="og:updated_time" content="2017-11-22T06:03:26.443Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS11-beta">
 <meta name="twitter:description" content="iOS11 预览版安装体验笔记。">
@@ -404,6 +404,7 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">guard</span> <span class="type">ALAssetsLibrary</span>.authorizationStatus() == .authorized <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div></pre></td></tr></table></figure>
 <p>需要注意的是上面代码之判断了是否有权限，但是在iOS11上并不会弹出什么授权提示。就算在<code>Info.plist</code>中添加<code>NSPhotoLibraryUsageDescription</code>依旧无济于事。</p>
 <p>目前来看，iOS11中<strong>只有</strong>添加<code>NSPhotoLibraryAddUsageDescription</code>才可以。</p>
+<h3 id="navigationItem-titleView-点击区域偏移"><a href="#navigationItem-titleView-点击区域偏移" class="headerlink" title="navigationItem.titleView 点击区域偏移"></a>navigationItem.titleView 点击区域偏移</h3><p>所设置的View需要实现：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@implementation <span class="type">DNImageFoldTitleView</span></div><div class="line">- (<span class="type">CGSize</span>)intrinsicContentSize &#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">UILayoutFittingExpandedSize</span>;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -617,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">2.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失效的automaticallyAdjustsScrollViewInsets"><span class="nav-number">2.1.</span> <span class="nav-text">失效的automaticallyAdjustsScrollViewInsets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decisionHandler-allow-was-called-more-than-once"><span class="nav-number">2.2.</span> <span class="nav-text">decisionHandler(.allow) was called more than once</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#照片存储时候某些设备必crash"><span class="nav-number">2.3.</span> <span class="nav-text">照片存储时候某些设备必crash</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">2.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失效的automaticallyAdjustsScrollViewInsets"><span class="nav-number">2.1.</span> <span class="nav-text">失效的automaticallyAdjustsScrollViewInsets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decisionHandler-allow-was-called-more-than-once"><span class="nav-number">2.2.</span> <span class="nav-text">decisionHandler(.allow) was called more than once</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#照片存储时候某些设备必crash"><span class="nav-number">2.3.</span> <span class="nav-text">照片存储时候某些设备必crash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#navigationItem-titleView-点击区域偏移"><span class="nav-number">2.4.</span> <span class="nav-text">navigationItem.titleView 点击区域偏移</span></a></li></ol></li></ol></div>
             
 
           </div>

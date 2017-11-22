@@ -88,7 +88,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="UITableView作为高级控件被开发者广泛使用，同样的，UICollectionView由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。 在业务需求中，常规布局，大多数都是采用UITableView进行的，但是有痛点：  当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但">
-<meta property="og:updated_time" content="2017-10-31T02:08:33.912Z">
+<meta property="og:updated_time" content="2017-10-31T03:44:10.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用CollectionView简化代码，专注于业务和UI">
 <meta name="twitter:description" content="UITableView作为高级控件被开发者广泛使用，同样的，UICollectionView由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。 在业务需求中，常规布局，大多数都是采用UITableView进行的，但是有痛点：  当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但">
@@ -416,6 +416,7 @@
 <ol>
 <li>处理接口吐出来的数据。</li>
 <li>创建新的UI样式，并做好接口数据中间件。</li>
+<li>点击事件在处理数据的时候预先埋好，所有的数据、逻辑和UI数据一起被传递，不需要多次类型判断。</li>
 </ol>
 <p>统一使用<code>CollectionView</code>还有一个好处：不管前面谁写的一个UI，都能拉过来用。不用做中间层去从<code>TableViewCell</code>转<code>CollectionViewCell</code>。</p>
 <p>开发只需要关心业务，业务。安安心心做一个写业务的程序员吧～</p>

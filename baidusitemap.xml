@@ -4,8 +4,26 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/ios11-beta/</loc>
+    <lastmod>2017-11-22T06:03:26.443Z</lastmod>
+    <data>
+        <display>
+        <title>iOS11-beta</title>
+        <pubTime>2017-06-12T09:20:58.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
-    <lastmod>2017-10-31T02:08:33.912Z</lastmod>
+    <lastmod>2017-10-31T03:44:10.160Z</lastmod>
     <data>
         <display>
         <title>用CollectionView简化代码，专注于业务和UI</title>
@@ -678,24 +696,6 @@
         
         <tag>ReactiveCocoa</tag>
          
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/ios11-beta/</loc>
-    <lastmod>2017-10-09T04:56:25.675Z</lastmod>
-    <data>
-        <display>
-        <title>iOS11-beta</title>
-        <pubTime>2017-06-12T09:20:58.000Z</pubTime>
-        
          
            
              
