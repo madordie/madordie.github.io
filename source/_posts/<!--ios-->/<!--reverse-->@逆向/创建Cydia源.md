@@ -1,7 +1,7 @@
 ---
 title: iOS逆向-创建Cydia源
 url: reverse-ios-creat-cydia-sources
-date: 2018/1/2
+date: 2018-01-02
 tags: 
     - 逆向
 categories:
