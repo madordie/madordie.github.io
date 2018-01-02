@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/reverse-ios-creat-cydia-sources/</loc>
+    
+    <lastmod>2018-01-02T11:16:27.794Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/reverse-ios-monkeydev/</loc>
+    
+    <lastmod>2018-01-02T10:39:33.212Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/ios-tool-configurator-get-udid/</loc>
+    
+    <lastmod>2017-12-07T10:00:29.377Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/ios11-beta/</loc>
     
     <lastmod>2017-11-22T06:03:26.443Z</lastmod>
@@ -12,13 +33,6 @@
     <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
     
     <lastmod>2017-10-31T03:44:10.160Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/reverse-ios-monkeydev/</loc>
-    
-    <lastmod>2017-10-16T12:27:32.000Z</lastmod>
     
   </url>
   
