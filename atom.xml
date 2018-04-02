@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2018-01-02T11:18:34.562Z</updated>
+  <updated>2018-04-02T11:04:41.060Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://madordie.github.io/post/reverse-ios-creat-cydia-sources/"/>
     <id>https://madordie.github.io/post/reverse-ios-creat-cydia-sources/</id>
     <published>2018-01-01T16:00:00.000Z</published>
-    <updated>2018-01-02T11:18:34.562Z</updated>
+    <updated>2018-04-02T11:04:41.060Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>先笔记。</p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>搭建自己的cydia源。</p>
 <a id="more"></a>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
 <li>Ubuntu 16.04 LTS</li>
@@ -30,12 +30,11 @@
 <h3 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h3><h4 id="dpkg-dev"><a href="#dpkg-dev" class="headerlink" title="dpkg-dev"></a>dpkg-dev</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ apt-get update</div><div class="line">$ apt-get install dpkg-dev</div><div class="line">$ dpkg-scanpackages --help</div></pre></td></tr></table></figure>
 <h4 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install nginx</div></pre></td></tr></table></figure>
 <h3 id="开工"><a href="#开工" class="headerlink" title="开工"></a>开工</h3><h4 id="准备deb"><a href="#准备deb" class="headerlink" title="准备deb"></a>准备deb</h4><p>此处目录为<code>/opt/cydia/debs</code>，可以为别的，但是建议你也这样做:)。</p>
-<h4 id="生成依赖"><a href="#生成依赖" class="headerlink" title="生成依赖"></a>生成依赖</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /opt/cydia</div><div class="line">$ dpkg-scanpackages debs/  /dev/null | gzip&gt; debs/Packages.gz</div><div class="line">$ tar zcvf Packages.gz Packages</div><div class="line">$ bzip2 -k Packages Packages.bz2</div></pre></td></tr></table></figure>
+<h4 id="生成依赖"><a href="#生成依赖" class="headerlink" title="生成依赖"></a>生成依赖</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /opt/cydia</div><div class="line">$ dpkg-scanpackages -m . /dev/null &gt; Packages</div><div class="line">$ bzip2 Packages</div></pre></td></tr></table></figure>
 <h4 id="添加sources-list"><a href="#添加sources-list" class="headerlink" title="添加sources.list"></a>添加sources.list</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">echo</span> <span class="string">"deb file:///opt/cydia ./debs/"</span> &gt;&gt; /etc/apt/sources.list</div></pre></td></tr></table></figure>
 <p>ps. 注意路径信息</p>
 <h4 id="更新一下"><a href="#更新一下" class="headerlink" title="更新一下"></a>更新一下</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ apt-get update</div></pre></td></tr></table></figure>
 <h4 id="扔出去"><a href="#扔出去" class="headerlink" title="扔出去"></a>扔出去</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ln <span class="_">-s</span> /opt/cydia cydia</div><div class="line">$ /etc/init.d/nginx start</div></pre></td></tr></table></figure>
-<h3 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h3><p>（等我试一下更新再更吧😂</p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
 <li><a href="http://www.saurik.com/id/7" target="_blank" rel="external">http://www.saurik.com/id/7</a></li>
 <li><a href="https://bbs.feng.com/read-htm-tid-8052646.html" target="_blank" rel="external">https://bbs.feng.com/read-htm-tid-8052646.html</a></li>
@@ -44,7 +43,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;先笔记。&lt;/p&gt;
+      &lt;p&gt;搭建自己的cydia源。&lt;/p&gt;
     
     </summary>
     
