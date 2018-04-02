@@ -8,7 +8,7 @@ categories:
     - iOS
 ---
 
-先笔记。
+搭建自己的cydia源。
 
 <!--more-->
 
@@ -40,9 +40,8 @@ apt-get install nginx
 
 ```sh
 $ cd /opt/cydia
-$ dpkg-scanpackages debs/  /dev/null | gzip> debs/Packages.gz
-$ tar zcvf Packages.gz Packages
-$ bzip2 -k Packages Packages.bz2
+$ dpkg-scanpackages -m . /dev/null > Packages
+$ bzip2 Packages
 ```
 
 #### 添加sources.list
@@ -65,10 +64,6 @@ $ apt-get update
 $ ln -s /opt/cydia cydia
 $ /etc/init.d/nginx start
 ```
-
-### 签名
-
-（等我试一下更新再更吧😂
 
 ### 参考
 - http://www.saurik.com/id/7
