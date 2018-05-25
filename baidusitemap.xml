@@ -4,6 +4,44 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/</loc>
+    <lastmod>2018-05-25T05:52:28.922Z</lastmod>
+    <data>
+        <display>
+        <title>「转」一个NB的补救项目国际化的方案</title>
+        <pubTime>2016-02-15T05:37:00.000Z</pubTime>
+        
+        <tag>国际化</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/about-change-blog/</loc>
+    <lastmod>2018-05-25T03:57:08.107Z</lastmod>
+    <data>
+        <display>
+        <title>博客迁移公告</title>
+        <pubTime>2016-07-05T05:43:36.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="公告" url="https://madordie.github.io/categories/%E5%85%AC%E5%91%8A/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/reverse-ios-creat-cydia-sources/</loc>
     <lastmod>2018-04-02T11:04:41.060Z</lastmod>
     <data>
@@ -45,7 +83,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/ios-tool-configurator-get-udid/</loc>
-    <lastmod>2017-12-07T10:00:29.377Z</lastmod>
+    <lastmod>2017-12-07T10:00:29.378Z</lastmod>
     <data>
         <display>
         <title>描述文件获取UDID</title>
@@ -166,7 +204,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
-    <lastmod>2017-10-11T03:37:40.489Z</lastmod>
+    <lastmod>2017-10-11T03:37:40.490Z</lastmod>
     <data>
         <display>
         <title>debug-_SwiftValue-unsignedIntegerValue</title>
@@ -248,7 +286,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
-    <lastmod>2017-10-11T03:37:39.822Z</lastmod>
+    <lastmod>2017-10-11T03:37:39.823Z</lastmod>
     <data>
         <display>
         <title>DEBUG - swift中取出通知中的frame</title>
@@ -288,7 +326,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/push-queue-for-navigation/</loc>
-    <lastmod>2017-10-11T03:05:55.190Z</lastmod>
+    <lastmod>2017-10-11T03:05:55.191Z</lastmod>
     <data>
         <display>
         <title>如何正确的连续推新页面</title>
@@ -308,7 +346,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/macos-high-sierra-cocoapods/</loc>
-    <lastmod>2017-10-10T06:08:43.664Z</lastmod>
+    <lastmod>2017-10-10T06:08:43.665Z</lastmod>
     <data>
         <display>
         <title>mac10.13 pods 命令错误</title>
@@ -350,7 +388,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/appstore-truncate/</loc>
-    <lastmod>2017-10-10T05:34:54.501Z</lastmod>
+    <lastmod>2017-10-10T05:34:54.502Z</lastmod>
     <data>
         <display>
         <title>如何实现AppStore查看更多的方法</title>
@@ -370,7 +408,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/bang-fastimagecache/</loc>
-    <lastmod>2017-10-10T05:34:24.597Z</lastmod>
+    <lastmod>2017-10-10T05:34:24.598Z</lastmod>
     <data>
         <display>
         <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
@@ -391,7 +429,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/about-me/</loc>
-    <lastmod>2017-10-10T05:24:02.848Z</lastmod>
+    <lastmod>2017-10-10T05:24:02.849Z</lastmod>
     <data>
         <display>
         <title>个人资料页</title>
@@ -405,26 +443,8 @@
 
     
   <url>
-    <loc>https://madordie.github.io/post/about-change-blog/</loc>
-    <lastmod>2017-10-09T05:01:29.582Z</lastmod>
-    <data>
-        <display>
-        <title>博客迁移公告</title>
-        <pubTime>2016-07-05T05:43:36.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="公告" url="https://madordie.github.io/categories/%E5%85%AC%E5%91%8A/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://madordie.github.io/post/use-hexo-setup-blog/</loc>
-    <lastmod>2017-10-09T05:01:03.357Z</lastmod>
+    <lastmod>2017-10-09T05:01:03.358Z</lastmod>
     <data>
         <display>
         <title>hexo的博客让百度收录</title>
@@ -444,7 +464,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/swift-build-times/</loc>
-    <lastmod>2017-10-09T05:00:20.020Z</lastmod>
+    <lastmod>2017-10-09T05:00:20.021Z</lastmod>
     <data>
         <display>
         <title>Swift 编译时性能优化笔记</title>
@@ -486,7 +506,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/note/</loc>
-    <lastmod>2017-10-09T05:00:00.502Z</lastmod>
+    <lastmod>2017-10-09T05:00:00.503Z</lastmod>
     <data>
         <display>
         <title>开发小记</title>
@@ -506,7 +526,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/mac-high-sierra-open-with-external/</loc>
-    <lastmod>2017-10-09T04:59:40.197Z</lastmod>
+    <lastmod>2017-10-09T04:59:40.198Z</lastmod>
     <data>
         <display>
         <title>mac10.13依旧让Xcode支持打开终端</title>
@@ -670,7 +690,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/reverse-ios-dump-decrypted/</loc>
-    <lastmod>2017-10-09T04:57:30.933Z</lastmod>
+    <lastmod>2017-10-09T04:57:30.934Z</lastmod>
     <data>
         <display>
         <title>iOS逆向-砸壳(cycript/clutch)</title>
@@ -690,7 +710,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/reverse-ios-class-dump/</loc>
-    <lastmod>2017-10-09T04:57:22.748Z</lastmod>
+    <lastmod>2017-10-09T04:57:22.749Z</lastmod>
     <data>
         <display>
         <title>iOS逆向-class-dump工具</title>
@@ -730,7 +750,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/reactivecocoa-ready-to-use/</loc>
-    <lastmod>2017-10-09T04:57:07.923Z</lastmod>
+    <lastmod>2017-10-09T04:57:07.924Z</lastmod>
     <data>
         <display>
         <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
@@ -750,7 +770,7 @@
     
   <url>
     <loc>https://madordie.github.io/post/ios-automation-jenkins-configuration/</loc>
-    <lastmod>2017-10-09T04:56:16.540Z</lastmod>
+    <lastmod>2017-10-09T04:56:16.541Z</lastmod>
     <data>
         <display>
         <title>iOS自动化-Jenkins环境搭建</title>

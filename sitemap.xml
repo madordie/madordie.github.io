@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/</loc>
+    
+    <lastmod>2018-05-25T05:52:28.922Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/about-change-blog/</loc>
+    
+    <lastmod>2018-05-25T03:57:08.107Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/reverse-ios-creat-cydia-sources/</loc>
     
     <lastmod>2018-04-02T11:04:41.060Z</lastmod>
@@ -18,7 +32,7 @@
   <url>
     <loc>https://madordie.github.io/post/ios-tool-configurator-get-udid/</loc>
     
-    <lastmod>2017-12-07T10:00:29.377Z</lastmod>
+    <lastmod>2017-12-07T10:00:29.378Z</lastmod>
     
   </url>
   
@@ -67,7 +81,7 @@
   <url>
     <loc>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</loc>
     
-    <lastmod>2017-10-11T03:37:40.489Z</lastmod>
+    <lastmod>2017-10-11T03:37:40.490Z</lastmod>
     
   </url>
   
@@ -95,7 +109,7 @@
   <url>
     <loc>https://madordie.github.io/post/debug-swift-notifa-frame/</loc>
     
-    <lastmod>2017-10-11T03:37:39.822Z</lastmod>
+    <lastmod>2017-10-11T03:37:39.823Z</lastmod>
     
   </url>
   
@@ -109,14 +123,14 @@
   <url>
     <loc>https://madordie.github.io/post/push-queue-for-navigation/</loc>
     
-    <lastmod>2017-10-11T03:05:55.190Z</lastmod>
+    <lastmod>2017-10-11T03:05:55.191Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/macos-high-sierra-cocoapods/</loc>
     
-    <lastmod>2017-10-10T06:08:43.664Z</lastmod>
+    <lastmod>2017-10-10T06:08:43.665Z</lastmod>
     
   </url>
   
@@ -130,49 +144,42 @@
   <url>
     <loc>https://madordie.github.io/post/appstore-truncate/</loc>
     
-    <lastmod>2017-10-10T05:34:54.501Z</lastmod>
+    <lastmod>2017-10-10T05:34:54.502Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/bang-fastimagecache/</loc>
     
-    <lastmod>2017-10-10T05:34:24.597Z</lastmod>
+    <lastmod>2017-10-10T05:34:24.598Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/about/index.html</loc>
     
-    <lastmod>2017-10-10T05:26:27.404Z</lastmod>
+    <lastmod>2017-10-10T05:26:27.405Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/about-me/</loc>
     
-    <lastmod>2017-10-10T05:24:02.848Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/about-change-blog/</loc>
-    
-    <lastmod>2017-10-09T05:01:29.582Z</lastmod>
+    <lastmod>2017-10-10T05:24:02.849Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/use-hexo-setup-blog/</loc>
     
-    <lastmod>2017-10-09T05:01:03.357Z</lastmod>
+    <lastmod>2017-10-09T05:01:03.358Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/swift-build-times/</loc>
     
-    <lastmod>2017-10-09T05:00:20.020Z</lastmod>
+    <lastmod>2017-10-09T05:00:20.021Z</lastmod>
     
   </url>
   
@@ -186,14 +193,14 @@
   <url>
     <loc>https://madordie.github.io/post/note/</loc>
     
-    <lastmod>2017-10-09T05:00:00.502Z</lastmod>
+    <lastmod>2017-10-09T05:00:00.503Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/mac-high-sierra-open-with-external/</loc>
     
-    <lastmod>2017-10-09T04:59:40.197Z</lastmod>
+    <lastmod>2017-10-09T04:59:40.198Z</lastmod>
     
   </url>
   
@@ -249,14 +256,14 @@
   <url>
     <loc>https://madordie.github.io/post/reverse-ios-dump-decrypted/</loc>
     
-    <lastmod>2017-10-09T04:57:30.933Z</lastmod>
+    <lastmod>2017-10-09T04:57:30.934Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/reverse-ios-class-dump/</loc>
     
-    <lastmod>2017-10-09T04:57:22.748Z</lastmod>
+    <lastmod>2017-10-09T04:57:22.749Z</lastmod>
     
   </url>
   
@@ -270,14 +277,14 @@
   <url>
     <loc>https://madordie.github.io/post/reactivecocoa-ready-to-use/</loc>
     
-    <lastmod>2017-10-09T04:57:07.923Z</lastmod>
+    <lastmod>2017-10-09T04:57:07.924Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://madordie.github.io/post/ios-automation-jenkins-configuration/</loc>
     
-    <lastmod>2017-10-09T04:56:16.540Z</lastmod>
+    <lastmod>2017-10-09T04:56:16.541Z</lastmod>
     
   </url>
   
