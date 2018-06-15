@@ -282,6 +282,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/macos-high-sierra-cocoapods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="继刚">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="继刚的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/macos-high-sierra-cocoapods/" itemprop="url">mac10.13 pods 命令错误</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-29T14:03:58+08:00">
+                2017-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/macOS/" itemprop="url" rel="index">
+                    <span itemprop="name">macOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每逢升级大版本总要过搞点事情。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pod env</div><div class="line">-bash: /usr/<span class="built_in">local</span>/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory</div></pre></td></tr></table></figure>
+<p>不论是<code>pod env</code>、<code>pod update</code> 等等均报上面的错误。</p>
+<p>如果Google发现：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/44396215/cocoapods-not-working-in-macos-high-sierra" target="_blank" rel="external">ruby - CocoaPods not working in macOS High Sierra - Stack Overflow</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6778" target="_blank" rel="external">CocoaPods CLI fails in High Sierra due to change of Ruby version #6778</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096" target="_blank" rel="external">High Sierra: bad interpreter #6898</a></li>
+</ul>
+<p>事情的缘由就是这样。</p>
+<p><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096" target="_blank" rel="external">#6898</a>中道出了简单直接的解决方案：</p>
+<blockquote>
+<p>for all others:</p>
+<p><code>gem install -n /usr/local/bin cocoapods</code></p>
+<p>fixes it</p>
+</blockquote>
+<p><strong>综合起来</strong>解决这个问题是这样的：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ gem update --system</div><div class="line">$ gem uninstall cocoapods</div><div class="line">$ <span class="built_in">echo</span> <span class="string">'gem: --bindir /usr/local/bin'</span> &gt;&gt; ~/.gemrc</div><div class="line">$ sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<p>愉快的使用cocoapods吧～</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/mac-high-sierra-open-with-external/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -880,164 +1040,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/ios-automation-jenkins-configuration/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="继刚">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="继刚的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/ios-automation-jenkins-configuration/" itemprop="url">iOS自动化-Jenkins环境搭建</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T09:49:32+08:00">
-                2017-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ul>
-<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
-<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
-</ul>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
-<p> <strong>Jenkins</strong><br><em>Build great things at any scale</em><br>The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.</p>
-</blockquote>
-<p>如<a href="https://jenkins.io">官网</a>所说<code>Build great things at any scale</code></p>
-<p>从这篇文章中你将会实现：</p>
-<ul>
-<li>在Mac上多种方案安装并启动jenkins</li>
-<li>在局域网中正常访问jenkins</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/post/ios-automation-jenkins-configuration/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1092,7 +1094,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

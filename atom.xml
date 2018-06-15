@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2018-04-02T11:04:41.060Z</updated>
+  <updated>2018-06-15T03:30:45.514Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,6 +14,89 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于日志打印和过滤的那点破事</title>
+    <link href="https://madordie.github.io/post/reverse-ios-socat-watch-filter/"/>
+    <id>https://madordie.github.io/post/reverse-ios-socat-watch-filter/</id>
+    <published>2018-06-14T16:00:00.000Z</published>
+    <updated>2018-06-15T03:30:45.514Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前两天，重启电脑突然发现我的<code>iOS8</code>设备无法连接到<code>MacOS</code>了。。</p>
+<p>MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。</p>
+<p>具体报错如下：<br><code>Xcode&lt;Version 9.4 (9F1027a)&gt;</code>报错如下: (我安装过<code>Xcode10 beta1</code>)<br><img src="/images/2018-06-15-10-13-16.png" alt="Xcode报错"></p>
+<p><code>iTunes</code>报错如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。</div></pre></td></tr></table></figure></p>
+<p><img src="/images/2018-06-15-10-06-16.png" alt="iTunes报错"></p>
+<p><code>Apple Configurator2</code>报错如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">已收到设备上的意外响应。</div></pre></td></tr></table></figure></p>
+<p><img src="/images/2018-06-15-10-09-33.png" alt="Apple Configurator2报错"></p>
+<a id="more"></a>
+<p>还是 先来聊一下日志打印的几种方案吧。</p>
+<h2 id="手机可以连接到MacOS"><a href="#手机可以连接到MacOS" class="headerlink" title="手机可以连接到MacOS"></a>手机可以连接到MacOS</h2><p>这种情况是最常见的，就是能在Xcode下Debug….</p>
+<h3 id="方案一：Console-app-控制台"><a href="#方案一：Console-app-控制台" class="headerlink" title="方案一：Console.app(控制台)"></a>方案一：Console.app(控制台)</h3><p>这是MacOS自带的日志神器～ 效果顶呱呱👍👍👍，截图如下：<br><img src="/images/2018-06-15-10-23-02.png" alt="Console.app"></p>
+<p>具体用法我就不说了。。。毕竟都是中文😂</p>
+<h3 id="方案二：LogGuru"><a href="#方案二：LogGuru" class="headerlink" title="方案二：LogGuru"></a>方案二：LogGuru</h3><p><a href="https://github.com/madordie/LogGuru" target="_blank" rel="external">madordie/LogGuru</a> 也不错，很久之前fork自<a href="https://github.com/FIRHQ/LogGuru" target="_blank" rel="external">FIRHQ/LogGuru</a>，增加了直接过滤的功能，要不然速度真的很慢。。</p>
+<p>只要插入USB，即可显示日志，还是不错滴。。</p>
+<p><img src="/images/2018-06-15-10-29-07.png" alt="原来的截图"></p>
+<h3 id="方案三-其他的"><a href="#方案三-其他的" class="headerlink" title="方案三: 其他的"></a>方案三: 其他的</h3><p>还有很多方案，比如说命令行啊、其他的工具啊，我就不说了，我觉得 <strong>Console.app(控制台)</strong> 就够了😂</p>
+<h2 id="手机无法链接进MacOS"><a href="#手机无法链接进MacOS" class="headerlink" title="手机无法链接进MacOS"></a>手机无法链接进MacOS</h2><p>也就是最开始说的报错的情况下，可以连接进MacOS的方案均无法使用。苦逼，只能让iOS打印日志了。。</p>
+<p>下面都是 <strong>越狱环境</strong> 下的。。不越狱还有人用iOS8么😂</p>
+<p>先来看个文档：<a href="https://www.theiphonewiki.com/wiki/System_Log" target="_blank" rel="external">The iPhone Wiki/System Log</a>,这里提供了很多方案，也非常全面，值得一试。</p>
+<p>苦逼的事情是我手上的iOS8.4.1无法使用<code>syslogd to /var/log/syslog</code>插件，尝试使用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_saving_to_a_file_via_a_Python_script" target="_blank" rel="external">On-device with saving to a file via a Python script</a>的方案去解决也并不如意。。</p>
+<p>开始用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_socat" target="_blank" rel="external">On-device with socat</a>（ 在<a href="http://bbs.iosre.com" target="_blank" rel="external">iosre</a>中也有一个类似的文章：<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="external">iOS查看日志利器 —— socat</a>），说的都是相当的详细。</p>
+<h3 id="socat的坑"><a href="#socat的坑" class="headerlink" title="socat的坑"></a>socat的坑</h3><h4 id="stop没有用"><a href="#stop没有用" class="headerlink" title="stop没有用"></a>stop没有用</h4><p>如<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="external">iOS查看日志利器 —— socat</a>所说：</p>
+<blockquote>
+<p>输入watch查看，输入stop停止（不过停止貌似没用，也不知道为啥，知道的请告诉我）</p>
+</blockquote>
+<p>这个真的是没有用，所以<code>watch</code>功能就很鸡肋。。</p>
+<h4 id="没有办法实时过滤"><a href="#没有办法实时过滤" class="headerlink" title="没有办法实时过滤"></a>没有办法实时过滤</h4><p>文中提到了很多过滤条件，但是一旦开启过滤，就没有办法显示实时日志。。也就是说无法和<code>watch</code>共存。。。</p>
+<h3 id="换个姿势使用socat"><a href="#换个姿势使用socat" class="headerlink" title="换个姿势使用socat"></a>换个姿势使用socat</h3><p><code>socat</code>的日志都在终端上，不着色不说还有上面的两个很影响使用的问题。。。于是乎，为了增加过滤功能，需要通过管道将输出接入另外的命令如：<code>grep</code>等。</p>
+<p><code>socat</code>命令需要手动输入<code>watch</code>才能显示出实时命令，这个让管道并不能直接使用。这里需要借助<code>expect</code>命令。</p>
+<p>好了所有的点都通了，大致步骤如下：</p>
+<h4 id="在mac上安装expect"><a href="#在mac上安装expect" class="headerlink" title="在mac上安装expect"></a>在mac上安装expect</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install expect</div></pre></td></tr></table></figure>
+<h4 id="在mac的～-bash-profile配置"><a href="#在mac的～-bash-profile配置" class="headerlink" title="在mac的～/.bash_profile配置"></a>在mac的～/.bash_profile配置</h4><p>此处假设你的设备已经按照<a href="../reverse-ios-ssh">iOS逆向-设备ssh免密登录</a>配置好了：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</div><div class="line">    expect -c <span class="string">"</span></div><div class="line">        spawn ssh i5s \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</div><div class="line">        expect &#123;</div><div class="line">            \"&gt; \" &#123;send \"watch\n\";&#125;</div><div class="line">        &#125;</div><div class="line">    interact"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>ios-socat</code> 函数名，在命令行可以直接输入函数名调用该函数</li>
+<li><code>i5s</code> 在<code>~/.ssh/config</code>中配置的名字</li>
+</ul>
+<p>如果没有配置ssh免密呢需要这样：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</div><div class="line">    expect -c <span class="string">"</span></div><div class="line">        spawn ssh -p22 root@ios's_ip \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</div><div class="line">        expect &#123;</div><div class="line">            \"*password: \" &#123;send \"mypassword\n\";&#125;</div><div class="line">            \"&gt; \" &#123;send \"watch\n\";&#125;</div><div class="line">        &#125;</div><div class="line">    interact"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>-p22</code> 端口号，22是默认不用写，但是其他的需要写。</li>
+<li><code>ios&#39;s_ip</code> iOS设备的ip。</li>
+<li><code>mypassword</code> iOS设备密码</li>
+<li>这个我没测。。大致如此，我对<code>expect</code>的语法也不是很熟</li>
+</ul>
+<p>最后别忘了让<code>~/.bash_profile</code>生效：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> ~/.bash_profile</div></pre></td></tr></table></figure></p>
+<p>然后只需要在命令行输入<code>ios-socat</code>就可以看到蹭蹭蹭的日志打印咯。。至于用什么管道啊都不是问题。</p>
+<p>比如：<br>只显示包含<code>iosre</code>关键字的日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ios-socat | grep iosre</div></pre></td></tr></table></figure>
+<h4 id="晋级用法"><a href="#晋级用法" class="headerlink" title="晋级用法"></a>晋级用法</h4><ul>
+<li>我的iOS设备通过<code>iproxy</code>来进行端口映射。具体用法移步<a href="https://www.google.com/search?q=iproxy&amp;oq=iproxy" target="_blank" rel="external">Google</a></li>
+<li><p>通过<code>ios-socat &gt; ~/Desktop/ios.log</code> 然后下载<a href="https://itunes.apple.com/cn/app/logtail/id1073404370?mt=12" target="_blank" rel="external">LogTail</a>，剩下的摸索一下咯</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2></li>
+</ul>
+<p>我还不清楚究竟什么原因导致了<code>收到来自此设备的无效响应</code>错误，布吉岛系统修改了什么。我尝试重新安装iTunes、Xcode都无效（据说陌陌的开发为这个无法调试直接将系统降级是可以的😂）。。有老铁懂得指点下～～</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前两天，重启电脑突然发现我的&lt;code&gt;iOS8&lt;/code&gt;设备无法连接到&lt;code&gt;MacOS&lt;/code&gt;了。。&lt;/p&gt;
+&lt;p&gt;MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。&lt;/p&gt;
+&lt;p&gt;具体报错如下：&lt;br&gt;&lt;code&gt;Xcode&amp;lt;Version 9.4 (9F1027a)&amp;gt;&lt;/code&gt;报错如下: (我安装过&lt;code&gt;Xcode10 beta1&lt;/code&gt;)&lt;br&gt;&lt;img src=&quot;/images/2018-06-15-10-13-16.png&quot; alt=&quot;Xcode报错&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iTunes&lt;/code&gt;报错如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2018-06-15-10-06-16.png&quot; alt=&quot;iTunes报错&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Apple Configurator2&lt;/code&gt;报错如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;已收到设备上的意外响应。&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2018-06-15-10-09-33.png&quot; alt=&quot;Apple Configurator2报错&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+    
+      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
+    
+  </entry>
   
   <entry>
     <title>iOS逆向-创建Cydia源</title>
@@ -1359,31 +1442,6 @@
     
     
       <category term="FastImageCache" scheme="https://madordie.github.io/tags/FastImageCache/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>debug-_SwiftValue-unsignedIntegerValue</title>
-    <link href="https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/"/>
-    <id>https://madordie.github.io/post/debug-SwiftValue-unsignedIntegerValue/</id>
-    <published>2017-04-17T06:05:09.000Z</published>
-    <updated>2017-10-11T03:37:40.490Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>crash:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let attr = try? NSMutableAttributedString(data: data,</div><div class="line">                                          options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,</div><div class="line">                                                    NSCharacterEncodingDocumentAttribute: String.Encoding.utf8],</div><div class="line">                                          documentAttributes:nil)</div><div class="line">// log:</div><div class="line">2017-04-17 14:04:38.140 [41275:463875] -[_SwiftValue unsignedIntegerValue]: unrecognized selector sent to instance 0x608000256620</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>WTF! 这个方法启动时不能直接调用，要异步？</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;crash:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;let attr = try? NSMutableAttributedString(data: data,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                                          options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                                                    NSCharacterEncodingDocumentAttribute: String.Encoding.utf8],&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                                          documentAttributes:nil)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;// log:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2017-04-17 14:04:38.140 [41275:463875] -[_SwiftValue unsignedIntegerValue]: unrecognized selector sent to instance 0x608000256620&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="DEBUG" scheme="https://madordie.github.io/tags/DEBUG/"/>
     
   </entry>
   
