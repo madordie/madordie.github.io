@@ -38,9 +38,11 @@ apt-get install nginx
 
 #### 生成依赖
 
+更新插件需要重新执行哟。。
+
 ```sh
 $ cd /opt/cydia
-$ dpkg-scanpackages -m . /dev/null > Packages
+$ dpkg-scanpackages -m ./debs /dev/null > Packages
 $ bzip2 Packages
 ```
 
@@ -61,6 +63,7 @@ $ apt-get update
 #### 扔出去
 
 ```sh
+$ cd /var/www/html
 $ ln -s /opt/cydia cydia
 $ /etc/init.d/nginx start
 ```
