@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="构建,Fastlane," />
+  <meta name="keywords" content="Sketchplugin," />
 
 
 
@@ -81,17 +81,19 @@
 
 
 
-<meta name="description" content="之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！回看之前的build-ipa-sh.md确实比较僵硬。自动化还是很棒的。">
-<meta name="keywords" content="构建,Fastlane">
+<meta name="description" content="Sketch 模块同步插件通过该插件可以将sketch中的画板转换为data然后上传至服务器，并能通过插件将服务器的data下载至本地还原为之前的画板。">
+<meta name="keywords" content="Sketchplugin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fastlane自动化笔记">
-<meta property="og:url" content="https://madordie.github.io/post/fastlane-note/index.html">
+<meta property="og:title" content="sketech模块同步插件">
+<meta property="og:url" content="https://madordie.github.io/post/sync-sketchplugin/index.html">
 <meta property="og:site_name" content="继刚的博客">
-<meta property="og:description" content="之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！回看之前的build-ipa-sh.md确实比较僵硬。自动化还是很棒的。">
-<meta property="og:updated_time" content="2017-10-09T04:17:43.185Z">
+<meta property="og:description" content="Sketch 模块同步插件通过该插件可以将sketch中的画板转换为data然后上传至服务器，并能通过插件将服务器的data下载至本地还原为之前的画板。">
+<meta property="og:image" content="https://github.com/madordie/sync-sketch-plugin/blob/master/Untitled.gif?raw=true">
+<meta property="og:updated_time" content="2018-06-21T10:33:58.996Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fastlane自动化笔记">
-<meta name="twitter:description" content="之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！回看之前的build-ipa-sh.md确实比较僵硬。自动化还是很棒的。">
+<meta name="twitter:title" content="sketech模块同步插件">
+<meta name="twitter:description" content="Sketch 模块同步插件通过该插件可以将sketch中的画板转换为data然后上传至服务器，并能通过插件将服务器的data下载至本地还原为之前的画板。">
+<meta name="twitter:image" content="https://github.com/madordie/sync-sketch-plugin/blob/master/Untitled.gif?raw=true">
 
 
 
@@ -121,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://madordie.github.io/post/fastlane-note/"/>
+  <link rel="canonical" href="https://madordie.github.io/post/sync-sketchplugin/"/>
 
 
 
 
 
-  <title>Fastlane自动化笔记 | 继刚的博客</title>
+  <title>sketech模块同步插件 | 继刚的博客</title>
   
 
 
@@ -283,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/fastlane-note/">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/sync-sketchplugin/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="继刚">
@@ -300,7 +302,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Fastlane自动化笔记</h2>
+          <h2 class="post-title" itemprop="name headline">sketech模块同步插件</h2>
         
 
         <div class="post-meta">
@@ -312,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-04T18:14:07+08:00">
-                2017-01-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T18:33:47+08:00">
+                2018-06-21
               </time>
             
 
@@ -335,8 +337,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
                   </a>
                 </span>
 
@@ -372,27 +374,47 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！<br>回看之前的<a href="../build-ipa-sh">build-ipa-sh.md</a>确实比较僵硬。自动化还是很棒的。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Sketch-模块同步插件"><a href="#Sketch-模块同步插件" class="headerlink" title="Sketch 模块同步插件"></a>Sketch 模块同步插件</h2><p>通过该插件可以将sketch中的画板转换为data然后上传至服务器，并能通过插件将服务器的data下载至本地还原为之前的画板。</p>
+<p><img src="https://github.com/madordie/sync-sketch-plugin/blob/master/Untitled.gif?raw=true" alt="预览"></p>
 <a id="more"></a>
-<h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><p>  (<a href="http://icyleaf.com" target="_blank" rel="external">@icyleaf</a>)在<a href="https://icyleaf.com/2016/07/intro-fastlane-automation-for-ios-and-android/" target="_blank" rel="external">Fastlane - iOS 和 Android 的自动化构建工具</a>中说到：</p>
-<blockquote>
-<p>Fastlane 提供的流程的众多工具都是可以独立存在和使用（提供 cli 命令），也可以统一由 fastlane 来控制。它在使用中提出了两个概念：</p>
-<pre><code>- action: Fastlane 的插件，截至当前内置 165 个至多，不过每个动作的颗粒度大小不一。查看详情
-- lane: Fastlane 的任务（或者可以理解为命令），一个可以包含多个 lanes，通过 fastlane cli 传入制定的 lane 来执行。
-</code></pre></blockquote>
-<p>  自我感觉这句话这个对理解和使用很重要！</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>  Fastlane已被Fabric收购，所以按照其安装也很随意(<a href="https://fabric.io/features/distribution" target="_blank" rel="external">戳我配置</a>)。<br>  对于打包，</p>
-<h1 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h1><ul>
-<li><a href="http://icyleaf.com/2016/07/fastlane-in-action/" target="_blank" rel="external">深入浅出 Fastlane 一看你就懂</a></li>
-<li><a href="http://blog.fir.im/fir_im_weekly160505" target="_blank" rel="external">fir.im weekly - 「 持续集成 」实践教程合集</a></li>
-<li><a href="https://everettjf.github.io/2015/09/08/ios-ci-with-fastlane" target="_blank" rel="external">使用fastlane实现iOS持续集成</a></li>
-<li><a href="https://docs.fastlane.tools" target="_blank" rel="external">fastlane docs</a></li>
-<li><a href="https://github.com/fastlane/fastlane" target="_blank" rel="external">fastlane GitHub</a></li>
-<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part01" target="_blank" rel="external">Fastlane实战（一）：移动开发自动化之道</a></li>
-<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part02" target="_blank" rel="external">Fastlane实战（二）：Action和Plugin机制</a></li>
-<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part03" target="_blank" rel="external">Fastlane实战（三）：Fastlane在Android平台的应用</a></li>
-<li><a href="http://www.infoq.com/cn/articles/fastlane-automatic-testing" target="_blank" rel="external">Fastlane实战（四）：自动化测试篇</a></li>
-<li><a href="http://www.infoq.com/cn/articles/fastlane-pro-tips" target="_blank" rel="external">Fastlane实战（五）：高级用法</a></li>
+<h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><p>功能的实现都是通过<a href="https://www.sketchapp.com" target="_blank" rel="external">Sketch.app</a>的API实现</p>
+<p>其核心功能就俩：</p>
+<ul>
+<li>将画板编码</li>
+<li>解码为画板</li>
+</ul>
+<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><p>由于功能并不复杂，但是sketch并没有完整的API文档，所以只能摸索着来，最后总结一下用到的API，只有下面的几个重要函数。</p>
+<p>但是要找到这些API并不是随手一个Google可以得到，现将其列出，方便你能随手Google一下就得到：）</p>
+<p>另外，下面几部分的代码都通过<a href="https://github.com/ccgus/CocoaScript" target="_blank" rel="external">CocoaScript</a>的语法，所以可以直接应用到插件中。</p>
+<p>为了能更好的理解和使用相关API，我尽量详细。</p>
+<h3 id="将画板编码"><a href="#将画板编码" class="headerlink" title="将画板编码"></a>将画板编码</h3><p>本节会将所有已经选中的层所对应的画板转换为json字符串。</p>
+<p>ps.</p>
+<ul>
+<li><code>层</code>包含sketch能够呈现的所有组件，包括但不限于：文本、矩形、图片、画板。</li>
+<li>如果选中的层没有画板，将会被忽略。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> selection = context.selection,</div><div class="line">    artboards = [];</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; selection.count(); i++) &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="comment">// 取出选中的所有画板</span></div><div class="line">        <span class="keyword">var</span> artboard = selection[i].parentArtboard();</div><div class="line">        <span class="keyword">if</span> (artboards.indexOf(artboard) == <span class="number">-1</span>) &#123;</div><div class="line">            <span class="comment">// 过滤重复的画板</span></div><div class="line">            artboards.push(artboard);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">catch</span> (error) &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (artboards.length == <span class="number">0</span>) &#123;</div><div class="line">    <span class="comment">// 并无选中的任何画板</span></div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 此时 artboards 数组， 即为当前选中的所有画板</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> selectionStrings = [];</div><div class="line">artboards.forEach(<span class="function"><span class="params">artboard</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="comment">// 将画板转为JSON字符串，并保存在 selectionStrings 数组中</span></div><div class="line">        selectionStrings.push(MSJSONDataArchiver.archiveStringWithRootObject_error_(artboard.immutableModelObject(), nil));</div><div class="line">    &#125; <span class="keyword">catch</span> (error) &#123;&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 将selectionStrings数组转为数组JSON字符串</span></div><div class="line"><span class="keyword">var</span> selectionsString = <span class="string">'['</span> + selectionStrings.join(<span class="string">','</span>) + <span class="string">']'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 此时selectionsString字符串即为当前选中的所有画板的json数组字符串形式。</span></div></pre></td></tr></table></figure>
+<h3 id="解码为画板"><a href="#解码为画板" class="headerlink" title="解码为画板"></a>解码为画板</h3><p>接上一节的<code>selectionsString</code>。</p>
+<p>先将<code>selectionsString</code>转为<code>page</code>的json数据，然后解析为一个新的<code>page</code>，并居中展示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> selectionsString = res.layers,</div><div class="line">    pageUUID = NSUUID.UUID().UUIDString(),</div><div class="line">    <span class="comment">// 用page的JSON包裹selectionsString，同时生成一个新的UUID</span></div><div class="line">    pageString = <span class="string">'&#123;"_class":"page","do_objectID":"'</span> + pageUUID + <span class="string">'","layers":'</span> + selectionsString + <span class="string">'&#125;'</span>,</div><div class="line">    data = NSString.alloc().initWithString(pageString).dataUsingEncoding_(<span class="number">4</span>),</div><div class="line">    <span class="comment">// 将JSON解码</span></div><div class="line">    unarchive = MSJSONDataUnarchiver.unarchiveObjectWithData(data),</div><div class="line">    <span class="comment">// 生成新的page</span></div><div class="line">    newPage = MSPage.alloc().initWithImmutableModelObject(unarchive),</div><div class="line">    <span class="comment">// 插入一个新的page</span></div><div class="line">    page = MSDocument.currentDocument().addBlankPage();</div><div class="line"><span class="comment">// 将生成的page所有的layers转移到新的page里面</span></div><div class="line">page.addLayers(newPage.layers());</div><div class="line"><span class="comment">// 为page设置哥名字</span></div><div class="line">page.setName(res.project);</div><div class="line"><span class="comment">// page剧中</span></div><div class="line">MSDocument.currentDocument().contentDrawView().centerLayersInCanvas();</div><div class="line">MSDocument.currentDocument().pageTreeLayoutDidChange();</div></pre></td></tr></table></figure>
+<h3 id="其他代码"><a href="#其他代码" class="headerlink" title="其他代码"></a>其他代码</h3><p>关于别的后端操作啊 什么的我认为并不是核心代码。那代码谁都会写。。毕竟我写这个的时候只有2周的摸索经验😂，还是不聊这个了。</p>
+<ul>
+<li><code>sync-npm</code> 插件相关的目录，采用<a href="https://github.com/skpm/skpm" target="_blank" rel="external">skpm</a>构建</li>
+<li><code>sync-server</code> 插件对应的服务端代码，采用<a href="https://nodejs.org/en/" target="_blank" rel="external">Node-js</a>构建</li>
+</ul>
+<h2 id="目前还存在的问题"><a href="#目前还存在的问题" class="headerlink" title="目前还存在的问题"></a>目前还存在的问题</h2><ul>
+<li>如果是带图片的画板，并且较多的时候，<code>selectionsString</code>会很大，传输速度有点慢。。</li>
+<li>UI交互有点吃藕。。最好开发一套macOS的UI，但是我还是只菜鸡。。</li>
+<li>项目的代码我只是简简单单的连学带写2周做出来的。。写的不是一般的渣，见谅。。</li>
+</ul>
+<h2 id="你可能需要的参考资料"><a href="#你可能需要的参考资料" class="headerlink" title="你可能需要的参考资料"></a>你可能需要的参考资料</h2><ul>
+<li>Sketch的都文件：<a href="https://github.com/abynim/Sketch-Headers" target="_blank" rel="external">Sketch-Headers</a>，可以省去自己<a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="external">class-dump</a>的麻烦.</li>
+<li>插件开发神器：<a href="https://github.com/skpm/skpm" target="_blank" rel="external">skpm</a></li>
+<li>用来调试很不错：<a href="https://github.com/skpm/sketch-dev-tools" target="_blank" rel="external">Sketch DevTools</a></li>
+<li>官方开发文档：<a href="https://developer.sketchapp.com" target="_blank" rel="external">Sketch Developer</a></li>
+<li>插件开发社区：<a href="https://sketchplugins.com" target="_blank" rel="external">Sketch Developers</a></li>
+<li>插件使用的语言：<a href="https://github.com/ccgus/CocoaScript" target="_blank" rel="external">CocoaScript</a>，但是并不仅限这一种哟</li>
+<li>推荐搜索引擎: <a href="https://www.google.com" target="_blank" rel="external">Google</a>，别问我为什么用Google不用百度，我是不会告诉你sketch插件开发本来资料就少，国内更少的。。</li>
 </ul>
 
       
@@ -411,9 +433,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/构建/" rel="tag"># 构建</a>
-          
-            <a href="/tags/Fastlane/" rel="tag"># Fastlane</a>
+            <a href="/tags/Sketchplugin/" rel="tag"># Sketchplugin</a>
           
         </div>
       
@@ -426,18 +446,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/swift-build-times/" rel="next" title="Swift 编译时性能优化笔记">
-                <i class="fa fa-chevron-left"></i> Swift 编译时性能优化笔记
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/elegant-to-use-swiftlint/" rel="prev" title="优雅的使用SwiftLint">
-                优雅的使用SwiftLint <i class="fa fa-chevron-right"></i>
+              <a href="/post/reverse-ios-socat-watch-filter/" rel="prev" title="关于日志打印和过滤的那点破事">
+                关于日志打印和过滤的那点破事 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -610,7 +626,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本知识"><span class="nav-number">1.</span> <span class="nav-text">基本知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文章"><span class="nav-number">3.</span> <span class="nav-text">文章</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sketch-模块同步插件"><span class="nav-number">1.</span> <span class="nav-text">Sketch 模块同步插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心功能"><span class="nav-number">2.</span> <span class="nav-text">核心功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心代码"><span class="nav-number">3.</span> <span class="nav-text">核心代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将画板编码"><span class="nav-number">3.1.</span> <span class="nav-text">将画板编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解码为画板"><span class="nav-number">3.2.</span> <span class="nav-text">解码为画板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他代码"><span class="nav-number">3.3.</span> <span class="nav-text">其他代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目前还存在的问题"><span class="nav-number">4.</span> <span class="nav-text">目前还存在的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你可能需要的参考资料"><span class="nav-number">5.</span> <span class="nav-text">你可能需要的参考资料</span></a></li></ol></div>
             
 
           </div>
@@ -788,9 +804,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://madordie.github.io/post/fastlane-note/';
-          this.page.identifier = 'post/fastlane-note/';
-          this.page.title = 'Fastlane自动化笔记';
+          this.page.url = 'https://madordie.github.io/post/sync-sketchplugin/';
+          this.page.identifier = 'post/sync-sketchplugin/';
+          this.page.title = 'sketech模块同步插件';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://madordie.disqus.com/embed.js';
