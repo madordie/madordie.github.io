@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2018-06-21T10:33:58.996Z</updated>
+  <updated>2018-06-21T10:39:43.755Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/post/sync-sketchplugin/"/>
     <id>https://madordie.github.io/post/sync-sketchplugin/</id>
     <published>2018-06-21T10:33:47.000Z</published>
-    <updated>2018-06-21T10:33:58.996Z</updated>
+    <updated>2018-06-21T10:39:43.755Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Sketch-模块同步插件"><a href="#Sketch-模块同步插件" class="headerlink" title="Sketch 模块同步插件"></a>Sketch 模块同步插件</h2><p>通过该插件可以将sketch中的画板转换为data然后上传至服务器，并能通过插件将服务器的data下载至本地还原为之前的画板。</p>
 <p><img src="https://github.com/madordie/sync-sketch-plugin/blob/master/Untitled.gif?raw=true" alt="预览"></p>
@@ -64,6 +64,7 @@
 <li>插件使用的语言：<a href="https://github.com/ccgus/CocoaScript" target="_blank" rel="external">CocoaScript</a>，但是并不仅限这一种哟</li>
 <li>推荐搜索引擎: <a href="https://www.google.com" target="_blank" rel="external">Google</a>，别问我为什么用Google不用百度，我是不会告诉你sketch插件开发本来资料就少，国内更少的。。</li>
 </ul>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>老规矩：<a href="https://github.com/madordie/sync-sketch-plugin" target="_blank" rel="external">madordie/sync-sketch-plugin</a></p>
 ]]></content>
     
     <summary type="html">
