@@ -130,3 +130,7 @@ MSDocument.currentDocument().pageTreeLayoutDidChange();
 - 插件开发社区：[Sketch Developers](https://sketchplugins.com)
 - 插件使用的语言：[CocoaScript](https://github.com/ccgus/CocoaScript)，但是并不仅限这一种哟
 - 推荐搜索引擎: [Google](https://www.google.com)，别问我为什么用Google不用百度，我是不会告诉你sketch插件开发本来资料就少，国内更少的。。
+
+## 源码
+
+老规矩：[madordie/sync-sketch-plugin](https://github.com/madordie/sync-sketch-plugin)
