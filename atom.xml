@@ -86,7 +86,7 @@
     <link href="https://madordie.github.io/post/reverse-ios-socat-watch-filter/"/>
     <id>https://madordie.github.io/post/reverse-ios-socat-watch-filter/</id>
     <published>2018-06-14T16:00:00.000Z</published>
-    <updated>2018-06-15T03:30:45.514Z</updated>
+    <updated>2018-07-02T11:05:37.344Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前两天，重启电脑突然发现我的<code>iOS8</code>设备无法连接到<code>MacOS</code>了。。</p>
 <p>MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。</p>
@@ -143,6 +143,7 @@
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2></li>
 </ul>
 <p>我还不清楚究竟什么原因导致了<code>收到来自此设备的无效响应</code>错误，布吉岛系统修改了什么。我尝试重新安装iTunes、Xcode都无效（据说陌陌的开发为这个无法调试直接将系统降级是可以的😂）。。有老铁懂得指点下～～</p>
+<p>目前虽然上面都可以用，但是看个日志并不能满足我的野心，最后在移动硬盘里做了一个10.12的系统😂，用了Console.app…</p>
 ]]></content>
     
     <summary type="html">
