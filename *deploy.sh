@@ -50,6 +50,7 @@ if [ $opt = 's' ]; then
 elif [ $opt = 'b' ]; then
     backup
 elif [ $opt = 'p' ]; then
+    setproxy
     hexo clean
     hexo generate -d
     echo -e ' --> 已成功部署.\n'
