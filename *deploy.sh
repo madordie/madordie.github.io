@@ -55,7 +55,6 @@ elif [ $opt = 'p' ]; then
     sleep 1
     python auto-push-sitemap.py
     echo -e ' --> 已上传站图.\n'
-    sleep 1
     backup
 fi
 
