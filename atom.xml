@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2018-07-25T06:39:02.403Z</updated>
+  <updated>2018-07-25T10:06:59.566Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://madordie.github.io/post/debug-sth-from-crash/"/>
     <id>https://madordie.github.io/post/debug-sth-from-crash/</id>
     <published>2018-07-25T02:38:04.000Z</published>
-    <updated>2018-07-25T06:39:02.403Z</updated>
+    <updated>2018-07-25T10:06:59.566Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不相邪的态度，决定尝试一番。然后将此事记录如下文。</p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不信邪的态度，决定尝试一番。然后将此事记录如下文。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*** Terminating app due to uncaught exception &apos;NSInvalidArgumentException&apos;, reason: &apos;-[__NSCFConstantString hasPrefix:]: nil argument&apos;</span><br><span class="line">*** First throw call stack:</span><br><span class="line">(0x18521ed8c .....)</span><br><span class="line">libc++abi.dylib: terminating with uncaught exception of type NSException</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="崩溃表现"><a href="#崩溃表现" class="headerlink" title="崩溃表现"></a>崩溃表现</h2><p>那老哥说他的APP运行之后，什么都不做，等待10s之后就会闪退，闪退的最重要信息是上面，栈结构上没有函数信息，只有地址。</p>
@@ -101,7 +101,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不相邪的态度，决定尝试一番。然后将此事记录如下文。&lt;/p&gt;
+      &lt;p&gt;昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不信邪的态度，决定尝试一番。然后将此事记录如下文。&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;*** Terminating app due to uncaught exception &amp;apos;NSInvalidArgumentException&amp;apos;, reason: &amp;apos;-[__NSCFConstantString hasPrefix:]: nil argument&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** First throw call stack:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;(0x18521ed8c .....)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;libc++abi.dylib: terminating with uncaught exception of type NSException&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>

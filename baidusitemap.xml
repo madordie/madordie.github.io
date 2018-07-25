@@ -4,16 +4,14 @@
 
     
   <url>
-    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
-    <lastmod>2018-07-25T08:52:17.454Z</lastmod>
+    <loc>https://madordie.github.io/post/debug-sth-from-crash/</loc>
+    <lastmod>2018-07-25T10:06:59.566Z</lastmod>
     <data>
         <display>
-        <title>用CollectionView简化代码，专注于业务和UI</title>
-        <pubTime>2017-10-11T16:00:00.000Z</pubTime>
+        <title>从一个常见的崩溃开始</title>
+        <pubTime>2018-07-25T02:38:04.000Z</pubTime>
         
-        <tag>tool</tag>
-         
-        <tag>UICollectionView</tag>
+        <tag>DEBUG</tag>
          
          
            
@@ -26,14 +24,16 @@
 
     
   <url>
-    <loc>https://madordie.github.io/post/debug-sth-from-crash/</loc>
-    <lastmod>2018-07-25T06:39:02.403Z</lastmod>
+    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
+    <lastmod>2018-07-25T08:52:17.454Z</lastmod>
     <data>
         <display>
-        <title>从一个常见的崩溃开始</title>
-        <pubTime>2018-07-25T02:38:04.000Z</pubTime>
+        <title>用CollectionView简化代码，专注于业务和UI</title>
+        <pubTime>2017-10-11T16:00:00.000Z</pubTime>
         
-        <tag>DEBUG</tag>
+        <tag>tool</tag>
+         
+        <tag>UICollectionView</tag>
          
          
            
