@@ -12,6 +12,18 @@ opt='p'
 # b: 备份
 # ----------------------------
 
+function setproxy() {
+    # export {HTTP,HTTPS,FTP}_PROXY="http://127.0.0.1:3128" 也可以设置http代理
+    export ALL_PROXY=socks5://127.0.0.1:1081
+    echo "当前IP：`curl -s ip.sb`"
+}
+
+function unsetproxy() {
+    # unset {HTTP,HTTPS,FTP}_PROXY
+    unset ALL_PROXY
+    echo "当前IP：`curl -s ip.sb`"
+}
+
 # 确认文章URL没有重复
 function checkout_URLs() {
     rm -rf .tmp-*
