@@ -426,7 +426,7 @@
     <link href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/"/>
     <id>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</id>
     <published>2017-10-11T16:00:00.000Z</published>
-    <updated>2017-10-31T03:44:10.160Z</updated>
+    <updated>2018-07-25T08:52:17.454Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><code>UITableView</code>作为高级控件被开发者广泛使用，同样的，<code>UICollectionView</code>由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。</p>
 <p>在业务需求中，常规布局，大多数都是采用<code>UITableView</code>进行的，但是有痛点：</p>
@@ -526,6 +526,10 @@
 <p>PS.对于同一个List，需要注意cell的复用和多个cellModel同时绑定一个cell时，属性的设置。</p>
 <h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p><a href="https://github.com/madordie/collectionview-simplify-business" target="_blank" rel="noopener">Demo</a>部分没有写跳转相关内容，但是别的都有了😂</p>
 <h3 id="别的"><a href="#别的" class="headerlink" title="别的"></a>别的</h3><p>好像没了吧～，想起来了再补充咯</p>
+<h3 id="偶然看到一个类似的文章"><a href="#偶然看到一个类似的文章" class="headerlink" title="偶然看到一个类似的文章"></a>偶然看到一个类似的文章</h3><blockquote>
+<p><a href="https://www.appcoda.com.tw/tableview-mvvm/" target="_blank" rel="noopener">Table View 太複雜？利用 MVVM 和 Protocol 就可以為它重構瘦身！</a></p>
+</blockquote>
+<p>昨天(2018.7.24)翻文章的时候看到这个文章，然后将文章和代码捋了一下，发现这才是MVVM吧。觉得不错，贴出来～</p>
 ]]></content>
     
     <summary type="html">
