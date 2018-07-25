@@ -33,6 +33,7 @@ function checkout_URLs() {
 
 # 备份
 function backup() {
+    echo "最后更新日期:" `date` > README.md
     git add .
     git commit -am "backup"
     git push https://github.com/madordie/madordie.github.io.git hexo
