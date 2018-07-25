@@ -50,11 +50,14 @@ if [ $opt = 's' ]; then
 elif [ $opt = 'b' ]; then
     backup
 elif [ $opt = 'p' ]; then
+    setproxy
     hexo clean
     hexo generate -d
     echo -e ' --> 已成功部署.\n'
     sleep 1
+    unsetproxy
     python auto-push-sitemap.py
+    setproxy
     echo -e ' --> 已上传站图.\n'
     backup
 fi
