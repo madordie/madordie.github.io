@@ -88,6 +88,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/reactivecocoa-ready-to-use/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-09T04:57:07.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="准备食用RAC(ReactiveCocoa)的顾虑">
@@ -376,19 +377,25 @@
 <a id="more"></a>
 <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。</p>
 <h1 id="OC简单食用方法"><a href="#OC简单食用方法" class="headerlink" title="OC简单食用方法"></a>OC简单食用方法</h1><p>先来个例子代码：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">RACSignal *RSignal = [[<span class="keyword">self</span>.R rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.R.value)];</div><div class="line">RACSignal *GSignal = [[<span class="keyword">self</span>.G rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.G.value)];</div><div class="line">RACSignal *BSignal = [[<span class="keyword">self</span>.B rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.B.value)];</div><div class="line"></div><div class="line"><span class="built_in">NSString</span>*(^valueFormat)(<span class="built_in">NSNumber</span> *value) = ^(<span class="built_in">NSNumber</span> *value) &#123;</div><div class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.0f"</span>, [value doubleValue]*<span class="number">255</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">[RSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.RVaule.text = valueFormat(x);</div><div class="line">&#125;];</div><div class="line">[GSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.GValue.text = valueFormat(x);</div><div class="line">&#125;];</div><div class="line">[BSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</div><div class="line">    <span class="keyword">self</span>.BValue.text = valueFormat(x);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">RACSignal *RSignal = [[<span class="keyword">self</span>.R rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.R.value)];</span><br><span class="line">RACSignal *GSignal = [[<span class="keyword">self</span>.G rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.G.value)];</span><br><span class="line">RACSignal *BSignal = [[<span class="keyword">self</span>.B rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.B.value)];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span>*(^valueFormat)(<span class="built_in">NSNumber</span> *value) = ^(<span class="built_in">NSNumber</span> *value) &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.0f"</span>, [value doubleValue]*<span class="number">255</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">[RSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.RVaule.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[GSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.GValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[BSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.BValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <p>是不是超级简单！</p>
 <h2 id="顾虑"><a href="#顾虑" class="headerlink" title="顾虑"></a>顾虑</h2><p>可是我有一个问题：</p>
 <ul>
 <li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。</li>
 </ul>
-<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1><p>在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a>的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift" target="_blank" rel="external">README.md</a>中有这么一段话：</p>
+<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1><p>在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="noopener">ReactiveCocoa</a>的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift" target="_blank" rel="noopener">README.md</a>中有这么一段话：</p>
 <blockquote>
-<h2 id="Objective-C-and-Swift"><a href="#Objective-C-and-Swift" class="headerlink" title="Objective-C and Swift"></a>Objective-C and Swift</h2><p>  Although ReactiveCocoa was started as an Objective-C framework, as of [version<br>  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].</p>
-<p>  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is<br>  a [bridge][Objective-C Bridging] to convert between the two. This<br>  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to<br>  use Cocoa extensions which haven’t been added to the Swift API yet.</p>
-<p>  The Objective-C API will continue to exist and be supported for the foreseeable<br>  future, but it won’t receive many improvements. For more information about using<br>  this API, please consult our [legacy documentation][].</p>
-<p>  <strong>We highly recommend that all new projects use the Swift API.</strong></p>
+<h2 id="Objective-C-and-Swift"><a href="#Objective-C-and-Swift" class="headerlink" title="Objective-C and Swift"></a>Objective-C and Swift</h2></blockquote>
+<p>  Although ReactiveCocoa was started as an Objective-C framework, as of [version<br>  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].</p>
+<blockquote>
 </blockquote>
+<p>  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is<br>  a [bridge][Objective-C Bridging] to convert between the two. This<br>  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to<br>  use Cocoa extensions which haven’t been added to the Swift API yet.</p>
+<blockquote>
+</blockquote>
+<p>  The Objective-C API will continue to exist and be supported for the foreseeable<br>  future, but it won’t receive many improvements. For more information about using<br>  this API, please consult our [legacy documentation][].</p>
+<blockquote>
+</blockquote>
+<p>  <strong>We highly recommend that all new projects use the Swift API.</strong></p>
 
       
     </div>
@@ -419,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/about-reprint-article/" rel="next" title="关于转载的文章">
-                <i class="fa fa-chevron-left"></i> 关于转载的文章
+              <a href="/post/use-hexo-setup-blog/" rel="next" title="hexo的博客让百度收录">
+                <i class="fa fa-chevron-left"></i> hexo的博客让百度收录
               </a>
             
           </div>
@@ -429,8 +436,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/use-hexo-setup-blog/" rel="prev" title="hexo的博客让百度收录">
-                hexo的博客让百度收录 <i class="fa fa-chevron-right"></i>
+              <a href="/post/about-reprint-article/" rel="prev" title="关于转载的文章">
+                关于转载的文章 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

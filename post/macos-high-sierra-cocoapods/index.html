@@ -88,6 +88,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/macos-high-sierra-cocoapods/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="每逢升级大版本总要过搞点事情。 12$ pod env-bash: /usr/local/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory 不论是pod env、pod update 等等均报上面的错误。 如">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-10T06:08:43.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mac10.13 pods 命令错误">
@@ -373,23 +374,27 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每逢升级大版本总要过搞点事情。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pod env</div><div class="line">-bash: /usr/<span class="built_in">local</span>/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pod env</span><br><span class="line">-bash: /usr/<span class="built_in">local</span>/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure>
 <p>不论是<code>pod env</code>、<code>pod update</code> 等等均报上面的错误。</p>
 <p>如果Google发现：</p>
 <ul>
-<li><a href="https://stackoverflow.com/questions/44396215/cocoapods-not-working-in-macos-high-sierra" target="_blank" rel="external">ruby - CocoaPods not working in macOS High Sierra - Stack Overflow</a></li>
-<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6778" target="_blank" rel="external">CocoaPods CLI fails in High Sierra due to change of Ruby version #6778</a></li>
-<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096" target="_blank" rel="external">High Sierra: bad interpreter #6898</a></li>
+<li><a href="https://stackoverflow.com/questions/44396215/cocoapods-not-working-in-macos-high-sierra" target="_blank" rel="noopener">ruby - CocoaPods not working in macOS High Sierra - Stack Overflow</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6778" target="_blank" rel="noopener">CocoaPods CLI fails in High Sierra due to change of Ruby version #6778</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096" target="_blank" rel="noopener">High Sierra: bad interpreter #6898</a></li>
 </ul>
 <p>事情的缘由就是这样。</p>
-<p><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096" target="_blank" rel="external">#6898</a>中道出了简单直接的解决方案：</p>
+<p><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096" target="_blank" rel="noopener">#6898</a>中道出了简单直接的解决方案：</p>
 <blockquote>
 <p>for all others:</p>
+</blockquote>
+<blockquote>
 <p><code>gem install -n /usr/local/bin cocoapods</code></p>
+</blockquote>
+<blockquote>
 <p>fixes it</p>
 </blockquote>
 <p><strong>综合起来</strong>解决这个问题是这样的：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ gem update --system</div><div class="line">$ gem uninstall cocoapods</div><div class="line">$ <span class="built_in">echo</span> <span class="string">'gem: --bindir /usr/local/bin'</span> &gt;&gt; ~/.gemrc</div><div class="line">$ sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ gem update --system</span><br><span class="line">$ gem uninstall cocoapods</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'gem: --bindir /usr/local/bin'</span> &gt;&gt; ~/.gemrc</span><br><span class="line">$ sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
 <p>愉快的使用cocoapods吧～</p>
 
       
@@ -421,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/ios-tool-collectionview-simplify-business/" rel="next" title="用CollectionView简化代码，专注于业务和UI">
-                <i class="fa fa-chevron-left"></i> 用CollectionView简化代码，专注于业务和UI
+              <a href="/post/mac-high-sierra-open-with-external/" rel="next" title="mac10.13依旧让Xcode支持打开终端">
+                <i class="fa fa-chevron-left"></i> mac10.13依旧让Xcode支持打开终端
               </a>
             
           </div>
@@ -431,8 +436,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/mac-high-sierra-open-with-external/" rel="prev" title="mac10.13依旧让Xcode支持打开终端">
-                mac10.13依旧让Xcode支持打开终端 <i class="fa fa-chevron-right"></i>
+              <a href="/post/ios-tool-collectionview-simplify-business/" rel="prev" title="用CollectionView简化代码，专注于业务和UI">
+                用CollectionView简化代码，专注于业务和UI <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

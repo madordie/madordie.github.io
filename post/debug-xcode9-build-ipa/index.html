@@ -81,17 +81,18 @@
 
 
 
-<meta name="description" content="错误输出 error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features. Error Domain=IDEProvisioningErrorDomain Code=9 “”Fangduoduo">
+<meta name="description" content="错误输出 error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.   Error Domain=IDEProvisioningErrorDomain Code=9 “”Fangduod">
 <meta name="keywords" content="构建,DEBUG">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Xcode9编译失败">
 <meta property="og:url" content="https://madordie.github.io/post/debug-xcode9-build-ipa/index.html">
 <meta property="og:site_name" content="继刚的博客">
-<meta property="og:description" content="错误输出 error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features. Error Domain=IDEProvisioningErrorDomain Code=9 “”Fangduoduo">
+<meta property="og:description" content="错误输出 error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.   Error Domain=IDEProvisioningErrorDomain Code=9 “”Fangduod">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-11T03:37:39.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xcode9编译失败">
-<meta name="twitter:description" content="错误输出 error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features. Error Domain=IDEProvisioningErrorDomain Code=9 “”Fangduoduo">
+<meta name="twitter:description" content="错误输出 error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.   Error Domain=IDEProvisioningErrorDomain Code=9 “”Fangduod">
 
 
 
@@ -374,6 +375,8 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="错误输出"><a href="#错误输出" class="headerlink" title="错误输出"></a>错误输出</h2><blockquote>
 <p>error: exportArchive: “Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.</p>
+</blockquote>
+<blockquote>
 <p>Error Domain=IDEProvisioningErrorDomain Code=9 “”Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features.” UserInfo={NSLocalizedDescription=”Fangduoduo_ent.app” requires a provisioning profile with the Push Notifications and Associated Domains features., NSLocalizedRecoverySuggestion=Add a profile to the “provisioningProfiles” dictionary in your Export Options property list.}</p>
 </blockquote>
 <a id="more"></a>
@@ -391,38 +394,98 @@
 </li>
 </ol>
 <h2 id="脚本构建"><a href="#脚本构建" class="headerlink" title="脚本构建"></a>脚本构建</h2><p><code>ipa</code>即为目标变量，具体的参看<a href="../build-ipa-sh">打包脚本</a></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">rm -rf ./build/*</div><div class="line">cat &lt;&lt; EOF &gt; ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</div><div class="line">&lt;!DOCTYPE plist PUBLIC <span class="string">"-//Apple//DTD PLIST 1.0//EN"</span> <span class="string">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span>&gt;</div><div class="line">&lt;plist version=<span class="string">"1.0"</span>&gt;</div><div class="line">&lt;dict&gt;</div><div class="line">    &lt;key&gt;compileBitcode&lt;/key&gt;</div><div class="line">    &lt;<span class="literal">true</span>/&gt;</div><div class="line">    &lt;key&gt;method&lt;/key&gt;</div><div class="line">    &lt;string&gt;enterprise&lt;/string&gt;</div><div class="line">    &lt;key&gt;provisioningProfiles&lt;/key&gt;</div><div class="line">    &lt;dict&gt;</div><div class="line">        &lt;key&gt;ershoufanglzg.fangdd.com&lt;/key&gt;</div><div class="line">        &lt;string&gt;ershoufanglzg_dis&lt;/string&gt;</div><div class="line">    &lt;/dict&gt;</div><div class="line">    &lt;key&gt;signingCertificate&lt;/key&gt;</div><div class="line">    &lt;string&gt;iPhone Distribution&lt;/string&gt;</div><div class="line">    &lt;key&gt;signingStyle&lt;/key&gt;</div><div class="line">    &lt;string&gt;manual&lt;/string&gt;</div><div class="line">    &lt;key&gt;stripSwiftSymbols&lt;/key&gt;</div><div class="line">    &lt;<span class="literal">true</span>/&gt;</div><div class="line">    &lt;key&gt;teamID&lt;/key&gt;</div><div class="line">    &lt;string&gt;J3B467DURT&lt;/string&gt;</div><div class="line">    &lt;key&gt;thinning&lt;/key&gt;</div><div class="line">    &lt;string&gt;&amp;lt;none&amp;gt;&lt;/string&gt;</div><div class="line">&lt;/dict&gt;</div><div class="line">&lt;/plist&gt;</div><div class="line">EOF</div><div class="line"></div><div class="line">xcodebuild -archivePath <span class="string">"./build/xxx.xcarchive"</span> -workspace Fangduoduo.xcworkspace -sdk iphoneos -scheme <span class="string">"Fangduoduo_ent"</span> -configuration <span class="string">"Release Inhouse"</span> archive</div><div class="line">xcodebuild -exportArchive -archivePath <span class="string">"./build/xxx.xcarchive"</span> -exportPath <span class="string">"./build/"</span> -exportOptionsPlist ./build/<span class="built_in">export</span>OptionsPlist.plist</div><div class="line"></div><div class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls ./build/*.ipa)</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ./build/*</span><br><span class="line">cat &lt;&lt; EOF &gt; ./build/exportOptionsPlist.plist</span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC <span class="string">"-//Apple//DTD PLIST 1.0//EN"</span> <span class="string">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span>&gt;</span><br><span class="line">&lt;plist version=<span class="string">"1.0"</span>&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">    &lt;key&gt;compileBitcode&lt;/key&gt;</span><br><span class="line">    &lt;<span class="literal">true</span>/&gt;</span><br><span class="line">    &lt;key&gt;method&lt;/key&gt;</span><br><span class="line">    &lt;string&gt;enterprise&lt;/string&gt;</span><br><span class="line">    &lt;key&gt;provisioningProfiles&lt;/key&gt;</span><br><span class="line">    &lt;dict&gt;</span><br><span class="line">        &lt;key&gt;ershoufanglzg.fangdd.com&lt;/key&gt;</span><br><span class="line">        &lt;string&gt;ershoufanglzg_dis&lt;/string&gt;</span><br><span class="line">    &lt;/dict&gt;</span><br><span class="line">    &lt;key&gt;signingCertificate&lt;/key&gt;</span><br><span class="line">    &lt;string&gt;iPhone Distribution&lt;/string&gt;</span><br><span class="line">    &lt;key&gt;signingStyle&lt;/key&gt;</span><br><span class="line">    &lt;string&gt;manual&lt;/string&gt;</span><br><span class="line">    &lt;key&gt;stripSwiftSymbols&lt;/key&gt;</span><br><span class="line">    &lt;<span class="literal">true</span>/&gt;</span><br><span class="line">    &lt;key&gt;teamID&lt;/key&gt;</span><br><span class="line">    &lt;string&gt;J3B467DURT&lt;/string&gt;</span><br><span class="line">    &lt;key&gt;thinning&lt;/key&gt;</span><br><span class="line">    &lt;string&gt;&amp;lt;none&amp;gt;&lt;/string&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">xcodebuild -archivePath <span class="string">"./build/xxx.xcarchive"</span> -workspace Fangduoduo.xcworkspace -sdk iphoneos -scheme <span class="string">"Fangduoduo_ent"</span> -configuration <span class="string">"Release Inhouse"</span> archive</span><br><span class="line">xcodebuild -exportArchive -archivePath <span class="string">"./build/xxx.xcarchive"</span> -exportPath <span class="string">"./build/"</span> -exportOptionsPlist ./build/exportOptionsPlist.plist</span><br><span class="line"></span><br><span class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls ./build/*.ipa)</span><br></pre></td></tr></table></figure>
 <h2 id="xcodebuild-–help"><a href="#xcodebuild-–help" class="headerlink" title="xcodebuild –help"></a>xcodebuild –help</h2><blockquote>
 <p>Available keys for -exportOptionsPlist:</p>
+</blockquote>
+<blockquote>
 <p>compileBitcode : Bool</p>
+</blockquote>
+<blockquote>
 <p>For non-App Store exports, should Xcode re-compile the app from bitcode? Defaults to YES.</p>
+</blockquote>
+<blockquote>
 <p>embedOnDemandResourcesAssetPacksInBundle : Bool</p>
+</blockquote>
+<blockquote>
 <p>For non-App Store exports, if the app uses On Demand Resources and this is YES, asset packs are embedded in the app bundle so that the app can be tested without a server to host asset packs. Defaults to YES unless onDemandResourcesAssetPacksBaseURL is specified.</p>
+</blockquote>
+<blockquote>
 <p>iCloudContainerEnvironment : String</p>
+</blockquote>
+<blockquote>
 <p>If the app is using CloudKit, this configures the “com.apple.developer.icloud-container-environment” entitlement. Available options vary depending on the type of provisioning profile used, but may include: Development and Production.</p>
+</blockquote>
+<blockquote>
 <p>installerSigningCertificate : String</p>
+</blockquote>
+<blockquote>
 <p>For manual signing only. Provide a certificate name, SHA-1 hash, or automatic selector to use for signing. Automatic selectors allow Xcode to pick the newest installed certificate of a particular type. The available automatic selectors are “Mac Installer Distribution” and “Developer ID Installer”. Defaults to an automatic certificate selector matching the current distribution method.</p>
+</blockquote>
+<blockquote>
 <p>manifest : Dictionary</p>
+</blockquote>
+<blockquote>
 <p>For non-App Store exports, users can download your app over the web by opening your distribution manifest file in a web browser. To generate a distribution manifest, the value of this key should be a dictionary with three sub-keys: appURL, displayImageURL, fullSizeImageURL. The additional sub-key assetPackManifestURL is required when using on-demand resources.</p>
+</blockquote>
+<blockquote>
 <p>method : String</p>
+</blockquote>
+<blockquote>
 <p>Describes how Xcode should export the archive. Available options: app-store, package, ad-hoc, enterprise, development, developer-id, and mac-application. The list of options varies based on the type of archive. Defaults to development.</p>
+</blockquote>
+<blockquote>
 <p>onDemandResourcesAssetPacksBaseURL : String</p>
+</blockquote>
+<blockquote>
 <p>For non-App Store exports, if the app uses On Demand Resources and embedOnDemandResourcesAssetPacksInBundle isn’t YES, this should be a base URL specifying where asset packs are going to be hosted. This configures the app to download asset packs from the specified URL.</p>
+</blockquote>
+<blockquote>
 <p>provisioningProfiles : Dictionary</p>
+</blockquote>
+<blockquote>
 <p>For manual signing only. Specify the provisioning profile to use for each executable in your app. Keys in this dictionary are the bundle identifiers of executables; values are the provisioning profile name or UUID to use.</p>
+</blockquote>
+<blockquote>
 <p>signingCertificate : String</p>
+</blockquote>
+<blockquote>
 <p>For manual signing only. Provide a certificate name, SHA-1 hash, or automatic selector to use for signing. Automatic selectors allow Xcode to pick the newest installed certificate of a particular type. The available automatic selectors are “Mac App Distribution”, “iOS Developer”, “iOS Distribution”, “Developer ID Application”, and “Mac Developer”. Defaults to an automatic certificate selector matching the current distribution method.</p>
+</blockquote>
+<blockquote>
 <p>signingStyle : String</p>
+</blockquote>
+<blockquote>
 <p>The signing style to use when re-signing the app for distribution. Options are manual or automatic. Apps that were automatically signed when archived can be signed manually or automatically during distribution, and default to automatic. Apps that were manually signed when archived must be manually signed during distribtion, so the value of signingStyle is ignored.</p>
+</blockquote>
+<blockquote>
 <p>stripSwiftSymbols : Bool</p>
+</blockquote>
+<blockquote>
 <p>Should symbols be stripped from Swift libraries in your IPA? Defaults to YES.</p>
+</blockquote>
+<blockquote>
 <p>teamID : String</p>
+</blockquote>
+<blockquote>
 <p>The Developer Portal team to use for this export. Defaults to the team used to build the archive.</p>
+</blockquote>
+<blockquote>
 <p>thinning : String</p>
+</blockquote>
+<blockquote>
 <p>For non-App Store exports, should Xcode thin the package for one or more device variants? Available options: <none> (Xcode produces a non-thinned universal app), <thin-for-all-variants> (Xcode produces a universal app and all available thinned variants), or a model identifier for a specific device (e.g. “iPhone7,1”). Defaults to <none>.</none></thin-for-all-variants></none></p>
+</blockquote>
+<blockquote>
 <p>uploadBitcode : Bool</p>
+</blockquote>
+<blockquote>
 <p>For App Store exports, should the package include bitcode? Defaults to YES.</p>
+</blockquote>
+<blockquote>
 <p>uploadSymbols : Bool</p>
+</blockquote>
+<blockquote>
 <p>For App Store exports, should the package include symbols? Defaults to YES.</p>
 </blockquote>
 
@@ -457,8 +520,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/mac-high-sierra-open-with-external/" rel="next" title="mac10.13依旧让Xcode支持打开终端">
-                <i class="fa fa-chevron-left"></i> mac10.13依旧让Xcode支持打开终端
+              <a href="/post/ios-automation-jenkins-build/" rel="next" title="iOS自动化-Jenkins编译工程">
+                <i class="fa fa-chevron-left"></i> iOS自动化-Jenkins编译工程
               </a>
             
           </div>
@@ -467,8 +530,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/ios-automation-jenkins-build/" rel="prev" title="iOS自动化-Jenkins编译工程">
-                iOS自动化-Jenkins编译工程 <i class="fa fa-chevron-right"></i>
+              <a href="/post/mac-high-sierra-open-with-external/" rel="prev" title="mac10.13依旧让Xcode支持打开终端">
+                mac10.13依旧让Xcode支持打开终端 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

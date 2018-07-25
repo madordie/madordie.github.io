@@ -88,6 +88,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/elegant-to-use-swiftlint/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="接入了SwiftLine，修改2000+的warning、300+error的一点笔记心得。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-09T04:59:22.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="优雅的使用SwiftLint">
@@ -375,19 +376,19 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>接入了SwiftLine，修改2000+的warning、300+error的一点笔记心得。</p>
 <a id="more"></a>
 <h1 id="SwiftLint"><a href="#SwiftLint" class="headerlink" title="SwiftLint"></a>SwiftLint</h1><blockquote>
-<h2 id="SwiftLint-1"><a href="#SwiftLint-1" class="headerlink" title="SwiftLint"></a><a href="https://github.com/realm/SwiftLint" target="_blank" rel="external">SwiftLint</a></h2><p>A tool to enforce Swift style and conventions, loosely based on GitHub’s Swift Style Guide.<br>  SwiftLint hooks into Clang and SourceKit to use the AST representation of your source files for more accurate results.<br>  SwiftLint 是一个用于强制检查 Swift 代码风格和规定的一个工具，基本上以 GitHub’s Swift 代码风格指南为基础。<br>  SwiftLint Hook 了 Clang 和 SourceKit 从而能够使用 AST 来表示源代码文件的更多精确结果。</p>
+<h2 id="SwiftLint-1"><a href="#SwiftLint-1" class="headerlink" title="SwiftLint"></a><a href="https://github.com/realm/SwiftLint" target="_blank" rel="noopener">SwiftLint</a></h2><p>A tool to enforce Swift style and conventions, loosely based on GitHub’s Swift Style Guide.<br>  SwiftLint hooks into Clang and SourceKit to use the AST representation of your source files for more accurate results.<br>  SwiftLint 是一个用于强制检查 Swift 代码风格和规定的一个工具，基本上以 GitHub’s Swift 代码风格指南为基础。<br>  SwiftLint Hook 了 Clang 和 SourceKit 从而能够使用 AST 来表示源代码文件的更多精确结果。</p>
 </blockquote>
-<h2 id="对原有代码格式化"><a href="#对原有代码格式化" class="headerlink" title="对原有代码格式化"></a>对原有代码格式化</h2><h3 id="自动格式化"><a href="#自动格式化" class="headerlink" title="自动格式化"></a>自动格式化</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">swiftlint autocorrect</div></pre></td></tr></table></figure>
+<h2 id="对原有代码格式化"><a href="#对原有代码格式化" class="headerlink" title="对原有代码格式化"></a>对原有代码格式化</h2><h3 id="自动格式化"><a href="#自动格式化" class="headerlink" title="自动格式化"></a>自动格式化</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swiftlint autocorrect</span><br></pre></td></tr></table></figure>
 <h3 id="TrailingWhitespaceRule"><a href="#TrailingWhitespaceRule" class="headerlink" title="TrailingWhitespaceRule"></a>TrailingWhitespaceRule</h3><h4 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h4><blockquote>
 <p>xxx.swift:34: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)</p>
 </blockquote>
-<p>  规则实现：<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/TrailingWhitespaceRule.swift" target="_blank" rel="external">TrailingWhitespaceRule.swift</a></p>
+<p>  规则实现：<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/TrailingWhitespaceRule.swift" target="_blank" rel="noopener">TrailingWhitespaceRule.swift</a></p>
 <h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>  Xcode中的”空白行”。其实并不空白，含有空的字符。最明显的表现为git提交的时候会有明显的黄色警告。</p>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>  Xcode中有选项可以直接控制，具体路径为<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Xcode </div><div class="line">-&gt; Preferences</div><div class="line">-&gt; Text Editing</div><div class="line">-&gt; While editing</div><div class="line">-&gt; [V] Including whitespace-only lines</div></pre></td></tr></table></figure></p>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>  Xcode中有选项可以直接控制，具体路径为<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Xcode </span><br><span class="line">-&gt; Preferences</span><br><span class="line">-&gt; Text Editing</span><br><span class="line">-&gt; While editing</span><br><span class="line">-&gt; [V] Including whitespace-only lines</span><br></pre></td></tr></table></figure></p>
 <h3 id="ColonRule"><a href="#ColonRule" class="headerlink" title="ColonRule"></a>ColonRule</h3><h4 id="现象-1"><a href="#现象-1" class="headerlink" title="现象"></a>现象</h4><blockquote>
 <p>xxx.swift:13:71: warning: Colon Violation: Colons should be next to the identifier when specifying a type. (colon)</p>
 </blockquote>
-<h4 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h4><p>  变量方法的 <code>:</code> 的右边应该有一个空格才能识别出来，且左侧不能留空格。所以写代码的时候随手写上还是比较好的。。<br>  栗子：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//  OK:</div><div class="line">var responseData: [String : Any]? = nil // 返回结果，请求之前为nil</div><div class="line"></div><div class="line">//  warning: 第一个&apos;:&apos;处左侧有空格</div><div class="line">var responseData : [String : Any]? = nil // 返回结果，请求之前为nil</div><div class="line"></div><div class="line">//  warning: 第一个&apos;:&apos;处右侧无空格</div><div class="line">var responseData:[String : Any]? = nil // 返回结果，请求之前为nil</div></pre></td></tr></table></figure></p>
+<h4 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h4><p>  变量方法的 <code>:</code> 的右边应该有一个空格才能识别出来，且左侧不能留空格。所以写代码的时候随手写上还是比较好的。。<br>  栗子：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//  OK:</span><br><span class="line">var responseData: [String : Any]? = nil // 返回结果，请求之前为nil</span><br><span class="line"></span><br><span class="line">//  warning: 第一个&apos;:&apos;处左侧有空格</span><br><span class="line">var responseData : [String : Any]? = nil // 返回结果，请求之前为nil</span><br><span class="line"></span><br><span class="line">//  warning: 第一个&apos;:&apos;处右侧无空格</span><br><span class="line">var responseData:[String : Any]? = nil // 返回结果，请求之前为nil</span><br></pre></td></tr></table></figure></p>
 <h4 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h4><p>  规范书写</p>
 <h3 id="LineLengthRule"><a href="#LineLengthRule" class="headerlink" title="LineLengthRule"></a>LineLengthRule</h3><h4 id="现象-2"><a href="#现象-2" class="headerlink" title="现象"></a>现象</h4><blockquote>
 <p>xxx.swift:90: warning: Line Length Violation: Line should be 100 characters or less: currently 101 characters (line_length)</p>
@@ -399,22 +400,22 @@
 <h3 id="ControlStatementRule"><a href="#ControlStatementRule" class="headerlink" title="ControlStatementRule"></a>ControlStatementRule</h3><h4 id="现象-3"><a href="#现象-3" class="headerlink" title="现象"></a>现象</h4><blockquote>
 <p>xxx.swift:169:21: warning: Control Statement Violation: if,for,while,do statements shouldn’t wrap their conditionals in parentheses. (control_statement)</p>
 </blockquote>
-<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/ControlStatementRule.swift" target="_blank" rel="external">ControlStatementRule</a></p>
+<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/ControlStatementRule.swift" target="_blank" rel="noopener">ControlStatementRule</a></p>
 <h4 id="原因-3"><a href="#原因-3" class="headerlink" title="原因"></a>原因</h4><p>  swift中<code>if,for,while,do</code> 语句不应该用<code>()</code></p>
 <h3 id="UnusedClosureParameterRule"><a href="#UnusedClosureParameterRule" class="headerlink" title="UnusedClosureParameterRule"></a>UnusedClosureParameterRule</h3><h4 id="现象-4"><a href="#现象-4" class="headerlink" title="现象"></a>现象</h4><blockquote>
 <p>xxx.swift:103:62: warning: Unused Closure Parameter Violation: Unused parameter “response” in a closure should be replaced with _. (unused_closure_parameter)</p>
 </blockquote>
-<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/UnusedClosureParameterRule.swift" target="_blank" rel="external">UnusedClosureParameterRule</a></p>
+<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/UnusedClosureParameterRule.swift" target="_blank" rel="noopener">UnusedClosureParameterRule</a></p>
 <h4 id="原因-4"><a href="#原因-4" class="headerlink" title="原因"></a>原因</h4><p>  <code>response</code> 没有使用，建议替换为 <code>_</code>。</p>
 <h3 id="CyclomaticComplexityRule"><a href="#CyclomaticComplexityRule" class="headerlink" title="CyclomaticComplexityRule"></a>CyclomaticComplexityRule</h3><h4 id="现象-5"><a href="#现象-5" class="headerlink" title="现象"></a>现象</h4><blockquote>
 <p>xxx.swift:69:5: warning: Cyclomatic Complexity Violation: Function should have complexity 10 or less: currently complexity equals 14 (cyclomatic_complexity)</p>
 </blockquote>
-<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/CyclomaticComplexityRule.swift" target="_blank" rel="external">CyclomaticComplexityRule</a></p>
+<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/CyclomaticComplexityRule.swift" target="_blank" rel="noopener">CyclomaticComplexityRule</a></p>
 <h4 id="原因-5"><a href="#原因-5" class="headerlink" title="原因"></a>原因</h4><p>  😂，他说你这函数写的太复杂了。看实现是说不能有过多的<code>if {}</code></p>
 <h3 id="OpeningBraceRule"><a href="#OpeningBraceRule" class="headerlink" title="OpeningBraceRule"></a>OpeningBraceRule</h3><h4 id="现象-6"><a href="#现象-6" class="headerlink" title="现象"></a>现象</h4><blockquote>
 <p>xxx.swift:221:34: warning: Opening Brace Spacing Violation: Opening braces should be preceded by a single space and on the same line as the declaration. (opening_brace)</p>
 </blockquote>
-<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/OpeningBraceRule.swift" target="_blank" rel="external">OpeningBraceRule</a></p>
+<p>  规则实现<a href="https://github.com/realm/SwiftLint/blob/master/Source/SwiftLintFramework/Rules/OpeningBraceRule.swift" target="_blank" rel="noopener">OpeningBraceRule</a></p>
 <h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>  <code>{}</code>的前面要有空格隔开</p>
 
       
@@ -448,8 +449,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/fastlane-note/" rel="next" title="Fastlane自动化笔记">
-                <i class="fa fa-chevron-left"></i> Fastlane自动化笔记
+              <a href="/post/bandwagonhost-note/" rel="next" title="科学上网之搬瓦工ss搭建笔记">
+                <i class="fa fa-chevron-left"></i> 科学上网之搬瓦工ss搭建笔记
               </a>
             
           </div>
@@ -458,8 +459,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/bandwagonhost-note/" rel="prev" title="科学上网之搬瓦工ss搭建笔记">
-                科学上网之搬瓦工ss搭建笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/post/fastlane-note/" rel="prev" title="Fastlane自动化笔记">
+                Fastlane自动化笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

@@ -88,6 +88,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/debug-swift-notifa-frame/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="swift中获取OC存储的Frame两种获取方案。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-11T03:37:39.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DEBUG - swift中取出通知中的frame">
@@ -376,7 +377,7 @@
 <a id="more"></a>
 <h1 id="Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。"><a href="#Swift下在Notification-userInfo取Frame，Debug和Release情况下还不一样。。" class="headerlink" title="Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。"></a>Swift下在Notification.userInfo取Frame，Debug和Release情况下还不一样。。</h1><p>  –&gt;更新于2016.12.1</p>
 <p>  <strong> Version 8.1 (8B62) </strong></p>
-  <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">keyboardShow</span><span class="params">(sender: Notification)</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> endFrame = <span class="type">CGRect</span>.zero        </div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> frame = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">CGRect</span> &#123;</div><div class="line">        endFrame = frame</div><div class="line">        <span class="comment">//  *** Debug是可以通过的。但是Release无法通过。</span></div><div class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as CGRect"</span>)</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> value = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">NSValue</span> &#123;</div><div class="line">        endFrame = value.cgRectValue</div><div class="line">        <span class="comment">//  *** Release会取出NSValue</span></div><div class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as NSValue"</span>)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">keyboardShow</span><span class="params">(sender: Notification)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> endFrame = <span class="type">CGRect</span>.zero        </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> frame = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">CGRect</span> &#123;</span><br><span class="line">        endFrame = frame</span><br><span class="line">        <span class="comment">//  *** Debug是可以通过的。但是Release无法通过。</span></span><br><span class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as CGRect"</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> value = sender.userInfo?[<span class="type">UIKeyboardFrameEndUserInfoKey</span>] <span class="keyword">as</span>? <span class="type">NSValue</span> &#123;</span><br><span class="line">        endFrame = value.cgRectValue</span><br><span class="line">        <span class="comment">//  *** Release会取出NSValue</span></span><br><span class="line">        <span class="type">NSLog</span>(<span class="string">"&lt;&lt;&lt;INFO&gt;&gt;&gt;: as NSValue"</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>  由于Release无法调试，所以费了不少劲。首先Swift中的字典已经可以存放值类型，其本身也是值类型。所以我首先选择了第一种写法<code>let frame = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect</code>, 但是Release情况下却发生解包失败的情况。所以采用OC的传统写法<code>let value = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue</code>。就能解析出来。但是总感觉OC的方法不够swift😂。。。</p>
 <p>  有同事直接强制转换为NSValue是没有问题的，于是乎试了一下，发现直接校验NSValue就可以。但是swift中感觉不应该有这个转换了，毕竟本身就可以存储CGRect..</p>
 <p>  猜测原因：目前阶段Swift的字典和OC的字典数据结构还并未完全一致。。</p>
@@ -410,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/bruch-up-regular-expressions/" rel="next" title="正则表达式学习笔记">
-                <i class="fa fa-chevron-left"></i> 正则表达式学习笔记
+              <a href="/post/debug-xcode8-analysis-crash-file/" rel="next" title="DEBUG - Xcode8解析.crash">
+                <i class="fa fa-chevron-left"></i> DEBUG - Xcode8解析.crash
               </a>
             
           </div>
@@ -420,8 +421,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/debug-xcode8-analysis-crash-file/" rel="prev" title="DEBUG - Xcode8解析.crash">
-                DEBUG - Xcode8解析.crash <i class="fa fa-chevron-right"></i>
+              <a href="/post/bruch-up-regular-expressions/" rel="prev" title="正则表达式学习笔记">
+                正则表达式学习笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

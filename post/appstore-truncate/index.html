@@ -88,6 +88,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/appstore-truncate/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="UITextView-More使用UITextKit 实现“更多”的折叠效果">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true">
 <meta property="og:updated_time" content="2017-10-10T05:34:54.502Z">
 <meta name="twitter:card" content="summary">
@@ -374,20 +375,20 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="UITextView-More"><a href="#UITextView-More" class="headerlink" title="UITextView-More"></a><a href="https://github.com/madordie/UITextView-More" target="_blank" rel="external">UITextView-More</a></h2><p>使用UITextKit 实现“更多”的折叠效果</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="UITextView-More"><a href="#UITextView-More" class="headerlink" title="UITextView-More"></a><a href="https://github.com/madordie/UITextView-More" target="_blank" rel="noopener">UITextView-More</a></h2><p>使用UITextKit 实现“更多”的折叠效果</p>
 <p><img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="预览"></p>
 <a id="more"></a>
-<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><h3 id="获取最后一行Rect"><a href="#获取最后一行Rect" class="headerlink" title="获取最后一行Rect"></a>获取最后一行Rect</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> lastRect = <span class="type">CGRect</span>.zero</div><div class="line">layoutManager.enumerateEnclosingRects(forGlyphRange: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: textStorage.string.characters.<span class="built_in">count</span>), withinSelectedGlyphRange: <span class="type">NSRange</span>(location: <span class="type">NSNotFound</span>, length: <span class="number">0</span>), <span class="keyword">in</span>: textContainer, using: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (rect, isStop) <span class="keyword">in</span></div><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> _self = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line"><span class="keyword">var</span> newRect = rect</div><div class="line">newRect.origin.y += _self.textContainerInset.top</div><div class="line">lastRect = newRect</div><div class="line">&#125;)</div><div class="line"><span class="built_in">print</span>(lastRect)</div></pre></td></tr></table></figure>
-<h3 id="增加-exclusionPaths"><a href="#增加-exclusionPaths" class="headerlink" title="增加 exclusionPaths"></a>增加 <code>exclusionPaths</code></h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">textContainer.exclusionPaths = [<span class="type">UIBezierPath</span>.<span class="keyword">init</span>(rect: rect)]</div></pre></td></tr></table></figure>
+<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><h3 id="获取最后一行Rect"><a href="#获取最后一行Rect" class="headerlink" title="获取最后一行Rect"></a>获取最后一行Rect</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lastRect = <span class="type">CGRect</span>.zero</span><br><span class="line">layoutManager.enumerateEnclosingRects(forGlyphRange: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: textStorage.string.characters.<span class="built_in">count</span>), withinSelectedGlyphRange: <span class="type">NSRange</span>(location: <span class="type">NSNotFound</span>, length: <span class="number">0</span>), <span class="keyword">in</span>: textContainer, using: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (rect, isStop) <span class="keyword">in</span></span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> _self = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"><span class="keyword">var</span> newRect = rect</span><br><span class="line">newRect.origin.y += _self.textContainerInset.top</span><br><span class="line">lastRect = newRect</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">print</span>(lastRect)</span><br></pre></td></tr></table></figure>
+<h3 id="增加-exclusionPaths"><a href="#增加-exclusionPaths" class="headerlink" title="增加 exclusionPaths"></a>增加 <code>exclusionPaths</code></h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textContainer.exclusionPaths = [<span class="type">UIBezierPath</span>.<span class="keyword">init</span>(rect: rect)]</span><br></pre></td></tr></table></figure>
 <h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
 <li><code>UITextView</code>默认携带左右边距，通过<code>UITextView.textContainer.lineFragmentPadding</code>获取</li>
 <li><code>UITextView</code>默认携带上下左右边距(<code>UITextView.textContainerInset</code>)，其中左右和<code>lineFragmentPadding</code>相加</li>
-<li>此处并没有对<a href="https://github.com/madordie/UITextView-More/blob/master/TruncateTextView.swift" target="_blank" rel="external">TruncateTextView</a>进行过多的设置，主要是因为继承在UITextView下，<a href="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif" target="_blank" rel="external">GIF</a>中的这部分设置放在了<a href="https://github.com/madordie/UITextView-More/blob/master/Demo-AppStore-More/ViewController.swift" target="_blank" rel="external">ViewController.swift</a>中</li>
+<li>此处并没有对<a href="https://github.com/madordie/UITextView-More/blob/master/TruncateTextView.swift" target="_blank" rel="noopener">TruncateTextView</a>进行过多的设置，主要是因为继承在UITextView下，<a href="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif" target="_blank" rel="noopener">GIF</a>中的这部分设置放在了<a href="https://github.com/madordie/UITextView-More/blob/master/Demo-AppStore-More/ViewController.swift" target="_blank" rel="noopener">ViewController.swift</a>中</li>
 <li>此处使用的是<code>frame</code>，可以在<code>UIView.sizeToFit()</code>之后获取到<code>UIView</code>的<code>Size</code>。约束也大抵如此</li>
 </ul>
 <hr>
 <ul>
-<li>感谢<a href="https://github.com/lexiaoyao20" target="_blank" rel="external">乐逍遥</a>提供的例子，才找到了<code>open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange</code>方法😂</li>
+<li>感谢<a href="https://github.com/lexiaoyao20" target="_blank" rel="noopener">乐逍遥</a>提供的例子，才找到了<code>open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange</code>方法😂</li>
 </ul>
 
       
@@ -419,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/ios-automation-jenkins-build/" rel="next" title="iOS自动化-Jenkins编译工程">
-                <i class="fa fa-chevron-left"></i> iOS自动化-Jenkins编译工程
+              <a href="/post/ios-automation-jenkins-configuration/" rel="next" title="iOS自动化-Jenkins环境搭建">
+                <i class="fa fa-chevron-left"></i> iOS自动化-Jenkins环境搭建
               </a>
             
           </div>
@@ -429,8 +430,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/ios-automation-jenkins-configuration/" rel="prev" title="iOS自动化-Jenkins环境搭建">
-                iOS自动化-Jenkins环境搭建 <i class="fa fa-chevron-right"></i>
+              <a href="/post/ios-automation-jenkins-build/" rel="prev" title="iOS自动化-Jenkins编译工程">
+                iOS自动化-Jenkins编译工程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

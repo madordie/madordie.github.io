@@ -88,6 +88,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/push-queue-for-navigation/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="题记当使用某个页面还没有进行viewDidAppear:的时候再进行一次推页面是不安全的。苹果在iPhone5C iOS7.1.2中Push时给出的警告：  “nested push animation can result in corrupted navigation bar. Finishing up a navigation transition in an unexpected stat">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-11T03:05:55.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何正确的连续推新页面">
@@ -386,15 +387,19 @@
 <p>此问题的发生并不是简单的一个代码块中使用同一个导航控制器进行连续Push操作。回想一下<code>ViewController</code>的生命周期。其实标志着<code>ViewController</code>完全显示的是<code>viewDidAppear:</code>调用，那么在此方法生命周期之前的方法中进行Push均有可能造成“nested push animation can result in corrupted navigation bar”。</p>
 <p>由于iOS7.1.2的iPhone5C被升级，无法必现此BUG，所以没有截图。可以自己找个测一下。。</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="方案一：通过延时避开此时间段。"><a href="#方案一：通过延时避开此时间段。" class="headerlink" title="方案一：通过延时避开此时间段。"></a>方案一：通过延时避开此时间段。</h3><p>在很多源码中会看到这样一行代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//  0.1是我随手写的。。是一个根据自己情况估算上一个PUSH的耗时，</div><div class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">    [self.navigationController pushViewController:vc animated:YES];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>如上代码，在<a href="https://github.com/search?utf8=✓&amp;q=dispatch_after+pushViewController%3A&amp;type=Code&amp;ref=searchresults" target="_blank" rel="external">GitHub中很常见</a>，起初并不懂其用意，当遇到这个问题时候我才明白。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//  0.1是我随手写的。。是一个根据自己情况估算上一个PUSH的耗时，</span><br><span class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    [self.navigationController pushViewController:vc animated:YES];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如上代码，在<a href="https://github.com/search?utf8=✓&amp;q=dispatch_after+pushViewController%3A&amp;type=Code&amp;ref=searchresults" target="_blank" rel="noopener">GitHub中很常见</a>，起初并不懂其用意，当遇到这个问题时候我才明白。</p>
 <p>还有一种代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//  objccn.io</div><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">    // Some UIKit call that had timing issues but works fine</div><div class="line">    // in the next runloop.</div><div class="line">    [self updatePopoverSize];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>这种代码是切换到下个代码周期，来避开嵌套的时序问题。<a href="https://objccn.io/issue-2-4/" target="_blank" rel="external">objc.io</a>有这么个文章说了这个问题的弊端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//  objccn.io</span><br><span class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    // Some UIKit call that had timing issues but works fine</span><br><span class="line">    // in the next runloop.</span><br><span class="line">    [self updatePopoverSize];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这种代码是切换到下个代码周期，来避开嵌套的时序问题。<a href="https://objccn.io/issue-2-4/" target="_blank" rel="noopener">objc.io</a>有这么个文章说了这个问题的弊端：</p>
 <blockquote>
 <p>用 <code>dispatch_async</code> 修复时序问题</p>
+</blockquote>
+<blockquote>
 <p>在使用 UIKit 的时候遇到了一些时序上的麻烦？很多时候，这样进行“修正”看来非常完美：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">    // Some UIKit call that had timing issues but works fine</div><div class="line">    // in the next runloop.</div><div class="line">    [self updatePopoverSize];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    // Some UIKit call that had timing issues but works fine</span><br><span class="line">    // in the next runloop.</span><br><span class="line">    [self updatePopoverSize];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>千万别这么做！相信我，这种做法将会在之后你的 app 规模大一些的时候让你找不着北。这种代码非常难以调试，并且你很快就会陷入用更多的 dispatch 来修复所谓的莫名其妙的”时序问题”。审视你的代码，并且找到合适的地方来进行调用（比如在 viewWillAppear 里调用，而不是 viewDidLoad 之类的）才是解决这个问题的正确做法。我在自己的代码中也还留有一些这样的 hack，但是我为它们基本都做了正确的文档工作，并且对应的 issue 也被一一记录过。</p>
 <p>记住这不是真正的 <code>GCD</code> 特性，而只是一个在 <code>GCD</code> 下很容易实现的常见反面模式。事实上你可以使用 <code>performSelector:afterDelay:</code> 方法来实现同样的操作，其中 <code>delay</code> 是在对应时间后的 <code>runloop</code>。</p>
@@ -411,7 +416,7 @@
 <p>我最开始采用了继承<code>UINavigationController</code>的方法，因为继承但一，不会干扰其他的类。值得一赞。</p>
 <p>对于要解决其问题，所有的都需要进行继承，过于麻烦，于是增加了第二种方案：HOOK。</p>
 <p>两种方案为了达到统一的效果，所以拉出其中的代理，就完成了统一。</p>
-<p><a href="https://github.com/madordie/KTJPushQueueForNavigation.git" target="_blank" rel="external">代码＋Demo</a></p>
+<p><a href="https://github.com/madordie/KTJPushQueueForNavigation.git" target="_blank" rel="noopener">代码＋Demo</a></p>
 
       
     </div>
@@ -442,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/about-me/" rel="next" title="个人资料页">
-                <i class="fa fa-chevron-left"></i> 个人资料页
+              <a href="/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/" rel="next" title="「转」一个NB的补救项目国际化的方案">
+                <i class="fa fa-chevron-left"></i> 「转」一个NB的补救项目国际化的方案
               </a>
             
           </div>
@@ -452,8 +457,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/" rel="prev" title="「转」一个NB的补救项目国际化的方案">
-                「转」一个NB的补救项目国际化的方案 <i class="fa fa-chevron-right"></i>
+              <a href="/post/about-me/" rel="prev" title="个人资料页">
+                个人资料页 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

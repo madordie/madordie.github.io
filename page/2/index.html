@@ -87,6 +87,7 @@
 <meta property="og:url" content="https://madordie.github.io/page/2/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="一个热衷于技术的狂热粉">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="继刚的博客">
 <meta name="twitter:description" content="一个热衷于技术的狂热粉">
@@ -375,7 +376,7 @@
       
         
           <p>如果前页面和后页面不同，则会出现轻微侧滑时导航栏莫名其妙没了😂</p>
-<p><a href="https://github.com/madordie/Demo-PushAndPop">Demo-PushAndPop</a></p>
+<p><a href="https://github.com/madordie/Demo-PushAndPop" target="_blank" rel="noopener">Demo-PushAndPop</a></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/post/push-pop-navigation-bar-hidden/#more" rel="contents">
@@ -521,8 +522,8 @@
 
       
         
-          <p>原文：<a href="http://blog.cnbang.net/tech/2578/">iOS图片加载速度极限优化—FastImageCache解析</a></p>
-<p><a href="https://github.com/path/FastImageCache">FastImageCache</a>是Path团队开发的一个开源库，用于提升图片的加载和渲染速度，让基于图片的列表滑动起来更顺畅，来看看它是怎么做的。</p>
+          <p>原文：<a href="http://blog.cnbang.net/tech/2578/" target="_blank" rel="noopener">iOS图片加载速度极限优化—FastImageCache解析</a></p>
+<p><a href="https://github.com/path/FastImageCache" target="_blank" rel="noopener">FastImageCache</a>是Path团队开发的一个开源库，用于提升图片的加载和渲染速度，让基于图片的列表滑动起来更顺畅，来看看它是怎么做的。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/post/bang-fastimagecache/#more" rel="contents">
@@ -668,7 +669,7 @@
 
       
         
-          <p>crash:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let attr = try? NSMutableAttributedString(data: data,</div><div class="line">                                          options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,</div><div class="line">                                                    NSCharacterEncodingDocumentAttribute: String.Encoding.utf8],</div><div class="line">                                          documentAttributes:nil)</div><div class="line">// log:</div><div class="line">2017-04-17 14:04:38.140 [41275:463875] -[_SwiftValue unsignedIntegerValue]: unrecognized selector sent to instance 0x608000256620</div></pre></td></tr></table></figure></p>
+          <p>crash:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let attr = try? NSMutableAttributedString(data: data,</span><br><span class="line">                                          options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,</span><br><span class="line">                                                    NSCharacterEncodingDocumentAttribute: String.Encoding.utf8],</span><br><span class="line">                                          documentAttributes:nil)</span><br><span class="line">// log:</span><br><span class="line">2017-04-17 14:04:38.140 [41275:463875] -[_SwiftValue unsignedIntegerValue]: unrecognized selector sent to instance 0x608000256620</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/post/debug-SwiftValue-unsignedIntegerValue/#more" rel="contents">
@@ -965,19 +966,19 @@
 <ol>
 <li>Download and unzip the SonarQube distribution (let’s say in “C:\sonarqube” or “/etc/sonarqube”)</li>
 <li><p>Start the SonarQube server:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># On Windows, execute:</div><div class="line">C:\sonarqube\bin\windows-x86-xx\StartSonar.bat</div><div class="line"> </div><div class="line"># On other operating system, execute:</div><div class="line">/etc/sonarqube/bin/[OS]/sonar.sh console</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># On Windows, execute:</span><br><span class="line">C:\sonarqube\bin\windows-x86-xx\StartSonar.bat</span><br><span class="line"> </span><br><span class="line"># On other operating system, execute:</span><br><span class="line">/etc/sonarqube/bin/[OS]/sonar.sh console</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Download and unzip the SonarQube Scanner (let’s say in “C:\sonar-scanner” or “/etc/sonar-scanner”)</p>
 </li>
 <li>Download and unzip some project samples (let’s say in “C:\sonar-scanning-examples” or “/etc/sonar-scanning-examples”)</li>
 <li><p>Analyze a project:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># On Windows:</div><div class="line">cd C:\sonar-scanning-examples\sonarqube-scanner</div><div class="line">C:\sonar-scanner\bin\sonar-scanner.bat</div><div class="line"> </div><div class="line"># On other operating system:</div><div class="line">cd /etc/sonar-scanning-examples/sonarqube-scanner</div><div class="line">/etc/sonar-scanner/bin/sonar-scanner</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># On Windows:</span><br><span class="line">cd C:\sonar-scanning-examples\sonarqube-scanner</span><br><span class="line">C:\sonar-scanner\bin\sonar-scanner.bat</span><br><span class="line"> </span><br><span class="line"># On other operating system:</span><br><span class="line">cd /etc/sonar-scanning-examples/sonarqube-scanner</span><br><span class="line">/etc/sonar-scanner/bin/sonar-scanner</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Browse the results at <a href="http://localhost:9000" target="_blank" rel="external">http://localhost:9000</a> (default System administrator credentials are admin/admin)</p>
+<li><p>Browse the results at <a href="http://localhost:9000" target="_blank" rel="noopener">http://localhost:9000</a> (default System administrator credentials are admin/admin)</p>
 </li>
 </ol>
 <h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ul>
-<li><a href="https://docs.sonarqube.org/display/HOME/SonarQube+Platform" target="_blank" rel="external">docs.sonarqube.org</a></li>
+<li><a href="https://docs.sonarqube.org/display/HOME/SonarQube+Platform" target="_blank" rel="noopener">docs.sonarqube.org</a></li>
 <li></li>
 </ul>
 
@@ -1120,7 +1121,7 @@
 
       
         
-          <p>原文链接：<a href="https://realm.io/cn/news/real-world-swift-performance/">真实世界中的 Swift 性能优化</a></p>
+          <p>原文链接：<a href="https://realm.io/cn/news/real-world-swift-performance/" target="_blank" rel="noopener">真实世界中的 Swift 性能优化</a></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/post/real-world-swift-performance/#more" rel="contents">
