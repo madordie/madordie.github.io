@@ -284,3 +284,9 @@ PS.对于同一个List，需要注意cell的复用和多个cellModel同时绑定
 ### 别的
 
 好像没了吧～，想起来了再补充咯
+
+### 偶然看到一个类似的文章
+
+> [Table View 太複雜？利用 MVVM 和 Protocol 就可以為它重構瘦身！](https://www.appcoda.com.tw/tableview-mvvm/)
+
+昨天(2018.7.24)翻文章的时候看到这个文章，然后将文章和代码捋了一下，发现这才是MVVM吧。觉得不错，贴出来～
