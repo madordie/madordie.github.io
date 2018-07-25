@@ -71,8 +71,8 @@ elif [ $opt = 'p' ]; then
     sleep 1
     unsetproxy
     python auto-push-sitemap.py
-    setproxy
     echo -e ' --> 已上传站图.\n'
+    setproxy
     backup
 fi
 
