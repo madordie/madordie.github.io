@@ -33,7 +33,7 @@ function checkout_URLs() {
 
 # 备份
 function backup() {
-    echo "最后更新日期:" `date` > README.md
+    echo "最后更新于:" `date` > README.md
     git add .
     git commit -am "backup"
     git push https://github.com/madordie/madordie.github.io.git hexo
@@ -50,7 +50,6 @@ if [ $opt = 's' ]; then
 elif [ $opt = 'b' ]; then
     backup
 elif [ $opt = 'p' ]; then
-    setproxy
     hexo clean
     hexo generate -d
     echo -e ' --> 已成功部署.\n'
