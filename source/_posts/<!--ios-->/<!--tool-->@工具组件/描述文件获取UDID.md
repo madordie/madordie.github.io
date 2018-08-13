@@ -19,7 +19,7 @@ categories:
 
 嗯，Apple出的为数不多的mac app:[Apple Configurator 2](https://itunes.apple.com/cn/app/apple-configurator-2/id1037126344?mt=12)
 
-这个工具是有中文文档的：[Apple Configurator 2 官方文档](http://help.apple.com/configurator/mac/2.3/?lang=zh-cn)
+这个工具是有中文文档的：[Apple Configurator 2 官方文档](http://help.apple.com/configurator/mac/2.3/)
 
 
 当然还有比较暴力的直接写xml: [Apple的相关文档](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/iPhoneOTAConfiguration/ConfigurationProfileExamples/ConfigurationProfileExamples.html)
