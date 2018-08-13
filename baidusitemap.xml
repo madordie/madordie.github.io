@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/ios-tool-configurator-get-udid/</loc>
+    <lastmod>2018-08-13T02:19:58.647Z</lastmod>
+    <data>
+        <display>
+        <title>描述文件获取UDID</title>
+        <pubTime>2017-12-06T16:00:00.000Z</pubTime>
+        
+        <tag>tool</tag>
+         
+        <tag>UDID</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/debug-sth-from-crash/</loc>
     <lastmod>2018-07-25T10:06:59.566Z</lastmod>
     <data>
@@ -152,28 +174,6 @@
         <pubTime>2017-08-14T03:05:57.000Z</pubTime>
         
         <tag>逆向</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/ios-tool-configurator-get-udid/</loc>
-    <lastmod>2017-12-07T10:00:29.378Z</lastmod>
-    <data>
-        <display>
-        <title>描述文件获取UDID</title>
-        <pubTime>2017-12-06T16:00:00.000Z</pubTime>
-        
-        <tag>tool</tag>
-         
-        <tag>UDID</tag>
          
          
            

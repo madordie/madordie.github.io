@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/ios-tool-configurator-get-udid/</loc>
+    
+    <lastmod>2018-08-13T02:19:58.647Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/debug-sth-from-crash/</loc>
     
     <lastmod>2018-07-25T10:06:59.566Z</lastmod>
@@ -54,13 +61,6 @@
     <loc>https://madordie.github.io/post/reverse-ios-monkeydev/</loc>
     
     <lastmod>2018-01-02T10:39:33.212Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/ios-tool-configurator-get-udid/</loc>
-    
-    <lastmod>2017-12-07T10:00:29.378Z</lastmod>
     
   </url>
   
