@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/uifont-infos/</loc>
+    
+    <lastmod>2018-08-23T03:17:26.448Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/post/build-ipa-sh/</loc>
+    
+    <lastmod>2018-08-23T03:16:17.042Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/ios-tool-configurator-get-udid/</loc>
     
     <lastmod>2018-08-13T02:19:58.647Z</lastmod>
@@ -306,13 +320,6 @@
     <loc>https://madordie.github.io/post/ios-automation-jenkins-configuration/</loc>
     
     <lastmod>2017-10-09T04:56:16.541Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/build-ipa-sh/</loc>
-    
-    <lastmod>2017-10-09T04:17:44.383Z</lastmod>
     
   </url>
   

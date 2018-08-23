@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="逆向," />
+  <meta name="keywords" content="UIFont," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="前提条件 已越狱设备 越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码) 电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）">
-<meta name="keywords" content="逆向">
+<meta name="description" content="iOS系统下字体信息。">
+<meta name="keywords" content="UIFont">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS逆向-设备ssh免密登录">
-<meta property="og:url" content="https://madordie.github.io/post/reverse-ios-ssh/index.html">
+<meta property="og:title" content="UIFont字体信息">
+<meta property="og:url" content="https://madordie.github.io/post/uifont-infos/index.html">
 <meta property="og:site_name" content="继刚的博客">
-<meta property="og:description" content="前提条件 已越狱设备 越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码) 电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）">
+<meta property="og:description" content="iOS系统下字体信息。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-09T04:57:48.373Z">
+<meta property="og:updated_time" content="2018-08-23T03:17:26.448Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS逆向-设备ssh免密登录">
-<meta name="twitter:description" content="前提条件 已越狱设备 越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码) 电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）">
+<meta name="twitter:title" content="UIFont字体信息">
+<meta name="twitter:description" content="iOS系统下字体信息。">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://madordie.github.io/post/reverse-ios-ssh/"/>
+  <link rel="canonical" href="https://madordie.github.io/post/uifont-infos/"/>
 
 
 
 
 
-  <title>iOS逆向-设备ssh免密登录 | 继刚的博客</title>
+  <title>UIFont字体信息 | 继刚的博客</title>
   
 
 
@@ -284,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/reverse-ios-ssh/">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/uifont-infos/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="继刚">
@@ -301,7 +301,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">iOS逆向-设备ssh免密登录</h2>
+          <h2 class="post-title" itemprop="name headline">UIFont字体信息</h2>
         
 
         <div class="post-meta">
@@ -313,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T15:31:30+08:00">
-                2017-08-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-16T18:43:20+08:00">
+                2018-08-16
               </time>
             
 
@@ -373,28 +373,15 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
-<li>已越狱设备</li>
-<li>越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码)</li>
-<li>电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）</li>
-</ul>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>iOS系统下字体信息。</p>
 <a id="more"></a>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="生成RSA证书"><a href="#生成RSA证书" class="headerlink" title="生成RSA证书"></a>生成RSA证书</h3><p>我这里生成的证书为:<code>ipad</code>，可自己需要定义。（注意如果直接回车会覆盖<code>~/.ssh/id_rsa</code>）</p>
-<p>执行命令<code>ssh-keygen</code>，如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/.ssh/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ssh-keygen</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/Madordie/.ssh/id_rsa): ipad</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in ipad.</span><br><span class="line">Your public key has been saved in ipad.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:GpQBeAf+oqUzWlUhtItDcVyVFz2wd0EcIgD+BZLPK8U Madordie@Bingo.local</span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|  .+*+*++o++.o+. |</span><br><span class="line">|  .+o+o=...oo... |</span><br><span class="line">|  ..o.=+ .o ...  |</span><br><span class="line">| . . = .E. . .   |</span><br><span class="line">|  o = o.S.       |</span><br><span class="line">|   * ..o.        |</span><br><span class="line">|  *   ..         |</span><br><span class="line">| o o             |</span><br><span class="line">|.                |</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls ~/.ssh/ipad*</span></span><br><span class="line">/Users/Madordie/.ssh/ipad     /Users/Madordie/.ssh/ipad.pub</span><br></pre></td></tr></table></figure></p>
-<h3 id="将公钥推送至越狱设备"><a href="#将公钥推送至越狱设备" class="headerlink" title="将公钥推送至越狱设备"></a>将公钥推送至越狱设备</h3><p>默认是没有<code>~/.ssh</code>目录的，暂时放置在<code>/var/root</code>下。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> scp ~/.ssh/ipad.pub root@10.11.12.13:/var/root</span></span><br></pre></td></tr></table></figure>
-<p><code>scp</code> 默认端口为<code>22</code> 如果需要自定义端口可以在路径前添加<code>-P 端口号</code>参数。</p>
-<h3 id="配置本机-ssh-config文件"><a href="#配置本机-ssh-config文件" class="headerlink" title="配置本机~/.ssh/config文件"></a>配置本机<code>~/.ssh/config</code>文件</h3><p>使用顺手的工具编辑<code>~/.ssh/config</code>文件。（没有就新建一个啦～</p>
-<p>按照如下格式填写。默认<code>ssh</code>登录端口为<code>22</code>可以不写。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host ipad</span><br><span class="line">    Hostname 10.11.12.13</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/ipad</span><br></pre></td></tr></table></figure></p>
-<h3 id="配置越狱设备"><a href="#配置越狱设备" class="headerlink" title="配置越狱设备"></a>配置越狱设备</h3><p>先用<code>ssh root@10.11.12.13</code>登录进设备。刚才我们将<code>ipad.pub</code>通过<code>scp</code>放在了<code>/var/root</code>下。</p>
-<p>一般情况下<code>/var/root/.ssh</code>是不存在的，使用命令<code>mkdir -p /var/root/.ssh</code>即可创建。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat ipad.pub &gt;&gt; /var/root/.ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
-<p>然后强迫症的可以使用<code>rm -rf ipad.pub</code>删除啦～</p>
-<p>对了，退出<code>ssh</code>登录的设备使用：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">exit</span></span></span><br><span class="line">logout</span><br><span class="line">Connection to 10.11.12.13 closed.</span><br></pre></td></tr></table></figure>
-<h3 id="赶紧测试一下远程登录效果"><a href="#赶紧测试一下远程登录效果" class="headerlink" title="赶紧测试一下远程登录效果"></a>赶紧测试一下远程登录效果</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh ipad</span></span><br></pre></td></tr></table></figure>
-<p>然后你会发现你已经完成了免密码登录越狱设备。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实这并不是只有越狱iOS设备才能使用的免登录，而是<code>ssh</code>所支持的。用途也很方便～</p>
+<h2 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h2><ul>
+<li>iOS12.0(16A5357b)</li>
+<li>iPhone6</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> label = <span class="type">UILabel</span>()</span><br><span class="line">label.text = <span class="string">"这是啥"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> format: (<span class="type">UIFont</span>) -&gt; [<span class="type">String</span>: <span class="type">Any</span>] = &#123; (font) <span class="keyword">in</span></span><br><span class="line">    label.font = font</span><br><span class="line">    label.sizeToFit()</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">"font.familyName"</span>: font.familyName,</span><br><span class="line">            <span class="string">"font.fontName"</span>: font.fontName,</span><br><span class="line">            <span class="string">"font.pointSize"</span>: font.pointSize,</span><br><span class="line">            <span class="string">"font.ascender"</span>: font.ascender,</span><br><span class="line">            <span class="string">"font.descender"</span>: font.descender,</span><br><span class="line">            <span class="string">"font.capHeight"</span>: font.capHeight,</span><br><span class="line">            <span class="string">"font.xHeight"</span>: font.xHeight,</span><br><span class="line">            <span class="string">"font.lineHeight"</span>: font.lineHeight,</span><br><span class="line">            <span class="string">"font.leading"</span>: font.leading,</span><br><span class="line">            <span class="string">"label.sizeToFit"</span>: label.frame.height]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> json: [<span class="type">String</span>: [[<span class="type">String</span>: <span class="type">Any</span>]]] = [:]</span><br><span class="line"><span class="keyword">for</span> family <span class="keyword">in</span> <span class="type">UIFont</span>.familyNames &#123;</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> <span class="type">UIFont</span>.fontNames(forFamilyName: family) &#123;</span><br><span class="line">        <span class="keyword">var</span> list: [[<span class="type">String</span>: <span class="type">Any</span>]] = []</span><br><span class="line">        <span class="keyword">for</span> size <span class="keyword">in</span> <span class="number">5</span>...<span class="number">60</span> &#123;</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> font = <span class="type">UIFont</span>.<span class="keyword">init</span>(name: name, size: <span class="type">CGFloat</span>(size)) <span class="keyword">else</span> &#123; <span class="keyword">continue</span> &#125;</span><br><span class="line">            list.append(format(font))</span><br><span class="line">        &#125;</span><br><span class="line">        json[<span class="string">"\(family) -&gt; \(name)"</span>] = list</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="type">String</span>(data:(<span class="keyword">try</span>? <span class="type">JSONSerialization</span>.data(withJSONObject: json, options: .prettyPrinted)) ?? <span class="type">Data</span>(), encoding: .utf8)!)</span><br></pre></td></tr></table></figure>
+<h2 id="长长的数据"><a href="#长长的数据" class="headerlink" title="长长的数据"></a>长长的数据</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>然而数据太多加载不出来。。</p>
 
       
     </div>
@@ -412,7 +399,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/逆向/" rel="tag"># 逆向</a>
+            <a href="/tags/UIFont/" rel="tag"># UIFont</a>
           
         </div>
       
@@ -425,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/format-sketchplugin/" rel="next" title="自定义数据填充Sketch插件">
-                <i class="fa fa-chevron-left"></i> 自定义数据填充Sketch插件
+              <a href="/post/debug-sth-from-crash/" rel="next" title="从一个常见的崩溃开始">
+                <i class="fa fa-chevron-left"></i> 从一个常见的崩溃开始
               </a>
             
           </div>
@@ -434,10 +421,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/reverse-ios-dump-decrypted/" rel="prev" title="iOS逆向-砸壳(cycript/clutch)">
-                iOS逆向-砸壳(cycript/clutch) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提条件"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成RSA证书"><span class="nav-number">2.1.</span> <span class="nav-text">生成RSA证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将公钥推送至越狱设备"><span class="nav-number">2.2.</span> <span class="nav-text">将公钥推送至越狱设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置本机-ssh-config文件"><span class="nav-number">2.3.</span> <span class="nav-text">配置本机~/.ssh/config文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置越狱设备"><span class="nav-number">2.4.</span> <span class="nav-text">配置越狱设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赶紧测试一下远程登录效果"><span class="nav-number">2.5.</span> <span class="nav-text">赶紧测试一下远程登录效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境信息"><span class="nav-number">1.</span> <span class="nav-text">环境信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长长的数据"><span class="nav-number">3.</span> <span class="nav-text">长长的数据</span></a></li></ol></div>
             
 
           </div>
@@ -787,9 +770,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://madordie.github.io/post/reverse-ios-ssh/';
-          this.page.identifier = 'post/reverse-ios-ssh/';
-          this.page.title = 'iOS逆向-设备ssh免密登录';
+          this.page.url = 'https://madordie.github.io/post/uifont-infos/';
+          this.page.identifier = 'post/uifont-infos/';
+          this.page.title = 'UIFont字体信息';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://madordie.disqus.com/embed.js';

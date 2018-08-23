@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/uifont-infos/</loc>
+    <lastmod>2018-08-23T03:17:26.448Z</lastmod>
+    <data>
+        <display>
+        <title>UIFont字体信息</title>
+        <pubTime>2018-08-16T10:43:20.000Z</pubTime>
+        
+        <tag>UIFont</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/build-ipa-sh/</loc>
+    <lastmod>2018-08-23T03:16:17.042Z</lastmod>
+    <data>
+        <display>
+        <title>Xcode打包脚本</title>
+        <pubTime>2016-09-26T06:55:09.000Z</pubTime>
+        
+        <tag>构建</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/ios-tool-configurator-get-udid/</loc>
     <lastmod>2018-08-13T02:19:58.647Z</lastmod>
     <data>
@@ -839,26 +879,6 @@
         <tag>构建</tag>
          
         <tag>Jenkins</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/build-ipa-sh/</loc>
-    <lastmod>2017-10-09T04:17:44.383Z</lastmod>
-    <data>
-        <display>
-        <title>Xcode打包脚本</title>
-        <pubTime>2016-09-26T06:55:09.000Z</pubTime>
-        
-        <tag>构建</tag>
          
          
            
