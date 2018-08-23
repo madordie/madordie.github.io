@@ -80,7 +80,9 @@ cd $workspace_name
 
 rm -rf ./build/*
 
-xcodebuild -archivePath "./build/xxx.xcarchive" -workspace $workspace_name.xcworkspace -sdk iphoneos -scheme $scheme_name -configuration "Release Inhouse" archive
+xcodebuild clean -workspace $workspace_name.xcworkspace -scheme $scheme_nam -configuration Release | xcpretty
+
+xcodebuild archive -archivePath "./build/xxx.xcarchive" -workspace $workspace_name.xcworkspace -sdk iphoneos -scheme $scheme_name -configuration "Release Inhouse"
 
 
 cat << EOF > ./build/exportOptionsPlist.plist
