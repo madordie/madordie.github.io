@@ -13,19 +13,49 @@ require 'active_support'
 require 'active_support/core_ext'
 require 'sitemap-parser'
 
+puts "正在检索URL"
+
 sitemap = SitemapParser.new sitemap_url
 urls = sitemap.to_a
 
-conn = Faraday.new(:url => "https://api.github.com/repos/#{username}/#{repo_name}/issues") do |conn|
+puts "检索到文章共#{urls.count}个"
+
+conn = Faraday.new(:url => "https://api.github.com") do |conn|
   conn.basic_auth(username, token)
+  conn.headers['Accept'] = "application/vnd.github.symmetra-preview+json"
   conn.adapter  Faraday.default_adapter
 end
 
-urls.each_with_index do |url, index|
-  title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
-  response = conn.post do |req|
-    req.body = { body: url, labels: [kind, url], title: title }.to_json
+commenteds = Array.new
+`
+  if [ ! -f .commenteds ]; then
+    touch .commenteds
+  fi
+`
+File.open(".commenteds", "r") do |file|
+  file.each_line do |line|
+      commenteds.push line
   end
-  puts response.body
-  sleep 15 if index % 20 == 0
+end
+
+urls.each_with_index do |url, index|
+
+  if commenteds.include?("#{url}\n") == false
+    response = conn.get "/search/issues?q=label:#{url}+state:open+repo:#{username}/#{repo_name}"
+    
+    if JSON.parse(response.body)['total_count'] > 0
+      `echo #{url} >> .commenteds`
+    else
+      puts "正在创建: #{url}"
+      title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
+
+      response = conn.post("/repos/#{username}/#{repo_name}/issues") do |req|
+        req.body = { body: url, labels: [kind, url.scan(/.*\/(.+?)\/?$/).first.first], title: title }.to_json
+      end
+      if JSON.parse(response.body)['number'] > 0
+        `echo #{url} >> .commenteds`
+        puts "\t↳ 已创建成功"
+      end
+    end
+  end
 end
