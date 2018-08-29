@@ -55,6 +55,8 @@ urls.each_with_index do |url, index|
       if JSON.parse(response.body)['number'] > 0
         `echo #{url} >> .commenteds`
         puts "\t↳ 已创建成功"
+      else
+        puts "\t↳ #{response.body}"
       end
     end
   end
