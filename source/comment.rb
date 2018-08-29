@@ -2,7 +2,7 @@
 # 另外，token已放在.git-token文件下，防止泄漏。。
 
 username = "madordie" # GitHub 用户名
-new_token = system 'cat .git-token'  # GitHub Token
+new_token = `cat .git-token`  # GitHub Token
 repo_name = "madordie.github.io" # 存放 issues
 sitemap_url = "https://madordie.github.io/sitemap.xml" # sitemap
 kind = "gitment" # "Gitalk" or "gitment"
