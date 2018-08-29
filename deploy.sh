@@ -74,10 +74,9 @@ elif [ $opt = 'p' ]; then
     echo -e ' --> 已上传站图.\n'
     setproxy
     backup
+    cd ./source
+    ruby comment.rb
+    echo -e ' --> 评论已自动创建.\n'
 fi
-
-cd ./source
-ruby comment.rb
-echo -e ' --> 评论已自动创建.\n'
 
 echo -e ' -->  所有操作已完成.'
