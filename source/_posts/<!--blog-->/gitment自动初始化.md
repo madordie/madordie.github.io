@@ -251,7 +251,7 @@ end
 ...
         var gitment = new {{CommentsClass}}({
 -           id: document.location.href,
-+           id: md5(window.location.pathname), 
++           id: md5(window.location.pathname),
             owner: '{{ theme.gitment.github_user }}',
             repo: '{{ theme.gitment.github_repo }}',
 ```
