@@ -237,28 +237,19 @@ end
 需要修改`/themes/next/layout/_third-party/comments/gitment.swig`文件，由于JS不支持MD5,所以还需要引入一个JS，于是乎大约这样：
 
 ```swig
-    {% if theme.gitment.mint %}
-        {% set CommentsClass = "Gitmint" %}
         <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
         <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
 +       <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
-    {% else %}
-        {% set CommentsClass = "Gitment" %}
+...
         <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
         <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 +       <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
-    {% endif %}
 ...
-    {% if page.comments %}
-      <script type="text/javascript">
-      function renderGitment(){
         var gitment = new {{CommentsClass}}({
 -           id: document.location.href,
 +           id: md5(window.location.pathname), 
             owner: '{{ theme.gitment.github_user }}',
             repo: '{{ theme.gitment.github_repo }}',
-            {% if theme.gitment.mint %}
-            lang: "{{ theme.gitment.language }}" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
 ```
 
 至于这个MD5的引入，我是随便搜的一个。。这个`{% if theme.gitment.mint %}`我并不知道在哪里配置的，所以俩都加上吧。
