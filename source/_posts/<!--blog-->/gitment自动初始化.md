@@ -1,9 +1,10 @@
 ---
-title: gitment自动初始化
+title: Gitment/Gitalk自动初始化
 url: blog-gitment-auto-setup
 date: 2018-08-29 16:58:47
 tags:
     - gitment
+    - blog
 categories: 
     - 工具
 ---
@@ -167,7 +168,7 @@ ruby comment.rb
 
 ```rb
 # from : https://draveness.me/git-comments-initialize
-# 另外，token已放在.git-token文件下，防止泄漏。。
+# 另外，token已放在.git-token文件下,并被.gitignore标记，防止泄漏。。
 
 username = "madordie" # GitHub 用户名
 token = `cat .git-token`  # GitHub Token
@@ -266,4 +267,5 @@ end
 - 文中的引用啥的我都标记了链接，如有漏掉、不明白，麻烦告诉我一哈，我去补一下
 - 我只是个小小的iOS，对ruby、js懂得不多，rb写的不好的地方轻拍
 - 哦对了，这脚本全部在这里：[comment.rb](https://github.com/madordie/madordie.github.io/blob/master/comment.rb)。同时，这个脚本我又放在了自动发布的shell脚本里面，同样shell写的很水。。放在了这里：[deploy.sh](https://github.com/madordie/madordie.github.io/blob/master/deploy.sh)，而且是很早之前就写了的。。
+- 并未测试[Gitalk](https://github.com/gitalk/gitalk)，只是脚本应该是通用的，至于JS的MD5该咋写 我就不是很清楚了。。
 - 如果还有什么问题，可以拉出来讨论一哈 ;)
