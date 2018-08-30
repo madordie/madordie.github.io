@@ -237,13 +237,17 @@ end
 需要修改`/themes/next/layout/_third-party/comments/gitment.swig`文件，由于JS不支持MD5,所以还需要引入一个JS，于是乎大约这样：
 
 ```swig
+    {% if theme.gitment.mint %}
+        {% set CommentsClass = "Gitmint" %}
         <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
         <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
 +       <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
-...
+    {% else %}
+        {% set CommentsClass = "Gitment" %}
         <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
         <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 +       <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    {% endif %}
 ...
         var gitment = new {{CommentsClass}}({
 -           id: document.location.href,
