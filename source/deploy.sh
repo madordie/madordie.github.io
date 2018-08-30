@@ -70,6 +70,7 @@ elif [ $opt = 'p' ]; then
     echo -e ' --> 已成功部署.\n'
     sleep 1
     unsetproxy
+    # 这个脚本在这里：https://madordie.github.io/post/use-hexo-setup-blog/
     python auto-push-sitemap.py
     echo -e ' --> 已上传站图.\n'
     setproxy

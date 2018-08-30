@@ -30,6 +30,7 @@ PS.
 这个我就不说了，作者有写中文文档，看一眼就明白了。
 
 列一下我的使用[NexT主题](https://github.com/iissnan/hexo-theme-next)的配置：
+
 ```yml
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
@@ -56,7 +57,11 @@ gitment:
 
 看到[自动初始化 Gitalk 和 Gitment 评论](https://draveness.me/git-comments-initialize)的脚本想着刚好我的也是自动发布、备份，这不是刚好嘛。。
 
-跑了一下发现并不行，如果创建成功的话多次运行会创建多个。脑袋瓜子一热，判断一下。。于是就有了下面的版本。。
+但是存在多次执行就会多次创建的问题。这不是我想要的。
+
+### 第一版：让脚本可以多次执行
+
+GitHub提供较为完善的API，用我这水水的rb水平，大致可以完善如下：
 
 ```rb
 # from : https://draveness.me/git-comments-initialize
@@ -124,8 +129,146 @@ urls.each_with_index do |url, index|
 end
 ```
 
-如果你的文章链接都比较短，恭喜你，已经完成了～～
+脚本OK，还需要安装一些库用这个就行：
 
-但是我的文章链接普遍比较长。。
+```sh
+sudo gem install faraday activesupport sitemap-parser
+```
 
-我还在想办法和查资料😂。。
+正常情况都会安装成功，那么跑一下脚本吧：
+
+```rb
+ruby comment.rb
+```
+
+第一次运行请求多，稍微等一会。表急。。
+
+跑完之后如果你的链接总长度都是 `<= 50` 字符，那么真嗨，这就行了。
+
+但是如果以后有可能 `> 50`，或者不确定以后会不会写一个链接贼长的文章，那么你可能还要往下再看一下。。
+
+### 第二版：让脚本兼容文章链接很长长长
+
+关于这个的讨论很多，在issues中搜一下大约这样：[Error: Validation Failed](https://github.com/imsun/gitment/issues?utf8=✓&q=is%3Aissue+validation+Failed)。
+
+这个`Error: Validation Failed`就是label太长。
+
+关于这个问题在[API: Create a label](https://developer.github.com/v3/issues/labels/#create-a-label)并未提及。
+
+但是在任何一个仓库下，按照`Issues -> New label`的时候，输入的`Label name`是有限制的，输入超过`50`个自符之后便无法再接收输入。就酱，没找到什么文档。。
+
+看了这个[Validation Failed ID长度问题建议](https://github.com/imsun/gitment/issues/116)之后觉得，MD5一下吧那就。。
+
+为了选择一个KEY去MD5，顺便解决一下[同一个页面，带锚点#more会初始化一条新的issue](https://github.com/imsun/gitment/issues/168)这个问题，
+
+所以KEY使用[关于hexo博客单篇文章初始化两次的问题](https://github.com/imsun/gitment/issues/68)中提出的`window.location.pathname`吧，但是关于`/`的讨论，我这里貌似并没有看到，我的都是有的😂。。如果看到的话再更，或者保险期间，先按照这种方案更新一下。
+
+将上面的做完，现在的rb应该长这个样子:
+
+```rb
+# from : https://draveness.me/git-comments-initialize
+# 另外，token已放在.git-token文件下，防止泄漏。。
+
+username = "madordie" # GitHub 用户名
+token = `cat .git-token`  # GitHub Token
+repo_name = "madordie.github.io" # 存放 issues
+sitemap_url = "https://madordie.github.io/sitemap.xml" # sitemap
+kind = "gitment" # "Gitalk" or "gitment"
+
+require 'open-uri'
+require 'faraday'
+require 'active_support'
+require 'active_support/core_ext'
+require 'sitemap-parser'
+require 'digest'
+
+puts "正在检索URL"
+
+sitemap = SitemapParser.new sitemap_url
+urls = sitemap.to_a
+
+puts "检索到文章共#{urls.count}个"
+
+conn = Faraday.new(:url => "https://api.github.com") do |conn|
+  conn.basic_auth(username, token)
+  conn.headers['Accept'] = "application/vnd.github.symmetra-preview+json"
+  conn.adapter  Faraday.default_adapter
+end
+
+commenteds = Array.new
+`
+  if [ ! -f .commenteds ]; then
+    touch .commenteds
+  fi
+`
+File.open(".commenteds", "r") do |file|
+  file.each_line do |line|
+      commenteds.push line
+  end
+end
+
+urls.each_with_index do |url, index|
+
+  if commenteds.include?("#{url}\n") == false
+    url_key = Digest::MD5.hexdigest(URI.parse(url).path)
+    response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
+
+    if JSON.parse(response.body)['total_count'] > 0
+      `echo #{url} >> .commenteds`
+    else
+      puts "正在创建: #{url}"
+      title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
+      response = conn.post("/repos/#{username}/#{repo_name}/issues") do |req|
+        req.body = { body: url, labels: [kind, url_key], title: title }.to_json
+      end
+      if JSON.parse(response.body)['number'] > 0
+        `echo #{url} >> .commenteds`
+        puts "\t↳ 已创建成功"
+      else
+        puts "\t↳ #{response.body}"
+      end
+    end
+  end
+end
+```
+
+同时别忘了修改对应的网页。。我这里使用的是[NexT](https://github.com/iissnan/hexo-theme-next)（我已经记不得这是哪个版本了 抱歉。。）
+
+需要修改`/themes/next/layout/_third-party/comments/gitment.swig`文件，由于JS不支持MD5,所以还需要引入一个JS，于是乎大约这样：
+
+```swig
+    {% if theme.gitment.mint %}
+        {% set CommentsClass = "Gitmint" %}
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
++       <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    {% else %}
+        {% set CommentsClass = "Gitment" %}
+        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
++       <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    {% endif %}
+...
+    {% if page.comments %}
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new {{CommentsClass}}({
+-           id: document.location.href,
++           id: md5(window.location.pathname), 
+            owner: '{{ theme.gitment.github_user }}',
+            repo: '{{ theme.gitment.github_repo }}',
+            {% if theme.gitment.mint %}
+            lang: "{{ theme.gitment.language }}" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+```
+
+至于这个MD5的引入，我是随便搜的一个。。这个`{% if theme.gitment.mint %}`我并不知道在哪里配置的，所以俩都加上吧。
+
+执行一下脚本吧，应该齐活了。
+
+## 最后
+
+- 文中提到的关于链接`/`飘忽不定的事情我没碰到，我是直接取的[sitemap](https://madordie.github.io/sitemap.xml)，貌似每个网站都带了
+- 文中的引用啥的我都标记了链接，如有漏掉、不明白，麻烦告诉我一哈，我去补一下
+- 我只是个小小的iOS，对ruby、js懂得不多，rb写的不好的地方轻拍
+- 哦对了，这脚本全部在这里：[comment.rb](https://github.com/madordie/madordie.github.io/blob/master/comment.rb)。同时，这个脚本我又放在了自动发布的shell脚本里面，同样shell写的很水。。放在了这里：[deploy.sh](https://github.com/madordie/madordie.github.io/blob/master/deploy.sh)，而且是很早之前就写了的。。
+- 如果还有什么问题，可以拉出来讨论一哈 ;)
