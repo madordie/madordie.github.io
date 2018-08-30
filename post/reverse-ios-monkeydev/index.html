@@ -802,6 +802,7 @@
         
         <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
         <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+        <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
     
 <!-- END LOCAL -->
 
@@ -811,7 +812,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: document.location.href, 
+            id: md5(window.location.pathname), 
             owner: 'madordie',
             repo: 'madordie.github.io',
             
