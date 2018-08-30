@@ -59,7 +59,7 @@ gitment:
 
 但是存在多次执行就会多次创建的问题。这不是我想要的。
 
-### 第一版：让脚本可以多次执行
+### 第一版：支持多次执行
 
 GitHub提供较为完善的API，用我这水水的rb水平，大致可以完善如下：
 
@@ -147,7 +147,7 @@ ruby comment.rb
 
 但是如果以后有可能 `> 50`，或者不确定以后会不会写一个链接贼长的文章，那么你可能还要往下再看一下。。
 
-### 第二版：让脚本兼容文章链接很长长长
+### 第二版：兼容文章链接很长长长
 
 关于这个的讨论很多，在issues中搜一下大约这样：[Error: Validation Failed](https://github.com/imsun/gitment/issues?utf8=✓&q=is%3Aissue+validation+Failed)。
 
@@ -232,7 +232,7 @@ urls.each_with_index do |url, index|
 end
 ```
 
-同时别忘了修改对应的网页。。我这里使用的是[NexT](https://github.com/iissnan/hexo-theme-next)（我已经记不得这是哪个版本了 抱歉。。）
+同时别忘了修改对应的网页。。我这里使用的是[NexT.Pisces v5.1.4](https://github.com/iissnan/hexo-theme-next)
 
 需要修改`/themes/next/layout/_third-party/comments/gitment.swig`文件，由于JS不支持MD5,所以还需要引入一个JS，于是乎大约这样：
 
@@ -262,7 +262,7 @@ end
 
 ## 最后
 
-- 文中提到的关于链接`/`飘忽不定的事情我没碰到，我是直接取的[sitemap](https://madordie.github.io/sitemap.xml)，貌似每个网站都带了
+- 文中提到的关于链接`/`飘忽不定的事情我没碰到，我是直接取的[sitemap](https://madordie.github.io/sitemap.xml)，貌似每个文章都带了`/`
 - 文中的引用啥的我都标记了链接，如有漏掉、不明白，麻烦告诉我一哈，我去补一下
 - 我只是个小小的iOS，对ruby、js懂得不多，rb写的不好的地方轻拍
 - 哦对了，这脚本全部在这里：[comment.rb](https://github.com/madordie/madordie.github.io/blob/master/comment.rb)。同时，这个脚本我又放在了自动发布的shell脚本里面，同样shell写的很水。。放在了这里：[deploy.sh](https://github.com/madordie/madordie.github.io/blob/master/deploy.sh)，而且是很早之前就写了的。。
