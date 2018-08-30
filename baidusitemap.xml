@@ -5,18 +5,62 @@
     
   <url>
     <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
-    <lastmod>2018-08-30T05:46:39.827Z</lastmod>
+    <lastmod>2018-08-30T05:57:19.404Z</lastmod>
     <data>
         <display>
-        <title>gitment自动初始化</title>
+        <title>Gitment/Gitalk自动初始化</title>
         <pubTime>2018-08-29T08:58:47.000Z</pubTime>
         
+        <tag>blog</tag>
+         
         <tag>gitment</tag>
          
          
            
              
               <breadCrumb title="工具" url="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/use-hexo-setup-blog/</loc>
+    <lastmod>2018-08-30T05:54:30.093Z</lastmod>
+    <data>
+        <display>
+        <title>hexo的博客让百度收录</title>
+        <pubTime>2016-07-05T10:03:31.000Z</pubTime>
+        
+        <tag>SEO</tag>
+         
+        <tag>blog</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/about-change-blog/</loc>
+    <lastmod>2018-08-30T05:54:23.643Z</lastmod>
+    <data>
+        <display>
+        <title>博客迁移公告</title>
+        <pubTime>2016-07-05T05:43:36.000Z</pubTime>
+        
+        <tag>blog</tag>
+         
+         
+           
+             
+              <breadCrumb title="公告" url="https://madordie.github.io/categories/%E5%85%AC%E5%91%8A/"/>
           
         </display>
     </data>
@@ -201,24 +245,6 @@
            
              
               <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/about-change-blog/</loc>
-    <lastmod>2018-05-25T03:57:08.107Z</lastmod>
-    <data>
-        <display>
-        <title>博客迁移公告</title>
-        <pubTime>2016-07-05T05:43:36.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="公告" url="https://madordie.github.io/categories/%E5%85%AC%E5%91%8A/"/>
           
         </display>
     </data>
@@ -557,26 +583,6 @@
         
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/use-hexo-setup-blog/</loc>
-    <lastmod>2017-10-09T05:01:03.358Z</lastmod>
-    <data>
-        <display>
-        <title>hexo的博客让百度收录</title>
-        <pubTime>2016-07-05T10:03:31.000Z</pubTime>
-        
-        <tag>SEO</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-          
         </display>
     </data>
     </url>
