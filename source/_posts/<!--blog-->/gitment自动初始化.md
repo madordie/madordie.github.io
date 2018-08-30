@@ -256,7 +256,7 @@ end
             repo: '{{ theme.gitment.github_repo }}',
 ```
 
-至于这个MD5的引入，我是随便搜的一个。。这个`{% if theme.gitment.mint %}`我并不知道在哪里配置的，所以俩都加上吧。
+至于这个MD5的引入，我是随便搜的一个。。这个`if theme.gitment.mint`我并不知道在哪里配置的，所以俩都加上吧。
 
 执行一下脚本吧，应该齐活了。
 

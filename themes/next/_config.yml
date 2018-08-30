@@ -1,10 +1,18 @@
+# ===============================================================
+# ========================= ATTENTION! ==========================
+# ===============================================================
+# NexT repository is moving here: https://github.com/theme-next
+# ===============================================================
+# It's rebase to v6.0.0 and future maintenance will resume there
+# ===============================================================
+
 # ---------------------------------------------------------------
 # Theme Core Configuration Settings
 # ---------------------------------------------------------------
 
 # Set to true, if you want to fully override the default configuration.
 # Useful if you don't want to inherit the theme _config.yml configurations.
-override: true
+override: false
 
 # ---------------------------------------------------------------
 # Site Information Settings
@@ -52,7 +60,7 @@ footer:
     # Theme & scheme info link (Theme - NexT.scheme).
     enable: true
     # Version info of NexT after scheme info (vX.X.X).
-    version: false
+    version: true
   # -------------------------------------------------------------
   # Any custom text can be defined here.
   #custom_text: Hosted by <a target="_blank" href="https://pages.github.com">GitHub Pages</a>
@@ -71,7 +79,7 @@ seo: true
 
 # If true, will add site-subtitle to index page, added in main hexo config.
 # subtitle: Subtitle
-index_with_subtitle: true
+index_with_subtitle: false
 
 
 # ---------------------------------------------------------------
@@ -89,10 +97,6 @@ menu:
   categories: /categories/ || th
   tags: /tags/ || tags
   about: /about/ || user
-  #about: /about/ || user
-  #tags: /tags/ || tags
-  #categories: /categories/ || th
-  #archives: /archives/ || archive
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -107,7 +111,7 @@ menu_icons:
 # ---------------------------------------------------------------
 
 # Schemes
-#scheme: Muse
+# scheme: Muse
 #scheme: Mist
 scheme: Pisces
 #scheme: Gemini
@@ -123,6 +127,7 @@ scheme: Pisces
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
+-social:
   E-Mail: "mailto:e.madordie@gmail.com"
   原博客园: "http://www.cnblogs.com/madordie/"
   GitHub: "https://github.com/madordie"
@@ -376,14 +381,18 @@ changyan:
 
 # Valine.
 # You can get your appid and appkey from https://leancloud.cn
-# more info please open https://github.com/xCss/Valine
+# more info please open https://valine.js.org
 valine:
   enable: false
   appid:  # your leancloud application appid
   appkey:  # your leancloud application appkey
   notify: false # mail notifier , https://github.com/xCss/Valine/wiki
   verify: false # Verification code
-  placeholder: Comment input placeholder
+  placeholder: Just go go # comment box placeholder
+  avatar: mm # gravatar style
+  guest_info: nick,mail,link # custom comment header
+  pageSize: 10 # pagination size
+
 
 # Support for youyan comments system.
 # You can get your uid from http://www.uyan.cc
@@ -395,6 +404,7 @@ valine:
 
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
+# You can get your Github ID from https://api.github.com/users/<Github username>
 gitment:
   enable: true
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
@@ -527,8 +537,18 @@ rating:
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
   enable: false
-  app_id: 2J1SRhOLinnCHVowdOcg2nRx-gzGzoHsz
-  app_key: urDdiCbFngvx8l3grpAA1VUl
+  app_id: #<app_id>
+  app_key: #<app_key>
+
+# Another tool to show number of visitors to each article.
+# visit https://console.firebase.google.com/u/0/ to get apiKey and projectId
+# visit https://firebase.google.com/docs/firestore/ to get more information about firestore
+firestore:
+  enable: false
+  collection: articles #required, a string collection name to access firestore database
+  apiKey: #required
+  projectId: #required
+  bluebird: false #enable this if you want to include bluebird 3.5.1(core version) Promise polyfill
 
 # Show PV/UV of the website/page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
@@ -693,7 +713,14 @@ canvas_sphere: false
 
 # Only fit scheme Pisces
 # Canvas-ribbon
-canvas_ribbon: false
+# size: The width of the ribbon.
+# alpha: The transparency of the ribbon.
+# zIndex: The display level of the ribbon.
+canvas_ribbon:
+  enable: false
+  size: 300
+  alpha: 0.6
+  zIndex: -1
 
 # Script Vendors.
 # Set a CDN address for the vendor you want to customize.
@@ -788,4 +815,4 @@ js: js
 images: images
 
 # Theme version
-version: 5.1.3
+version: 5.1.4
