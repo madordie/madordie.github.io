@@ -84,14 +84,14 @@
 <meta name="description" content="5步解析.crash文件">
 <meta name="keywords" content="DEBUG">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DEBUG - Xcode8解析.crash">
+<meta property="og:title" content="DEBUG - Xcode解析.crash">
 <meta property="og:url" content="https://madordie.github.io/post/debug-xcode8-analysis-crash-file/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="5步解析.crash文件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-11T03:37:40.003Z">
+<meta property="og:updated_time" content="2018-09-12T01:36:50.592Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DEBUG - Xcode8解析.crash">
+<meta name="twitter:title" content="DEBUG - Xcode解析.crash">
 <meta name="twitter:description" content="5步解析.crash文件">
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>DEBUG - Xcode8解析.crash | 继刚的博客</title>
+  <title>DEBUG - Xcode解析.crash | 继刚的博客</title>
   
 
 
@@ -301,7 +301,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">DEBUG - Xcode8解析.crash</h2>
+          <h2 class="post-title" itemprop="name headline">DEBUG - Xcode解析.crash</h2>
         
 
         <div class="post-meta">
@@ -375,13 +375,16 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
 <a id="more"></a>
-<h1 id="Xcode8中解析-crash文件"><a href="#Xcode8中解析-crash文件" class="headerlink" title="Xcode8中解析.crash文件"></a>Xcode8中解析.crash文件</h1><ol>
+<h1 id="Xcode中解析-crash文件"><a href="#Xcode中解析-crash文件" class="headerlink" title="Xcode中解析.crash文件"></a>Xcode中解析.crash文件</h1><ol>
 <li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
 <li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
 <li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
 <li>拷贝脚本文件，运行<code>cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A</code></li>
 <li>到<code>目录A</code>解析，运行<code>./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名</code></li>
 </ol>
+<h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><ul>
+<li>这里最重要的是<code>symbolicatecrash</code>文件，<code>symbolicatecrash</code>在手解析不愁。</li>
+</ul>
 
       
     </div>
@@ -593,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode8中解析-crash文件"><span class="nav-number">1.</span> <span class="nav-text">Xcode8中解析.crash文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode中解析-crash文件"><span class="nav-number">1.</span> <span class="nav-text">Xcode中解析.crash文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注"><span class="nav-number">2.</span> <span class="nav-text">注</span></a></li></ol></div>
             
 
           </div>

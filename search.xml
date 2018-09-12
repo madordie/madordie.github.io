@@ -382,9 +382,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DEBUG - Xcode8解析.crash]]></title>
+    <title><![CDATA[DEBUG - Xcode解析.crash]]></title>
     <url>%2Fpost%2Fdebug-xcode8-analysis-crash-file%2F</url>
-    <content type="text"><![CDATA[5步解析.crash文件 Xcode8中解析.crash文件 导出x.crash文件，放置在目录A下 复制工程名.app.dSYM到目录A 配置环境变量，运行export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer 拷贝脚本文件，运行cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A 到目录A解析，运行./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名]]></content>
+    <content type="text"><![CDATA[5步解析.crash文件 Xcode中解析.crash文件 导出x.crash文件，放置在目录A下 复制工程名.app.dSYM到目录A 配置环境变量，运行export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer 拷贝脚本文件，运行cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A 到目录A解析，运行./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名 注 这里最重要的是symbolicatecrash文件，symbolicatecrash在手解析不愁。]]></content>
       <categories>
         <category>iOS</category>
       </categories>

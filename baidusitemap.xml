@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
+    <lastmod>2018-09-12T01:36:50.592Z</lastmod>
+    <data>
+        <display>
+        <title>DEBUG - Xcode解析.crash</title>
+        <pubTime>2016-11-14T04:43:22.000Z</pubTime>
+        
+        <tag>DEBUG</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
     <lastmod>2018-08-30T06:24:30.898Z</lastmod>
     <data>
@@ -375,26 +395,6 @@
         <display>
         <title>DEBUG - UIView.h#190</title>
         <pubTime>2016-10-11T04:43:22.000Z</pubTime>
-        
-        <tag>DEBUG</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
-    <lastmod>2017-10-11T03:37:40.003Z</lastmod>
-    <data>
-        <display>
-        <title>DEBUG - Xcode8解析.crash</title>
-        <pubTime>2016-11-14T04:43:22.000Z</pubTime>
         
         <tag>DEBUG</tag>
          
