@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/ios-automation-jenkins-configuration/</loc>
+    
+    <lastmod>2018-09-30T03:21:41.241Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
     
     <lastmod>2018-09-12T01:36:50.592Z</lastmod>
@@ -320,13 +327,6 @@
     <loc>https://madordie.github.io/post/reactivecocoa-ready-to-use/</loc>
     
     <lastmod>2017-10-09T04:57:07.924Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/ios-automation-jenkins-configuration/</loc>
-    
-    <lastmod>2017-10-09T04:56:16.541Z</lastmod>
     
   </url>
   

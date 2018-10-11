@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/ios-automation-jenkins-configuration/</loc>
+    <lastmod>2018-09-30T03:21:41.241Z</lastmod>
+    <data>
+        <display>
+        <title>iOS自动化-Jenkins环境搭建</title>
+        <pubTime>2017-09-10T01:49:32.000Z</pubTime>
+        
+        <tag>构建</tag>
+         
+        <tag>Jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
     <lastmod>2018-09-12T01:36:50.592Z</lastmod>
     <data>
@@ -883,28 +905,6 @@
         <pubTime>2016-07-12T01:53:14.000Z</pubTime>
         
         <tag>ReactiveCocoa</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/ios-automation-jenkins-configuration/</loc>
-    <lastmod>2017-10-09T04:56:16.541Z</lastmod>
-    <data>
-        <display>
-        <title>iOS自动化-Jenkins环境搭建</title>
-        <pubTime>2017-09-10T01:49:32.000Z</pubTime>
-        
-        <tag>构建</tag>
-         
-        <tag>Jenkins</tag>
          
          
            

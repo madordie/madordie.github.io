@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍  JenkinsBuild great things at any scaleThe leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and aut">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-09T04:56:16.541Z">
+<meta property="og:updated_time" content="2018-09-30T03:21:41.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS自动化-Jenkins环境搭建">
 <meta name="twitter:description" content="iOS自动化-Jenkins环境搭建 iOS自动化-Jenkins编译工程  介绍  JenkinsBuild great things at any scaleThe leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and aut">
@@ -416,7 +416,6 @@
 <p>这里使用<code>brew</code>，因为<strong>很方便</strong>：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ brew update &amp;&amp; brew install jenkins</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line">$ brew update &amp; brew upgrade jenkins</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后台运行 还支持`stop`、`restart`等 (这种方式还是有差别的，下面会说明)</span></span><br><span class="line">$ brew services start jenkins</span><br></pre></td></tr></table></figure></p>
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>建议先来看一波<code>--help</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jenkins --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
-<p>下面是常用的几种方案，此处如果第一次安装，建议采用<code>方案一</code>或者<code>方案二</code>，暂时不建议新手使用后台运行的方案～～（会在打包的时候出现证书的问题）</p>
 <h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>直接运行<code>jenkins</code>命令，可以看到日志输出，但是不能退出命令。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jenkins</span><br></pre></td></tr></table></figure>
 <p>经过漫长的初始化，会将</p>
@@ -712,7 +711,7 @@
 
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.infome/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
     <span class="site-uv">
