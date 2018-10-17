@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="前提条件 已越狱设备 越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码) 电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-09T04:57:48.373Z">
+<meta property="og:updated_time" content="2018-10-17T05:35:08.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS逆向-设备ssh免密登录">
 <meta name="twitter:description" content="前提条件 已越狱设备 越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码) 电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）">
@@ -386,7 +386,7 @@
 <p><code>scp</code> 默认端口为<code>22</code> 如果需要自定义端口可以在路径前添加<code>-P 端口号</code>参数。</p>
 <h3 id="配置本机-ssh-config文件"><a href="#配置本机-ssh-config文件" class="headerlink" title="配置本机~/.ssh/config文件"></a>配置本机<code>~/.ssh/config</code>文件</h3><p>使用顺手的工具编辑<code>~/.ssh/config</code>文件。（没有就新建一个啦～</p>
 <p>按照如下格式填写。默认<code>ssh</code>登录端口为<code>22</code>可以不写。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host ipad</span><br><span class="line">    Hostname 10.11.12.13</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/ipad</span><br></pre></td></tr></table></figure></p>
-<h3 id="配置越狱设备"><a href="#配置越狱设备" class="headerlink" title="配置越狱设备"></a>配置越狱设备</h3><p>先用<code>ssh root@10.11.12.13</code>登录进设备。刚才我们将<code>ipad.pub</code>通过<code>scp</code>放在了<code>/var/root</code>下。</p>
+<h3 id="配置越狱设备"><a href="#配置越狱设备" class="headerlink" title="配置越狱设备"></a>配置越狱设备</h3><p>先用<code>ssh root@10.11.12.13</code>登录进设备(如果你没有修改密码那么默认是<code>alpine</code>,这个在<a href="https://cydia.saurik.com/openssh.html" target="_blank" rel="noopener">OpenSSH</a>上)。刚才我们将<code>ipad.pub</code>通过<code>scp</code>放在了<code>/var/root</code>下。</p>
 <p>一般情况下<code>/var/root/.ssh</code>是不存在的，使用命令<code>mkdir -p /var/root/.ssh</code>即可创建。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat ipad.pub &gt;&gt; /var/root/.ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
 <p>然后强迫症的可以使用<code>rm -rf ipad.pub</code>删除啦～</p>
