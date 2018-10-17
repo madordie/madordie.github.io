@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="前提条件 已越狱设备 越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码) 电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-17T05:35:08.520Z">
+<meta property="og:updated_time" content="2018-10-17T05:46:09.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS逆向-设备ssh免密登录">
 <meta name="twitter:description" content="前提条件 已越狱设备 越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码) 电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）">
@@ -395,6 +395,7 @@
 <h3 id="赶紧测试一下远程登录效果"><a href="#赶紧测试一下远程登录效果" class="headerlink" title="赶紧测试一下远程登录效果"></a>赶紧测试一下远程登录效果</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh ipad</span></span><br></pre></td></tr></table></figure>
 <p>然后你会发现你已经完成了免密码登录越狱设备。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实这并不是只有越狱iOS设备才能使用的免登录，而是<code>ssh</code>所支持的。用途也很方便～</p>
+<p>PS. 这里面的IP地址(10.11.12.13) 是你设备的IP。如果超时的话或者ping不通或者网速比较差的话，可以采用<a href="http://iphonedevwiki.net/index.php/SSH_Over_USB" target="_blank" rel="noopener">usbmux</a>方案进行，文档已相当详细，此处不再赘述。</p>
 
       
     </div>
