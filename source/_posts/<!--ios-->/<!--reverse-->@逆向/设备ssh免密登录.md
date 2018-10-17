@@ -106,3 +106,5 @@ $ ssh ipad
 ## 总结
 
 其实这并不是只有越狱iOS设备才能使用的免登录，而是`ssh`所支持的。用途也很方便～
+
+PS. 这里面的IP地址(10.11.12.13) 是你设备的IP。如果超时的话或者ping不通或者网速比较差的话，可以采用[usbmux](http://iphonedevwiki.net/index.php/SSH_Over_USB)方案进行，文档已相当详细，此处不再赘述。
