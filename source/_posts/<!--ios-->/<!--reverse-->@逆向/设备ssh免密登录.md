@@ -77,7 +77,7 @@ Host ipad
 
 ### 配置越狱设备
 
-先用`ssh root@10.11.12.13`登录进设备。刚才我们将`ipad.pub`通过`scp`放在了`/var/root`下。
+先用`ssh root@10.11.12.13`登录进设备(如果你没有修改密码那么默认是`alpine`,这个在[OpenSSH](https://cydia.saurik.com/openssh.html)上)。刚才我们将`ipad.pub`通过`scp`放在了`/var/root`下。
 
 一般情况下`/var/root/.ssh`是不存在的，使用命令`mkdir -p /var/root/.ssh`即可创建。
 
