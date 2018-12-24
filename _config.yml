@@ -33,7 +33,7 @@ url: https://madordie.github.io
 root: /
 permalink: post/:url/
 permalink_defaults:
-  lang: zh-Hans
+  lang: zh-CN
 
 # Directory
 source_dir: source
