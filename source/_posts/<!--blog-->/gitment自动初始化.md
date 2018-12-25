@@ -209,6 +209,7 @@ File.open(".commenteds", "r") do |file|
 end
 
 urls.each_with_index do |url, index|
+  url.gsub!(/index.html$/, "")
 
   if commenteds.include?("#{url}\n") == false
     url_key = Digest::MD5.hexdigest(URI.parse(url).path)
@@ -252,7 +253,7 @@ end
 ...
         var gitment = new {{CommentsClass}}({
 -           id: document.location.href,
-+           id: md5(window.location.pathname),
++           id: md5(window.location.pathname.replace(/index.html/, "")),
             owner: '{{ theme.gitment.github_user }}',
             repo: '{{ theme.gitment.github_repo }}',
 ```
