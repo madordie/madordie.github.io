@@ -106,14 +106,16 @@ File.open(".commenteds", "r") do |file|
 end
 
 urls.each_with_index do |url, index|
+  url = url.gsub(/index.html$/, "")
 
   if commenteds.include?("#{url}\n") == false
-    response = conn.get "/search/issues?q=label:#{url}+state:open+repo:#{username}/#{repo_name}"
+    url_key = Digest::MD5.hexdigest(URI.parse(url).path)
+    response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
 
+    puts "正在创建: #{url}"
     if JSON.parse(response.body)['total_count'] > 0
+      puts "\t↳ 已存在"
       `echo #{url} >> .commenteds`
-    else
-      puts "正在创建: #{url}"
       title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
 
       response = conn.post("/repos/#{username}/#{repo_name}/issues") do |req|
