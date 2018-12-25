@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
+    
+    <lastmod>2018-12-25T03:29:20.145Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/reverse-ios-ssh/</loc>
     
     <lastmod>2018-10-17T05:46:09.463Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>https://madordie.github.io/post/debug-xcode8-analysis-crash-file/</loc>
     
     <lastmod>2018-09-12T01:36:50.592Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
-    
-    <lastmod>2018-08-30T06:24:30.898Z</lastmod>
     
   </url>
   

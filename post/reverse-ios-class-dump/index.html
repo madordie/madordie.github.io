@@ -818,7 +818,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: md5(window.location.pathname), 
+            id: md5(window.location.pathname.replace(/index.html/, "")), 
             owner: 'madordie',
             repo: 'madordie.github.io',
             
