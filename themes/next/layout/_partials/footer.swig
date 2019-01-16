@@ -45,3 +45,25 @@
   #}{{ theme.footer.custom_text }}{#
 #}</div>
 {% endif %}
+
+{% if theme.graphviz.enable %}
+  <script src='https://cdn.bootcss.com/viz.js/1.7.1/viz.js'></script>
+  <script>
+    String.prototype.replaceAll = function(search, replacement) {
+      var target = this;
+      return target.split(search).join(replacement);
+    };
+ 
+    let vizObjects = document.querySelectorAll('.graphviz')
+ 
+    for (let item of vizObjects) {
+      let svg = undefined
+      try {
+        svg = Viz(item.textContent.replaceAll('–', '--'))
+        item.outerHTML = '<p style="text-align:center;">' + svg + '</p>'
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  </script>
+{% endif %}

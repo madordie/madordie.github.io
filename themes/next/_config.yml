@@ -344,6 +344,10 @@ font:
 # Third Party Services Settings
 # ---------------------------------------------------------------
 
+# hexo-graphviz
+graphviz:
+  enable: true
+
 # MathJax Support
 mathjax:
   enable: false
