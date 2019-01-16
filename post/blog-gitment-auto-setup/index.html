@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="一个ruby脚本解放你双手啪啪啪的敲键盘三分钟～ PS.  ruby新手，轻拍。。 三是虚指。。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-25T03:48:31.809Z">
+<meta property="og:updated_time" content="2019-01-16T07:15:59.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gitment&#x2F;Gitalk自动初始化">
 <meta name="twitter:description" content="一个ruby脚本解放你双手啪啪啪的敲键盘三分钟～ PS.  ruby新手，轻拍。。 三是虚指。。">
@@ -672,6 +672,27 @@
 
 
 
+
+
+  <script src='https://cdn.bootcss.com/viz.js/1.7.1/viz.js'></script>
+  <script>
+    String.prototype.replaceAll = function(search, replacement) {
+      var target = this;
+      return target.split(search).join(replacement);
+    };
+ 
+    let vizObjects = document.querySelectorAll('.graphviz')
+ 
+    for (let item of vizObjects) {
+      let svg = undefined
+      try {
+        svg = Viz(item.textContent.replaceAll('–', '--'))
+        item.outerHTML = '<p style="text-align:center;">' + svg + '</p>'
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  </script>
 
         
 <div class="busuanzi-count">
