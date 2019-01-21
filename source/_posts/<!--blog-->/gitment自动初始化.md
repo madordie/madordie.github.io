@@ -65,7 +65,7 @@ gitment:
 GitHub提供较为完善的API，用我这水水的rb水平，大致可以完善如下：
 
 ```rb
-# from : https://draveness.me/git-comments-initialize
+# from : https://madordie.github.io/post/blog-gitment-auto-setup
 # 另外，token已放在.git-token文件下，防止泄漏。。
 
 username = "madordie" # GitHub 用户名
@@ -169,7 +169,7 @@ ruby comment.rb
 将上面的做完，现在的rb应该长这个样子:
 
 ```rb
-# from : https://draveness.me/git-comments-initialize
+# from : https://madordie.github.io/post/blog-gitment-auto-setup
 # 另外，token已放在.git-token文件下,并被.gitignore标记，防止泄漏。。
 
 username = "madordie" # GitHub 用户名
