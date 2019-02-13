@@ -10,7 +10,7 @@ iOS 开发者，嵌入式爱好者，喜欢研究，热衷于技术。
 
 **QQ**: [453870736](tencent://QQInterLive/?Cmd=2&Uin=495939026)
 
-**E-mail**: [e.madordie@gmail.com](mailto:e.madordie@gmail.com)
+**E-mail**: [io.madordie@gmail.com](mailto:io.madordie@gmail.com)
 
 **Github**: [https://github.com/madordie](https://github.com/madordie)
 
