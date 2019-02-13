@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/about/index.html</loc>
+    
+    <lastmod>2019-02-13T06:13:11.053Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
     
     <lastmod>2019-01-21T02:17:12.266Z</lastmod>
@@ -215,13 +222,6 @@
     <loc>https://madordie.github.io/post/bang-fastimagecache/</loc>
     
     <lastmod>2017-10-10T05:34:24.598Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/about/index.html</loc>
-    
-    <lastmod>2017-10-10T05:26:27.405Z</lastmod>
     
   </url>
   
