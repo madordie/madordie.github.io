@@ -394,7 +394,7 @@ valine:
   placeholder: Just go go # comment box placeholder
   avatar: mm # gravatar style
   guest_info: nick,mail,link # custom comment header
-  pageSize: 10 # pagination size
+  pageSize: 5 # pagination size
 
 
 # Support for youyan comments system.
