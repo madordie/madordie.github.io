@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2019-01-21T02:17:12.266Z</updated>
+  <updated>2019-05-17T03:00:03.919Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -14,6 +14,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>logio</title>
+    <link href="https://madordie.github.io/post/logio-brief/"/>
+    <id>https://madordie.github.io/post/logio-brief/</id>
+    <published>2019-05-16T16:00:00.000Z</published>
+    <updated>2019-05-17T03:00:03.919Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p>Real-time log monitoring in your browser.</p>
+<a id="more"></a>
+<h1 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work"></a>How does it work</h1><p>Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.</p>
+<p>Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.</p>
+<p><img src="/images/2019-05-17-10-03-13.png" alt="work io"></p>
+<h1 id="Activate-streams-amp-nodes-to-watch-log-messages"><a href="#Activate-streams-amp-nodes-to-watch-log-messages" class="headerlink" title="Activate streams &amp; nodes to watch log messages"></a>Activate streams &amp; nodes to watch log messages</h1><p><img src="/images/2019-05-17-10-12-25.png" alt="Activate streams &amp; nodes to watch log messages"></p>
+<h1 id="Simple-TCP-interface"><a href="#Simple-TCP-interface" class="headerlink" title="Simple TCP interface"></a><a name="Simple TCP interface">Simple TCP interface</a></h1><p>Log.io uses a stateless TCP API to receive log messages.</p>
+<p>Writing a third party harvester is easy. Open a TCP connection to the server and begin writing properly formatted messages to the socket.</p>
+<p>Read the <a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">API documentation</a>.</p>
+<h2 id="Send-a-log-message"><a href="#Send-a-log-message" class="headerlink" title="Send a log message:"></a>Send a log message:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
+<h2 id="Register-a-new-node-with-stream-associations"><a href="#Register-a-new-node-with-stream-associations" class="headerlink" title="Register a new node, with stream associations"></a>Register a new node, with stream associations</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
+<h2 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
+<h1 id="Install-Log-io"><a href="#Install-Log-io" class="headerlink" title="Install Log.io"></a>Install Log.io</h1><p>The original project <a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">NarrativeScience/Log.io</a> has been unavailable due to lack of maintenance for a long time.</p>
+<p>Fortunately, the <a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a> can also be used.</p>
+<p>So we can install the project like this：</p>
+<h2 id="Install-and-start-docker"><a href="#Install-and-start-docker" class="headerlink" title="Install and start docker"></a>Install and start docker</h2><p>The <a href="https://docs.docker.com/install/" target="_blank" rel="noopener">docs.docker.com</a> is very detailed.</p>
+<p>Support <a href="https://docs.docker.com/install/" target="_blank" rel="noopener">Cloud</a>、 <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="noopener">MacOS</a> 、<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">Linux</a> 、 <a href="https://docs.docker.com/docker-for-windows/install/" target="_blank" rel="noopener">Windows</a></p>
+<h2 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull blacklabelops/logio</span><br></pre></td></tr></table></figure>
+<h2 id="Start-the-server"><a href="#Start-the-server" class="headerlink" title="Start the server"></a>Start the server</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 28778:28778 \</span><br><span class="line">    -p 28777:28777 \</span><br><span class="line">    --name logio \</span><br><span class="line">    blacklabelops/logio</span><br></pre></td></tr></table></figure>
+<h2 id="Other-configure"><a href="#Other-configure" class="headerlink" title="Other configure"></a>Other configure</h2><p><a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a>.</p>
+<h1 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h1><p>Browser: <a href="http://localhost:28778/" target="_blank" rel="noopener">http://localhost:28778/</a><br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
+<p>Now we can write logs to port 28777. 🎉🎉🎉</p>
+<h1 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h1><p>We only need to perform TCP communication according to the rules <a href="#Simple TCP interface">Simple TCP interface</a>, and the log can be displayed on the browser.</p>
+<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio" target="_blank" rel="noopener">logio for iOS</a></p>
+<hr>
+<ul>
+<li><a href="http://logio.org/" target="_blank" rel="noopener">logio.org</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;log-io&quot;&gt;&lt;a href=&quot;#log-io&quot; class=&quot;headerlink&quot; title=&quot;log.io&quot;&gt;&lt;/a&gt;log.io&lt;/h1&gt;&lt;p&gt;Real-time log monitoring in your browser.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+      <category term="macOS" scheme="https://madordie.github.io/categories/iOS/macOS/"/>
+    
+      <category term="工具" scheme="https://madordie.github.io/categories/iOS/macOS/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="tool" scheme="https://madordie.github.io/tags/tool/"/>
+    
+      <category term="logio" scheme="https://madordie.github.io/tags/logio/"/>
+    
+  </entry>
   
   <entry>
     <title>Gitment/Gitalk自动初始化</title>
@@ -1439,58 +1495,6 @@
     
     
       <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>自定义数据填充Sketch插件</title>
-    <link href="https://madordie.github.io/post/format-sketchplugin/"/>
-    <id>https://madordie.github.io/post/format-sketchplugin/</id>
-    <published>2017-07-17T06:45:12.000Z</published>
-    <updated>2017-10-09T04:59:31.525Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="先来个README-md"><a href="#先来个README-md" class="headerlink" title="先来个README.md"></a>先来个README.md</h2><blockquote>
-<h2 id="format-sketchplugin"><a href="#format-sketchplugin" class="headerlink" title="format-sketchplugin"></a><a href="https://github.com/madordie/format-sketchplugin" target="_blank" rel="noopener">format-sketchplugin</a></h2></blockquote>
-<blockquote>
-<p>为Sketch自动生成自定义填充数据源插件。</p>
-</blockquote>
-<blockquote>
-<p><img src="https://github.com/madordie/format-sketchplugin/blob/master/Images/Untitled.gif?raw=true" alt="预览"></p>
-</blockquote>
-<blockquote>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2></blockquote>
-<blockquote>
-<ul>
-<li>下载<a href="https://github.com/madordie/format-sketchplugin/releases" target="_blank" rel="noopener">Release</a>上的包，并双击打开</li>
-<li>选择要随机填充的文本数据(支持多选，文本数据按照回车进行随机，会默认删除空数据)</li>
-<li>选择随机填充的图片文件夹(只支持单选文件夹，选中文件夹内的<code>.png</code>、 <code>.PNG</code>、 <code>.jpg</code>、 <code>.JPG</code>、 <code>.jpeg</code>、 <code>.JPEG</code>、 <code>.gif</code>、 <code>.GIF</code>文件将会被识别并作为数据源)</li>
-<li>将插件生成目录拖拽至窗口即完成设置</li>
-<li>文本、图片文件夹 可在保存前重复多次选择</li>
-<li>点击<code>制作</code>，即可在生成目录看到插件生成</li>
-</ul>
-</blockquote>
-<blockquote>
-<h2 id="生成说明"><a href="#生成说明" class="headerlink" title="生成说明"></a>生成说明</h2></blockquote>
-<blockquote>
-<ul>
-<li>文本数据按照文本文件名作为标示</li>
-<li>图片文件夹按照图片文件夹名作为标示</li>
-<li>保存时，文本数据会读取至插件内</li>
-<li>保存时，图片文件夹会复制至插件内(不识别子目录，并只拷贝可识别的素材)</li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h2 id=&quot;先来个README-md&quot;&gt;&lt;a href=&quot;#先来个README
-    
-    </summary>
-    
-      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Sketchplugin" scheme="https://madordie.github.io/tags/Sketchplugin/"/>
     
   </entry>
   
