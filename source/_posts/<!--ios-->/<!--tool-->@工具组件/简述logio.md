@@ -13,6 +13,8 @@ categories:
 
 # log.io
 
+[中文](https://madordie.github.io/post/logio-brief-zh-cn/)
+
 Real-time log monitoring in your browser.
 
 <!--more-->

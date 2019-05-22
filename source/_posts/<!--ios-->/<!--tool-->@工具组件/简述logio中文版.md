@@ -13,6 +13,8 @@ categories:
 
 # log.io
 
+[English](https://madordie.github.io/post/logio-brief/)
+
 一个能在浏览器上实时显示日志的工具。
 
 <!--more-->
