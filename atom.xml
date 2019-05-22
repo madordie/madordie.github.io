@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2019-05-22T03:58:48.345Z</updated>
+  <updated>2019-05-22T04:02:24.736Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="https://madordie.github.io/post/logio-brief-zh-cn/"/>
     <id>https://madordie.github.io/post/logio-brief-zh-cn/</id>
     <published>2019-05-21T16:00:00.000Z</published>
-    <updated>2019-05-22T03:58:48.345Z</updated>
+    <updated>2019-05-22T04:02:24.736Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p>一个能在浏览器上实时显示日志的工具。</p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief/">English</a></p>
+<p>一个能在浏览器上实时显示日志的工具。</p>
 <a id="more"></a>
 <h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p>以下摘自<a href="http://logio.org/" target="_blank" rel="noopener">logio.org</a>，我觉得已经非常的详细了，这里就不啰嗦了。</p>
 <blockquote>
@@ -62,7 +63,8 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;log-io&quot;&gt;&lt;a href=&quot;#log-io&quot; class=&quot;headerlink&quot; title=&quot;log.io&quot;&gt;&lt;/a&gt;log.io&lt;/h1&gt;&lt;p&gt;一个能在浏览器上实时显示日志的工具。&lt;/p&gt;
+      &lt;h1 id=&quot;log-io&quot;&gt;&lt;a href=&quot;#log-io&quot; class=&quot;headerlink&quot; title=&quot;log.io&quot;&gt;&lt;/a&gt;log.io&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://madordie.github.io/post/logio-brief/&quot;&gt;English&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;一个能在浏览器上实时显示日志的工具。&lt;/p&gt;
     
     </summary>
     
@@ -84,9 +86,10 @@
     <link href="https://madordie.github.io/post/logio-brief/"/>
     <id>https://madordie.github.io/post/logio-brief/</id>
     <published>2019-05-16T16:00:00.000Z</published>
-    <updated>2019-05-22T03:37:15.598Z</updated>
+    <updated>2019-05-22T04:02:27.799Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p>Real-time log monitoring in your browser.</p>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief-zh-cn/">中文</a></p>
+<p>Real-time log monitoring in your browser.</p>
 <a id="more"></a>
 <h1 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work"></a>How does it work</h1><blockquote>
 <p>Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.</p>
@@ -124,7 +127,8 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;log-io&quot;&gt;&lt;a href=&quot;#log-io&quot; class=&quot;headerlink&quot; title=&quot;log.io&quot;&gt;&lt;/a&gt;log.io&lt;/h1&gt;&lt;p&gt;Real-time log monitoring in your browser.&lt;/p&gt;
+      &lt;h1 id=&quot;log-io&quot;&gt;&lt;a href=&quot;#log-io&quot; class=&quot;headerlink&quot; title=&quot;log.io&quot;&gt;&lt;/a&gt;log.io&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://madordie.github.io/post/logio-brief-zh-cn/&quot;&gt;中文&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Real-time log monitoring in your browser.&lt;/p&gt;
     
     </summary>
     
