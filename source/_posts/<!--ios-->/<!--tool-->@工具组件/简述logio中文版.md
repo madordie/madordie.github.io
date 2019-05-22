@@ -103,7 +103,13 @@ $ docker run -d \
 
 ## iOS
 
-[logio for iOS](https://github.com/madordie/logio)
+[iOS版本](https://github.com/madordie/logio)基于[CocoaPods](https://cocoapods.org/)的项目只需要在Podfile中添加：
+
+```ruby
+pod 'logio', :git => 'https://github.com/madordie/logio.git'
+```
+
+其iOS版本已经放在了这里：[madordie/logio](https://github.com/madordie/logio)
 
 iOS上之前有一个类似的[LogIO-CocoaLumberjack](https://github.com/s4nchez/LogIO-CocoaLumberjack), 我这里做了简单的更新，目的是不绑定[CocoaAsyncSocket](https://github.com/robbiehanson/CocoaAsyncSocket)。
 
