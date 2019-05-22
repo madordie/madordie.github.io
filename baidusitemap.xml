@@ -4,30 +4,8 @@
 
     
   <url>
-    <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
-    <lastmod>2019-05-22T03:51:24.165Z</lastmod>
-    <data>
-        <display>
-        <title>Gitment/Gitalk自动初始化</title>
-        <pubTime>2018-08-29T08:58:47.000Z</pubTime>
-        
-        <tag>blog</tag>
-         
-        <tag>gitment</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具" url="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://madordie.github.io/post/logio-brief-zh-cn/</loc>
-    <lastmod>2019-05-22T03:43:52.492Z</lastmod>
+    <lastmod>2019-05-22T03:58:48.345Z</lastmod>
     <data>
         <display>
         <title>实时显示日志logio</title>
@@ -47,6 +25,28 @@
           
              
               <breadCrumb title="工具" url="https://madordie.github.io/categories/iOS/macOS/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
+    <lastmod>2019-05-22T03:51:24.165Z</lastmod>
+    <data>
+        <display>
+        <title>Gitment/Gitalk自动初始化</title>
+        <pubTime>2018-08-29T08:58:47.000Z</pubTime>
+        
+        <tag>blog</tag>
+         
+        <tag>gitment</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -152,9 +152,9 @@
         <title>hexo的博客让百度收录</title>
         <pubTime>2016-07-05T10:03:31.000Z</pubTime>
         
-        <tag>SEO</tag>
-         
         <tag>blog</tag>
+         
+        <tag>SEO</tag>
          
          
            
