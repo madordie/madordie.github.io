@@ -19,23 +19,23 @@ Real-time log monitoring in your browser.
 
 # How does it work
 
-Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.
-
-Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.
-
-![work io](/images/2019-05-17-10-03-13.png)
+> Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.
+>
+> Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.
+>
+> ![work io](/images/2019-05-17-10-03-13.png)
 
 # Activate streams & nodes to watch log messages
 
-![Activate streams & nodes to watch log messages](/images/2019-05-17-10-12-25.png)
+> ![Activate streams & nodes to watch log messages](/images/2019-05-17-10-12-25.png)
 
 # <a name="Simple TCP interface">Simple TCP interface</a>
 
-Log.io uses a stateless TCP API to receive log messages.
-
-Writing a third party harvester is easy. Open a TCP connection to the server and begin writing properly formatted messages to the socket.
-
-Read the [API documentation](https://github.com/NarrativeScience/Log.io).
+> Log.io uses a stateless TCP API to receive log messages.
+>
+> Writing a third party harvester is easy. Open a TCP connection to the > server and begin writing properly formatted messages to the socket.
+>
+> Read the [API documentation](https://github.com/NarrativeScience/Log.io).
 
 ## Send a log message:
 
