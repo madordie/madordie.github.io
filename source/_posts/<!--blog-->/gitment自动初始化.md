@@ -71,7 +71,7 @@ GitHub提供较为完善的API，用我这水水的rb水平，大致可以完善
 username = "madordie" # GitHub 用户名
 token = `cat .git-token`  # GitHub Token
 repo_name = "madordie.github.io" # 存放 issues
-sitemap_url = "https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml" # sitemap
+sitemap_url = "https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml" # sitemap 此处由于github.io不是立马生效，但是仓库是立马生效的，所以此处应该更换为仓库的raw
 kind = "gitment" # "Gitalk" or "gitment"
 
 require 'open-uri'
