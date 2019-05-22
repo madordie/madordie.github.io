@@ -25,11 +25,11 @@ Real-time log monitoring in your browser.
 >
 > ![work io](/images/2019-05-17-10-03-13.png)
 
-# Activate streams & nodes to watch log messages
+## Activate streams & nodes to watch log messages
 
 > ![Activate streams & nodes to watch log messages](/images/2019-05-17-10-12-25.png)
 
-# <a name="Simple TCP interface">Simple TCP interface</a>
+## <a name="Simple TCP interface">Simple TCP interface</a>
 
 > Log.io uses a stateless TCP API to receive log messages.
 >
@@ -37,19 +37,19 @@ Real-time log monitoring in your browser.
 >
 > Read the [API documentation](https://github.com/NarrativeScience/Log.io).
 
-## Send a log message:
+### Send a log message
 
 ```
 +log|my_stream|my_node|info|this is log message\r\n
 ```
 
-## Register a new node, with stream associations
+### Register a new node, with stream associations
 
 ```
 +node|my_node|my_stream1,my_stream2\r\n
 ```
 
-## Remove a node
+### Remove a node
 
 ```
 -node|my_node\r\n
@@ -89,7 +89,7 @@ $ docker run -d \
 
 [blacklabelops-legacy/logio](https://github.com/blacklabelops-legacy/logio).
 
-# Complete
+## Complete
 
 Browser: http://localhost:28778/
 ![log.io server](/images/2019-05-17-10-40-18.png)
