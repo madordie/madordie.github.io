@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2019-05-22T03:00:25.442Z</updated>
+  <updated>2019-05-22T03:43:52.492Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -16,11 +16,73 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>实时显示日志logio</title>
+    <link href="https://madordie.github.io/post/logio-brief-zh-cn/"/>
+    <id>https://madordie.github.io/post/logio-brief-zh-cn/</id>
+    <published>2019-05-21T16:00:00.000Z</published>
+    <updated>2019-05-22T03:43:52.492Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p>一个能在浏览器上实时显示日志的工具。</p>
+<a id="more"></a>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p>以下摘自<a href="http://logio.org/" target="_blank" rel="noopener">logio.org</a>，我觉得已经非常的详细了，这里就不啰嗦了。</p>
+<blockquote>
+<p>Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.</p>
+<p>Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.</p>
+<p><img src="/images/2019-05-17-10-03-13.png" alt="work io"><br><img src="/images/2019-05-17-10-12-25.png" alt="Activate streams &amp; nodes to watch log messages"></p>
+</blockquote>
+<h2 id="通信使用的TCP接口"><a href="#通信使用的TCP接口" class="headerlink" title="通信使用的TCP接口"></a><a name="Simple TCP interface">通信使用的TCP接口</a></h2><blockquote>
+<p>Log.io uses a stateless TCP API to receive log messages.</p>
+<p>Writing a third party harvester is easy. Open a TCP connection to the &gt; server and begin writing properly formatted messages to the socket.</p>
+<p>Read the <a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">API documentation</a>.</p>
+</blockquote>
+<h3 id="消息发送"><a href="#消息发送" class="headerlink" title="消息发送"></a>消息发送</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="注册一个新的node和stream"><a href="#注册一个新的node和stream" class="headerlink" title="注册一个新的node和stream"></a>注册一个新的node和stream</h3><p>如果原来已经存在，那么还是原来的那个。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="删除node"><a href="#删除node" class="headerlink" title="删除node"></a>删除node</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
+<h1 id="安装Log-io服务端"><a href="#安装Log-io服务端" class="headerlink" title="安装Log.io服务端"></a>安装Log.io服务端</h1><p>这个年久失修的原始项目<a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">NarrativeScience/Log.io</a>已经没办法正常工作了。。</p>
+<p>幸运的是，docker版本的<a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a>还可以用，所以我们就用这个吧。</p>
+<h2 id="安装并开启docker"><a href="#安装并开启docker" class="headerlink" title="安装并开启docker"></a>安装并开启docker</h2><p>docker的文档<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">docs.docker.com</a>依旧非常详细，不再赘述。</p>
+<p>值得一提的是支持的平台有很多，比如：<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">Cloud</a>、 <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="noopener">MacOS</a> 、<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">Linux</a> 、 <a href="https://docs.docker.com/docker-for-windows/install/" target="_blank" rel="noopener">Windows</a></p>
+<h2 id="pull-镜像"><a href="#pull-镜像" class="headerlink" title="pull 镜像"></a>pull 镜像</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull blacklabelops/logio</span><br></pre></td></tr></table></figure>
+<h2 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 28778:28778 \</span><br><span class="line">    -p 28777:28777 \</span><br><span class="line">    --name logio \</span><br><span class="line">    blacklabelops/logio</span><br></pre></td></tr></table></figure>
+<p>值得一提的是，原文档<a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a>中是没有<code>-p 28777:28777</code>参数的，会导致其28777端口无响应，应该是一个手误或者特殊需要？反正这里打开就好了。</p>
+<h2 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h2><p>其他配置在<a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a>中也很详细😂，需要的请自取。比如说日志、https、等</p>
+<h2 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h2><p>在浏览器上打开<a href="http://localhost:28778/即可。（localhost" target="_blank" rel="noopener">http://localhost:28778/即可。（localhost</a> 是安装server的IP）<br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
+<p>于是乎，我们就可以向localhost:28778疯狂的写日志了. 🎉🎉🎉</p>
+<h1 id="支持的插件"><a href="#支持的插件" class="headerlink" title="支持的插件"></a>支持的插件</h1><p>这个日志服务<a href="#Simple TCP interface">对外接口</a>比较简单，所以理论上来讲，只需要可以进行TCP通信的包均可以支持，包括但不限于安卓、iOS。</p>
+<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio" target="_blank" rel="noopener">logio for iOS</a></p>
+<p>iOS上之前有一个类似的<a href="https://github.com/s4nchez/LogIO-CocoaLumberjack" target="_blank" rel="noopener">LogIO-CocoaLumberjack</a>, 我这里做了简单的更新，目的是不绑定<a href="https://github.com/robbiehanson/CocoaAsyncSocket" target="_blank" rel="noopener">CocoaAsyncSocket</a>。</p>
+<hr>
+<ul>
+<li><a href="http://logio.org/" target="_blank" rel="noopener">logio.org</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;log-io&quot;&gt;&lt;a href=&quot;#log-io&quot; class=&quot;headerlink&quot; title=&quot;log.io&quot;&gt;&lt;/a&gt;log.io&lt;/h1&gt;&lt;p&gt;一个能在浏览器上实时显示日志的工具。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+      <category term="macOS" scheme="https://madordie.github.io/categories/iOS/macOS/"/>
+    
+      <category term="工具" scheme="https://madordie.github.io/categories/iOS/macOS/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="tool" scheme="https://madordie.github.io/tags/tool/"/>
+    
+      <category term="logio" scheme="https://madordie.github.io/tags/logio/"/>
+    
+  </entry>
+  
+  <entry>
     <title>logio</title>
     <link href="https://madordie.github.io/post/logio-brief/"/>
     <id>https://madordie.github.io/post/logio-brief/</id>
     <published>2019-05-16T16:00:00.000Z</published>
-    <updated>2019-05-22T03:00:25.442Z</updated>
+    <updated>2019-05-22T03:37:15.598Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p>Real-time log monitoring in your browser.</p>
 <a id="more"></a>
@@ -29,17 +91,17 @@
 <p>Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.</p>
 <p><img src="/images/2019-05-17-10-03-13.png" alt="work io"></p>
 </blockquote>
-<h1 id="Activate-streams-amp-nodes-to-watch-log-messages"><a href="#Activate-streams-amp-nodes-to-watch-log-messages" class="headerlink" title="Activate streams &amp; nodes to watch log messages"></a>Activate streams &amp; nodes to watch log messages</h1><blockquote>
+<h2 id="Activate-streams-amp-nodes-to-watch-log-messages"><a href="#Activate-streams-amp-nodes-to-watch-log-messages" class="headerlink" title="Activate streams &amp; nodes to watch log messages"></a>Activate streams &amp; nodes to watch log messages</h2><blockquote>
 <p><img src="/images/2019-05-17-10-12-25.png" alt="Activate streams &amp; nodes to watch log messages"></p>
 </blockquote>
-<h1 id="Simple-TCP-interface"><a href="#Simple-TCP-interface" class="headerlink" title="Simple TCP interface"></a><a name="Simple TCP interface">Simple TCP interface</a></h1><blockquote>
+<h2 id="Simple-TCP-interface"><a href="#Simple-TCP-interface" class="headerlink" title="Simple TCP interface"></a><a name="Simple TCP interface">Simple TCP interface</a></h2><blockquote>
 <p>Log.io uses a stateless TCP API to receive log messages.</p>
 <p>Writing a third party harvester is easy. Open a TCP connection to the &gt; server and begin writing properly formatted messages to the socket.</p>
 <p>Read the <a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">API documentation</a>.</p>
 </blockquote>
-<h2 id="Send-a-log-message"><a href="#Send-a-log-message" class="headerlink" title="Send a log message:"></a>Send a log message:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
-<h2 id="Register-a-new-node-with-stream-associations"><a href="#Register-a-new-node-with-stream-associations" class="headerlink" title="Register a new node, with stream associations"></a>Register a new node, with stream associations</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
-<h2 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="Send-a-log-message"><a href="#Send-a-log-message" class="headerlink" title="Send a log message"></a>Send a log message</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="Register-a-new-node-with-stream-associations"><a href="#Register-a-new-node-with-stream-associations" class="headerlink" title="Register a new node, with stream associations"></a>Register a new node, with stream associations</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
 <h1 id="Install-Log-io"><a href="#Install-Log-io" class="headerlink" title="Install Log.io"></a>Install Log.io</h1><p>The original project <a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">NarrativeScience/Log.io</a> has been unavailable due to lack of maintenance for a long time.</p>
 <p>Fortunately, the <a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a> can also be used.</p>
 <p>So we can install the project like this：</p>
@@ -48,7 +110,7 @@
 <h2 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull blacklabelops/logio</span><br></pre></td></tr></table></figure>
 <h2 id="Start-the-server"><a href="#Start-the-server" class="headerlink" title="Start the server"></a>Start the server</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 28778:28778 \</span><br><span class="line">    -p 28777:28777 \</span><br><span class="line">    --name logio \</span><br><span class="line">    blacklabelops/logio</span><br></pre></td></tr></table></figure>
 <h2 id="Other-configure"><a href="#Other-configure" class="headerlink" title="Other configure"></a>Other configure</h2><p><a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a>.</p>
-<h1 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h1><p>Browser: <a href="http://localhost:28778/" target="_blank" rel="noopener">http://localhost:28778/</a><br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
+<h2 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h2><p>Browser: <a href="http://localhost:28778/" target="_blank" rel="noopener">http://localhost:28778/</a><br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
 <p>Now we can write logs to port 28777. 🎉🎉🎉</p>
 <h1 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h1><p>We only need to perform TCP communication according to the rules <a href="#Simple TCP interface">Simple TCP interface</a>, and the log can be displayed on the browser.</p>
 <h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio" target="_blank" rel="noopener">logio for iOS</a></p>
@@ -1445,55 +1507,6 @@
 &lt;/ul&gt;
 &lt;p&gt;目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～&lt;/p&gt;
 &lt;p&gt;下面分别对&lt;code&gt;cycript&lt;/code&gt;、&lt;code&gt;clutch&lt;/code&gt;进行砸壳:&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS逆向-设备ssh免密登录</title>
-    <link href="https://madordie.github.io/post/reverse-ios-ssh/"/>
-    <id>https://madordie.github.io/post/reverse-ios-ssh/</id>
-    <published>2017-08-09T07:31:30.000Z</published>
-    <updated>2018-10-17T05:46:09.463Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
-<li>已越狱设备</li>
-<li>越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码)</li>
-<li>电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）</li>
-</ul>
-<a id="more"></a>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="生成RSA证书"><a href="#生成RSA证书" class="headerlink" title="生成RSA证书"></a>生成RSA证书</h3><p>我这里生成的证书为:<code>ipad</code>，可自己需要定义。（注意如果直接回车会覆盖<code>~/.ssh/id_rsa</code>）</p>
-<p>执行命令<code>ssh-keygen</code>，如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/.ssh/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ssh-keygen</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/Madordie/.ssh/id_rsa): ipad</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in ipad.</span><br><span class="line">Your public key has been saved in ipad.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:GpQBeAf+oqUzWlUhtItDcVyVFz2wd0EcIgD+BZLPK8U Madordie@Bingo.local</span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|  .+*+*++o++.o+. |</span><br><span class="line">|  .+o+o=...oo... |</span><br><span class="line">|  ..o.=+ .o ...  |</span><br><span class="line">| . . = .E. . .   |</span><br><span class="line">|  o = o.S.       |</span><br><span class="line">|   * ..o.        |</span><br><span class="line">|  *   ..         |</span><br><span class="line">| o o             |</span><br><span class="line">|.                |</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls ~/.ssh/ipad*</span></span><br><span class="line">/Users/Madordie/.ssh/ipad     /Users/Madordie/.ssh/ipad.pub</span><br></pre></td></tr></table></figure></p>
-<h3 id="将公钥推送至越狱设备"><a href="#将公钥推送至越狱设备" class="headerlink" title="将公钥推送至越狱设备"></a>将公钥推送至越狱设备</h3><p>默认是没有<code>~/.ssh</code>目录的，暂时放置在<code>/var/root</code>下。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> scp ~/.ssh/ipad.pub root@10.11.12.13:/var/root</span></span><br></pre></td></tr></table></figure>
-<p><code>scp</code> 默认端口为<code>22</code> 如果需要自定义端口可以在路径前添加<code>-P 端口号</code>参数。</p>
-<h3 id="配置本机-ssh-config文件"><a href="#配置本机-ssh-config文件" class="headerlink" title="配置本机~/.ssh/config文件"></a>配置本机<code>~/.ssh/config</code>文件</h3><p>使用顺手的工具编辑<code>~/.ssh/config</code>文件。（没有就新建一个啦～</p>
-<p>按照如下格式填写。默认<code>ssh</code>登录端口为<code>22</code>可以不写。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host ipad</span><br><span class="line">    Hostname 10.11.12.13</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/ipad</span><br></pre></td></tr></table></figure></p>
-<h3 id="配置越狱设备"><a href="#配置越狱设备" class="headerlink" title="配置越狱设备"></a>配置越狱设备</h3><p>先用<code>ssh root@10.11.12.13</code>登录进设备(如果你没有修改密码那么默认是<code>alpine</code>,这个在<a href="https://cydia.saurik.com/openssh.html" target="_blank" rel="noopener">OpenSSH</a>上)。刚才我们将<code>ipad.pub</code>通过<code>scp</code>放在了<code>/var/root</code>下。</p>
-<p>一般情况下<code>/var/root/.ssh</code>是不存在的，使用命令<code>mkdir -p /var/root/.ssh</code>即可创建。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat ipad.pub &gt;&gt; /var/root/.ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
-<p>然后强迫症的可以使用<code>rm -rf ipad.pub</code>删除啦～</p>
-<p>对了，退出<code>ssh</code>登录的设备使用：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">exit</span></span></span><br><span class="line">logout</span><br><span class="line">Connection to 10.11.12.13 closed.</span><br></pre></td></tr></table></figure>
-<h3 id="赶紧测试一下远程登录效果"><a href="#赶紧测试一下远程登录效果" class="headerlink" title="赶紧测试一下远程登录效果"></a>赶紧测试一下远程登录效果</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh ipad</span></span><br></pre></td></tr></table></figure>
-<p>然后你会发现你已经完成了免密码登录越狱设备。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实这并不是只有越狱iOS设备才能使用的免登录，而是<code>ssh</code>所支持的。用途也很方便～</p>
-<p>PS. 这里面的IP地址(10.11.12.13) 是你设备的IP。如果超时的话或者ping不通或者网速比较差的话，可以采用<a href="http://iphonedevwiki.net/index.php/SSH_Over_USB" target="_blank" rel="noopener">usbmux</a>方案进行，文档已相当详细，此处不再赘述。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前提条件&quot;&gt;&lt;a href=&quot;#前提条件&quot; class=&quot;headerlink&quot; title=&quot;前提条件&quot;&gt;&lt;/a&gt;前提条件&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;已越狱设备&lt;/li&gt;
-&lt;li&gt;越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码)&lt;/li&gt;
-&lt;li&gt;电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     

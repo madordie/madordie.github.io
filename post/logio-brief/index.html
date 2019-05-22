@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://madordie.github.io/images/2019-05-17-10-03-13.png">
 <meta property="og:image" content="https://madordie.github.io/images/2019-05-17-10-12-25.png">
 <meta property="og:image" content="https://madordie.github.io/images/2019-05-17-10-40-18.png">
-<meta property="og:updated_time" content="2019-05-22T03:00:25.442Z">
+<meta property="og:updated_time" content="2019-05-22T03:37:15.598Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="logio">
 <meta name="twitter:description" content="log.ioReal-time log monitoring in your browser.">
@@ -406,17 +406,17 @@
 <p>Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.</p>
 <p><img src="/images/2019-05-17-10-03-13.png" alt="work io"></p>
 </blockquote>
-<h1 id="Activate-streams-amp-nodes-to-watch-log-messages"><a href="#Activate-streams-amp-nodes-to-watch-log-messages" class="headerlink" title="Activate streams &amp; nodes to watch log messages"></a>Activate streams &amp; nodes to watch log messages</h1><blockquote>
+<h2 id="Activate-streams-amp-nodes-to-watch-log-messages"><a href="#Activate-streams-amp-nodes-to-watch-log-messages" class="headerlink" title="Activate streams &amp; nodes to watch log messages"></a>Activate streams &amp; nodes to watch log messages</h2><blockquote>
 <p><img src="/images/2019-05-17-10-12-25.png" alt="Activate streams &amp; nodes to watch log messages"></p>
 </blockquote>
-<h1 id="Simple-TCP-interface"><a href="#Simple-TCP-interface" class="headerlink" title="Simple TCP interface"></a><a name="Simple TCP interface">Simple TCP interface</a></h1><blockquote>
+<h2 id="Simple-TCP-interface"><a href="#Simple-TCP-interface" class="headerlink" title="Simple TCP interface"></a><a name="Simple TCP interface">Simple TCP interface</a></h2><blockquote>
 <p>Log.io uses a stateless TCP API to receive log messages.</p>
 <p>Writing a third party harvester is easy. Open a TCP connection to the &gt; server and begin writing properly formatted messages to the socket.</p>
 <p>Read the <a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">API documentation</a>.</p>
 </blockquote>
-<h2 id="Send-a-log-message"><a href="#Send-a-log-message" class="headerlink" title="Send a log message:"></a>Send a log message:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
-<h2 id="Register-a-new-node-with-stream-associations"><a href="#Register-a-new-node-with-stream-associations" class="headerlink" title="Register a new node, with stream associations"></a>Register a new node, with stream associations</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
-<h2 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="Send-a-log-message"><a href="#Send-a-log-message" class="headerlink" title="Send a log message"></a>Send a log message</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="Register-a-new-node-with-stream-associations"><a href="#Register-a-new-node-with-stream-associations" class="headerlink" title="Register a new node, with stream associations"></a>Register a new node, with stream associations</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
 <h1 id="Install-Log-io"><a href="#Install-Log-io" class="headerlink" title="Install Log.io"></a>Install Log.io</h1><p>The original project <a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">NarrativeScience/Log.io</a> has been unavailable due to lack of maintenance for a long time.</p>
 <p>Fortunately, the <a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a> can also be used.</p>
 <p>So we can install the project like this：</p>
@@ -425,7 +425,7 @@
 <h2 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull blacklabelops/logio</span><br></pre></td></tr></table></figure>
 <h2 id="Start-the-server"><a href="#Start-the-server" class="headerlink" title="Start the server"></a>Start the server</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 28778:28778 \</span><br><span class="line">    -p 28777:28777 \</span><br><span class="line">    --name logio \</span><br><span class="line">    blacklabelops/logio</span><br></pre></td></tr></table></figure>
 <h2 id="Other-configure"><a href="#Other-configure" class="headerlink" title="Other configure"></a>Other configure</h2><p><a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a>.</p>
-<h1 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h1><p>Browser: <a href="http://localhost:28778/" target="_blank" rel="noopener">http://localhost:28778/</a><br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
+<h2 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h2><p>Browser: <a href="http://localhost:28778/" target="_blank" rel="noopener">http://localhost:28778/</a><br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
 <p>Now we can write logs to port 28777. 🎉🎉🎉</p>
 <h1 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h1><p>We only need to perform TCP communication according to the rules <a href="#Simple TCP interface">Simple TCP interface</a>, and the log can be displayed on the browser.</p>
 <h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio" target="_blank" rel="noopener">logio for iOS</a></p>
@@ -474,6 +474,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/logio-brief-zh-cn/" rel="prev" title="实时显示日志logio">
+                实时显示日志logio <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -561,7 +565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -642,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#log-io"><span class="nav-number">1.</span> <span class="nav-text">log.io</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-it-work"><span class="nav-number">2.</span> <span class="nav-text">How does it work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Activate-streams-amp-nodes-to-watch-log-messages"><span class="nav-number">3.</span> <span class="nav-text">Activate streams &amp; nodes to watch log messages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Simple-TCP-interface"><span class="nav-number">4.</span> <span class="nav-text">Simple TCP interface</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Send-a-log-message"><span class="nav-number">4.1.</span> <span class="nav-text">Send a log message:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Register-a-new-node-with-stream-associations"><span class="nav-number">4.2.</span> <span class="nav-text">Register a new node, with stream associations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-a-node"><span class="nav-number">4.3.</span> <span class="nav-text">Remove a node</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-Log-io"><span class="nav-number">5.</span> <span class="nav-text">Install Log.io</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-and-start-docker"><span class="nav-number">5.1.</span> <span class="nav-text">Install and start docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pull-image"><span class="nav-number">5.2.</span> <span class="nav-text">Pull image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Start-the-server"><span class="nav-number">5.3.</span> <span class="nav-text">Start the server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-configure"><span class="nav-number">5.4.</span> <span class="nav-text">Other configure</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Complete"><span class="nav-number">6.</span> <span class="nav-text">Complete</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Plugins"><span class="nav-number">7.</span> <span class="nav-text">Plugins</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS"><span class="nav-number">7.1.</span> <span class="nav-text">iOS</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#log-io"><span class="nav-number">1.</span> <span class="nav-text">log.io</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-it-work"><span class="nav-number">2.</span> <span class="nav-text">How does it work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Activate-streams-amp-nodes-to-watch-log-messages"><span class="nav-number">2.1.</span> <span class="nav-text">Activate streams &amp; nodes to watch log messages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simple-TCP-interface"><span class="nav-number">2.2.</span> <span class="nav-text">Simple TCP interface</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Send-a-log-message"><span class="nav-number">2.2.1.</span> <span class="nav-text">Send a log message</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register-a-new-node-with-stream-associations"><span class="nav-number">2.2.2.</span> <span class="nav-text">Register a new node, with stream associations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-a-node"><span class="nav-number">2.2.3.</span> <span class="nav-text">Remove a node</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-Log-io"><span class="nav-number">3.</span> <span class="nav-text">Install Log.io</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-and-start-docker"><span class="nav-number">3.1.</span> <span class="nav-text">Install and start docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pull-image"><span class="nav-number">3.2.</span> <span class="nav-text">Pull image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Start-the-server"><span class="nav-number">3.3.</span> <span class="nav-text">Start the server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-configure"><span class="nav-number">3.4.</span> <span class="nav-text">Other configure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Complete"><span class="nav-number">3.5.</span> <span class="nav-text">Complete</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Plugins"><span class="nav-number">4.</span> <span class="nav-text">Plugins</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS"><span class="nav-number">4.1.</span> <span class="nav-text">iOS</span></a></li></ol></li></ol></div>
             
 
           </div>

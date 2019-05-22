@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="逆向," />
+  <meta name="keywords" content="tool,logio," />
 
 
 
@@ -81,24 +81,22 @@
 
 
 
-<meta name="description" content="前两天，重启电脑突然发现我的iOS8设备无法连接到MacOS了。。 MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。 具体报错如下：Xcode&amp;lt;Version 9.4 (9F1027a)&amp;gt;报错如下: (我安装过Xcode10 beta1) iTunes报错如下：1iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。  A">
-<meta name="keywords" content="逆向">
+<meta name="description" content="log.io一个能在浏览器上实时显示日志的工具。">
+<meta name="keywords" content="tool,logio">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于日志打印和过滤的那点破事">
-<meta property="og:url" content="https://madordie.github.io/post/reverse-ios-socat-watch-filter/index.html">
+<meta property="og:title" content="实时显示日志logio">
+<meta property="og:url" content="https://madordie.github.io/post/logio-brief-zh-cn/index.html">
 <meta property="og:site_name" content="继刚的博客">
-<meta property="og:description" content="前两天，重启电脑突然发现我的iOS8设备无法连接到MacOS了。。 MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。 具体报错如下：Xcode&amp;lt;Version 9.4 (9F1027a)&amp;gt;报错如下: (我安装过Xcode10 beta1) iTunes报错如下：1iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。  A">
+<meta property="og:description" content="log.io一个能在浏览器上实时显示日志的工具。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://madordie.github.io/images/2018-06-15-10-13-16.png">
-<meta property="og:image" content="https://madordie.github.io/images/2018-06-15-10-06-16.png">
-<meta property="og:image" content="https://madordie.github.io/images/2018-06-15-10-09-33.png">
-<meta property="og:image" content="https://madordie.github.io/images/2018-06-15-10-23-02.png">
-<meta property="og:image" content="https://madordie.github.io/images/2018-06-15-10-29-07.png">
-<meta property="og:updated_time" content="2018-07-02T11:05:37.344Z">
+<meta property="og:image" content="https://madordie.github.io/images/2019-05-17-10-03-13.png">
+<meta property="og:image" content="https://madordie.github.io/images/2019-05-17-10-12-25.png">
+<meta property="og:image" content="https://madordie.github.io/images/2019-05-17-10-40-18.png">
+<meta property="og:updated_time" content="2019-05-22T03:43:52.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于日志打印和过滤的那点破事">
-<meta name="twitter:description" content="前两天，重启电脑突然发现我的iOS8设备无法连接到MacOS了。。 MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。 具体报错如下：Xcode&amp;lt;Version 9.4 (9F1027a)&amp;gt;报错如下: (我安装过Xcode10 beta1) iTunes报错如下：1iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。  A">
-<meta name="twitter:image" content="https://madordie.github.io/images/2018-06-15-10-13-16.png">
+<meta name="twitter:title" content="实时显示日志logio">
+<meta name="twitter:description" content="log.io一个能在浏览器上实时显示日志的工具。">
+<meta name="twitter:image" content="https://madordie.github.io/images/2019-05-17-10-03-13.png">
 
 
 
@@ -128,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://madordie.github.io/post/reverse-ios-socat-watch-filter/"/>
+  <link rel="canonical" href="https://madordie.github.io/post/logio-brief-zh-cn/"/>
 
 
 
 
 
-  <title>关于日志打印和过滤的那点破事 | 继刚的博客</title>
+  <title>实时显示日志logio | 继刚的博客</title>
   
 
 
@@ -290,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/reverse-ios-socat-watch-filter/">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/logio-brief-zh-cn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="继刚">
@@ -307,7 +305,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">关于日志打印和过滤的那点破事</h2>
+          <h2 class="post-title" itemprop="name headline">实时显示日志logio</h2>
         
 
         <div class="post-meta">
@@ -319,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-15T00:00:00+08:00">
-                2018-06-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T00:00:00+08:00">
+                2019-05-22
               </time>
             
 
@@ -344,6 +342,28 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/iOS/" itemprop="url" rel="index">
                     <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/macOS/" itemprop="url" rel="index">
+                    <span itemprop="name">macOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/macOS/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
                   </a>
                 </span>
 
@@ -379,62 +399,40 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前两天，重启电脑突然发现我的<code>iOS8</code>设备无法连接到<code>MacOS</code>了。。</p>
-<p>MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。</p>
-<p>具体报错如下：<br><code>Xcode&lt;Version 9.4 (9F1027a)&gt;</code>报错如下: (我安装过<code>Xcode10 beta1</code>)<br><img src="/images/2018-06-15-10-13-16.png" alt="Xcode报错"></p>
-<p><code>iTunes</code>报错如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/2018-06-15-10-06-16.png" alt="iTunes报错"></p>
-<p><code>Apple Configurator2</code>报错如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">已收到设备上的意外响应。</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/2018-06-15-10-09-33.png" alt="Apple Configurator2报错"></p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p>一个能在浏览器上实时显示日志的工具。</p>
 <a id="more"></a>
-<p>还是 先来聊一下日志打印的几种方案吧。</p>
-<h2 id="手机可以连接到MacOS"><a href="#手机可以连接到MacOS" class="headerlink" title="手机可以连接到MacOS"></a>手机可以连接到MacOS</h2><p>这种情况是最常见的，就是能在Xcode下Debug….</p>
-<h3 id="方案一：Console-app-控制台"><a href="#方案一：Console-app-控制台" class="headerlink" title="方案一：Console.app(控制台)"></a>方案一：Console.app(控制台)</h3><p>这是MacOS自带的日志神器～ 效果顶呱呱👍👍👍，截图如下：<br><img src="/images/2018-06-15-10-23-02.png" alt="Console.app"></p>
-<p>具体用法我就不说了。。。毕竟都是中文😂</p>
-<h3 id="方案二：LogGuru"><a href="#方案二：LogGuru" class="headerlink" title="方案二：LogGuru"></a>方案二：LogGuru</h3><p><a href="https://github.com/madordie/LogGuru" target="_blank" rel="noopener">madordie/LogGuru</a> 也不错，很久之前fork自<a href="https://github.com/FIRHQ/LogGuru" target="_blank" rel="noopener">FIRHQ/LogGuru</a>，增加了直接过滤的功能，要不然速度真的很慢。。</p>
-<p>只要插入USB，即可显示日志，还是不错滴。。</p>
-<p><img src="/images/2018-06-15-10-29-07.png" alt="原来的截图"></p>
-<h3 id="方案三-其他的"><a href="#方案三-其他的" class="headerlink" title="方案三: 其他的"></a>方案三: 其他的</h3><p>还有很多方案，比如说命令行啊、其他的工具啊，我就不说了，我觉得 <strong>Console.app(控制台)</strong> 就够了😂</p>
-<h2 id="手机无法链接进MacOS"><a href="#手机无法链接进MacOS" class="headerlink" title="手机无法链接进MacOS"></a>手机无法链接进MacOS</h2><p>也就是最开始说的报错的情况下，可以连接进MacOS的方案均无法使用。苦逼，只能让iOS打印日志了。。</p>
-<p>下面都是 <strong>越狱环境</strong> 下的。。不越狱还有人用iOS8么😂</p>
-<p>先来看个文档：<a href="https://www.theiphonewiki.com/wiki/System_Log" target="_blank" rel="noopener">The iPhone Wiki/System Log</a>,这里提供了很多方案，也非常全面，值得一试。</p>
-<p>苦逼的事情是我手上的iOS8.4.1无法使用<code>syslogd to /var/log/syslog</code>插件，尝试使用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_saving_to_a_file_via_a_Python_script" target="_blank" rel="noopener">On-device with saving to a file via a Python script</a>的方案去解决也并不如意。。</p>
-<p>开始用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_socat" target="_blank" rel="noopener">On-device with socat</a>（ 在<a href="http://bbs.iosre.com" target="_blank" rel="noopener">iosre</a>中也有一个类似的文章：<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="noopener">iOS查看日志利器 —— socat</a>），说的都是相当的详细。</p>
-<h3 id="socat的坑"><a href="#socat的坑" class="headerlink" title="socat的坑"></a>socat的坑</h3><h4 id="stop没有用"><a href="#stop没有用" class="headerlink" title="stop没有用"></a>stop没有用</h4><p>如<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="noopener">iOS查看日志利器 —— socat</a>所说：</p>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p>以下摘自<a href="http://logio.org/" target="_blank" rel="noopener">logio.org</a>，我觉得已经非常的详细了，这里就不啰嗦了。</p>
 <blockquote>
-<p>输入watch查看，输入stop停止（不过停止貌似没用，也不知道为啥，知道的请告诉我）</p>
+<p>Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.</p>
+<p>Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.</p>
+<p><img src="/images/2019-05-17-10-03-13.png" alt="work io"><br><img src="/images/2019-05-17-10-12-25.png" alt="Activate streams &amp; nodes to watch log messages"></p>
 </blockquote>
-<p>这个真的是没有用，所以<code>watch</code>功能就很鸡肋。。</p>
-<h4 id="没有办法实时过滤"><a href="#没有办法实时过滤" class="headerlink" title="没有办法实时过滤"></a>没有办法实时过滤</h4><p>文中提到了很多过滤条件，但是一旦开启过滤，就没有办法显示实时日志。。也就是说无法和<code>watch</code>共存。。。</p>
-<h3 id="换个姿势使用socat"><a href="#换个姿势使用socat" class="headerlink" title="换个姿势使用socat"></a>换个姿势使用socat</h3><p><code>socat</code>的日志都在终端上，不着色不说还有上面的两个很影响使用的问题。。。于是乎，为了增加过滤功能，需要通过管道将输出接入另外的命令如：<code>grep</code>等。</p>
-<p><code>socat</code>命令需要手动输入<code>watch</code>才能显示出实时命令，这个让管道并不能直接使用。这里需要借助<code>expect</code>命令。</p>
-<p>好了所有的点都通了，大致步骤如下：</p>
-<h4 id="在mac上安装expect"><a href="#在mac上安装expect" class="headerlink" title="在mac上安装expect"></a>在mac上安装expect</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install expect</span><br></pre></td></tr></table></figure>
-<h4 id="在mac的～-bash-profile配置"><a href="#在mac的～-bash-profile配置" class="headerlink" title="在mac的～/.bash_profile配置"></a>在mac的～/.bash_profile配置</h4><p>此处假设你的设备已经按照<a href="../reverse-ios-ssh">iOS逆向-设备ssh免密登录</a>配置好了：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">"</span></span><br><span class="line"><span class="string">        spawn ssh i5s \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \"&gt; \" &#123;send \"watch\n\";&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="通信使用的TCP接口"><a href="#通信使用的TCP接口" class="headerlink" title="通信使用的TCP接口"></a><a name="Simple TCP interface">通信使用的TCP接口</a></h2><blockquote>
+<p>Log.io uses a stateless TCP API to receive log messages.</p>
+<p>Writing a third party harvester is easy. Open a TCP connection to the &gt; server and begin writing properly formatted messages to the socket.</p>
+<p>Read the <a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">API documentation</a>.</p>
+</blockquote>
+<h3 id="消息发送"><a href="#消息发送" class="headerlink" title="消息发送"></a>消息发送</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="注册一个新的node和stream"><a href="#注册一个新的node和stream" class="headerlink" title="注册一个新的node和stream"></a>注册一个新的node和stream</h3><p>如果原来已经存在，那么还是原来的那个。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="删除node"><a href="#删除node" class="headerlink" title="删除node"></a>删除node</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
+<h1 id="安装Log-io服务端"><a href="#安装Log-io服务端" class="headerlink" title="安装Log.io服务端"></a>安装Log.io服务端</h1><p>这个年久失修的原始项目<a href="https://github.com/NarrativeScience/Log.io" target="_blank" rel="noopener">NarrativeScience/Log.io</a>已经没办法正常工作了。。</p>
+<p>幸运的是，docker版本的<a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a>还可以用，所以我们就用这个吧。</p>
+<h2 id="安装并开启docker"><a href="#安装并开启docker" class="headerlink" title="安装并开启docker"></a>安装并开启docker</h2><p>docker的文档<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">docs.docker.com</a>依旧非常详细，不再赘述。</p>
+<p>值得一提的是支持的平台有很多，比如：<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">Cloud</a>、 <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="noopener">MacOS</a> 、<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">Linux</a> 、 <a href="https://docs.docker.com/docker-for-windows/install/" target="_blank" rel="noopener">Windows</a></p>
+<h2 id="pull-镜像"><a href="#pull-镜像" class="headerlink" title="pull 镜像"></a>pull 镜像</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull blacklabelops/logio</span><br></pre></td></tr></table></figure>
+<h2 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 28778:28778 \</span><br><span class="line">    -p 28777:28777 \</span><br><span class="line">    --name logio \</span><br><span class="line">    blacklabelops/logio</span><br></pre></td></tr></table></figure>
+<p>值得一提的是，原文档<a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a>中是没有<code>-p 28777:28777</code>参数的，会导致其28777端口无响应，应该是一个手误或者特殊需要？反正这里打开就好了。</p>
+<h2 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h2><p>其他配置在<a href="https://github.com/blacklabelops-legacy/logio" target="_blank" rel="noopener">blacklabelops-legacy/logio</a>中也很详细😂，需要的请自取。比如说日志、https、等</p>
+<h2 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h2><p>在浏览器上打开<a href="http://localhost:28778/即可。（localhost" target="_blank" rel="noopener">http://localhost:28778/即可。（localhost</a> 是安装server的IP）<br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
+<p>于是乎，我们就可以向localhost:28778疯狂的写日志了. 🎉🎉🎉</p>
+<h1 id="支持的插件"><a href="#支持的插件" class="headerlink" title="支持的插件"></a>支持的插件</h1><p>这个日志服务<a href="#Simple TCP interface">对外接口</a>比较简单，所以理论上来讲，只需要可以进行TCP通信的包均可以支持，包括但不限于安卓、iOS。</p>
+<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio" target="_blank" rel="noopener">logio for iOS</a></p>
+<p>iOS上之前有一个类似的<a href="https://github.com/s4nchez/LogIO-CocoaLumberjack" target="_blank" rel="noopener">LogIO-CocoaLumberjack</a>, 我这里做了简单的更新，目的是不绑定<a href="https://github.com/robbiehanson/CocoaAsyncSocket" target="_blank" rel="noopener">CocoaAsyncSocket</a>。</p>
+<hr>
 <ul>
-<li><code>ios-socat</code> 函数名，在命令行可以直接输入函数名调用该函数</li>
-<li><code>i5s</code> 在<code>~/.ssh/config</code>中配置的名字</li>
+<li><a href="http://logio.org/" target="_blank" rel="noopener">logio.org</a></li>
 </ul>
-<p>如果没有配置ssh免密呢需要这样：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">"</span></span><br><span class="line"><span class="string">        spawn ssh -p22 root@ios's_ip \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \"*password: \" &#123;send \"mypassword\n\";&#125;</span></span><br><span class="line"><span class="string">            \"&gt; \" &#123;send \"watch\n\";&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>-p22</code> 端口号，22是默认不用写，但是其他的需要写。</li>
-<li><code>ios&#39;s_ip</code> iOS设备的ip。</li>
-<li><code>mypassword</code> iOS设备密码</li>
-<li>这个我没测。。大致如此，我对<code>expect</code>的语法也不是很熟</li>
-</ul>
-<p>最后别忘了让<code>~/.bash_profile</code>生效：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
-<p>然后只需要在命令行输入<code>ios-socat</code>就可以看到蹭蹭蹭的日志打印咯。。至于用什么管道啊都不是问题。</p>
-<p>比如：<br>只显示包含<code>iosre</code>关键字的日志</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ios-socat | grep iosre</span><br></pre></td></tr></table></figure>
-<h4 id="晋级用法"><a href="#晋级用法" class="headerlink" title="晋级用法"></a>晋级用法</h4><ul>
-<li>我的iOS设备通过<code>iproxy</code>来进行端口映射。具体用法移步<a href="https://www.google.com/search?q=iproxy&amp;oq=iproxy" target="_blank" rel="noopener">Google</a></li>
-<li><p>通过<code>ios-socat &gt; ~/Desktop/ios.log</code> 然后下载<a href="https://itunes.apple.com/cn/app/logtail/id1073404370?mt=12" target="_blank" rel="noopener">LogTail</a>，剩下的摸索一下咯</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2></li>
-</ul>
-<p>我还不清楚究竟什么原因导致了<code>收到来自此设备的无效响应</code>错误，布吉岛系统修改了什么。我尝试重新安装iTunes、Xcode都无效（据说陌陌的开发为这个无法调试直接将系统降级是可以的😂）。。有老铁懂得指点下～～</p>
-<p>目前虽然上面都可以用，但是看个日志并不能满足我的野心，最后在移动硬盘里做了一个10.12的系统😂，用了Console.app…</p>
 
       
     </div>
@@ -452,7 +450,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/逆向/" rel="tag"># 逆向</a>
+            <a href="/tags/tool/" rel="tag"># tool</a>
+          
+            <a href="/tags/logio/" rel="tag"># logio</a>
           
         </div>
       
@@ -465,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/reverse-ios-creat-cydia-sources/" rel="next" title="iOS逆向-创建Cydia源">
-                <i class="fa fa-chevron-left"></i> iOS逆向-创建Cydia源
+              <a href="/post/logio-brief/" rel="next" title="logio">
+                <i class="fa fa-chevron-left"></i> logio
               </a>
             
           </div>
@@ -474,10 +474,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/sync-sketchplugin/" rel="prev" title="sketech模块同步插件">
-                sketech模块同步插件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -646,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#手机可以连接到MacOS"><span class="nav-number">1.</span> <span class="nav-text">手机可以连接到MacOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一：Console-app-控制台"><span class="nav-number">1.1.</span> <span class="nav-text">方案一：Console.app(控制台)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二：LogGuru"><span class="nav-number">1.2.</span> <span class="nav-text">方案二：LogGuru</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三-其他的"><span class="nav-number">1.3.</span> <span class="nav-text">方案三: 其他的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手机无法链接进MacOS"><span class="nav-number">2.</span> <span class="nav-text">手机无法链接进MacOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#socat的坑"><span class="nav-number">2.1.</span> <span class="nav-text">socat的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#stop没有用"><span class="nav-number">2.1.1.</span> <span class="nav-text">stop没有用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#没有办法实时过滤"><span class="nav-number">2.1.2.</span> <span class="nav-text">没有办法实时过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#换个姿势使用socat"><span class="nav-number">2.2.</span> <span class="nav-text">换个姿势使用socat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在mac上安装expect"><span class="nav-number">2.2.1.</span> <span class="nav-text">在mac上安装expect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在mac的～-bash-profile配置"><span class="nav-number">2.2.2.</span> <span class="nav-text">在mac的～/.bash_profile配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#晋级用法"><span class="nav-number">2.2.3.</span> <span class="nav-text">晋级用法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#log-io"><span class="nav-number">1.</span> <span class="nav-text">log.io</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工作原理"><span class="nav-number">2.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通信使用的TCP接口"><span class="nav-number">2.1.</span> <span class="nav-text">通信使用的TCP接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消息发送"><span class="nav-number">2.1.1.</span> <span class="nav-text">消息发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册一个新的node和stream"><span class="nav-number">2.1.2.</span> <span class="nav-text">注册一个新的node和stream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除node"><span class="nav-number">2.1.3.</span> <span class="nav-text">删除node</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Log-io服务端"><span class="nav-number">3.</span> <span class="nav-text">安装Log.io服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装并开启docker"><span class="nav-number">3.1.</span> <span class="nav-text">安装并开启docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pull-镜像"><span class="nav-number">3.2.</span> <span class="nav-text">pull 镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启服务"><span class="nav-number">3.3.</span> <span class="nav-text">开启服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他配置"><span class="nav-number">3.4.</span> <span class="nav-text">其他配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终效果图"><span class="nav-number">3.5.</span> <span class="nav-text">最终效果图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#支持的插件"><span class="nav-number">4.</span> <span class="nav-text">支持的插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS"><span class="nav-number">4.1.</span> <span class="nav-text">iOS</span></a></li></ol></li></ol></div>
             
 
           </div>
