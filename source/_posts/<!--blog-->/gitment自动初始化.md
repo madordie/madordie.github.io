@@ -5,7 +5,7 @@ date: 2018-08-29 16:58:47
 tags:
     - gitment
     - blog
-categories: 
+categories:
     - 工具
 ---
 
@@ -71,7 +71,7 @@ GitHub提供较为完善的API，用我这水水的rb水平，大致可以完善
 username = "madordie" # GitHub 用户名
 token = `cat .git-token`  # GitHub Token
 repo_name = "madordie.github.io" # 存放 issues
-sitemap_url = "https://madordie.github.io/sitemap.xml" # sitemap
+sitemap_url = "https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml" # sitemap
 kind = "gitment" # "Gitalk" or "gitment"
 
 require 'open-uri'
