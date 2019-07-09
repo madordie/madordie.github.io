@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/ubuntu-sakura-frp/</loc>
+    <lastmod>2019-07-09T06:32:05.418Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu使用SakuraFrp实现内网穿透</title>
+        <pubTime>2019-07-08T16:00:00.000Z</pubTime>
+        
+        <tag>内网穿透</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="https://madordie.github.io/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/build-ipa-sh/</loc>
+    <lastmod>2019-07-09T04:45:36.175Z</lastmod>
+    <data>
+        <display>
+        <title>Xcode打包脚本</title>
+        <pubTime>2016-09-26T06:55:09.000Z</pubTime>
+        
+        <tag>构建</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/logio-brief/</loc>
     <lastmod>2019-05-22T04:02:27.799Z</lastmod>
     <data>
@@ -195,26 +235,6 @@
         <pubTime>2018-08-16T10:43:20.000Z</pubTime>
         
         <tag>UIFont</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/build-ipa-sh/</loc>
-    <lastmod>2018-08-23T03:16:17.042Z</lastmod>
-    <data>
-        <display>
-        <title>Xcode打包脚本</title>
-        <pubTime>2016-09-26T06:55:09.000Z</pubTime>
-        
-        <tag>构建</tag>
          
          
            

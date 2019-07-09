@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="Jenkins自动构建脚本解决方案。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-23T03:16:17.042Z">
+<meta property="og:updated_time" content="2019-07-09T04:45:36.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xcode打包脚本">
 <meta name="twitter:description" content="Jenkins自动构建脚本解决方案。">
@@ -377,7 +377,7 @@
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>2017.9.26更新：<br>xcode9更新又无法构建咯</p>
 <p>2017.6.14更新:<br><a href="https://github.com/supermarin/xcpretty" target="_blank" rel="noopener">xcpretty</a>格式化输出日志。很溜，输出效果和 <code>fastlane</code> 差不多哈哈</p>
-<p>2017.1.13更新：<br>  好吧，其实有更加强悍的打包工具，虽然早有耳闻但是没弄。然后最近搭建了一下，这打包脚本也不用了，毕竟有成套工具嘛。嘿嘿<br>  不过最后上传osc的脚本还是很可以的。<br>  传送门：<a href="../fastlane-note/#more">Fastlane自动化笔记</a></p>
+<p>2017.1.13更新：<br>  好吧，其实有更加强悍的打包工具，虽然早有耳闻但是没弄。然后最近搭建了一下，这打包脚本也不用了，毕竟有成套工具嘛。嘿嘿<br>  不过最后上传osc的脚本还是很可以的。<br>  传送门：<a href="../fastlane-note">Fastlane自动化笔记</a></p>
 <h2 id="Xcode8"><a href="#Xcode8" class="headerlink" title="Xcode8"></a>Xcode8</h2><p>好悲催，Xcode8更新之后Jenkins打包失败了。。由于代码库中使用了swift3语法，故必须使用Xcode8。。</p>
 <p>先来重点：可用脚本：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#   追上fir API token 自动上传</span></span><br><span class="line"><span class="comment">#   基于当前代码进行打包打包目录：MyProject/build/MyProject_ent.ipa</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> MyProject</span><br><span class="line"></span><br><span class="line">rm -rf ./build/*</span><br><span class="line"></span><br><span class="line">xcodebuild -archivePath <span class="string">"./build/xxx.xcarchive"</span> -workspace MyProject.xcworkspace -sdk iphoneos -scheme <span class="string">"MyProject_ent"</span> -configuration <span class="string">"Release Inhouse"</span> archive</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"&lt;?xml version="</span>1.0<span class="string">" encoding="</span>UTF-8<span class="string">"?&gt;&lt;!DOCTYPE plist PUBLIC "</span>-//Apple//DTD PLIST 1.0//EN<span class="string">" "</span>http://www.apple.com/DTDs/PropertyList-1.0.dtd<span class="string">"&gt;&lt;plist version="</span>1.0<span class="string">"&gt;&lt;dict&gt;&lt;key&gt;method&lt;/key&gt;&lt;string&gt;enterprise&lt;/string&gt;&lt;key&gt;compileBitcode&lt;/key&gt;&lt;string&gt;YES&lt;/string&gt;&lt;/dict&gt;&lt;/plist&gt;"</span> &gt; ./build/exportOptionsPlist.plist</span><br><span class="line"></span><br><span class="line">xcodebuild -exportArchive -archivePath <span class="string">"./build/xxx.xcarchive"</span> -exportPath <span class="string">"./build/"</span> -exportOptionsPlist ./build/exportOptionsPlist.plist</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> build/</span><br><span class="line"></span><br><span class="line">fir i ./MyProject_ent.ipa</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    git <span class="built_in">log</span> -10 &gt; git.log</span><br><span class="line">    fir p ./MyProject_ent.ipa -T <span class="variable">$1</span> -c git.log</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
@@ -529,7 +529,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -540,7 +540,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -551,7 +551,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
