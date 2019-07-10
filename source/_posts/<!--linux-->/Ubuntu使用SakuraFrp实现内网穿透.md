@@ -30,6 +30,12 @@ MBP: 主要工作在这里。比如远程win桌面用的是[Microsoft Remote Des
 
 经过安装提示以及笔记本的疯狂发热很快就安装完事了。
 
+PS. 安装Wi-Fi驱动：
+
+```sh
+sudo apt install bcmwl-kernel-source
+```
+
 ## 设置Ubuntu软件源
 
 这里还是用清华大学的镜像，其[Ubuntu 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/)也是相当的详细：
