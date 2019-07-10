@@ -98,9 +98,9 @@ sudo apt install bumblebee-nvidia
 - 右键窗口会有一个类似`移至显示器右侧`的按钮，点了就看不见了
 - `xrandr --listmonitors` 有两个
 
-### Ubuntu如何正确地切换Intel和Nvidia显卡
+### 切换Intel和Nvidia显卡
 
-> [Ubuntu如何正确地切换Intel和Nvidia显卡](https://www.linuxdashen.com/switch-intel-nvidia-graphics-card-ubuntu)
+> [How To Switch Between Intel and Nvidia Graphics Card on Ubuntu](https://www.linuxbabe.com/desktop-linux/switch-intel-nvidia-graphics-card-ubuntu)
 ```sh
 software-properties-gtk
 ```
