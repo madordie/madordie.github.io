@@ -100,9 +100,9 @@ sudo apt install bumblebee-nvidia
 
 ### 切换Intel和Nvidia显卡
 
-> [How To Switch Between Intel and Nvidia Graphics Card on Ubuntu](https://www.linuxbabe.com/desktop-linux/switch-intel-nvidia-graphics-card-ubuntu)
+[How To Switch Between Intel and Nvidia Graphics Card on Ubuntu](https://www.linuxbabe.com/desktop-linux/switch-intel-nvidia-graphics-card-ubuntu)遇到卡在`Started bpfilter`之后需要编辑/etc/gdm3/custom.conf，将下面这一行放开：
 ```sh
-software-properties-gtk
+＃WaylandEnable = FALSE
 ```
 
 # 内网穿透
