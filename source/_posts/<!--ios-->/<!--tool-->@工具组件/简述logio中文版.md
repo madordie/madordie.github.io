@@ -6,8 +6,6 @@ tags:
     - tool
     - logio
 categories:
-    - iOS
-    - macOS
     - 工具
 ---
 
