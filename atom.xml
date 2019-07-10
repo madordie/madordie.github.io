@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2019-07-10T08:02:39.695Z</updated>
+  <updated>2019-07-10T08:30:59.973Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/post/ubuntu-sakura-frp/"/>
     <id>https://madordie.github.io/post/ubuntu-sakura-frp/</id>
     <published>2019-07-08T16:00:00.000Z</published>
-    <updated>2019-07-10T08:02:39.695Z</updated>
+    <updated>2019-07-10T08:30:59.973Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录将一台吃灰的笔记本改装成服务器，并暴露在公网下的过程。</p>
 <a id="more"></a>
@@ -34,8 +34,6 @@
 <p>MBP: 主要工作在这里。比如远程win桌面用的是<a href="https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12" target="_blank" rel="noopener">Microsoft Remote Desktop</a></p>
 <h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>注意，Ubuntu会将硬盘 <strong>所有分区全部格式化</strong> ，请先妥善备份。</p>
 <p>经过安装提示以及笔记本的疯狂发热很快就安装完事了。</p>
-<p>PS. 安装Wi-Fi驱动，记得重启哦：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install bcmwl-kernel-source</span><br></pre></td></tr></table></figure>
 <h2 id="设置Ubuntu软件源"><a href="#设置Ubuntu软件源" class="headerlink" title="设置Ubuntu软件源"></a>设置Ubuntu软件源</h2><p>这里还是用清华大学的镜像，其<a href="https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/" target="_blank" rel="noopener">Ubuntu 镜像使用帮助</a>也是相当的详细：</p>
 <blockquote>
 <p>Ubuntu 的软件源配置文件是 /etc/apt/sources.list。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用 TUNA 的软件源镜像。</p>
@@ -46,6 +44,19 @@
 <p>当然，别忘了安装<code>wget</code>:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install wget</span><br></pre></td></tr></table></figure>
 <p>此处如果按照上面的步骤已经设置了清华大学的镜像源，那速度将会很快。要不然就很慢慢慢。。</p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>此步骤并非必须，只是记录一下一些很坑的事情，啊哈哈哈哈</p>
+<h3 id="没有Wi-Fi选项"><a href="#没有Wi-Fi选项" class="headerlink" title="没有Wi-Fi选项"></a>没有Wi-Fi选项</h3><p>安装Wi-Fi驱动，记得重启哦：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install bcmwl-kernel-source</span><br></pre></td></tr></table></figure>
+<h3 id="未知的显示器（Unknown-Display）"><a href="#未知的显示器（Unknown-Display）" class="headerlink" title="未知的显示器（Unknown Display）"></a>未知的显示器（Unknown Display）</h3><p>如果是很快的意识到是<code>设置</code>里面有一个<code>未知的显示器</code>，并且以<code>拼接</code>的方式使用，那你就直接根据<a href="https://bugs.launchpad.net/ubuntu/+source/ubuntu-drivers-common/+bug/1296020" target="_blank" rel="noopener">Non-existent display detected in both intel driver and nvidia driver (Optimus Laptop)</a>所示，只需安装Bumblebee并重启即可。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install bumblebee-nvidia</span><br></pre></td></tr></table></figure>
+<p>该问题貌似是由于集成显卡和独显共存的问题，所以当你并没有连接外接显示器但是却出现以下双显示器才有的功能时候记得用这个方案。</p>
+<ul>
+<li>APP打开了却看不到界面，只看到页面嗖的一下飞出了屏幕</li>
+<li>左上角有时候会出现一个黑框框，里面有一个数字1</li>
+<li>鼠标放至屏幕上下左右，有一个边会进去</li>
+<li>右键窗口会有一个类似<code>移至显示器右侧</code>的按钮，点了就看不见了</li>
+<li><code>xrandr --listmonitors</code> 有两个</li>
+</ul>
 <h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><p>将<code>内网穿透</code>放在Google里面搜索一下会有很多方案，我的VPS被邻居连累之后就没有再买，所以我没有域名、公网IP。。。其中搜索结果的大部分都不适合我。</p>
 <p>其中大部分提到一个<code>DDNS</code>的概念：<a href="https://zh.wikipedia.org/wiki/%E5%8B%95%E6%85%8BDNS" target="_blank" rel="noopener">维基百科:动态DNS</a></p>
 <blockquote>
