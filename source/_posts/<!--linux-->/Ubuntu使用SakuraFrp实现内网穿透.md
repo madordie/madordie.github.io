@@ -26,15 +26,13 @@ MBP: 主要工作在这里。比如远程win桌面用的是[Microsoft Remote Des
 
 # 开始
 
-注意，Ubuntu会讲硬盘 **所有分区全部格式化** ，请先妥善备份。
+注意，Ubuntu会将硬盘 **所有分区全部格式化** ，请先妥善备份。
 
-经过笔记本的疯狂发热根据提示就安装完事了。
-
-我这里直接安装的最小版本，工具什么的问题都不大。
+经过安装提示以及笔记本的疯狂发热很快就安装完事了。
 
 ## 设置Ubuntu软件源
 
-这里还是用清华大学的[Ubuntu 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/),也是相当的详细：
+这里还是用清华大学的镜像，其[Ubuntu 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/)也是相当的详细：
 
 > Ubuntu 的软件源配置文件是 /etc/apt/sources.list。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用 TUNA 的软件源镜像。
 >
@@ -80,9 +78,13 @@ sudo apt install wget
 
 > 动态DNS（英语：Dynamic DNS，简称DDNS）是域名系统（DNS）中的一种自动更新名称服务器（Name server）内容的技术。根据互联网的域名订立规则，域名必须跟从固定的IP地址。但动态DNS系统为动态网域提供一个固定的名称服务器（Name server），透过即时更新，使外界用户能够连上动态用户的网址。
 
+了解玩这个之后就可以搜索并选择DDMS方案了。
+
+再明确一下目标：在外网ssh进内网我们刚建好的Ubuntu。
+
 ## TPDDNS
 
-不过我家里的路由是TP-LINK(https://www.tp-link.com.cn/)的，TP-LINK是可以参考[TPDDNS的使用方法介绍](https://service.tp-link.com.cn/detail_article_2978.html)可以直接使用的。
+不过我家里的路由是[TP-LINK](https://www.tp-link.com.cn/)的，TP-LINK是可以参考[TPDDNS的使用方法介绍](https://service.tp-link.com.cn/detail_article_2978.html)可以直接使用的。
 
 不过坑比的事情是[TPDDNS]支持的硬件版本是4.0。参考[如何查看产品型号与硬件版本？](https://service.tp-link.com.cn/detail_article_1420.html)，也就是其`ver 4.0`之上是可以的。
 
@@ -106,8 +108,6 @@ sudo apt install wget
 好了，适合我这种不愿意花钱的穷屌丝，来[注册](https://openid.natfrp.org/?action=register&src=www.natfrp.com)吧。。
 
 登录进去才发现，好多文字。没有明显的新手教程，对我这种不是很懂`FRP`的人来说简直一脸懵逼。
-
-再明确一下目标：在外网ssh进内网我们刚建好的Ubuntu。
 
 ## 创建映射
 
@@ -222,7 +222,7 @@ systemctl disable sakurafrp
 
 至此，来让我们看一下当前的状态：
 ```sh
-sudo systemctl status sakurafrp
+╰─>$ sudo systemctl status sakurafrp
 ● sakurafrp.service - Sakura Frp Client
    Loaded: loaded (/etc/systemd/system/sakurafrp.service; enabled; vendor preset: enabled)
    Active: active (running) since Tue 2019-07-09 11:07:19 CST; 3h 13min ago
@@ -267,7 +267,7 @@ Last login: Tue Jul  9 14:19:33 2019 from 127.0.0.1
 
 # 其他方案
 
-还有一些其他的，比如：
+还有一些其他的方案可以选择，比如：
 
 - [花生壳](https://hsk.oray.com/)
 - [no-ip](https://www.noip.com)
