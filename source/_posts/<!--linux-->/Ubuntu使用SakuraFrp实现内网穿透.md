@@ -30,12 +30,6 @@ MBP: 主要工作在这里。比如远程win桌面用的是[Microsoft Remote Des
 
 经过安装提示以及笔记本的疯狂发热很快就安装完事了。
 
-PS. 安装Wi-Fi驱动，记得重启哦：
-
-```sh
-sudo apt install bcmwl-kernel-source
-```
-
 ## 设置Ubuntu软件源
 
 这里还是用清华大学的镜像，其[Ubuntu 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/)也是相当的详细：
@@ -75,6 +69,34 @@ sudo apt install wget
 ```
 
 此处如果按照上面的步骤已经设置了清华大学的镜像源，那速度将会很快。要不然就很慢慢慢。。
+
+## Tips
+
+此步骤并非必须，只是记录一下一些很坑的事情，啊哈哈哈哈
+
+### 没有Wi-Fi选项
+
+安装Wi-Fi驱动，记得重启哦：
+
+```sh
+sudo apt install bcmwl-kernel-source
+```
+
+### 未知的显示器（Unknown Display）
+
+如果是很快的意识到是`设置`里面有一个`未知的显示器`，并且以`拼接`的方式使用，那你就直接根据[Non-existent display detected in both intel driver and nvidia driver (Optimus Laptop)](https://bugs.launchpad.net/ubuntu/+source/ubuntu-drivers-common/+bug/1296020)所示，只需安装Bumblebee并重启即可。
+
+```sh
+sudo apt install bumblebee-nvidia
+```
+
+该问题貌似是由于集成显卡和独显共存的问题，所以当你并没有连接外接显示器但是却出现以下双显示器才有的功能时候记得用这个方案。
+
+- APP打开了却看不到界面，只看到页面嗖的一下飞出了屏幕
+- 左上角有时候会出现一个黑框框，里面有一个数字1
+- 鼠标放至屏幕上下左右，有一个边会进去
+- 右键窗口会有一个类似`移至显示器右侧`的按钮，点了就看不见了
+- `xrandr --listmonitors` 有两个
 
 # 内网穿透
 
