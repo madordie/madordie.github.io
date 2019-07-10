@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2019-07-10T03:17:26.601Z</updated>
+  <updated>2019-07-10T07:57:16.503Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/post/ubuntu-sakura-frp/"/>
     <id>https://madordie.github.io/post/ubuntu-sakura-frp/</id>
     <published>2019-07-08T16:00:00.000Z</published>
-    <updated>2019-07-10T03:17:26.601Z</updated>
+    <updated>2019-07-10T07:57:16.503Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录将一台吃灰的笔记本改装成服务器，并暴露在公网下的过程。</p>
 <a id="more"></a>
@@ -34,6 +34,8 @@
 <p>MBP: 主要工作在这里。比如远程win桌面用的是<a href="https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12" target="_blank" rel="noopener">Microsoft Remote Desktop</a></p>
 <h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>注意，Ubuntu会将硬盘 <strong>所有分区全部格式化</strong> ，请先妥善备份。</p>
 <p>经过安装提示以及笔记本的疯狂发热很快就安装完事了。</p>
+<p>PS. 安装Wi-Fi驱动：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install bcmwl-kernel-source</span><br></pre></td></tr></table></figure>
 <h2 id="设置Ubuntu软件源"><a href="#设置Ubuntu软件源" class="headerlink" title="设置Ubuntu软件源"></a>设置Ubuntu软件源</h2><p>这里还是用清华大学的镜像，其<a href="https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/" target="_blank" rel="noopener">Ubuntu 镜像使用帮助</a>也是相当的详细：</p>
 <blockquote>
 <p>Ubuntu 的软件源配置文件是 /etc/apt/sources.list。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用 TUNA 的软件源镜像。</p>

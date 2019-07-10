@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/ubuntu-sakura-frp/</loc>
+    
+    <lastmod>2019-07-10T07:57:16.503Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/logio-brief/</loc>
     
     <lastmod>2019-07-10T03:24:19.041Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://madordie.github.io/post/logio-brief-zh-cn/</loc>
     
     <lastmod>2019-07-10T03:22:22.600Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/ubuntu-sakura-frp/</loc>
-    
-    <lastmod>2019-07-10T03:17:26.601Z</lastmod>
     
   </url>
   
