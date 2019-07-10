@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2019-07-10T03:15:05.088Z</updated>
+  <updated>2019-07-10T03:17:26.601Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/post/ubuntu-sakura-frp/"/>
     <id>https://madordie.github.io/post/ubuntu-sakura-frp/</id>
     <published>2019-07-08T16:00:00.000Z</published>
-    <updated>2019-07-10T03:15:05.088Z</updated>
+    <updated>2019-07-10T03:17:26.601Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录将一台吃灰的笔记本改装成服务器，并暴露在公网下的过程。</p>
 <a id="more"></a>
@@ -114,7 +114,7 @@
     <link href="https://madordie.github.io/post/logio-brief-zh-cn/"/>
     <id>https://madordie.github.io/post/logio-brief-zh-cn/</id>
     <published>2019-05-21T16:00:00.000Z</published>
-    <updated>2019-05-22T04:02:24.736Z</updated>
+    <updated>2019-07-10T03:22:22.600Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief/">English</a></p>
 <p>一个能在浏览器上实时显示日志的工具。</p>
@@ -162,11 +162,7 @@
     
     </summary>
     
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-      <category term="macOS" scheme="https://madordie.github.io/categories/iOS/macOS/"/>
-    
-      <category term="工具" scheme="https://madordie.github.io/categories/iOS/macOS/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
       <category term="tool" scheme="https://madordie.github.io/tags/tool/"/>
@@ -180,7 +176,7 @@
     <link href="https://madordie.github.io/post/logio-brief/"/>
     <id>https://madordie.github.io/post/logio-brief/</id>
     <published>2019-05-16T16:00:00.000Z</published>
-    <updated>2019-05-22T04:02:27.799Z</updated>
+    <updated>2019-07-10T03:24:19.041Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief-zh-cn/">中文</a></p>
 <p>Real-time log monitoring in your browser.</p>
@@ -226,11 +222,7 @@
     
     </summary>
     
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-      <category term="macOS" scheme="https://madordie.github.io/categories/iOS/macOS/"/>
-    
-      <category term="工具" scheme="https://madordie.github.io/categories/iOS/macOS/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
       <category term="tool" scheme="https://madordie.github.io/tags/tool/"/>
