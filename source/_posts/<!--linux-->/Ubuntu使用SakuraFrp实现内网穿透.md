@@ -98,6 +98,13 @@ sudo apt install bumblebee-nvidia
 - 右键窗口会有一个类似`移至显示器右侧`的按钮，点了就看不见了
 - `xrandr --listmonitors` 有两个
 
+### Ubuntu如何正确地切换Intel和Nvidia显卡
+
+> [Ubuntu如何正确地切换Intel和Nvidia显卡](https://www.linuxdashen.com/switch-intel-nvidia-graphics-card-ubuntu)
+```sh
+software-properties-gtk
+```
+
 # 内网穿透
 
 将`内网穿透`放在Google里面搜索一下会有很多方案，我的VPS被邻居连累之后就没有再买，所以我没有域名、公网IP。。。其中搜索结果的大部分都不适合我。
