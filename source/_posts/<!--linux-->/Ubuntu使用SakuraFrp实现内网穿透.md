@@ -100,6 +100,8 @@ sudo apt install bumblebee-nvidia
 
 ### 切换Intel和Nvidia显卡
 
+**no zuo no die no life, 听我一句劝别玩这个。。。**。如果G了去看下[解决Ubuntu18.04安装Nvidia驱动开机卡死](https://www.qingsword.com/qing/ubuntu-remove-nvidia.html)
+
 [How To Switch Between Intel and Nvidia Graphics Card on Ubuntu](https://www.linuxbabe.com/desktop-linux/switch-intel-nvidia-graphics-card-ubuntu)遇到卡在`Started bpfilter`之后需要编辑/etc/gdm3/custom.conf，将下面这一行放开：
 ```sh
 ＃WaylandEnable = FALSE
