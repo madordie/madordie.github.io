@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://madordie.github.io/images/2019-07-09-13-43-31.png">
 <meta property="og:image" content="https://madordie.github.io/images/2019-07-09-13-44-25.png">
-<meta property="og:updated_time" content="2019-07-10T10:07:27.793Z">
+<meta property="og:updated_time" content="2019-07-11T09:49:55.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu使用SakuraFrp实现内网穿透">
 <meta name="twitter:description" content="记录将一台吃灰的笔记本改装成服务器，并暴露在公网下的过程。">
@@ -411,7 +411,8 @@
 <li>右键窗口会有一个类似<code>移至显示器右侧</code>的按钮，点了就看不见了</li>
 <li><code>xrandr --listmonitors</code> 有两个</li>
 </ul>
-<h3 id="切换Intel和Nvidia显卡"><a href="#切换Intel和Nvidia显卡" class="headerlink" title="切换Intel和Nvidia显卡"></a>切换Intel和Nvidia显卡</h3><p><a href="https://www.linuxbabe.com/desktop-linux/switch-intel-nvidia-graphics-card-ubuntu" target="_blank" rel="noopener">How To Switch Between Intel and Nvidia Graphics Card on Ubuntu</a>遇到卡在<code>Started bpfilter</code>之后需要编辑/etc/gdm3/custom.conf，将下面这一行放开：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">＃WaylandEnable = FALSE</span><br></pre></td></tr></table></figure></p>
+<h3 id="切换Intel和Nvidia显卡"><a href="#切换Intel和Nvidia显卡" class="headerlink" title="切换Intel和Nvidia显卡"></a>切换Intel和Nvidia显卡</h3><p><strong>no zuo no die no life, 听我一句劝别玩这个。。。</strong>。如果G了去看下<a href="https://www.qingsword.com/qing/ubuntu-remove-nvidia.html" target="_blank" rel="noopener">解决Ubuntu18.04安装Nvidia驱动开机卡死</a></p>
+<p><a href="https://www.linuxbabe.com/desktop-linux/switch-intel-nvidia-graphics-card-ubuntu" target="_blank" rel="noopener">How To Switch Between Intel and Nvidia Graphics Card on Ubuntu</a>遇到卡在<code>Started bpfilter</code>之后需要编辑/etc/gdm3/custom.conf，将下面这一行放开：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">＃WaylandEnable = FALSE</span><br></pre></td></tr></table></figure></p>
 <h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><p>将<code>内网穿透</code>放在Google里面搜索一下会有很多方案，我的VPS被邻居连累之后就没有再买，所以我没有域名、公网IP。。。其中搜索结果的大部分都不适合我。</p>
 <p>其中大部分提到一个<code>DDNS</code>的概念：<a href="https://zh.wikipedia.org/wiki/%E5%8B%95%E6%85%8BDNS" target="_blank" rel="noopener">维基百科:动态DNS</a></p>
 <blockquote>
