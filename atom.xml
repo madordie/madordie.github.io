@@ -129,7 +129,7 @@
     <link href="https://madordie.github.io/post/logio-brief-zh-cn/"/>
     <id>https://madordie.github.io/post/logio-brief-zh-cn/</id>
     <published>2019-05-21T16:00:00.000Z</published>
-    <updated>2019-07-10T03:22:22.600Z</updated>
+    <updated>2019-07-15T02:36:55.358Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief/">English</a></p>
 <p>一个能在浏览器上实时显示日志的工具。</p>
@@ -161,7 +161,7 @@
 <p>于是乎，我们就可以向localhost:28778疯狂的写日志了. 🎉🎉🎉</p>
 <h1 id="支持的插件"><a href="#支持的插件" class="headerlink" title="支持的插件"></a>支持的插件</h1><p>这个日志服务<a href="#Simple TCP interface">对外接口</a>比较简单，所以理论上来讲，只需要可以进行TCP通信的包均可以支持，包括但不限于安卓、iOS。</p>
 <h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio" target="_blank" rel="noopener">iOS版本</a>基于<a href="https://cocoapods.org/" target="_blank" rel="noopener">CocoaPods</a>的项目只需要在Podfile中添加：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'logio'</span>, <span class="symbol">:git</span> =&gt; <span class="string">'https://github.com/madordie/logio.git'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'LogIO'</span>, <span class="symbol">:git</span> =&gt; <span class="string">'https://github.com/madordie/logio.git'</span></span><br></pre></td></tr></table></figure>
 <p>其iOS版本已经放在了这里：<a href="https://github.com/madordie/logio" target="_blank" rel="noopener">madordie/logio</a></p>
 <p>iOS上之前有一个类似的<a href="https://github.com/s4nchez/LogIO-CocoaLumberjack" target="_blank" rel="noopener">LogIO-CocoaLumberjack</a>, 我这里做了简单的更新，目的是不绑定<a href="https://github.com/robbiehanson/CocoaAsyncSocket" target="_blank" rel="noopener">CocoaAsyncSocket</a>。</p>
 <hr>
