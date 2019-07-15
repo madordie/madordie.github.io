@@ -106,7 +106,7 @@ $ docker run -d \
 [iOS版本](https://github.com/madordie/logio)基于[CocoaPods](https://cocoapods.org/)的项目只需要在Podfile中添加：
 
 ```ruby
-pod 'logio', :git => 'https://github.com/madordie/logio.git'
+pod 'LogIO', :git => 'https://github.com/madordie/logio.git'
 ```
 
 其iOS版本已经放在了这里：[madordie/logio](https://github.com/madordie/logio)
