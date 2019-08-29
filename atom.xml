@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2019-07-11T09:49:55.646Z</updated>
+  <updated>2019-08-29T10:22:39.996Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://madordie.github.io/post/ubuntu-sakura-frp/"/>
     <id>https://madordie.github.io/post/ubuntu-sakura-frp/</id>
     <published>2019-07-08T16:00:00.000Z</published>
-    <updated>2019-07-11T09:49:55.646Z</updated>
+    <updated>2019-08-29T10:22:39.996Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录将一台吃灰的笔记本改装成服务器，并暴露在公网下的过程。</p>
 <a id="more"></a>
@@ -66,6 +66,8 @@
 </blockquote>
 <p>了解玩这个之后就可以搜索并选择DDMS方案了。</p>
 <p>再明确一下目标：在外网ssh进内网我们刚建好的Ubuntu。</p>
+<h2 id="fatedier-frp"><a href="#fatedier-frp" class="headerlink" title="fatedier/frp"></a>fatedier/frp</h2><p>首推这种方案：<a href="https://github.com/fatedier/frp" target="_blank" rel="noopener">fatedier/frp</a>, 文档有中文并且比较详细。</p>
+<p>还有少数派的一个文章也不错：<a href="https://sspai.com/post/52523" target="_blank" rel="noopener">使用frp进行内网穿透</a></p>
 <h2 id="TPDDNS"><a href="#TPDDNS" class="headerlink" title="TPDDNS"></a>TPDDNS</h2><p>不过我家里的路由是<a href="https://www.tp-link.com.cn/" target="_blank" rel="noopener">TP-LINK</a>的，TP-LINK是可以参考<a href="https://service.tp-link.com.cn/detail_article_2978.html" target="_blank" rel="noopener">TPDDNS的使用方法介绍</a>可以直接使用的。</p>
 <p>不过坑比的事情是[TPDDNS]支持的硬件版本是4.0。参考<a href="https://service.tp-link.com.cn/detail_article_1420.html" target="_blank" rel="noopener">如何查看产品型号与硬件版本？</a>，也就是其<code>ver 4.0</code>之上是可以的。</p>
 <p>最好是问一下<code>TP-LINK 在线客服</code>，一般 某猫、某狗上面的客服是不懂这个的。</p>
