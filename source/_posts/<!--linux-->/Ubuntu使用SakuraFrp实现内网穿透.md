@@ -119,6 +119,12 @@ sudo apt install bumblebee-nvidia
 
 再明确一下目标：在外网ssh进内网我们刚建好的Ubuntu。
 
+## fatedier/frp
+
+首推这种方案：[fatedier/frp](https://github.com/fatedier/frp), 文档有中文并且比较详细。
+
+还有少数派的一个文章也不错：[使用frp进行内网穿透](https://sspai.com/post/52523)
+
 ## TPDDNS
 
 不过我家里的路由是[TP-LINK](https://www.tp-link.com.cn/)的，TP-LINK是可以参考[TPDDNS的使用方法介绍](https://service.tp-link.com.cn/detail_article_2978.html)可以直接使用的。
