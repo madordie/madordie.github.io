@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://madordie.github.io/"/>
-  <updated>2019-08-29T10:22:39.996Z</updated>
+  <updated>2020-05-18T06:59:35.356Z</updated>
   <id>https://madordie.github.io/</id>
   
   <author>
@@ -16,11 +16,67 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>class的class-static-func使用Self作为返回值</title>
+    <link href="https://madordie.github.io/post/class-static-func-return-self/"/>
+    <id>https://madordie.github.io/post/class-static-func-return-self/</id>
+    <published>2020-05-17T16:00:00.000Z</published>
+    <updated>2020-05-18T06:59:35.356Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="一个问题"><a href="#一个问题" class="headerlink" title="一个问题"></a>一个问题</h1><ul>
+<li>Xcode: Version 11.4.1 (11E503a)</li>
+<li>swift: Swift 5</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MDButton</span>: <span class="title">UIButton</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 为了更清楚展示问题,代码经过精简</span></span><br><span class="line">    <span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">make</span>() -&gt; <span class="title">Self</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">MDButton</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码无法编译:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ViewController.swift: error: cannot convert return expression of type &apos;MDButton&apos; to return type &apos;Self&apos;</span><br><span class="line">        return MDButton()</span><br><span class="line">               ^~~~~~~~~~</span><br><span class="line">                          as! Self</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="查找关于Self的新特性"><a href="#查找关于Self的新特性" class="headerlink" title="查找关于Self的新特性"></a>查找关于<code>Self</code>的新特性</h1><p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0068-universal-self.md" target="_blank" rel="noopener">Proposal: SE-0068</a>这里有说到关于这个<code>Self</code>的问题.</p>
+<p>其目的是为了解决:</p>
+<blockquote>
+<ul>
+<li><code>dynamicType</code> remains an exception to Swift’s lowercased keywords rule. This change eliminates a special case that’s out of step with Swift’s new standards.</li>
+<li><code>Self</code> is shorter and clearer in its intent. It mirrors <code>self</code>, which refers to the current instance.</li>
+<li>It provides an easier way to access static members. As type names grow large, readability suffers. <code>MyExtremelyLargeTypeName.staticMember</code> is unwieldy to type and read.</li>
+<li>Code using hardwired type names is less portable than code that automatically knows its type.</li>
+<li>Renaming a type means updating any <code>TypeName</code> references in code.</li>
+<li>Using <code>self.dynamicType</code> fights against Swift’s goals of concision and clarity in that it is both noisy and esoteric.</li>
+</ul>
+</blockquote>
+<p>所以说该问题在<code>struct</code>中并不存在,也就是下面的代码完全没有问题:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">xxx</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">()</span></span> -&gt; <span class="type">Self</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> xxx()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="究竟如何修改"><a href="#究竟如何修改" class="headerlink" title="究竟如何修改"></a>究竟如何修改</h1><p>好吧,上面测试过这几个关键字之后,尝试修改函数内的返回对象吧.此时既然<code>Self</code>是<code>dynamicType</code>,那么可以使用<code>self</code>去调用初始化方法就行了吧, 于是:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MDButton2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">     <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">make</span>() -&gt; <span class="title">Self</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 或 return self.init()</span></span><br><span class="line">        <span class="keyword">return</span> <span class="type">Self</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="一点看法"><a href="#一点看法" class="headerlink" title="一点看法"></a>一点看法</h1><p>首先, 整个过程(包括Xcode的提示)不使用<code>as!</code>的解决方案, 对,我就是那个坚决不使用<code>as!</code>的人(刷题除外).</p>
+<p>然后, 可以翻一下这个<code>Self</code>的实现<a href="https://github.com/apple/swift/pull/22863" target="_blank" rel="noopener">apple/swift#22863</a>,内容比较多.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一个问题&quot;&gt;&lt;a href=&quot;#一个问题&quot; class=&quot;headerlink&quot; title=&quot;一个问题&quot;&gt;&lt;/a&gt;一个问题&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;Xcode: Version 11.4.1 (11E503a)&lt;/li&gt;
+&lt;li&gt;swift: Swift 5&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight swift&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; UIKit&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MDButton&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;UIButton&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 为了更清楚展示问题,代码经过精简&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;open&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;make&lt;/span&gt;() -&amp;gt; &lt;span class=&quot;title&quot;&gt;Self&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;MDButton&lt;/span&gt;()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上面的代码无法编译:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ViewController.swift: error: cannot convert return expression of type &amp;apos;MDButton&amp;apos; to return type &amp;apos;Self&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return MDButton()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;               ^~~~~~~~~~&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                          as! Self&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
+    
+    
+      <category term="DEBUG" scheme="https://madordie.github.io/tags/DEBUG/"/>
+    
+      <category term="Swift" scheme="https://madordie.github.io/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Ubuntu使用SakuraFrp实现内网穿透</title>
     <link href="https://madordie.github.io/post/ubuntu-sakura-frp/"/>
     <id>https://madordie.github.io/post/ubuntu-sakura-frp/</id>
     <published>2019-07-08T16:00:00.000Z</published>
-    <updated>2019-08-29T10:22:39.996Z</updated>
+    <updated>2019-08-29T10:24:09.319Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录将一台吃灰的笔记本改装成服务器，并暴露在公网下的过程。</p>
 <a id="more"></a>
@@ -319,9 +375,9 @@
       <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="blog" scheme="https://madordie.github.io/tags/blog/"/>
-    
       <category term="gitment" scheme="https://madordie.github.io/tags/gitment/"/>
+    
+      <category term="blog" scheme="https://madordie.github.io/tags/blog/"/>
     
   </entry>
   
@@ -767,7 +823,7 @@
     <link href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/"/>
     <id>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</id>
     <published>2017-10-11T16:00:00.000Z</published>
-    <updated>2018-07-25T08:52:17.454Z</updated>
+    <updated>2020-05-18T02:46:39.005Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><code>UITableView</code>作为高级控件被开发者广泛使用，同样的，<code>UICollectionView</code>由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。</p>
 <p>在业务需求中，常规布局，大多数都是采用<code>UITableView</code>进行的，但是有痛点：</p>
@@ -1489,44 +1545,6 @@
 &lt;blockquote&gt;
 &lt;p&gt;这是自动给第三方应用集成Reveal、Cycript和注入dylib的模块，支持调试dylib和第三方应用，支持Pod给第三放应用集成SDK，只需要准备一个砸壳后的ipa或者app文件即可。&lt;/p&gt;
 &lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://madordie.github.io/categories/iOS/"/>
-    
-    
-      <category term="逆向" scheme="https://madordie.github.io/tags/%E9%80%86%E5%90%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS逆向-class-dump工具</title>
-    <link href="https://madordie.github.io/post/reverse-ios-class-dump/"/>
-    <id>https://madordie.github.io/post/reverse-ios-class-dump/</id>
-    <published>2017-08-10T04:40:27.000Z</published>
-    <updated>2017-10-09T04:57:22.749Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="noopener">stevenygard.com</a>下载最新的包。</p>
-<p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
-<p>在<code>~/.base_profile</code>中添加<code>export PATH=/opt/class-dump:$PATH</code></p>
-<p>运行<code>source ~/.base_profile</code></p>
-<p>最后确认一下安装OK ：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> class-dump --v</span></span><br><span class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
-<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="../reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br><span class="line"><span class="meta">$</span><span class="bash"> class-dump -H WeChat.decrypted -o ./Headers/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls Headers</span></span><br><span class="line">Headers</span><br></pre></td></tr></table></figure>
-<p>即得头文件目录：<code>Headers</code></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;安装class-dump&quot;&gt;&lt;a href=&quot;#安装class-dump&quot; class=&quot;headerlink&quot; title=&quot;安装class-dump&quot;&gt;&lt;/a&gt;安装class-dump&lt;/h2&gt;&lt;p&gt;去&lt;a href=&quot;http://stevenygard.com/projects/class-dump/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;stevenygard.com&lt;/a&gt;下载最新的包。&lt;/p&gt;
-&lt;p&gt;将包中的&lt;code&gt;class-dump&lt;/code&gt;可执行文件复制到&lt;code&gt;/opt/class-dump&lt;/code&gt;。(我的逆向相关工具均在这下面😂）&lt;/p&gt;
-&lt;p&gt;在&lt;code&gt;~/.base_profile&lt;/code&gt;中添加&lt;code&gt;export PATH=/opt/class-dump:$PATH&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;运行&lt;code&gt;source ~/.base_profile&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;最后确认一下安装OK ：&lt;/p&gt;
-&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; class-dump --v&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     

@@ -4,8 +4,67 @@
 
     
   <url>
+    <loc>https://madordie.github.io/post/about-me/</loc>
+    <lastmod>2020-05-21T03:05:56.318Z</lastmod>
+    <data>
+        <display>
+        <title>个人资料页</title>
+        <pubTime>2016-07-04T16:00:00.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/class-static-func-return-self/</loc>
+    <lastmod>2020-05-18T06:59:35.356Z</lastmod>
+    <data>
+        <display>
+        <title>class的class-static-func使用Self作为返回值</title>
+        <pubTime>2020-05-17T16:00:00.000Z</pubTime>
+        
+        <tag>DEBUG</tag>
+         
+        <tag>Swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
+    <lastmod>2020-05-18T02:46:39.005Z</lastmod>
+    <data>
+        <display>
+        <title>用CollectionView简化代码，专注于业务和UI</title>
+        <pubTime>2017-10-11T16:00:00.000Z</pubTime>
+        
+        <tag>tool</tag>
+         
+        <tag>UICollectionView</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://madordie.github.io/post/ubuntu-sakura-frp/</loc>
-    <lastmod>2019-08-29T10:22:39.996Z</lastmod>
+    <lastmod>2019-08-29T10:24:09.319Z</lastmod>
     <data>
         <display>
         <title>Ubuntu使用SakuraFrp实现内网穿透</title>
@@ -95,9 +154,9 @@
         <title>Gitment/Gitalk自动初始化</title>
         <pubTime>2018-08-29T08:58:47.000Z</pubTime>
         
-        <tag>blog</tag>
-         
         <tag>gitment</tag>
+         
+        <tag>blog</tag>
          
          
            
@@ -180,9 +239,9 @@
         <title>hexo的博客让百度收录</title>
         <pubTime>2016-07-05T10:03:31.000Z</pubTime>
         
-        <tag>SEO</tag>
-         
         <tag>blog</tag>
+         
+        <tag>SEO</tag>
          
          
            
@@ -265,28 +324,6 @@
         <pubTime>2018-07-25T02:38:04.000Z</pubTime>
         
         <tag>DEBUG</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/ios-tool-collectionview-simplify-business/</loc>
-    <lastmod>2018-07-25T08:52:17.454Z</lastmod>
-    <data>
-        <display>
-        <title>用CollectionView简化代码，专注于业务和UI</title>
-        <pubTime>2017-10-11T16:00:00.000Z</pubTime>
-        
-        <tag>tool</tag>
-         
-        <tag>UICollectionView</tag>
          
          
            
@@ -674,21 +711,6 @@
              
               <breadCrumb title="iOS" url="https://madordie.github.io/categories/iOS/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://madordie.github.io/post/about-me/</loc>
-    <lastmod>2017-10-10T05:24:02.849Z</lastmod>
-    <data>
-        <display>
-        <title>个人资料页</title>
-        <pubTime>2016-07-04T16:00:00.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
