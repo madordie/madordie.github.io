@@ -15,7 +15,7 @@ opt='p'
 # 设置VPN
 function setproxy() {
     # export {HTTP,HTTPS,FTP}_PROXY="http://127.0.0.1:3128" 也可以设置http代理
-    export ALL_PROXY=socks5://127.0.0.1:1081
+    export ALL_PROXY=socks5://127.0.0.1:7891
     echo "当前IP：`curl -s ip.sb`"
 }
 
@@ -42,7 +42,7 @@ function checkout_URLs() {
         exit 1
     fi
     rm -rf .tmp-*
-    echo -e ' --> 文章URL已校验.\n'    
+    echo -e ' --> 文章URL已校验.\n'
 }
 
 # 备份
@@ -60,7 +60,7 @@ checkout_URLs
 cd ./../
 if [ $opt = 's' ]; then
     hexo clean
-    hexo s -g 
+    hexo s -g
 elif [ $opt = 'b' ]; then
     backup
 elif [ $opt = 'p' ]; then
