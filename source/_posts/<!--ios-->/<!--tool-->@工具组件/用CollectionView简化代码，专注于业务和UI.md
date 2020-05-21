@@ -2,7 +2,7 @@
 title: 用CollectionView简化代码，专注于业务和UI
 url: ios-tool-collectionview-simplify-business
 date: 2017-10-12
-tags: 
+tags:
     - tool
     - UICollectionView
 categories:
