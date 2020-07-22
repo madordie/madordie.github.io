@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面 iOS 多语言版本的开发（二） 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了Demo 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「转」一个NB的补救项目国际化的方案">
+<meta property="og:url" content="https://madordie.github.io/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/index.html">
+<meta property="og:site_name" content="继刚的博客">
+<meta property="og:description" content="写在前面 iOS 多语言版本的开发（二） 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了Demo 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单">
+<meta property="og:image" content="https://madordie.github.io/images/2018-05-25-13-32-53.png">
+<meta property="og:image" content="https://madordie.github.io/images/2018-05-25-13-48-12.png">
+<meta property="og:image" content="https://madordie.github.io/images/2018-05-25-13-48-38.png">
+<meta property="og:image" content="https://madordie.github.io/images/2018-05-25-13-50-18.png">
+<meta property="article:published_time" content="2016-02-15T05:37:00.000Z">
+<meta property="article:modified_time" content="2018-05-25T05:52:28.922Z">
+<meta property="article:author" content="继刚">
+<meta property="article:tag" content="国际化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://madordie.github.io/images/2018-05-25-13-32-53.png">
+
+<link rel="canonical" href="https://madordie.github.io/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>「转」一个NB的补救项目国际化的方案 | 继刚的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">继刚的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="继刚">
+      <meta itemprop="description" content="学习是我快乐 :)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="继刚的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「转」一个NB的补救项目国际化的方案
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-02-15 13:37:00" itemprop="dateCreated datePublished" datetime="2016-02-15T13:37:00+08:00">2016-02-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-05-25 13:52:28" itemprop="dateModified" datetime="2018-05-25T13:52:28+08:00">2018-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><a href="http://www.devashen.com/blog/2016/01/15/localized02/" target="_blank" rel="noopener"> iOS 多语言版本的开发（二）</a> 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了<a href="https://github.com/Ashen-Zhao/easyLocalized" target="_blank" rel="noopener">Demo</a> 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单快捷高效的方法，让我慢慢与您道来；</p>
+<h2 id="如何辨别项目中的中文字符串"><a href="#如何辨别项目中的中文字符串" class="headerlink" title="如何辨别项目中的中文字符串?"></a>如何辨别项目中的中文字符串?</h2><p> 既然要替换项目中使用到的中文字符串，那么前提就必须要先找到这些个字符串，然后将这些字符串，替换成我们定义的宏， 为了替换方便，可将这些字符串自身作为key， 这里不理解的不要紧，下面我还会讲到。 既然是辨别中文字符串，那也就是说在项目文件中进行匹配查找，说到匹配，那就需要正则表达式了，用正则表达式匹配Xcode中的使用的中文字符串，使用<code>(@&quot;[^&quot;]*[\u4E00-\u9FA5]+[^&quot;\n]*?&quot;)\s*</code> 即可， 打开你的Xcode 试试看，切记find 后面的选项要选择 <code>Regular Expression</code>, 默认选中的是<code>Text</code>, 如图</p>
+<p><img src="/images/2018-05-25-13-32-53.png" alt="啊神多语言"></p>
+<h2 id="如何取出识别到的中文字符串？"><a href="#如何取出识别到的中文字符串？" class="headerlink" title="如何取出识别到的中文字符串？"></a>如何取出识别到的中文字符串？</h2><p> 我们已经知道如何识别项目中的字符串了，但是如何取出来使用呢？ 这就需要遍历项目中所有的指定后缀（e.g: .h、.m等）的文件，然后利用正则表达匹配所有使用到的中文字符串，并写入文件中。为了方便起见，我将此过程写了一个Mac客户端<a href="https://github.com/Ashen-Zhao/ReadChinese" target="_blank" rel="noopener">小应用</a>，可直接将选中的项目中所有的中文字符串，导出到指定的路径下；该应用还可以选择对于重复出现的中文字符串进行处理，以及还可以将中文字符串导出为繁体； <a href="https://github.com/Ashen-Zhao/ReadChinese" target="_blank" rel="noopener">小应用</a>更值得关注的是它导出的文件，可以直接拿来当做多语言文件中的<code>key=value</code> 使用，非常简单，喜欢的可以去<a href="https://github.com/Ashen-Zhao/ReadChinese" target="_blank" rel="noopener">下载看看</a>， 含有源码的哦；小应用运行图如下：</p>
+<p><img src="/images/2018-05-25-13-48-12.png" alt="啊神多语言"></p>
+<h2 id="如何使用取出的中文字符串？"><a href="#如何使用取出的中文字符串？" class="headerlink" title="如何使用取出的中文字符串？"></a>如何使用取出的中文字符串？</h2><p> 已经拿到取出的中文字符串文件，这个文件是可以直接拿来用做多语言文件使用的，小应用导出的文件，只可以用于中文以及繁体多语言文件，而对于其他的语言，就需要你拿着导出的文件，找你们公司的翻译人员，进行翻译； 拿繁体版来举个例子，导出来的繁体文件如下（收留我App导出的文件）：</p>
+<p><img src="/images/2018-05-25-13-48-38.png" alt="啊神多语言"></p>
+<p>这个繁体文件，可以直接作为繁体多语言使用，如何想要翻译成英文，可以将此文件拷贝一份，交给翻译人员，让其翻译。翻译的时候，你一定要给翻译人员沟通好，让其只翻译<code>value</code>, 也就是图中<code>=</code> 后面双引号中的内容，格式什么的也不要让他乱改，否则容易出现问题，导致key与value对不上号。 一切沟通妥当后，等翻译把文件给你后，直接将文件中的内容，复制到多语言文件的英语文件中即可；</p>
+<h2 id="如何将项目中的中文字符串进行替换"><a href="#如何将项目中的中文字符串进行替换" class="headerlink" title="如何将项目中的中文字符串进行替换"></a>如何将项目中的中文字符串进行替换</h2><p> 多语言文件已经配置完成，到了这里，那么问题来了，我们只是取出项目中使用的中文字符串，然后将字符串封装成多语言文件，但是对于项目中使用的中文字符串依然还是中文字符串，我们还并没有进行替换处理。当然，这一步我们是不能够忘了，由于是替换项目中所有的使用中文字符串，我们还是谨慎为好，首先将你的项目进行备份、备份、备份，非常重要的事情说三篇，切记一定要备份。备份好后，我们就可以开始替换工作了，没有备份的不要往下看了，赶紧备份去；<br> 假设你已经备份好了，你就可以开始替换工作了，前面我们说过让中文字符串自身作为key 进行替换，之所以让其自身作为key, 是因为这样可以大大减轻替换的困难度，而且还有利于代码的可读性，基本上算是保持原有代码；既然要替换项目中的使用中文字符串，就要用到Xcode 自带的字符串替换功能，首先还需要使用正则表达式<code>(@&quot;[^&quot;]*[\u4E00-\u9FA5]+[^&quot;\n]*?&quot;)\s*</code>，匹配出项目中使用的中文字符串，然后在对其进行替换处理。</p>
+<p> 由于我们在<a href="http://www.devashen.com/blog/2016/01/15/localized02/" target="_blank" rel="noopener">iOS 多语言版本的开发（二）</a>中，对取key对应的语言内容，进行了宏的封装, 这里我们可以将匹配到的使用中文字符直接替换成我们定义的宏的使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define ASLocalizedString(key)  [NSString stringWithFormat:@&quot;%@&quot;, [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@&quot;%@&quot;,[[NSUserDefaults standardUserDefaults] objectForKey:@&quot;appLanguage&quot;]] ofType:@&quot;lproj&quot;]] localizedStringForKey:(key) value:nil table:@&quot;ASLocalized&quot;]]</span><br></pre></td></tr></table></figure>
+
+<p>以上是宏的定义，我们需要将字符串进行替换成宏的使用，如：<br> 替换前是这样的<code>_lbl.text = @&quot;我是多语言&quot;;</code><br> 替换后<code>_lbl.text = ASLocalizedString(@&quot;我是多语言&quot;)</code></p>
+<p>替换规则如图：</p>
+<p><img src="/images/2018-05-25-13-50-18.png" alt="啊神多语言"></p>
+<p>这次选中的是<code>Replace</code>, 不是<code>Find</code>。按图中所示，选择完毕后，点击<code>ReplaceAll</code>, 会出来一个弹框，不用管它直接继续，即可，然后你在看项目中使用到的中文字符串是否已经替换掉了，到这里基本上大功告成了；</p>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>1、正则表达式，不懂得可以先照文章里写就行，然后再去学习下，<a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">这里有篇基础文章</a><br>2、ASLocalizedString(key) ， 该宏使用面积广，可以将其定义成公共头文件中，然后用时引用头文件即可，也可将文件封装进pch文件中，这样无需使用头文件接口使用<br>3、替换后，可能会有些地方报错，command + b 编译下，看看报错的地方，进行相应修改即可。报错原因：a. 可能是你定义的常量字符串； b. 可能是定义的宏； c. 可能是替换后没有换行； 基本上报的错误很明显，进行修改即可；<br>4、在迭代版本中，再次使用中文字符串，就需要使用<code>ASLocalizedString(key)</code>， 来代替了，然后再多语言文件中，进行<code>key=value</code> 配置；</p>
+<blockquote>
+<p>相关文章</p>
+</blockquote>
+<blockquote>
+<p>iOS 多语言版本的开发（一）</p>
+</blockquote>
+<blockquote>
+<p>iOS 多语言版本的开发（二）</p>
+</blockquote>
+<hr>
+<p>文章转自 <a href="http://www.devashen.com/blog/2016/01/18/localized03/" target="_blank" rel="noopener">iOS 多语言版本的开发（三）</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" rel="tag"># 国际化</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/post/push-queue-for-navigation/" rel="next" title="如何正确的连续推新页面">
+      如何正确的连续推新页面 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何辨别项目中的中文字符串"><span class="nav-number">2.</span> <span class="nav-text">如何辨别项目中的中文字符串?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何取出识别到的中文字符串？"><span class="nav-number">3.</span> <span class="nav-text">如何取出识别到的中文字符串？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用取出的中文字符串？"><span class="nav-number">4.</span> <span class="nav-text">如何使用取出的中文字符串？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何将项目中的中文字符串进行替换"><span class="nav-number">5.</span> <span class="nav-text">如何将项目中的中文字符串进行替换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遗留问题"><span class="nav-number">6.</span> <span class="nav-text">遗留问题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="继刚"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习是我快乐 :)</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-fw"></i>博客园</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">继刚</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2fcb2111497d0ea0dba4',
+      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
+      repo        : 'madordie.github.io',
+      owner       : 'madordie',
+      admin       : ['madordie'],
+      id          : 'b8932393ee65a177fe9bf34c60c2ff8b',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

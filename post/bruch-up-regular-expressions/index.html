@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="正则表达式基础学习笔记。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式学习笔记">
+<meta property="og:url" content="https://madordie.github.io/post/bruch-up-regular-expressions/index.html">
+<meta property="og:site_name" content="继刚的博客">
+<meta property="og:description" content="正则表达式基础学习笔记。">
+<meta property="article:published_time" content="2016-12-19T07:03:09.000Z">
+<meta property="article:modified_time" content="2017-10-16T02:18:11.851Z">
+<meta property="article:author" content="继刚">
+<meta property="article:tag" content="正则表达式">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://madordie.github.io/post/bruch-up-regular-expressions/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>正则表达式学习笔记 | 继刚的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">继刚的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/bruch-up-regular-expressions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="继刚">
+      <meta itemprop="description" content="学习是我快乐 :)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="继刚的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          正则表达式学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-12-19 15:03:09" itemprop="dateCreated datePublished" datetime="2016-12-19T15:03:09+08:00">2016-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2017-10-16 10:18:11" itemprop="dateModified" datetime="2017-10-16T10:18:11+08:00">2017-10-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>正则表达式基础学习笔记。</p>
+<a id="more"></a>
+
+<h1 id="前面"><a href="#前面" class="headerlink" title="前面"></a>前面</h1><p>  上次找了个很好的文章，可是手残没保存。。找不到了😭，现在重新找了一个文章：<a href="https://luke0922.gitbooks.io/learnregularexpressionin30minutes/content/index.html" target="_blank" rel="noopener">正则表达式30分钟入门教程</a><br>  正如作者说的：</p>
+<blockquote>
+<h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>本文非原创，是改编自<a href="http://deerchao.net/tutorials/regex/regex.htm#mission" target="_blank" rel="noopener">《正则表达式30分钟入门教程》</a>，因为原作者的排版个人不是很喜欢，而且内容上个人觉得有些地方需要改进，所以在 gitbook 上开了一本书。</p>
+</blockquote>
+<p>  OSC的<a href="http://tool.oschina.net/regex" target="_blank" rel="noopener">在线正则表达式测试</a></p>
+<h1 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h1><h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><ul>
+<li><code>\</code> : 转义</li>
+<li><code>\b</code> : 单词开始或结束</li>
+<li><code>^</code> : 字符串开始</li>
+<li><code>$</code> : 字符串结束</li>
+<li><code>\d</code> : 一个数字</li>
+<li><code>\s</code> : 任意空白字符：空格、制表符、换行符、中文全角空格、等</li>
+<li><code>\w</code> : 字母/数字/下划线/汉字 可见字符</li>
+<li><code>.</code> : 除换行符以外的任意字符</li>
+</ul>
+<h2 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h2><ul>
+<li><code>{n}</code> : 前置位重复匹配 [n] 次</li>
+<li><code>{n,m}</code> : 前置位重复匹配 [n-m] 次</li>
+<li><code>{n,}</code> : 前置位重复匹配 [n-∞] 次</li>
+<li><code>*</code> : 数量区间：[0-N]</li>
+<li><code>+</code> : 数量区间：[1-N]</li>
+<li><code>?</code> : 数量区间：[0-1]</li>
+</ul>
+<h2 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h2><ul>
+<li><code>[nml]</code> : 可以匹配到 n/m/l</li>
+</ul>
+<h2 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h2><ul>
+<li><code>|</code> : __或__语句。存在逻辑短路</li>
+<li><code>(m)</code> : __分组__语句。子式，可以指定重复什么的</li>
+</ul>
+<h2 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h2><ul>
+<li><code>\W</code> : 任意__不是__（字符、数字、下划线、汉字）</li>
+<li><code>\S</code> : 任意<strong>不是</strong> 空白符</li>
+<li><code>\D</code> : 任意<strong>不是</strong> 数字</li>
+<li><code>\B</code> : 任意<strong>不是</strong> 单词开头或结尾</li>
+<li><code>\^x</code> : 除x以外的任意字符</li>
+<li><code>[\^abc]</code> : 除abc这几个字母以外的任意字符</li>
+</ul>
+<h2 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h2><p>  <code>(\w+)</code>这样用<code>()</code>的部分称为一个分组，其匹配到的内容可以使用<code>\n</code>来表示，<code>n</code>代表该分组为第n个分组。分组下标从<code>1</code>开始。<br>  也可以自定义子表达式组名: <code>(?&lt;Word&gt;M) \k&lt;Word&gt;</code> : 或 <code>(?&#39;Word&#39;M) \k&#39;Word&#39;</code>，其中M为子式。</p>
+<h2 id="常用分组语法"><a href="#常用分组语法" class="headerlink" title="常用分组语法"></a>常用分组语法</h2><h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><ul>
+<li><code>(exp)</code> : 匹配exp,并捕获文本到自动命名的组里</li>
+<li><code>(?exp)</code> : 匹配exp,并捕获文本到名称为name的组里，也可以写成(?’name’exp)</li>
+<li><code>(?:exp)</code> : 匹配exp,不捕获匹配的文本，也不给此分组分配组号</li>
+</ul>
+<h3 id="零宽断言"><a href="#零宽断言" class="headerlink" title="零宽断言"></a>零宽断言</h3><ul>
+<li><code>(?=exp)</code> : 匹配exp前面的位置</li>
+<li><code>(?&lt;=exp)</code> : 匹配exp后面的位置</li>
+<li><code>(?!exp)</code> : 匹配后面跟的不是exp的位置</li>
+<li><code>(?&lt;!exp)</code> : 匹配前面不是exp的位置</li>
+</ul>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ul>
+<li><code>(?#comment)</code> : 这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读</li>
+</ul>
+<h2 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h2><p>  贪婪：匹配的尽可能长<br>  懒惰：匹配的尽可能短</p>
+<ul>
+<li><code>*?</code> : 重复任意次，但尽可能少重复</li>
+<li><code>+?</code> : 重复1次或更多次，但尽可能少重复</li>
+<li><code>??</code> : 重复0次或1次，但尽可能少重复</li>
+<li><code>{n,m}?</code> : 重复n到m次，但尽可能少重复</li>
+<li><code>{n,}?</code> : 重复n次以上，但尽可能少重复</li>
+</ul>
+<h2 id="平衡组-递归匹配"><a href="#平衡组-递归匹配" class="headerlink" title="平衡组/递归匹配"></a>平衡组/递归匹配</h2><p>  # 我开始看不懂了😂</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><code>\a</code> : 报警字符(打印它的效果是电脑嘀一声)</li>
+<li><code>\b</code> : 通常是单词分界位置，但如果在字符类里使用代表退格</li>
+<li><code>\t</code> : 制表符，Tab</li>
+<li><code>\r</code> : 回车</li>
+<li><code>\v</code> : 竖向制表符</li>
+<li><code>\f</code> : 换页符</li>
+<li><code>\n</code> : 换行符</li>
+<li><code>\e</code> : Escape</li>
+<li><code>\0nn</code> : ASCII代码中八进制代码为nn的字符</li>
+<li><code>\xnn</code> : ASCII代码中十六进制代码为nn的字符</li>
+<li><code>\unnnn</code> : Unicode代码中十六进制代码为nnnn的字符</li>
+<li><code>\cN</code> : ASCII控制字符。比如\cC代表Ctrl+C</li>
+<li><code>\A</code> : 字符串开头(类似^，但不受处理多行选项的影响)</li>
+<li><code>\Z</code> : 字符串结尾或行尾(不受处理多行选项的影响)</li>
+<li><code>\z</code> : 字符串结尾(类似$，但不受处理多行选项的影响)</li>
+<li><code>\G</code> : 当前搜索的开头</li>
+<li><code>\p{name}</code> : Unicode中命名为name的字符类，例如\p{IsGreek}</li>
+<li><code>(?&gt;exp)</code> : 贪婪子表达式</li>
+<li><code>(?&lt;x&gt;-&lt;y&gt;exp)</code> : 平衡组</li>
+<li><code>(?im-nsx:exp)</code> : 在子表达式exp中改变处理选项</li>
+<li><code>(?im-nsx)</code> : 为表达式后面的部分改变处理选项</li>
+<li><code>(?(exp)yes|no)</code> : 把exp当作零宽正向先行断言，如果在这个位置能匹配，使用yes作为此组的表达式；否则使用no</li>
+<li><code>(?(exp)yes)</code> : 同上，只是使用空表达式作为no</li>
+<li><code>(?(name)yes|no)</code> : 如果命名为name的组捕获到了内容，使用yes作为表达式；否则使用no</li>
+<li><code>(?(name)yes)</code> : 同上，只是使用空表达式作为no</li>
+</ul>
+<h2 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a>栗子</h2><ul>
+<li>5-12位QQ：<code>^\d{5,12}$</code></li>
+<li>IPv4地址：<code>((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)</code></li>
+<li><code>go go</code>、<code>kitty kitty</code>这样的叠词：<code>\b(\w+)\b\s+\1\b</code></li>
+<li>后向引用：<code>\b(\w+)\b\s+\1\b</code> == <code>\b(?&lt;Word&gt;\w+)\b\s+\k&lt;Word&gt;\b</code> == <code>\b(?&#39;Word&#39;\w+)\b\s+\k&#39;Word&#39;\b</code></li>
+</ul>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>  知识研究了一下语法，还未详细测试。思考：这玩意真心厉害😂。</p>
+<hr>
+<p><a href="../reprinted-regular-mind-map">思维导图</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag"># 正则表达式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/debug-swift-notifa-frame/" rel="prev" title="DEBUG - swift中取出通知中的frame">
+      <i class="fa fa-chevron-left"></i> DEBUG - swift中取出通知中的frame
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/bandwagonhost-note/" rel="next" title="科学上网之搬瓦工ss搭建笔记">
+      科学上网之搬瓦工ss搭建笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前面"><span class="nav-number">1.</span> <span class="nav-text">前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明"><span class="nav-number">2.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开搞"><span class="nav-number">3.</span> <span class="nav-text">开搞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#元字符"><span class="nav-number">3.1.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重复"><span class="nav-number">3.2.</span> <span class="nav-text">重复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符类"><span class="nav-number">3.3.</span> <span class="nav-text">字符类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件"><span class="nav-number">3.4.</span> <span class="nav-text">条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反义"><span class="nav-number">3.5.</span> <span class="nav-text">反义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后向引用"><span class="nav-number">3.6.</span> <span class="nav-text">后向引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用分组语法"><span class="nav-number">3.7.</span> <span class="nav-text">常用分组语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获"><span class="nav-number">3.7.1.</span> <span class="nav-text">捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#零宽断言"><span class="nav-number">3.7.2.</span> <span class="nav-text">零宽断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">3.7.3.</span> <span class="nav-text">注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贪婪与懒惰"><span class="nav-number">3.8.</span> <span class="nav-text">贪婪与懒惰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平衡组-递归匹配"><span class="nav-number">3.9.</span> <span class="nav-text">平衡组&#x2F;递归匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">3.10.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栗子"><span class="nav-number">3.11.</span> <span class="nav-text">栗子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="继刚"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习是我快乐 :)</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-fw"></i>博客园</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">继刚</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2fcb2111497d0ea0dba4',
+      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
+      repo        : 'madordie.github.io',
+      owner       : 'madordie',
+      admin       : ['madordie'],
+      id          : '61af1b3d4417707d972c842fd172222d',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

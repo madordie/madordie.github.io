@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：   右击工程 Open With External Editor 终端弹出来了。。  如果没有生效，就是你的电脑上装了什么可以打开xx.xcodeproj的应用程序，也就是在Finder下右击可以看到如下样式：  呐～ Xcode为默认，备忘录为默认下面的第一个～～ 对，如果这样的话，那么按照上面3步，得到的结果是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac10.13依旧让Xcode支持打开终端">
+<meta property="og:url" content="https://madordie.github.io/post/mac-high-sierra-open-with-external/index.html">
+<meta property="og:site_name" content="继刚的博客">
+<meta property="og:description" content="在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：   右击工程 Open With External Editor 终端弹出来了。。  如果没有生效，就是你的电脑上装了什么可以打开xx.xcodeproj的应用程序，也就是在Finder下右击可以看到如下样式：  呐～ Xcode为默认，备忘录为默认下面的第一个～～ 对，如果这样的话，那么按照上面3步，得到的结果是">
+<meta property="og:image" content="https://madordie.github.io/images/mac-high-sierra-open-with-external-1.gif">
+<meta property="og:image" content="https://madordie.github.io/images/mac-high-sierra-open-with-external-2.jpg">
+<meta property="article:published_time" content="2017-09-28T11:06:47.000Z">
+<meta property="article:modified_time" content="2017-10-09T04:59:40.198Z">
+<meta property="article:author" content="继刚">
+<meta property="article:tag" content="Xcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://madordie.github.io/images/mac-high-sierra-open-with-external-1.gif">
+
+<link rel="canonical" href="https://madordie.github.io/post/mac-high-sierra-open-with-external/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>mac10.13依旧让Xcode支持打开终端 | 继刚的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">继刚的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/mac-high-sierra-open-with-external/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="继刚">
+      <meta itemprop="description" content="学习是我快乐 :)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="继刚的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mac10.13依旧让Xcode支持打开终端
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-09-28 19:06:47" itemprop="dateCreated datePublished" datetime="2017-09-28T19:06:47+08:00">2017-09-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2017-10-09 12:59:40" itemprop="dateModified" datetime="2017-10-09T12:59:40+08:00">2017-10-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/macOS/" itemprop="url" rel="index"><span itemprop="name">macOS</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：</p>
+<p><img src="/images/mac-high-sierra-open-with-external-1.gif" alt="效果图"></p>
+<ol>
+<li>右击工程</li>
+<li>Open With External Editor</li>
+<li>终端弹出来了。。</li>
+</ol>
+<p>如果没有生效，就是你的电脑上装了什么可以打开<code>xx.xcodeproj</code>的应用程序，也就是在<code>Finder</code>下右击可以看到如下样式：</p>
+<p><img src="/images/mac-high-sierra-open-with-external-2.jpg" alt="效果图"></p>
+<p>呐～ Xcode为默认，备忘录为默认下面的第一个～～</p>
+<p>对，如果这样的话，那么按照上面3步，得到的结果是：这个文件被莫名其妙的保存在了备忘录～～  </p>
+<p>这不是我们要的🤷‍♂️，下面我们通过修改<code>备忘录.app</code>的配置文件来达到我们的效果。</p>
+<a id="more"></a>
+
+<h3 id="成因"><a href="#成因" class="headerlink" title="成因"></a>成因</h3><p>macSO10.13加强了备忘录，嗯的确变强了，可是并没有Xcode和终端常用。</p>
+<p>备忘录增加了导入的功能，支持了一些文件的打开(只是导入而已。。)，但是并不适合我。于是改一下吧～～</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ol>
+<li>在<code>应用程序</code>中找到<code>备忘录</code></li>
+<li>显示包内容</li>
+<li>找到 我们要修改的plist文件： <code>Contents/Info.plist</code></li>
+<li>做一下备份：复制一下。。</li>
+<li>确保 &lt;4&gt; 已完成</li>
+<li>直接修改<code>Info.plist</code>会提示没有权限，使用<code>sudo vim Info.plist</code>修改</li>
+<li>不管你用什么方法，删除下面的这些代码<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>General files and folders<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeRole<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>Viewer<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>LSItemContentTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.data<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.directory<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><code>:wq</code></li>
+<li>重启一下 （目的：重建索引）</li>
+</ol>
+<h3 id="至于我做了什么"><a href="#至于我做了什么" class="headerlink" title="至于我做了什么"></a>至于我做了什么</h3><p>讲道理，用Xcode的都知道吧？这个是注册的app支持的文件类型。 删除之后就可以了，就这么多😂</p>
+<h3 id="注意一下"><a href="#注意一下" class="headerlink" title="注意一下"></a>注意一下</h3><p><code>操作</code>中的<code>步骤9</code>可以有脚本，但是还是老实重启一下吧，有的脚本会使部分图标失效，巨烦。。还是重启一下比较靠谱。毕竟不着急</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Xcode/" rel="tag"># Xcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/debug-xcode9-build-ipa/" rel="prev" title="Xcode9编译失败">
+      <i class="fa fa-chevron-left"></i> Xcode9编译失败
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/macos-high-sierra-cocoapods/" rel="next" title="mac10.13 pods 命令错误">
+      mac10.13 pods 命令错误 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#成因"><span class="nav-number">1.</span> <span class="nav-text">成因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">2.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#至于我做了什么"><span class="nav-number">3.</span> <span class="nav-text">至于我做了什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意一下"><span class="nav-number">4.</span> <span class="nav-text">注意一下</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="继刚"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习是我快乐 :)</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-fw"></i>博客园</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">继刚</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2fcb2111497d0ea0dba4',
+      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
+      repo        : 'madordie.github.io',
+      owner       : 'madordie',
+      admin       : ['madordie'],
+      id          : 'a60204f13506806142159e22b791ca47',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

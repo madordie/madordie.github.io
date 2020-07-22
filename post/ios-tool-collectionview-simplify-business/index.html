@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="UITableView作为高级控件被开发者广泛使用，同样的，UICollectionView由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。 在业务需求中，常规布局，大多数都是采用UITableView进行的，但是有痛点：  当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用CollectionView简化代码，专注于业务和UI">
+<meta property="og:url" content="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/index.html">
+<meta property="og:site_name" content="继刚的博客">
+<meta property="og:description" content="UITableView作为高级控件被开发者广泛使用，同样的，UICollectionView由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。 在业务需求中，常规布局，大多数都是采用UITableView进行的，但是有痛点：  当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但">
+<meta property="article:published_time" content="2017-10-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-18T02:46:39.005Z">
+<meta property="article:author" content="继刚">
+<meta property="article:tag" content="tool">
+<meta property="article:tag" content="UICollectionView">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>用CollectionView简化代码，专注于业务和UI | 继刚的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">继刚的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="继刚">
+      <meta itemprop="description" content="学习是我快乐 :)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="继刚的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用CollectionView简化代码，专注于业务和UI
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-10-12 00:00:00" itemprop="dateCreated datePublished" datetime="2017-10-12T00:00:00+08:00">2017-10-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-18 10:46:39" itemprop="dateModified" datetime="2020-05-18T10:46:39+08:00">2020-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><code>UITableView</code>作为高级控件被开发者广泛使用，同样的，<code>UICollectionView</code>由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。</p>
+<p>在业务需求中，常规布局，大多数都是采用<code>UITableView</code>进行的，但是有痛点：</p>
+<ul>
+<li>当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但是要从<code>UITableView</code>迁移到<code>UICollectionView</code></li>
+<li><code>UITableViewDelegate</code>、<code>UITableViewDataSource</code> 恐怕每处使用都要写繁琐的相同的代码吧～</li>
+<li>很多人也会对其进行高度缓存啊神马的优化策略</li>
+<li>不知不觉这些代码堆在一起已经将<code>UIViewController</code>堆的相当的高</li>
+</ul>
+<p>然后呢，我们现在使用一个<code>CollectionView</code>将这些操作包装一下，达到这样一个流程:</p>
+<ol>
+<li><p>自定义Cell、CellModel</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LabelCell</span>: <span class="title">UICollectionViewCell</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> info = <span class="type">UILabel</span>()</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">sizeThatFits</span><span class="params">(<span class="number">_</span> size: CGSize)</span></span> -&gt; <span class="type">CGSize</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">return</span> <span class="type">CGSize</span>(width: size.width, height: info.frame.maxY + info.frame.minY)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LabelCell</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Model</span>: <span class="title">ListItemDefaultProtocol</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> info: <span class="type">String?</span></span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(view: LabelCell)</span></span> &#123;</span><br><span class="line">            view.info.text = info</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>请求、处理数据格式化为<code>LabelCell.Model</code>这样的类</p>
+</li>
+<li><p>处理好的数据交给<code>CollectionView</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.sections = model.format(...)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>休息一会，完工了～</p>
+</li>
+</ol>
+<p>然后，来看看<code>Collection</code>里面都做了什么操作</p>
+<a id="more"></a>
+
+<h3 id="CollectionView"><a href="#CollectionView" class="headerlink" title="CollectionView"></a>CollectionView</h3><p>为了达到上面效果中的第三步，我们需要自定义一个<code>CollectionView</code>来处理刷新数据、设置代理、设置数据源、注册cell、等操作。</p>
+<p>需要说明的是，此处使用<a href="https://github.com/chiahsien/CHTCollectionViewWaterfallLayout" target="_blank" rel="noopener"><code>CHTCollectionViewWaterfallLayout</code></a>来处理瀑布流。</p>
+<p>创建一个<code>CollectionViewSection</code>的类/结构体来保存section信息。比如说：<code>sectionInset</code>、<code>minimumColumnSpacing</code>、<code>minimumInteritemSpacing</code>、<code>columnCount</code>、等</p>
+<p>在<code>CollectionView</code>中设置一个<code>var sections = [KTJCollectionViewSection]()</code>用于保存sections</p>
+<p>实现<code>UICollectionViewDataSource</code>、 <code>UICollectionViewDelegate</code>。此处省略约1千字…</p>
+<h3 id="ListItemDefaultProtocol：绑定Cell和Model"><a href="#ListItemDefaultProtocol：绑定Cell和Model" class="headerlink" title="ListItemDefaultProtocol：绑定Cell和Model"></a>ListItemDefaultProtocol：绑定Cell和Model</h3><p>上面<code>省略约1千字</code>中有一个并没有说：<code>CollectionViewSection</code>的<code>header</code>、<code>items</code>、<code>footer</code>如何实现。😂</p>
+<p>好了，此处这三个均采用协议<code>ListItemDefaultProtocol</code>来实现。（PS：大家都喜欢用父类，但父类只有一个，为了兼容和冲突，这里协议是最好不过的～，特别是swift中的协议）</p>
+<p>协议需要给出这么几个信息：</p>
+<ul>
+<li><code>reuseIdentifier</code> 用来复用的重用标识符</li>
+<li><code>cellClass</code> 用来注册用的类名</li>
+<li><code>func fillModel(item: AnyObject)</code> 用来给cell填充model的方法</li>
+</ul>
+<p>那么这个协议就出来了：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">KTJListItemProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> identifa: <span class="type">String</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> registClass: <span class="type">AnyClass</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(item: AnyObject)</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<strong>swift</strong>协议支持默认实现，于是乎，就可以再写一个:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">ListItemDefaultProtocol</span>: <span class="title">KTJListItemProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">associatedtype</span> <span class="type">ItemType</span>: <span class="type">UIView</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(view: ItemType)</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ListItemDefaultProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> identifa: <span class="type">String</span> &#123; <span class="keyword">return</span>  <span class="type">NSStringFromClass</span>(<span class="type">ItemType</span>.<span class="keyword">self</span>)&#125;</span><br><span class="line">    <span class="keyword">var</span> registClass: <span class="type">AnyClass</span> &#123; <span class="keyword">return</span> <span class="type">ItemType</span>.<span class="keyword">self</span> &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(item: AnyObject)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> reusableView = item <span class="keyword">as</span>? <span class="type">ItemType</span> &#123;</span><br><span class="line">            fillModel(view: reusableView)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，就可以愉快的玩耍了～～</p>
+<p>最后Cell中的的代码效果就是<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView-simplify-business/LabelCell.swift" target="_blank" rel="noopener">这个样子</a>。<br>再加上<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView-simplify-business/ViewController.swift" target="_blank" rel="noopener">数据填充</a>是不是很简单了呢～～</p>
+<h3 id="以后如何开发"><a href="#以后如何开发" class="headerlink" title="以后如何开发"></a>以后如何开发</h3><p>真的如同前面的例子一样，只需要这么几步绕不过去的：</p>
+<ol>
+<li>处理接口吐出来的数据。</li>
+<li>创建新的UI样式，并做好接口数据中间件。</li>
+<li>点击事件在处理数据的时候预先埋好，所有的数据、逻辑和UI数据一起被传递，不需要多次类型判断。</li>
+</ol>
+<p>统一使用<code>CollectionView</code>还有一个好处：不管前面谁写的一个UI，都能拉过来用。不用做中间层去从<code>TableViewCell</code>转<code>CollectionViewCell</code>。</p>
+<p>开发只需要关心业务，业务。安安心心做一个写业务的程序员吧～</p>
+<h3 id="关于Cell的跳转处理"><a href="#关于Cell的跳转处理" class="headerlink" title="关于Cell的跳转处理"></a>关于Cell的跳转处理</h3><p>乍一看，完美了。不过还有一个巨烦的跳转处理。。。不过，<strong>莫怕</strong></p>
+<p>跳转，有这么几种：</p>
+<ul>
+<li>支持路由的URL跳转，这个是最简单的，也是最爽的</li>
+<li>只能复杂的进行创建类、赋值、push啊神马的</li>
+</ul>
+<p>由于我们将数据全部处理好后扔给了<code>cellmodel</code>，而跳转、打点所需要的参数均在此处为最全的，我们可以将回调作为数据一起传递。。</p>
+<p>嗯, 事件需要传递的对象大约这个样子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Jmp</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// 支持URL跳转的URL</span></span><br><span class="line">    <span class="keyword">let</span> url: <span class="type">String?</span></span><br><span class="line">    <span class="comment">/// 打点事件名</span></span><br><span class="line">    <span class="keyword">let</span> event: <span class="type">String?</span></span><br><span class="line">    <span class="comment">/// 打点参数</span></span><br><span class="line">    <span class="keyword">let</span> attr: [<span class="type">AnyHashable</span>: <span class="type">Any</span>]?</span><br><span class="line">    <span class="comment">/// 不支持URL的直接回调</span></span><br><span class="line">    <span class="keyword">let</span> eventCallback: (() -&gt; <span class="type">Void</span>)?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后cell对应的另一个类是这样的：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KTJJmp</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> info: <span class="type">Jmp?</span></span><br><span class="line">    <span class="keyword">let</span> action = #selector(topVCJmp)</span><br><span class="line">    <span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">topVCJmp</span><span class="params">()</span></span> &#123;</span><br><span class="line">        ... <span class="comment">// 打点</span></span><br><span class="line">        <span class="type">KTJURLJump</span>.jumpToViewOnTopVC(jmp: info)</span><br><span class="line">        info?.eventCallback?()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">tap</span><span class="params">()</span></span> -&gt; <span class="type">UITapGestureRecognizer</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">UITapGestureRecognizer</span>(target: <span class="keyword">self</span>, action: #selector(topVCJmp))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个类共同作用就是：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JmpCell</span>: <span class="title">UICollectionViewCell</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> jmp = <span class="type">JmpCellModel</span>()</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setup</span><span class="params">()</span></span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        jmpBtn.addTarget(jmp, action: jmp.action, <span class="keyword">for</span>: .touchUpInside)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JmpCellModel</span>: <span class="title">ListItemDefaultProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> jmp: <span class="type">Jmp?</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(view: JmpCell)</span></span> &#123;</span><br><span class="line">        view.jmp.info = jmp</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至于这个<code>JmpCellModel.jmp</code>怎么生成，这里就不说了。</p>
+<h3 id="关于算高那点事"><a href="#关于算高那点事" class="headerlink" title="关于算高那点事"></a>关于算高那点事</h3><h4 id="算高位置的选择"><a href="#算高位置的选择" class="headerlink" title="算高位置的选择"></a>算高位置的选择</h4><p>我也曾纠结过frame的代码应该写在哪里。。有写在初始化的，有单独写一个方法的，还有写在<code>func sizeThatFits(:) -&gt; CGSize</code></p>
+<p>由于当年对<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell" target="_blank" rel="noopener">UITableView-FDTemplateLayoutCell</a>中毒较深，所以沿用了最后一种方案。</p>
+<h4 id="算高使用的view的选择"><a href="#算高使用的view的选择" class="headerlink" title="算高使用的view的选择"></a>算高使用的view的选择</h4><p>在算高的时候，首先需要明确的是：<strong>高度是数据和当前最大宽度共同决定的</strong>，所以在算高的时候需要拿着数据、view然后才能去算高（PS：至于那些拿着数据硬算出一个高度的代码，此处不发表看法😂，早晚会后悔的）</p>
+<p>然后就是<code>UITableView</code>、<code>UICollectionView</code>的算高是通过一个单独的代理去获取的，并不提供view去计算。。这就是矛盾的地方。</p>
+<p>虽然<code>UITableView</code>、<code>UICollectionView</code>在算高的地方不提供View,但是有一个<code>dequeueReusableCell....</code>的方法可以获取到缓存池中的<code>Cell</code>呀</p>
+<p>如果你这样做了，那么你将会付出惨重的代码。这个方案我在<a href="http://www.cnblogs.com/madordie" target="_blank" rel="noopener">博客园</a>2015.03.17的<a href="http://www.cnblogs.com/madordie/p/4344209.html" target="_blank" rel="noopener">“iOS 优化性能之TableView”</a>中已经说了：</p>
+<blockquote>
+<p>dequeueReusableCellWithIdentifier:此函数的调用要注意以下几点：<br>    i.此函数的返回值是做为tableView:cellForRowAtIndexPath:的返回值的。这样保证拿出来的完整还给TableView。<br>    ii.如果此函数的返回值不是为了给tableView:cellForRowAtIndexPath:做返回值，那么你要注意这是在一个拿取别人稀缺资源的操作，需要注意珍惜这个返回值，能不浪费就不要浪费。<br>    iii.对于AL自动适应的TableView取Cell时候要注意保存。个人建议封装TableView，然后用来计算高度的Cell保存在TableView中。对于多种类型的Cell，则可以使用复用标识符作为Key的字典来存储。这样能够有效节约dequeueReusableCellWithIdentifier:调用次数。</p>
+</blockquote>
+<p><code>UICollectionView</code>也是如此。所以使用<code>dequeueReusableCell....</code>方法是<strong>很不靠谱的</strong>。</p>
+<p>在<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell/blob/912b3ce4a61198c0b79a3d85b977f8fdacd153ea/Classes/UITableView%2BFDTemplateLayoutCell.m#L134-#L155" target="_blank" rel="noopener">UITableView-FDTemplateLayoutCell</a>中使用了字典保存缓存算高的View，也是比较赞的。</p>
+<p>但是现在有了<code>CollectionView</code>，我们可以不用OC的<code>objc_setAssociatedObject(,,,)</code>去处理而直接使用了<code>NSCache</code>去处理就行了～</p>
+<p>如果看了<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift" target="_blank" rel="noopener"><code>CollectionView</code></a>就会发现，<code>ListItemProtocol</code>还有一个get方法<code>var newItem: AnyObject { get }</code>这个是用来算高的。</p>
+<p>在<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift" target="_blank" rel="noopener">CollectionView.swift</a>关于高度的代理设置中可以看到相关获取和设置。</p>
+<h4 id="算高的时候变局的控制"><a href="#算高的时候变局的控制" class="headerlink" title="算高的时候变局的控制"></a>算高的时候变局的控制</h4><p>高度的计算现在已经可以正常计算，但是对于<code>columnCount &gt; 1</code>的时候，牵扯到间隙的计算需要注意一次啊。毕竟<code>CHTCollectionViewWaterfallLayout</code>功能更强大。</p>
+<p>相关代码在<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift" target="_blank" rel="noopener">CollectionView.swift</a>的<code>func collectionView(:,layout:,sizeForItemAt:) -&gt; CGSize</code>函数中。</p>
+<h3 id="关于代理那点事"><a href="#关于代理那点事" class="headerlink" title="关于代理那点事"></a>关于代理那点事</h3><p>丫的，需求总是比想的多，但是办法也比问题多。</p>
+<p>对于<code>CollectionView</code>来说，代理都设置成了self，这样会导致有时候需要<code>UIScrollViewDelegate</code>干些事情的时候总是不那么自由。。。实乃新痛点，不过有办法。</p>
+<p>下面是几种方案：</p>
+<h4 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h4><p>直接KVO到<code>self.contentOffset</code>，这样一了百了。写什么代理，要什么自行车！（PS：swift提供闭包的代理，也是很好用的）</p>
+<p>如果不会，请自行<a href="https://www.google.com/" target="_blank" rel="noopener">Google</a>。<a href="https://objccn.io/issue-7-3/" target="_blank" rel="noopener">ObjC-中国：KVC 和 KVO</a>，我只能帮你到这里</p>
+<h4 id="Rx系"><a href="#Rx系" class="headerlink" title="Rx系"></a>Rx系</h4><p>很抱歉，你不能用<code>self.rx.contentOffset</code>。原因是<a href="https://github.com/chiahsien/CHTCollectionViewWaterfallLayout" target="_blank" rel="noopener"><code>CHTCollectionViewWaterfallLayout</code></a>中有这么一行断言：</p>
+<blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSAssert</span>([<span class="keyword">self</span>.delegate conformsToProtocol:@<span class="class"><span class="keyword">protocol</span>(<span class="title">CHTCollectionViewDelegateWaterfallLayout</span>)], @"<span class="title">UICollectionView</span>'<span class="title">s</span> <span class="title">delegate</span> <span class="title">should</span> <span class="title">conform</span> <span class="title">to</span> <span class="title">CHTCollectionViewDelegateWaterfallLayout</span> <span class="title">protocol</span>"); </span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>但是</strong>，你可以使用Rx里面的KVO呀～也是贼方便</p>
+<h4 id="RAC系"><a href="#RAC系" class="headerlink" title="RAC系"></a>RAC系</h4><p>抱歉，我不会。原因在此<a href="../reactivecocoa-ready-to-use">准备食用RAC(ReactiveCocoa)的顾虑</a></p>
+<h4 id="代理传递"><a href="#代理传递" class="headerlink" title="代理传递"></a>代理传递</h4><p>当然也可以使用代理进行传递出去。大致这个样子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">CollectionViewDelegate</span>: <span class="title">NSObjectProtocol</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">collectionView</span><span class="params">(<span class="number">_</span> collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CollectionView</span> </span>&#123;</span><br><span class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> allDelegate: <span class="type">CollectionViewDelegate?</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">collectionView</span><span class="params">(<span class="number">_</span> collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)</span></span> &#123;</span><br><span class="line">    <span class="keyword">self</span>.allDelegate?.collectionView(<span class="keyword">self</span>, didSelectItemAt: indexPath)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这方案没啥聊的。。</p>
+<h3 id="OC咋办？"><a href="#OC咋办？" class="headerlink" title="OC咋办？"></a>OC咋办？</h3><p>这个OC也能用，只不过需要一些手段，比如说：继承、扩展、等</p>
+<p><code>ListItemProtocol</code>就是为了给OC使用留的，还有就是<code>CollectionViewSection</code>使用了类，而不是结构体。</p>
+<p>不过具体没有例子，不想写OC代码，太麻烦了。。主要是这种思路:)</p>
+<h3 id="填充Cell的数据为什么会在CellModel中？"><a href="#填充Cell的数据为什么会在CellModel中？" class="headerlink" title="填充Cell的数据为什么会在CellModel中？"></a>填充Cell的数据为什么会在CellModel中？</h3><p>对于Cell来说，Cell是干净的，没有任何继承、协议来限制Cell如何处理。那么Cell就可以接受来自任何模块的各种风格的Cell，这是我想要的减少侵入。</p>
+<p>cellModel中定义了Cell所对应的填充数据格式，在第一次写的时候难免会按照业务逻辑起一些业务逻辑的名字，在复用的时候又不能改名字，会对维护和开发加了一定量的复杂度，这不是我想要的。。</p>
+<p>于是乎每个CellModel根据自己的需要绑定需要绑定的Cell，去填充Cell所对应的数据就好。只需要侵入cellModel即可。代价最小，受益最大。</p>
+<p>PS.对于同一个List，需要注意cell的复用和多个cellModel同时绑定一个cell时，属性的设置。</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p><a href="https://github.com/madordie/collectionview-simplify-business" target="_blank" rel="noopener">Demo</a>部分没有写跳转相关内容，但是别的都有了😂</p>
+<h3 id="别的"><a href="#别的" class="headerlink" title="别的"></a>别的</h3><p>好像没了吧～，想起来了再补充咯</p>
+<h3 id="偶然看到一个类似的文章"><a href="#偶然看到一个类似的文章" class="headerlink" title="偶然看到一个类似的文章"></a>偶然看到一个类似的文章</h3><blockquote>
+<p><a href="https://www.appcoda.com.tw/tableview-mvvm/" target="_blank" rel="noopener">Table View 太複雜？利用 MVVM 和 Protocol 就可以為它重構瘦身！</a></p>
+</blockquote>
+<p>昨天(2018.7.24)翻文章的时候看到这个文章，然后将文章和代码捋了一下，发现这才是MVVM吧。觉得不错，贴出来～</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/tool/" rel="tag"># tool</a>
+              <a href="/tags/UICollectionView/" rel="tag"># UICollectionView</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/macos-high-sierra-cocoapods/" rel="prev" title="mac10.13 pods 命令错误">
+      <i class="fa fa-chevron-left"></i> mac10.13 pods 命令错误
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/reprinted-regular-mind-map/" rel="next" title="「转」一张思维导图，让正则表达式不再难懂">
+      「转」一张思维导图，让正则表达式不再难懂 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CollectionView"><span class="nav-number">1.</span> <span class="nav-text">CollectionView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListItemDefaultProtocol：绑定Cell和Model"><span class="nav-number">2.</span> <span class="nav-text">ListItemDefaultProtocol：绑定Cell和Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以后如何开发"><span class="nav-number">3.</span> <span class="nav-text">以后如何开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Cell的跳转处理"><span class="nav-number">4.</span> <span class="nav-text">关于Cell的跳转处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于算高那点事"><span class="nav-number">5.</span> <span class="nav-text">关于算高那点事</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算高位置的选择"><span class="nav-number">5.1.</span> <span class="nav-text">算高位置的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算高使用的view的选择"><span class="nav-number">5.2.</span> <span class="nav-text">算高使用的view的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算高的时候变局的控制"><span class="nav-number">5.3.</span> <span class="nav-text">算高的时候变局的控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于代理那点事"><span class="nav-number">6.</span> <span class="nav-text">关于代理那点事</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#KVO"><span class="nav-number">6.1.</span> <span class="nav-text">KVO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rx系"><span class="nav-number">6.2.</span> <span class="nav-text">Rx系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RAC系"><span class="nav-number">6.3.</span> <span class="nav-text">RAC系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代理传递"><span class="nav-number">6.4.</span> <span class="nav-text">代理传递</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OC咋办？"><span class="nav-number">7.</span> <span class="nav-text">OC咋办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填充Cell的数据为什么会在CellModel中？"><span class="nav-number">8.</span> <span class="nav-text">填充Cell的数据为什么会在CellModel中？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">9.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#别的"><span class="nav-number">10.</span> <span class="nav-text">别的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#偶然看到一个类似的文章"><span class="nav-number">11.</span> <span class="nav-text">偶然看到一个类似的文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="继刚"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习是我快乐 :)</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-fw"></i>博客园</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">继刚</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2fcb2111497d0ea0dba4',
+      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
+      repo        : 'madordie.github.io',
+      owner       : 'madordie',
+      admin       : ['madordie'],
+      id          : '50b89089660bc8278a0d945c110a5a77',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

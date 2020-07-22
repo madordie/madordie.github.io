@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="「转」一张思维导图，让正则表达式不再难懂">
+<meta property="og:url" content="https://madordie.github.io/post/reprinted-regular-mind-map/index.html">
+<meta property="og:site_name" content="继刚的博客">
+<meta property="og:image" content="https://madordie.github.io/images/bruch-up-regular-expressions-1.png">
+<meta property="article:published_time" content="2017-10-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2017-10-16T02:26:02.834Z">
+<meta property="article:author" content="继刚">
+<meta property="article:tag" content="正则表达式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://madordie.github.io/images/bruch-up-regular-expressions-1.png">
+
+<link rel="canonical" href="https://madordie.github.io/post/reprinted-regular-mind-map/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>「转」一张思维导图，让正则表达式不再难懂 | 继刚的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">继刚的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/reprinted-regular-mind-map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="继刚">
+      <meta itemprop="description" content="学习是我快乐 :)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="继刚的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「转」一张思维导图，让正则表达式不再难懂
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2017-10-16 00:00:00 / Modified: 10:26:02" itemprop="dateCreated datePublished" datetime="2017-10-16T00:00:00+08:00">2017-10-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="/images/bruch-up-regular-expressions-1.png" alt="思维导图"></p>
+<a id="more"></a>
+
+<h2 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h2><ul>
+<li><p>普通字符：字母、数字、汉字、下划线，匹配与之相同的一个字符</p>
+</li>
+<li><p>简单转义字符：\n（换行）,\t（制表）,\（\本身）和 ^…（^等有特殊作用的符号如要匹配自己的话要用转义）</p>
+</li>
+<li><p>标准字符集合<br>注意区分大小写，大写是相反的意思，匹配相反是不匹配</p>
+<ul>
+<li>\d<br>  任意一个数字，0~9</li>
+<li>\w<br>  任意一个字母、数字、汉字或下划线，A<del>Z、a</del>z、0~9、_和任意一个汉字</li>
+<li>\s<br>  任意空白符，包括空格、制表符、换行符</li>
+<li>.<br>  小数点可以匹配任意一个字符，换行除外（如果要匹配包括”\n”在内的所有字符，一般用[\s\S]）</li>
+</ul>
+</li>
+<li><p>自定义字符集合<br>[ ]方括号匹配方式，能够匹配方括号中的任意一个字符,^表示取反</p>
+<ul>
+<li>[ab5@]<br>  匹配”a”或”b”或”5”或”@”</li>
+<li>[^abc]<br>  匹配a、b、c之外的任意字符</li>
+<li>[f-k]<br>  匹配“f”到”k”之间的字符</li>
+<li>[^A-F0-3]<br>  匹配“A”-“F”,”0”-“3”之外的任意一个字符</li>
+</ul>
+</li>
+</ul>
+<h2 id="量词-Quantifier"><a href="#量词-Quantifier" class="headerlink" title="量词(Quantifier)"></a>量词(Quantifier)</h2><p>修饰前面的一个表达式，如果要修饰多个表达式，就用( )把表达式包起来</p>
+<ul>
+<li>{n}<br>  表达式重复n次​</li>
+<li>{m,n}<br>  表达式至少重复m次，最多重复n次<ul>
+<li>贪婪模式 （默认）<br>匹配符合的最长的字符串</li>
+<li>非贪婪模式 （在量词后面加 ? 例：{m,n}? )<br>  匹配符合的最短的字符串</li>
+</ul>
+</li>
+<li>{m,}<br>  表达式至少重复m次</li>
+<li>？<br>  匹配表达式0或1次，相当于{0,1}</li>
+<li>+<br>  表达式至少出现一次，相当于{1,}</li>
+<li>*<br>  表达式不出现或出现任意次，相当于{0,}</li>
+</ul>
+<h2 id="字符边界"><a href="#字符边界" class="headerlink" title="字符边界"></a>字符边界</h2><pre><code>零宽：匹配的不是字符而是位置，符合某种条件的位置</code></pre>
+<ul>
+<li>^<br>  与字符串开始的地方匹配</li>
+<li>$<br>  与字符串结束的地方匹配</li>
+<li>\b<br>  匹配一个单词的边界，当前位置前面的字符和后面的字符不全是\w</li>
+</ul>
+<h2 id="预搜索（零宽断言、环视）"><a href="#预搜索（零宽断言、环视）" class="headerlink" title="预搜索（零宽断言、环视）"></a>预搜索（零宽断言、环视）</h2><p>零宽：匹配的不是字符而是位置，符合某种条件的位置</p>
+<ul>
+<li>(?=exp)<br>  断言自身出现的位置的后面能匹配表达式exp</li>
+<li>(?!exp)<br>  断言自身出现的位置的后面不能匹配表达式exp</li>
+<li>(?&lt;=exp)<br>  断言自身出现的位置的前面能匹配表达式exp</li>
+<li>(?&lt;!exp)<br>  断言自身出现的位置的前面不能匹配表达式exp</li>
+</ul>
+<h2 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h2><p>对文本的处理方式</p>
+<ul>
+<li>IGNORECASE 忽略大小写模式<br>  匹配时忽略大小写<br>  默认是区分大小写的</li>
+<li>SINGLELINE 单行模式<br>  整个文本看作一个字符串，只有一个开头一个结尾<br>  使小数点”.”可以匹配包含换行符(\n)在内的任意字符</li>
+<li>MULTILINE 多行模式<br>  每行都是一个字符串<br>  在多行模式下，如果需要仅匹配字符串开始和结束位置，可以使用\A和\Z</li>
+</ul>
+<h2 id="选择符和分组"><a href="#选择符和分组" class="headerlink" title="选择符和分组"></a>选择符和分组</h2><p>分支结构、捕获组合非捕获组</p>
+<ul>
+<li>| 分支结构​<br>  左右表达式之间“或”关系，匹配左边或右边</li>
+<li>( ) 捕获组<br>  （1）、在被修饰匹配次数的时候，括号中的表达式可以作为整体被修饰<br>  （2）、取匹配结果的时候，括号中的表达式匹配到的内容可以被单独得到<br>  （3）、每一对括号会分配一个编号，使用（）的捕获根据左括号的顺序从1开始自动编号。捕获编号为零的第一个捕获是整个正则表达式模式匹配的文本<br>   反向引用：通过反向引用，可以对分组已捕获的字符串进行引用。</li>
+<li>(?:Expression) 非捕获组<br>  一些表达式中，不得不使用（），但又不需要保存（）中子表达式匹配的内容，这时可以用非捕获组来抵消（）带来的副作用。</li>
+</ul>
+<hr>
+<p>原文：<a href="https://my.oschina.net/u/3080373/blog/1550653" target="_blank" rel="noopener">一张思维导图，让正则表达式不再难懂</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag"># 正则表达式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/ios-tool-collectionview-simplify-business/" rel="prev" title="用CollectionView简化代码，专注于业务和UI">
+      <i class="fa fa-chevron-left"></i> 用CollectionView简化代码，专注于业务和UI
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/ios-tool-configurator-get-udid/" rel="next" title="描述文件获取UDID">
+      描述文件获取UDID <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符"><span class="nav-number">1.</span> <span class="nav-text">字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量词-Quantifier"><span class="nav-number">2.</span> <span class="nav-text">量词(Quantifier)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符边界"><span class="nav-number">3.</span> <span class="nav-text">字符边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预搜索（零宽断言、环视）"><span class="nav-number">4.</span> <span class="nav-text">预搜索（零宽断言、环视）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配模式"><span class="nav-number">5.</span> <span class="nav-text">匹配模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择符和分组"><span class="nav-number">6.</span> <span class="nav-text">选择符和分组</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="继刚"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习是我快乐 :)</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-fw"></i>博客园</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">继刚</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2fcb2111497d0ea0dba4',
+      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
+      repo        : 'madordie.github.io',
+      owner       : 'madordie',
+      admin       : ['madordie'],
+      id          : '5796687c11d91ef50533d9e2c3b35192',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
