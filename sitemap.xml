@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
+    
+    <lastmod>2020-07-23T02:49:38.014Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/how-to-quickly-find-symbol-references-in-ipa/</loc>
     
     <lastmod>2020-07-22T03:42:22.381Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>https://madordie.github.io/post/build-ipa-sh/</loc>
     
     <lastmod>2019-07-09T04:45:36.175Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
-    
-    <lastmod>2019-05-22T03:51:24.165Z</lastmod>
     
   </url>
   
