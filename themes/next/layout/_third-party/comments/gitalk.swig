@@ -4,9 +4,10 @@
 
 {%- set gitalk_js_uri = theme.vendors.gitalk_js or '//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js' %}
 
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('{{ gitalk_js_uri }}', () => {
     var gitalk = new Gitalk({
       clientID    : '{{ theme.gitalk.client_id }}',
       clientSecret: '{{ theme.gitalk.client_secret }}',
@@ -22,7 +23,5 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       distractionFreeMode: {{ theme.gitalk.distraction_free_mode }}
     });
     gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
 </script>
 {%- endif %}
