@@ -66,7 +66,7 @@ elif [ $opt = 'b' ]; then
 elif [ $opt = 'p' ]; then
     setproxy
     hexo clean
-    hexo generate --deploy --force
+    hexo generate --deploy --force --bail
     echo -e ' --> 已成功部署.\n'
     sleep 1
     unsetproxy
