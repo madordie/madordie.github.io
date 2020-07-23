@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madordie.github.io/about/index.html</loc>
+    
+    <lastmod>2020-07-23T05:34:46.475Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
     
-    <lastmod>2020-07-23T05:27:17.669Z</lastmod>
+    <lastmod>2020-07-23T05:30:31.634Z</lastmod>
     
   </url>
   
@@ -33,13 +40,6 @@
     <loc>https://madordie.github.io/post/about-me/</loc>
     
     <lastmod>2020-05-21T10:54:49.722Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/about/index.html</loc>
-    
-    <lastmod>2020-05-21T10:14:28.601Z</lastmod>
     
   </url>
   
