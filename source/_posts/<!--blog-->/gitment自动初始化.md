@@ -4,6 +4,7 @@ url: blog-gitment-auto-setup
 date: 2018-08-29 16:58:47
 tags:
     - gitment
+    - gitalk
     - blog
 categories:
     - 工具
@@ -50,7 +51,7 @@ gitment:
   redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled
 ```
 
-## 自动初始化
+## Gitment
 
 关于作者的[初始化评论框方案讨论](https://github.com/imsun/gitment/issues/8)还在讨论中。。。
 
@@ -264,11 +265,121 @@ end
 
 执行一下脚本吧，应该齐活了。
 
+### Gitalk
+
+好气啊, [Next主题](https://github.com/next-theme/hexo-theme-next)升级之后不支持Gitment了, 大概是因为上面种种问题吧, 所以,被迫来到了[Gitalk](https://github.com/gitalk/gitalk)
+
+真香警告.
+
+回归本心,诉求就一个: 从`gitment`兼容至`gitalk`.
+
+脚本需要配置项:
+
+- .git-token = 放置token 切记注意添加`.gitignore`
+- username = "madordie" # GitHub 用户名
+- token = `cat .git-token`  # GitHub Token
+- repo_name = "madordie.github.io" # 存放 issues
+- sitemap_url = "https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml" # sitemap
+- kind = "Gitalk" # "Gitalk" or "gitment"
+
+然后, 脚本会识别`kind`是否已经添加, 如果没有添加会追一个`label`, 以确保能正常执行
+
+```rb
+# from : https://madordie.github.io/post/blog-gitment-auto-setup
+# 另外，token已放在.git-token文件下，防止泄漏。。
+
+username = "madordie" # GitHub 用户名
+token = `cat .git-token`  # GitHub Token
+repo_name = "madordie.github.io" # 存放 issues
+sitemap_url = "https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml" # sitemap
+kind = "Gitalk" # "Gitalk" or "gitment"
+
+require 'open-uri'
+require 'faraday'
+require 'active_support'
+require 'active_support/core_ext'
+require 'sitemap-parser'
+require 'digest'
+
+puts "正在检索URL"
+
+sitemap = SitemapParser.new sitemap_url
+urls = sitemap.to_a
+
+puts "检索到文章共#{urls.count}个"
+
+conn = Faraday.new(:url => "https://api.github.com/") do |conn|
+  conn.basic_auth(username, token)
+  conn.headers['Accept'] = "application/vnd.github.symmetra-preview+json"
+  conn.adapter  Faraday.default_adapter
+end
+
+commenteds = Array.new
+`
+  if [ ! -f .commenteds ]; then
+    touch .commenteds
+  fi
+`
+File.open(".commenteds", "r") do |file|
+  file.each_line do |line|
+      commenteds.push line
+  end
+end
+
+urls.each_with_index do |url, index|
+  url = url.gsub(/index.html$/, "")
+
+  if commenteds.include?("#{url}\n") == false
+    url_key = Digest::MD5.hexdigest(URI.parse(url).path)
+    response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
+
+    puts "正在创建: #{url} -> [#{url_key}, #{kind}]"
+    labels = JSON.parse(response.body)["items"]
+      .map { |item|
+        item["labels"].map { |label| label["name"] }
+      }
+      .flatten
+
+    if labels.include?(url_key)
+      if labels.include?(kind)
+        puts "\t↳ 已存在"
+        `echo #{url} >> .commenteds`
+      else
+        issue_id = JSON.parse(response.body)["items"]
+          .map { |item| item["number"] }
+          .first
+
+        puts "\t↳ 正在为评论(#{issue_id})增加`#{kind}`标签"
+        response = conn.post("/repos/#{username}/#{repo_name}/issues/#{issue_id}/labels") do |req|
+          req.body = { labels: [kind] }.to_json
+        end
+        if response.status == 200
+          `echo #{url} >> .commenteds`
+          puts "\t\t↳ 已增加成功"
+        else
+          puts "\t↳ #{response.body}"
+        end
+      end
+    else
+      title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
+      response = conn.post("/repos/#{username}/#{repo_name}/issues") do |req|
+        req.body = { body: url, labels: [kind, url_key], title: title }.to_json
+      end
+      if JSON.parse(response.body)['number'] > 0
+        `echo #{url} >> .commenteds`
+        puts "\t↳ 已创建成功"
+      else
+        puts "\t↳ #{response.body}"
+      end
+    end
+  end
+end
+```
+
 ## 最后
 
 - 文中提到的关于链接`/`飘忽不定的事情我没碰到，我是直接取的[sitemap](https://madordie.github.io/sitemap.xml)，貌似每个文章都带了`/`
 - 文中的引用啥的我都标记了链接，如有漏掉、不明白，麻烦告诉我一哈，我去补一下
 - 我只是个小小的iOS，对ruby、js懂得不多，rb写的不好的地方轻拍
 - 哦对了，这脚本全部在这里：[comment.rb](https://github.com/madordie/madordie.github.io/blob/master/comment.rb)。同时，这个脚本我又放在了自动发布的shell脚本里面，同样shell写的很水。。放在了这里：[deploy.sh](https://github.com/madordie/madordie.github.io/blob/master/deploy.sh)，而且是很早之前就写了的。。
-- 并未测试[Gitalk](https://github.com/gitalk/gitalk)，只是脚本应该是通用的，至于JS的MD5该咋写 我就不是很清楚了。。
 - 如果还有什么问题，可以拉出来讨论一哈 ;)
