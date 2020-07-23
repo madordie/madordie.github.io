@@ -42,8 +42,6 @@ end
 urls.each_with_index do |url, index|
   url = url.gsub(/index.html$/, "")
 
-
-
   if commenteds.include?("#{url}\n") == false
     url_key = Digest::MD5.hexdigest(URI.parse(url).path)
     response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"

@@ -265,7 +265,7 @@ end
 
 执行一下脚本吧，应该齐活了。
 
-### Gitalk
+## Gitalk
 
 好气啊, [Next主题](https://github.com/next-theme/hexo-theme-next)升级之后不支持Gitment了, 大概是因为上面种种问题吧, 所以,被迫来到了[Gitalk](https://github.com/gitalk/gitalk)
 
