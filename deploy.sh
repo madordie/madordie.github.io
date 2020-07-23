@@ -78,7 +78,7 @@ elif [ $opt = 'p' ]; then
     cd ./source
     ruby comment.rb
     echo -e ' --> 评论已自动创建.\n'
-    local sitemap=`mktemp`
+    sitemap=`mktemp`
     curl -s https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml | grep madordie.github.io | awk -v FS='<loc>|</loc>' '{print $2}' > sitemap
     curl -H 'Content-Type:text/plain' --data-binary @sitemap "http://data.zz.baidu.com/urls?site=https://madordie.github.io&token=`cat .baidu-token`"
 fi
