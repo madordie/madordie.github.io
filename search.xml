@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>hexo的博客让百度收录</title>
+    <url>/post/use-hexo-setup-blog/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个github.io搭建的过程参考，以及向百度推送的python、js脚本。</p>
+<a id="more"></a>
+
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p>感谢 <a href="http://lovenight.github.io/" target="_blank" rel="noopener">岁月如歌</a> 的这个<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/" target="_blank" rel="noopener">《Hexo 3.1.1 静态博客搭建指南》</a>同时感谢这个<a href="http://lovenight.github.io/2015/11/18/%E5%90%91%E7%99%BE%E5%BA%A6%E6%8E%A8%E9%80%81hexo%E5%8D%9A%E5%AE%A2%E6%89%80%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84Python%E8%84%9A%E6%9C%AC/" target="_blank" rel="noopener">《向百度推送hexo博客所有链接的Python脚本》</a>(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)</p>
+<p>另外还有一个<a href="http://emufan.com/" target="_blank" rel="noopener">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/" target="_blank" rel="noopener">百度主动推送hexo生成的文章</a></p>
+<h1 id="python自动推送脚本修改"><a href="#python自动推送脚本修改" class="headerlink" title="python自动推送脚本修改"></a>python自动推送脚本修改</h1><p>上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: LoveNight</span></span><br><span class="line"><span class="comment"># @Date:   2015-11-16 20:45:59</span></span><br><span class="line"><span class="comment"># @Last Modified by:   LoveNight</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2015-11-18 18:07:19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># @Last Modified by:   Keith</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2016-07-06 16:22:45</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> BS</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#import msvcrt</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">hexo 博客专用，向百度站长平台提交所有网址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">本脚本必须放在hexo博客的根目录下执行！需要已安装生成百度站点地图的插件。</span></span><br><span class="line"><span class="string">百度站长平台提交链接：http://zhanzhang.baidu.com/linksubmit/index</span></span><br><span class="line"><span class="string">主动推送：最为快速的提交方式，推荐您将站点当天新产出链接立即通过此方式推送给百度，以保证新链接可以及时被百度收录。</span></span><br><span class="line"><span class="string">从中找到自己的接口调用地址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">python环境：</span></span><br><span class="line"><span class="string">pip install beautifulsoup4</span></span><br><span class="line"><span class="string">pip install requests</span></span><br><span class="line"><span class="string">xcode-select --install	</span></span><br><span class="line"><span class="string">pip install lxml </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ❌❌❌ 抄的需要更改这个URL！！这是我的！！❌❌❌</span></span><br><span class="line">url = <span class="string">'http://data.zz.baidu.com/urls?site=https://madordie.github.io&amp;token=j33t0VEPFl24tJ8N'</span></span><br><span class="line">baidu_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">'public'</span>, <span class="string">'baidusitemap.xml'</span>)</span><br><span class="line">google_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">'public'</span>, <span class="string">'sitemap.xml'</span>)</span><br><span class="line">sitemap = [baidu_sitemap, google_sitemap]</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> (os.path.exists(baidu_sitemap) <span class="keyword">or</span> os.path.exists(</span><br><span class="line">    google_sitemap)), <span class="string">"没找到任何网站地图，请检查！"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从站点地图中读取网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrls</span><span class="params">()</span>:</span></span><br><span class="line">    urls = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> sitemap:</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(_):</span><br><span class="line">            <span class="keyword">with</span> open(_, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">                xml = f.read()</span><br><span class="line">        soup = BS(xml, <span class="string">"xml"</span>)</span><br><span class="line">        tags = soup.find_all(<span class="string">"loc"</span>)</span><br><span class="line">        urls += [x.string <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">        <span class="keyword">if</span> _ == baidu_sitemap:</span><br><span class="line">            tags = soup.find_all(<span class="string">"breadCrumb"</span>, url=<span class="literal">True</span>)</span><br><span class="line">            urls += [x[<span class="string">"url"</span>] <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">    <span class="keyword">return</span> urls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># POST提交网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postUrls</span><span class="params">(urls)</span>:</span></span><br><span class="line">    urls = set(urls)  <span class="comment"># 先去重</span></span><br><span class="line">    print(<span class="string">"一共提取出 %s 个网址"</span> % len(urls))</span><br><span class="line">    print(urls)</span><br><span class="line">    data = <span class="string">"\n"</span>.join(urls)</span><br><span class="line">    <span class="keyword">return</span> requests.post(url, data=data).text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    urls = getUrls()</span><br><span class="line">    result = postUrls(urls)</span><br><span class="line">    print(<span class="string">"提交结果："</span>)</span><br><span class="line">    print(result)</span><br><span class="line"><span class="comment">#    msvcrt.getch()</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="js脚本"><a href="#js脚本" class="headerlink" title="js脚本"></a>js脚本</h1><p>这个脚本是我在<a href="http://emufan.com/" target="_blank" rel="noopener">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/" target="_blank" rel="noopener">百度主动推送hexo生成的文章</a>发现的，感觉也很赞。</p>
+<blockquote>
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>  <a href="https://github.com/Relsoul/bdwork/tree/master/soul/hexo%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E4%B8%8A%E4%BC%A0" target="_blank" rel="noopener">脚本地址</a></p>
+</blockquote>
+<h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2><p>  今天发现百度没收录我的站..主要是我的站点换来换去的..估计被ban了..然后想用sitemap来推送一下..结果发现github禁用了百度爬虫..没办法只能主动推送了.</p>
+<h2 id="利用插件"><a href="#利用插件" class="headerlink" title="利用插件"></a>利用插件</h2><p>  这里利用到了一款插件<br>  <a href="https://github.com/coneycode/hexo-generator-baidu-sitemap" target="_blank" rel="noopener">hexo-generator-baidu-sitemap</a><br>  设置很简单 只需要在.config.yml添加一些数据即可, 下面附上我的添加数据 theme这个可以随意更改 下面的copy即可<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: http:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: yilia</span><br><span class="line">baidusitemap:</span><br><span class="line">path: baidusitemap.xml</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>  然后hexo g 生成一下数据 会在public下面发现一个文件名为baidusitemap.xml</p>
+</blockquote>
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>  这里用nodejs写了一款脚本 大概流程是 获取baidusitemap.xml里面的内容 然后读取本地的一个site_file.json这个文件 这个文件存储的是上一次数据 与上一次数据进行对比 如果对比发现新数据那么就上传新数据 否则全部上传.</p>
+<h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>  把ActivePush.js脚本放在hexo文件夹主目录 然后用nodejs ActivePush.js一下即可 这里还支持一个参数nodejs ActivePush.js all 则是不对比直接上传数据</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>SEO</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Gitment/Gitalk自动初始化</title>
     <url>/post/blog-gitment-auto-setup/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一个ruby脚本解放你双手啪啪啪的敲键盘三分钟～</p>
@@ -77,40 +108,9 @@
         <category>工具</category>
       </categories>
       <tags>
+        <tag>blog</tag>
         <tag>gitment</tag>
         <tag>gitalk</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo的博客让百度收录</title>
-    <url>/post/use-hexo-setup-blog/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个github.io搭建的过程参考，以及向百度推送的python、js脚本。</p>
-<a id="more"></a>
-
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p>感谢 <a href="http://lovenight.github.io/" target="_blank" rel="noopener">岁月如歌</a> 的这个<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/" target="_blank" rel="noopener">《Hexo 3.1.1 静态博客搭建指南》</a>同时感谢这个<a href="http://lovenight.github.io/2015/11/18/%E5%90%91%E7%99%BE%E5%BA%A6%E6%8E%A8%E9%80%81hexo%E5%8D%9A%E5%AE%A2%E6%89%80%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84Python%E8%84%9A%E6%9C%AC/" target="_blank" rel="noopener">《向百度推送hexo博客所有链接的Python脚本》</a>(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)</p>
-<p>另外还有一个<a href="http://emufan.com/" target="_blank" rel="noopener">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/" target="_blank" rel="noopener">百度主动推送hexo生成的文章</a></p>
-<h1 id="python自动推送脚本修改"><a href="#python自动推送脚本修改" class="headerlink" title="python自动推送脚本修改"></a>python自动推送脚本修改</h1><p>上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: LoveNight</span></span><br><span class="line"><span class="comment"># @Date:   2015-11-16 20:45:59</span></span><br><span class="line"><span class="comment"># @Last Modified by:   LoveNight</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2015-11-18 18:07:19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># @Last Modified by:   Keith</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2016-07-06 16:22:45</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> BS</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#import msvcrt</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">hexo 博客专用，向百度站长平台提交所有网址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">本脚本必须放在hexo博客的根目录下执行！需要已安装生成百度站点地图的插件。</span></span><br><span class="line"><span class="string">百度站长平台提交链接：http://zhanzhang.baidu.com/linksubmit/index</span></span><br><span class="line"><span class="string">主动推送：最为快速的提交方式，推荐您将站点当天新产出链接立即通过此方式推送给百度，以保证新链接可以及时被百度收录。</span></span><br><span class="line"><span class="string">从中找到自己的接口调用地址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">python环境：</span></span><br><span class="line"><span class="string">pip install beautifulsoup4</span></span><br><span class="line"><span class="string">pip install requests</span></span><br><span class="line"><span class="string">xcode-select --install	</span></span><br><span class="line"><span class="string">pip install lxml </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ❌❌❌ 抄的需要更改这个URL！！这是我的！！❌❌❌</span></span><br><span class="line">url = <span class="string">'http://data.zz.baidu.com/urls?site=https://madordie.github.io&amp;token=j33t0VEPFl24tJ8N'</span></span><br><span class="line">baidu_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">'public'</span>, <span class="string">'baidusitemap.xml'</span>)</span><br><span class="line">google_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">'public'</span>, <span class="string">'sitemap.xml'</span>)</span><br><span class="line">sitemap = [baidu_sitemap, google_sitemap]</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> (os.path.exists(baidu_sitemap) <span class="keyword">or</span> os.path.exists(</span><br><span class="line">    google_sitemap)), <span class="string">"没找到任何网站地图，请检查！"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从站点地图中读取网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrls</span><span class="params">()</span>:</span></span><br><span class="line">    urls = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> sitemap:</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(_):</span><br><span class="line">            <span class="keyword">with</span> open(_, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">                xml = f.read()</span><br><span class="line">        soup = BS(xml, <span class="string">"xml"</span>)</span><br><span class="line">        tags = soup.find_all(<span class="string">"loc"</span>)</span><br><span class="line">        urls += [x.string <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">        <span class="keyword">if</span> _ == baidu_sitemap:</span><br><span class="line">            tags = soup.find_all(<span class="string">"breadCrumb"</span>, url=<span class="literal">True</span>)</span><br><span class="line">            urls += [x[<span class="string">"url"</span>] <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">    <span class="keyword">return</span> urls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># POST提交网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postUrls</span><span class="params">(urls)</span>:</span></span><br><span class="line">    urls = set(urls)  <span class="comment"># 先去重</span></span><br><span class="line">    print(<span class="string">"一共提取出 %s 个网址"</span> % len(urls))</span><br><span class="line">    print(urls)</span><br><span class="line">    data = <span class="string">"\n"</span>.join(urls)</span><br><span class="line">    <span class="keyword">return</span> requests.post(url, data=data).text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    urls = getUrls()</span><br><span class="line">    result = postUrls(urls)</span><br><span class="line">    print(<span class="string">"提交结果："</span>)</span><br><span class="line">    print(result)</span><br><span class="line"><span class="comment">#    msvcrt.getch()</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="js脚本"><a href="#js脚本" class="headerlink" title="js脚本"></a>js脚本</h1><p>这个脚本是我在<a href="http://emufan.com/" target="_blank" rel="noopener">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/" target="_blank" rel="noopener">百度主动推送hexo生成的文章</a>发现的，感觉也很赞。</p>
-<blockquote>
-<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>  <a href="https://github.com/Relsoul/bdwork/tree/master/soul/hexo%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E4%B8%8A%E4%BC%A0" target="_blank" rel="noopener">脚本地址</a></p>
-</blockquote>
-<h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2><p>  今天发现百度没收录我的站..主要是我的站点换来换去的..估计被ban了..然后想用sitemap来推送一下..结果发现github禁用了百度爬虫..没办法只能主动推送了.</p>
-<h2 id="利用插件"><a href="#利用插件" class="headerlink" title="利用插件"></a>利用插件</h2><p>  这里利用到了一款插件<br>  <a href="https://github.com/coneycode/hexo-generator-baidu-sitemap" target="_blank" rel="noopener">hexo-generator-baidu-sitemap</a><br>  设置很简单 只需要在.config.yml添加一些数据即可, 下面附上我的添加数据 theme这个可以随意更改 下面的copy即可<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: http:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: yilia</span><br><span class="line">baidusitemap:</span><br><span class="line">path: baidusitemap.xml</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>  然后hexo g 生成一下数据 会在public下面发现一个文件名为baidusitemap.xml</p>
-</blockquote>
-<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>  这里用nodejs写了一款脚本 大概流程是 获取baidusitemap.xml里面的内容 然后读取本地的一个site_file.json这个文件 这个文件存储的是上一次数据 与上一次数据进行对比 如果对比发现新数据那么就上传新数据 否则全部上传.</p>
-<h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>  把ActivePush.js脚本放在hexo文件夹主目录 然后用nodejs ActivePush.js一下即可 这里还支持一个参数nodejs ActivePush.js all 则是不对比直接上传数据</p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>blog</tag>
-        <tag>SEO</tag>
       </tags>
   </entry>
   <entry>
@@ -708,6 +708,22 @@
       </tags>
   </entry>
   <entry>
+    <title>关于转载的文章</title>
+    <url>/post/about-reprint-article/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一点删除原链接的转载文章的牢骚</p>
+<a id="more"></a>
+
+<h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并没有署名转载出处，所以应该是原创）。之后看了一下他的另一个文章，刚好我百度过这个文章的原作者的最后一个系列的，于是我又翻阅了一下看看是不是不一样，结果和我想的一样，除了删除了作者的署名之外其他的都是一样的。于是关掉了网页，心中默默的鄙视。</p>
+<h1 id="关于转载的别人文章"><a href="#关于转载的别人文章" class="headerlink" title="关于转载的别人文章"></a>关于转载的别人文章</h1><p>对于一些大神的技术文章都是喜欢的，爱不释手的那种，我也是。有的能转载的我就转载，不能转载的，我会复制下来，放在我自己的文件夹中，为的是方便查询。在转载的时候我会特意标示转载的地址。而且一般情况下我会在文章的开始写上几句简单的主要的思想（比如：<a href="http://www.cnblogs.com/madordie/p/5159597.html" target="_blank" rel="noopener">《[转]蓝牙开发》</a>、<a href="http://www.cnblogs.com/madordie/p/4322044.html" target="_blank" rel="noopener">《[搬运] mac下安装GDB》</a>、<a href="http://www.cnblogs.com/madordie/p/4322042.html" target="_blank" rel="noopener">《［搬运］MAC 下安装 brew》</a>），当然有时候没来得及的就忘了😂（比如：<a href="http://www.cnblogs.com/madordie/p/4357685.html" target="_blank" rel="noopener">《[搬运] iOS 7 侧滑返回手势使用和错误集》</a>）。</p>
+<p>还有关于文章的排版，殊不知原作者为了让读者更好的阅读会对排版做的比较好，有的人为了阅读方便会去阅读原作者的文章。比如说我这种强迫症。</p>
+<h1 id="我对删除原链的转载文章态度"><a href="#我对删除原链的转载文章态度" class="headerlink" title="我对删除原链的转载文章态度"></a>我对删除原链的转载文章态度</h1><p>然后说一下我对于那些抄袭的，然后删除了原链接的人鄙视一下。每一篇文章都是别人花费了大量的精力去完成的，有的为了让读者能够更清楚的理解，所以会在发布的时候找别人去读一读，看能不能理解其中云云。然而对文章的原链接保存是一种对别人劳动成果的尊重，对原作者最基本的尊重。</p>
+<p>别的不想多说了。转载请注明出处。谢谢！<br>且行且珍惜。</p>
+]]></content>
+      <categories>
+        <category>牢骚</category>
+      </categories>
+  </entry>
+  <entry>
     <title>自定义数据填充Sketch插件</title>
     <url>/post/format-sketchplugin/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="先来个README-md"><a href="#先来个README-md" class="headerlink" title="先来个README.md"></a>先来个README.md</h2><blockquote>
@@ -751,22 +767,6 @@
       <tags>
         <tag>Sketchplugin</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>关于转载的文章</title>
-    <url>/post/about-reprint-article/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一点删除原链接的转载文章的牢骚</p>
-<a id="more"></a>
-
-<h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并没有署名转载出处，所以应该是原创）。之后看了一下他的另一个文章，刚好我百度过这个文章的原作者的最后一个系列的，于是我又翻阅了一下看看是不是不一样，结果和我想的一样，除了删除了作者的署名之外其他的都是一样的。于是关掉了网页，心中默默的鄙视。</p>
-<h1 id="关于转载的别人文章"><a href="#关于转载的别人文章" class="headerlink" title="关于转载的别人文章"></a>关于转载的别人文章</h1><p>对于一些大神的技术文章都是喜欢的，爱不释手的那种，我也是。有的能转载的我就转载，不能转载的，我会复制下来，放在我自己的文件夹中，为的是方便查询。在转载的时候我会特意标示转载的地址。而且一般情况下我会在文章的开始写上几句简单的主要的思想（比如：<a href="http://www.cnblogs.com/madordie/p/5159597.html" target="_blank" rel="noopener">《[转]蓝牙开发》</a>、<a href="http://www.cnblogs.com/madordie/p/4322044.html" target="_blank" rel="noopener">《[搬运] mac下安装GDB》</a>、<a href="http://www.cnblogs.com/madordie/p/4322042.html" target="_blank" rel="noopener">《［搬运］MAC 下安装 brew》</a>），当然有时候没来得及的就忘了😂（比如：<a href="http://www.cnblogs.com/madordie/p/4357685.html" target="_blank" rel="noopener">《[搬运] iOS 7 侧滑返回手势使用和错误集》</a>）。</p>
-<p>还有关于文章的排版，殊不知原作者为了让读者更好的阅读会对排版做的比较好，有的人为了阅读方便会去阅读原作者的文章。比如说我这种强迫症。</p>
-<h1 id="我对删除原链的转载文章态度"><a href="#我对删除原链的转载文章态度" class="headerlink" title="我对删除原链的转载文章态度"></a>我对删除原链的转载文章态度</h1><p>然后说一下我对于那些抄袭的，然后删除了原链接的人鄙视一下。每一篇文章都是别人花费了大量的精力去完成的，有的为了让读者能够更清楚的理解，所以会在发布的时候找别人去读一读，看能不能理解其中云云。然而对文章的原链接保存是一种对别人劳动成果的尊重，对原作者最基本的尊重。</p>
-<p>别的不想多说了。转载请注明出处。谢谢！<br>且行且珍惜。</p>
-]]></content>
-      <categories>
-        <category>牢骚</category>
-      </categories>
   </entry>
   <entry>
     <title>Fastlane自动化笔记</title>
@@ -900,30 +900,6 @@
       </tags>
   </entry>
   <entry>
-    <title>DEBUG - Xcode解析.crash</title>
-    <url>/post/debug-xcode8-analysis-crash-file/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
-<a id="more"></a>
-
-<h1 id="Xcode中解析-crash文件"><a href="#Xcode中解析-crash文件" class="headerlink" title="Xcode中解析.crash文件"></a>Xcode中解析.crash文件</h1><ol>
-<li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
-<li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
-<li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
-<li>拷贝脚本文件，运行<code>cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A</code></li>
-<li>到<code>目录A</code>解析，运行<code>./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名</code></li>
-</ol>
-<h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><ul>
-<li>这里最重要的是<code>symbolicatecrash</code>文件，<code>symbolicatecrash</code>在手解析不愁。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>DEBUG</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>iOS自动化-Jenkins编译工程</title>
     <url>/post/ios-automation-jenkins-build/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
@@ -1005,6 +981,30 @@
       <tags>
         <tag>构建</tag>
         <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DEBUG - Xcode解析.crash</title>
+    <url>/post/debug-xcode8-analysis-crash-file/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
+<a id="more"></a>
+
+<h1 id="Xcode中解析-crash文件"><a href="#Xcode中解析-crash文件" class="headerlink" title="Xcode中解析.crash文件"></a>Xcode中解析.crash文件</h1><ol>
+<li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
+<li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
+<li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
+<li>拷贝脚本文件，运行<code>cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A</code></li>
+<li>到<code>目录A</code>解析，运行<code>./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名</code></li>
+</ol>
+<h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><ul>
+<li>这里最重要的是<code>symbolicatecrash</code>文件，<code>symbolicatecrash</code>在手解析不愁。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>DEBUG</tag>
       </tags>
   </entry>
   <entry>
@@ -1220,6 +1220,40 @@
       </tags>
   </entry>
   <entry>
+    <title>DEBUG - UIView.h#190</title>
+    <url>/post/debug-uiview-m-190/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>CRASH:<br><code>void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()</code></p>
+<a id="more"></a>
+
+<h1 id="UIView-m-190-UIViewReportBrokenSuperviewChain"><a href="#UIView-m-190-UIViewReportBrokenSuperviewChain" class="headerlink" title="UIView.m:190 - UIViewReportBrokenSuperviewChain"></a>UIView.m:190 - UIViewReportBrokenSuperviewChain</h1><h2 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常分析"><a href="#异常分析" class="headerlink" title="异常分析"></a>异常分析</h2><p>  APP crash在<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[keyWindow addSubview:weakSelf];</span><br></pre></td></tr></table></figure><br>  <a href="#%E9%94%99%E8%AF%AF%E5%A0%86%E6%A0%88">错误堆栈信息</a>。</p>
+<p>  但是真正造成crash的代码为：</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure>
+
+
+<p>  解决方案：<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self layoutIfNeeded];</span><br><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure></p>
+<p>  原因分析：<br>  下面这个说的很在理</p>
+<blockquote>
+<p><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="noopener">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
+<p>I had this issue with a library when moving over to Xcode 8 (Material-Controls-For-iOS - MDTextField). I found that the problem was coming from where the layer of one view (which had no superview) was being added to another.</p>
+<p>It looks like this may be the case for yourself also - your toolbar being created has not been added to a superview first. The fix I used was to add the view as a subview of the view that the layer was being added to, so in your case adding the toolbar as a subview of myModelView should stop the error.</p>
+</blockquote>
+<h2 id="碰到该问题的还有"><a href="#碰到该问题的还有" class="headerlink" title="碰到该问题的还有"></a>碰到该问题的还有</h2><ul>
+<li><a href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8" target="_blank" rel="noopener">Google出来的一个，但是并未看到相关回复。。。</a></li>
+<li><a href="http://www.th7.cn/Program/IOS/201609/975582.shtml" target="_blank" rel="noopener">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a></li>
+<li><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="noopener">stackoverflow(这个分析的很到位)</a></li>
+</ul>
+<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br><span class="line"></span><br><span class="line">(lldb) bt</span><br><span class="line">* thread #1: tid &#x3D; 0x87c18, 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw, queue &#x3D; &#39;com.apple.main-thread&#39;, stop reason &#x3D; breakpoint 1.2</span><br><span class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw</span><br><span class="line">    frame #1: 0x0000000183954094 CoreFoundation&#96;+[NSException raise:format:arguments:] + 104</span><br><span class="line">    frame #2: 0x00000001843de898 Foundation&#96;-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</span><br><span class="line">    frame #3: 0x0000000189a7cf9c UIKit&#96;UIViewReportBrokenSuperviewChain + 472</span><br><span class="line">    frame #4: 0x0000000189a7d658 UIKit&#96;_UIViewTopDownSubtreeTraversal + 1496</span><br><span class="line">    frame #5: 0x000000018a0f3390 UIKit&#96;-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</span><br><span class="line">    frame #6: 0x00000001843832ac Foundation&#96;-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</span><br><span class="line">    frame #7: 0x0000000184382dcc Foundation&#96;-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</span><br><span class="line">    frame #8: 0x00000001843809e0 Foundation&#96;-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</span><br><span class="line">    frame #9: 0x000000018989cfdc UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</span><br><span class="line">    frame #10: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #11: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #12: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #13: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #14: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #15: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #16: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #17: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #18: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #19: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #20: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #21: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #22: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #23: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #24: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #25: 0x00000001898a4bb0 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</span><br><span class="line">    frame #26: 0x00000001898a4b04 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</span><br><span class="line">    frame #27: 0x00000001898a4910 UIKit&#96;-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</span><br><span class="line">    frame #28: 0x00000001897996dc UIKit&#96;-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</span><br><span class="line">    frame #29: 0x0000000189798d90 UIKit&#96;__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</span><br><span class="line">    frame #30: 0x0000000189798be8 UIKit&#96;-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</span><br><span class="line">    frame #31: 0x00000001897a4ad0 UIKit&#96;-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</span><br><span class="line">    frame #32: 0x00000001897a43bc UIKit&#96;-[UIView(Hierarchy) addSubview:] + 828</span><br><span class="line">  * frame #33: 0x00000001004f78ec Project_ent&#96;__31-[EsfCommentReportView show]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</span><br><span class="line">    frame #34: 0x00000001897d2b88 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</span><br><span class="line">    frame #35: 0x00000001897d28e8 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</span><br><span class="line">    frame #36: 0x00000001004f77a0 Project_ent&#96;-[EsfCommentReportView show](self&#x3D;0x000000015fe32020, _cmd&#x3D;&quot;show&quot;) + 492 at EsfCommentReportView.m:291</span><br><span class="line">    frame #37: 0x0000000100858a04 Project_ent&#96;__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</span><br><span class="line">    frame #38: 0x00000001003f93e4 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, sourceType&#x3D;2, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 236 at MyLoginViewController.m:123</span><br><span class="line">    frame #39: 0x00000001003f92b0 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 156 at MyLoginViewController.m:114</span><br><span class="line">    frame #40: 0x00000001003f9124 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0) + 120 at MyLoginViewController.m:104</span><br><span class="line">    frame #41: 0x0000000100858870 Project_ent&#96;-[BuyerAdviserProfileViewController reportAction:](self&#x3D;0x000000015fd2e320, _cmd&#x3D;&quot;reportAction:&quot;, button&#x3D;0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</span><br><span class="line">    frame #42: 0x00000001897d27b0 UIKit&#96;-[UIApplication sendAction:to:from:forEvent:] + 96</span><br><span class="line">    frame #43: 0x00000001897d2730 UIKit&#96;-[UIControl sendAction:to:forEvent:] + 80</span><br><span class="line">    frame #44: 0x00000001897bcbe4 UIKit&#96;-[UIControl _sendActionsForEvents:withEvent:] + 452</span><br><span class="line">    frame #45: 0x00000001897d201c UIKit&#96;-[UIControl touchesEnded:withEvent:] + 584</span><br><span class="line">    frame #46: 0x00000001897d1b44 UIKit&#96;-[UIWindow _sendTouchesForEvent:] + 2484</span><br><span class="line">    frame #47: 0x00000001897ccd8c UIKit&#96;-[UIWindow sendEvent:] + 2988</span><br><span class="line">    frame #48: 0x000000018979d858 UIKit&#96;-[UIApplication sendEvent:] + 340</span><br><span class="line">    frame #49: 0x0000000189f8acb8 UIKit&#96;__dispatchPreprocessedEventFromEventQueue + 2736</span><br><span class="line">    frame #50: 0x0000000189f84720 UIKit&#96;__handleEventQueue + 784</span><br><span class="line">    frame #51: 0x0000000183902278 CoreFoundation&#96;__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</span><br><span class="line">    frame #52: 0x0000000183901bc0 CoreFoundation&#96;__CFRunLoopDoSources0 + 524</span><br><span class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation&#96;__CFRunLoopRun + 804</span><br><span class="line">    frame #54: 0x000000018382e048 CoreFoundation&#96;CFRunLoopRunSpecific + 444</span><br><span class="line">    frame #55: 0x00000001852b1198 GraphicsServices&#96;GSEventRunModal + 180</span><br><span class="line">    frame #56: 0x0000000189808628 UIKit&#96;-[UIApplication _run] + 684</span><br><span class="line">    frame #57: 0x0000000189803360 UIKit&#96;UIApplicationMain + 208</span><br><span class="line">    frame #58: 0x0000000100a3db78 Project_ent&#96;main + 460 at main.swift:24</span><br><span class="line">    frame #59: 0x00000001828105b8 libdyld.dylib&#96;start + 4</span><br><span class="line">(lldb)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>DEBUG</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>从一个常见的崩溃开始</title>
     <url>/post/debug-sth-from-crash/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不信邪的态度，决定尝试一番。然后将此事记录如下文。</p>
@@ -1315,40 +1349,6 @@
       </tags>
   </entry>
   <entry>
-    <title>DEBUG - UIView.h#190</title>
-    <url>/post/debug-uiview-m-190/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>CRASH:<br><code>void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()</code></p>
-<a id="more"></a>
-
-<h1 id="UIView-m-190-UIViewReportBrokenSuperviewChain"><a href="#UIView-m-190-UIViewReportBrokenSuperviewChain" class="headerlink" title="UIView.m:190 - UIViewReportBrokenSuperviewChain"></a>UIView.m:190 - UIViewReportBrokenSuperviewChain</h1><h2 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br></pre></td></tr></table></figure>
-
-<h2 id="异常分析"><a href="#异常分析" class="headerlink" title="异常分析"></a>异常分析</h2><p>  APP crash在<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[keyWindow addSubview:weakSelf];</span><br></pre></td></tr></table></figure><br>  <a href="#%E9%94%99%E8%AF%AF%E5%A0%86%E6%A0%88">错误堆栈信息</a>。</p>
-<p>  但是真正造成crash的代码为：</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure>
-
-
-<p>  解决方案：<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self layoutIfNeeded];</span><br><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure></p>
-<p>  原因分析：<br>  下面这个说的很在理</p>
-<blockquote>
-<p><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="noopener">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
-<p>I had this issue with a library when moving over to Xcode 8 (Material-Controls-For-iOS - MDTextField). I found that the problem was coming from where the layer of one view (which had no superview) was being added to another.</p>
-<p>It looks like this may be the case for yourself also - your toolbar being created has not been added to a superview first. The fix I used was to add the view as a subview of the view that the layer was being added to, so in your case adding the toolbar as a subview of myModelView should stop the error.</p>
-</blockquote>
-<h2 id="碰到该问题的还有"><a href="#碰到该问题的还有" class="headerlink" title="碰到该问题的还有"></a>碰到该问题的还有</h2><ul>
-<li><a href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8" target="_blank" rel="noopener">Google出来的一个，但是并未看到相关回复。。。</a></li>
-<li><a href="http://www.th7.cn/Program/IOS/201609/975582.shtml" target="_blank" rel="noopener">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a></li>
-<li><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="noopener">stackoverflow(这个分析的很到位)</a></li>
-</ul>
-<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br><span class="line"></span><br><span class="line">(lldb) bt</span><br><span class="line">* thread #1: tid &#x3D; 0x87c18, 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw, queue &#x3D; &#39;com.apple.main-thread&#39;, stop reason &#x3D; breakpoint 1.2</span><br><span class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw</span><br><span class="line">    frame #1: 0x0000000183954094 CoreFoundation&#96;+[NSException raise:format:arguments:] + 104</span><br><span class="line">    frame #2: 0x00000001843de898 Foundation&#96;-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</span><br><span class="line">    frame #3: 0x0000000189a7cf9c UIKit&#96;UIViewReportBrokenSuperviewChain + 472</span><br><span class="line">    frame #4: 0x0000000189a7d658 UIKit&#96;_UIViewTopDownSubtreeTraversal + 1496</span><br><span class="line">    frame #5: 0x000000018a0f3390 UIKit&#96;-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</span><br><span class="line">    frame #6: 0x00000001843832ac Foundation&#96;-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</span><br><span class="line">    frame #7: 0x0000000184382dcc Foundation&#96;-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</span><br><span class="line">    frame #8: 0x00000001843809e0 Foundation&#96;-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</span><br><span class="line">    frame #9: 0x000000018989cfdc UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</span><br><span class="line">    frame #10: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #11: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #12: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #13: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #14: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #15: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #16: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #17: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #18: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #19: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #20: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #21: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #22: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #23: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #24: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #25: 0x00000001898a4bb0 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</span><br><span class="line">    frame #26: 0x00000001898a4b04 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</span><br><span class="line">    frame #27: 0x00000001898a4910 UIKit&#96;-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</span><br><span class="line">    frame #28: 0x00000001897996dc UIKit&#96;-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</span><br><span class="line">    frame #29: 0x0000000189798d90 UIKit&#96;__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</span><br><span class="line">    frame #30: 0x0000000189798be8 UIKit&#96;-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</span><br><span class="line">    frame #31: 0x00000001897a4ad0 UIKit&#96;-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</span><br><span class="line">    frame #32: 0x00000001897a43bc UIKit&#96;-[UIView(Hierarchy) addSubview:] + 828</span><br><span class="line">  * frame #33: 0x00000001004f78ec Project_ent&#96;__31-[EsfCommentReportView show]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</span><br><span class="line">    frame #34: 0x00000001897d2b88 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</span><br><span class="line">    frame #35: 0x00000001897d28e8 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</span><br><span class="line">    frame #36: 0x00000001004f77a0 Project_ent&#96;-[EsfCommentReportView show](self&#x3D;0x000000015fe32020, _cmd&#x3D;&quot;show&quot;) + 492 at EsfCommentReportView.m:291</span><br><span class="line">    frame #37: 0x0000000100858a04 Project_ent&#96;__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</span><br><span class="line">    frame #38: 0x00000001003f93e4 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, sourceType&#x3D;2, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 236 at MyLoginViewController.m:123</span><br><span class="line">    frame #39: 0x00000001003f92b0 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 156 at MyLoginViewController.m:114</span><br><span class="line">    frame #40: 0x00000001003f9124 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0) + 120 at MyLoginViewController.m:104</span><br><span class="line">    frame #41: 0x0000000100858870 Project_ent&#96;-[BuyerAdviserProfileViewController reportAction:](self&#x3D;0x000000015fd2e320, _cmd&#x3D;&quot;reportAction:&quot;, button&#x3D;0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</span><br><span class="line">    frame #42: 0x00000001897d27b0 UIKit&#96;-[UIApplication sendAction:to:from:forEvent:] + 96</span><br><span class="line">    frame #43: 0x00000001897d2730 UIKit&#96;-[UIControl sendAction:to:forEvent:] + 80</span><br><span class="line">    frame #44: 0x00000001897bcbe4 UIKit&#96;-[UIControl _sendActionsForEvents:withEvent:] + 452</span><br><span class="line">    frame #45: 0x00000001897d201c UIKit&#96;-[UIControl touchesEnded:withEvent:] + 584</span><br><span class="line">    frame #46: 0x00000001897d1b44 UIKit&#96;-[UIWindow _sendTouchesForEvent:] + 2484</span><br><span class="line">    frame #47: 0x00000001897ccd8c UIKit&#96;-[UIWindow sendEvent:] + 2988</span><br><span class="line">    frame #48: 0x000000018979d858 UIKit&#96;-[UIApplication sendEvent:] + 340</span><br><span class="line">    frame #49: 0x0000000189f8acb8 UIKit&#96;__dispatchPreprocessedEventFromEventQueue + 2736</span><br><span class="line">    frame #50: 0x0000000189f84720 UIKit&#96;__handleEventQueue + 784</span><br><span class="line">    frame #51: 0x0000000183902278 CoreFoundation&#96;__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</span><br><span class="line">    frame #52: 0x0000000183901bc0 CoreFoundation&#96;__CFRunLoopDoSources0 + 524</span><br><span class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation&#96;__CFRunLoopRun + 804</span><br><span class="line">    frame #54: 0x000000018382e048 CoreFoundation&#96;CFRunLoopRunSpecific + 444</span><br><span class="line">    frame #55: 0x00000001852b1198 GraphicsServices&#96;GSEventRunModal + 180</span><br><span class="line">    frame #56: 0x0000000189808628 UIKit&#96;-[UIApplication _run] + 684</span><br><span class="line">    frame #57: 0x0000000189803360 UIKit&#96;UIApplicationMain + 208</span><br><span class="line">    frame #58: 0x0000000100a3db78 Project_ent&#96;main + 460 at main.swift:24</span><br><span class="line">    frame #59: 0x00000001828105b8 libdyld.dylib&#96;start + 4</span><br><span class="line">(lldb)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>DEBUG</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>侧滑导航栏消失问题笔记</title>
     <url>/post/push-pop-navigation-bar-hidden/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>如果前页面和后页面不同，则会出现轻微侧滑时导航栏莫名其妙没了😂</p>
@@ -1375,6 +1375,50 @@
       </categories>
       <tags>
         <tag>DEBUG</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何快速查找ipa内的符号引用</title>
+    <url>/post/how-to-quickly-find-symbol-references-in-ipa/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>ITMS-90809: Deprecated API Usage - Apple will stop accepting submissions of apps that use UIWebView APIs . See <a href="https://developer.apple.com/documentation/uikit/uiwebview" target="_blank" rel="noopener">https://developer.apple.com/documentation/uikit/uiwebview</a> for more information.</p>
+</blockquote>
+<p>熟悉不?</p>
+<a id="more"></a>
+
+<h2 id="源码级别引用"><a href="#源码级别引用" class="headerlink" title="源码级别引用"></a>源码级别引用</h2><p>有些时候, 我们需要查找我们的<code>.ipa</code>里面什么地方使用了某个API, 而常规操作是在Xcode的<code>Navigation -&gt; Find</code>里面直接search一下就可以查到源码上哪些地方直接调用了该API.</p>
+<p>而往往这种情况下可以解决问题的话就不会跑去<code>Google</code>了.</p>
+<h2 id="二进制级别引用"><a href="#二进制级别引用" class="headerlink" title="二进制级别引用"></a>二进制级别引用</h2><p>APP总会通过各种手段集成些别人的第三方库, 而此库究竟干了什么我们一般并不能十分了解(如果能了解大概人家就开源了吧). 这个时候要如何查找这些库有没有使用某API该咋办呢?</p>
+<h3 id="定位究竟有谁在包含"><a href="#定位究竟有谁在包含" class="headerlink" title="定位究竟有谁在包含"></a>定位究竟有谁在包含</h3><p>我们提交<code>App Store</code>都是打包成<code>.ipa</code>提交,所以我们先将<code>.ipa</code>重命名<code>.zip</code>并解压. 然后假设我们需要找的是<code>UIWebView</code>, <code>Terminal</code>搞开,到解压后的目录.</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╭─Bingo@madordie xxx.app</span><br><span class="line">╰─&gt;$ find . -print0 | xargs -0 grep -s <span class="string">'UIWebView'</span></span><br></pre></td></tr></table></figure>
+
+<p>便得到<code>xxx.app</code>内所有包含<code>UIWebView</code>字符的文件(包括Mach-O). 这个时候输出的行<code>Binary file ./XXXX/YYYY matches</code>即为匹配到了.</p>
+<p>此时定位到<code>XXXX/YYYY</code>内含有<code>UIWebView</code>.</p>
+<p>另外: 上述命令在项目主目录执行也可以搜索到, 只不过除了<code>Navigation -&gt; Find</code>里search的还有其他的, 内容如果多的话可以再用<code>grep</code>过滤一次.</p>
+<p>比如只关心<code>Binary file</code>:</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╭─Bingo@madordie project-main-path</span><br><span class="line">╰─&gt;$ find . -print0 | xargs -0 grep -s <span class="string">'UIWebView'</span> | grep <span class="string">'^Binary'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="这个API在Mach-O中是什么"><a href="#这个API在Mach-O中是什么" class="headerlink" title="这个API在Mach-O中是什么"></a>这个API在Mach-O中是什么</h3><h4 id="有字符串吗"><a href="#有字符串吗" class="headerlink" title="有字符串吗"></a>有字符串吗</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╭─Bingo@madordie xxx.app</span><br><span class="line">╰─&gt;$ strings ./XXXX/YYYY | grep <span class="string">'UIWebView'</span></span><br><span class="line">T@<span class="string">"UIWebView"</span>,R,N,V_webView</span><br><span class="line">UIWebViewDelegate</span><br><span class="line">B40@0:8@<span class="string">"UIWebView"</span>16@<span class="string">"NSURLRequest"</span>24q32</span><br><span class="line">v24@0:8@<span class="string">"UIWebView"</span>16</span><br><span class="line">v32@0:8@<span class="string">"UIWebView"</span>16@<span class="string">"NSError"</span>24</span><br><span class="line">@<span class="string">"UIWebView"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="有symbol吗"><a href="#有symbol吗" class="headerlink" title="有symbol吗"></a>有symbol吗</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╭─Bingo@madordie xxx.app</span><br><span class="line">╰─&gt;$ nm ./XXXX/YYYY | grep <span class="string">'UIWebView'</span></span><br><span class="line">                 U _OBJC_CLASS_<span class="variable">$_UIWebView</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="值得说一下"><a href="#值得说一下" class="headerlink" title="值得说一下"></a>值得说一下</h3><p>通过上面的操作基本上可以检索出来App Store查到的API, 但是说其他的字符串拼接/加密的方案去绕过的话,那么就问问作者吧…</p>
+<p>真不行使用逆向分析工具去分析也可以. 但是个人觉得稍微有点大材小用 :)</p>
+<p>上面使用的命令的文档均可通过<code>man xxx</code>、<code>xxx --help</code>、Google等方式查询就不啰嗦了.</p>
+<h3 id="UIWebView的废弃通告"><a href="#UIWebView的废弃通告" class="headerlink" title="UIWebView的废弃通告"></a>UIWebView的废弃通告</h3><p><a href="https://developer.apple.com/cn/news/?id=12232019b" target="_blank" rel="noopener">更新使用网页视图的 App</a></p>
+<blockquote>
+<p>更新使用网页视图的 App<br>2019 年 12 月 23 日</p>
+<p>如果您的 app 仍在使用已弃用的 UIWebView API 嵌入网络内容，我们强烈建议您尽快更新为 WKWebView 以提升安全性和稳定性。WKWebView 可将网页处理限制在 app 的网页视图中，从而确保不安全的网站内容不会影响到 app 的其他部分。此外，iOS、macOS 和 Mac Catalyst 均支持 WKWebView。</p>
+<p>2020 年 4 月起 App Store 将不再接受使用 UIWebView 的新 app，2020 年 12 月起将不再接受使用 UIWebView 的 app 更新。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>iOS</category>
+        <category>macOS</category>
+      </categories>
+      <tags>
+        <tag>DEBUG</tag>
+        <tag>tool</tag>
       </tags>
   </entry>
   <entry>
@@ -1432,50 +1476,6 @@
       </categories>
       <tags>
         <tag>debug</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何快速查找ipa内的符号引用</title>
-    <url>/post/how-to-quickly-find-symbol-references-in-ipa/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>ITMS-90809: Deprecated API Usage - Apple will stop accepting submissions of apps that use UIWebView APIs . See <a href="https://developer.apple.com/documentation/uikit/uiwebview" target="_blank" rel="noopener">https://developer.apple.com/documentation/uikit/uiwebview</a> for more information.</p>
-</blockquote>
-<p>熟悉不?</p>
-<a id="more"></a>
-
-<h2 id="源码级别引用"><a href="#源码级别引用" class="headerlink" title="源码级别引用"></a>源码级别引用</h2><p>有些时候, 我们需要查找我们的<code>.ipa</code>里面什么地方使用了某个API, 而常规操作是在Xcode的<code>Navigation -&gt; Find</code>里面直接search一下就可以查到源码上哪些地方直接调用了该API.</p>
-<p>而往往这种情况下可以解决问题的话就不会跑去<code>Google</code>了.</p>
-<h2 id="二进制级别引用"><a href="#二进制级别引用" class="headerlink" title="二进制级别引用"></a>二进制级别引用</h2><p>APP总会通过各种手段集成些别人的第三方库, 而此库究竟干了什么我们一般并不能十分了解(如果能了解大概人家就开源了吧). 这个时候要如何查找这些库有没有使用某API该咋办呢?</p>
-<h3 id="定位究竟有谁在包含"><a href="#定位究竟有谁在包含" class="headerlink" title="定位究竟有谁在包含"></a>定位究竟有谁在包含</h3><p>我们提交<code>App Store</code>都是打包成<code>.ipa</code>提交,所以我们先将<code>.ipa</code>重命名<code>.zip</code>并解压. 然后假设我们需要找的是<code>UIWebView</code>, <code>Terminal</code>搞开,到解压后的目录.</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╭─Bingo@madordie xxx.app</span><br><span class="line">╰─&gt;$ find . -print0 | xargs -0 grep -s <span class="string">'UIWebView'</span></span><br></pre></td></tr></table></figure>
-
-<p>便得到<code>xxx.app</code>内所有包含<code>UIWebView</code>字符的文件(包括Mach-O). 这个时候输出的行<code>Binary file ./XXXX/YYYY matches</code>即为匹配到了.</p>
-<p>此时定位到<code>XXXX/YYYY</code>内含有<code>UIWebView</code>.</p>
-<p>另外: 上述命令在项目主目录执行也可以搜索到, 只不过除了<code>Navigation -&gt; Find</code>里search的还有其他的, 内容如果多的话可以再用<code>grep</code>过滤一次.</p>
-<p>比如只关心<code>Binary file</code>:</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╭─Bingo@madordie project-main-path</span><br><span class="line">╰─&gt;$ find . -print0 | xargs -0 grep -s <span class="string">'UIWebView'</span> | grep <span class="string">'^Binary'</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="这个API在Mach-O中是什么"><a href="#这个API在Mach-O中是什么" class="headerlink" title="这个API在Mach-O中是什么"></a>这个API在Mach-O中是什么</h3><h4 id="有字符串吗"><a href="#有字符串吗" class="headerlink" title="有字符串吗"></a>有字符串吗</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╭─Bingo@madordie xxx.app</span><br><span class="line">╰─&gt;$ strings ./XXXX/YYYY | grep <span class="string">'UIWebView'</span></span><br><span class="line">T@<span class="string">"UIWebView"</span>,R,N,V_webView</span><br><span class="line">UIWebViewDelegate</span><br><span class="line">B40@0:8@<span class="string">"UIWebView"</span>16@<span class="string">"NSURLRequest"</span>24q32</span><br><span class="line">v24@0:8@<span class="string">"UIWebView"</span>16</span><br><span class="line">v32@0:8@<span class="string">"UIWebView"</span>16@<span class="string">"NSError"</span>24</span><br><span class="line">@<span class="string">"UIWebView"</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="有symbol吗"><a href="#有symbol吗" class="headerlink" title="有symbol吗"></a>有symbol吗</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╭─Bingo@madordie xxx.app</span><br><span class="line">╰─&gt;$ nm ./XXXX/YYYY | grep <span class="string">'UIWebView'</span></span><br><span class="line">                 U _OBJC_CLASS_<span class="variable">$_UIWebView</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="值得说一下"><a href="#值得说一下" class="headerlink" title="值得说一下"></a>值得说一下</h3><p>通过上面的操作基本上可以检索出来App Store查到的API, 但是说其他的字符串拼接/加密的方案去绕过的话,那么就问问作者吧…</p>
-<p>真不行使用逆向分析工具去分析也可以. 但是个人觉得稍微有点大材小用 :)</p>
-<p>上面使用的命令的文档均可通过<code>man xxx</code>、<code>xxx --help</code>、Google等方式查询就不啰嗦了.</p>
-<h3 id="UIWebView的废弃通告"><a href="#UIWebView的废弃通告" class="headerlink" title="UIWebView的废弃通告"></a>UIWebView的废弃通告</h3><p><a href="https://developer.apple.com/cn/news/?id=12232019b" target="_blank" rel="noopener">更新使用网页视图的 App</a></p>
-<blockquote>
-<p>更新使用网页视图的 App<br>2019 年 12 月 23 日</p>
-<p>如果您的 app 仍在使用已弃用的 UIWebView API 嵌入网络内容，我们强烈建议您尽快更新为 WKWebView 以提升安全性和稳定性。WKWebView 可将网页处理限制在 app 的网页视图中，从而确保不安全的网站内容不会影响到 app 的其他部分。此外，iOS、macOS 和 Mac Catalyst 均支持 WKWebView。</p>
-<p>2020 年 4 月起 App Store 将不再接受使用 UIWebView 的新 app，2020 年 12 月起将不再接受使用 UIWebView 的 app 更新。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>iOS</category>
-        <category>macOS</category>
-      </categories>
-      <tags>
-        <tag>DEBUG</tag>
-        <tag>tool</tag>
       </tags>
   </entry>
   <entry>
@@ -1829,49 +1829,6 @@ class CMExpandingTextField: UITextField {
       </tags>
   </entry>
   <entry>
-    <title>UI素材与代码解耦的讨论与思考</title>
-    <url>/post/ui-source-and-code-decoupling/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。</p>
-<a id="more"></a>
-
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码农的无休止的协作，所以可以进行着方面的解藕。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>  哪坏哪补。有问题就会有解决方案。群中说的<a href="#%E6%96%B9%E6%A1%88%E4%B8%80">方案一</a>由于当时不方便，所以并没有弄明白。<a href="#%E6%96%B9%E6%A1%88%E4%BA%8C">方案二</a>、<a href="#%E6%96%B9%E6%A1%88%E4%B8%89">方案三</a>是自己的一些解决方案。</p>
-<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a><a name="方案一">方案一</a></h3><p>  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。另外，@夏汁泡泡 还有一个简化就是这个处理的脚本可以放在<a href="https://developer.apple.com/library/ios/recipes/xcode_help-project_editor/Articles/AddingaRunScriptBuildPhase.html" target="_blank" rel="noopener">Add Run Script Build Phase</a>，暴露出来已知的问题：</p>
-<ul>
-<li>操作麻烦</li>
-<li>图片可能重复</li>
-<li>命名规范</li>
-</ul>
-<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a><a name="方案二">方案二</a></h3><p>  按照Pods的集成方式，可以将素材看作一个第三方库，直接将素材做成一个bundle，采用Pods私有库或者其他方式放入工程。暴露出来已知的问题：</p>
-<ul>
-<li>什么时候更新这个bundle</li>
-<li>多人合作时这个bundle冲突问题</li>
-<li>命名规范</li>
-</ul>
-<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a><a name="方案三">方案三</a></h3><p>  工程使用<code>xcassets</code>进行素材打包，然后使用子库进行持续集成。这样，设计师的素材可以放在另一个独立素材仓库，内含更新脚本，直接将素材生成对应的<code>xcassets</code>结构，并上传至子库。这样设计师做完素材直接扔在文件夹中，自动或手动跑一下脚本即可更新到素材仓库。暴露出来已知的问题：</p>
-<ul>
-<li>由于没有测试过，不知道如果素材比较多的话会不会发生冲突。因该不会吧，都是加文件或者修改😂 (有时间去研究一下之后更新)</li>
-<li>命名规范的问题依旧存在</li>
-</ul>
-<h3 id="方案四"><a href="#方案四" class="headerlink" title="方案四"></a><a name="方案四">方案四</a></h3><p>  __ 字体库 __。最近同事提出关于用字体库去存储素材图片的方案。感觉非常的赞，虽然并未实践，但是这种方案就像emoji一样，不但减少了相同图片内容之间存在多个不同尺寸版本的问题，也能够比较好的进行压缩管理。设计师需要做的就是做出一套字体库，然后将所有的素材图全部按照设计字体的方案进行设计和制作，这样在使用的时候只需要导入一个字体文件就好了。对于这个字体文件如何管理都好说，毕竟只有一个字体文件。字体库的制作方面还不是很了解，所以只提着么一下吧嘿嘿。。</p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>  好了，重要的问题来了，上面的问题都是存在命名规范的问题。此问题如何化解呢？</p>
-<p>  素材的引入需根据素材名写入代码中，那么如何才能不用素材名呢？那时不可能的😝，毕竟你要有一个唯一标识符去标志着一个素材。可能有的人说可以做一个json用来保存代码的命名和素材的命名呀，我只想说MDZZ，那不是有两套需要维护的命名规则么。。得不偿失。</p>
-<p>  这个命名的问题其实不能复杂化。参看iOS的项目国际化操作，使用一个key作为文案的唯一标识符，需要显示该文案，通过这个唯一标识符就能直接取到。回头看下素材，是不是也能炮制一个呢？</p>
-<p>  如果素材名字有统一的规则，就不需要这样的key作为统一标识符，直接使用素材名字即可，这样维护一套素材命名规则总比两套更容易维护。所以，直接使用素材名即可。</p>
-<p>  如果素材不能统一命名规则，那么这样的对照文件存在也是很不错的。话又说回来，要进行UI素材和代码的解耦，素材名都不能统一，还如何解耦，此问题也不存在了。。</p>
-<p>  退一步，我们的目的是让素材让设计师自己维护，代码不去维护素材。设计师和码农的耦合在于图片本身的交换比较烦。不论采用哪种解耦方案，都是把图片的耦合转换为图片名字的耦合(也可以理解为素材对应的KEY的耦合)。结果是 __ 为了解除一个耦合,而引入了一个新的耦合 __ 。个人认为这样是不靠谱的。。除非有强力的人去推动设计师走标准的命名。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>  其实这个问题大可不必纠结，如果有强力的人去推动这个标准持续走下去那么这个问题才有价值。如果真的要进行题中说的代码解耦的话，我认为第三种是比较靠谱的。 __ 命名标准、命名标准、命名标准… __。</p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>  经验有限，如果有更好的方案，望告知。拜谢！</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>优化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Xcode打包脚本</title>
     <url>/post/build-ipa-sh/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Jenkins自动构建脚本解决方案。</p>
@@ -1912,6 +1869,49 @@ class CMExpandingTextField: UITextField {
       </categories>
       <tags>
         <tag>构建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI素材与代码解耦的讨论与思考</title>
+    <url>/post/ui-source-and-code-decoupling/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>个人对UI素材和代码的解耦的一些粗浅的看法。比如：解耦方案、是否该解耦。</p>
+<a id="more"></a>
+
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>  群里听到有人讨论这个话题，当时觉得比较新鲜，就十分好奇的请教了两位经验丰富的@kkk、@AK，虽然未得其中真髓，但是也得到一些自己的思考。总结一下两人的方案，以及自己的思考，</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>  代码内部引入的素材属于设计管理，代码则是码农管理，从这个角度来说两个工做都有码农管理则是一种耦合，为了减轻设计师频繁更换素材而带来的码农的无休止的协作，所以可以进行着方面的解藕。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>  哪坏哪补。有问题就会有解决方案。群中说的<a href="#%E6%96%B9%E6%A1%88%E4%B8%80">方案一</a>由于当时不方便，所以并没有弄明白。<a href="#%E6%96%B9%E6%A1%88%E4%BA%8C">方案二</a>、<a href="#%E6%96%B9%E6%A1%88%E4%B8%89">方案三</a>是自己的一些解决方案。</p>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a><a name="方案一">方案一</a></h3><p>  群中讨论的是素材、代码放在一个仓库，分支不同，使用脚本进行整合(其实并没有想明白怎么弄。。下周请教一下)。另外，@夏汁泡泡 还有一个简化就是这个处理的脚本可以放在<a href="https://developer.apple.com/library/ios/recipes/xcode_help-project_editor/Articles/AddingaRunScriptBuildPhase.html" target="_blank" rel="noopener">Add Run Script Build Phase</a>，暴露出来已知的问题：</p>
+<ul>
+<li>操作麻烦</li>
+<li>图片可能重复</li>
+<li>命名规范</li>
+</ul>
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a><a name="方案二">方案二</a></h3><p>  按照Pods的集成方式，可以将素材看作一个第三方库，直接将素材做成一个bundle，采用Pods私有库或者其他方式放入工程。暴露出来已知的问题：</p>
+<ul>
+<li>什么时候更新这个bundle</li>
+<li>多人合作时这个bundle冲突问题</li>
+<li>命名规范</li>
+</ul>
+<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a><a name="方案三">方案三</a></h3><p>  工程使用<code>xcassets</code>进行素材打包，然后使用子库进行持续集成。这样，设计师的素材可以放在另一个独立素材仓库，内含更新脚本，直接将素材生成对应的<code>xcassets</code>结构，并上传至子库。这样设计师做完素材直接扔在文件夹中，自动或手动跑一下脚本即可更新到素材仓库。暴露出来已知的问题：</p>
+<ul>
+<li>由于没有测试过，不知道如果素材比较多的话会不会发生冲突。因该不会吧，都是加文件或者修改😂 (有时间去研究一下之后更新)</li>
+<li>命名规范的问题依旧存在</li>
+</ul>
+<h3 id="方案四"><a href="#方案四" class="headerlink" title="方案四"></a><a name="方案四">方案四</a></h3><p>  __ 字体库 __。最近同事提出关于用字体库去存储素材图片的方案。感觉非常的赞，虽然并未实践，但是这种方案就像emoji一样，不但减少了相同图片内容之间存在多个不同尺寸版本的问题，也能够比较好的进行压缩管理。设计师需要做的就是做出一套字体库，然后将所有的素材图全部按照设计字体的方案进行设计和制作，这样在使用的时候只需要导入一个字体文件就好了。对于这个字体文件如何管理都好说，毕竟只有一个字体文件。字体库的制作方面还不是很了解，所以只提着么一下吧嘿嘿。。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>  好了，重要的问题来了，上面的问题都是存在命名规范的问题。此问题如何化解呢？</p>
+<p>  素材的引入需根据素材名写入代码中，那么如何才能不用素材名呢？那时不可能的😝，毕竟你要有一个唯一标识符去标志着一个素材。可能有的人说可以做一个json用来保存代码的命名和素材的命名呀，我只想说MDZZ，那不是有两套需要维护的命名规则么。。得不偿失。</p>
+<p>  这个命名的问题其实不能复杂化。参看iOS的项目国际化操作，使用一个key作为文案的唯一标识符，需要显示该文案，通过这个唯一标识符就能直接取到。回头看下素材，是不是也能炮制一个呢？</p>
+<p>  如果素材名字有统一的规则，就不需要这样的key作为统一标识符，直接使用素材名字即可，这样维护一套素材命名规则总比两套更容易维护。所以，直接使用素材名即可。</p>
+<p>  如果素材不能统一命名规则，那么这样的对照文件存在也是很不错的。话又说回来，要进行UI素材和代码的解耦，素材名都不能统一，还如何解耦，此问题也不存在了。。</p>
+<p>  退一步，我们的目的是让素材让设计师自己维护，代码不去维护素材。设计师和码农的耦合在于图片本身的交换比较烦。不论采用哪种解耦方案，都是把图片的耦合转换为图片名字的耦合(也可以理解为素材对应的KEY的耦合)。结果是 __ 为了解除一个耦合,而引入了一个新的耦合 __ 。个人认为这样是不靠谱的。。除非有强力的人去推动设计师走标准的命名。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>  其实这个问题大可不必纠结，如果有强力的人去推动这个标准持续走下去那么这个问题才有价值。如果真的要进行题中说的代码解耦的话，我认为第三种是比较靠谱的。 __ 命名标准、命名标准、命名标准… __。</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>  经验有限，如果有更好的方案，望告知。拜谢！</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>优化</tag>
       </tags>
   </entry>
   <entry>
@@ -1960,6 +1960,42 @@ class CMExpandingTextField: UITextField {
       </categories>
   </entry>
   <entry>
+    <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
+    <url>/post/reactivecocoa-ready-to-use/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。</p>
+<a id="more"></a>
+
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。</p>
+<h1 id="OC简单食用方法"><a href="#OC简单食用方法" class="headerlink" title="OC简单食用方法"></a>OC简单食用方法</h1><p>先来个例子代码：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">RACSignal *RSignal = [[<span class="keyword">self</span>.R rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.R.value)];</span><br><span class="line">RACSignal *GSignal = [[<span class="keyword">self</span>.G rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.G.value)];</span><br><span class="line">RACSignal *BSignal = [[<span class="keyword">self</span>.B rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.B.value)];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span>*(^valueFormat)(<span class="built_in">NSNumber</span> *value) = ^(<span class="built_in">NSNumber</span> *value) &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.0f"</span>, [value doubleValue]*<span class="number">255</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">[RSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.RVaule.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[GSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.GValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[BSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.BValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<p>是不是超级简单！</p>
+<h2 id="顾虑"><a href="#顾虑" class="headerlink" title="顾虑"></a>顾虑</h2><p>可是我有一个问题：</p>
+<ul>
+<li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。</li>
+</ul>
+<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1><p>在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="noopener">ReactiveCocoa</a>的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift" target="_blank" rel="noopener">README.md</a>中有这么一段话：</p>
+<blockquote>
+<h2 id="Objective-C-and-Swift"><a href="#Objective-C-and-Swift" class="headerlink" title="Objective-C and Swift"></a>Objective-C and Swift</h2></blockquote>
+<p>  Although ReactiveCocoa was started as an Objective-C framework, as of [version<br>  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].</p>
+<blockquote>
+</blockquote>
+<p>  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is<br>  a [bridge][Objective-C Bridging] to convert between the two. This<br>  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to<br>  use Cocoa extensions which haven’t been added to the Swift API yet.</p>
+<blockquote>
+</blockquote>
+<p>  The Objective-C API will continue to exist and be supported for the foreseeable<br>  future, but it won’t receive many improvements. For more information about using<br>  this API, please consult our [legacy documentation][].</p>
+<blockquote>
+</blockquote>
+<p>  <strong>We highly recommend that all new projects use the Swift API.</strong></p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>ReactiveCocoa</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>项目中的UITableView</title>
     <url>/post/about-project-tableview/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。</p>
@@ -2003,103 +2039,6 @@ class CMExpandingTextField: UITextField {
       </categories>
       <tags>
         <tag>UITableView</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
-    <url>/post/reactivecocoa-ready-to-use/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。</p>
-<a id="more"></a>
-
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。</p>
-<h1 id="OC简单食用方法"><a href="#OC简单食用方法" class="headerlink" title="OC简单食用方法"></a>OC简单食用方法</h1><p>先来个例子代码：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">RACSignal *RSignal = [[<span class="keyword">self</span>.R rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.R.value)];</span><br><span class="line">RACSignal *GSignal = [[<span class="keyword">self</span>.G rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.G.value)];</span><br><span class="line">RACSignal *BSignal = [[<span class="keyword">self</span>.B rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.B.value)];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span>*(^valueFormat)(<span class="built_in">NSNumber</span> *value) = ^(<span class="built_in">NSNumber</span> *value) &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.0f"</span>, [value doubleValue]*<span class="number">255</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">[RSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.RVaule.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[GSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.GValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[BSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.BValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-
-<p>是不是超级简单！</p>
-<h2 id="顾虑"><a href="#顾虑" class="headerlink" title="顾虑"></a>顾虑</h2><p>可是我有一个问题：</p>
-<ul>
-<li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。</li>
-</ul>
-<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1><p>在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="noopener">ReactiveCocoa</a>的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift" target="_blank" rel="noopener">README.md</a>中有这么一段话：</p>
-<blockquote>
-<h2 id="Objective-C-and-Swift"><a href="#Objective-C-and-Swift" class="headerlink" title="Objective-C and Swift"></a>Objective-C and Swift</h2></blockquote>
-<p>  Although ReactiveCocoa was started as an Objective-C framework, as of [version<br>  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].</p>
-<blockquote>
-</blockquote>
-<p>  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is<br>  a [bridge][Objective-C Bridging] to convert between the two. This<br>  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to<br>  use Cocoa extensions which haven’t been added to the Swift API yet.</p>
-<blockquote>
-</blockquote>
-<p>  The Objective-C API will continue to exist and be supported for the foreseeable<br>  future, but it won’t receive many improvements. For more information about using<br>  this API, please consult our [legacy documentation][].</p>
-<blockquote>
-</blockquote>
-<p>  <strong>We highly recommend that all new projects use the Swift API.</strong></p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>ReactiveCocoa</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
-    <url>/post/bang-fastimagecache/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文：<a href="http://blog.cnbang.net/tech/2578/" target="_blank" rel="noopener">iOS图片加载速度极限优化—FastImageCache解析</a></p>
-<p><a href="https://github.com/path/FastImageCache" target="_blank" rel="noopener">FastImageCache</a>是Path团队开发的一个开源库，用于提升图片的加载和渲染速度，让基于图片的列表滑动起来更顺畅，来看看它是怎么做的。</p>
-<a id="more"></a>
-
-<h2 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h2><p>iOS从磁盘加载一张图片，使用UIImageVIew显示在屏幕上，需要经过以下步骤：</p>
-<ol>
-<li>从磁盘拷贝数据到内核缓冲区</li>
-<li>从内核缓冲区复制数据到用户空间</li>
-<li>生成UIImageView，把图像数据赋值给UIImageView</li>
-<li>如果图像数据为未解码的PNG/JPG，解码为位图数据</li>
-<li>CATransaction捕获到UIImageView layer树的变化</li>
-<li>主线程Runloop提交CATransaction，开始进行图像渲染<br> 6.1 如果数据没有字节对齐，Core Animation会再拷贝一份数据，进行字节对齐。<br> 6.2 GPU处理位图数据，进行渲染。</li>
-</ol>
-<p>FastImageCache分别优化了2,4,6.1三个步骤：</p>
-<ol>
-<li>使用mmap内存映射，省去了上述第2步数据从内核空间拷贝到用户空间的操作。</li>
-<li>缓存解码后的位图数据到磁盘，下次从磁盘读取时省去第4步解码的操作。</li>
-<li>生成字节对齐的数据，防止上述第6.1步CoreAnimation在渲染时再拷贝一份数据。</li>
-</ol>
-<p>接下来具体介绍这三个优化点以及它的实现。</p>
-<h3 id="内存映射"><a href="#内存映射" class="headerlink" title="内存映射"></a>内存映射</h3><p>平常我们读取磁盘上的一个文件，上层API调用到最后会使用系统方法read()读取数据，内核把磁盘数据读入内核缓冲区，用户再从内核缓冲区读取数据复制到用户内存空间，这里有一次内存拷贝的时间消耗，并且读取后整个文件数据就已经存在于用户内存中，占用了进程的内存空间。</p>
-<p>FastImageCache采用了另一种读写文件的方法，就是用mmap把文件映射到用户空间里的虚拟内存，文件中的位置在虚拟内存中有了对应的地址，可以像操作内存一样操作这个文件，相当于已经把整个文件放入内存，但在真正使用到这些数据前却不会消耗物理内存，也不会有读写磁盘的操作，只有真正使用这些数据时，也就是图像准备渲染在屏幕上时，虚拟内存管理系统VMS才根据缺页加载的机制从磁盘加载对应的数据块到物理内存，再进行渲染。这样的文件读写文件方式少了数据从内核缓存到用户空间的拷贝，效率很高。</p>
-<h3 id="解码图像"><a href="#解码图像" class="headerlink" title="解码图像"></a>解码图像</h3><p>一般我们使用的图像是JPG/PNG，这些图像数据不是位图，而是是经过编码压缩后的数据，使用它渲染到屏幕之前需要进行解码转成位图数据，这个解码操作是比较耗时的，并且没有GPU硬解码，只能通过CPU，iOS默认会在主线程对图像进行解码。很多库都解决了图像解码的问题，不过由于解码后的图像太大，一般不会缓存到磁盘，SDWebImage的做法是把解码操作从主线程移到子线程，让耗时的解码操作不占用主线程的时间。</p>
-<p>FastImageCache也是在子线程解码图像，不同的是它会缓存解码后的图像到磁盘。因为解码后的图像体积很大，FastImageCache对这些图像数据做了系列缓存管理，详见下文实现部分。另外缓存的图像体积大也是使用内存映射读取文件的原因，小文件使用内存映射无优势，内存拷贝的量少，拷贝后占用用户内存也不高，文件越大内存映射优势越大。</p>
-<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>Core Animation在图像数据非字节对齐的情况下渲染前会先拷贝一份图像数据，官方文档没有对这次拷贝行为作说明，模拟器和Instrument里有高亮显示“copied images”的功能，但似乎它有bug，即使某张图片没有被高亮显示出渲染时被copy，从调用堆栈上也还是能看到调用了CA::Render::copy_image方法：</p>
-<p><img src="/images/fastImageCache1.png" alt="fastImageCache1"></p>
-<p>那什么是字节对齐呢，按我的理解，为了性能，底层渲染图像时不是一个像素一个像素渲染，而是一块一块渲染，数据是一块块地取，就可能遇到这一块连续的内存数据里结尾的数据不是图像的内容，是内存里其他的数据，可能越界读取导致一些奇怪的东西混入，所以在渲染之前CoreAnimation要把数据拷贝一份进行处理，确保每一块都是图像数据，对于不足一块的数据置空。大致图示：(pixel是图像像素数据，data是内存里其他数据)</p>
-<p><img src="/images/fastImageCache2.png" alt="fastImageCache2"></p>
-<p>块的大小应该是跟CPU cache line有关，ARMv7是32byte，A9是64byte，在A9下CoreAnimation应该是按64byte作为一块数据去读取和渲染，让图像数据对齐64byte就可以避免CoreAnimation再拷贝一份数据进行修补。FastImageCache做的字节对齐就是这个事情。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>FastImageCache把同个类型和尺寸的图像都放在一个文件里，根据文件偏移取单张图片，类似web的css雪碧图，这里称为ImageTable。这样做主要是为了方便统一管理图片缓存，控制缓存的大小，整个FastImageCache就是在管理一个个ImageTable的数据。整体实现的数据结构如图：</p>
-<p><img src="/images/fastImageCache3.png" alt="fastImageCache3"></p>
-<p>一些补充和说明：</p>
-<h3 id="ImageTable"><a href="#ImageTable" class="headerlink" title="ImageTable"></a>ImageTable</h3><ol>
-<li>一个ImageFormat对应一个ImageTable，ImageFormat指定了ImageTable里图像渲染格式/大小等信息，ImageTable里的图像数据都由ImageFormat规定了统一的尺寸，每张图像大小都是一样的。</li>
-<li>一个ImageTable一个实体文件，并有另一个文件保存这个ImageTable的meta信息。</li>
-<li>图像使用entityUUID作为唯一标示符，由用户定义，通常是图像url的hash值。ImageTable Meta的indexMap记录了entityUUID-&gt;entryIndex的映射，通过indexMap就可以用图像的entityUUID找到缓存数据在ImageTable对应的位置。</li>
-</ol>
-<h3 id="ImageTableEntry"><a href="#ImageTableEntry" class="headerlink" title="ImageTableEntry"></a>ImageTableEntry</h3><ol>
-<li>ImageTable的实体数据是ImageTableEntry，每个entry有两部分数据，一部分是对齐后的图像数据，另一部分是meta信息，meta保存这张图像的UUID和原图UUID，用于校验图像数据的正确性。</li>
-<li>Entry数据是按内存分页大小对齐的，数据大小是内存分页大小的整数倍，这样可以保证虚拟内存缺页加载时使用最少的内存页加载一张图像。</li>
-<li>图像数据做了字节对齐处理，CoreAnimation使用时无需再处理拷贝。具体做法是CGBitmapContextCreate创建位图画布时bytesPerRow参数传64倍数。</li>
-</ol>
-<h3 id="Chunk"><a href="#Chunk" class="headerlink" title="Chunk"></a>Chunk</h3><ul>
-<li>ImageTable和实体数据Entry间多了层Chunk，Chunk是逻辑上的数据划分，N个Entry作为一个Chunk，内存映射mmap操作是以chunk为单位的，每一个chunk执行一次mmap把这个chunk的内容映射到虚拟内存。为什么要多一层chunk呢，按我的理解，这样做是为了灵活控制mmap的大小和调用次数，若对整个ImageTable执行mmap，载入虚拟内存的文件过大，若对每个Entry做mmap，调用次数会太多。</li>
-</ul>
-<h3 id="缓存管理"><a href="#缓存管理" class="headerlink" title="缓存管理"></a>缓存管理</h3><ul>
-<li>用户可以定义整个ImageTable里最大缓存的图像数量，在有新图像需要缓存时，如果缓存没有超过限制，会以chunk为单位扩展文件大小，顺序写下去。如果已超过最大缓存限制，会把最少使用的缓存替换掉，实现方法是每次使用图像都会把UUID插入到MRUEntries数组的开头，MRUEntries按最近使用顺序排列了图像UUID，数组里最后一个图像就是最少使用的。被替换掉的图片下次需要再使用时，再走一次取原图—解压—存储的流程。</li>
-</ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>FastImageCache适合用于tableView里缓存每个cell上同样规格的图像，优点是能极大加快第一次从磁盘加载这些图像的速度。但它有两个明显的缺点：一是占空间大。因为缓存了解码后的位图到磁盘，位图是很大的，宽高100<em>100的图像在2x的高清屏设备下就需要200</em>200*4byte/pixel=156KB，这也是为什么FastImageCache要大费周章限制缓存大小。二是接口不友好，需预定义好缓存的图像尺寸。FastImageCache无法像SDWebImage那样无缝接入UIImageView，使用它需要配置ImageTable，定义好尺寸，手动提供的原图，每种实体图像要定义一个FICEntity模型，使逻辑变复杂。</p>
-<p>FastImageCache已经属于极限优化，做图像加载/渲染优化时应该优先考虑一些低代价高回报的优化点，例如CALayer代替UIImageVIew，减少GPU计算（去透明/像素对齐），图像子线程解码，避免Offscreen-Render等。在其他优化都做到位，图像的渲染还是有性能问题的前提下才考虑使用FastImageCache进一步提升首次加载的性能，不过字节对齐的优化倒是可以脱离FastImageCache直接运用在项目上，只需要在解码图像时bitmap画布的bytesPerRow设为64的倍数即可。</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>FastImageCache</tag>
       </tags>
   </entry>
   <entry>
@@ -2285,6 +2224,67 @@ class CMExpandingTextField: UITextField {
       </tags>
   </entry>
   <entry>
+    <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
+    <url>/post/bang-fastimagecache/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文：<a href="http://blog.cnbang.net/tech/2578/" target="_blank" rel="noopener">iOS图片加载速度极限优化—FastImageCache解析</a></p>
+<p><a href="https://github.com/path/FastImageCache" target="_blank" rel="noopener">FastImageCache</a>是Path团队开发的一个开源库，用于提升图片的加载和渲染速度，让基于图片的列表滑动起来更顺畅，来看看它是怎么做的。</p>
+<a id="more"></a>
+
+<h2 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h2><p>iOS从磁盘加载一张图片，使用UIImageVIew显示在屏幕上，需要经过以下步骤：</p>
+<ol>
+<li>从磁盘拷贝数据到内核缓冲区</li>
+<li>从内核缓冲区复制数据到用户空间</li>
+<li>生成UIImageView，把图像数据赋值给UIImageView</li>
+<li>如果图像数据为未解码的PNG/JPG，解码为位图数据</li>
+<li>CATransaction捕获到UIImageView layer树的变化</li>
+<li>主线程Runloop提交CATransaction，开始进行图像渲染<br> 6.1 如果数据没有字节对齐，Core Animation会再拷贝一份数据，进行字节对齐。<br> 6.2 GPU处理位图数据，进行渲染。</li>
+</ol>
+<p>FastImageCache分别优化了2,4,6.1三个步骤：</p>
+<ol>
+<li>使用mmap内存映射，省去了上述第2步数据从内核空间拷贝到用户空间的操作。</li>
+<li>缓存解码后的位图数据到磁盘，下次从磁盘读取时省去第4步解码的操作。</li>
+<li>生成字节对齐的数据，防止上述第6.1步CoreAnimation在渲染时再拷贝一份数据。</li>
+</ol>
+<p>接下来具体介绍这三个优化点以及它的实现。</p>
+<h3 id="内存映射"><a href="#内存映射" class="headerlink" title="内存映射"></a>内存映射</h3><p>平常我们读取磁盘上的一个文件，上层API调用到最后会使用系统方法read()读取数据，内核把磁盘数据读入内核缓冲区，用户再从内核缓冲区读取数据复制到用户内存空间，这里有一次内存拷贝的时间消耗，并且读取后整个文件数据就已经存在于用户内存中，占用了进程的内存空间。</p>
+<p>FastImageCache采用了另一种读写文件的方法，就是用mmap把文件映射到用户空间里的虚拟内存，文件中的位置在虚拟内存中有了对应的地址，可以像操作内存一样操作这个文件，相当于已经把整个文件放入内存，但在真正使用到这些数据前却不会消耗物理内存，也不会有读写磁盘的操作，只有真正使用这些数据时，也就是图像准备渲染在屏幕上时，虚拟内存管理系统VMS才根据缺页加载的机制从磁盘加载对应的数据块到物理内存，再进行渲染。这样的文件读写文件方式少了数据从内核缓存到用户空间的拷贝，效率很高。</p>
+<h3 id="解码图像"><a href="#解码图像" class="headerlink" title="解码图像"></a>解码图像</h3><p>一般我们使用的图像是JPG/PNG，这些图像数据不是位图，而是是经过编码压缩后的数据，使用它渲染到屏幕之前需要进行解码转成位图数据，这个解码操作是比较耗时的，并且没有GPU硬解码，只能通过CPU，iOS默认会在主线程对图像进行解码。很多库都解决了图像解码的问题，不过由于解码后的图像太大，一般不会缓存到磁盘，SDWebImage的做法是把解码操作从主线程移到子线程，让耗时的解码操作不占用主线程的时间。</p>
+<p>FastImageCache也是在子线程解码图像，不同的是它会缓存解码后的图像到磁盘。因为解码后的图像体积很大，FastImageCache对这些图像数据做了系列缓存管理，详见下文实现部分。另外缓存的图像体积大也是使用内存映射读取文件的原因，小文件使用内存映射无优势，内存拷贝的量少，拷贝后占用用户内存也不高，文件越大内存映射优势越大。</p>
+<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>Core Animation在图像数据非字节对齐的情况下渲染前会先拷贝一份图像数据，官方文档没有对这次拷贝行为作说明，模拟器和Instrument里有高亮显示“copied images”的功能，但似乎它有bug，即使某张图片没有被高亮显示出渲染时被copy，从调用堆栈上也还是能看到调用了CA::Render::copy_image方法：</p>
+<p><img src="/images/fastImageCache1.png" alt="fastImageCache1"></p>
+<p>那什么是字节对齐呢，按我的理解，为了性能，底层渲染图像时不是一个像素一个像素渲染，而是一块一块渲染，数据是一块块地取，就可能遇到这一块连续的内存数据里结尾的数据不是图像的内容，是内存里其他的数据，可能越界读取导致一些奇怪的东西混入，所以在渲染之前CoreAnimation要把数据拷贝一份进行处理，确保每一块都是图像数据，对于不足一块的数据置空。大致图示：(pixel是图像像素数据，data是内存里其他数据)</p>
+<p><img src="/images/fastImageCache2.png" alt="fastImageCache2"></p>
+<p>块的大小应该是跟CPU cache line有关，ARMv7是32byte，A9是64byte，在A9下CoreAnimation应该是按64byte作为一块数据去读取和渲染，让图像数据对齐64byte就可以避免CoreAnimation再拷贝一份数据进行修补。FastImageCache做的字节对齐就是这个事情。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>FastImageCache把同个类型和尺寸的图像都放在一个文件里，根据文件偏移取单张图片，类似web的css雪碧图，这里称为ImageTable。这样做主要是为了方便统一管理图片缓存，控制缓存的大小，整个FastImageCache就是在管理一个个ImageTable的数据。整体实现的数据结构如图：</p>
+<p><img src="/images/fastImageCache3.png" alt="fastImageCache3"></p>
+<p>一些补充和说明：</p>
+<h3 id="ImageTable"><a href="#ImageTable" class="headerlink" title="ImageTable"></a>ImageTable</h3><ol>
+<li>一个ImageFormat对应一个ImageTable，ImageFormat指定了ImageTable里图像渲染格式/大小等信息，ImageTable里的图像数据都由ImageFormat规定了统一的尺寸，每张图像大小都是一样的。</li>
+<li>一个ImageTable一个实体文件，并有另一个文件保存这个ImageTable的meta信息。</li>
+<li>图像使用entityUUID作为唯一标示符，由用户定义，通常是图像url的hash值。ImageTable Meta的indexMap记录了entityUUID-&gt;entryIndex的映射，通过indexMap就可以用图像的entityUUID找到缓存数据在ImageTable对应的位置。</li>
+</ol>
+<h3 id="ImageTableEntry"><a href="#ImageTableEntry" class="headerlink" title="ImageTableEntry"></a>ImageTableEntry</h3><ol>
+<li>ImageTable的实体数据是ImageTableEntry，每个entry有两部分数据，一部分是对齐后的图像数据，另一部分是meta信息，meta保存这张图像的UUID和原图UUID，用于校验图像数据的正确性。</li>
+<li>Entry数据是按内存分页大小对齐的，数据大小是内存分页大小的整数倍，这样可以保证虚拟内存缺页加载时使用最少的内存页加载一张图像。</li>
+<li>图像数据做了字节对齐处理，CoreAnimation使用时无需再处理拷贝。具体做法是CGBitmapContextCreate创建位图画布时bytesPerRow参数传64倍数。</li>
+</ol>
+<h3 id="Chunk"><a href="#Chunk" class="headerlink" title="Chunk"></a>Chunk</h3><ul>
+<li>ImageTable和实体数据Entry间多了层Chunk，Chunk是逻辑上的数据划分，N个Entry作为一个Chunk，内存映射mmap操作是以chunk为单位的，每一个chunk执行一次mmap把这个chunk的内容映射到虚拟内存。为什么要多一层chunk呢，按我的理解，这样做是为了灵活控制mmap的大小和调用次数，若对整个ImageTable执行mmap，载入虚拟内存的文件过大，若对每个Entry做mmap，调用次数会太多。</li>
+</ul>
+<h3 id="缓存管理"><a href="#缓存管理" class="headerlink" title="缓存管理"></a>缓存管理</h3><ul>
+<li>用户可以定义整个ImageTable里最大缓存的图像数量，在有新图像需要缓存时，如果缓存没有超过限制，会以chunk为单位扩展文件大小，顺序写下去。如果已超过最大缓存限制，会把最少使用的缓存替换掉，实现方法是每次使用图像都会把UUID插入到MRUEntries数组的开头，MRUEntries按最近使用顺序排列了图像UUID，数组里最后一个图像就是最少使用的。被替换掉的图片下次需要再使用时，再走一次取原图—解压—存储的流程。</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>FastImageCache适合用于tableView里缓存每个cell上同样规格的图像，优点是能极大加快第一次从磁盘加载这些图像的速度。但它有两个明显的缺点：一是占空间大。因为缓存了解码后的位图到磁盘，位图是很大的，宽高100<em>100的图像在2x的高清屏设备下就需要200</em>200*4byte/pixel=156KB，这也是为什么FastImageCache要大费周章限制缓存大小。二是接口不友好，需预定义好缓存的图像尺寸。FastImageCache无法像SDWebImage那样无缝接入UIImageView，使用它需要配置ImageTable，定义好尺寸，手动提供的原图，每种实体图像要定义一个FICEntity模型，使逻辑变复杂。</p>
+<p>FastImageCache已经属于极限优化，做图像加载/渲染优化时应该优先考虑一些低代价高回报的优化点，例如CALayer代替UIImageVIew，减少GPU计算（去透明/像素对齐），图像子线程解码，避免Offscreen-Render等。在其他优化都做到位，图像的渲染还是有性能问题的前提下才考虑使用FastImageCache进一步提升首次加载的性能，不过字节对齐的优化倒是可以脱离FastImageCache直接运用在项目上，只需要在解码图像时bitmap画布的bytesPerRow设为64的倍数即可。</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>FastImageCache</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>「转」一个NB的补救项目国际化的方案</title>
     <url>/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><a href="http://www.devashen.com/blog/2016/01/15/localized02/" target="_blank" rel="noopener"> iOS 多语言版本的开发（二）</a> 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了<a href="https://github.com/Ashen-Zhao/easyLocalized" target="_blank" rel="noopener">Demo</a> 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单快捷高效的方法，让我慢慢与您道来；</p>
@@ -2321,82 +2321,6 @@ class CMExpandingTextField: UITextField {
       </categories>
       <tags>
         <tag>国际化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「转」一张思维导图，让正则表达式不再难懂</title>
-    <url>/post/reprinted-regular-mind-map/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="/images/bruch-up-regular-expressions-1.png" alt="思维导图"></p>
-<a id="more"></a>
-
-<h2 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h2><ul>
-<li><p>普通字符：字母、数字、汉字、下划线，匹配与之相同的一个字符</p>
-</li>
-<li><p>简单转义字符：\n（换行）,\t（制表）,\（\本身）和 ^…（^等有特殊作用的符号如要匹配自己的话要用转义）</p>
-</li>
-<li><p>标准字符集合<br>注意区分大小写，大写是相反的意思，匹配相反是不匹配</p>
-<ul>
-<li>\d<br>  任意一个数字，0~9</li>
-<li>\w<br>  任意一个字母、数字、汉字或下划线，A<del>Z、a</del>z、0~9、_和任意一个汉字</li>
-<li>\s<br>  任意空白符，包括空格、制表符、换行符</li>
-<li>.<br>  小数点可以匹配任意一个字符，换行除外（如果要匹配包括”\n”在内的所有字符，一般用[\s\S]）</li>
-</ul>
-</li>
-<li><p>自定义字符集合<br>[ ]方括号匹配方式，能够匹配方括号中的任意一个字符,^表示取反</p>
-<ul>
-<li>[ab5@]<br>  匹配”a”或”b”或”5”或”@”</li>
-<li>[^abc]<br>  匹配a、b、c之外的任意字符</li>
-<li>[f-k]<br>  匹配“f”到”k”之间的字符</li>
-<li>[^A-F0-3]<br>  匹配“A”-“F”,”0”-“3”之外的任意一个字符</li>
-</ul>
-</li>
-</ul>
-<h2 id="量词-Quantifier"><a href="#量词-Quantifier" class="headerlink" title="量词(Quantifier)"></a>量词(Quantifier)</h2><p>修饰前面的一个表达式，如果要修饰多个表达式，就用( )把表达式包起来</p>
-<ul>
-<li>{n}<br>  表达式重复n次​</li>
-<li>{m,n}<br>  表达式至少重复m次，最多重复n次<ul>
-<li>贪婪模式 （默认）<br>匹配符合的最长的字符串</li>
-<li>非贪婪模式 （在量词后面加 ? 例：{m,n}? )<br>  匹配符合的最短的字符串</li>
-</ul>
-</li>
-<li>{m,}<br>  表达式至少重复m次</li>
-<li>？<br>  匹配表达式0或1次，相当于{0,1}</li>
-<li>+<br>  表达式至少出现一次，相当于{1,}</li>
-<li>*<br>  表达式不出现或出现任意次，相当于{0,}</li>
-</ul>
-<h2 id="字符边界"><a href="#字符边界" class="headerlink" title="字符边界"></a>字符边界</h2><pre><code>零宽：匹配的不是字符而是位置，符合某种条件的位置</code></pre>
-<ul>
-<li>^<br>  与字符串开始的地方匹配</li>
-<li>$<br>  与字符串结束的地方匹配</li>
-<li>\b<br>  匹配一个单词的边界，当前位置前面的字符和后面的字符不全是\w</li>
-</ul>
-<h2 id="预搜索（零宽断言、环视）"><a href="#预搜索（零宽断言、环视）" class="headerlink" title="预搜索（零宽断言、环视）"></a>预搜索（零宽断言、环视）</h2><p>零宽：匹配的不是字符而是位置，符合某种条件的位置</p>
-<ul>
-<li>(?=exp)<br>  断言自身出现的位置的后面能匹配表达式exp</li>
-<li>(?!exp)<br>  断言自身出现的位置的后面不能匹配表达式exp</li>
-<li>(?&lt;=exp)<br>  断言自身出现的位置的前面能匹配表达式exp</li>
-<li>(?&lt;!exp)<br>  断言自身出现的位置的前面不能匹配表达式exp</li>
-</ul>
-<h2 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h2><p>对文本的处理方式</p>
-<ul>
-<li>IGNORECASE 忽略大小写模式<br>  匹配时忽略大小写<br>  默认是区分大小写的</li>
-<li>SINGLELINE 单行模式<br>  整个文本看作一个字符串，只有一个开头一个结尾<br>  使小数点”.”可以匹配包含换行符(\n)在内的任意字符</li>
-<li>MULTILINE 多行模式<br>  每行都是一个字符串<br>  在多行模式下，如果需要仅匹配字符串开始和结束位置，可以使用\A和\Z</li>
-</ul>
-<h2 id="选择符和分组"><a href="#选择符和分组" class="headerlink" title="选择符和分组"></a>选择符和分组</h2><p>分支结构、捕获组合非捕获组</p>
-<ul>
-<li>| 分支结构​<br>  左右表达式之间“或”关系，匹配左边或右边</li>
-<li>( ) 捕获组<br>  （1）、在被修饰匹配次数的时候，括号中的表达式可以作为整体被修饰<br>  （2）、取匹配结果的时候，括号中的表达式匹配到的内容可以被单独得到<br>  （3）、每一对括号会分配一个编号，使用（）的捕获根据左括号的顺序从1开始自动编号。捕获编号为零的第一个捕获是整个正则表达式模式匹配的文本<br>   反向引用：通过反向引用，可以对分组已捕获的字符串进行引用。</li>
-<li>(?:Expression) 非捕获组<br>  一些表达式中，不得不使用（），但又不需要保存（）中子表达式匹配的内容，这时可以用非捕获组来抵消（）带来的副作用。</li>
-</ul>
-<hr>
-<p>原文：<a href="https://my.oschina.net/u/3080373/blog/1550653" target="_blank" rel="noopener">一张思维导图，让正则表达式不再难懂</a></p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>正则表达式</tag>
       </tags>
   </entry>
   <entry>
@@ -2478,6 +2402,82 @@ class CMExpandingTextField: UITextField {
       </categories>
       <tags>
         <tag>优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「转」一张思维导图，让正则表达式不再难懂</title>
+    <url>/post/reprinted-regular-mind-map/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="/images/bruch-up-regular-expressions-1.png" alt="思维导图"></p>
+<a id="more"></a>
+
+<h2 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h2><ul>
+<li><p>普通字符：字母、数字、汉字、下划线，匹配与之相同的一个字符</p>
+</li>
+<li><p>简单转义字符：\n（换行）,\t（制表）,\（\本身）和 ^…（^等有特殊作用的符号如要匹配自己的话要用转义）</p>
+</li>
+<li><p>标准字符集合<br>注意区分大小写，大写是相反的意思，匹配相反是不匹配</p>
+<ul>
+<li>\d<br>  任意一个数字，0~9</li>
+<li>\w<br>  任意一个字母、数字、汉字或下划线，A<del>Z、a</del>z、0~9、_和任意一个汉字</li>
+<li>\s<br>  任意空白符，包括空格、制表符、换行符</li>
+<li>.<br>  小数点可以匹配任意一个字符，换行除外（如果要匹配包括”\n”在内的所有字符，一般用[\s\S]）</li>
+</ul>
+</li>
+<li><p>自定义字符集合<br>[ ]方括号匹配方式，能够匹配方括号中的任意一个字符,^表示取反</p>
+<ul>
+<li>[ab5@]<br>  匹配”a”或”b”或”5”或”@”</li>
+<li>[^abc]<br>  匹配a、b、c之外的任意字符</li>
+<li>[f-k]<br>  匹配“f”到”k”之间的字符</li>
+<li>[^A-F0-3]<br>  匹配“A”-“F”,”0”-“3”之外的任意一个字符</li>
+</ul>
+</li>
+</ul>
+<h2 id="量词-Quantifier"><a href="#量词-Quantifier" class="headerlink" title="量词(Quantifier)"></a>量词(Quantifier)</h2><p>修饰前面的一个表达式，如果要修饰多个表达式，就用( )把表达式包起来</p>
+<ul>
+<li>{n}<br>  表达式重复n次​</li>
+<li>{m,n}<br>  表达式至少重复m次，最多重复n次<ul>
+<li>贪婪模式 （默认）<br>匹配符合的最长的字符串</li>
+<li>非贪婪模式 （在量词后面加 ? 例：{m,n}? )<br>  匹配符合的最短的字符串</li>
+</ul>
+</li>
+<li>{m,}<br>  表达式至少重复m次</li>
+<li>？<br>  匹配表达式0或1次，相当于{0,1}</li>
+<li>+<br>  表达式至少出现一次，相当于{1,}</li>
+<li>*<br>  表达式不出现或出现任意次，相当于{0,}</li>
+</ul>
+<h2 id="字符边界"><a href="#字符边界" class="headerlink" title="字符边界"></a>字符边界</h2><pre><code>零宽：匹配的不是字符而是位置，符合某种条件的位置</code></pre>
+<ul>
+<li>^<br>  与字符串开始的地方匹配</li>
+<li>$<br>  与字符串结束的地方匹配</li>
+<li>\b<br>  匹配一个单词的边界，当前位置前面的字符和后面的字符不全是\w</li>
+</ul>
+<h2 id="预搜索（零宽断言、环视）"><a href="#预搜索（零宽断言、环视）" class="headerlink" title="预搜索（零宽断言、环视）"></a>预搜索（零宽断言、环视）</h2><p>零宽：匹配的不是字符而是位置，符合某种条件的位置</p>
+<ul>
+<li>(?=exp)<br>  断言自身出现的位置的后面能匹配表达式exp</li>
+<li>(?!exp)<br>  断言自身出现的位置的后面不能匹配表达式exp</li>
+<li>(?&lt;=exp)<br>  断言自身出现的位置的前面能匹配表达式exp</li>
+<li>(?&lt;!exp)<br>  断言自身出现的位置的前面不能匹配表达式exp</li>
+</ul>
+<h2 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h2><p>对文本的处理方式</p>
+<ul>
+<li>IGNORECASE 忽略大小写模式<br>  匹配时忽略大小写<br>  默认是区分大小写的</li>
+<li>SINGLELINE 单行模式<br>  整个文本看作一个字符串，只有一个开头一个结尾<br>  使小数点”.”可以匹配包含换行符(\n)在内的任意字符</li>
+<li>MULTILINE 多行模式<br>  每行都是一个字符串<br>  在多行模式下，如果需要仅匹配字符串开始和结束位置，可以使用\A和\Z</li>
+</ul>
+<h2 id="选择符和分组"><a href="#选择符和分组" class="headerlink" title="选择符和分组"></a>选择符和分组</h2><p>分支结构、捕获组合非捕获组</p>
+<ul>
+<li>| 分支结构​<br>  左右表达式之间“或”关系，匹配左边或右边</li>
+<li>( ) 捕获组<br>  （1）、在被修饰匹配次数的时候，括号中的表达式可以作为整体被修饰<br>  （2）、取匹配结果的时候，括号中的表达式匹配到的内容可以被单独得到<br>  （3）、每一对括号会分配一个编号，使用（）的捕获根据左括号的顺序从1开始自动编号。捕获编号为零的第一个捕获是整个正则表达式模式匹配的文本<br>   反向引用：通过反向引用，可以对分组已捕获的字符串进行引用。</li>
+<li>(?:Expression) 非捕获组<br>  一些表达式中，不得不使用（），但又不需要保存（）中子表达式匹配的内容，这时可以用非捕获组来抵消（）带来的副作用。</li>
+</ul>
+<hr>
+<p>原文：<a href="https://my.oschina.net/u/3080373/blog/1550653" target="_blank" rel="noopener">一张思维导图，让正则表达式不再难懂</a></p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>正则表达式</tag>
       </tags>
   </entry>
   <entry>
