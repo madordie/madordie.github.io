@@ -458,11 +458,11 @@
         
         <tags>
             
-            <tag> blog </tag>
-            
             <tag> gitment </tag>
             
             <tag> gitalk </tag>
+            
+            <tag> blog </tag>
             
         </tags>
         
@@ -3308,9 +3308,9 @@ class CMExpandingTextField: UITextField {
         
         <tags>
             
-            <tag> SEO </tag>
-            
             <tag> blog </tag>
+            
+            <tag> SEO </tag>
             
         </tags>
         
