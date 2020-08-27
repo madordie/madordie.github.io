@@ -42,7 +42,7 @@ function checkout_URLs() {
         exit 1
     fi
     rm -rf .tmp-*
-    echo -e ' --> 文章URL已校验.\n'
+    echo ' --> 文章URL已校验.\n'
 }
 
 # 备份
@@ -51,7 +51,7 @@ function backup() {
     git add .
     git commit -am "backup"
     git push https://github.com/madordie/madordie.github.io.git hexo
-    echo -e ' --> 已备份.\n'
+    echo ' --> 已备份.\n'
 }
 
 
@@ -67,20 +67,20 @@ elif [ $opt = 'p' ]; then
     setproxy
     hexo clean
     hexo generate --deploy --force --bail
-    echo -e ' --> 已成功部署.\n'
+    echo ' --> 已成功部署.\n'
     sleep 1
     unsetproxy
     # # 这个脚本在这里：https://madordie.github.io/post/use-hexo-setup-blog/
     # python auto-push-sitemap.py
-    # echo -e ' --> 已上传站图.\n'
+    # echo ' --> 已上传站图.\n'
     setproxy
     backup
     cd ./source
     ruby comment.rb
-    echo -e ' --> 评论已自动创建.\n'
+    echo ' --> 评论已自动创建.\n'
     sitemap=`mktemp`
     curl -s https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml | grep madordie.github.io | awk -v FS='<loc>|</loc>' '{print $2}' > sitemap
     curl -H 'Content-Type:text/plain' --data-binary @sitemap "http://data.zz.baidu.com/urls?site=https://madordie.github.io&token=`cat .baidu-token`"
 fi
 
-echo -e ' -->  所有操作已完成.'
+echo ' -->  所有操作已完成.'
