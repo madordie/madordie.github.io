@@ -769,6 +769,221 @@
       </categories>
   </entry>
   <entry>
+    <title>iOS自动化-Jenkins环境搭建</title>
+    <url>/post/ios-automation-jenkins-configuration/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
+<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
+<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
+</ul>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p> <strong>Jenkins</strong><br><em>Build great things at any scale</em><br>The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.</p>
+</blockquote>
+<p>如<a href="https://jenkins.io/" target="_blank" rel="noopener">官网</a>所说<code>Build great things at any scale</code></p>
+<p>从这篇文章中你将会实现：</p>
+<ul>
+<li>在Mac上多种方案安装并启动jenkins</li>
+<li>在局域网中正常访问jenkins</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>当然你首先需要一个macOS的系统，为后来的构建做基础。</p>
+<p>Jenkins中可以使用<code>pkg</code>、<code>war</code>的方式运行，当然还有在<a href="https://jenkins.io/doc/book/getting-started/installing/" target="_blank" rel="noopener">Installing Jenkins</a>中提供一些安装方式：</p>
+<blockquote>
+<p> <strong>macOS</strong><br>To install from the website, using a package:</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>Download the latest package</li>
+<li>Open the package and follow the instructions</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Jenkins can also be installed using brew:</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>Install the latest release version<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">brew install jenkins </span><br></pre></td></tr></table></figure></li>
+<li>Install the LTS version<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">brew install jenkins-lts </span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>这里使用<code>brew</code>，因为<strong>很方便</strong>：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ brew update &amp;&amp; brew install jenkins</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line">$ brew update &amp; brew upgrade jenkins</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后台运行 还支持`stop`、`restart`等 (这种方式还是有差别的，下面会说明)</span></span><br><span class="line">$ brew services start jenkins</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>建议先来看一波<code>--help</code></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ jenkins --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>直接运行<code>jenkins</code>命令，可以看到日志输出，但是不能退出命令。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ jenkins</span><br></pre></td></tr></table></figure>
+
+<p>经过漫长的初始化，会将</p>
+<ul>
+<li><code>~/.jenkins</code>目录作为<code>JENKINS_HOME</code></li>
+<li><code>localhost:8080</code>作为默认URL</li>
+</ul>
+<p>终端输出<code>Started initialization</code>一行之后就可以正常打开了。</p>
+<p>在浏览器打开<a href="http://10.12.12.10:8080/" target="_blank" rel="noopener">http://10.12.12.10:8080</a>就可以正常加载啦～</p>
+<p>退出运行：<code>control + C</code> 组合键。</p>
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>直接<code>open</code>，看不到日志输出，所对应的运行环境和方案一相同。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ open /usr/<span class="built_in">local</span>/opt/jenkins/libexec/jenkins.war</span><br></pre></td></tr></table></figure>
+
+<p>命令结束，稍等片刻(初始化相关目录、环境)，在浏览器打开<a href="http://10.12.12.10:8080/" target="_blank" rel="noopener">http://10.12.12.10:8080</a>就可以正常加载啦～</p>
+<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>使用<code>brew</code>直接挂在后台作为服务运行起来</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sudo brew services start jenkins</span><br></pre></td></tr></table></figure>
+
+<p><code>brew</code>还提供其他的参数，比如说<code>restart</code>、<code>list</code>、<code>stop</code> 等等。</p>
+<p>此方案和上面的运行环境是不一样的，会有些权限的差别。</p>
+<h3 id="其他方案"><a href="#其他方案" class="headerlink" title="其他方案"></a>其他方案</h3><p>使用<code>launchctl</code>、<code>nohup</code> 等其他方案进行的后台运行，同方案三差不多。</p>
+<p>需要说的是<code>launchctl</code>是macOS下系统提供的后台运行方案，<code>brew</code>等，均来自于此。</p>
+<p>在<code>launchctl</code>后台中需要一个<code>plist</code>，但是<code>brew</code>已经做好了，放置在<code>~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</code>。需要说的是<code>launchctl</code>是macOS下系统提供的后台运行方案，<code>brew</code>等，均来自于此，具体的配置参数都和<code>launchctl</code>一样的，搜索一下很多。<code>brew</code>为我们已经准备好了一个，直接使用<code>方案三</code>就行。</p>
+<p>具体操作可以Google一下，很多的～</p>
+<h2 id="安装完成后的配置"><a href="#安装完成后的配置" class="headerlink" title="安装完成后的配置"></a>安装完成后的配置</h2><p>在Jenkins初始化完毕为了验证管理员身份，需要将Jenkins机器上的一个字符串输入到<a href="http://10.12.12.10:8080/" target="_blank" rel="noopener">http://10.12.12.10:8080</a>中进行验证，具体文件目录在输入的界面就能看到，不要大惊小怪。</p>
+<p>之后开始选择安装插件。这里可以选择推荐的～～，也可以自己勾选。为了方便，这里直接选择推荐的方案进行安装。</p>
+<p>经过漫长的等待，终于将插件安装完毕，并启动了起来～～</p>
+<p>Jenkins权限，嗯，这个很重要，可以去<code>系统管理 -&gt; Configure Global Security</code>  中进行设置。</p>
+<p>接下来开始去配置工程吧！传送门：<a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></p>
+<h2 id="可能会碰到的错误"><a href="#可能会碰到的错误" class="headerlink" title="可能会碰到的错误"></a>可能会碰到的错误</h2><h3 id="Error-Permission-denied"><a href="#Error-Permission-denied" class="headerlink" title="Error: Permission denied - ***"></a>Error: Permission denied - ***</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew services start jenkins</span><br><span class="line">Error: Permission denied - ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</span><br></pre></td></tr></table></figure>
+<p>这种很明显<code>Permission denied</code>，在命令行前添加<code>sudo</code>，然后输入密码即可。如下：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sudo brew services start jenkins</span><br></pre></td></tr></table></figure>
+
+<h3 id="方案二后的地址哪里来的？"><a href="#方案二后的地址哪里来的？" class="headerlink" title="方案二后的地址哪里来的？"></a><code>方案二</code>后的地址哪里来的？</h3><p>这里推荐的安装方案是<code>brew install jenkins</code></p>
+<p>通过下面的方式找到<code>brew</code>安装的位置</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew services list</span><br><span class="line">Name       Status  User Plist</span><br><span class="line">beanstalkd stopped</span><br><span class="line">influxdb   stopped</span><br><span class="line">jenkins    started keith  ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</span><br><span class="line">nginx      stopped</span><br><span class="line">sonarqube  stopped</span><br><span class="line">FDDdeiMac:~ FDD$ cat ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</span><br><span class="line">...</span><br><span class="line">&lt;string&gt;/usr/<span class="built_in">local</span>/opt/jenkins/libexec/jenkins.war&lt;/string&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="给Jenkins绑定一个IP"><a href="#给Jenkins绑定一个IP" class="headerlink" title="给Jenkins绑定一个IP"></a>给Jenkins绑定一个IP</h3><p>讲道理这个不应该在这里聊的😂，不过还是说一下吧。。</p>
+<p>一般局域网中都是直接自动获取IP信息的也就是DHCP，但是Jenkins总改IP也不好。。于是绑定一下吧。</p>
+<p>在mac 中 <code>系统偏好设置 -&gt; 网络</code> 记录下来当前获取到的IP。</p>
+<p>在<code>高级</code>中将<code>使用DHCP</code>修改为<code>使用DHCP(手动设定地址)</code>，然后将上面的地址填进去就好啦～</p>
+<p>当然你也可以指定其他的地址，只要别人没有占用😂，你开心就好～</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>构建</tag>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Fastlane自动化笔记</title>
+    <url>/post/fastlane-note/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！<br>回看之前的<a href="../build-ipa-sh">build-ipa-sh.md</a>确实比较僵硬。自动化还是很棒的。</p>
+<a id="more"></a>
+
+<h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><p>  (<a href="http://icyleaf.com/" target="_blank" rel="noopener">@icyleaf</a>)在<a href="https://icyleaf.com/2016/07/intro-fastlane-automation-for-ios-and-android/" target="_blank" rel="noopener">Fastlane - iOS 和 Android 的自动化构建工具</a>中说到：</p>
+<blockquote>
+<p>Fastlane 提供的流程的众多工具都是可以独立存在和使用（提供 cli 命令），也可以统一由 fastlane 来控制。它在使用中提出了两个概念：</p>
+</blockquote>
+<pre><code>- action: Fastlane 的插件，截至当前内置 165 个至多，不过每个动作的颗粒度大小不一。查看详情
+- lane: Fastlane 的任务（或者可以理解为命令），一个可以包含多个 lanes，通过 fastlane cli 传入制定的 lane 来执行。</code></pre>
+<p>  自我感觉这句话这个对理解和使用很重要！</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>  Fastlane已被Fabric收购，所以按照其安装也很随意(<a href="https://fabric.io/features/distribution" target="_blank" rel="noopener">戳我配置</a>)。<br>  对于打包，</p>
+<h1 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h1><ul>
+<li><a href="http://icyleaf.com/2016/07/fastlane-in-action/" target="_blank" rel="noopener">深入浅出 Fastlane 一看你就懂</a></li>
+<li><a href="http://blog.fir.im/fir_im_weekly160505" target="_blank" rel="noopener">fir.im weekly - 「 持续集成 」实践教程合集</a></li>
+<li><a href="https://everettjf.github.io/2015/09/08/ios-ci-with-fastlane" target="_blank" rel="noopener">使用fastlane实现iOS持续集成</a></li>
+<li><a href="https://docs.fastlane.tools/" target="_blank" rel="noopener">fastlane docs</a></li>
+<li><a href="https://github.com/fastlane/fastlane" target="_blank" rel="noopener">fastlane GitHub</a></li>
+<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part01" target="_blank" rel="noopener">Fastlane实战（一）：移动开发自动化之道</a></li>
+<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part02" target="_blank" rel="noopener">Fastlane实战（二）：Action和Plugin机制</a></li>
+<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part03" target="_blank" rel="noopener">Fastlane实战（三）：Fastlane在Android平台的应用</a></li>
+<li><a href="http://www.infoq.com/cn/articles/fastlane-automatic-testing" target="_blank" rel="noopener">Fastlane实战（四）：自动化测试篇</a></li>
+<li><a href="http://www.infoq.com/cn/articles/fastlane-pro-tips" target="_blank" rel="noopener">Fastlane实战（五）：高级用法</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>构建</tag>
+        <tag>Fastlane</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS自动化-Jenkins编译工程</title>
+    <url>/post/ios-automation-jenkins-build/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
+<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
+<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
+</ul>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～</p>
+<p>从这个文章中你将要实现以下功能：</p>
+<ul>
+<li>在Jenkins创建工程</li>
+<li>build出ipa</li>
+<li>将ipa上传至fir</li>
+<li>钉钉机器人群通知</li>
+<li>将dsym上传至bugly</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><p>这里大多数操作都是用脚本来进行的，不为别的，就为自由和以后～</p>
+<h3 id="fastlane"><a href="#fastlane" class="headerlink" title="fastlane"></a>fastlane</h3><p>此乃自动化神器。<a href="https://docs.fastlane.tools/" target="_blank" rel="noopener">文档在此</a>。<a href="https://github.com/fastlane/fastlane" target="_blank" rel="noopener">开源哟～</a></p>
+<p>此处主要用来编译、打包。</p>
+<p>安装方法：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew cask install fastlane</span><br></pre></td></tr></table></figure>
+
+<p>此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。</p>
+<p>在Xcode9 我使用的版本2.14.1打包出问题了。。具体在这里详见<a href="../debug-xcode9-build-ipa">Xcode9编译失败</a>。于是呼采用了<code>xcodebuild</code>进行打包</p>
+<h3 id="fir-im-cli"><a href="#fir-im-cli" class="headerlink" title="fir.im-cli"></a>fir.im-cli</h3><p><a href="https://fir.im/" target="_blank" rel="noopener">fir.im</a>提供的应用内测托管工具。<a href="https://github.com/FIRHQ/fir-cli/blob/master/README.md" target="_blank" rel="noopener">开源官网</a>。</p>
+<p>安装方法：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem install fir-cli</span><br></pre></td></tr></table></figure>
+
+<p>此工具也提供打包ipa、apk、上传符号表至BugHD、等功能。但是我们在这里选择了<code>fastlane gym</code></p>
+<p>上传加速：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sh -c <span class="string">"<span class="variable">$(curl -sSL https://gist.githubusercontent.com/trawor/5dda140dee86836b8e60/raw/turbo-qiniu.sh)</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>上传加速代码已经<a href="http://blog.fir.im/turbo-qiniu/" target="_blank" rel="noopener">开源至此</a>。</p>
+<p><a href="http://bughd.com/" target="_blank" rel="noopener">BugHD</a>: 已停止线上免费服务，开始卖私有部署了。</p>
+<p>另外，fir 也有<a href="http://blog.fir.im/jenkins/" target="_blank" rel="noopener">Jenkins插件</a>，但是这里选择脚本方式。</p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
+<p>确保以下插件已经被安装：</p>
+<ul>
+<li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin" target="_blank" rel="noopener">Git Plugin</a></li>
+<li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin" target="_blank" rel="noopener">Tool Environment Plugin</a></li>
+</ul>
+<p>嗯，开始创建工程，然后配置打包吧！</p>
+<h2 id="工程相关配置"><a href="#工程相关配置" class="headerlink" title="工程相关配置"></a>工程相关配置</h2><p>左侧的<code>新建(New Item)</code>我就不说了吧～，点击输入项目名字，然后选择第一个<code>构建一个自由风格的软件项目</code>就行啦～～</p>
+<p>此处项目名字暂且成为<code>test</code>。这里只说一些比较重要的，没有活不成的那种配置。别的自己研究一下或者点击右侧❓就能看到介绍。</p>
+<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>此处点击<code>Git</code>，展开之后输入<code>Repository URL</code>即可。</p>
+<p><code>Repository URL</code>输入完毕之后点击别处，Jenkins的Git插件会自动校验该URL是否能够clone下来代码。出现红色就自己根据错误修改一下咯。。</p>
+<p>另外此处支持<code>ssh</code> 的方式，大致样式为：<code>ssh://sunjigang@github.com:29418/projects/aaa</code>。</p>
+<p><code>Branches to build</code> 写上你的构建分支～，根据自己需求来，<code>master</code>一般为仓库的默认分支。</p>
+<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><p>此处表示该项目的构建触发条件。（可选）</p>
+<p>我们这里说一下<code>Poll SCM</code>：</p>
+<p>定时检查源码变更。条件是 一定要配置<code>Git</code>这样的源码管理。</p>
+<p>例子：</p>
+<ul>
+<li><code>H/15 * * * *</code>：每15分钟构建一次</li>
+<li><code>0 2 * * *</code>： 每天2:00构建一次</li>
+</ul>
+<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>此处为构建的核心😂。当然，我们为了自由，此处全部使用<code>shell</code>脚本。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 工程名</span></span><br><span class="line">workspace=<span class="string">'xxx.xcworkspace'</span></span><br><span class="line"><span class="comment"># 构建scheme</span></span><br><span class="line">scheme=<span class="string">'xxx'</span></span><br><span class="line"><span class="comment"># 打包类型：app-store, ad-hoc, package, enterprise, development, and developer-id.</span></span><br><span class="line">export_method=<span class="string">'enterprise'</span></span><br><span class="line"><span class="comment"># fir的token，在fir-&gt;用户-&gt;token 获取</span></span><br><span class="line">fir_token=<span class="string">'c5077e0368888b9750ae848b9fe00***'</span></span><br><span class="line"><span class="comment"># fir上传短链接，效果为 https://fir.im/xxx</span></span><br><span class="line">fir_url=<span class="string">'xxx'</span></span><br><span class="line"><span class="comment"># 钉钉机器人token</span></span><br><span class="line">dingtalk_token=<span class="string">'6d09e43ddc62e540be914ff2e901e28b921d55c5ad457f6f3571f9f881287***'</span></span><br><span class="line"><span class="comment"># 钉钉机器人发送的内容</span></span><br><span class="line">dingtalk_content=<span class="string">"iOSXXX已经上传至 http://fir.im/<span class="variable">$&#123;fir_url&#125;</span> ,吧啦吧啦吧啦～"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建</span></span><br><span class="line">fastlane gym</span><br><span class="line">    --workspace <span class="variable">$workspace</span> \</span><br><span class="line">    --scheme <span class="variable">$scheme</span> \</span><br><span class="line">    --export_method <span class="variable">$export_method</span> \</span><br><span class="line">    clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># fir</span></span><br><span class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls *.ipa)</span><br><span class="line">git <span class="built_in">log</span> -10 &gt; git.log</span><br><span class="line">fir p <span class="variable">$ipa</span> -T <span class="variable">$fir_token</span> -s <span class="variable">$fir_url</span> -c git.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 钉钉通知</span></span><br><span class="line">curl <span class="string">"https://oapi.dingtalk.com/robot/send?access_token=<span class="variable">$&#123;dingtalk_token&#125;</span>"</span> -H <span class="string">'Content-Type: application/json'</span>    -d <span class="string">'</span></span><br><span class="line"><span class="string">    &#123;"msgtype": "text",</span></span><br><span class="line"><span class="string">        "text": &#123;</span></span><br><span class="line"><span class="string">            "content":$&#123;dingtalk_content&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;'</span></span><br></pre></td></tr></table></figure>
+
+<p>至此 已经完成了打包、上传fir、钉钉机器人通知。</p>
+<p>上述脚本只是配置的例子，可以根据自己需求，自己编写和配置。特别是</p>
+<ul>
+<li><code>.xcworkspace</code>的位置，要找清楚呀</li>
+<li><code>scheme</code>无法找到是因为你在提交代码的时候没有将其设置为shared</li>
+<li><code>fastlane gym</code> 支持很多参数，是对<code>xcodebuild</code>的封装，<a href="https://github.com/fastlane/fastlane/tree/master/gym" target="_blank" rel="noopener">源码及文档在此</a></li>
+</ul>
+<h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
+<p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
+<p>其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 路径主要用来提取Info.plist以及dsym文件</span></span><br><span class="line">path=<span class="string">'/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo'</span></span><br><span class="line"><span class="comment"># scheme name</span></span><br><span class="line">scheme=<span class="string">'Fangduoduo_ent'</span></span><br><span class="line"><span class="comment"># ipa bundleId</span></span><br><span class="line">package=<span class="string">'xx.xx.com'</span></span><br><span class="line"><span class="comment"># bugly id</span></span><br><span class="line">bugly_id=<span class="string">'9xxx'</span></span><br><span class="line"><span class="comment"># bugly key</span></span><br><span class="line">bugly_key=<span class="string">'wHzxcxxx'</span></span><br><span class="line"></span><br><span class="line">rm -rf *dSYM*</span><br><span class="line">cp <span class="variable">$&#123;path&#125;</span>/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist</span><br><span class="line">cp -rf <span class="variable">$&#123;path&#125;</span>/build/*.xcarchive/dSYMs .</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------ post dsym ------------ #</span></span><br><span class="line"></span><br><span class="line">app_infoplist_path=<span class="string">'Info.plist'</span></span><br><span class="line">version=$(/usr/libexec/PlistBuddy -c <span class="string">"print CFBundleVersion"</span> <span class="variable">$&#123;app_infoplist_path&#125;</span>)</span><br><span class="line"></span><br><span class="line">java -jar ./bugly/buglySymboliOS.jar \</span><br><span class="line">	-i dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM \</span><br><span class="line">    -dsym \</span><br><span class="line">    -u \</span><br><span class="line">    -id <span class="variable">$&#123;bugly_id&#125;</span> \</span><br><span class="line">    -key <span class="variable">$&#123;bugly_key&#125;</span> \</span><br><span class="line">    -package <span class="variable">$&#123;package&#125;</span> \</span><br><span class="line">    -version <span class="variable">$&#123;version&#125;</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># ------------ UUID ------------ #</span></span><br><span class="line"></span><br><span class="line">unzip -o ./dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM.zip</span><br><span class="line">xcrun dwarfdump --uuid ./<span class="variable">$&#123;scheme&#125;</span> &gt;&gt; ./uuids-<span class="variable">$&#123;version&#125;</span>.txt</span><br></pre></td></tr></table></figure>
+
+<p>值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。</p>
+<p>如果还有问题，可以在<a href="../../about">关于</a>中找到我。</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>构建</tag>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DEBUG - Xcode解析.crash</title>
     <url>/post/debug-xcode8-analysis-crash-file/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
@@ -1207,35 +1422,6 @@
       </tags>
   </entry>
   <entry>
-    <title>如何实现AppStore查看更多的方法</title>
-    <url>/post/appstore-truncate/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="UITextView-More"><a href="#UITextView-More" class="headerlink" title="UITextView-More"></a><a href="https://github.com/madordie/UITextView-More" target="_blank" rel="noopener">UITextView-More</a></h2><p>使用UITextKit 实现“更多”的折叠效果</p>
-<p><img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="预览"></p>
-<a id="more"></a>
-
-<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><h3 id="获取最后一行Rect"><a href="#获取最后一行Rect" class="headerlink" title="获取最后一行Rect"></a>获取最后一行Rect</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> lastRect = <span class="type">CGRect</span>.zero</span><br><span class="line">layoutManager.enumerateEnclosingRects(forGlyphRange: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: textStorage.string.characters.<span class="built_in">count</span>), withinSelectedGlyphRange: <span class="type">NSRange</span>(location: <span class="type">NSNotFound</span>, length: <span class="number">0</span>), <span class="keyword">in</span>: textContainer, using: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (rect, isStop) <span class="keyword">in</span></span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> _self = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"><span class="keyword">var</span> newRect = rect</span><br><span class="line">newRect.origin.y += _self.textContainerInset.top</span><br><span class="line">lastRect = newRect</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">print</span>(lastRect)</span><br></pre></td></tr></table></figure>
-
-<h3 id="增加-exclusionPaths"><a href="#增加-exclusionPaths" class="headerlink" title="增加 exclusionPaths"></a>增加 <code>exclusionPaths</code></h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">textContainer.exclusionPaths = [<span class="type">UIBezierPath</span>.<span class="keyword">init</span>(rect: rect)]</span><br></pre></td></tr></table></figure>
-
-<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
-<li><code>UITextView</code>默认携带左右边距，通过<code>UITextView.textContainer.lineFragmentPadding</code>获取</li>
-<li><code>UITextView</code>默认携带上下左右边距(<code>UITextView.textContainerInset</code>)，其中左右和<code>lineFragmentPadding</code>相加</li>
-<li>此处并没有对<a href="https://github.com/madordie/UITextView-More/blob/master/TruncateTextView.swift" target="_blank" rel="noopener">TruncateTextView</a>进行过多的设置，主要是因为继承在UITextView下，<a href="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif" target="_blank" rel="noopener">GIF</a>中的这部分设置放在了<a href="https://github.com/madordie/UITextView-More/blob/master/Demo-AppStore-More/ViewController.swift" target="_blank" rel="noopener">ViewController.swift</a>中</li>
-<li>此处使用的是<code>frame</code>，可以在<code>UIView.sizeToFit()</code>之后获取到<code>UIView</code>的<code>Size</code>。约束也大抵如此</li>
-</ul>
-<hr>
-<ul>
-<li>感谢<a href="https://github.com/lexiaoyao20" target="_blank" rel="noopener">乐逍遥</a>提供的例子，才找到了<code>open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange</code>方法😂</li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>效果</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何正确的连续推新页面</title>
     <url>/post/push-queue-for-navigation/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="题记"><a href="#题记" class="headerlink" title="题记"></a>题记</h2><p>当使用某个页面还没有进行viewDidAppear:的时候再进行一次推页面是不安全的。苹果在iPhone5C iOS7.1.2中Push时给出的警告：</p>
@@ -1290,6 +1476,35 @@
       </categories>
       <tags>
         <tag>debug</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何实现AppStore查看更多的方法</title>
+    <url>/post/appstore-truncate/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="UITextView-More"><a href="#UITextView-More" class="headerlink" title="UITextView-More"></a><a href="https://github.com/madordie/UITextView-More" target="_blank" rel="noopener">UITextView-More</a></h2><p>使用UITextKit 实现“更多”的折叠效果</p>
+<p><img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="预览"></p>
+<a id="more"></a>
+
+<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><h3 id="获取最后一行Rect"><a href="#获取最后一行Rect" class="headerlink" title="获取最后一行Rect"></a>获取最后一行Rect</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> lastRect = <span class="type">CGRect</span>.zero</span><br><span class="line">layoutManager.enumerateEnclosingRects(forGlyphRange: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: textStorage.string.characters.<span class="built_in">count</span>), withinSelectedGlyphRange: <span class="type">NSRange</span>(location: <span class="type">NSNotFound</span>, length: <span class="number">0</span>), <span class="keyword">in</span>: textContainer, using: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (rect, isStop) <span class="keyword">in</span></span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> _self = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"><span class="keyword">var</span> newRect = rect</span><br><span class="line">newRect.origin.y += _self.textContainerInset.top</span><br><span class="line">lastRect = newRect</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">print</span>(lastRect)</span><br></pre></td></tr></table></figure>
+
+<h3 id="增加-exclusionPaths"><a href="#增加-exclusionPaths" class="headerlink" title="增加 exclusionPaths"></a>增加 <code>exclusionPaths</code></h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">textContainer.exclusionPaths = [<span class="type">UIBezierPath</span>.<span class="keyword">init</span>(rect: rect)]</span><br></pre></td></tr></table></figure>
+
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
+<li><code>UITextView</code>默认携带左右边距，通过<code>UITextView.textContainer.lineFragmentPadding</code>获取</li>
+<li><code>UITextView</code>默认携带上下左右边距(<code>UITextView.textContainerInset</code>)，其中左右和<code>lineFragmentPadding</code>相加</li>
+<li>此处并没有对<a href="https://github.com/madordie/UITextView-More/blob/master/TruncateTextView.swift" target="_blank" rel="noopener">TruncateTextView</a>进行过多的设置，主要是因为继承在UITextView下，<a href="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif" target="_blank" rel="noopener">GIF</a>中的这部分设置放在了<a href="https://github.com/madordie/UITextView-More/blob/master/Demo-AppStore-More/ViewController.swift" target="_blank" rel="noopener">ViewController.swift</a>中</li>
+<li>此处使用的是<code>frame</code>，可以在<code>UIView.sizeToFit()</code>之后获取到<code>UIView</code>的<code>Size</code>。约束也大抵如此</li>
+</ul>
+<hr>
+<ul>
+<li>感谢<a href="https://github.com/lexiaoyao20" target="_blank" rel="noopener">乐逍遥</a>提供的例子，才找到了<code>open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange</code>方法😂</li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>效果</tag>
       </tags>
   </entry>
   <entry>
@@ -1827,376 +2042,6 @@ class CMExpandingTextField: UITextField {
       </tags>
   </entry>
   <entry>
-    <title>iOS逆向-class-dump工具</title>
-    <url>/post/reverse-ios-class-dump/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="noopener">stevenygard.com</a>下载最新的包。</p>
-<p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
-<p>在<code>~/.base_profile</code>中添加<code>export PATH=/opt/class-dump:$PATH</code></p>
-<p>运行<code>source ~/.base_profile</code></p>
-<p>最后确认一下安装OK ：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> class-dump --v</span></span><br><span class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
-<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="../reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br><span class="line"><span class="meta">$</span><span class="bash"> class-dump -H WeChat.decrypted -o ./Headers/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls Headers</span></span><br><span class="line">Headers</span><br></pre></td></tr></table></figure>
-
-<p>即得头文件目录：<code>Headers</code></p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>逆向</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS逆向-monkeydev工具</title>
-    <url>/post/reverse-ios-monkeydev/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>MonkeyDev wiki<br>这是一个为越狱和非越狱开发人员准备的工具，主要包括四个模块:</p>
-</blockquote>
-<blockquote>
-<p> Logos Tweak</p>
-</blockquote>
-<blockquote>
-<p>使用theos提供的logify.pl工具将*.xm文件转成*.mm文件进行编译，集成了CydiaSubstrate，可以使用MSHookMessageEx和MSHookFunction来Hook OC函数和指定地址。</p>
-</blockquote>
-<blockquote>
-<p>CaptainHook Tweak</p>
-</blockquote>
-<blockquote>
-<p>使用CaptainHook提供的头文件进行OC 函数的Hook，以及属性的获取。</p>
-</blockquote>
-<blockquote>
-<p>Command-line Tool</p>
-</blockquote>
-<blockquote>
-<p>可以直接创建运行于越狱设备的命令行工具</p>
-</blockquote>
-<blockquote>
-<p>MonkeyApp</p>
-</blockquote>
-<blockquote>
-<p>这是自动给第三方应用集成Reveal、Cycript和注入dylib的模块，支持调试dylib和第三方应用，支持Pod给第三放应用集成SDK，只需要准备一个砸壳后的ipa或者app文件即可。</p>
-</blockquote>
-<a id="more"></a>
-
-
-<hr>
-<ul>
-<li><a href="https://github.com/AloneMonkey/MonkeyDev/wiki" target="_blank" rel="noopener">MonkeyDev wiki</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>逆向</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于日志打印和过滤的那点破事</title>
-    <url>/post/reverse-ios-socat-watch-filter/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前两天，重启电脑突然发现我的<code>iOS8</code>设备无法连接到<code>MacOS</code>了。。</p>
-<p>MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。</p>
-<p>具体报错如下：<br><code>Xcode&lt;Version 9.4 (9F1027a)&gt;</code>报错如下: (我安装过<code>Xcode10 beta1</code>)<br><img src="/images/2018-06-15-10-13-16.png" alt="Xcode报错"></p>
-<p><code>iTunes</code>报错如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/2018-06-15-10-06-16.png" alt="iTunes报错"></p>
-<p><code>Apple Configurator2</code>报错如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">已收到设备上的意外响应。</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/2018-06-15-10-09-33.png" alt="Apple Configurator2报错"></p>
-<a id="more"></a>
-
-<p>还是 先来聊一下日志打印的几种方案吧。</p>
-<h2 id="手机可以连接到MacOS"><a href="#手机可以连接到MacOS" class="headerlink" title="手机可以连接到MacOS"></a>手机可以连接到MacOS</h2><p>这种情况是最常见的，就是能在Xcode下Debug….</p>
-<h3 id="方案一：Console-app-控制台"><a href="#方案一：Console-app-控制台" class="headerlink" title="方案一：Console.app(控制台)"></a>方案一：Console.app(控制台)</h3><p>这是MacOS自带的日志神器～ 效果顶呱呱👍👍👍，截图如下：<br><img src="/images/2018-06-15-10-23-02.png" alt="Console.app"></p>
-<p>具体用法我就不说了。。。毕竟都是中文😂</p>
-<h3 id="方案二：LogGuru"><a href="#方案二：LogGuru" class="headerlink" title="方案二：LogGuru"></a>方案二：LogGuru</h3><p><a href="https://github.com/madordie/LogGuru" target="_blank" rel="noopener">madordie/LogGuru</a> 也不错，很久之前fork自<a href="https://github.com/FIRHQ/LogGuru" target="_blank" rel="noopener">FIRHQ/LogGuru</a>，增加了直接过滤的功能，要不然速度真的很慢。。</p>
-<p>只要插入USB，即可显示日志，还是不错滴。。</p>
-<p><img src="/images/2018-06-15-10-29-07.png" alt="原来的截图"></p>
-<h3 id="方案三-其他的"><a href="#方案三-其他的" class="headerlink" title="方案三: 其他的"></a>方案三: 其他的</h3><p>还有很多方案，比如说命令行啊、其他的工具啊，我就不说了，我觉得 <strong>Console.app(控制台)</strong> 就够了😂</p>
-<h2 id="手机无法链接进MacOS"><a href="#手机无法链接进MacOS" class="headerlink" title="手机无法链接进MacOS"></a>手机无法链接进MacOS</h2><p>也就是最开始说的报错的情况下，可以连接进MacOS的方案均无法使用。苦逼，只能让iOS打印日志了。。</p>
-<p>下面都是 <strong>越狱环境</strong> 下的。。不越狱还有人用iOS8么😂</p>
-<p>先来看个文档：<a href="https://www.theiphonewiki.com/wiki/System_Log" target="_blank" rel="noopener">The iPhone Wiki/System Log</a>,这里提供了很多方案，也非常全面，值得一试。</p>
-<p>苦逼的事情是我手上的iOS8.4.1无法使用<code>syslogd to /var/log/syslog</code>插件，尝试使用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_saving_to_a_file_via_a_Python_script" target="_blank" rel="noopener">On-device with saving to a file via a Python script</a>的方案去解决也并不如意。。</p>
-<p>开始用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_socat" target="_blank" rel="noopener">On-device with socat</a>（ 在<a href="http://bbs.iosre.com/" target="_blank" rel="noopener">iosre</a>中也有一个类似的文章：<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="noopener">iOS查看日志利器 —— socat</a>），说的都是相当的详细。</p>
-<h3 id="socat的坑"><a href="#socat的坑" class="headerlink" title="socat的坑"></a>socat的坑</h3><h4 id="stop没有用"><a href="#stop没有用" class="headerlink" title="stop没有用"></a>stop没有用</h4><p>如<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="noopener">iOS查看日志利器 —— socat</a>所说：</p>
-<blockquote>
-<p>输入watch查看，输入stop停止（不过停止貌似没用，也不知道为啥，知道的请告诉我）</p>
-</blockquote>
-<p>这个真的是没有用，所以<code>watch</code>功能就很鸡肋。。</p>
-<h4 id="没有办法实时过滤"><a href="#没有办法实时过滤" class="headerlink" title="没有办法实时过滤"></a>没有办法实时过滤</h4><p>文中提到了很多过滤条件，但是一旦开启过滤，就没有办法显示实时日志。。也就是说无法和<code>watch</code>共存。。。</p>
-<h3 id="换个姿势使用socat"><a href="#换个姿势使用socat" class="headerlink" title="换个姿势使用socat"></a>换个姿势使用socat</h3><p><code>socat</code>的日志都在终端上，不着色不说还有上面的两个很影响使用的问题。。。于是乎，为了增加过滤功能，需要通过管道将输出接入另外的命令如：<code>grep</code>等。</p>
-<p><code>socat</code>命令需要手动输入<code>watch</code>才能显示出实时命令，这个让管道并不能直接使用。这里需要借助<code>expect</code>命令。</p>
-<p>好了所有的点都通了，大致步骤如下：</p>
-<h4 id="在mac上安装expect"><a href="#在mac上安装expect" class="headerlink" title="在mac上安装expect"></a>在mac上安装expect</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">brew install expect</span><br></pre></td></tr></table></figure>
-
-<h4 id="在mac的～-bash-profile配置"><a href="#在mac的～-bash-profile配置" class="headerlink" title="在mac的～/.bash_profile配置"></a>在mac的～/.bash_profile配置</h4><p>此处假设你的设备已经按照<a href="../reverse-ios-ssh">iOS逆向-设备ssh免密登录</a>配置好了：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">"</span></span><br><span class="line"><span class="string">        spawn ssh i5s \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \"&gt; \" &#123;send \"watch\n\";&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>ios-socat</code> 函数名，在命令行可以直接输入函数名调用该函数</li>
-<li><code>i5s</code> 在<code>~/.ssh/config</code>中配置的名字</li>
-</ul>
-<p>如果没有配置ssh免密呢需要这样：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">"</span></span><br><span class="line"><span class="string">        spawn ssh -p22 root@ios's_ip \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \"*password: \" &#123;send \"mypassword\n\";&#125;</span></span><br><span class="line"><span class="string">            \"&gt; \" &#123;send \"watch\n\";&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>-p22</code> 端口号，22是默认不用写，但是其他的需要写。</li>
-<li><code>ios&#39;s_ip</code> iOS设备的ip。</li>
-<li><code>mypassword</code> iOS设备密码</li>
-<li>这个我没测。。大致如此，我对<code>expect</code>的语法也不是很熟</li>
-</ul>
-<p>最后别忘了让<code>~/.bash_profile</code>生效：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
-
-<p>然后只需要在命令行输入<code>ios-socat</code>就可以看到蹭蹭蹭的日志打印咯。。至于用什么管道啊都不是问题。</p>
-<p>比如：<br>只显示包含<code>iosre</code>关键字的日志</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ios-socat | grep iosre</span><br></pre></td></tr></table></figure>
-
-<h4 id="晋级用法"><a href="#晋级用法" class="headerlink" title="晋级用法"></a>晋级用法</h4><ul>
-<li><p>我的iOS设备通过<code>iproxy</code>来进行端口映射。具体用法移步<a href="https://www.google.com/search?q=iproxy&oq=iproxy" target="_blank" rel="noopener">Google</a></p>
-</li>
-<li><p>通过<code>ios-socat &gt; ~/Desktop/ios.log</code> 然后下载<a href="https://itunes.apple.com/cn/app/logtail/id1073404370?mt=12" target="_blank" rel="noopener">LogTail</a>，剩下的摸索一下咯</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2></li>
-</ul>
-<p>我还不清楚究竟什么原因导致了<code>收到来自此设备的无效响应</code>错误，布吉岛系统修改了什么。我尝试重新安装iTunes、Xcode都无效（据说陌陌的开发为这个无法调试直接将系统降级是可以的😂）。。有老铁懂得指点下～～</p>
-<p>目前虽然上面都可以用，但是看个日志并不能满足我的野心，最后在移动硬盘里做了一个10.12的系统😂，用了Console.app…</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>逆向</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS逆向-创建Cydia源</title>
-    <url>/post/reverse-ios-creat-cydia-sources/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>搭建自己的cydia源。</p>
-<a id="more"></a>
-
-<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
-<li>Ubuntu 16.04 LTS</li>
-</ul>
-<h3 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h3><h4 id="dpkg-dev"><a href="#dpkg-dev" class="headerlink" title="dpkg-dev"></a>dpkg-dev</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ apt-get update</span><br><span class="line">$ apt-get install dpkg-dev</span><br><span class="line">$ dpkg-scanpackages --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">apt-get install nginx</span><br></pre></td></tr></table></figure>
-
-<h3 id="开工"><a href="#开工" class="headerlink" title="开工"></a>开工</h3><h4 id="准备deb"><a href="#准备deb" class="headerlink" title="准备deb"></a>准备deb</h4><p>此处目录为<code>/opt/cydia/debs</code>，可以为别的，但是建议你也这样做:)。</p>
-<h4 id="生成依赖"><a href="#生成依赖" class="headerlink" title="生成依赖"></a>生成依赖</h4><p>更新插件需要重新执行哟。。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /opt/cydia</span><br><span class="line">$ dpkg-scanpackages -m ./debs /dev/null &gt; Packages</span><br><span class="line">$ bzip2 Packages</span><br></pre></td></tr></table></figure>
-
-<h4 id="添加sources-list"><a href="#添加sources-list" class="headerlink" title="添加sources.list"></a>添加sources.list</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"deb file:///opt/cydia ./debs/"</span> &gt;&gt; /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-
-<p>ps. 注意路径信息</p>
-<h4 id="更新一下"><a href="#更新一下" class="headerlink" title="更新一下"></a>更新一下</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ apt-get update</span><br></pre></td></tr></table></figure>
-
-<h4 id="扔出去"><a href="#扔出去" class="headerlink" title="扔出去"></a>扔出去</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /var/www/html</span><br><span class="line">$ ln -s /opt/cydia cydia</span><br><span class="line">$ /etc/init.d/nginx start</span><br></pre></td></tr></table></figure>
-
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="http://www.saurik.com/id/7" target="_blank" rel="noopener">http://www.saurik.com/id/7</a></li>
-<li><a href="https://bbs.feng.com/read-htm-tid-8052646.html" target="_blank" rel="noopener">https://bbs.feng.com/read-htm-tid-8052646.html</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>逆向</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS逆向-设备ssh免密登录</title>
-    <url>/post/reverse-ios-ssh/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
-<li>已越狱设备</li>
-<li>越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码)</li>
-<li>电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）</li>
-</ul>
-<a id="more"></a>
-
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="生成RSA证书"><a href="#生成RSA证书" class="headerlink" title="生成RSA证书"></a>生成RSA证书</h3><p>我这里生成的证书为:<code>ipad</code>，可自己需要定义。（注意如果直接回车会覆盖<code>~/.ssh/id_rsa</code>）</p>
-<p>执行命令<code>ssh-keygen</code>，如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/.ssh/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ssh-keygen</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/Madordie/.ssh/id_rsa): ipad</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in ipad.</span><br><span class="line">Your public key has been saved in ipad.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:GpQBeAf+oqUzWlUhtItDcVyVFz2wd0EcIgD+BZLPK8U Madordie@Bingo.local</span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|  .+*+*++o++.o+. |</span><br><span class="line">|  .+o+o=...oo... |</span><br><span class="line">|  ..o.=+ .o ...  |</span><br><span class="line">| . . = .E. . .   |</span><br><span class="line">|  o = o.S.       |</span><br><span class="line">|   * ..o.        |</span><br><span class="line">|  *   ..         |</span><br><span class="line">| o o             |</span><br><span class="line">|.                |</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls ~/.ssh/ipad*</span></span><br><span class="line">/Users/Madordie/.ssh/ipad     /Users/Madordie/.ssh/ipad.pub</span><br></pre></td></tr></table></figure>
-
-<h3 id="将公钥推送至越狱设备"><a href="#将公钥推送至越狱设备" class="headerlink" title="将公钥推送至越狱设备"></a>将公钥推送至越狱设备</h3><p>默认是没有<code>~/.ssh</code>目录的，暂时放置在<code>/var/root</code>下。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> scp ~/.ssh/ipad.pub root@10.11.12.13:/var/root</span></span><br></pre></td></tr></table></figure>
-
-<p><code>scp</code> 默认端口为<code>22</code> 如果需要自定义端口可以在路径前添加<code>-P 端口号</code>参数。</p>
-<h3 id="配置本机-ssh-config文件"><a href="#配置本机-ssh-config文件" class="headerlink" title="配置本机~/.ssh/config文件"></a>配置本机<code>~/.ssh/config</code>文件</h3><p>使用顺手的工具编辑<code>~/.ssh/config</code>文件。（没有就新建一个啦～</p>
-<p>按照如下格式填写。默认<code>ssh</code>登录端口为<code>22</code>可以不写。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host ipad</span><br><span class="line">    Hostname 10.11.12.13</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~&#x2F;.ssh&#x2F;ipad</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置越狱设备"><a href="#配置越狱设备" class="headerlink" title="配置越狱设备"></a>配置越狱设备</h3><p>先用<code>ssh root@10.11.12.13</code>登录进设备(如果你没有修改密码那么默认是<code>alpine</code>,这个在<a href="https://cydia.saurik.com/openssh.html" target="_blank" rel="noopener">OpenSSH</a>上)。刚才我们将<code>ipad.pub</code>通过<code>scp</code>放在了<code>/var/root</code>下。</p>
-<p>一般情况下<code>/var/root/.ssh</code>是不存在的，使用命令<code>mkdir -p /var/root/.ssh</code>即可创建。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat ipad.pub &gt;&gt; /var/root/.ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
-
-<p>然后强迫症的可以使用<code>rm -rf ipad.pub</code>删除啦～</p>
-<p>对了，退出<code>ssh</code>登录的设备使用：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">exit</span></span></span><br><span class="line">logout</span><br><span class="line">Connection to 10.11.12.13 closed.</span><br></pre></td></tr></table></figure>
-
-<h3 id="赶紧测试一下远程登录效果"><a href="#赶紧测试一下远程登录效果" class="headerlink" title="赶紧测试一下远程登录效果"></a>赶紧测试一下远程登录效果</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh ipad</span></span><br></pre></td></tr></table></figure>
-
-<p>然后你会发现你已经完成了免密码登录越狱设备。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实这并不是只有越狱iOS设备才能使用的免登录，而是<code>ssh</code>所支持的。用途也很方便～</p>
-<p>PS. 这里面的IP地址(10.11.12.13) 是你设备的IP。如果超时的话或者ping不通或者网速比较差的话，可以采用<a href="http://iphonedevwiki.net/index.php/SSH_Over_USB" target="_blank" rel="noopener">usbmux</a>方案进行，文档已相当详细，此处不再赘述。</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>逆向</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS逆向-砸壳(cycript/clutch)</title>
-    <url>/post/reverse-ios-dump-decrypted/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
-<li>越狱设备</li>
-</ul>
-<p>目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～</p>
-<p>下面分别对<code>cycript</code>、<code>clutch</code>进行砸壳:</p>
-<a id="more"></a>
-
-<h1 id="使用cycript进行砸壳"><a href="#使用cycript进行砸壳" class="headerlink" title="使用cycript进行砸壳"></a>使用cycript进行砸壳</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
-<li><code>Cydia</code>中搜索<code>cycript</code>并安装 </li>
-</ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><a href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略" class="headerlink" title="制作并上传dumpdecrypted.dylib （已经OK的可忽略"></a>制作并上传<code>dumpdecrypted.dylib</code> （已经OK的可忽略</h3><h4 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h4><p>目前我制作目录暂时在<code>~/Desktop</code>。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/stefanesser/dumpdecrypted.git ~/Desktop</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ～／Desktop/dumpdecrypted</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls dumpdecrypted.dylib</span></span><br></pre></td></tr></table></figure>
-
-<p>没什么错误的话，即得<code>dumpdecrypted.dylib</code>。</p>
-<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>将<code>dumpdecrypted.dylib</code>放在越狱设备的<code>/var/root/</code>下</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls dumpdecrypted.dylib</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> scp dumpdecrypted.dylib root@10.12.14.16:/var/root/</span></span><br><span class="line">root@10.12.14.16's password:</span><br><span class="line">dumpdecrypted.dylib                           100%  193KB   3.0MB/s   00:00</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="登录进越狱设备"><a href="#登录进越狱设备" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
-<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="../reverse-ios-ssh/">配置传送门</a></p>
-<h3 id="找到可执行文件路径"><a href="#找到可执行文件路径" class="headerlink" title="找到可执行文件路径"></a>找到可执行文件路径</h3><p>这里以<code>WeChat</code>为例子啦～</p>
-<p>记得先打开呀～～～</p>
-<p><code>ps -e</code>： 显示所有程序<br><code>grep</code>: 这里是过滤一下。。具体用法Google。所有的程序有点多，我知道名字，所以直接过滤一下。也可忽略</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps -e | grep WeChat</span></span><br><span class="line">705 ??         0:02.20 /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</span><br><span class="line">707 ttys000    0:00.01 grep WeChat</span><br><span class="line"><span class="meta">$</span><span class="bash"> cycript -p 705</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cycript -p 705</span></span><br><span class="line"><span class="meta">cy#</span><span class="bash"> [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string">"file:///var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/"</span></span></span><br><span class="line"><span class="meta">cy#</span><span class="bash"> <span class="built_in">exit</span>(0)</span></span><br><span class="line">MS:Error: _krncall(mach_vm_read_overwrite(task, data, sizeof(*baton), reinterpret_cast&lt;mach_vm_address_t&gt;(baton), &amp;error)) =4</span><br><span class="line">*** _assert(status == 0):../Inject.cpp(143):InjectLibrary</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
-
-<p>此处获得两个目录：</p>
-<ul>
-<li><code>/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</code></li>
-<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</code></li>
-</ul>
-<h3 id="开砸"><a href="#开砸" class="headerlink" title="开砸"></a>开砸</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp dumpdecrypted.dylib /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</span></span><br><span class="line">mach-o decryption dumper</span><br><span class="line"></span><br><span class="line">DISCLAIMER: This tool is only meant for security research purposes, not for application crackers.</span><br><span class="line"></span><br><span class="line">[+] detected 64bit ARM binary in memory.</span><br><span class="line">[+] offset to cryptid found: @0x1000c0ca8(from 0x1000c0000) = ca8</span><br><span class="line">[+] Found encrypted data at address 00004000 of length 51200000 bytes - type 1.</span><br><span class="line">[+] Opening /private/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat for reading.</span><br><span class="line">[+] Reading header</span><br><span class="line">[+] Detecting header type</span><br><span class="line">[+] Executable is a plain MACH-O image</span><br><span class="line">[+] Opening WeChat.decrypted for writing.</span><br><span class="line">[+] Copying the not encrypted start of the file</span><br><span class="line">[+] Dumping the decrypted data into the file</span><br><span class="line">[+] Copying the not encrypted remainder of the file</span><br><span class="line">[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset ca8</span><br><span class="line">[+] Closing original file</span><br><span class="line">[+] Closing dump file</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents</span><br></pre></td></tr></table></figure>
-<p>最后得到文件:</p>
-<ul>
-<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted</code></li>
-</ul>
-<h3 id="将-decrypted拷贝出来"><a href="#将-decrypted拷贝出来" class="headerlink" title="将*.decrypted拷贝出来"></a>将<code>*.decrypted</code>拷贝出来</h3><p>我这里直接使用<code>scp</code>吧～。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /Users/Madordie/Desktop/Madordie/iOS/xxx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> scp root@10.12.14.16:/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted .</span></span><br><span class="line">root@10.12.14.16's password:</span><br><span class="line">WeChat.decrypted                              100%   61MB   4.7MB/s   00:12</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br></pre></td></tr></table></figure>
-<p>至此在主机上得到：</p>
-<ul>
-<li><code>/Users/Madordie/Desktop/Madordie/iOS/xxx/WeChat.decrypted</code></li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>为什么将<code>dumpdecrypted.dylib</code>  <code>copy</code> 至<code>*/Documents/</code>下？<br>  ：别的目录没有权限～～（<code>dumpdecrypted.dylib: stat() failed with errno=1</code> ）</li>
-</ul>
-<h1 id="使用clutch进行砸壳"><a href="#使用clutch进行砸壳" class="headerlink" title="使用clutch进行砸壳"></a>使用clutch进行砸壳</h1><h2 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h2><h3 id="下载上传clutch-无须重复做"><a href="#下载上传clutch-无须重复做" class="headerlink" title="下载上传clutch(无须重复做)"></a>下载上传clutch(无须重复做)</h3><p><code>clutch</code>可以从<a href="https://github.com/KJCracks/Clutch" target="_blank" rel="noopener">https://github.com/KJCracks/Clutch</a>下载编译。</p>
-<p>当然也可以从<a href="https://github.com/KJCracks/Clutch/releases" target="_blank" rel="noopener">https://github.com/KJCracks/Clutch/releases</a>直接下载。</p>
-<p>目前下载到目录<code>~/Clutch-2.0.4</code></p>
-<p>上传到设备：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> scp Clutch-2.0.4 root@10.12.14.16:/usr/bin/</span></span><br><span class="line">root@10.12.14.16's password:</span><br><span class="line">Clutch-2.0.4                                  100% 1204KB   4.7MB/s   00:00</span><br></pre></td></tr></table></figure>
-
-<h3 id="登录进越狱设备-1"><a href="#登录进越狱设备-1" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
-<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="../reverse-ios-ssh/">配置传送门</a></p>
-<h3 id="修改权限"><a href="#修改权限" class="headerlink" title="修改权限"></a>修改权限</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/bin</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv Clutch-2.0.4 clutch</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod +x clutch</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="砸壳"><a href="#砸壳" class="headerlink" title="砸壳"></a>砸壳</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> clutch -i</span></span><br><span class="line">Installed apps:</span><br><span class="line">1:   钉钉 &lt;com.laiwang.DingTalk&gt;</span><br><span class="line">2:   韩剧TV-最新热门韩剧大全 &lt;com.baoyun.hanju&gt;</span><br><span class="line">3:   PG Client - a better client for dribbble &lt;com.az.azdribbble&gt;</span><br><span class="line">4:   窝牛－设计装修我们的家 &lt;com.lingduohome.acorn&gt;</span><br><span class="line"><span class="meta">$</span><span class="bash"> clutch -d 1</span></span><br><span class="line">com.laiwang.DingTalk contains watchOS 2 compatible application. It's not possible to dump watchOS 2 apps with Clutch 2.0.4 at this moment.</span><br><span class="line">Zipping DingTalk.app</span><br><span class="line">ASLR slide: 0x10001c000</span><br><span class="line">Dumping &lt;DingTalk&gt; (arm64)</span><br><span class="line">Patched cryptid (64bit segment)</span><br><span class="line">Writing new checksum</span><br><span class="line">DONE: /private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</span><br><span class="line">Finished dumping com.laiwang.DingTalk in 40.6 seconds</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
-
-<p>生成最终路径:</p>
-<ul>
-<li><code>/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</code></li>
-</ul>
-<h3 id="传至本地"><a href="#传至本地" class="headerlink" title="传至本地"></a>传至本地</h3><p>注意路径中有<code>()</code>这样的字符，需要转义一下。如下：</p>
-<p>在本地终端中使用<code>scp</code>拉取：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> scp root@10.12.14.16:<span class="string">'/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa'</span> .</span></span><br><span class="line">root@10.12.14.16's password:</span><br><span class="line">com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ip 100%   48MB   3.6MB/s   00:13</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa</span></span><br><span class="line">com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/Madordie/Desktop/Madordie/ios-reverse</span><br></pre></td></tr></table></figure>
-<p>至此在主机上得到：</p>
-<ul>
-<li><code>/Users/Madordie/Desktop/Madordie/ios-reverse/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa</code></li>
-</ul>
-<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>并不是每一个都可以支持这种工具砸壳，失败了用第一种试试。。。</li>
-</ul>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>目前发现这两种砸壳工具。但是并不是每一个APP都可以使用2种工具。有的只有一个有效，有的两个都有效，还有一种两个都失败的😂</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>逆向</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
-    <url>/post/bang-fastimagecache/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文：<a href="http://blog.cnbang.net/tech/2578/" target="_blank" rel="noopener">iOS图片加载速度极限优化—FastImageCache解析</a></p>
-<p><a href="https://github.com/path/FastImageCache" target="_blank" rel="noopener">FastImageCache</a>是Path团队开发的一个开源库，用于提升图片的加载和渲染速度，让基于图片的列表滑动起来更顺畅，来看看它是怎么做的。</p>
-<a id="more"></a>
-
-<h2 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h2><p>iOS从磁盘加载一张图片，使用UIImageVIew显示在屏幕上，需要经过以下步骤：</p>
-<ol>
-<li>从磁盘拷贝数据到内核缓冲区</li>
-<li>从内核缓冲区复制数据到用户空间</li>
-<li>生成UIImageView，把图像数据赋值给UIImageView</li>
-<li>如果图像数据为未解码的PNG/JPG，解码为位图数据</li>
-<li>CATransaction捕获到UIImageView layer树的变化</li>
-<li>主线程Runloop提交CATransaction，开始进行图像渲染<br> 6.1 如果数据没有字节对齐，Core Animation会再拷贝一份数据，进行字节对齐。<br> 6.2 GPU处理位图数据，进行渲染。</li>
-</ol>
-<p>FastImageCache分别优化了2,4,6.1三个步骤：</p>
-<ol>
-<li>使用mmap内存映射，省去了上述第2步数据从内核空间拷贝到用户空间的操作。</li>
-<li>缓存解码后的位图数据到磁盘，下次从磁盘读取时省去第4步解码的操作。</li>
-<li>生成字节对齐的数据，防止上述第6.1步CoreAnimation在渲染时再拷贝一份数据。</li>
-</ol>
-<p>接下来具体介绍这三个优化点以及它的实现。</p>
-<h3 id="内存映射"><a href="#内存映射" class="headerlink" title="内存映射"></a>内存映射</h3><p>平常我们读取磁盘上的一个文件，上层API调用到最后会使用系统方法read()读取数据，内核把磁盘数据读入内核缓冲区，用户再从内核缓冲区读取数据复制到用户内存空间，这里有一次内存拷贝的时间消耗，并且读取后整个文件数据就已经存在于用户内存中，占用了进程的内存空间。</p>
-<p>FastImageCache采用了另一种读写文件的方法，就是用mmap把文件映射到用户空间里的虚拟内存，文件中的位置在虚拟内存中有了对应的地址，可以像操作内存一样操作这个文件，相当于已经把整个文件放入内存，但在真正使用到这些数据前却不会消耗物理内存，也不会有读写磁盘的操作，只有真正使用这些数据时，也就是图像准备渲染在屏幕上时，虚拟内存管理系统VMS才根据缺页加载的机制从磁盘加载对应的数据块到物理内存，再进行渲染。这样的文件读写文件方式少了数据从内核缓存到用户空间的拷贝，效率很高。</p>
-<h3 id="解码图像"><a href="#解码图像" class="headerlink" title="解码图像"></a>解码图像</h3><p>一般我们使用的图像是JPG/PNG，这些图像数据不是位图，而是是经过编码压缩后的数据，使用它渲染到屏幕之前需要进行解码转成位图数据，这个解码操作是比较耗时的，并且没有GPU硬解码，只能通过CPU，iOS默认会在主线程对图像进行解码。很多库都解决了图像解码的问题，不过由于解码后的图像太大，一般不会缓存到磁盘，SDWebImage的做法是把解码操作从主线程移到子线程，让耗时的解码操作不占用主线程的时间。</p>
-<p>FastImageCache也是在子线程解码图像，不同的是它会缓存解码后的图像到磁盘。因为解码后的图像体积很大，FastImageCache对这些图像数据做了系列缓存管理，详见下文实现部分。另外缓存的图像体积大也是使用内存映射读取文件的原因，小文件使用内存映射无优势，内存拷贝的量少，拷贝后占用用户内存也不高，文件越大内存映射优势越大。</p>
-<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>Core Animation在图像数据非字节对齐的情况下渲染前会先拷贝一份图像数据，官方文档没有对这次拷贝行为作说明，模拟器和Instrument里有高亮显示“copied images”的功能，但似乎它有bug，即使某张图片没有被高亮显示出渲染时被copy，从调用堆栈上也还是能看到调用了CA::Render::copy_image方法：</p>
-<p><img src="/images/fastImageCache1.png" alt="fastImageCache1"></p>
-<p>那什么是字节对齐呢，按我的理解，为了性能，底层渲染图像时不是一个像素一个像素渲染，而是一块一块渲染，数据是一块块地取，就可能遇到这一块连续的内存数据里结尾的数据不是图像的内容，是内存里其他的数据，可能越界读取导致一些奇怪的东西混入，所以在渲染之前CoreAnimation要把数据拷贝一份进行处理，确保每一块都是图像数据，对于不足一块的数据置空。大致图示：(pixel是图像像素数据，data是内存里其他数据)</p>
-<p><img src="/images/fastImageCache2.png" alt="fastImageCache2"></p>
-<p>块的大小应该是跟CPU cache line有关，ARMv7是32byte，A9是64byte，在A9下CoreAnimation应该是按64byte作为一块数据去读取和渲染，让图像数据对齐64byte就可以避免CoreAnimation再拷贝一份数据进行修补。FastImageCache做的字节对齐就是这个事情。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>FastImageCache把同个类型和尺寸的图像都放在一个文件里，根据文件偏移取单张图片，类似web的css雪碧图，这里称为ImageTable。这样做主要是为了方便统一管理图片缓存，控制缓存的大小，整个FastImageCache就是在管理一个个ImageTable的数据。整体实现的数据结构如图：</p>
-<p><img src="/images/fastImageCache3.png" alt="fastImageCache3"></p>
-<p>一些补充和说明：</p>
-<h3 id="ImageTable"><a href="#ImageTable" class="headerlink" title="ImageTable"></a>ImageTable</h3><ol>
-<li>一个ImageFormat对应一个ImageTable，ImageFormat指定了ImageTable里图像渲染格式/大小等信息，ImageTable里的图像数据都由ImageFormat规定了统一的尺寸，每张图像大小都是一样的。</li>
-<li>一个ImageTable一个实体文件，并有另一个文件保存这个ImageTable的meta信息。</li>
-<li>图像使用entityUUID作为唯一标示符，由用户定义，通常是图像url的hash值。ImageTable Meta的indexMap记录了entityUUID-&gt;entryIndex的映射，通过indexMap就可以用图像的entityUUID找到缓存数据在ImageTable对应的位置。</li>
-</ol>
-<h3 id="ImageTableEntry"><a href="#ImageTableEntry" class="headerlink" title="ImageTableEntry"></a>ImageTableEntry</h3><ol>
-<li>ImageTable的实体数据是ImageTableEntry，每个entry有两部分数据，一部分是对齐后的图像数据，另一部分是meta信息，meta保存这张图像的UUID和原图UUID，用于校验图像数据的正确性。</li>
-<li>Entry数据是按内存分页大小对齐的，数据大小是内存分页大小的整数倍，这样可以保证虚拟内存缺页加载时使用最少的内存页加载一张图像。</li>
-<li>图像数据做了字节对齐处理，CoreAnimation使用时无需再处理拷贝。具体做法是CGBitmapContextCreate创建位图画布时bytesPerRow参数传64倍数。</li>
-</ol>
-<h3 id="Chunk"><a href="#Chunk" class="headerlink" title="Chunk"></a>Chunk</h3><ul>
-<li>ImageTable和实体数据Entry间多了层Chunk，Chunk是逻辑上的数据划分，N个Entry作为一个Chunk，内存映射mmap操作是以chunk为单位的，每一个chunk执行一次mmap把这个chunk的内容映射到虚拟内存。为什么要多一层chunk呢，按我的理解，这样做是为了灵活控制mmap的大小和调用次数，若对整个ImageTable执行mmap，载入虚拟内存的文件过大，若对每个Entry做mmap，调用次数会太多。</li>
-</ul>
-<h3 id="缓存管理"><a href="#缓存管理" class="headerlink" title="缓存管理"></a>缓存管理</h3><ul>
-<li>用户可以定义整个ImageTable里最大缓存的图像数量，在有新图像需要缓存时，如果缓存没有超过限制，会以chunk为单位扩展文件大小，顺序写下去。如果已超过最大缓存限制，会把最少使用的缓存替换掉，实现方法是每次使用图像都会把UUID插入到MRUEntries数组的开头，MRUEntries按最近使用顺序排列了图像UUID，数组里最后一个图像就是最少使用的。被替换掉的图片下次需要再使用时，再走一次取原图—解压—存储的流程。</li>
-</ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>FastImageCache适合用于tableView里缓存每个cell上同样规格的图像，优点是能极大加快第一次从磁盘加载这些图像的速度。但它有两个明显的缺点：一是占空间大。因为缓存了解码后的位图到磁盘，位图是很大的，宽高100<em>100的图像在2x的高清屏设备下就需要200</em>200*4byte/pixel=156KB，这也是为什么FastImageCache要大费周章限制缓存大小。二是接口不友好，需预定义好缓存的图像尺寸。FastImageCache无法像SDWebImage那样无缝接入UIImageView，使用它需要配置ImageTable，定义好尺寸，手动提供的原图，每种实体图像要定义一个FICEntity模型，使逻辑变复杂。</p>
-<p>FastImageCache已经属于极限优化，做图像加载/渲染优化时应该优先考虑一些低代价高回报的优化点，例如CALayer代替UIImageVIew，减少GPU计算（去透明/像素对齐），图像子线程解码，避免Offscreen-Render等。在其他优化都做到位，图像的渲染还是有性能问题的前提下才考虑使用FastImageCache进一步提升首次加载的性能，不过字节对齐的优化倒是可以脱离FastImageCache直接运用在项目上，只需要在解码图像时bitmap画布的bytesPerRow设为64的倍数即可。</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>FastImageCache</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>「转」Unowned 还是 Weak？生命周期和性能对比</title>
     <url>/post/swiftgg-unowned-or-weak-lifetime-and-performance/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
@@ -2376,6 +2221,67 @@ class CMExpandingTextField: UITextField {
       </categories>
       <tags>
         <tag>Unowned与Weak</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
+    <url>/post/bang-fastimagecache/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文：<a href="http://blog.cnbang.net/tech/2578/" target="_blank" rel="noopener">iOS图片加载速度极限优化—FastImageCache解析</a></p>
+<p><a href="https://github.com/path/FastImageCache" target="_blank" rel="noopener">FastImageCache</a>是Path团队开发的一个开源库，用于提升图片的加载和渲染速度，让基于图片的列表滑动起来更顺畅，来看看它是怎么做的。</p>
+<a id="more"></a>
+
+<h2 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h2><p>iOS从磁盘加载一张图片，使用UIImageVIew显示在屏幕上，需要经过以下步骤：</p>
+<ol>
+<li>从磁盘拷贝数据到内核缓冲区</li>
+<li>从内核缓冲区复制数据到用户空间</li>
+<li>生成UIImageView，把图像数据赋值给UIImageView</li>
+<li>如果图像数据为未解码的PNG/JPG，解码为位图数据</li>
+<li>CATransaction捕获到UIImageView layer树的变化</li>
+<li>主线程Runloop提交CATransaction，开始进行图像渲染<br> 6.1 如果数据没有字节对齐，Core Animation会再拷贝一份数据，进行字节对齐。<br> 6.2 GPU处理位图数据，进行渲染。</li>
+</ol>
+<p>FastImageCache分别优化了2,4,6.1三个步骤：</p>
+<ol>
+<li>使用mmap内存映射，省去了上述第2步数据从内核空间拷贝到用户空间的操作。</li>
+<li>缓存解码后的位图数据到磁盘，下次从磁盘读取时省去第4步解码的操作。</li>
+<li>生成字节对齐的数据，防止上述第6.1步CoreAnimation在渲染时再拷贝一份数据。</li>
+</ol>
+<p>接下来具体介绍这三个优化点以及它的实现。</p>
+<h3 id="内存映射"><a href="#内存映射" class="headerlink" title="内存映射"></a>内存映射</h3><p>平常我们读取磁盘上的一个文件，上层API调用到最后会使用系统方法read()读取数据，内核把磁盘数据读入内核缓冲区，用户再从内核缓冲区读取数据复制到用户内存空间，这里有一次内存拷贝的时间消耗，并且读取后整个文件数据就已经存在于用户内存中，占用了进程的内存空间。</p>
+<p>FastImageCache采用了另一种读写文件的方法，就是用mmap把文件映射到用户空间里的虚拟内存，文件中的位置在虚拟内存中有了对应的地址，可以像操作内存一样操作这个文件，相当于已经把整个文件放入内存，但在真正使用到这些数据前却不会消耗物理内存，也不会有读写磁盘的操作，只有真正使用这些数据时，也就是图像准备渲染在屏幕上时，虚拟内存管理系统VMS才根据缺页加载的机制从磁盘加载对应的数据块到物理内存，再进行渲染。这样的文件读写文件方式少了数据从内核缓存到用户空间的拷贝，效率很高。</p>
+<h3 id="解码图像"><a href="#解码图像" class="headerlink" title="解码图像"></a>解码图像</h3><p>一般我们使用的图像是JPG/PNG，这些图像数据不是位图，而是是经过编码压缩后的数据，使用它渲染到屏幕之前需要进行解码转成位图数据，这个解码操作是比较耗时的，并且没有GPU硬解码，只能通过CPU，iOS默认会在主线程对图像进行解码。很多库都解决了图像解码的问题，不过由于解码后的图像太大，一般不会缓存到磁盘，SDWebImage的做法是把解码操作从主线程移到子线程，让耗时的解码操作不占用主线程的时间。</p>
+<p>FastImageCache也是在子线程解码图像，不同的是它会缓存解码后的图像到磁盘。因为解码后的图像体积很大，FastImageCache对这些图像数据做了系列缓存管理，详见下文实现部分。另外缓存的图像体积大也是使用内存映射读取文件的原因，小文件使用内存映射无优势，内存拷贝的量少，拷贝后占用用户内存也不高，文件越大内存映射优势越大。</p>
+<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>Core Animation在图像数据非字节对齐的情况下渲染前会先拷贝一份图像数据，官方文档没有对这次拷贝行为作说明，模拟器和Instrument里有高亮显示“copied images”的功能，但似乎它有bug，即使某张图片没有被高亮显示出渲染时被copy，从调用堆栈上也还是能看到调用了CA::Render::copy_image方法：</p>
+<p><img src="/images/fastImageCache1.png" alt="fastImageCache1"></p>
+<p>那什么是字节对齐呢，按我的理解，为了性能，底层渲染图像时不是一个像素一个像素渲染，而是一块一块渲染，数据是一块块地取，就可能遇到这一块连续的内存数据里结尾的数据不是图像的内容，是内存里其他的数据，可能越界读取导致一些奇怪的东西混入，所以在渲染之前CoreAnimation要把数据拷贝一份进行处理，确保每一块都是图像数据，对于不足一块的数据置空。大致图示：(pixel是图像像素数据，data是内存里其他数据)</p>
+<p><img src="/images/fastImageCache2.png" alt="fastImageCache2"></p>
+<p>块的大小应该是跟CPU cache line有关，ARMv7是32byte，A9是64byte，在A9下CoreAnimation应该是按64byte作为一块数据去读取和渲染，让图像数据对齐64byte就可以避免CoreAnimation再拷贝一份数据进行修补。FastImageCache做的字节对齐就是这个事情。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>FastImageCache把同个类型和尺寸的图像都放在一个文件里，根据文件偏移取单张图片，类似web的css雪碧图，这里称为ImageTable。这样做主要是为了方便统一管理图片缓存，控制缓存的大小，整个FastImageCache就是在管理一个个ImageTable的数据。整体实现的数据结构如图：</p>
+<p><img src="/images/fastImageCache3.png" alt="fastImageCache3"></p>
+<p>一些补充和说明：</p>
+<h3 id="ImageTable"><a href="#ImageTable" class="headerlink" title="ImageTable"></a>ImageTable</h3><ol>
+<li>一个ImageFormat对应一个ImageTable，ImageFormat指定了ImageTable里图像渲染格式/大小等信息，ImageTable里的图像数据都由ImageFormat规定了统一的尺寸，每张图像大小都是一样的。</li>
+<li>一个ImageTable一个实体文件，并有另一个文件保存这个ImageTable的meta信息。</li>
+<li>图像使用entityUUID作为唯一标示符，由用户定义，通常是图像url的hash值。ImageTable Meta的indexMap记录了entityUUID-&gt;entryIndex的映射，通过indexMap就可以用图像的entityUUID找到缓存数据在ImageTable对应的位置。</li>
+</ol>
+<h3 id="ImageTableEntry"><a href="#ImageTableEntry" class="headerlink" title="ImageTableEntry"></a>ImageTableEntry</h3><ol>
+<li>ImageTable的实体数据是ImageTableEntry，每个entry有两部分数据，一部分是对齐后的图像数据，另一部分是meta信息，meta保存这张图像的UUID和原图UUID，用于校验图像数据的正确性。</li>
+<li>Entry数据是按内存分页大小对齐的，数据大小是内存分页大小的整数倍，这样可以保证虚拟内存缺页加载时使用最少的内存页加载一张图像。</li>
+<li>图像数据做了字节对齐处理，CoreAnimation使用时无需再处理拷贝。具体做法是CGBitmapContextCreate创建位图画布时bytesPerRow参数传64倍数。</li>
+</ol>
+<h3 id="Chunk"><a href="#Chunk" class="headerlink" title="Chunk"></a>Chunk</h3><ul>
+<li>ImageTable和实体数据Entry间多了层Chunk，Chunk是逻辑上的数据划分，N个Entry作为一个Chunk，内存映射mmap操作是以chunk为单位的，每一个chunk执行一次mmap把这个chunk的内容映射到虚拟内存。为什么要多一层chunk呢，按我的理解，这样做是为了灵活控制mmap的大小和调用次数，若对整个ImageTable执行mmap，载入虚拟内存的文件过大，若对每个Entry做mmap，调用次数会太多。</li>
+</ul>
+<h3 id="缓存管理"><a href="#缓存管理" class="headerlink" title="缓存管理"></a>缓存管理</h3><ul>
+<li>用户可以定义整个ImageTable里最大缓存的图像数量，在有新图像需要缓存时，如果缓存没有超过限制，会以chunk为单位扩展文件大小，顺序写下去。如果已超过最大缓存限制，会把最少使用的缓存替换掉，实现方法是每次使用图像都会把UUID插入到MRUEntries数组的开头，MRUEntries按最近使用顺序排列了图像UUID，数组里最后一个图像就是最少使用的。被替换掉的图片下次需要再使用时，再走一次取原图—解压—存储的流程。</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>FastImageCache适合用于tableView里缓存每个cell上同样规格的图像，优点是能极大加快第一次从磁盘加载这些图像的速度。但它有两个明显的缺点：一是占空间大。因为缓存了解码后的位图到磁盘，位图是很大的，宽高100<em>100的图像在2x的高清屏设备下就需要200</em>200*4byte/pixel=156KB，这也是为什么FastImageCache要大费周章限制缓存大小。二是接口不友好，需预定义好缓存的图像尺寸。FastImageCache无法像SDWebImage那样无缝接入UIImageView，使用它需要配置ImageTable，定义好尺寸，手动提供的原图，每种实体图像要定义一个FICEntity模型，使逻辑变复杂。</p>
+<p>FastImageCache已经属于极限优化，做图像加载/渲染优化时应该优先考虑一些低代价高回报的优化点，例如CALayer代替UIImageVIew，减少GPU计算（去透明/像素对齐），图像子线程解码，避免Offscreen-Render等。在其他优化都做到位，图像的渲染还是有性能问题的前提下才考虑使用FastImageCache进一步提升首次加载的性能，不过字节对齐的优化倒是可以脱离FastImageCache直接运用在项目上，只需要在解码图像时bitmap画布的bytesPerRow设为64的倍数即可。</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>FastImageCache</tag>
       </tags>
   </entry>
   <entry>
@@ -2572,6 +2478,315 @@ class CMExpandingTextField: UITextField {
       </categories>
       <tags>
         <tag>优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS逆向-class-dump工具</title>
+    <url>/post/reverse-ios-class-dump/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="noopener">stevenygard.com</a>下载最新的包。</p>
+<p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
+<p>在<code>~/.base_profile</code>中添加<code>export PATH=/opt/class-dump:$PATH</code></p>
+<p>运行<code>source ~/.base_profile</code></p>
+<p>最后确认一下安装OK ：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> class-dump --v</span></span><br><span class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
+<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="../reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br><span class="line"><span class="meta">$</span><span class="bash"> class-dump -H WeChat.decrypted -o ./Headers/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls Headers</span></span><br><span class="line">Headers</span><br></pre></td></tr></table></figure>
+
+<p>即得头文件目录：<code>Headers</code></p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS逆向-monkeydev工具</title>
+    <url>/post/reverse-ios-monkeydev/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>MonkeyDev wiki<br>这是一个为越狱和非越狱开发人员准备的工具，主要包括四个模块:</p>
+</blockquote>
+<blockquote>
+<p> Logos Tweak</p>
+</blockquote>
+<blockquote>
+<p>使用theos提供的logify.pl工具将*.xm文件转成*.mm文件进行编译，集成了CydiaSubstrate，可以使用MSHookMessageEx和MSHookFunction来Hook OC函数和指定地址。</p>
+</blockquote>
+<blockquote>
+<p>CaptainHook Tweak</p>
+</blockquote>
+<blockquote>
+<p>使用CaptainHook提供的头文件进行OC 函数的Hook，以及属性的获取。</p>
+</blockquote>
+<blockquote>
+<p>Command-line Tool</p>
+</blockquote>
+<blockquote>
+<p>可以直接创建运行于越狱设备的命令行工具</p>
+</blockquote>
+<blockquote>
+<p>MonkeyApp</p>
+</blockquote>
+<blockquote>
+<p>这是自动给第三方应用集成Reveal、Cycript和注入dylib的模块，支持调试dylib和第三方应用，支持Pod给第三放应用集成SDK，只需要准备一个砸壳后的ipa或者app文件即可。</p>
+</blockquote>
+<a id="more"></a>
+
+
+<hr>
+<ul>
+<li><a href="https://github.com/AloneMonkey/MonkeyDev/wiki" target="_blank" rel="noopener">MonkeyDev wiki</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于日志打印和过滤的那点破事</title>
+    <url>/post/reverse-ios-socat-watch-filter/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前两天，重启电脑突然发现我的<code>iOS8</code>设备无法连接到<code>MacOS</code>了。。</p>
+<p>MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。</p>
+<p>具体报错如下：<br><code>Xcode&lt;Version 9.4 (9F1027a)&gt;</code>报错如下: (我安装过<code>Xcode10 beta1</code>)<br><img src="/images/2018-06-15-10-13-16.png" alt="Xcode报错"></p>
+<p><code>iTunes</code>报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/2018-06-15-10-06-16.png" alt="iTunes报错"></p>
+<p><code>Apple Configurator2</code>报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">已收到设备上的意外响应。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/2018-06-15-10-09-33.png" alt="Apple Configurator2报错"></p>
+<a id="more"></a>
+
+<p>还是 先来聊一下日志打印的几种方案吧。</p>
+<h2 id="手机可以连接到MacOS"><a href="#手机可以连接到MacOS" class="headerlink" title="手机可以连接到MacOS"></a>手机可以连接到MacOS</h2><p>这种情况是最常见的，就是能在Xcode下Debug….</p>
+<h3 id="方案一：Console-app-控制台"><a href="#方案一：Console-app-控制台" class="headerlink" title="方案一：Console.app(控制台)"></a>方案一：Console.app(控制台)</h3><p>这是MacOS自带的日志神器～ 效果顶呱呱👍👍👍，截图如下：<br><img src="/images/2018-06-15-10-23-02.png" alt="Console.app"></p>
+<p>具体用法我就不说了。。。毕竟都是中文😂</p>
+<h3 id="方案二：LogGuru"><a href="#方案二：LogGuru" class="headerlink" title="方案二：LogGuru"></a>方案二：LogGuru</h3><p><a href="https://github.com/madordie/LogGuru" target="_blank" rel="noopener">madordie/LogGuru</a> 也不错，很久之前fork自<a href="https://github.com/FIRHQ/LogGuru" target="_blank" rel="noopener">FIRHQ/LogGuru</a>，增加了直接过滤的功能，要不然速度真的很慢。。</p>
+<p>只要插入USB，即可显示日志，还是不错滴。。</p>
+<p><img src="/images/2018-06-15-10-29-07.png" alt="原来的截图"></p>
+<h3 id="方案三-其他的"><a href="#方案三-其他的" class="headerlink" title="方案三: 其他的"></a>方案三: 其他的</h3><p>还有很多方案，比如说命令行啊、其他的工具啊，我就不说了，我觉得 <strong>Console.app(控制台)</strong> 就够了😂</p>
+<h2 id="手机无法链接进MacOS"><a href="#手机无法链接进MacOS" class="headerlink" title="手机无法链接进MacOS"></a>手机无法链接进MacOS</h2><p>也就是最开始说的报错的情况下，可以连接进MacOS的方案均无法使用。苦逼，只能让iOS打印日志了。。</p>
+<p>下面都是 <strong>越狱环境</strong> 下的。。不越狱还有人用iOS8么😂</p>
+<p>先来看个文档：<a href="https://www.theiphonewiki.com/wiki/System_Log" target="_blank" rel="noopener">The iPhone Wiki/System Log</a>,这里提供了很多方案，也非常全面，值得一试。</p>
+<p>苦逼的事情是我手上的iOS8.4.1无法使用<code>syslogd to /var/log/syslog</code>插件，尝试使用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_saving_to_a_file_via_a_Python_script" target="_blank" rel="noopener">On-device with saving to a file via a Python script</a>的方案去解决也并不如意。。</p>
+<p>开始用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_socat" target="_blank" rel="noopener">On-device with socat</a>（ 在<a href="http://bbs.iosre.com/" target="_blank" rel="noopener">iosre</a>中也有一个类似的文章：<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="noopener">iOS查看日志利器 —— socat</a>），说的都是相当的详细。</p>
+<h3 id="socat的坑"><a href="#socat的坑" class="headerlink" title="socat的坑"></a>socat的坑</h3><h4 id="stop没有用"><a href="#stop没有用" class="headerlink" title="stop没有用"></a>stop没有用</h4><p>如<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="noopener">iOS查看日志利器 —— socat</a>所说：</p>
+<blockquote>
+<p>输入watch查看，输入stop停止（不过停止貌似没用，也不知道为啥，知道的请告诉我）</p>
+</blockquote>
+<p>这个真的是没有用，所以<code>watch</code>功能就很鸡肋。。</p>
+<h4 id="没有办法实时过滤"><a href="#没有办法实时过滤" class="headerlink" title="没有办法实时过滤"></a>没有办法实时过滤</h4><p>文中提到了很多过滤条件，但是一旦开启过滤，就没有办法显示实时日志。。也就是说无法和<code>watch</code>共存。。。</p>
+<h3 id="换个姿势使用socat"><a href="#换个姿势使用socat" class="headerlink" title="换个姿势使用socat"></a>换个姿势使用socat</h3><p><code>socat</code>的日志都在终端上，不着色不说还有上面的两个很影响使用的问题。。。于是乎，为了增加过滤功能，需要通过管道将输出接入另外的命令如：<code>grep</code>等。</p>
+<p><code>socat</code>命令需要手动输入<code>watch</code>才能显示出实时命令，这个让管道并不能直接使用。这里需要借助<code>expect</code>命令。</p>
+<p>好了所有的点都通了，大致步骤如下：</p>
+<h4 id="在mac上安装expect"><a href="#在mac上安装expect" class="headerlink" title="在mac上安装expect"></a>在mac上安装expect</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">brew install expect</span><br></pre></td></tr></table></figure>
+
+<h4 id="在mac的～-bash-profile配置"><a href="#在mac的～-bash-profile配置" class="headerlink" title="在mac的～/.bash_profile配置"></a>在mac的～/.bash_profile配置</h4><p>此处假设你的设备已经按照<a href="../reverse-ios-ssh">iOS逆向-设备ssh免密登录</a>配置好了：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">"</span></span><br><span class="line"><span class="string">        spawn ssh i5s \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \"&gt; \" &#123;send \"watch\n\";&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>ios-socat</code> 函数名，在命令行可以直接输入函数名调用该函数</li>
+<li><code>i5s</code> 在<code>~/.ssh/config</code>中配置的名字</li>
+</ul>
+<p>如果没有配置ssh免密呢需要这样：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">"</span></span><br><span class="line"><span class="string">        spawn ssh -p22 root@ios's_ip \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \"*password: \" &#123;send \"mypassword\n\";&#125;</span></span><br><span class="line"><span class="string">            \"&gt; \" &#123;send \"watch\n\";&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-p22</code> 端口号，22是默认不用写，但是其他的需要写。</li>
+<li><code>ios&#39;s_ip</code> iOS设备的ip。</li>
+<li><code>mypassword</code> iOS设备密码</li>
+<li>这个我没测。。大致如此，我对<code>expect</code>的语法也不是很熟</li>
+</ul>
+<p>最后别忘了让<code>~/.bash_profile</code>生效：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>然后只需要在命令行输入<code>ios-socat</code>就可以看到蹭蹭蹭的日志打印咯。。至于用什么管道啊都不是问题。</p>
+<p>比如：<br>只显示包含<code>iosre</code>关键字的日志</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ios-socat | grep iosre</span><br></pre></td></tr></table></figure>
+
+<h4 id="晋级用法"><a href="#晋级用法" class="headerlink" title="晋级用法"></a>晋级用法</h4><ul>
+<li><p>我的iOS设备通过<code>iproxy</code>来进行端口映射。具体用法移步<a href="https://www.google.com/search?q=iproxy&oq=iproxy" target="_blank" rel="noopener">Google</a></p>
+</li>
+<li><p>通过<code>ios-socat &gt; ~/Desktop/ios.log</code> 然后下载<a href="https://itunes.apple.com/cn/app/logtail/id1073404370?mt=12" target="_blank" rel="noopener">LogTail</a>，剩下的摸索一下咯</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2></li>
+</ul>
+<p>我还不清楚究竟什么原因导致了<code>收到来自此设备的无效响应</code>错误，布吉岛系统修改了什么。我尝试重新安装iTunes、Xcode都无效（据说陌陌的开发为这个无法调试直接将系统降级是可以的😂）。。有老铁懂得指点下～～</p>
+<p>目前虽然上面都可以用，但是看个日志并不能满足我的野心，最后在移动硬盘里做了一个10.12的系统😂，用了Console.app…</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS逆向-创建Cydia源</title>
+    <url>/post/reverse-ios-creat-cydia-sources/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>搭建自己的cydia源。</p>
+<a id="more"></a>
+
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
+<li>Ubuntu 16.04 LTS</li>
+</ul>
+<h3 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h3><h4 id="dpkg-dev"><a href="#dpkg-dev" class="headerlink" title="dpkg-dev"></a>dpkg-dev</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ apt-get update</span><br><span class="line">$ apt-get install dpkg-dev</span><br><span class="line">$ dpkg-scanpackages --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">apt-get install nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="开工"><a href="#开工" class="headerlink" title="开工"></a>开工</h3><h4 id="准备deb"><a href="#准备deb" class="headerlink" title="准备deb"></a>准备deb</h4><p>此处目录为<code>/opt/cydia/debs</code>，可以为别的，但是建议你也这样做:)。</p>
+<h4 id="生成依赖"><a href="#生成依赖" class="headerlink" title="生成依赖"></a>生成依赖</h4><p>更新插件需要重新执行哟。。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /opt/cydia</span><br><span class="line">$ dpkg-scanpackages -m ./debs /dev/null &gt; Packages</span><br><span class="line">$ bzip2 Packages</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加sources-list"><a href="#添加sources-list" class="headerlink" title="添加sources.list"></a>添加sources.list</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"deb file:///opt/cydia ./debs/"</span> &gt;&gt; /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<p>ps. 注意路径信息</p>
+<h4 id="更新一下"><a href="#更新一下" class="headerlink" title="更新一下"></a>更新一下</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ apt-get update</span><br></pre></td></tr></table></figure>
+
+<h4 id="扔出去"><a href="#扔出去" class="headerlink" title="扔出去"></a>扔出去</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /var/www/html</span><br><span class="line">$ ln -s /opt/cydia cydia</span><br><span class="line">$ /etc/init.d/nginx start</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="http://www.saurik.com/id/7" target="_blank" rel="noopener">http://www.saurik.com/id/7</a></li>
+<li><a href="https://bbs.feng.com/read-htm-tid-8052646.html" target="_blank" rel="noopener">https://bbs.feng.com/read-htm-tid-8052646.html</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS逆向-砸壳(cycript/clutch)</title>
+    <url>/post/reverse-ios-dump-decrypted/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>越狱设备</li>
+</ul>
+<p>目前有两种砸壳工具，并不肩并肩，一个不行就用另一个呗，俩都不行就Google吧～～</p>
+<p>下面分别对<code>cycript</code>、<code>clutch</code>进行砸壳:</p>
+<a id="more"></a>
+
+<h1 id="使用cycript进行砸壳"><a href="#使用cycript进行砸壳" class="headerlink" title="使用cycript进行砸壳"></a>使用cycript进行砸壳</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><code>Cydia</code>中搜索<code>cycript</code>并安装 </li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="制作并上传dumpdecrypted-dylib-（已经OK的可忽略"><a href="#制作并上传dumpdecrypted-dylib-（已经OK的可忽略" class="headerlink" title="制作并上传dumpdecrypted.dylib （已经OK的可忽略"></a>制作并上传<code>dumpdecrypted.dylib</code> （已经OK的可忽略</h3><h4 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h4><p>目前我制作目录暂时在<code>~/Desktop</code>。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/stefanesser/dumpdecrypted.git ~/Desktop</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ～／Desktop/dumpdecrypted</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls dumpdecrypted.dylib</span></span><br></pre></td></tr></table></figure>
+
+<p>没什么错误的话，即得<code>dumpdecrypted.dylib</code>。</p>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>将<code>dumpdecrypted.dylib</code>放在越狱设备的<code>/var/root/</code>下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls dumpdecrypted.dylib</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> scp dumpdecrypted.dylib root@10.12.14.16:/var/root/</span></span><br><span class="line">root@10.12.14.16's password:</span><br><span class="line">dumpdecrypted.dylib                           100%  193KB   3.0MB/s   00:00</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="登录进越狱设备"><a href="#登录进越狱设备" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
+<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="../reverse-ios-ssh/">配置传送门</a></p>
+<h3 id="找到可执行文件路径"><a href="#找到可执行文件路径" class="headerlink" title="找到可执行文件路径"></a>找到可执行文件路径</h3><p>这里以<code>WeChat</code>为例子啦～</p>
+<p>记得先打开呀～～～</p>
+<p><code>ps -e</code>： 显示所有程序<br><code>grep</code>: 这里是过滤一下。。具体用法Google。所有的程序有点多，我知道名字，所以直接过滤一下。也可忽略</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps -e | grep WeChat</span></span><br><span class="line">705 ??         0:02.20 /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</span><br><span class="line">707 ttys000    0:00.01 grep WeChat</span><br><span class="line"><span class="meta">$</span><span class="bash"> cycript -p 705</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cycript -p 705</span></span><br><span class="line"><span class="meta">cy#</span><span class="bash"> [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string">"file:///var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/"</span></span></span><br><span class="line"><span class="meta">cy#</span><span class="bash"> <span class="built_in">exit</span>(0)</span></span><br><span class="line">MS:Error: _krncall(mach_vm_read_overwrite(task, data, sizeof(*baton), reinterpret_cast&lt;mach_vm_address_t&gt;(baton), &amp;error)) =4</span><br><span class="line">*** _assert(status == 0):../Inject.cpp(143):InjectLibrary</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
+
+<p>此处获得两个目录：</p>
+<ul>
+<li><code>/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</code></li>
+<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</code></li>
+</ul>
+<h3 id="开砸"><a href="#开砸" class="headerlink" title="开砸"></a>开砸</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp dumpdecrypted.dylib /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat</span></span><br><span class="line">mach-o decryption dumper</span><br><span class="line"></span><br><span class="line">DISCLAIMER: This tool is only meant for security research purposes, not for application crackers.</span><br><span class="line"></span><br><span class="line">[+] detected 64bit ARM binary in memory.</span><br><span class="line">[+] offset to cryptid found: @0x1000c0ca8(from 0x1000c0000) = ca8</span><br><span class="line">[+] Found encrypted data at address 00004000 of length 51200000 bytes - type 1.</span><br><span class="line">[+] Opening /private/var/mobile/Containers/Bundle/Application/3AE519BF-2FD2-43FC-A14B-2893190B8E1E/WeChat.app/WeChat for reading.</span><br><span class="line">[+] Reading header</span><br><span class="line">[+] Detecting header type</span><br><span class="line">[+] Executable is a plain MACH-O image</span><br><span class="line">[+] Opening WeChat.decrypted for writing.</span><br><span class="line">[+] Copying the not encrypted start of the file</span><br><span class="line">[+] Dumping the decrypted data into the file</span><br><span class="line">[+] Copying the not encrypted remainder of the file</span><br><span class="line">[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset ca8</span><br><span class="line">[+] Closing original file</span><br><span class="line">[+] Closing dump file</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents</span><br></pre></td></tr></table></figure>
+<p>最后得到文件:</p>
+<ul>
+<li><code>/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted</code></li>
+</ul>
+<h3 id="将-decrypted拷贝出来"><a href="#将-decrypted拷贝出来" class="headerlink" title="将*.decrypted拷贝出来"></a>将<code>*.decrypted</code>拷贝出来</h3><p>我这里直接使用<code>scp</code>吧～。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /Users/Madordie/Desktop/Madordie/iOS/xxx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> scp root@10.12.14.16:/var/mobile/Containers/Data/Application/54EF9A70-8E3A-4B6D-B7F4-554AB256C48B/Documents/WeChat.decrypted .</span></span><br><span class="line">root@10.12.14.16's password:</span><br><span class="line">WeChat.decrypted                              100%   61MB   4.7MB/s   00:12</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br></pre></td></tr></table></figure>
+<p>至此在主机上得到：</p>
+<ul>
+<li><code>/Users/Madordie/Desktop/Madordie/iOS/xxx/WeChat.decrypted</code></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>为什么将<code>dumpdecrypted.dylib</code>  <code>copy</code> 至<code>*/Documents/</code>下？<br>  ：别的目录没有权限～～（<code>dumpdecrypted.dylib: stat() failed with errno=1</code> ）</li>
+</ul>
+<h1 id="使用clutch进行砸壳"><a href="#使用clutch进行砸壳" class="headerlink" title="使用clutch进行砸壳"></a>使用clutch进行砸壳</h1><h2 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h2><h3 id="下载上传clutch-无须重复做"><a href="#下载上传clutch-无须重复做" class="headerlink" title="下载上传clutch(无须重复做)"></a>下载上传clutch(无须重复做)</h3><p><code>clutch</code>可以从<a href="https://github.com/KJCracks/Clutch" target="_blank" rel="noopener">https://github.com/KJCracks/Clutch</a>下载编译。</p>
+<p>当然也可以从<a href="https://github.com/KJCracks/Clutch/releases" target="_blank" rel="noopener">https://github.com/KJCracks/Clutch/releases</a>直接下载。</p>
+<p>目前下载到目录<code>~/Clutch-2.0.4</code></p>
+<p>上传到设备：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> scp Clutch-2.0.4 root@10.12.14.16:/usr/bin/</span></span><br><span class="line">root@10.12.14.16's password:</span><br><span class="line">Clutch-2.0.4                                  100% 1204KB   4.7MB/s   00:00</span><br></pre></td></tr></table></figure>
+
+<h3 id="登录进越狱设备-1"><a href="#登录进越狱设备-1" class="headerlink" title="登录进越狱设备"></a>登录进越狱设备</h3><p>可以使用<code>ssh root@IP</code>进行登录。</p>
+<p>当然也可以使用<code>ssh ipad</code>，这样免密登录登录。 <a href="../reverse-ios-ssh/">配置传送门</a></p>
+<h3 id="修改权限"><a href="#修改权限" class="headerlink" title="修改权限"></a>修改权限</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/bin</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv Clutch-2.0.4 clutch</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod +x clutch</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="砸壳"><a href="#砸壳" class="headerlink" title="砸壳"></a>砸壳</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> clutch -i</span></span><br><span class="line">Installed apps:</span><br><span class="line">1:   钉钉 &lt;com.laiwang.DingTalk&gt;</span><br><span class="line">2:   韩剧TV-最新热门韩剧大全 &lt;com.baoyun.hanju&gt;</span><br><span class="line">3:   PG Client - a better client for dribbble &lt;com.az.azdribbble&gt;</span><br><span class="line">4:   窝牛－设计装修我们的家 &lt;com.lingduohome.acorn&gt;</span><br><span class="line"><span class="meta">$</span><span class="bash"> clutch -d 1</span></span><br><span class="line">com.laiwang.DingTalk contains watchOS 2 compatible application. It's not possible to dump watchOS 2 apps with Clutch 2.0.4 at this moment.</span><br><span class="line">Zipping DingTalk.app</span><br><span class="line">ASLR slide: 0x10001c000</span><br><span class="line">Dumping &lt;DingTalk&gt; (arm64)</span><br><span class="line">Patched cryptid (64bit segment)</span><br><span class="line">Writing new checksum</span><br><span class="line">DONE: /private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</span><br><span class="line">Finished dumping com.laiwang.DingTalk in 40.6 seconds</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
+
+<p>生成最终路径:</p>
+<ul>
+<li><code>/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</code></li>
+</ul>
+<h3 id="传至本地"><a href="#传至本地" class="headerlink" title="传至本地"></a>传至本地</h3><p>注意路径中有<code>()</code>这样的字符，需要转义一下。如下：</p>
+<p>在本地终端中使用<code>scp</code>拉取：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> scp root@10.12.14.16:<span class="string">'/private/var/mobile/Documents/Dumped/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa'</span> .</span></span><br><span class="line">root@10.12.14.16's password:</span><br><span class="line">com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ip 100%   48MB   3.6MB/s   00:13</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa</span></span><br><span class="line">com.laiwang.DingTalk-iOS7.0-(Clutch-2.0.4).ipa</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/Madordie/Desktop/Madordie/ios-reverse</span><br></pre></td></tr></table></figure>
+<p>至此在主机上得到：</p>
+<ul>
+<li><code>/Users/Madordie/Desktop/Madordie/ios-reverse/com.laiwang.DingTalk-iOS7.0-\(Clutch-2.0.4\).ipa</code></li>
+</ul>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>并不是每一个都可以支持这种工具砸壳，失败了用第一种试试。。。</li>
+</ul>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>目前发现这两种砸壳工具。但是并不是每一个APP都可以使用2种工具。有的只有一个有效，有的两个都有效，还有一种两个都失败的😂</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS逆向-设备ssh免密登录</title>
+    <url>/post/reverse-ios-ssh/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
+<li>已越狱设备</li>
+<li>越狱设备安装OpenSSH(⚠️记得修改默认的’alpine’登录密码)</li>
+<li>电脑和设备同局域网。（我这里设备IP：10.11.12.13，并且设置成静态IP了😂）</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="生成RSA证书"><a href="#生成RSA证书" class="headerlink" title="生成RSA证书"></a>生成RSA证书</h3><p>我这里生成的证书为:<code>ipad</code>，可自己需要定义。（注意如果直接回车会覆盖<code>~/.ssh/id_rsa</code>）</p>
+<p>执行命令<code>ssh-keygen</code>，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/.ssh/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ssh-keygen</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/Madordie/.ssh/id_rsa): ipad</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in ipad.</span><br><span class="line">Your public key has been saved in ipad.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:GpQBeAf+oqUzWlUhtItDcVyVFz2wd0EcIgD+BZLPK8U Madordie@Bingo.local</span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|  .+*+*++o++.o+. |</span><br><span class="line">|  .+o+o=...oo... |</span><br><span class="line">|  ..o.=+ .o ...  |</span><br><span class="line">| . . = .E. . .   |</span><br><span class="line">|  o = o.S.       |</span><br><span class="line">|   * ..o.        |</span><br><span class="line">|  *   ..         |</span><br><span class="line">| o o             |</span><br><span class="line">|.                |</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls ~/.ssh/ipad*</span></span><br><span class="line">/Users/Madordie/.ssh/ipad     /Users/Madordie/.ssh/ipad.pub</span><br></pre></td></tr></table></figure>
+
+<h3 id="将公钥推送至越狱设备"><a href="#将公钥推送至越狱设备" class="headerlink" title="将公钥推送至越狱设备"></a>将公钥推送至越狱设备</h3><p>默认是没有<code>~/.ssh</code>目录的，暂时放置在<code>/var/root</code>下。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> scp ~/.ssh/ipad.pub root@10.11.12.13:/var/root</span></span><br></pre></td></tr></table></figure>
+
+<p><code>scp</code> 默认端口为<code>22</code> 如果需要自定义端口可以在路径前添加<code>-P 端口号</code>参数。</p>
+<h3 id="配置本机-ssh-config文件"><a href="#配置本机-ssh-config文件" class="headerlink" title="配置本机~/.ssh/config文件"></a>配置本机<code>~/.ssh/config</code>文件</h3><p>使用顺手的工具编辑<code>~/.ssh/config</code>文件。（没有就新建一个啦～</p>
+<p>按照如下格式填写。默认<code>ssh</code>登录端口为<code>22</code>可以不写。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host ipad</span><br><span class="line">    Hostname 10.11.12.13</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~&#x2F;.ssh&#x2F;ipad</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置越狱设备"><a href="#配置越狱设备" class="headerlink" title="配置越狱设备"></a>配置越狱设备</h3><p>先用<code>ssh root@10.11.12.13</code>登录进设备(如果你没有修改密码那么默认是<code>alpine</code>,这个在<a href="https://cydia.saurik.com/openssh.html" target="_blank" rel="noopener">OpenSSH</a>上)。刚才我们将<code>ipad.pub</code>通过<code>scp</code>放在了<code>/var/root</code>下。</p>
+<p>一般情况下<code>/var/root/.ssh</code>是不存在的，使用命令<code>mkdir -p /var/root/.ssh</code>即可创建。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat ipad.pub &gt;&gt; /var/root/.ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
+
+<p>然后强迫症的可以使用<code>rm -rf ipad.pub</code>删除啦～</p>
+<p>对了，退出<code>ssh</code>登录的设备使用：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">exit</span></span></span><br><span class="line">logout</span><br><span class="line">Connection to 10.11.12.13 closed.</span><br></pre></td></tr></table></figure>
+
+<h3 id="赶紧测试一下远程登录效果"><a href="#赶紧测试一下远程登录效果" class="headerlink" title="赶紧测试一下远程登录效果"></a>赶紧测试一下远程登录效果</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh ipad</span></span><br></pre></td></tr></table></figure>
+
+<p>然后你会发现你已经完成了免密码登录越狱设备。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实这并不是只有越狱iOS设备才能使用的免登录，而是<code>ssh</code>所支持的。用途也很方便～</p>
+<p>PS. 这里面的IP地址(10.11.12.13) 是你设备的IP。如果超时的话或者ping不通或者网速比较差的话，可以采用<a href="http://iphonedevwiki.net/index.php/SSH_Over_USB" target="_blank" rel="noopener">usbmux</a>方案进行，文档已相当详细，此处不再赘述。</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>逆向</tag>
       </tags>
   </entry>
   <entry>
@@ -2828,221 +3043,6 @@ class CMExpandingTextField: UITextField {
       <tags>
         <tag>tool</tag>
         <tag>logio</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Fastlane自动化笔记</title>
-    <url>/post/fastlane-note/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前在搭建Jenkins的时候，由于看到Fastlane的配置好复杂，那么多，而当时的需求就是自动打包。。所以没有用，现在想来好气！今天翻到InfoQ的一个文章，又详细的了解了Fastlane之后，觉得此大法甚好，解决很多痛点！决定搞通这一切！<br>回看之前的<a href="../build-ipa-sh">build-ipa-sh.md</a>确实比较僵硬。自动化还是很棒的。</p>
-<a id="more"></a>
-
-<h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><p>  (<a href="http://icyleaf.com/" target="_blank" rel="noopener">@icyleaf</a>)在<a href="https://icyleaf.com/2016/07/intro-fastlane-automation-for-ios-and-android/" target="_blank" rel="noopener">Fastlane - iOS 和 Android 的自动化构建工具</a>中说到：</p>
-<blockquote>
-<p>Fastlane 提供的流程的众多工具都是可以独立存在和使用（提供 cli 命令），也可以统一由 fastlane 来控制。它在使用中提出了两个概念：</p>
-</blockquote>
-<pre><code>- action: Fastlane 的插件，截至当前内置 165 个至多，不过每个动作的颗粒度大小不一。查看详情
-- lane: Fastlane 的任务（或者可以理解为命令），一个可以包含多个 lanes，通过 fastlane cli 传入制定的 lane 来执行。</code></pre>
-<p>  自我感觉这句话这个对理解和使用很重要！</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>  Fastlane已被Fabric收购，所以按照其安装也很随意(<a href="https://fabric.io/features/distribution" target="_blank" rel="noopener">戳我配置</a>)。<br>  对于打包，</p>
-<h1 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h1><ul>
-<li><a href="http://icyleaf.com/2016/07/fastlane-in-action/" target="_blank" rel="noopener">深入浅出 Fastlane 一看你就懂</a></li>
-<li><a href="http://blog.fir.im/fir_im_weekly160505" target="_blank" rel="noopener">fir.im weekly - 「 持续集成 」实践教程合集</a></li>
-<li><a href="https://everettjf.github.io/2015/09/08/ios-ci-with-fastlane" target="_blank" rel="noopener">使用fastlane实现iOS持续集成</a></li>
-<li><a href="https://docs.fastlane.tools/" target="_blank" rel="noopener">fastlane docs</a></li>
-<li><a href="https://github.com/fastlane/fastlane" target="_blank" rel="noopener">fastlane GitHub</a></li>
-<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part01" target="_blank" rel="noopener">Fastlane实战（一）：移动开发自动化之道</a></li>
-<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part02" target="_blank" rel="noopener">Fastlane实战（二）：Action和Plugin机制</a></li>
-<li><a href="http://www.infoq.com/cn/articles/actual-combat-of-fastlane-part03" target="_blank" rel="noopener">Fastlane实战（三）：Fastlane在Android平台的应用</a></li>
-<li><a href="http://www.infoq.com/cn/articles/fastlane-automatic-testing" target="_blank" rel="noopener">Fastlane实战（四）：自动化测试篇</a></li>
-<li><a href="http://www.infoq.com/cn/articles/fastlane-pro-tips" target="_blank" rel="noopener">Fastlane实战（五）：高级用法</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>构建</tag>
-        <tag>Fastlane</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS自动化-Jenkins环境搭建</title>
-    <url>/post/ios-automation-jenkins-configuration/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
-<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
-<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
-</ul>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
-<p> <strong>Jenkins</strong><br><em>Build great things at any scale</em><br>The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.</p>
-</blockquote>
-<p>如<a href="https://jenkins.io/" target="_blank" rel="noopener">官网</a>所说<code>Build great things at any scale</code></p>
-<p>从这篇文章中你将会实现：</p>
-<ul>
-<li>在Mac上多种方案安装并启动jenkins</li>
-<li>在局域网中正常访问jenkins</li>
-</ul>
-<a id="more"></a>
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>当然你首先需要一个macOS的系统，为后来的构建做基础。</p>
-<p>Jenkins中可以使用<code>pkg</code>、<code>war</code>的方式运行，当然还有在<a href="https://jenkins.io/doc/book/getting-started/installing/" target="_blank" rel="noopener">Installing Jenkins</a>中提供一些安装方式：</p>
-<blockquote>
-<p> <strong>macOS</strong><br>To install from the website, using a package:</p>
-</blockquote>
-<blockquote>
-<ul>
-<li>Download the latest package</li>
-<li>Open the package and follow the instructions</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>Jenkins can also be installed using brew:</p>
-</blockquote>
-<blockquote>
-<ul>
-<li>Install the latest release version<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">brew install jenkins </span><br></pre></td></tr></table></figure></li>
-<li>Install the LTS version<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">brew install jenkins-lts </span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<p>这里使用<code>brew</code>，因为<strong>很方便</strong>：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ brew update &amp;&amp; brew install jenkins</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line">$ brew update &amp; brew upgrade jenkins</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后台运行 还支持`stop`、`restart`等 (这种方式还是有差别的，下面会说明)</span></span><br><span class="line">$ brew services start jenkins</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>建议先来看一波<code>--help</code></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ jenkins --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>直接运行<code>jenkins</code>命令，可以看到日志输出，但是不能退出命令。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ jenkins</span><br></pre></td></tr></table></figure>
-
-<p>经过漫长的初始化，会将</p>
-<ul>
-<li><code>~/.jenkins</code>目录作为<code>JENKINS_HOME</code></li>
-<li><code>localhost:8080</code>作为默认URL</li>
-</ul>
-<p>终端输出<code>Started initialization</code>一行之后就可以正常打开了。</p>
-<p>在浏览器打开<a href="http://10.12.12.10:8080/" target="_blank" rel="noopener">http://10.12.12.10:8080</a>就可以正常加载啦～</p>
-<p>退出运行：<code>control + C</code> 组合键。</p>
-<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>直接<code>open</code>，看不到日志输出，所对应的运行环境和方案一相同。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ open /usr/<span class="built_in">local</span>/opt/jenkins/libexec/jenkins.war</span><br></pre></td></tr></table></figure>
-
-<p>命令结束，稍等片刻(初始化相关目录、环境)，在浏览器打开<a href="http://10.12.12.10:8080/" target="_blank" rel="noopener">http://10.12.12.10:8080</a>就可以正常加载啦～</p>
-<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>使用<code>brew</code>直接挂在后台作为服务运行起来</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sudo brew services start jenkins</span><br></pre></td></tr></table></figure>
-
-<p><code>brew</code>还提供其他的参数，比如说<code>restart</code>、<code>list</code>、<code>stop</code> 等等。</p>
-<p>此方案和上面的运行环境是不一样的，会有些权限的差别。</p>
-<h3 id="其他方案"><a href="#其他方案" class="headerlink" title="其他方案"></a>其他方案</h3><p>使用<code>launchctl</code>、<code>nohup</code> 等其他方案进行的后台运行，同方案三差不多。</p>
-<p>需要说的是<code>launchctl</code>是macOS下系统提供的后台运行方案，<code>brew</code>等，均来自于此。</p>
-<p>在<code>launchctl</code>后台中需要一个<code>plist</code>，但是<code>brew</code>已经做好了，放置在<code>~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</code>。需要说的是<code>launchctl</code>是macOS下系统提供的后台运行方案，<code>brew</code>等，均来自于此，具体的配置参数都和<code>launchctl</code>一样的，搜索一下很多。<code>brew</code>为我们已经准备好了一个，直接使用<code>方案三</code>就行。</p>
-<p>具体操作可以Google一下，很多的～</p>
-<h2 id="安装完成后的配置"><a href="#安装完成后的配置" class="headerlink" title="安装完成后的配置"></a>安装完成后的配置</h2><p>在Jenkins初始化完毕为了验证管理员身份，需要将Jenkins机器上的一个字符串输入到<a href="http://10.12.12.10:8080/" target="_blank" rel="noopener">http://10.12.12.10:8080</a>中进行验证，具体文件目录在输入的界面就能看到，不要大惊小怪。</p>
-<p>之后开始选择安装插件。这里可以选择推荐的～～，也可以自己勾选。为了方便，这里直接选择推荐的方案进行安装。</p>
-<p>经过漫长的等待，终于将插件安装完毕，并启动了起来～～</p>
-<p>Jenkins权限，嗯，这个很重要，可以去<code>系统管理 -&gt; Configure Global Security</code>  中进行设置。</p>
-<p>接下来开始去配置工程吧！传送门：<a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></p>
-<h2 id="可能会碰到的错误"><a href="#可能会碰到的错误" class="headerlink" title="可能会碰到的错误"></a>可能会碰到的错误</h2><h3 id="Error-Permission-denied"><a href="#Error-Permission-denied" class="headerlink" title="Error: Permission denied - ***"></a>Error: Permission denied - ***</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew services start jenkins</span><br><span class="line">Error: Permission denied - ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</span><br></pre></td></tr></table></figure>
-<p>这种很明显<code>Permission denied</code>，在命令行前添加<code>sudo</code>，然后输入密码即可。如下：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sudo brew services start jenkins</span><br></pre></td></tr></table></figure>
-
-<h3 id="方案二后的地址哪里来的？"><a href="#方案二后的地址哪里来的？" class="headerlink" title="方案二后的地址哪里来的？"></a><code>方案二</code>后的地址哪里来的？</h3><p>这里推荐的安装方案是<code>brew install jenkins</code></p>
-<p>通过下面的方式找到<code>brew</code>安装的位置</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew services list</span><br><span class="line">Name       Status  User Plist</span><br><span class="line">beanstalkd stopped</span><br><span class="line">influxdb   stopped</span><br><span class="line">jenkins    started keith  ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</span><br><span class="line">nginx      stopped</span><br><span class="line">sonarqube  stopped</span><br><span class="line">FDDdeiMac:~ FDD$ cat ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist</span><br><span class="line">...</span><br><span class="line">&lt;string&gt;/usr/<span class="built_in">local</span>/opt/jenkins/libexec/jenkins.war&lt;/string&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h3 id="给Jenkins绑定一个IP"><a href="#给Jenkins绑定一个IP" class="headerlink" title="给Jenkins绑定一个IP"></a>给Jenkins绑定一个IP</h3><p>讲道理这个不应该在这里聊的😂，不过还是说一下吧。。</p>
-<p>一般局域网中都是直接自动获取IP信息的也就是DHCP，但是Jenkins总改IP也不好。。于是绑定一下吧。</p>
-<p>在mac 中 <code>系统偏好设置 -&gt; 网络</code> 记录下来当前获取到的IP。</p>
-<p>在<code>高级</code>中将<code>使用DHCP</code>修改为<code>使用DHCP(手动设定地址)</code>，然后将上面的地址填进去就好啦～</p>
-<p>当然你也可以指定其他的地址，只要别人没有占用😂，你开心就好～</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>构建</tag>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS自动化-Jenkins编译工程</title>
-    <url>/post/ios-automation-jenkins-build/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
-<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
-<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
-</ul>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～</p>
-<p>从这个文章中你将要实现以下功能：</p>
-<ul>
-<li>在Jenkins创建工程</li>
-<li>build出ipa</li>
-<li>将ipa上传至fir</li>
-<li>钉钉机器人群通知</li>
-<li>将dsym上传至bugly</li>
-</ul>
-<a id="more"></a>
-
-<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><p>这里大多数操作都是用脚本来进行的，不为别的，就为自由和以后～</p>
-<h3 id="fastlane"><a href="#fastlane" class="headerlink" title="fastlane"></a>fastlane</h3><p>此乃自动化神器。<a href="https://docs.fastlane.tools/" target="_blank" rel="noopener">文档在此</a>。<a href="https://github.com/fastlane/fastlane" target="_blank" rel="noopener">开源哟～</a></p>
-<p>此处主要用来编译、打包。</p>
-<p>安装方法：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew cask install fastlane</span><br></pre></td></tr></table></figure>
-
-<p>此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。</p>
-<p>在Xcode9 我使用的版本2.14.1打包出问题了。。具体在这里详见<a href="../debug-xcode9-build-ipa">Xcode9编译失败</a>。于是呼采用了<code>xcodebuild</code>进行打包</p>
-<h3 id="fir-im-cli"><a href="#fir-im-cli" class="headerlink" title="fir.im-cli"></a>fir.im-cli</h3><p><a href="https://fir.im/" target="_blank" rel="noopener">fir.im</a>提供的应用内测托管工具。<a href="https://github.com/FIRHQ/fir-cli/blob/master/README.md" target="_blank" rel="noopener">开源官网</a>。</p>
-<p>安装方法：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem install fir-cli</span><br></pre></td></tr></table></figure>
-
-<p>此工具也提供打包ipa、apk、上传符号表至BugHD、等功能。但是我们在这里选择了<code>fastlane gym</code></p>
-<p>上传加速：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sh -c <span class="string">"<span class="variable">$(curl -sSL https://gist.githubusercontent.com/trawor/5dda140dee86836b8e60/raw/turbo-qiniu.sh)</span>"</span></span><br></pre></td></tr></table></figure>
-
-<p>上传加速代码已经<a href="http://blog.fir.im/turbo-qiniu/" target="_blank" rel="noopener">开源至此</a>。</p>
-<p><a href="http://bughd.com/" target="_blank" rel="noopener">BugHD</a>: 已停止线上免费服务，开始卖私有部署了。</p>
-<p>另外，fir 也有<a href="http://blog.fir.im/jenkins/" target="_blank" rel="noopener">Jenkins插件</a>，但是这里选择脚本方式。</p>
-<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
-<p>确保以下插件已经被安装：</p>
-<ul>
-<li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin" target="_blank" rel="noopener">Git Plugin</a></li>
-<li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin" target="_blank" rel="noopener">Tool Environment Plugin</a></li>
-</ul>
-<p>嗯，开始创建工程，然后配置打包吧！</p>
-<h2 id="工程相关配置"><a href="#工程相关配置" class="headerlink" title="工程相关配置"></a>工程相关配置</h2><p>左侧的<code>新建(New Item)</code>我就不说了吧～，点击输入项目名字，然后选择第一个<code>构建一个自由风格的软件项目</code>就行啦～～</p>
-<p>此处项目名字暂且成为<code>test</code>。这里只说一些比较重要的，没有活不成的那种配置。别的自己研究一下或者点击右侧❓就能看到介绍。</p>
-<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>此处点击<code>Git</code>，展开之后输入<code>Repository URL</code>即可。</p>
-<p><code>Repository URL</code>输入完毕之后点击别处，Jenkins的Git插件会自动校验该URL是否能够clone下来代码。出现红色就自己根据错误修改一下咯。。</p>
-<p>另外此处支持<code>ssh</code> 的方式，大致样式为：<code>ssh://sunjigang@github.com:29418/projects/aaa</code>。</p>
-<p><code>Branches to build</code> 写上你的构建分支～，根据自己需求来，<code>master</code>一般为仓库的默认分支。</p>
-<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><p>此处表示该项目的构建触发条件。（可选）</p>
-<p>我们这里说一下<code>Poll SCM</code>：</p>
-<p>定时检查源码变更。条件是 一定要配置<code>Git</code>这样的源码管理。</p>
-<p>例子：</p>
-<ul>
-<li><code>H/15 * * * *</code>：每15分钟构建一次</li>
-<li><code>0 2 * * *</code>： 每天2:00构建一次</li>
-</ul>
-<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>此处为构建的核心😂。当然，我们为了自由，此处全部使用<code>shell</code>脚本。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 工程名</span></span><br><span class="line">workspace=<span class="string">'xxx.xcworkspace'</span></span><br><span class="line"><span class="comment"># 构建scheme</span></span><br><span class="line">scheme=<span class="string">'xxx'</span></span><br><span class="line"><span class="comment"># 打包类型：app-store, ad-hoc, package, enterprise, development, and developer-id.</span></span><br><span class="line">export_method=<span class="string">'enterprise'</span></span><br><span class="line"><span class="comment"># fir的token，在fir-&gt;用户-&gt;token 获取</span></span><br><span class="line">fir_token=<span class="string">'c5077e0368888b9750ae848b9fe00***'</span></span><br><span class="line"><span class="comment"># fir上传短链接，效果为 https://fir.im/xxx</span></span><br><span class="line">fir_url=<span class="string">'xxx'</span></span><br><span class="line"><span class="comment"># 钉钉机器人token</span></span><br><span class="line">dingtalk_token=<span class="string">'6d09e43ddc62e540be914ff2e901e28b921d55c5ad457f6f3571f9f881287***'</span></span><br><span class="line"><span class="comment"># 钉钉机器人发送的内容</span></span><br><span class="line">dingtalk_content=<span class="string">"iOSXXX已经上传至 http://fir.im/<span class="variable">$&#123;fir_url&#125;</span> ,吧啦吧啦吧啦～"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建</span></span><br><span class="line">fastlane gym</span><br><span class="line">    --workspace <span class="variable">$workspace</span> \</span><br><span class="line">    --scheme <span class="variable">$scheme</span> \</span><br><span class="line">    --export_method <span class="variable">$export_method</span> \</span><br><span class="line">    clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># fir</span></span><br><span class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls *.ipa)</span><br><span class="line">git <span class="built_in">log</span> -10 &gt; git.log</span><br><span class="line">fir p <span class="variable">$ipa</span> -T <span class="variable">$fir_token</span> -s <span class="variable">$fir_url</span> -c git.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 钉钉通知</span></span><br><span class="line">curl <span class="string">"https://oapi.dingtalk.com/robot/send?access_token=<span class="variable">$&#123;dingtalk_token&#125;</span>"</span> -H <span class="string">'Content-Type: application/json'</span>    -d <span class="string">'</span></span><br><span class="line"><span class="string">    &#123;"msgtype": "text",</span></span><br><span class="line"><span class="string">        "text": &#123;</span></span><br><span class="line"><span class="string">            "content":$&#123;dingtalk_content&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;'</span></span><br></pre></td></tr></table></figure>
-
-<p>至此 已经完成了打包、上传fir、钉钉机器人通知。</p>
-<p>上述脚本只是配置的例子，可以根据自己需求，自己编写和配置。特别是</p>
-<ul>
-<li><code>.xcworkspace</code>的位置，要找清楚呀</li>
-<li><code>scheme</code>无法找到是因为你在提交代码的时候没有将其设置为shared</li>
-<li><code>fastlane gym</code> 支持很多参数，是对<code>xcodebuild</code>的封装，<a href="https://github.com/fastlane/fastlane/tree/master/gym" target="_blank" rel="noopener">源码及文档在此</a></li>
-</ul>
-<h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
-<p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
-<p>其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 路径主要用来提取Info.plist以及dsym文件</span></span><br><span class="line">path=<span class="string">'/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo'</span></span><br><span class="line"><span class="comment"># scheme name</span></span><br><span class="line">scheme=<span class="string">'Fangduoduo_ent'</span></span><br><span class="line"><span class="comment"># ipa bundleId</span></span><br><span class="line">package=<span class="string">'xx.xx.com'</span></span><br><span class="line"><span class="comment"># bugly id</span></span><br><span class="line">bugly_id=<span class="string">'9xxx'</span></span><br><span class="line"><span class="comment"># bugly key</span></span><br><span class="line">bugly_key=<span class="string">'wHzxcxxx'</span></span><br><span class="line"></span><br><span class="line">rm -rf *dSYM*</span><br><span class="line">cp <span class="variable">$&#123;path&#125;</span>/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist</span><br><span class="line">cp -rf <span class="variable">$&#123;path&#125;</span>/build/*.xcarchive/dSYMs .</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------ post dsym ------------ #</span></span><br><span class="line"></span><br><span class="line">app_infoplist_path=<span class="string">'Info.plist'</span></span><br><span class="line">version=$(/usr/libexec/PlistBuddy -c <span class="string">"print CFBundleVersion"</span> <span class="variable">$&#123;app_infoplist_path&#125;</span>)</span><br><span class="line"></span><br><span class="line">java -jar ./bugly/buglySymboliOS.jar \</span><br><span class="line">	-i dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM \</span><br><span class="line">    -dsym \</span><br><span class="line">    -u \</span><br><span class="line">    -id <span class="variable">$&#123;bugly_id&#125;</span> \</span><br><span class="line">    -key <span class="variable">$&#123;bugly_key&#125;</span> \</span><br><span class="line">    -package <span class="variable">$&#123;package&#125;</span> \</span><br><span class="line">    -version <span class="variable">$&#123;version&#125;</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># ------------ UUID ------------ #</span></span><br><span class="line"></span><br><span class="line">unzip -o ./dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM.zip</span><br><span class="line">xcrun dwarfdump --uuid ./<span class="variable">$&#123;scheme&#125;</span> &gt;&gt; ./uuids-<span class="variable">$&#123;version&#125;</span>.txt</span><br></pre></td></tr></table></figure>
-
-<p>值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。</p>
-<p>如果还有问题，可以在<a href="../../about">关于</a>中找到我。</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>构建</tag>
-        <tag>Jenkins</tag>
       </tags>
   </entry>
 </search>
