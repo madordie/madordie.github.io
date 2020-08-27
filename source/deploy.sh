@@ -12,20 +12,6 @@ opt='p'
 # b: 备份
 # ----------------------------
 
-# 设置VPN
-function setproxy() {
-    # export {HTTP,HTTPS,FTP}_PROXY="http://127.0.0.1:3128" 也可以设置http代理
-    export ALL_PROXY=socks5://127.0.0.1:7891
-    echo "当前IP：`curl -s ip.sb`"
-}
-
-# 取消VPN
-function unsetproxy() {
-    # unset {HTTP,HTTPS,FTP}_PROXY
-    unset ALL_PROXY
-    echo "当前IP：`curl -s ip.sb`"
-}
-
 # 确认文章URL没有重复
 function checkout_URLs() {
     rm -rf .tmp-*
@@ -64,16 +50,13 @@ if [ $opt = 's' ]; then
 elif [ $opt = 'b' ]; then
     backup
 elif [ $opt = 'p' ]; then
-    setproxy
     hexo clean
     hexo generate --deploy --force --bail
     echo ' --> 已成功部署.\n'
     sleep 1
-    unsetproxy
     # # 这个脚本在这里：https://madordie.github.io/post/use-hexo-setup-blog/
     # python auto-push-sitemap.py
     # echo ' --> 已上传站图.\n'
-    setproxy
     backup
     cd ./source
     ruby comment.rb
