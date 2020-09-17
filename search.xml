@@ -114,6 +114,12 @@
       </tags>
   </entry>
   <entry>
+    <title>个人资料页</title>
+    <url>/post/about-me/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../about">关于</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>博客迁移公告</title>
     <url>/post/about-change-blog/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>你敢信！我又搬家了。。</p>
@@ -131,12 +137,6 @@
       <tags>
         <tag>blog</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>个人资料页</title>
-    <url>/post/about-me/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../about">关于</a></p>
-]]></content>
   </entry>
   <entry>
     <title>Ubuntu使用SakuraFrp实现内网穿透</title>
