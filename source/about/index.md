@@ -7,8 +7,4 @@ date: 2016-07-01 15:17:20
 
 一个热衷于技术的iOS开发者
 
-**E-mail**: [io.madordie@gmail.com](mailto:io.madordie@gmail.com)
-
-**Github**: [https://github.com/madordie](https://github.com/madordie)
-
-**详细资料页**: [传送门](../post/about-me/)
+您可以在这里找到我的联系方式[GitHub/madordie](https://github.com/madordie)
