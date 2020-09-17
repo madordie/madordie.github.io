@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://madordie.github.io/post/about-me/</loc>
+    <lastmod>2020-09-17</lastmod>
+  </url>
+  <url>
     <loc>https://madordie.github.io/post/blog-gitment-auto-setup/</loc>
     <lastmod>2020-07-23</lastmod>
   </url>
@@ -11,10 +15,6 @@
   <url>
     <loc>https://madordie.github.io/post/about-change-blog/</loc>
     <lastmod>2020-05-27</lastmod>
-  </url>
-  <url>
-    <loc>https://madordie.github.io/post/about-me/</loc>
-    <lastmod>2020-05-21</lastmod>
   </url>
   <url>
     <loc>https://madordie.github.io/post/class-static-func-return-self/</loc>
