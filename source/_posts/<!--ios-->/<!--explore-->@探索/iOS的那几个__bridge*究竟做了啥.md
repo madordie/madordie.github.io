@@ -164,9 +164,3 @@ id -[NSObject performSelector:withObjects:](NSObject *self, SEL a2, SEL a3, id a
 > You are responsible for calling CFRelease or a related function to relinquish ownership of the object.
 > - __bridge_transfer or CFBridgingRelease moves a non-Objective-C pointer to Objective-C and also transfers ownership to ARC.
 > ARC is responsible for relinquishing ownership of the object.
-
-
-
-### __bridge
-
-
