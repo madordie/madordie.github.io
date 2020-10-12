@@ -58,7 +58,7 @@ categories:
 
 <!--more-->
 
-## 挖一个坑
+## 粗略分析
 
 先打开`Zombie Objects`再跑一次:
 
@@ -68,46 +68,7 @@ categories:
 
 哦,`_teM<0x6000039ec630>`已经被释放了. 那是谁释放的呢?
 
-我们可以在`[invocation getReturnValue:&callBackObject];`之后断点:
-
-```lldb
-(lldb) po callBackObject
-<TestModel: 0x600000bf05b0>
-
-(lldb) finish
-(lldb) po _teM
- nil
-(lldb) next
-(lldb) po _teM
-<TestModel: 0x600000bf05b0>
-
-(lldb) next
-(lldb) next
-over
-(lldb)
-```
-
-**卧槽, 一行代码没改不崩溃了:<**
-
-传闻`po`有`retain`的功效,可是`frame variable`依旧会出现此诡异的问题.
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">It seems that the retain count of the object increases 1 whenever you execute `expression object`. Another workaround is to use frame variable<br><br>(lldb) frame variable object <a href="https://t.co/Y2ghQ3sHzL">pic.twitter.com/Y2ghQ3sHzL</a></p>&mdash; Pofat (@PofatTseng) <a href="https://twitter.com/PofatTseng/status/1057644037107118080?ref_src=twsrc%5Etfw">October 31, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-那就着重看一下`-[NSObject performSelector:withObject:]`中的返回值逻辑:
-
-```ObjC
-    id callBackObject = NULL;
-    if(methodSignature.methodReturnLength) {
-        [invocation getReturnValue:&callBackObject];
-    }
-    return callBackObject;
-```
-
-这代码不得不说着实有点简单, 对比之前[唯敬](https://github.com/Awhisper)大佬的[VKMsgSend](https://github.com/Awhisper/VKMsgSend)库,是真的短.
-
-## 先粗略分析一下
-
-再回到崩溃的问题上: `message sent to deallocated instance 0x6000039ec630`
+回到崩溃的问题上: `message sent to deallocated instance 0x6000039ec630`
 
 那么实现`-[TestModel dealloc]`即可找到什么时候释放的呗~
 
@@ -120,11 +81,26 @@ over
     ...
 ```
 
-还是在`-[NSObject performSelector:withObjects:]`中,看下汇编最后的几行伪代码:
+是不是很没头绪? 如果没头绪的话就被我~~这一顿粗略分析~~给带沟里了...
+
+## 看点别的
+
+我们先看下`-[NSObject performSelector:withObjects:]`中的返回值获取的情况:
+
+```ObjC
+    id callBackObject = NULL;
+    if(methodSignature.methodReturnLength) {
+        [invocation getReturnValue:&callBackObject];
+    }
+```
+
+关于`NSInvocation`我用的比较少,但是看过[唯敬](https://github.com/Awhisper)大佬的[VKMsgSend](https://github.com/Awhisper/VKMsgSend)库, 这几行代码是真的短..
+
+先回来分析一通.再在文章最后刨个坑...
+
+看下这几行的汇编:
 
 ```c
-id -[NSObject performSelector:withObjects:](NSObject *self, SEL a2, SEL a3, id a4) {
-  ...
   v15 = 0LL;
   if ( objc_msgSend(v24, "methodReturnLength") )
     objc_msgSend(v23, "getReturnValue:", &v15);
@@ -133,7 +109,6 @@ id -[NSObject performSelector:withObjects:](NSObject *self, SEL a2, SEL a3, id a
   objc_storeStrong(&v23, 0LL);
   objc_storeStrong(&v24, 0LL);
   return (id)objc_autoreleaseReturnValue(v12);  // --> append autoreleasepool
-}
 ```
 
 所以此时关于该对象的生命周期操作大概如下:
@@ -156,7 +131,7 @@ id -[NSObject performSelector:withObjects:](NSObject *self, SEL a2, SEL a3, id a
 
 这个问题其实也很简单, 试一下子撒~~ (答案是`__bridge` :)
 
-然后, 我想说点在网上目前还搜不到的, 先看下[官方文档](https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFDesignConcepts/Articles/tollFreeBridgedTypes.html)原文
+先看下[官方文档](https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFDesignConcepts/Articles/tollFreeBridgedTypes.html)原文
 
 > The compiler does not automatically manage the lifetimes of Core Foundation objects. You tell the compiler about the ownership semantics of objects using either a cast (defined in objc/runtime.h) or a Core Foundation-style macro (defined in NSObject.h):
 > - __bridge transfers a pointer between Objective-C and Core Foundation with no transfer of ownership.
@@ -164,3 +139,82 @@ id -[NSObject performSelector:withObjects:](NSObject *self, SEL a2, SEL a3, id a
 > You are responsible for calling CFRelease or a related function to relinquish ownership of the object.
 > - __bridge_transfer or CFBridgingRelease moves a non-Objective-C pointer to Objective-C and also transfers ownership to ARC.
 > ARC is responsible for relinquishing ownership of the object.
+
+然后, 我想说点在网上目前还搜不到的.
+
+### `__bridge_transfer`为什么不行
+
+如原文说了`a pointer between Objective-C and Core Foundation with no transfer of ownership`, 并不会发生所有权的转移.
+
+然后`__bridge_transfer`究竟做了什么呢? 对比一下汇编伪代码吧,简单直接:
+
+```c
+v15 = 0LL;
+if ( objc_msgSend(v24, "methodReturnLength") )
+  objc_msgSend(v23, "getReturnValue:", &v15);
+v12 = v15;
+objc_storeStrong(&v23, 0LL);
+objc_storeStrong(&v24, 0LL);
+return (id)objc_autoreleaseReturnValue(v12);
+```
+
+`v12 = v15`, 是的,就是这么彪悍. 直接赋值的, 比不加`__bridge_transfer`少了一次`objc_retain(v15)`和`objc_storeStrong(&v15, 0LL)`, 理论来讲速度更加快了,毕竟两者效果是一样的.
+
+### `__bridge`为什么行
+
+原文中说会讲所有权移交给ARC, 也就是ARC要负责释放该对象, 等价于将引用计数加一.
+
+再来看一下汇编伪代码:
+
+```c
+v15 = 0LL;
+if ( objc_msgSend(v24, "methodReturnLength") )
+  objc_msgSend(v23, "getReturnValue:", &v15);
+v12 = objc_retain(v15);
+objc_storeStrong(&v23, 0LL);
+objc_storeStrong(&v24, 0LL);
+return (id)objc_autoreleaseReturnValue(v12);
+```
+
+注意此时关于`v15/v12`的内存管理, 就只剩下了`objc_retain(v15)`与`objc_autoreleaseReturnValue(v12)`.
+
+不说了, 很完美. 信不信我一行代码不改单纯的通过`LLDB`的`po`来让其不崩溃....
+
+## 一个不相关的坑
+
+先在`return callBackObject;`处设置断点, 然后:
+
+```lldb
+(lldb) po callBackObject
+<TestModel: 0x600000bf05b0>
+
+(lldb) finish
+(lldb) po _teM
+ nil
+(lldb) next
+(lldb) po _teM
+<TestModel: 0x600000bf05b0>
+
+(lldb) next
+(lldb) next
+over
+(lldb)
+```
+
+**WTF, 一行代码没改不崩溃了:<**
+
+传闻`po`有`retain`的功效,可是`frame variable`依旧会出现此诡异的问题.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">It seems that the retain count of the object increases 1 whenever you execute `expression object`. Another workaround is to use frame variable<br><br>(lldb) frame variable object <a href="https://t.co/Y2ghQ3sHzL">pic.twitter.com/Y2ghQ3sHzL</a></p>&mdash; Pofat (@PofatTseng) <a href="https://twitter.com/PofatTseng/status/1057644037107118080?ref_src=twsrc%5Etfw">October 31, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+那就着重看一下`-[NSObject performSelector:withObject:]`中的返回值逻辑:
+
+```ObjC
+    id callBackObject = NULL;
+    if(methodSignature.methodReturnLength) {
+        [invocation getReturnValue:&callBackObject];
+    }
+    return callBackObject;
+```
+
+此处目前没答案, 我研究了半天也不知道哪里除了问题, 吃完饭讲一下我研究到哪里了......
