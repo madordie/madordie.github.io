@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="抛出问题群友(@闲人)贴了这么一个会崩溃的代码: 123456789101112131415161718192021222324252627282930313233343536373839@implementation NSObject (test)- (id)performSelector:(SEL)aSelector withObjects:(NSArray *)objects &amp;#123;">
 <meta property="article:published_time" content="2020-10-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-10T10:56:07.245Z">
+<meta property="article:modified_time" content="2020-10-12T08:36:59.257Z">
 <meta property="article:author" content="继刚">
 <meta property="article:tag" content="__bridge*">
 <meta name="twitter:card" content="summary">
@@ -216,10 +216,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-10-10 00:00:00 / Modified: 18:56:07" itemprop="dateCreated datePublished" datetime="2020-10-10T00:00:00+08:00">2020-10-10</time>
+              <time title="Created: 2020-10-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-10T00:00:00+08:00">2020-10-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-10-12 16:36:59" itemprop="dateModified" datetime="2020-10-12T16:36:59+08:00">2020-10-12</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -246,45 +252,6 @@
 
 <p>对,段错误,代码挂在了<code>[_teM performSelector:@selector(setAge:) withObject:@1]</code></p>
 <a id="more"></a>
-
-<h2 id="一个坑"><a href="#一个坑" class="headerlink" title="一个坑"></a>一个坑</h2><p>先打开<code>Zombie Objects</code>再跑一次:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*** -[TestModel performSelector:withObject:]: message sent to deallocated instance 0x6000039ec630</span><br></pre></td></tr></table></figure>
-
-<p>哦,<code>_teM&lt;0x6000039ec630&gt;</code>已经被释放了. 那是谁释放的呢?</p>
-<p>我们可以在<code>[invocation getReturnValue:&amp;callBackObject];</code>之后断点:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(lldb) po callBackObject</span><br><span class="line">&lt;TestModel: 0x600000bf05b0&gt;</span><br><span class="line"></span><br><span class="line">(lldb) finish</span><br><span class="line">(lldb) po _teM</span><br><span class="line"> nil</span><br><span class="line">(lldb) next</span><br><span class="line">(lldb) po _teM</span><br><span class="line">&lt;TestModel: 0x600000bf05b0&gt;</span><br><span class="line"></span><br><span class="line">(lldb) next</span><br><span class="line">(lldb) next</span><br><span class="line">over</span><br><span class="line">(lldb)</span><br></pre></td></tr></table></figure>
-
-<p><strong>卧槽, 一行代码没改不崩溃了:&lt;</strong></p>
-<p>传闻<code>po</code>有<code>retain</code>的功效,可是<code>frame variable</code>依旧会出现此诡异的问题.</p>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">It seems that the retain count of the object increases 1 whenever you execute `expression object`. Another workaround is to use frame variable<br><br>(lldb) frame variable object <a href="https://t.co/Y2ghQ3sHzL" target="_blank" rel="noopener">pic.twitter.com/Y2ghQ3sHzL</a></p>&mdash; Pofat (@PofatTseng) <a href="https://twitter.com/PofatTseng/status/1057644037107118080?ref_src=twsrc%5Etfw" target="_blank" rel="noopener">October 31, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<p>那就着重看一下<code>-[NSObject performSelector:withObject:]</code>中的返回值逻辑:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> callBackObject = <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">if</span>(methodSignature.methodReturnLength) &#123;</span><br><span class="line">    [invocation getReturnValue:&amp;callBackObject];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> callBackObject;</span><br></pre></td></tr></table></figure>
-
-<p>这代码不得不说着实有点简单, 对比之前<a href="https://github.com/Awhisper" target="_blank" rel="noopener">唯敬</a>大佬的<a href="https://github.com/Awhisper/VKMsgSend" target="_blank" rel="noopener">VKMsgSend</a>库,是真的短.</p>
-<h2 id="先粗略分析一下"><a href="#先粗略分析一下" class="headerlink" title="先粗略分析一下"></a>先粗略分析一下</h2><p>再回到崩溃的问题上: <code>message sent to deallocated instance 0x6000039ec630</code></p>
-<p>那么实现<code>-[TestModel dealloc]</code>即可找到什么时候释放的呗~</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(lldb) bt</span><br><span class="line">* thread #1, queue &#x3D; &#39;com.apple.main-thread&#39;, stop reason &#x3D; breakpoint 2.1</span><br><span class="line">  * frame #0: 0x000000010ec8a770 PerformDemo&#96;-[TestModel dealloc](self&#x3D;0x0000600003c847d0, _cmd&#x3D;&quot;dealloc&quot;) at ViewController.m:31:5</span><br><span class="line">    frame #1: 0x00007fff2018f7f4 libobjc.A.dylib&#96;objc_object::sidetable_release(bool, bool) + 174</span><br><span class="line">    frame #2: 0x000000010ec8a949 PerformDemo&#96;-[ViewController viewDidLoad](self&#x3D;0x00007ff403614fc0, _cmd&#x3D;&quot;viewDidLoad&quot;) at ViewController.m:46:5</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>还是在<code>-[ViewController viewDidLoad]</code>中,看下汇编所在的位置的伪代码:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> -[ViewController viewDidLoad](ViewController *self, SEL a2)</span><br><span class="line">&#123;</span><br><span class="line">  v3 = objc_alloc(NSClassFromString(CFSTR(<span class="string">"TestModel"</span>)););</span><br><span class="line">  v11 = (<span class="keyword">void</span> *)objc_retainAutoreleasedReturnValue(objc_msgSend(v3, <span class="string">"performSelector:withObjects:"</span>, <span class="string">"initWithA:b:c:"</span>, @[@<span class="number">1</span>, @<span class="number">1</span>, @<span class="number">1</span>]););</span><br><span class="line">  objc_release(<span class="number">0L</span>L);</span><br><span class="line">  objc_release(v3);</span><br><span class="line">  objc_msgSend(v11, <span class="string">"performSelector:withObject:"</span>, <span class="string">"setAge:"</span>, @<span class="number">1</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"over\n"</span>);</span><br><span class="line">  objc_storeStrong(&amp;v11, <span class="number">0L</span>L);</span><br><span class="line">&#125;</span><br><span class="line">id -[NSObject performSelector:withObjects:](NSObject *self, SEL a2, SEL a3, id a4)</span><br><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  v15 = <span class="number">0L</span>L;</span><br><span class="line">  <span class="keyword">if</span> ( objc_msgSend(v24, <span class="string">"methodReturnLength"</span>) )</span><br><span class="line">    objc_msgSend(v23, <span class="string">"getReturnValue:"</span>, &amp;v15);</span><br><span class="line">  v12 = objc_retain(v15);</span><br><span class="line">  objc_storeStrong(&amp;v15, <span class="number">0L</span>L);</span><br><span class="line">  objc_storeStrong(&amp;v23, <span class="number">0L</span>L);</span><br><span class="line">  objc_storeStrong(&amp;v24, <span class="number">0L</span>L);</span><br><span class="line">  <span class="keyword">return</span> (id)objc_autoreleaseReturnValue(v12);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>所以此时关于该对象的生命周期操作大概如下:</p>
-<ul>
-<li>alloc +1</li>
-<li>–&gt; objc_retain +1</li>
-<li>–&gt; objc_storeStrong -1</li>
-<li>–&gt; objc_autoreleaseReturnValue ===&gt; append autorelease pool</li>
-<li>objc_retainAutoreleasedReturnValue +1</li>
-<li>autoreleasepool -1</li>
-<li>objc_release -1  <code>&lt;-- dealloc</code></li>
-<li>printf</li>
-<li>objc_storeStrong -1</li>
-</ul>
-<p>至此, 崩溃的原委分析完了…</p>
-<h2 id="怎么解决"><a href="#怎么解决" class="headerlink" title="怎么解决"></a>怎么解决</h2><p>先看下<a href="https://github.com/Awhisper/VKMsgSend/blob/master/VKMsgSend/VKMsgSend.m#L214-#L227" target="_blank" rel="noopener">小抄</a>, 嗯,缺少了<code>__bridge*</code>:</p>
-<p>然后问题来了: 重写的<code>init</code>应该用<code>__bridge_transfer</code>还是<code>__bridge</code>?</p>
-<p>&lt; 容我回家吃个饭.. &gt;</p>
 
     </div>
 
@@ -395,7 +362,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#抛出问题"><span class="nav-number">1.</span> <span class="nav-text">抛出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个坑"><span class="nav-number">2.</span> <span class="nav-text">一个坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#先粗略分析一下"><span class="nav-number">3.</span> <span class="nav-text">先粗略分析一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么解决"><span class="nav-number">4.</span> <span class="nav-text">怎么解决</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#抛出问题"><span class="nav-number">1.</span> <span class="nav-text">抛出问题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
