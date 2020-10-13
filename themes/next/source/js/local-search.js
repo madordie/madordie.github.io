@@ -2,7 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!CONFIG.path) {
-    // Search DB path
     console.warn('`hexo-generator-searchdb` plugin is not installed!');
     return;
   }
@@ -197,8 +196,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const fetchData = () => {
+    // Search DB path
+    const searchPath = CONFIG.root + CONFIG.path;
     const isXml = !CONFIG.path.endsWith('json');
-    fetch(CONFIG.path)
+    fetch(searchPath)
       .then(response => response.text())
       .then(res => {
         // Get the contents from search data
