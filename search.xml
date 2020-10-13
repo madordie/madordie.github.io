@@ -1,37 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hexo的博客让百度收录</title>
-    <url>/post/use-hexo-setup-blog/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个github.io搭建的过程参考，以及向百度推送的python、js脚本。</p>
-<a id="more"></a>
-
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p>感谢 <a href="http://lovenight.github.io/">岁月如歌</a> 的这个<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/">《Hexo 3.1.1 静态博客搭建指南》</a>同时感谢这个<a href="http://lovenight.github.io/2015/11/18/%E5%90%91%E7%99%BE%E5%BA%A6%E6%8E%A8%E9%80%81hexo%E5%8D%9A%E5%AE%A2%E6%89%80%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84Python%E8%84%9A%E6%9C%AC/">《向百度推送hexo博客所有链接的Python脚本》</a>(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)</p>
-<p>另外还有一个<a href="http://emufan.com/">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/">百度主动推送hexo生成的文章</a></p>
-<h1 id="python自动推送脚本修改"><a href="#python自动推送脚本修改" class="headerlink" title="python自动推送脚本修改"></a>python自动推送脚本修改</h1><p>上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: LoveNight</span></span><br><span class="line"><span class="comment"># @Date:   2015-11-16 20:45:59</span></span><br><span class="line"><span class="comment"># @Last Modified by:   LoveNight</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2015-11-18 18:07:19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># @Last Modified by:   Keith</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2016-07-06 16:22:45</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> BS</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#import msvcrt</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">hexo 博客专用，向百度站长平台提交所有网址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">本脚本必须放在hexo博客的根目录下执行！需要已安装生成百度站点地图的插件。</span></span><br><span class="line"><span class="string">百度站长平台提交链接：http://zhanzhang.baidu.com/linksubmit/index</span></span><br><span class="line"><span class="string">主动推送：最为快速的提交方式，推荐您将站点当天新产出链接立即通过此方式推送给百度，以保证新链接可以及时被百度收录。</span></span><br><span class="line"><span class="string">从中找到自己的接口调用地址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">python环境：</span></span><br><span class="line"><span class="string">pip install beautifulsoup4</span></span><br><span class="line"><span class="string">pip install requests</span></span><br><span class="line"><span class="string">xcode-select --install	</span></span><br><span class="line"><span class="string">pip install lxml </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ❌❌❌ 抄的需要更改这个URL！！这是我的！！❌❌❌</span></span><br><span class="line">url = <span class="string">&#x27;http://data.zz.baidu.com/urls?site=https://madordie.github.io&amp;token=j33t0VEPFl24tJ8N&#x27;</span></span><br><span class="line">baidu_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;baidusitemap.xml&#x27;</span>)</span><br><span class="line">google_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;sitemap.xml&#x27;</span>)</span><br><span class="line">sitemap = [baidu_sitemap, google_sitemap]</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> (os.path.exists(baidu_sitemap) <span class="keyword">or</span> os.path.exists(</span><br><span class="line">    google_sitemap)), <span class="string">&quot;没找到任何网站地图，请检查！&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从站点地图中读取网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrls</span>():</span></span><br><span class="line">    urls = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> sitemap:</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(_):</span><br><span class="line">            <span class="keyword">with</span> open(_, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                xml = f.read()</span><br><span class="line">        soup = BS(xml, <span class="string">&quot;xml&quot;</span>)</span><br><span class="line">        tags = soup.find_all(<span class="string">&quot;loc&quot;</span>)</span><br><span class="line">        urls += [x.string <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">        <span class="keyword">if</span> _ == baidu_sitemap:</span><br><span class="line">            tags = soup.find_all(<span class="string">&quot;breadCrumb&quot;</span>, url=<span class="literal">True</span>)</span><br><span class="line">            urls += [x[<span class="string">&quot;url&quot;</span>] <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">    <span class="keyword">return</span> urls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># POST提交网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postUrls</span>(<span class="params">urls</span>):</span></span><br><span class="line">    urls = set(urls)  <span class="comment"># 先去重</span></span><br><span class="line">    print(<span class="string">&quot;一共提取出 %s 个网址&quot;</span> % len(urls))</span><br><span class="line">    print(urls)</span><br><span class="line">    data = <span class="string">&quot;\n&quot;</span>.join(urls)</span><br><span class="line">    <span class="keyword">return</span> requests.post(url, data=data).text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    urls = getUrls()</span><br><span class="line">    result = postUrls(urls)</span><br><span class="line">    print(<span class="string">&quot;提交结果：&quot;</span>)</span><br><span class="line">    print(result)</span><br><span class="line"><span class="comment">#    msvcrt.getch()</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="js脚本"><a href="#js脚本" class="headerlink" title="js脚本"></a>js脚本</h1><p>这个脚本是我在<a href="http://emufan.com/">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/">百度主动推送hexo生成的文章</a>发现的，感觉也很赞。</p>
-<blockquote>
-<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>  <a href="https://github.com/Relsoul/bdwork/tree/master/soul/hexo%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E4%B8%8A%E4%BC%A0">脚本地址</a></p>
-</blockquote>
-<h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2><p>  今天发现百度没收录我的站..主要是我的站点换来换去的..估计被ban了..然后想用sitemap来推送一下..结果发现github禁用了百度爬虫..没办法只能主动推送了.</p>
-<h2 id="利用插件"><a href="#利用插件" class="headerlink" title="利用插件"></a>利用插件</h2><p>  这里利用到了一款插件<br>  <a href="https://github.com/coneycode/hexo-generator-baidu-sitemap">hexo-generator-baidu-sitemap</a><br>  设置很简单 只需要在.config.yml添加一些数据即可, 下面附上我的添加数据 theme这个可以随意更改 下面的copy即可<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: http:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: yilia</span><br><span class="line">baidusitemap:</span><br><span class="line">path: baidusitemap.xml</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>  然后hexo g 生成一下数据 会在public下面发现一个文件名为baidusitemap.xml</p>
-</blockquote>
-<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>  这里用nodejs写了一款脚本 大概流程是 获取baidusitemap.xml里面的内容 然后读取本地的一个site_file.json这个文件 这个文件存储的是上一次数据 与上一次数据进行对比 如果对比发现新数据那么就上传新数据 否则全部上传.</p>
-<h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>  把ActivePush.js脚本放在hexo文件夹主目录 然后用nodejs ActivePush.js一下即可 这里还支持一个参数nodejs ActivePush.js all 则是不对比直接上传数据</p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>SEO</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Gitment/Gitalk自动初始化</title>
     <url>/post/blog-gitment-auto-setup/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一个ruby脚本解放你双手啪啪啪的敲键盘三分钟～</p>
@@ -108,9 +77,40 @@
         <category>工具</category>
       </categories>
       <tags>
-        <tag>blog</tag>
         <tag>gitment</tag>
         <tag>gitalk</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo的博客让百度收录</title>
+    <url>/post/use-hexo-setup-blog/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个github.io搭建的过程参考，以及向百度推送的python、js脚本。</p>
+<a id="more"></a>
+
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p>感谢 <a href="http://lovenight.github.io/">岁月如歌</a> 的这个<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/">《Hexo 3.1.1 静态博客搭建指南》</a>同时感谢这个<a href="http://lovenight.github.io/2015/11/18/%E5%90%91%E7%99%BE%E5%BA%A6%E6%8E%A8%E9%80%81hexo%E5%8D%9A%E5%AE%A2%E6%89%80%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84Python%E8%84%9A%E6%9C%AC/">《向百度推送hexo博客所有链接的Python脚本》</a>(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)</p>
+<p>另外还有一个<a href="http://emufan.com/">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/">百度主动推送hexo生成的文章</a></p>
+<h1 id="python自动推送脚本修改"><a href="#python自动推送脚本修改" class="headerlink" title="python自动推送脚本修改"></a>python自动推送脚本修改</h1><p>上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: LoveNight</span></span><br><span class="line"><span class="comment"># @Date:   2015-11-16 20:45:59</span></span><br><span class="line"><span class="comment"># @Last Modified by:   LoveNight</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2015-11-18 18:07:19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># @Last Modified by:   Keith</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2016-07-06 16:22:45</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> BS</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#import msvcrt</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">hexo 博客专用，向百度站长平台提交所有网址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">本脚本必须放在hexo博客的根目录下执行！需要已安装生成百度站点地图的插件。</span></span><br><span class="line"><span class="string">百度站长平台提交链接：http://zhanzhang.baidu.com/linksubmit/index</span></span><br><span class="line"><span class="string">主动推送：最为快速的提交方式，推荐您将站点当天新产出链接立即通过此方式推送给百度，以保证新链接可以及时被百度收录。</span></span><br><span class="line"><span class="string">从中找到自己的接口调用地址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">python环境：</span></span><br><span class="line"><span class="string">pip install beautifulsoup4</span></span><br><span class="line"><span class="string">pip install requests</span></span><br><span class="line"><span class="string">xcode-select --install	</span></span><br><span class="line"><span class="string">pip install lxml </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ❌❌❌ 抄的需要更改这个URL！！这是我的！！❌❌❌</span></span><br><span class="line">url = <span class="string">&#x27;http://data.zz.baidu.com/urls?site=https://madordie.github.io&amp;token=j33t0VEPFl24tJ8N&#x27;</span></span><br><span class="line">baidu_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;baidusitemap.xml&#x27;</span>)</span><br><span class="line">google_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;sitemap.xml&#x27;</span>)</span><br><span class="line">sitemap = [baidu_sitemap, google_sitemap]</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> (os.path.exists(baidu_sitemap) <span class="keyword">or</span> os.path.exists(</span><br><span class="line">    google_sitemap)), <span class="string">&quot;没找到任何网站地图，请检查！&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从站点地图中读取网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrls</span>():</span></span><br><span class="line">    urls = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> sitemap:</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(_):</span><br><span class="line">            <span class="keyword">with</span> open(_, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                xml = f.read()</span><br><span class="line">        soup = BS(xml, <span class="string">&quot;xml&quot;</span>)</span><br><span class="line">        tags = soup.find_all(<span class="string">&quot;loc&quot;</span>)</span><br><span class="line">        urls += [x.string <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">        <span class="keyword">if</span> _ == baidu_sitemap:</span><br><span class="line">            tags = soup.find_all(<span class="string">&quot;breadCrumb&quot;</span>, url=<span class="literal">True</span>)</span><br><span class="line">            urls += [x[<span class="string">&quot;url&quot;</span>] <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">    <span class="keyword">return</span> urls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># POST提交网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postUrls</span>(<span class="params">urls</span>):</span></span><br><span class="line">    urls = set(urls)  <span class="comment"># 先去重</span></span><br><span class="line">    print(<span class="string">&quot;一共提取出 %s 个网址&quot;</span> % len(urls))</span><br><span class="line">    print(urls)</span><br><span class="line">    data = <span class="string">&quot;\n&quot;</span>.join(urls)</span><br><span class="line">    <span class="keyword">return</span> requests.post(url, data=data).text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    urls = getUrls()</span><br><span class="line">    result = postUrls(urls)</span><br><span class="line">    print(<span class="string">&quot;提交结果：&quot;</span>)</span><br><span class="line">    print(result)</span><br><span class="line"><span class="comment">#    msvcrt.getch()</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="js脚本"><a href="#js脚本" class="headerlink" title="js脚本"></a>js脚本</h1><p>这个脚本是我在<a href="http://emufan.com/">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/">百度主动推送hexo生成的文章</a>发现的，感觉也很赞。</p>
+<blockquote>
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>  <a href="https://github.com/Relsoul/bdwork/tree/master/soul/hexo%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E4%B8%8A%E4%BC%A0">脚本地址</a></p>
+</blockquote>
+<h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2><p>  今天发现百度没收录我的站..主要是我的站点换来换去的..估计被ban了..然后想用sitemap来推送一下..结果发现github禁用了百度爬虫..没办法只能主动推送了.</p>
+<h2 id="利用插件"><a href="#利用插件" class="headerlink" title="利用插件"></a>利用插件</h2><p>  这里利用到了一款插件<br>  <a href="https://github.com/coneycode/hexo-generator-baidu-sitemap">hexo-generator-baidu-sitemap</a><br>  设置很简单 只需要在.config.yml添加一些数据即可, 下面附上我的添加数据 theme这个可以随意更改 下面的copy即可<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: http:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: yilia</span><br><span class="line">baidusitemap:</span><br><span class="line">path: baidusitemap.xml</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>  然后hexo g 生成一下数据 会在public下面发现一个文件名为baidusitemap.xml</p>
+</blockquote>
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>  这里用nodejs写了一款脚本 大概流程是 获取baidusitemap.xml里面的内容 然后读取本地的一个site_file.json这个文件 这个文件存储的是上一次数据 与上一次数据进行对比 如果对比发现新数据那么就上传新数据 否则全部上传.</p>
+<h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>  把ActivePush.js脚本放在hexo文件夹主目录 然后用nodejs ActivePush.js一下即可 这里还支持一个参数nodejs ActivePush.js all 则是不对比直接上传数据</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>SEO</tag>
       </tags>
   </entry>
   <entry>
@@ -136,132 +136,6 @@
       </categories>
       <tags>
         <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu使用SakuraFrp实现内网穿透</title>
-    <url>/post/ubuntu-sakura-frp/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录将一台吃灰的笔记本改装成服务器，并暴露在公网下的过程。</p>
-<a id="more"></a>
-
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><ul>
-<li>一个 ubuntu-18.04.2-desktop-amd64.iso</li>
-<li>一台陈旧的Gateway笔记本</li>
-<li>一台主战MBP</li>
-</ul>
-<p>iso: 如果从<a href="https://ubuntu.com/download/desktop">官网</a>下载速度比较慢，可以考虑上<code>wget</code>、迅雷。我这里使用了<code>wget</code>并且使用了<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cdimage/ubuntu/releases/">清华的镜像</a></p>
-<p>Gateway: 还是个win10，于是乎顺手就把<code>ubuntu-18.04.2-desktop-amd64.iso</code>制作成了U盘，此处我就不说了，反正能引导进去就行啊哈哈哈</p>
-<p>MBP: 主要工作在这里。比如远程win桌面用的是<a href="https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12">Microsoft Remote Desktop</a></p>
-<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>注意，Ubuntu会将硬盘 <strong>所有分区全部格式化</strong> ，请先妥善备份。</p>
-<p>经过安装提示以及笔记本的疯狂发热很快就安装完事了。</p>
-<h2 id="设置Ubuntu软件源"><a href="#设置Ubuntu软件源" class="headerlink" title="设置Ubuntu软件源"></a>设置Ubuntu软件源</h2><p>这里还是用清华大学的镜像，其<a href="https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/">Ubuntu 镜像使用帮助</a>也是相当的详细：</p>
-<blockquote>
-<p>Ubuntu 的软件源配置文件是 /etc/apt/sources.list。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用 TUNA 的软件源镜像。</p>
-<p>选择你的ubuntu版本: 18.04 LTS</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic main restricted universe multiverse</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-updates main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-updates main restricted universe multiverse</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-backports main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-backports main restricted universe multiverse</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-security main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line"># 预发布软件源，不建议启用</span><br><span class="line"># deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-proposed main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-proposed main restricted universe multiverse</span><br></pre></td></tr></table></figure>
-
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p><code>apt</code>已经相当完善，此处不再赘述。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt dist-upgrade</span><br></pre></td></tr></table></figure>
-
-<p>当然，别忘了安装<code>wget</code>:</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install wget</span><br></pre></td></tr></table></figure>
-
-<p>此处如果按照上面的步骤已经设置了清华大学的镜像源，那速度将会很快。要不然就很慢慢慢。。</p>
-<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>此步骤并非必须，只是记录一下一些很坑的事情，啊哈哈哈哈</p>
-<h3 id="没有Wi-Fi选项"><a href="#没有Wi-Fi选项" class="headerlink" title="没有Wi-Fi选项"></a>没有Wi-Fi选项</h3><p>安装Wi-Fi驱动，记得重启哦：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install bcmwl-kernel-source</span><br></pre></td></tr></table></figure>
-
-<h3 id="未知的显示器（Unknown-Display）"><a href="#未知的显示器（Unknown-Display）" class="headerlink" title="未知的显示器（Unknown Display）"></a>未知的显示器（Unknown Display）</h3><p>如果是很快的意识到是<code>设置</code>里面有一个<code>未知的显示器</code>，并且以<code>拼接</code>的方式使用，那你就直接根据<a href="https://bugs.launchpad.net/ubuntu/+source/ubuntu-drivers-common/+bug/1296020">Non-existent display detected in both intel driver and nvidia driver (Optimus Laptop)</a>所示，只需安装Bumblebee并重启即可。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install bumblebee-nvidia</span><br></pre></td></tr></table></figure>
-
-<p>该问题貌似是由于集成显卡和独显共存的问题，所以当你并没有连接外接显示器但是却出现以下双显示器才有的功能时候记得用这个方案。</p>
-<ul>
-<li>APP打开了却看不到界面，只看到页面嗖的一下飞出了屏幕</li>
-<li>左上角有时候会出现一个黑框框，里面有一个数字1</li>
-<li>鼠标放至屏幕上下左右，有一个边会进去</li>
-<li>右键窗口会有一个类似<code>移至显示器右侧</code>的按钮，点了就看不见了</li>
-<li><code>xrandr --listmonitors</code> 有两个</li>
-</ul>
-<h3 id="切换Intel和Nvidia显卡"><a href="#切换Intel和Nvidia显卡" class="headerlink" title="切换Intel和Nvidia显卡"></a>切换Intel和Nvidia显卡</h3><p><strong>no zuo no die no life, 听我一句劝别玩这个。。。</strong>。如果G了去看下<a href="https://www.qingsword.com/qing/ubuntu-remove-nvidia.html">解决Ubuntu18.04安装Nvidia驱动开机卡死</a></p>
-<p><a href="https://www.linuxbabe.com/desktop-linux/switch-intel-nvidia-graphics-card-ubuntu">How To Switch Between Intel and Nvidia Graphics Card on Ubuntu</a>遇到卡在<code>Started bpfilter</code>之后需要编辑/etc/gdm3/custom.conf，将下面这一行放开：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">＃WaylandEnable = FALSE</span><br></pre></td></tr></table></figure>
-
-<h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><p>将<code>内网穿透</code>放在Google里面搜索一下会有很多方案，我的VPS被邻居连累之后就没有再买，所以我没有域名、公网IP。。。其中搜索结果的大部分都不适合我。</p>
-<p>其中大部分提到一个<code>DDNS</code>的概念：<a href="https://zh.wikipedia.org/wiki/%E5%8B%95%E6%85%8BDNS">维基百科:动态DNS</a></p>
-<blockquote>
-<p>动态DNS（英语：Dynamic DNS，简称DDNS）是域名系统（DNS）中的一种自动更新名称服务器（Name server）内容的技术。根据互联网的域名订立规则，域名必须跟从固定的IP地址。但动态DNS系统为动态网域提供一个固定的名称服务器（Name server），透过即时更新，使外界用户能够连上动态用户的网址。</p>
-</blockquote>
-<p>了解玩这个之后就可以搜索并选择DDMS方案了。</p>
-<p>再明确一下目标：在外网ssh进内网我们刚建好的Ubuntu。</p>
-<h2 id="fatedier-frp"><a href="#fatedier-frp" class="headerlink" title="fatedier/frp"></a>fatedier/frp</h2><p>首推这种方案：<a href="https://github.com/fatedier/frp">fatedier/frp</a>, 文档有中文并且比较详细。</p>
-<p>还有少数派的一个文章也不错：<a href="https://sspai.com/post/52523">使用frp进行内网穿透</a></p>
-<h2 id="TPDDNS"><a href="#TPDDNS" class="headerlink" title="TPDDNS"></a>TPDDNS</h2><p>不过我家里的路由是<a href="https://www.tp-link.com.cn/">TP-LINK</a>的，TP-LINK是可以参考<a href="https://service.tp-link.com.cn/detail_article_2978.html">TPDDNS的使用方法介绍</a>可以直接使用的。</p>
-<p>不过坑比的事情是[TPDDNS]支持的硬件版本是4.0。参考<a href="https://service.tp-link.com.cn/detail_article_1420.html">如何查看产品型号与硬件版本？</a>，也就是其<code>ver 4.0</code>之上是可以的。</p>
-<p>最好是问一下<code>TP-LINK 在线客服</code>，一般 某猫、某狗上面的客服是不懂这个的。</p>
-<p>很显然我家里的路由是V3.0 啊哈哈哈 此方案我这里不适用。不过看上面的教程已经很详尽了，应该比较好搞。</p>
-<h2 id="Sakura-Frp"><a href="#Sakura-Frp" class="headerlink" title="Sakura Frp"></a>Sakura Frp</h2><p>这个据<a href="https://www.natfrp.org/">官网</a>介绍是这样的：</p>
-<blockquote>
-<p>简单方便<br>客户端基于 Fatedier Frp 修改，免去了配置文件，改为从网络读取配置，您只需要在网站上简单操作即可添加映射。</p>
-<p>完全免费<br>您不必再为了内网穿透多花一分钱，Sakura Frp 是永远免费的，我们只为了让更多人能体验到免费、好用的内网穿透。</p>
-<p>自由使用<br>我们非常欢迎您将 Sakura Frp 集成到自己的软件中，并且我们提供了多种 API 接口以供使用，完全没有使用限制。</p>
-</blockquote>
-<p>好了，适合我这种不愿意花钱的穷屌丝，来<a href="https://openid.natfrp.org/?action=register&src=www.natfrp.com">注册</a>吧。。</p>
-<p>登录进去才发现，好多文字。没有明显的新手教程，对我这种不是很懂<code>FRP</code>的人来说简直一脸懵逼。</p>
-<h2 id="创建映射"><a href="#创建映射" class="headerlink" title="创建映射"></a>创建映射</h2><p><a href="https://www.natfrp.com/page/panel/">映射列表</a>中的<code>示例映射 - Linux SSH</code>正合我意，然后只需要再点一下<code>随机端口</code>就可以不用输入直接点添加了。</p>
-<p><img src="/images/2019-07-09-13-43-31.png" alt="Linux SSH 并随机端口"></p>
-<p><img src="/images/2019-07-09-13-44-25.png" alt="已添加的隧道列表"></p>
-<p>至此第一个映射已经创建了，然后需要去Ubuntu上开启代理吧</p>
-<h2 id="开启代理"><a href="#开启代理" class="headerlink" title="开启代理"></a>开启代理</h2><p>在<a href="https://www.natfrp.com/page/panel/">客户软件</a>中找到适合自己的<code>Linux x64 (64位操作系统)</code>包并下载至Ubuntu:</p>
-<p>此处将包下载至<code>/opt/natfrp</code>(该路径将在后面的配置中使用)</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /opt/natfrp &amp;&amp; <span class="built_in">cd</span> /opt/natfrp</span><br><span class="line">sudo wget https://cdn.tcotp.cn:4443/client/Sakura_frpc_linux_amd64.tar.gz</span><br><span class="line">sudo tar zxvf Sakura_frpc_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压完成后，就会得到一个可执行文件<code>Sakura_frpc_linux_amd64</code>(该文件名将在后面的配置中使用)</p>
-<p>根据<a href="https://www.zerobbs.net/?s=viewpost&tid=5">Linux 将 Sakura Frp 设置为服务，开机自动启动</a>的教程操作如下：</p>
-<h3 id="创建service"><a href="#创建service" class="headerlink" title="创建service"></a>创建service</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/systemd/system/sakurafrp.service</span><br></pre></td></tr></table></figure>
-
-<h3 id="根据自己的配置写入service"><a href="#根据自己的配置写入service" class="headerlink" title="根据自己的配置写入service"></a>根据自己的配置写入service</h3><p><code>/opt/natfrp/</code>: Sakura_frpc_linux_amd64的全路径<br><code>/opt/natfrp/Sakura_frpc_linux_amd64</code>: 解压之后的Sakura_frpc_linux_amd64全路径<br><code>--sid=</code>: 服务器列表中左侧的数字</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Sakura Frp Client</span><br><span class="line">Wants=network-online.target</span><br><span class="line">After=network-online.target</span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">WorkingDirectory=/opt/natfrp/</span><br><span class="line">LimitNOFILE=4096</span><br><span class="line">PIDFile=/var/run/sakurafrp/client.pid</span><br><span class="line">ExecStart=/opt/natfrp/Sakura_frpc_linux_amd64 --su=你的账号 --sp=你的密码 --sid=你要选择的服务器的ID(就是服务器列表左侧的数字)</span><br><span class="line">Restart=on-failure</span><br><span class="line">StartLimitInterval=600</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-
-<p>sid信息[2019.7.9:14:10]:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">| ID	名称		状态		介绍</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">| 1	宁波电信	√ 在线		高防线路，适合搭 Minecraft 服务器，使用人数较多 (官方服务器)</span><br><span class="line">| 2	宁波联通	√ 在线		联通线路，防御 20G，适合部分移动联通&#x2F;用户使用 (官方服务器)</span><br><span class="line">| 3	徐州电信	√ 在线		徐州高防电信，适合开服，月流量固定 500G，请合理使用 (官方服务器)</span><br><span class="line">| 4	贵州电信	× 离线		贵州电信节点，无防御，适合小流量传输服务[超流量停机] (官方服务器)</span><br><span class="line">| 6	罗马尼亚	× 离线		罗马尼亚不限内容无视 DMCA 版权服务器，免备案 (官方服务器)</span><br><span class="line">| 7	日本千兆	√ 在线		日本千兆服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">| 8	台湾百兆	√ 在线		台湾谷歌云 100M 服务器，适合建站，延迟较低，免备案 (官方服务器)</span><br><span class="line">| 9	香港线路1 √ 在线		香港 StarryDNS 100M 服务器，适合建站 (官方服务器)</span><br><span class="line">| 10	江苏镇江	√ 在线		江苏镇江 100M 服务器，BGP 全国优化线路，适合开服 (官方服务器)</span><br><span class="line">| 12	河南电信	√ 在线		河南电信线路服务器，适合开服以及小流量服务 (官方服务器)</span><br><span class="line">| 13	香港线路2 √ 在线		香港谷歌云 100M 服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">| 30	洛杉矶01	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 1 (官方服务器)</span><br><span class="line">| 31	洛杉矶02	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 2 (官方服务器)</span><br><span class="line">| 32	洛杉矶03	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 3 (官方服务器)</span><br><span class="line">| 33	洛杉矶04	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 4 (官方服务器)</span><br><span class="line">| 34	洛杉矶05	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 5 (官方服务器)</span><br><span class="line">| 38	新加坡01	× 离线		新加坡阿里云 30M 服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">| 39	蒙特利尔	√ 在线		加拿大蒙特利尔谷歌云 100M 服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">| 43	香港移动	× 离线		香港 UOvZ 100M 移动服务器，适合建站，免备案[机房断网维护中] (官方服务器)</span><br><span class="line">| 45	美国纽约1 √ 在线		美国纽约百兆服务器，适合建站，免备案 线路1 (官方服务器)</span><br><span class="line">| 46	美国纽约2 √ 在线		美国纽约百兆服务器，适合建站，免备案 线路2 (官方服务器)</span><br><span class="line">| 47	日本长野	× 离线		日本长野百兆服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
-
-<h3 id="启动service"><a href="#启动service" class="headerlink" title="启动service"></a>启动service</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
-
-<p>服务就创建成功了，接下来启动服务：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl start sakurafrp</span><br></pre></td></tr></table></figure>
-
-<p>将服务设置为开机启动</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> sakurafrp</span><br></pre></td></tr></table></figure>
-
-<p>如果要停止运行客户端，只需要输入</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl stop sakurafrp</span><br></pre></td></tr></table></figure>
-
-<p>如果要禁止开机启动，输入</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> sakurafrp</span><br></pre></td></tr></table></figure>
-
-<p>至此，来让我们看一下当前的状态：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╰─&gt;$ sudo systemctl status sakurafrp</span><br><span class="line">● sakurafrp.service - Sakura Frp Client</span><br><span class="line">   Loaded: loaded (/etc/systemd/system/sakurafrp.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Tue 2019-07-09 11:07:19 CST; 3h 13min ago</span><br><span class="line"> Main PID: 3301 (Sakura_frpc_lin)</span><br><span class="line">    Tasks: 10 (<span class="built_in">limit</span>: 4915)</span><br><span class="line">   Memory: 5.9M</span><br><span class="line">   CGroup: /system.slice/sakurafrp.service</span><br><span class="line">           └─3301 /opt/natfrp/Sakura_frpc_linux_amd64 --su=xxxxxxxx --sp=xxxxxxxx --sid=xxx</span><br><span class="line"></span><br><span class="line">7月 09 11:07:20 madordie-NV47H Sakura_frpc_linux_amd64[3301]: &gt;配置文件载入成功</span><br><span class="line">7月 09 11:07:20 madordie-NV47H Sakura_frpc_linux_amd64[3301]: 2019/07/09 11:07:20 [I] [proxy_manager.go:322] 增加代理: [xxx.natfrp.org:22941        29795-87248]</span><br><span class="line">7月 09 11:07:20 madordie-NV47H Sakura_frpc_linux_amd64[3301]: 2019/07/09 11:07:20 [I] [control.go:242] [d54792913cdac17d] 登录成功, 获取到运行ID [d54792913cdac17d], server udp port [7001]</span><br><span class="line">7月 09 11:07:20 madordie-NV47H Sakura_frpc_linux_amd64[3301]: 2019/07/09 11:07:20 [I] [control.go:167] [d54792913cdac17d] [xxx.natfrp.org:22941        29795-87248] 启动代理成功</span><br></pre></td></tr></table></figure>
-
-<p>可以看到<code>[xxx.natfrp.org:22941        29795-87248] 启动代理成功</code></p>
-<p>需要注意的是选用的sid不一样其代理的域名也不一样。这个是很显然的，但是是容易忽略的。</p>
-<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>在MBP上验证一下<code>xxx.natfrp.org:22941</code></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╰─&gt;$ ssh -p 22941 madordie@xxx.natfrp.org</span><br><span class="line">Welcome to Ubuntu 19.04 (GNU/Linux 4.18.0-15-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https://help.ubuntu.com</span><br><span class="line"> * Management:     https://landscape.canonical.com</span><br><span class="line"> * Support:        https://ubuntu.com/advantage</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">12 updates can be installed immediately.</span><br><span class="line">6 of these updates are security updates.</span><br><span class="line"></span><br><span class="line">Last login: Tue Jul  9 14:19:33 2019 from 127.0.0.1</span><br></pre></td></tr></table></figure>
-
-<p><code>Sakura Frp</code>已通，愉快的玩耍吧！</p>
-<p>括弧：一旦其暴露出去别忘了考虑安全，比如你的这个SSH账号、密码是否足够复杂，或者是否关闭了账号密码登陆。</p>
-<h1 id="其他方案"><a href="#其他方案" class="headerlink" title="其他方案"></a>其他方案</h1><p>还有一些其他的方案可以选择，比如：</p>
-<ul>
-<li><a href="https://hsk.oray.com/">花生壳</a></li>
-<li><a href="https://www.noip.com/">no-ip</a></li>
-<li><a href="https://github.com/fatedier/frp">开源的frp</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>内网穿透</tag>
       </tags>
   </entry>
   <entry>
@@ -298,6 +172,46 @@
       </categories>
       <tags>
         <tag>cocoapods</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mac10.13依旧让Xcode支持打开终端</title>
+    <url>/post/mac-high-sierra-open-with-external/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：</p>
+<p><img src="/images/mac-high-sierra-open-with-external-1.gif" alt="效果图"></p>
+<ol>
+<li>右击工程</li>
+<li>Open With External Editor</li>
+<li>终端弹出来了。。</li>
+</ol>
+<p>如果没有生效，就是你的电脑上装了什么可以打开<code>xx.xcodeproj</code>的应用程序，也就是在<code>Finder</code>下右击可以看到如下样式：</p>
+<p><img src="/images/mac-high-sierra-open-with-external-2.jpg" alt="效果图"></p>
+<p>呐～ Xcode为默认，备忘录为默认下面的第一个～～</p>
+<p>对，如果这样的话，那么按照上面3步，得到的结果是：这个文件被莫名其妙的保存在了备忘录～～  </p>
+<p>这不是我们要的🤷‍♂️，下面我们通过修改<code>备忘录.app</code>的配置文件来达到我们的效果。</p>
+<a id="more"></a>
+
+<h3 id="成因"><a href="#成因" class="headerlink" title="成因"></a>成因</h3><p>macSO10.13加强了备忘录，嗯的确变强了，可是并没有Xcode和终端常用。</p>
+<p>备忘录增加了导入的功能，支持了一些文件的打开(只是导入而已。。)，但是并不适合我。于是改一下吧～～</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ol>
+<li>在<code>应用程序</code>中找到<code>备忘录</code></li>
+<li>显示包内容</li>
+<li>找到 我们要修改的plist文件： <code>Contents/Info.plist</code></li>
+<li>做一下备份：复制一下。。</li>
+<li>确保 &lt;4&gt; 已完成</li>
+<li>直接修改<code>Info.plist</code>会提示没有权限，使用<code>sudo vim Info.plist</code>修改</li>
+<li>不管你用什么方法，删除下面的这些代码<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>General files and folders<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeRole<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>Viewer<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>LSItemContentTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.data<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.directory<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><code>:wq</code></li>
+<li>重启一下 （目的：重建索引）</li>
+</ol>
+<h3 id="至于我做了什么"><a href="#至于我做了什么" class="headerlink" title="至于我做了什么"></a>至于我做了什么</h3><p>讲道理，用Xcode的都知道吧？这个是注册的app支持的文件类型。 删除之后就可以了，就这么多😂</p>
+<h3 id="注意一下"><a href="#注意一下" class="headerlink" title="注意一下"></a>注意一下</h3><p><code>操作</code>中的<code>步骤9</code>可以有脚本，但是还是老实重启一下吧，有的脚本会使部分图标失效，巨烦。。还是重启一下比较靠谱。毕竟不着急</p>
+]]></content>
+      <categories>
+        <category>macOS</category>
+      </categories>
+      <tags>
+        <tag>Xcode</tag>
       </tags>
   </entry>
   <entry>
@@ -358,43 +272,28 @@
       </tags>
   </entry>
   <entry>
-    <title>mac10.13依旧让Xcode支持打开终端</title>
-    <url>/post/mac-high-sierra-open-with-external/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在macOS10.13以前是支持Xcode中直接打开终端的，步骤呢就是下面这样子：</p>
-<p><img src="/images/mac-high-sierra-open-with-external-1.gif" alt="效果图"></p>
+    <title>sonarqube-note</title>
+    <url>/post/sonarqube-note/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>Get Started in Two Minutes</p>
 <ol>
-<li>右击工程</li>
-<li>Open With External Editor</li>
-<li>终端弹出来了。。</li>
+<li>Download and unzip the SonarQube distribution (let’s say in “C:\sonarqube” or “/etc/sonarqube”)</li>
+<li>Start the SonarQube server:<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># On Windows, execute:</span><br><span class="line">C:\sonarqube\bin\windows-x86-xx\StartSonar.bat</span><br><span class="line"> </span><br><span class="line"># On other operating system, execute:</span><br><span class="line">&#x2F;etc&#x2F;sonarqube&#x2F;bin&#x2F;[OS]&#x2F;sonar.sh console</span><br></pre></td></tr></table></figure></li>
+<li>Download and unzip the SonarQube Scanner (let’s say in “C:\sonar-scanner” or “/etc/sonar-scanner”)</li>
+<li>Download and unzip some project samples (let’s say in “C:\sonar-scanning-examples” or “/etc/sonar-scanning-examples”)</li>
+<li>Analyze a project:<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># On Windows:</span><br><span class="line">cd C:\sonar-scanning-examples\sonarqube-scanner</span><br><span class="line">C:\sonar-scanner\bin\sonar-scanner.bat</span><br><span class="line"> </span><br><span class="line"># On other operating system:</span><br><span class="line">cd &#x2F;etc&#x2F;sonar-scanning-examples&#x2F;sonarqube-scanner</span><br><span class="line">&#x2F;etc&#x2F;sonar-scanner&#x2F;bin&#x2F;sonar-scanner</span><br></pre></td></tr></table></figure></li>
+<li>Browse the results at <a href="http://localhost:9000/">http://localhost:9000</a> (default System administrator credentials are admin/admin)</li>
 </ol>
-<p>如果没有生效，就是你的电脑上装了什么可以打开<code>xx.xcodeproj</code>的应用程序，也就是在<code>Finder</code>下右击可以看到如下样式：</p>
-<p><img src="/images/mac-high-sierra-open-with-external-2.jpg" alt="效果图"></p>
-<p>呐～ Xcode为默认，备忘录为默认下面的第一个～～</p>
-<p>对，如果这样的话，那么按照上面3步，得到的结果是：这个文件被莫名其妙的保存在了备忘录～～  </p>
-<p>这不是我们要的🤷‍♂️，下面我们通过修改<code>备忘录.app</code>的配置文件来达到我们的效果。</p>
-<a id="more"></a>
-
-<h3 id="成因"><a href="#成因" class="headerlink" title="成因"></a>成因</h3><p>macSO10.13加强了备忘录，嗯的确变强了，可是并没有Xcode和终端常用。</p>
-<p>备忘录增加了导入的功能，支持了一些文件的打开(只是导入而已。。)，但是并不适合我。于是改一下吧～～</p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ol>
-<li>在<code>应用程序</code>中找到<code>备忘录</code></li>
-<li>显示包内容</li>
-<li>找到 我们要修改的plist文件： <code>Contents/Info.plist</code></li>
-<li>做一下备份：复制一下。。</li>
-<li>确保 &lt;4&gt; 已完成</li>
-<li>直接修改<code>Info.plist</code>会提示没有权限，使用<code>sudo vim Info.plist</code>修改</li>
-<li>不管你用什么方法，删除下面的这些代码<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>General files and folders<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleTypeRole<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>Viewer<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>LSItemContentTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.data<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>public.directory<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><code>:wq</code></li>
-<li>重启一下 （目的：重建索引）</li>
-</ol>
-<h3 id="至于我做了什么"><a href="#至于我做了什么" class="headerlink" title="至于我做了什么"></a>至于我做了什么</h3><p>讲道理，用Xcode的都知道吧？这个是注册的app支持的文件类型。 删除之后就可以了，就这么多😂</p>
-<h3 id="注意一下"><a href="#注意一下" class="headerlink" title="注意一下"></a>注意一下</h3><p><code>操作</code>中的<code>步骤9</code>可以有脚本，但是还是老实重启一下吧，有的脚本会使部分图标失效，巨烦。。还是重启一下比较靠谱。毕竟不着急</p>
+<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ul>
+<li><a href="https://docs.sonarqube.org/display/HOME/SonarQube+Platform">docs.sonarqube.org</a></li>
+<li></li>
+</ul>
 ]]></content>
       <categories>
-        <category>macOS</category>
+        <category>工具</category>
       </categories>
       <tags>
-        <tag>Xcode</tag>
+        <tag>构建</tag>
+        <tag>Sonarqube</tag>
       </tags>
   </entry>
   <entry>
@@ -453,31 +352,6 @@
       <tags>
         <tag>构建</tag>
         <tag>SwiftLint</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>sonarqube-note</title>
-    <url>/post/sonarqube-note/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>Get Started in Two Minutes</p>
-<ol>
-<li>Download and unzip the SonarQube distribution (let’s say in “C:\sonarqube” or “/etc/sonarqube”)</li>
-<li>Start the SonarQube server:<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># On Windows, execute:</span><br><span class="line">C:\sonarqube\bin\windows-x86-xx\StartSonar.bat</span><br><span class="line"> </span><br><span class="line"># On other operating system, execute:</span><br><span class="line">&#x2F;etc&#x2F;sonarqube&#x2F;bin&#x2F;[OS]&#x2F;sonar.sh console</span><br></pre></td></tr></table></figure></li>
-<li>Download and unzip the SonarQube Scanner (let’s say in “C:\sonar-scanner” or “/etc/sonar-scanner”)</li>
-<li>Download and unzip some project samples (let’s say in “C:\sonar-scanning-examples” or “/etc/sonar-scanning-examples”)</li>
-<li>Analyze a project:<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># On Windows:</span><br><span class="line">cd C:\sonar-scanning-examples\sonarqube-scanner</span><br><span class="line">C:\sonar-scanner\bin\sonar-scanner.bat</span><br><span class="line"> </span><br><span class="line"># On other operating system:</span><br><span class="line">cd &#x2F;etc&#x2F;sonar-scanning-examples&#x2F;sonarqube-scanner</span><br><span class="line">&#x2F;etc&#x2F;sonar-scanner&#x2F;bin&#x2F;sonar-scanner</span><br></pre></td></tr></table></figure></li>
-<li>Browse the results at <a href="http://localhost:9000/">http://localhost:9000</a> (default System administrator credentials are admin/admin)</li>
-</ol>
-<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ul>
-<li><a href="https://docs.sonarqube.org/display/HOME/SonarQube+Platform">docs.sonarqube.org</a></li>
-<li></li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>构建</tag>
-        <tag>Sonarqube</tag>
       </tags>
   </entry>
   <entry>
@@ -699,6 +573,132 @@
       </tags>
   </entry>
   <entry>
+    <title>Ubuntu使用SakuraFrp实现内网穿透</title>
+    <url>/post/ubuntu-sakura-frp/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录将一台吃灰的笔记本改装成服务器，并暴露在公网下的过程。</p>
+<a id="more"></a>
+
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><ul>
+<li>一个 ubuntu-18.04.2-desktop-amd64.iso</li>
+<li>一台陈旧的Gateway笔记本</li>
+<li>一台主战MBP</li>
+</ul>
+<p>iso: 如果从<a href="https://ubuntu.com/download/desktop">官网</a>下载速度比较慢，可以考虑上<code>wget</code>、迅雷。我这里使用了<code>wget</code>并且使用了<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cdimage/ubuntu/releases/">清华的镜像</a></p>
+<p>Gateway: 还是个win10，于是乎顺手就把<code>ubuntu-18.04.2-desktop-amd64.iso</code>制作成了U盘，此处我就不说了，反正能引导进去就行啊哈哈哈</p>
+<p>MBP: 主要工作在这里。比如远程win桌面用的是<a href="https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12">Microsoft Remote Desktop</a></p>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>注意，Ubuntu会将硬盘 <strong>所有分区全部格式化</strong> ，请先妥善备份。</p>
+<p>经过安装提示以及笔记本的疯狂发热很快就安装完事了。</p>
+<h2 id="设置Ubuntu软件源"><a href="#设置Ubuntu软件源" class="headerlink" title="设置Ubuntu软件源"></a>设置Ubuntu软件源</h2><p>这里还是用清华大学的镜像，其<a href="https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/">Ubuntu 镜像使用帮助</a>也是相当的详细：</p>
+<blockquote>
+<p>Ubuntu 的软件源配置文件是 /etc/apt/sources.list。将系统自带的该文件做个备份，将该文件替换为下面内容，即可使用 TUNA 的软件源镜像。</p>
+<p>选择你的ubuntu版本: 18.04 LTS</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic main restricted universe multiverse</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-updates main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-updates main restricted universe multiverse</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-backports main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-backports main restricted universe multiverse</span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-security main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line"># 预发布软件源，不建议启用</span><br><span class="line"># deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-proposed main restricted universe multiverse</span><br><span class="line"># deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; bionic-proposed main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p><code>apt</code>已经相当完善，此处不再赘述。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt dist-upgrade</span><br></pre></td></tr></table></figure>
+
+<p>当然，别忘了安装<code>wget</code>:</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install wget</span><br></pre></td></tr></table></figure>
+
+<p>此处如果按照上面的步骤已经设置了清华大学的镜像源，那速度将会很快。要不然就很慢慢慢。。</p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>此步骤并非必须，只是记录一下一些很坑的事情，啊哈哈哈哈</p>
+<h3 id="没有Wi-Fi选项"><a href="#没有Wi-Fi选项" class="headerlink" title="没有Wi-Fi选项"></a>没有Wi-Fi选项</h3><p>安装Wi-Fi驱动，记得重启哦：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install bcmwl-kernel-source</span><br></pre></td></tr></table></figure>
+
+<h3 id="未知的显示器（Unknown-Display）"><a href="#未知的显示器（Unknown-Display）" class="headerlink" title="未知的显示器（Unknown Display）"></a>未知的显示器（Unknown Display）</h3><p>如果是很快的意识到是<code>设置</code>里面有一个<code>未知的显示器</code>，并且以<code>拼接</code>的方式使用，那你就直接根据<a href="https://bugs.launchpad.net/ubuntu/+source/ubuntu-drivers-common/+bug/1296020">Non-existent display detected in both intel driver and nvidia driver (Optimus Laptop)</a>所示，只需安装Bumblebee并重启即可。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install bumblebee-nvidia</span><br></pre></td></tr></table></figure>
+
+<p>该问题貌似是由于集成显卡和独显共存的问题，所以当你并没有连接外接显示器但是却出现以下双显示器才有的功能时候记得用这个方案。</p>
+<ul>
+<li>APP打开了却看不到界面，只看到页面嗖的一下飞出了屏幕</li>
+<li>左上角有时候会出现一个黑框框，里面有一个数字1</li>
+<li>鼠标放至屏幕上下左右，有一个边会进去</li>
+<li>右键窗口会有一个类似<code>移至显示器右侧</code>的按钮，点了就看不见了</li>
+<li><code>xrandr --listmonitors</code> 有两个</li>
+</ul>
+<h3 id="切换Intel和Nvidia显卡"><a href="#切换Intel和Nvidia显卡" class="headerlink" title="切换Intel和Nvidia显卡"></a>切换Intel和Nvidia显卡</h3><p><strong>no zuo no die no life, 听我一句劝别玩这个。。。</strong>。如果G了去看下<a href="https://www.qingsword.com/qing/ubuntu-remove-nvidia.html">解决Ubuntu18.04安装Nvidia驱动开机卡死</a></p>
+<p><a href="https://www.linuxbabe.com/desktop-linux/switch-intel-nvidia-graphics-card-ubuntu">How To Switch Between Intel and Nvidia Graphics Card on Ubuntu</a>遇到卡在<code>Started bpfilter</code>之后需要编辑/etc/gdm3/custom.conf，将下面这一行放开：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">＃WaylandEnable = FALSE</span><br></pre></td></tr></table></figure>
+
+<h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><p>将<code>内网穿透</code>放在Google里面搜索一下会有很多方案，我的VPS被邻居连累之后就没有再买，所以我没有域名、公网IP。。。其中搜索结果的大部分都不适合我。</p>
+<p>其中大部分提到一个<code>DDNS</code>的概念：<a href="https://zh.wikipedia.org/wiki/%E5%8B%95%E6%85%8BDNS">维基百科:动态DNS</a></p>
+<blockquote>
+<p>动态DNS（英语：Dynamic DNS，简称DDNS）是域名系统（DNS）中的一种自动更新名称服务器（Name server）内容的技术。根据互联网的域名订立规则，域名必须跟从固定的IP地址。但动态DNS系统为动态网域提供一个固定的名称服务器（Name server），透过即时更新，使外界用户能够连上动态用户的网址。</p>
+</blockquote>
+<p>了解玩这个之后就可以搜索并选择DDMS方案了。</p>
+<p>再明确一下目标：在外网ssh进内网我们刚建好的Ubuntu。</p>
+<h2 id="fatedier-frp"><a href="#fatedier-frp" class="headerlink" title="fatedier/frp"></a>fatedier/frp</h2><p>首推这种方案：<a href="https://github.com/fatedier/frp">fatedier/frp</a>, 文档有中文并且比较详细。</p>
+<p>还有少数派的一个文章也不错：<a href="https://sspai.com/post/52523">使用frp进行内网穿透</a></p>
+<h2 id="TPDDNS"><a href="#TPDDNS" class="headerlink" title="TPDDNS"></a>TPDDNS</h2><p>不过我家里的路由是<a href="https://www.tp-link.com.cn/">TP-LINK</a>的，TP-LINK是可以参考<a href="https://service.tp-link.com.cn/detail_article_2978.html">TPDDNS的使用方法介绍</a>可以直接使用的。</p>
+<p>不过坑比的事情是[TPDDNS]支持的硬件版本是4.0。参考<a href="https://service.tp-link.com.cn/detail_article_1420.html">如何查看产品型号与硬件版本？</a>，也就是其<code>ver 4.0</code>之上是可以的。</p>
+<p>最好是问一下<code>TP-LINK 在线客服</code>，一般 某猫、某狗上面的客服是不懂这个的。</p>
+<p>很显然我家里的路由是V3.0 啊哈哈哈 此方案我这里不适用。不过看上面的教程已经很详尽了，应该比较好搞。</p>
+<h2 id="Sakura-Frp"><a href="#Sakura-Frp" class="headerlink" title="Sakura Frp"></a>Sakura Frp</h2><p>这个据<a href="https://www.natfrp.org/">官网</a>介绍是这样的：</p>
+<blockquote>
+<p>简单方便<br>客户端基于 Fatedier Frp 修改，免去了配置文件，改为从网络读取配置，您只需要在网站上简单操作即可添加映射。</p>
+<p>完全免费<br>您不必再为了内网穿透多花一分钱，Sakura Frp 是永远免费的，我们只为了让更多人能体验到免费、好用的内网穿透。</p>
+<p>自由使用<br>我们非常欢迎您将 Sakura Frp 集成到自己的软件中，并且我们提供了多种 API 接口以供使用，完全没有使用限制。</p>
+</blockquote>
+<p>好了，适合我这种不愿意花钱的穷屌丝，来<a href="https://openid.natfrp.org/?action=register&src=www.natfrp.com">注册</a>吧。。</p>
+<p>登录进去才发现，好多文字。没有明显的新手教程，对我这种不是很懂<code>FRP</code>的人来说简直一脸懵逼。</p>
+<h2 id="创建映射"><a href="#创建映射" class="headerlink" title="创建映射"></a>创建映射</h2><p><a href="https://www.natfrp.com/page/panel/">映射列表</a>中的<code>示例映射 - Linux SSH</code>正合我意，然后只需要再点一下<code>随机端口</code>就可以不用输入直接点添加了。</p>
+<p><img src="/images/2019-07-09-13-43-31.png" alt="Linux SSH 并随机端口"></p>
+<p><img src="/images/2019-07-09-13-44-25.png" alt="已添加的隧道列表"></p>
+<p>至此第一个映射已经创建了，然后需要去Ubuntu上开启代理吧</p>
+<h2 id="开启代理"><a href="#开启代理" class="headerlink" title="开启代理"></a>开启代理</h2><p>在<a href="https://www.natfrp.com/page/panel/">客户软件</a>中找到适合自己的<code>Linux x64 (64位操作系统)</code>包并下载至Ubuntu:</p>
+<p>此处将包下载至<code>/opt/natfrp</code>(该路径将在后面的配置中使用)</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /opt/natfrp &amp;&amp; <span class="built_in">cd</span> /opt/natfrp</span><br><span class="line">sudo wget https://cdn.tcotp.cn:4443/client/Sakura_frpc_linux_amd64.tar.gz</span><br><span class="line">sudo tar zxvf Sakura_frpc_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压完成后，就会得到一个可执行文件<code>Sakura_frpc_linux_amd64</code>(该文件名将在后面的配置中使用)</p>
+<p>根据<a href="https://www.zerobbs.net/?s=viewpost&tid=5">Linux 将 Sakura Frp 设置为服务，开机自动启动</a>的教程操作如下：</p>
+<h3 id="创建service"><a href="#创建service" class="headerlink" title="创建service"></a>创建service</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/systemd/system/sakurafrp.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据自己的配置写入service"><a href="#根据自己的配置写入service" class="headerlink" title="根据自己的配置写入service"></a>根据自己的配置写入service</h3><p><code>/opt/natfrp/</code>: Sakura_frpc_linux_amd64的全路径<br><code>/opt/natfrp/Sakura_frpc_linux_amd64</code>: 解压之后的Sakura_frpc_linux_amd64全路径<br><code>--sid=</code>: 服务器列表中左侧的数字</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Sakura Frp Client</span><br><span class="line">Wants=network-online.target</span><br><span class="line">After=network-online.target</span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">WorkingDirectory=/opt/natfrp/</span><br><span class="line">LimitNOFILE=4096</span><br><span class="line">PIDFile=/var/run/sakurafrp/client.pid</span><br><span class="line">ExecStart=/opt/natfrp/Sakura_frpc_linux_amd64 --su=你的账号 --sp=你的密码 --sid=你要选择的服务器的ID(就是服务器列表左侧的数字)</span><br><span class="line">Restart=on-failure</span><br><span class="line">StartLimitInterval=600</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>sid信息[2019.7.9:14:10]:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">| ID	名称		状态		介绍</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">| 1	宁波电信	√ 在线		高防线路，适合搭 Minecraft 服务器，使用人数较多 (官方服务器)</span><br><span class="line">| 2	宁波联通	√ 在线		联通线路，防御 20G，适合部分移动联通&#x2F;用户使用 (官方服务器)</span><br><span class="line">| 3	徐州电信	√ 在线		徐州高防电信，适合开服，月流量固定 500G，请合理使用 (官方服务器)</span><br><span class="line">| 4	贵州电信	× 离线		贵州电信节点，无防御，适合小流量传输服务[超流量停机] (官方服务器)</span><br><span class="line">| 6	罗马尼亚	× 离线		罗马尼亚不限内容无视 DMCA 版权服务器，免备案 (官方服务器)</span><br><span class="line">| 7	日本千兆	√ 在线		日本千兆服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">| 8	台湾百兆	√ 在线		台湾谷歌云 100M 服务器，适合建站，延迟较低，免备案 (官方服务器)</span><br><span class="line">| 9	香港线路1 √ 在线		香港 StarryDNS 100M 服务器，适合建站 (官方服务器)</span><br><span class="line">| 10	江苏镇江	√ 在线		江苏镇江 100M 服务器，BGP 全国优化线路，适合开服 (官方服务器)</span><br><span class="line">| 12	河南电信	√ 在线		河南电信线路服务器，适合开服以及小流量服务 (官方服务器)</span><br><span class="line">| 13	香港线路2 √ 在线		香港谷歌云 100M 服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">| 30	洛杉矶01	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 1 (官方服务器)</span><br><span class="line">| 31	洛杉矶02	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 2 (官方服务器)</span><br><span class="line">| 32	洛杉矶03	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 3 (官方服务器)</span><br><span class="line">| 33	洛杉矶04	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 4 (官方服务器)</span><br><span class="line">| 34	洛杉矶05	√ 在线		美国洛杉矶千兆服务器，适合建站，免备案 线路 5 (官方服务器)</span><br><span class="line">| 38	新加坡01	× 离线		新加坡阿里云 30M 服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">| 39	蒙特利尔	√ 在线		加拿大蒙特利尔谷歌云 100M 服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">| 43	香港移动	× 离线		香港 UOvZ 100M 移动服务器，适合建站，免备案[机房断网维护中] (官方服务器)</span><br><span class="line">| 45	美国纽约1 √ 在线		美国纽约百兆服务器，适合建站，免备案 线路1 (官方服务器)</span><br><span class="line">| 46	美国纽约2 √ 在线		美国纽约百兆服务器，适合建站，免备案 线路2 (官方服务器)</span><br><span class="line">| 47	日本长野	× 离线		日本长野百兆服务器，适合建站，免备案 (官方服务器)</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动service"><a href="#启动service" class="headerlink" title="启动service"></a>启动service</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+
+<p>服务就创建成功了，接下来启动服务：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl start sakurafrp</span><br></pre></td></tr></table></figure>
+
+<p>将服务设置为开机启动</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> sakurafrp</span><br></pre></td></tr></table></figure>
+
+<p>如果要停止运行客户端，只需要输入</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl stop sakurafrp</span><br></pre></td></tr></table></figure>
+
+<p>如果要禁止开机启动，输入</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> sakurafrp</span><br></pre></td></tr></table></figure>
+
+<p>至此，来让我们看一下当前的状态：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╰─&gt;$ sudo systemctl status sakurafrp</span><br><span class="line">● sakurafrp.service - Sakura Frp Client</span><br><span class="line">   Loaded: loaded (/etc/systemd/system/sakurafrp.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Tue 2019-07-09 11:07:19 CST; 3h 13min ago</span><br><span class="line"> Main PID: 3301 (Sakura_frpc_lin)</span><br><span class="line">    Tasks: 10 (<span class="built_in">limit</span>: 4915)</span><br><span class="line">   Memory: 5.9M</span><br><span class="line">   CGroup: /system.slice/sakurafrp.service</span><br><span class="line">           └─3301 /opt/natfrp/Sakura_frpc_linux_amd64 --su=xxxxxxxx --sp=xxxxxxxx --sid=xxx</span><br><span class="line"></span><br><span class="line">7月 09 11:07:20 madordie-NV47H Sakura_frpc_linux_amd64[3301]: &gt;配置文件载入成功</span><br><span class="line">7月 09 11:07:20 madordie-NV47H Sakura_frpc_linux_amd64[3301]: 2019/07/09 11:07:20 [I] [proxy_manager.go:322] 增加代理: [xxx.natfrp.org:22941        29795-87248]</span><br><span class="line">7月 09 11:07:20 madordie-NV47H Sakura_frpc_linux_amd64[3301]: 2019/07/09 11:07:20 [I] [control.go:242] [d54792913cdac17d] 登录成功, 获取到运行ID [d54792913cdac17d], server udp port [7001]</span><br><span class="line">7月 09 11:07:20 madordie-NV47H Sakura_frpc_linux_amd64[3301]: 2019/07/09 11:07:20 [I] [control.go:167] [d54792913cdac17d] [xxx.natfrp.org:22941        29795-87248] 启动代理成功</span><br></pre></td></tr></table></figure>
+
+<p>可以看到<code>[xxx.natfrp.org:22941        29795-87248] 启动代理成功</code></p>
+<p>需要注意的是选用的sid不一样其代理的域名也不一样。这个是很显然的，但是是容易忽略的。</p>
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>在MBP上验证一下<code>xxx.natfrp.org:22941</code></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">╰─&gt;$ ssh -p 22941 madordie@xxx.natfrp.org</span><br><span class="line">Welcome to Ubuntu 19.04 (GNU/Linux 4.18.0-15-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https://help.ubuntu.com</span><br><span class="line"> * Management:     https://landscape.canonical.com</span><br><span class="line"> * Support:        https://ubuntu.com/advantage</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">12 updates can be installed immediately.</span><br><span class="line">6 of these updates are security updates.</span><br><span class="line"></span><br><span class="line">Last login: Tue Jul  9 14:19:33 2019 from 127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<p><code>Sakura Frp</code>已通，愉快的玩耍吧！</p>
+<p>括弧：一旦其暴露出去别忘了考虑安全，比如你的这个SSH账号、密码是否足够复杂，或者是否关闭了账号密码登陆。</p>
+<h1 id="其他方案"><a href="#其他方案" class="headerlink" title="其他方案"></a>其他方案</h1><p>还有一些其他的方案可以选择，比如：</p>
+<ul>
+<li><a href="https://hsk.oray.com/">花生壳</a></li>
+<li><a href="https://www.noip.com/">no-ip</a></li>
+<li><a href="https://github.com/fatedier/frp">开源的frp</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>内网穿透</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于转载的文章</title>
     <url>/post/about-reprint-article/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一点删除原链接的转载文章的牢骚</p>
@@ -747,90 +747,6 @@
       <tags>
         <tag>构建</tag>
         <tag>Fastlane</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS自动化-Jenkins编译工程</title>
-    <url>/post/ios-automation-jenkins-build/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
-<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
-<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
-</ul>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～</p>
-<p>从这个文章中你将要实现以下功能：</p>
-<ul>
-<li>在Jenkins创建工程</li>
-<li>build出ipa</li>
-<li>将ipa上传至fir</li>
-<li>钉钉机器人群通知</li>
-<li>将dsym上传至bugly</li>
-</ul>
-<a id="more"></a>
-
-<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><p>这里大多数操作都是用脚本来进行的，不为别的，就为自由和以后～</p>
-<h3 id="fastlane"><a href="#fastlane" class="headerlink" title="fastlane"></a>fastlane</h3><p>此乃自动化神器。<a href="https://docs.fastlane.tools/">文档在此</a>。<a href="https://github.com/fastlane/fastlane">开源哟～</a></p>
-<p>此处主要用来编译、打包。</p>
-<p>安装方法：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew cask install fastlane</span><br></pre></td></tr></table></figure>
-
-<p>此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。</p>
-<p>在Xcode9 我使用的版本2.14.1打包出问题了。。具体在这里详见<a href="../debug-xcode9-build-ipa">Xcode9编译失败</a>。于是呼采用了<code>xcodebuild</code>进行打包</p>
-<h3 id="fir-im-cli"><a href="#fir-im-cli" class="headerlink" title="fir.im-cli"></a>fir.im-cli</h3><p><a href="https://fir.im/">fir.im</a>提供的应用内测托管工具。<a href="https://github.com/FIRHQ/fir-cli/blob/master/README.md">开源官网</a>。</p>
-<p>安装方法：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem install fir-cli</span><br></pre></td></tr></table></figure>
-
-<p>此工具也提供打包ipa、apk、上传符号表至BugHD、等功能。但是我们在这里选择了<code>fastlane gym</code></p>
-<p>上传加速：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sh -c <span class="string">&quot;<span class="subst">$(curl -sSL https://gist.githubusercontent.com/trawor/5dda140dee86836b8e60/raw/turbo-qiniu.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>上传加速代码已经<a href="http://blog.fir.im/turbo-qiniu/">开源至此</a>。</p>
-<p><a href="http://bughd.com/">BugHD</a>: 已停止线上免费服务，开始卖私有部署了。</p>
-<p>另外，fir 也有<a href="http://blog.fir.im/jenkins/">Jenkins插件</a>，但是这里选择脚本方式。</p>
-<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
-<p>确保以下插件已经被安装：</p>
-<ul>
-<li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin">Git Plugin</a></li>
-<li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin">Tool Environment Plugin</a></li>
-</ul>
-<p>嗯，开始创建工程，然后配置打包吧！</p>
-<h2 id="工程相关配置"><a href="#工程相关配置" class="headerlink" title="工程相关配置"></a>工程相关配置</h2><p>左侧的<code>新建(New Item)</code>我就不说了吧～，点击输入项目名字，然后选择第一个<code>构建一个自由风格的软件项目</code>就行啦～～</p>
-<p>此处项目名字暂且成为<code>test</code>。这里只说一些比较重要的，没有活不成的那种配置。别的自己研究一下或者点击右侧❓就能看到介绍。</p>
-<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>此处点击<code>Git</code>，展开之后输入<code>Repository URL</code>即可。</p>
-<p><code>Repository URL</code>输入完毕之后点击别处，Jenkins的Git插件会自动校验该URL是否能够clone下来代码。出现红色就自己根据错误修改一下咯。。</p>
-<p>另外此处支持<code>ssh</code> 的方式，大致样式为：<code>ssh://sunjigang@github.com:29418/projects/aaa</code>。</p>
-<p><code>Branches to build</code> 写上你的构建分支～，根据自己需求来，<code>master</code>一般为仓库的默认分支。</p>
-<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><p>此处表示该项目的构建触发条件。（可选）</p>
-<p>我们这里说一下<code>Poll SCM</code>：</p>
-<p>定时检查源码变更。条件是 一定要配置<code>Git</code>这样的源码管理。</p>
-<p>例子：</p>
-<ul>
-<li><code>H/15 * * * *</code>：每15分钟构建一次</li>
-<li><code>0 2 * * *</code>： 每天2:00构建一次</li>
-</ul>
-<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>此处为构建的核心😂。当然，我们为了自由，此处全部使用<code>shell</code>脚本。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 工程名</span></span><br><span class="line">workspace=<span class="string">&#x27;xxx.xcworkspace&#x27;</span></span><br><span class="line"><span class="comment"># 构建scheme</span></span><br><span class="line">scheme=<span class="string">&#x27;xxx&#x27;</span></span><br><span class="line"><span class="comment"># 打包类型：app-store, ad-hoc, package, enterprise, development, and developer-id.</span></span><br><span class="line">export_method=<span class="string">&#x27;enterprise&#x27;</span></span><br><span class="line"><span class="comment"># fir的token，在fir-&gt;用户-&gt;token 获取</span></span><br><span class="line">fir_token=<span class="string">&#x27;c5077e0368888b9750ae848b9fe00***&#x27;</span></span><br><span class="line"><span class="comment"># fir上传短链接，效果为 https://fir.im/xxx</span></span><br><span class="line">fir_url=<span class="string">&#x27;xxx&#x27;</span></span><br><span class="line"><span class="comment"># 钉钉机器人token</span></span><br><span class="line">dingtalk_token=<span class="string">&#x27;6d09e43ddc62e540be914ff2e901e28b921d55c5ad457f6f3571f9f881287***&#x27;</span></span><br><span class="line"><span class="comment"># 钉钉机器人发送的内容</span></span><br><span class="line">dingtalk_content=<span class="string">&quot;iOSXXX已经上传至 http://fir.im/<span class="variable">$&#123;fir_url&#125;</span> ,吧啦吧啦吧啦～&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建</span></span><br><span class="line">fastlane gym</span><br><span class="line">    --workspace <span class="variable">$workspace</span> \</span><br><span class="line">    --scheme <span class="variable">$scheme</span> \</span><br><span class="line">    --export_method <span class="variable">$export_method</span> \</span><br><span class="line">    clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># fir</span></span><br><span class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls *.ipa)</span><br><span class="line">git <span class="built_in">log</span> -10 &gt; git.log</span><br><span class="line">fir p <span class="variable">$ipa</span> -T <span class="variable">$fir_token</span> -s <span class="variable">$fir_url</span> -c git.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 钉钉通知</span></span><br><span class="line">curl <span class="string">&quot;https://oapi.dingtalk.com/robot/send?access_token=<span class="variable">$&#123;dingtalk_token&#125;</span>&quot;</span> -H <span class="string">&#x27;Content-Type: application/json&#x27;</span>    -d <span class="string">&#x27;</span></span><br><span class="line"><span class="string">    &#123;&quot;msgtype&quot;: &quot;text&quot;,</span></span><br><span class="line"><span class="string">        &quot;text&quot;: &#123;</span></span><br><span class="line"><span class="string">            &quot;content&quot;:$&#123;dingtalk_content&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>至此 已经完成了打包、上传fir、钉钉机器人通知。</p>
-<p>上述脚本只是配置的例子，可以根据自己需求，自己编写和配置。特别是</p>
-<ul>
-<li><code>.xcworkspace</code>的位置，要找清楚呀</li>
-<li><code>scheme</code>无法找到是因为你在提交代码的时候没有将其设置为shared</li>
-<li><code>fastlane gym</code> 支持很多参数，是对<code>xcodebuild</code>的封装，<a href="https://github.com/fastlane/fastlane/tree/master/gym">源码及文档在此</a></li>
-</ul>
-<h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
-<p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
-<p>其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 路径主要用来提取Info.plist以及dsym文件</span></span><br><span class="line">path=<span class="string">&#x27;/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo&#x27;</span></span><br><span class="line"><span class="comment"># scheme name</span></span><br><span class="line">scheme=<span class="string">&#x27;Fangduoduo_ent&#x27;</span></span><br><span class="line"><span class="comment"># ipa bundleId</span></span><br><span class="line">package=<span class="string">&#x27;xx.xx.com&#x27;</span></span><br><span class="line"><span class="comment"># bugly id</span></span><br><span class="line">bugly_id=<span class="string">&#x27;9xxx&#x27;</span></span><br><span class="line"><span class="comment"># bugly key</span></span><br><span class="line">bugly_key=<span class="string">&#x27;wHzxcxxx&#x27;</span></span><br><span class="line"></span><br><span class="line">rm -rf *dSYM*</span><br><span class="line">cp <span class="variable">$&#123;path&#125;</span>/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist</span><br><span class="line">cp -rf <span class="variable">$&#123;path&#125;</span>/build/*.xcarchive/dSYMs .</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------ post dsym ------------ #</span></span><br><span class="line"></span><br><span class="line">app_infoplist_path=<span class="string">&#x27;Info.plist&#x27;</span></span><br><span class="line">version=$(/usr/libexec/PlistBuddy -c <span class="string">&quot;print CFBundleVersion&quot;</span> <span class="variable">$&#123;app_infoplist_path&#125;</span>)</span><br><span class="line"></span><br><span class="line">java -jar ./bugly/buglySymboliOS.jar \</span><br><span class="line">	-i dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM \</span><br><span class="line">    -dsym \</span><br><span class="line">    -u \</span><br><span class="line">    -id <span class="variable">$&#123;bugly_id&#125;</span> \</span><br><span class="line">    -key <span class="variable">$&#123;bugly_key&#125;</span> \</span><br><span class="line">    -package <span class="variable">$&#123;package&#125;</span> \</span><br><span class="line">    -version <span class="variable">$&#123;version&#125;</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># ------------ UUID ------------ #</span></span><br><span class="line"></span><br><span class="line">unzip -o ./dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM.zip</span><br><span class="line">xcrun dwarfdump --uuid ./<span class="variable">$&#123;scheme&#125;</span> &gt;&gt; ./uuids-<span class="variable">$&#123;version&#125;</span>.txt</span><br></pre></td></tr></table></figure>
-
-<p>值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。</p>
-<p>如果还有问题，可以在<a href="../../about">关于</a>中找到我。</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>构建</tag>
-        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -920,6 +836,90 @@
 <p>在mac 中 <code>系统偏好设置 -&gt; 网络</code> 记录下来当前获取到的IP。</p>
 <p>在<code>高级</code>中将<code>使用DHCP</code>修改为<code>使用DHCP(手动设定地址)</code>，然后将上面的地址填进去就好啦～</p>
 <p>当然你也可以指定其他的地址，只要别人没有占用😂，你开心就好～</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>构建</tag>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS自动化-Jenkins编译工程</title>
+    <url>/post/ios-automation-jenkins-build/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
+<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
+<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
+</ul>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～</p>
+<p>从这个文章中你将要实现以下功能：</p>
+<ul>
+<li>在Jenkins创建工程</li>
+<li>build出ipa</li>
+<li>将ipa上传至fir</li>
+<li>钉钉机器人群通知</li>
+<li>将dsym上传至bugly</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><p>这里大多数操作都是用脚本来进行的，不为别的，就为自由和以后～</p>
+<h3 id="fastlane"><a href="#fastlane" class="headerlink" title="fastlane"></a>fastlane</h3><p>此乃自动化神器。<a href="https://docs.fastlane.tools/">文档在此</a>。<a href="https://github.com/fastlane/fastlane">开源哟～</a></p>
+<p>此处主要用来编译、打包。</p>
+<p>安装方法：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew cask install fastlane</span><br></pre></td></tr></table></figure>
+
+<p>此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。</p>
+<p>在Xcode9 我使用的版本2.14.1打包出问题了。。具体在这里详见<a href="../debug-xcode9-build-ipa">Xcode9编译失败</a>。于是呼采用了<code>xcodebuild</code>进行打包</p>
+<h3 id="fir-im-cli"><a href="#fir-im-cli" class="headerlink" title="fir.im-cli"></a>fir.im-cli</h3><p><a href="https://fir.im/">fir.im</a>提供的应用内测托管工具。<a href="https://github.com/FIRHQ/fir-cli/blob/master/README.md">开源官网</a>。</p>
+<p>安装方法：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem install fir-cli</span><br></pre></td></tr></table></figure>
+
+<p>此工具也提供打包ipa、apk、上传符号表至BugHD、等功能。但是我们在这里选择了<code>fastlane gym</code></p>
+<p>上传加速：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sh -c <span class="string">&quot;<span class="subst">$(curl -sSL https://gist.githubusercontent.com/trawor/5dda140dee86836b8e60/raw/turbo-qiniu.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>上传加速代码已经<a href="http://blog.fir.im/turbo-qiniu/">开源至此</a>。</p>
+<p><a href="http://bughd.com/">BugHD</a>: 已停止线上免费服务，开始卖私有部署了。</p>
+<p>另外，fir 也有<a href="http://blog.fir.im/jenkins/">Jenkins插件</a>，但是这里选择脚本方式。</p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
+<p>确保以下插件已经被安装：</p>
+<ul>
+<li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin">Git Plugin</a></li>
+<li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin">Tool Environment Plugin</a></li>
+</ul>
+<p>嗯，开始创建工程，然后配置打包吧！</p>
+<h2 id="工程相关配置"><a href="#工程相关配置" class="headerlink" title="工程相关配置"></a>工程相关配置</h2><p>左侧的<code>新建(New Item)</code>我就不说了吧～，点击输入项目名字，然后选择第一个<code>构建一个自由风格的软件项目</code>就行啦～～</p>
+<p>此处项目名字暂且成为<code>test</code>。这里只说一些比较重要的，没有活不成的那种配置。别的自己研究一下或者点击右侧❓就能看到介绍。</p>
+<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>此处点击<code>Git</code>，展开之后输入<code>Repository URL</code>即可。</p>
+<p><code>Repository URL</code>输入完毕之后点击别处，Jenkins的Git插件会自动校验该URL是否能够clone下来代码。出现红色就自己根据错误修改一下咯。。</p>
+<p>另外此处支持<code>ssh</code> 的方式，大致样式为：<code>ssh://sunjigang@github.com:29418/projects/aaa</code>。</p>
+<p><code>Branches to build</code> 写上你的构建分支～，根据自己需求来，<code>master</code>一般为仓库的默认分支。</p>
+<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><p>此处表示该项目的构建触发条件。（可选）</p>
+<p>我们这里说一下<code>Poll SCM</code>：</p>
+<p>定时检查源码变更。条件是 一定要配置<code>Git</code>这样的源码管理。</p>
+<p>例子：</p>
+<ul>
+<li><code>H/15 * * * *</code>：每15分钟构建一次</li>
+<li><code>0 2 * * *</code>： 每天2:00构建一次</li>
+</ul>
+<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>此处为构建的核心😂。当然，我们为了自由，此处全部使用<code>shell</code>脚本。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 工程名</span></span><br><span class="line">workspace=<span class="string">&#x27;xxx.xcworkspace&#x27;</span></span><br><span class="line"><span class="comment"># 构建scheme</span></span><br><span class="line">scheme=<span class="string">&#x27;xxx&#x27;</span></span><br><span class="line"><span class="comment"># 打包类型：app-store, ad-hoc, package, enterprise, development, and developer-id.</span></span><br><span class="line">export_method=<span class="string">&#x27;enterprise&#x27;</span></span><br><span class="line"><span class="comment"># fir的token，在fir-&gt;用户-&gt;token 获取</span></span><br><span class="line">fir_token=<span class="string">&#x27;c5077e0368888b9750ae848b9fe00***&#x27;</span></span><br><span class="line"><span class="comment"># fir上传短链接，效果为 https://fir.im/xxx</span></span><br><span class="line">fir_url=<span class="string">&#x27;xxx&#x27;</span></span><br><span class="line"><span class="comment"># 钉钉机器人token</span></span><br><span class="line">dingtalk_token=<span class="string">&#x27;6d09e43ddc62e540be914ff2e901e28b921d55c5ad457f6f3571f9f881287***&#x27;</span></span><br><span class="line"><span class="comment"># 钉钉机器人发送的内容</span></span><br><span class="line">dingtalk_content=<span class="string">&quot;iOSXXX已经上传至 http://fir.im/<span class="variable">$&#123;fir_url&#125;</span> ,吧啦吧啦吧啦～&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建</span></span><br><span class="line">fastlane gym</span><br><span class="line">    --workspace <span class="variable">$workspace</span> \</span><br><span class="line">    --scheme <span class="variable">$scheme</span> \</span><br><span class="line">    --export_method <span class="variable">$export_method</span> \</span><br><span class="line">    clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># fir</span></span><br><span class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls *.ipa)</span><br><span class="line">git <span class="built_in">log</span> -10 &gt; git.log</span><br><span class="line">fir p <span class="variable">$ipa</span> -T <span class="variable">$fir_token</span> -s <span class="variable">$fir_url</span> -c git.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 钉钉通知</span></span><br><span class="line">curl <span class="string">&quot;https://oapi.dingtalk.com/robot/send?access_token=<span class="variable">$&#123;dingtalk_token&#125;</span>&quot;</span> -H <span class="string">&#x27;Content-Type: application/json&#x27;</span>    -d <span class="string">&#x27;</span></span><br><span class="line"><span class="string">    &#123;&quot;msgtype&quot;: &quot;text&quot;,</span></span><br><span class="line"><span class="string">        &quot;text&quot;: &#123;</span></span><br><span class="line"><span class="string">            &quot;content&quot;:$&#123;dingtalk_content&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>至此 已经完成了打包、上传fir、钉钉机器人通知。</p>
+<p>上述脚本只是配置的例子，可以根据自己需求，自己编写和配置。特别是</p>
+<ul>
+<li><code>.xcworkspace</code>的位置，要找清楚呀</li>
+<li><code>scheme</code>无法找到是因为你在提交代码的时候没有将其设置为shared</li>
+<li><code>fastlane gym</code> 支持很多参数，是对<code>xcodebuild</code>的封装，<a href="https://github.com/fastlane/fastlane/tree/master/gym">源码及文档在此</a></li>
+</ul>
+<h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
+<p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
+<p>其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 路径主要用来提取Info.plist以及dsym文件</span></span><br><span class="line">path=<span class="string">&#x27;/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo&#x27;</span></span><br><span class="line"><span class="comment"># scheme name</span></span><br><span class="line">scheme=<span class="string">&#x27;Fangduoduo_ent&#x27;</span></span><br><span class="line"><span class="comment"># ipa bundleId</span></span><br><span class="line">package=<span class="string">&#x27;xx.xx.com&#x27;</span></span><br><span class="line"><span class="comment"># bugly id</span></span><br><span class="line">bugly_id=<span class="string">&#x27;9xxx&#x27;</span></span><br><span class="line"><span class="comment"># bugly key</span></span><br><span class="line">bugly_key=<span class="string">&#x27;wHzxcxxx&#x27;</span></span><br><span class="line"></span><br><span class="line">rm -rf *dSYM*</span><br><span class="line">cp <span class="variable">$&#123;path&#125;</span>/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist</span><br><span class="line">cp -rf <span class="variable">$&#123;path&#125;</span>/build/*.xcarchive/dSYMs .</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------ post dsym ------------ #</span></span><br><span class="line"></span><br><span class="line">app_infoplist_path=<span class="string">&#x27;Info.plist&#x27;</span></span><br><span class="line">version=$(/usr/libexec/PlistBuddy -c <span class="string">&quot;print CFBundleVersion&quot;</span> <span class="variable">$&#123;app_infoplist_path&#125;</span>)</span><br><span class="line"></span><br><span class="line">java -jar ./bugly/buglySymboliOS.jar \</span><br><span class="line">	-i dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM \</span><br><span class="line">    -dsym \</span><br><span class="line">    -u \</span><br><span class="line">    -id <span class="variable">$&#123;bugly_id&#125;</span> \</span><br><span class="line">    -key <span class="variable">$&#123;bugly_key&#125;</span> \</span><br><span class="line">    -package <span class="variable">$&#123;package&#125;</span> \</span><br><span class="line">    -version <span class="variable">$&#123;version&#125;</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># ------------ UUID ------------ #</span></span><br><span class="line"></span><br><span class="line">unzip -o ./dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM.zip</span><br><span class="line">xcrun dwarfdump --uuid ./<span class="variable">$&#123;scheme&#125;</span> &gt;&gt; ./uuids-<span class="variable">$&#123;version&#125;</span>.txt</span><br></pre></td></tr></table></figure>
+
+<p>值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。</p>
+<p>如果还有问题，可以在<a href="../../about">关于</a>中找到我。</p>
 ]]></content>
       <categories>
         <category>iOS</category>

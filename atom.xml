@@ -196,11 +196,11 @@
       <category term="工具" scheme="https://madordie.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="blog" scheme="https://madordie.github.io/tags/blog/"/>
-    
       <category term="gitment" scheme="https://madordie.github.io/tags/gitment/"/>
     
       <category term="gitalk" scheme="https://madordie.github.io/tags/gitalk/"/>
+    
+      <category term="blog" scheme="https://madordie.github.io/tags/blog/"/>
     
   </entry>
   
