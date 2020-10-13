@@ -34,6 +34,12 @@ function checkout_URLs() {
 # 备份
 function backup() {
     echo "最后更新于:" `date` > README.md
+
+    git --git-dir=themes/next/.git --work-tree=themes/next/ rev-parse HEAD > themes/next.commit
+    git --git-dir=themes/next/.git --work-tree=themes/next/ diff > themes/next.diff
+    cp themes/next/source/images/avatar.gif themes/avatar.gif
+    cp themes/next/source/images/favicon-32x32-next.png themes/avatar.gif
+
     git add .
     git commit -am "backup"
     git push https://github.com/madordie/madordie.github.io.git hexo
@@ -59,7 +65,7 @@ elif [ $opt = 'p' ]; then
     # echo ' --> 已上传站图.\n'
     backup
     cd ./source
-    # ruby comment.rb
+    ruby comment.rb
     echo ' --> 评论已自动创建.\n'
     sitemap=`mktemp`
     curl -s https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml | grep madordie.github.io | awk -v FS='<loc>|</loc>' '{print $2}' > sitemap

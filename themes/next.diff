@@ -1,0 +1,350 @@
+diff --git a/_config.yml b/_config.yml
+index 02758d9..caabc5b 100644
+--- a/_config.yml
++++ b/_config.yml
+@@ -36,13 +36,13 @@ custom_file_path:
+ # ---------------------------------------------------------------
+ 
+ # Schemes
+-scheme: Muse
++#scheme: Muse
+ #scheme: Mist
+-#scheme: Pisces
++scheme: Pisces
+ #scheme: Gemini
+ 
+ # Dark Mode
+-darkmode: false
++darkmode: true
+ 
+ 
+ # ---------------------------------------------------------------
+@@ -50,10 +50,10 @@ darkmode: false
+ # ---------------------------------------------------------------
+ 
+ favicon:
+-  small: /images/favicon-16x16-next.png
++  small: /images/favicon-32x32-next.png
+   medium: /images/favicon-32x32-next.png
+-  apple_touch_icon: /images/apple-touch-icon-next.png
+-  safari_pinned_tab: /images/logo.svg
++  apple_touch_icon: /images/favicon-32x32-next.png
++  safari_pinned_tab: /images/favicon-32x32-next.png
+   #android_manifest: /images/manifest.json
+   #ms_browserconfig: /images/browserconfig.xml
+ 
+@@ -81,11 +81,11 @@ creative_commons:
+ # Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.
+ # External url should start with http:// or https://
+ menu:
+-  #home: / || fa fa-home
+-  #about: /about/ || fa fa-user
++  home: / || fa fa-home
++  about: /about/ || fa fa-user
+   #tags: /tags/ || fa fa-tags
+   #categories: /categories/ || fa fa-th
+-  #archives: /archives/ || fa fa-archive
++  archives: /archives/ || fa fa-archive
+   #schedule: /schedule/ || fa fa-calendar
+   #sitemap: /sitemap.xml || fa fa-sitemap
+   #commonweal: /404/ || fa fa-heartbeat
+@@ -126,9 +126,9 @@ sidebar:
+ # Sidebar Avatar
+ avatar:
+   # Replace the default image and set the url here.
+-  url: #/images/avatar.gif
++  url: /images/avatar.gif
+   # If true, the avatar will be dispalyed in circle.
+-  rounded: false
++  rounded: true
+   # If true, the avatar will be rotated with the cursor.
+   rotated: false
+ 
+@@ -140,11 +140,11 @@ site_state: true
+ # Key is the link label showing to end users.
+ # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
+ social:
+-  #GitHub: https://github.com/yourname || fab fa-github
+-  #E-Mail: mailto:yourname@gmail.com || fa fa-envelope
++  GitHub: https://github.com/madordie || fab fa-github
++  E-Mail: mailto:io.madordie@gmail.com || fa fa-envelope
+   #Weibo: https://weibo.com/yourname || fab fa-weibo
+   #Google: https://plus.google.com/yourname || fab fa-google
+-  #Twitter: https://twitter.com/yourname || fab fa-twitter
++  Twitter: https://twitter.com/sunjigang || fab fa-twitter
+   #FB Page: https://www.facebook.com/yourname || fab fa-facebook
+   #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow
+   #YouTube: https://youtube.com/yourname || fab fa-youtube
+@@ -353,8 +353,8 @@ codeblock:
+   # Code Highlight theme
+   # All available themes: https://theme-next.js.org/highlight/
+   theme:
+-    light: default
+-    dark: tomorrow-night
++    light: atom-one-light
++    dark: atom-one-dark
+   prism:
+     light: prism
+     dark: prism-dark
+@@ -627,12 +627,12 @@ livere_uid: # <your_uid>
+ # Gitalk
+ # For more information: https://gitalk.github.io, https://github.com/gitalk/gitalk
+ gitalk:
+-  enable: false
+-  github_id: # GitHub repo owner
+-  repo: # Repository name to store issues
+-  client_id: # GitHub Application Client ID
+-  client_secret: # GitHub Application Client Secret
+-  admin_user: # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
++  enable: true
++  github_id: madordie # GitHub repo owner
++  repo: madordie.github.io # Repository name to store issues
++  client_id: 2fcb2111497d0ea0dba4 # GitHub Application Client ID
++  client_secret: 5e3ce0fb3c73d264112224a08b329c60029d50c2 # GitHub Application Client Secret
++  admin_user: madordie # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+   distraction_free_mode: true # Facebook-like distraction free mode
+   # Gitalk's display language depends on user's browser or system environment
+   # If you want everyone visiting your site to see a uniform language, you can set a force language value
+@@ -705,12 +705,12 @@ firestore:
+ # Show Views / Visitors of the website / page with busuanzi.
+ # Get more information on http://ibruce.info/2015/04/04/busuanzi
+ busuanzi_count:
+-  enable: false
++  enable: true
+   total_visitors: true
+   total_visitors_icon: fa fa-user
+   total_views: true
+   total_views_icon: fa fa-eye
+-  post_views: true
++  post_views: false
+   post_views_icon: far fa-eye
+ 
+ 
+@@ -729,7 +729,7 @@ algolia_search:
+ # Local Search
+ # Dependencies: https://github.com/next-theme/hexo-generator-searchdb
+ local_search:
+-  enable: false
++  enable: true
+   # If auto, trigger search by changing input.
+   # If manual, trigger search by pressing enter key or search button.
+   trigger: auto
+diff --git a/layout/_partials/footer.njk b/layout/_partials/footer.njk
+index 5265069..4f7f2b1 100644
+--- a/layout/_partials/footer.njk
++++ b/layout/_partials/footer.njk
+@@ -48,36 +48,12 @@
+ </div>
+ {%- endif %}
+ 
+-{%- if theme.busuanzi_count.enable %}
+-<div class="busuanzi-count">
+-  {%- if theme.busuanzi_count.total_visitors %}
+-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+-      <span class="post-meta-item-icon">
+-        <i class="{{ theme.busuanzi_count.total_visitors_icon }}"></i>
+-      </span>
+-      <span class="site-uv" title="{{ __('footer.total_visitors') }}">
+-        <span id="busuanzi_value_site_uv"></span>
+-      </span>
+-    </span>
+-  {%- endif %}
+-
+-  {%- if theme.busuanzi_count.total_views %}
+-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+-      <span class="post-meta-item-icon">
+-        <i class="{{ theme.busuanzi_count.total_views_icon }}"></i>
+-      </span>
+-      <span class="site-pv" title="{{ __('footer.total_views') }}">
+-        <span id="busuanzi_value_site_pv"></span>
+-      </span>
+-    </span>
+-  {%- endif %}
+-</div>
+-{%- endif %}
++<span id="busuanzi_container_site_pv">pv:<span id="busuanzi_value_site_pv"></span></span>
+ 
+ {%- if theme.footer.powered %}
+   <div class="powered-by">
+-    {%- set next_site = 'https://theme-next.js.org' if theme.scheme === 'Gemini' else 'https://theme-next.js.org/' + theme.scheme | lower + '/' %}
+-    {{- __('footer.powered', next_url('https://hexo.io', 'Hexo', {class: 'theme-link'}) + ' & ' + next_url(next_site, 'NexT.' + theme.scheme, {class: 'theme-link'})) }}
++    {%- set next_site = 'https://theme-next.js.org' if theme.scheme === 'Gemini' else 'https://theme-next.js.org' | lower + '/' %}
++    {{- __('footer.powered', next_url('https://hexo.io', 'Hexo', {class: 'theme-link'}) + ' & ' + next_url(next_site, 'NexT', {class: 'theme-link'})) }}
+   </div>
+ {%- endif %}
+ 
+diff --git a/layout/_partials/sidebar/site-overview.njk b/layout/_partials/sidebar/site-overview.njk
+index 73fa566..56a5b92 100644
+--- a/layout/_partials/sidebar/site-overview.njk
++++ b/layout/_partials/sidebar/site-overview.njk
+@@ -1,8 +1,6 @@
+ <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+-  {%- if theme.avatar.url %}
+-    <img class="site-author-image" itemprop="image" alt="{{ author }}"
+-      src="{{ url_for(theme.avatar.url) }}">
+-  {%- endif %}
++  <img class="site-author-image" itemprop="image" alt="{{ author }}"
++      src="/images/avatar.gif">
+   <p class="site-author-name" itemprop="name">{{ author }}</p>
+   <div class="site-description" itemprop="description">{{ description }}</div>
+ </div>
+@@ -74,18 +72,20 @@
+   </div>
+ {%- endif %}
+ 
+-{%- if theme.social %}
+   <div class="links-of-author site-overview-item animated">
+-    {%- for name, link in theme.social %}
+-      <span class="links-of-author-item">
+-        {%- set sidebarURL = link.split('||')[0] | trim %}
+-        {%- set sidebarIcon = '<i class="' + link.split('||')[1] | trim + ' fa-fw"></i>' if theme.social_icons.enable and link.split('||')[1] else '' %}
+-        {%- set sidebarText = '' if (theme.social_icons.enable and theme.social_icons.icons_only) else name %}
+-        {{ next_url(sidebarURL, sidebarIcon + sidebarText, {title: name + ' → ' + sidebarURL}) }}
+-      </span>
+-    {%- endfor %}
++    <span class="links-of-author-item">
++      <a href="https://github.com/madordie" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="GitHub → https://github.com/madordie"><i class="fab fa-github fa-fw"></i></a>
++    </span>
++    <span class="links-of-author-item">
++      <a href="mailto:io.madordie@gmail.com" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="E-Mail → mailto:io.madordie@gmail.com"><i class="fa fa-envelope fa-fw"></i></a>
++    </span>
++    <span class="links-of-author-item">
++      <a href="https://github.com/sunjigang" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="Twitter → https://github.com/sunjigang"><i class="fab fa-twitter fa-fw"></i></a>
++    </span>
++    <span class="links-of-author-item">
++      <a href="/atom.xml" title="RSS → /atom.xml" data-pjax-state=""><i class="fa fa-rss fa-fw"></i></a>
++    </span>
+   </div>
+-{%- endif %}
+ 
+ {%- if theme.creative_commons.license and theme.creative_commons.sidebar %}
+   <div class="cc-license site-overview-item animated" itemprop="license">
+diff --git a/layout/_third-party/comments/gitalk.njk b/layout/_third-party/comments/gitalk.njk
+index 4f54907..b921c6b 100644
+--- a/layout/_third-party/comments/gitalk.njk
++++ b/layout/_third-party/comments/gitalk.njk
+@@ -1,15 +1,15 @@
+-{%- if page.comments %}
+-<link rel="stylesheet" href="{{ theme.vendors.gitalk_css }}">
++  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
++  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+ 
+ <script>
+ NexT.utils.loadComments('#gitalk-container', () => {
+   NexT.utils.getScript('{{ theme.vendors.gitalk_js }}', () => {
+     var gitalk = new Gitalk({
+-      clientID    : '{{ theme.gitalk.client_id }}',
+-      clientSecret: '{{ theme.gitalk.client_secret }}',
+-      repo        : '{{ theme.gitalk.repo }}',
+-      owner       : '{{ theme.gitalk.github_id }}',
+-      admin       : ['{{ theme.gitalk.admin_user }}'],
++      clientID    : '2fcb2111497d0ea0dba4',
++      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
++      repo        : 'madordie.github.io',
++      owner       : 'madordie',
++      admin       : ['madordie'],
+       id          : '{{ gitalk_md5(page.path) }}',
+       {%- if theme.gitalk.language == '' %}
+         language: window.navigator.language || window.navigator.userLanguage,
+@@ -22,4 +22,3 @@ NexT.utils.loadComments('#gitalk-container', () => {
+   }, window.Gitalk);
+ });
+ </script>
+-{%- endif %}
+diff --git a/layout/_third-party/statistics/busuanzi-counter.njk b/layout/_third-party/statistics/busuanzi-counter.njk
+index f3ff6db..15ab658 100644
+--- a/layout/_third-party/statistics/busuanzi-counter.njk
++++ b/layout/_third-party/statistics/busuanzi-counter.njk
+@@ -1,3 +1 @@
+-{%- if theme.busuanzi_count.enable %}
+-  <script{{ pjax }} async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+-{%- endif %}
++<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+diff --git a/scripts/filters/comment/gitalk.js b/scripts/filters/comment/gitalk.js
+index df5ebb8..19a0d2b 100644
+--- a/scripts/filters/comment/gitalk.js
++++ b/scripts/filters/comment/gitalk.js
+@@ -7,7 +7,6 @@ const path = require('path');
+ // Add comment
+ hexo.extend.filter.register('theme_inject', injects => {
+   const theme = hexo.theme.config;
+-  if (!theme.gitalk.enable) return;
+ 
+   injects.comment.raw('gitalk', '<div class="comments" id="gitalk-container"></div>', {}, {cache: true});
+ 
+diff --git a/source/css/_common/components/third-party/third-party.styl b/source/css/_common/components/third-party/third-party.styl
+index 324d9c5..8ff3387 100644
+--- a/source/css/_common/components/third-party/third-party.styl
++++ b/source/css/_common/components/third-party/third-party.styl
+@@ -1,4 +1,4 @@
+-@import 'gitalk' if (hexo-config('gitalk.enable'));
++@import 'gitalk'
+ 
+ @import 'search' if (hexo-config('local_search.enable') || hexo-config('algolia_search.enable'));
+ 
+diff --git a/source/css/_common/outline/sidebar/sidebar-author.styl b/source/css/_common/outline/sidebar/sidebar-author.styl
+index 825d87d..1479781 100644
+--- a/source/css/_common/outline/sidebar/sidebar-author.styl
++++ b/source/css/_common/outline/sidebar/sidebar-author.styl
+@@ -3,9 +3,7 @@
+   max-width: $site-author-image-width;
+   padding: 2px;
+ 
+-  if (hexo-config('avatar.rounded')) {
+-    border-radius: 50%;
+-  }
++  border-radius: 50%;
+ 
+   if (hexo-config('avatar.rotated')) {
+     transition: transform 1s ease-out;
+diff --git a/source/css/_schemes/Pisces/_sidebar.styl b/source/css/_schemes/Pisces/_sidebar.styl
+index 0961fc5..b253cb2 100644
+--- a/source/css/_schemes/Pisces/_sidebar.styl
++++ b/source/css/_schemes/Pisces/_sidebar.styl
+@@ -8,10 +8,6 @@
+   +tablet-mobile() {
+     display: none;
+   }
+-
+-  if (hexo-config('motion.enable') && hexo-config('motion.transition.sidebar')) {
+-    visibility: hidden;
+-  }
+ }
+ 
+ .sidebar-toggle {
+diff --git a/source/css/_variables/base.styl b/source/css/_variables/base.styl
+index 3c77d92..5b879c8 100644
+--- a/source/css/_variables/base.styl
++++ b/source/css/_variables/base.styl
+@@ -94,7 +94,7 @@ $font-family-monospace    = get_font_family('codes'), consolas, Menlo, monospace
+ 
+ 
+ // Font size
+-$font-size-base           = (hexo-config('font.enable') and hexo-config('font.global.size') is a 'unit') ? unit(hexo-config('font.global.size'), em) : 1em;
++$font-size-base           = (hexo-config('font.enable') and hexo-config('font.global.size') is a 'unit') ? unit(hexo-config('font.global.size'), em) : 0.85em;
+ $font-size-smallest       = .75em;
+ $font-size-smaller        = .8125em;
+ $font-size-small          = .875em;
+diff --git a/source/css/main.styl b/source/css/main.styl
+index 8084230..e163216 100644
+--- a/source/css/main.styl
++++ b/source/css/main.styl
+@@ -1,7 +1,7 @@
+ // CSS Style Guide: http://codeguide.co/#css
+ 
+ 
+-$scheme    = hexo-config('scheme') ? hexo-config('scheme') : 'Muse';
++$scheme    = 'Pisces';
+ 
+ $variables = base $scheme;
+ 
+diff --git a/source/images/avatar.gif b/source/images/avatar.gif
+index 28411fd..9cd2358 100644
+Binary files a/source/images/avatar.gif and b/source/images/avatar.gif differ
+diff --git a/source/images/favicon-16x16-next.png b/source/images/favicon-16x16-next.png
+deleted file mode 100644
+index de8c5d3..0000000
+Binary files a/source/images/favicon-16x16-next.png and /dev/null differ
+diff --git a/source/images/favicon-32x32-next.png b/source/images/favicon-32x32-next.png
+index e02f5f4..11cc268 100644
+Binary files a/source/images/favicon-32x32-next.png and b/source/images/favicon-32x32-next.png differ
