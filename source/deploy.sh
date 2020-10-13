@@ -59,7 +59,7 @@ elif [ $opt = 'p' ]; then
     # echo ' --> 已上传站图.\n'
     backup
     cd ./source
-    ruby comment.rb
+    # ruby comment.rb
     echo ' --> 评论已自动创建.\n'
     sitemap=`mktemp`
     curl -s https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml | grep madordie.github.io | awk -v FS='<loc>|</loc>' '{print $2}' > sitemap
