@@ -85,7 +85,7 @@ categories:
 
 ## 看点别的
 
-我们先看下`-[NSObject performSelector:withObjects:]`中的返回值获取的情况:
+我们先看下`-[NSObject performSelector:withObjects:]`中的返回值获取的逻辑:
 
 ```ObjC
     id callBackObject = NULL;
@@ -96,9 +96,7 @@ categories:
 
 关于`NSInvocation`我用的比较少,但是看过[唯敬](https://github.com/Awhisper)大佬的[VKMsgSend](https://github.com/Awhisper/VKMsgSend)库, 这几行代码是真的短..
 
-先回来分析一通.再在文章最后刨个坑...
-
-看下这几行的汇编:
+先看下这几行的汇编伪代码:
 
 ```c
   v15 = 0LL;
@@ -119,11 +117,13 @@ categories:
 
 这个对象从`-[NSInvocation getReturnValue:]`获取出来之后在没有增加引用计数的情况下反而给人家加到了`autoreleasepool`里面.
 
+中所周知`autoreleasepool`在释放的时候会对其进行一次`release`, 而这次不对等的`release`就是这个崩溃发生的究极原因.
+
 ## 怎么解决
 
 `ObjC`的`ARC`下除了能用个`@autoreleasepool{}`让其提前`objc_release`,基本上没有能干预得了.
 
-不过这个`-[NSInvocation getReturnValue:]`API的返回值并非是`ObjC`格式,而是地址直接传递的, 所以这个应该属于`C`的范畴, 其于`ARC`对象之间是有`__bridge*`可用的.
+不过这个`-[NSInvocation getReturnValue:]`API的返回值是地址直接传递的, API也是属于`CoreFounction`中, 其与`ARC`对象之间还有`__bridge*`可用.
 
 再看下[小抄](https://github.com/Awhisper/VKMsgSend/blob/master/VKMsgSend/VKMsgSend.m#L214-#L227), 嗯,确实缺少了`__bridge*`:
 
@@ -178,43 +178,4 @@ return (id)objc_autoreleaseReturnValue(v12);
 
 注意此时关于`v15/v12`的内存管理, 就只剩下了`objc_retain(v15)`与`objc_autoreleaseReturnValue(v12)`.
 
-不说了, 很完美. 信不信我一行代码不改单纯的通过`LLDB`的`po`来让其不崩溃....
-
-## 一个不相关的坑
-
-先在`return callBackObject;`处设置断点, 然后:
-
-```lldb
-(lldb) po callBackObject
-<TestModel: 0x600000bf05b0>
-
-(lldb) finish
-(lldb) po _teM
- nil
-(lldb) next
-(lldb) po _teM
-<TestModel: 0x600000bf05b0>
-
-(lldb) next
-(lldb) next
-over
-(lldb)
-```
-
-**WTF, 一行代码没改不崩溃了:<**
-
-传闻`po`有`retain`的功效,可是`frame variable`依旧会出现此诡异的问题.
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">It seems that the retain count of the object increases 1 whenever you execute `expression object`. Another workaround is to use frame variable<br><br>(lldb) frame variable object <a href="https://t.co/Y2ghQ3sHzL">pic.twitter.com/Y2ghQ3sHzL</a></p>&mdash; Pofat (@PofatTseng) <a href="https://twitter.com/PofatTseng/status/1057644037107118080?ref_src=twsrc%5Etfw">October 31, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-那就着重看一下`-[NSObject performSelector:withObject:]`中的返回值逻辑:
-
-```ObjC
-    id callBackObject = NULL;
-    if(methodSignature.methodReturnLength) {
-        [invocation getReturnValue:&callBackObject];
-    }
-    return callBackObject;
-```
-
-此处目前没答案, 我研究了半天也不知道哪里除了问题, 吃完饭讲一下我研究到哪里了......
+不说了, 很完美.
