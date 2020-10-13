@@ -1,8 +1,6 @@
 <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  {%- if theme.avatar.url %}
-    <img class="site-author-image" itemprop="image" alt="{{ author }}"
-      src="{{ url_for(theme.avatar.url) }}">
-  {%- endif %}
+  <img class="site-author-image" itemprop="image" alt="{{ author }}"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">{{ author }}</p>
   <div class="site-description" itemprop="description">{{ description }}</div>
 </div>
@@ -74,18 +72,17 @@
   </div>
 {%- endif %}
 
-{%- if theme.social %}
   <div class="links-of-author site-overview-item animated">
-    {%- for name, link in theme.social %}
-      <span class="links-of-author-item">
-        {%- set sidebarURL = link.split('||')[0] | trim %}
-        {%- set sidebarIcon = '<i class="' + link.split('||')[1] | trim + ' fa-fw"></i>' if theme.social_icons.enable and link.split('||')[1] else '' %}
-        {%- set sidebarText = '' if (theme.social_icons.enable and theme.social_icons.icons_only) else name %}
-        {{ next_url(sidebarURL, sidebarIcon + sidebarText, {title: name + ' → ' + sidebarURL}) }}
-      </span>
-    {%- endfor %}
+    <span class="links-of-author-item">
+      <a href="https://github.com/madordie" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="GitHub → https://github.com/madordie"><i class="fab fa-github fa-fw"></i></a>
+    </span>
+    <span class="links-of-author-item">
+      <a href="mailto:io.madordie@gmail.com" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="E-Mail → mailto:io.madordie@gmail.com"><i class="fa fa-envelope fa-fw"></i></a>
+    </span>
+    <span class="links-of-author-item">
+      <a href="/atom.xml" title="RSS → /atom.xml" data-pjax-state=""><i class="fa fa-rss fa-fw"></i></a>
+    </span>
   </div>
-{%- endif %}
 
 {%- if theme.creative_commons.license and theme.creative_commons.sidebar %}
   <div class="cc-license site-overview-item animated" itemprop="license">
