@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -12,12 +12,14 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
   <meta name="description" content="昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不信邪的态度，决定尝试一番。然后将此事记录如下文。 1234*** Terminating app due to uncaught exception &#39;NSInvalidArgumentException&#39;, reason: &#39;-[__NSCFConstantString hasPrefix:]:">
@@ -26,6 +28,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/debug-sth-from-crash/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不信邪的态度，决定尝试一番。然后将此事记录如下文。 1234*** Terminating app due to uncaught exception &#39;NSInvalidArgumentException&#39;, reason: &#39;-[__NSCFConstantString hasPrefix:]:">
+<meta property="og:locale">
 <meta property="og:image" content="https://madordie.github.io/images/2018-07-25-10-52-38.png">
 <meta property="article:published_time" content="2018-07-25T02:38:04.000Z">
 <meta property="article:modified_time" content="2018-07-25T10:06:59.566Z">
@@ -34,10 +37,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://madordie.github.io/images/2018-07-25-10-52-38.png">
 
+
 <link rel="canonical" href="https://madordie.github.io/post/debug-sth-from-crash/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -57,65 +61,75 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">继刚的博客</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -126,55 +140,84 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
+
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B4%A9%E6%BA%83%E8%A1%A8%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">崩溃表现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E7%AE%80%E5%8D%95%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%80%E4%B8%8B"><span class="nav-number">2.</span> <span class="nav-text">先简单的分析一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%8E%B0%E4%B8%80%E4%B8%8B%E5%B4%A9%E6%BA%83"><span class="nav-number">3.</span> <span class="nav-text">复现一下崩溃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">寻找问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95%E8%A7%A3%E9%99%A4warning"><span class="nav-number">4.1.</span> <span class="nav-text">尝试解除warning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95Method-Swizzling%E4%B8%80%E4%B8%8B"><span class="nav-number">4.2.</span> <span class="nav-text">尝试Method Swizzling一下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E7%9A%84%E8%BF%87%E7%A8%8B%E9%83%A8%E5%88%86%E7%89%B9%E5%86%99"><span class="nav-number">5.</span> <span class="nav-text">寻找的过程部分特写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%8B%E5%88%B0%E5%85%A8%E5%B1%80%E6%96%AD%E7%82%B9%E7%9C%9F%E7%9A%84%E8%B5%B0%E4%B8%8D%E5%88%B0%E6%97%B6"><span class="nav-number">5.1.</span> <span class="nav-text">看到全局断点真的走不到时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%8B%E8%B5%B0%E7%9C%BC%E7%9A%84-Method-Swizzling"><span class="nav-number">5.2.</span> <span class="nav-text">看走眼的 Method Swizzling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
 </div>
 
+
+
+      </section>
     </div>
-  </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-</div>
+
     </header>
 
     
@@ -183,19 +226,24 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
+      
 
-    
+      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/debug-sth-from-crash/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -212,27 +260,29 @@
           从一个常见的崩溃开始
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
 
-              <time title="Created: 2018-07-25 10:38:04 / Modified: 18:06:59" itemprop="dateCreated datePublished" datetime="2018-07-25T10:38:04+08:00">2018-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-            </span>
+      <time title="Created: 2018-07-25 10:38:04 / Modified: 18:06:59" itemprop="dateCreated datePublished" datetime="2018-07-25T10:38:04+08:00">2018-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -241,8 +291,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不信邪的态度，决定尝试一番。然后将此事记录如下文。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*** Terminating app due to uncaught exception &#39;NSInvalidArgumentException&#39;, reason: &#39;-[__NSCFConstantString hasPrefix:]: nil argument&#39;</span><br><span class="line">*** First throw call stack:</span><br><span class="line">(0x18521ed8c .....)</span><br><span class="line">libc++abi.dylib: terminating with uncaught exception of type NSException</span><br></pre></td></tr></table></figure>
 
@@ -260,10 +308,10 @@
 <li>由于我技术有限，别的好像提炼不出有用信息了。。</li>
 </ul>
 <h2 id="复现一下崩溃"><a href="#复现一下崩溃" class="headerlink" title="复现一下崩溃"></a>复现一下崩溃</h2><p>先来个简单的代码，验证一下 ** <code>- (BOOL)hasPrefix:(NSString *)str;</code>中<code>nil argument</code>，也就是<code>str</code>为<code>nil</code>。 **</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, @([<span class="string">@""</span> hasPrefix:<span class="literal">nil</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, @([<span class="string">@&quot;&quot;</span> hasPrefix:<span class="literal">nil</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行一下，结果很意料之中，得出如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Untitled.m:<span class="number">4</span>:<span class="number">29</span>: warning: null passed to a callee that requires a non-null argument [-Wnonnull]</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, @([<span class="string">@""</span> hasPrefix:<span class="literal">nil</span>]));</span><br><span class="line">                            ^         ~~~</span><br><span class="line"><span class="number">1</span> warning generated.</span><br><span class="line">Terminated due to signal: ABORT TRAP (<span class="number">6</span>)</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-25</span> <span class="number">10</span>:<span class="number">44</span>:<span class="number">50.569</span> Untitled[<span class="number">53770</span>:<span class="number">899141</span>] *** Terminating app due to uncaught exception <span class="string">'NSInvalidArgumentException'</span>, reason: <span class="string">'-[__NSCFConstantString hasPrefix:]: nil argument'</span></span><br><span class="line">*** First throw call stack:</span><br><span class="line">(</span><br><span class="line">	<span class="number">0</span>   CoreFoundation                      <span class="number">0x00007fff30aae2db</span> __exceptionPreprocess + <span class="number">171</span></span><br><span class="line">	<span class="number">1</span>   libobjc.A.dylib                     <span class="number">0x00007fff57c58c76</span> objc_exception_throw + <span class="number">48</span></span><br><span class="line">	<span class="number">2</span>   CoreFoundation                      <span class="number">0x00007fff30b3fd7d</span> +[<span class="built_in">NSException</span> raise:format:] + <span class="number">205</span></span><br><span class="line">	<span class="number">3</span>   CoreFoundation                      <span class="number">0x00007fff30a01840</span> -[__NSCFString hasPrefix:] + <span class="number">96</span></span><br><span class="line">	<span class="number">4</span>   Untitled                            <span class="number">0x000000010787fd60</span> main + <span class="number">64</span></span><br><span class="line">	<span class="number">5</span>   libdyld.dylib                       <span class="number">0x00007fff58872015</span> start + <span class="number">1</span></span><br><span class="line">)</span><br><span class="line">libc++abi.dylib: terminating with uncaught exception of type <span class="built_in">NSException</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Untitled.m:<span class="number">4</span>:<span class="number">29</span>: warning: null passed to a callee that requires a non-null argument [-Wnonnull]</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, @([<span class="string">@&quot;&quot;</span> hasPrefix:<span class="literal">nil</span>]));</span><br><span class="line">                            ^         ~~~</span><br><span class="line"><span class="number">1</span> warning generated.</span><br><span class="line">Terminated due to signal: ABORT TRAP (<span class="number">6</span>)</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-25</span> <span class="number">10</span>:<span class="number">44</span>:<span class="number">50.569</span> Untitled[<span class="number">53770</span>:<span class="number">899141</span>] *** Terminating app due to uncaught exception <span class="string">&#x27;NSInvalidArgumentException&#x27;</span>, reason: <span class="string">&#x27;-[__NSCFConstantString hasPrefix:]: nil argument&#x27;</span></span><br><span class="line">*** First throw call stack:</span><br><span class="line">(</span><br><span class="line">	<span class="number">0</span>   CoreFoundation                      <span class="number">0x00007fff30aae2db</span> __exceptionPreprocess + <span class="number">171</span></span><br><span class="line">	<span class="number">1</span>   libobjc.A.dylib                     <span class="number">0x00007fff57c58c76</span> objc_exception_throw + <span class="number">48</span></span><br><span class="line">	<span class="number">2</span>   CoreFoundation                      <span class="number">0x00007fff30b3fd7d</span> +[<span class="built_in">NSException</span> raise:format:] + <span class="number">205</span></span><br><span class="line">	<span class="number">3</span>   CoreFoundation                      <span class="number">0x00007fff30a01840</span> -[__NSCFString hasPrefix:] + <span class="number">96</span></span><br><span class="line">	<span class="number">4</span>   Untitled                            <span class="number">0x000000010787fd60</span> main + <span class="number">64</span></span><br><span class="line">	<span class="number">5</span>   libdyld.dylib                       <span class="number">0x00007fff58872015</span> start + <span class="number">1</span></span><br><span class="line">)</span><br><span class="line">libc++abi.dylib: terminating with uncaught exception of type <span class="built_in">NSException</span></span><br></pre></td></tr></table></figure>
 
 <p>经过<code>1 warning generated</code>之后，果断崩溃了，还有明确的崩溃时候栈结构。</p>
 <p>好，问题确定了就是这个<code>1 warning generated</code>造成的。改下就完事咯～～</p>
@@ -276,30 +324,30 @@
 <p>GO DIE…</p>
 <p>PS.</p>
 <ul>
-<li>关于<code>hasPrefix</code>函数的<a href="https://developer.apple.com/documentation/foundation/nsstring/1410309-hasprefix?language=objc" target="_blank" rel="noopener">OC声明</a>、<a href="https://developer.apple.com/documentation/foundation/nsstring/1410309-hasprefix" target="_blank" rel="noopener">swift声明</a>均为完整字符串，所以安心全局搜索就能找到代码中已存在的<code>hasPrefix</code>函数</li>
-<li>顺便搜了一下该项目不包含第三方<code>.a</code>, 但是<code>.framework</code>不少。。有<a href="https://cocoapods.org/" target="_blank" rel="noopener">CocoaPods</a>集成有直接拖进来的。。</li>
+<li>关于<code>hasPrefix</code>函数的<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/foundation/nsstring/1410309-hasprefix?language=objc">OC声明</a>、<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/foundation/nsstring/1410309-hasprefix">swift声明</a>均为完整字符串，所以安心全局搜索就能找到代码中已存在的<code>hasPrefix</code>函数</li>
+<li>顺便搜了一下该项目不包含第三方<code>.a</code>, 但是<code>.framework</code>不少。。有<a target="_blank" rel="noopener" href="https://cocoapods.org/">CocoaPods</a>集成有直接拖进来的。。</li>
 </ul>
 <h3 id="尝试Method-Swizzling一下"><a href="#尝试Method-Swizzling一下" class="headerlink" title="尝试Method Swizzling一下"></a>尝试Method Swizzling一下</h3><p>这玩意既然在别人的framework中，那就更新一下咯，但是全部更新并不可取。。</p>
 <p>framework的更新可能导致一些不可预估的可变因素。比如说API修改、内部逻辑变更导致外部使用不兼容、某些开发者喜欢直接修改framework、等。</p>
 <p>所以先确定是哪个framework。</p>
 <p>Method Swizzling。将其<code>-[__NSCFConstantString hasPrefix:]: nil argument</code>直接过滤<code>nil</code>，岂不美滋滋～～</p>
 <p>好了先测试一下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">MySafeString</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">MySafeString</span></span></span><br><span class="line">+ (<span class="keyword">void</span>)load &#123;</span><br><span class="line">    Class originalClass = <span class="built_in">NSClassFromString</span>(<span class="string">@"__NSCFConstantString"</span>);</span><br><span class="line">    Class swizzledClass = [<span class="keyword">self</span> <span class="keyword">class</span>];</span><br><span class="line">    SEL originalSelector = <span class="keyword">@selector</span>(hasPrefix:);</span><br><span class="line">    SEL swizzledSelector = <span class="keyword">@selector</span>(safe_hasPrefix:);</span><br><span class="line">    Method originalMethod = class_getInstanceMethod(originalClass, originalSelector);</span><br><span class="line">    Method swizzledMethod = class_getInstanceMethod(swizzledClass, swizzledSelector);</span><br><span class="line">    </span><br><span class="line">    IMP originalIMP = method_getImplementation(originalMethod);</span><br><span class="line">    IMP swizzledIMP = method_getImplementation(swizzledMethod);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *originalType = method_getTypeEncoding(originalMethod);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *swizzledType = method_getTypeEncoding(swizzledMethod);</span><br><span class="line">    </span><br><span class="line">    class_replaceMethod(originalClass,swizzledSelector,originalIMP,originalType);</span><br><span class="line">    class_replaceMethod(originalClass,originalSelector,swizzledIMP,swizzledType);</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">BOOL</span>)safe_hasPrefix:(<span class="built_in">NSString</span> *)str &#123;</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="keyword">return</span> [<span class="keyword">self</span> safe_hasPrefix:str];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, @([<span class="string">@""</span> hasPrefix:<span class="literal">nil</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">MySafeString</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">MySafeString</span></span></span><br><span class="line">+ (<span class="keyword">void</span>)load &#123;</span><br><span class="line">    Class originalClass = <span class="built_in">NSClassFromString</span>(<span class="string">@&quot;__NSCFConstantString&quot;</span>);</span><br><span class="line">    Class swizzledClass = [<span class="keyword">self</span> <span class="keyword">class</span>];</span><br><span class="line">    SEL originalSelector = <span class="keyword">@selector</span>(hasPrefix:);</span><br><span class="line">    SEL swizzledSelector = <span class="keyword">@selector</span>(safe_hasPrefix:);</span><br><span class="line">    Method originalMethod = class_getInstanceMethod(originalClass, originalSelector);</span><br><span class="line">    Method swizzledMethod = class_getInstanceMethod(swizzledClass, swizzledSelector);</span><br><span class="line">    </span><br><span class="line">    IMP originalIMP = method_getImplementation(originalMethod);</span><br><span class="line">    IMP swizzledIMP = method_getImplementation(swizzledMethod);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *originalType = method_getTypeEncoding(originalMethod);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *swizzledType = method_getTypeEncoding(swizzledMethod);</span><br><span class="line">    </span><br><span class="line">    class_replaceMethod(originalClass,swizzledSelector,originalIMP,originalType);</span><br><span class="line">    class_replaceMethod(originalClass,originalSelector,swizzledIMP,swizzledType);</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">BOOL</span>)safe_hasPrefix:(<span class="built_in">NSString</span> *)str &#123;</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="keyword">return</span> [<span class="keyword">self</span> safe_hasPrefix:str];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, @([<span class="string">@&quot;&quot;</span> hasPrefix:<span class="literal">nil</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Untitled.m:<span class="number">33</span>:<span class="number">29</span>: warning: null passed to a callee that requires a non-null argument [-Wnonnull]</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, @([<span class="string">@""</span> hasPrefix:<span class="literal">nil</span>]));</span><br><span class="line">                            ^         ~~~</span><br><span class="line"><span class="number">1</span> warnings generated.</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-25</span> <span class="number">11</span>:<span class="number">32</span>:<span class="number">20.634</span> Untitled[<span class="number">54520</span>:<span class="number">926937</span>] <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Untitled.m:<span class="number">33</span>:<span class="number">29</span>: warning: null passed to a callee that requires a non-null argument [-Wnonnull]</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, @([<span class="string">@&quot;&quot;</span> hasPrefix:<span class="literal">nil</span>]));</span><br><span class="line">                            ^         ~~~</span><br><span class="line"><span class="number">1</span> warnings generated.</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-25</span> <span class="number">11</span>:<span class="number">32</span>:<span class="number">20.634</span> Untitled[<span class="number">54520</span>:<span class="number">926937</span>] <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 <p>不崩溃了，赶紧粘过去，并在<code>- (BOOL)safe_hasPrefix:(NSString *)str</code>中的<code>return YES;</code>打上断点。</p>
 <p>内心得到了极大的满足～ 美滋滋～～～</p>
 <p>2分钟后。</p>
 <p>断点停了，向<code>- (BOOL)safe_hasPrefix:(NSString *)str</code>的<code>str</code>传nil的调用者是<code>[MOBFErrorReportService writeHTTPErrorMsg:error:]</code>。</p>
-<p>将<code>MOBFErrorReportService</code>放入<a href="https://www.google.com/" target="_blank" rel="noopener">Google</a>看到第二个就是这个<a href="http://bbs.mob.com/thread-23618-1-1.html" target="_blank" rel="noopener">[MOBFDevice duid] - BUG提交- Mob官方论坛</a>。文中指出<code>SDK 版本: ShareSDKVersion-3.5.1</code>。</p>
+<p>将<code>MOBFErrorReportService</code>放入<a target="_blank" rel="noopener" href="https://www.google.com/">Google</a>看到第二个就是这个<a target="_blank" rel="noopener" href="http://bbs.mob.com/thread-23618-1-1.html">[MOBFDevice duid] - BUG提交- Mob官方论坛</a>。文中指出<code>SDK 版本: ShareSDKVersion-3.5.1</code>。</p>
 <p>好了看一下<code>ShareSDK</code>这个库。emmm 这个库是拖拽进去的。老哥说这项目接手之后没更新过这个库。</p>
 <p>事已至此，确定是<code>ShareSDK</code>的问题。</p>
 <p>更新之，问题解决～  真心的美滋滋～～</p>
 <p>PS.</p>
 <ul>
-<li>上文中关于类簇的 Method Swizzling，详见<a href="http://www.tanhao.me/code/160723.html/" target="_blank" rel="noopener">Method Swizzling的各种姿势</a>。</li>
+<li>上文中关于类簇的 Method Swizzling，详见<a target="_blank" rel="noopener" href="http://www.tanhao.me/code/160723.html/">Method Swizzling的各种姿势</a>。</li>
 </ul>
 <h2 id="寻找的过程部分特写"><a href="#寻找的过程部分特写" class="headerlink" title="寻找的过程部分特写"></a>寻找的过程部分特写</h2><p>上面的逻辑并不是一气呵成，而是由于粗心也走了部分弯路，特列出来引以为戒。</p>
 <h3 id="看到全局断点真的走不到时"><a href="#看到全局断点真的走不到时" class="headerlink" title="看到全局断点真的走不到时"></a>看到全局断点真的走不到时</h3><p>由于代码是公司代码，也没有demo,所以布吉岛为啥确实断点不会走。。。</p>
@@ -307,7 +355,7 @@
 <p>然后想到了逆向里面的骚操作。顿时想逆向分析一下。。。</p>
 <p>但由于看了一下<code>.app</code>中的可执行文件有 ** 40M ** ,算了算了，IDA载入的有点慢，这要好久才能分析完。。</p>
 <p>想了想天要下雨，媳妇和娃都在外面。果断放弃分析一波的冲动，来<code>Method Swizzling</code>会更快。</p>
-<h3 id="看走眼的-Method-Swizzling"><a href="#看走眼的-Method-Swizzling" class="headerlink" title="看走眼的 Method Swizzling"></a>看走眼的 Method Swizzling</h3><p>之前看过这个<a href="http://www.tanhao.me/code/160723.html/" target="_blank" rel="noopener">Method Swizzling的各种姿势</a>文章，印象深刻。</p>
+<h3 id="看走眼的-Method-Swizzling"><a href="#看走眼的-Method-Swizzling" class="headerlink" title="看走眼的 Method Swizzling"></a>看走眼的 Method Swizzling</h3><p>之前看过这个<a target="_blank" rel="noopener" href="http://www.tanhao.me/code/160723.html/">Method Swizzling的各种姿势</a>文章，印象深刻。</p>
 <p>由于 ** Method Swizzling ** 风险不那么容易控制，所以并没用类簇相关的。</p>
 <p>一顿<code>cmd c / cmd v</code>之后改了类名就扔了过去。当时大约这个样子：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)safe_hasPrefix:(<span class="built_in">NSString</span> *)str &#123;</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 此处会发生循环调用，是错误的示例</span></span><br><span class="line">        <span class="keyword">return</span> [(<span class="built_in">NSString</span> *)<span class="keyword">self</span> hasPrefix:str];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -322,7 +370,7 @@
 <h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><ul>
 <li>解决问题的方案在于知识面的宽度。（一直为我没有通过<code>First throw call stack</code>直接定位而害羞）</li>
 <li>着急下班的时候别写太多逻辑，容易漏。要么别着急，要么万分小心。</li>
-<li>集成第三方SDK别瞎胡闹，使用代码直接集成(除非万不得已)。尽量使用<a href="https://cocoapods.org/" target="_blank" rel="noopener">CocoaPods</a>这样的工具。</li>
+<li>集成第三方SDK别瞎胡闹，使用代码直接集成(除非万不得已)。尽量使用<a target="_blank" rel="noopener" href="https://cocoapods.org/">CocoaPods</a>这样的工具。</li>
 <li>代码中的 ** warning ** 记得消一下。成天<code>999+</code> 容易漏掉关键信息。</li>
 <li>开发的第三方SDK一定要注意测试覆盖率。</li>
 <li>swift大法好。swift不用<code>!</code>绝对不会有机会出现<code>func hasPrefix(_ str: String) -&gt; Bool</code>中参数<code>str</code>传空的可能 :)</li>
@@ -333,67 +381,36 @@
     
     
     
-        
 
-  <div class="followme">
-    <p>Welcome to my other publishing channels</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
-            <span class="icon">
-              <i class="fab fa-twitter"></i>
-            </span>
-
-            <span class="label">Twitter</span>
-          </a>
-        </div>
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
-          </a>
-        </div>
-    </div>
-  </div>
-
-
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/DEBUG/" rel="tag"># DEBUG</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/post/sync-sketchplugin/" rel="prev" title="sketech模块同步插件">
-      <i class="fa fa-chevron-left"></i> sketech模块同步插件
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/post/uifont-infos/" rel="next" title="UIFont字体信息">
-      UIFont字体信息 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/sync-sketchplugin/" rel="prev" title="sketech模块同步插件">
+                  <i class="fa fa-chevron-left"></i> sketech模块同步插件
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/uifont-infos/" rel="next" title="UIFont字体信息">
+                  UIFont字体信息 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="gitalk-container"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -402,7 +419,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -411,193 +428,46 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#崩溃表现"><span class="nav-number">1.</span> <span class="nav-text">崩溃表现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#先简单的分析一下"><span class="nav-number">2.</span> <span class="nav-text">先简单的分析一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复现一下崩溃"><span class="nav-number">3.</span> <span class="nav-text">复现一下崩溃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找问题"><span class="nav-number">4.</span> <span class="nav-text">寻找问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试解除warning"><span class="nav-number">4.1.</span> <span class="nav-text">尝试解除warning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试Method-Swizzling一下"><span class="nav-number">4.2.</span> <span class="nav-text">尝试Method Swizzling一下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找的过程部分特写"><span class="nav-number">5.</span> <span class="nav-text">寻找的过程部分特写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#看到全局断点真的走不到时"><span class="nav-number">5.1.</span> <span class="nav-text">看到全局断点真的走不到时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#看走眼的-Method-Swizzling"><span class="nav-number">5.2.</span> <span class="nav-text">看走眼的 Method Swizzling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">6.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="继刚"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">继刚</p>
-  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>博客园</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
+      
 
 <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">继刚</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="Total Visitors">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="Total Views">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
-  </script>
 
 
 
 
-  
-<script src="/js/local-search.js"></script>
+
 
 
 
@@ -613,26 +483,16 @@
 
   
 
+
+
+
+
+
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-<script>
-    var gitalk = new Gitalk({
-      clientID    : '125422a205b9c712854c',
-      clientSecret: 'bf476d441db42d05a0997b6e4bf1ef1fb7e87c02',
-      repo        : 'madordie.github.io',
-      owner       : 'madordie',
-      admin       : ['madordie'],
-      id          : '2237051f9aff23853743fcd4865e4325',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-</script>
+  
 
 </body>
 </html>

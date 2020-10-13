@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -12,12 +12,14 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
   <meta name="description" content="Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。">
@@ -26,6 +28,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/swift-build-times/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。">
+<meta property="og:locale">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/005SiNxygw1f3p3jimjllj31jk0dwqft.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005SiNxygw1f3p3hhivppj30m809lwis.jpg">
 <meta property="article:published_time" content="2017-01-17T05:47:17.000Z">
@@ -35,10 +38,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://ww3.sinaimg.cn/large/005SiNxygw1f3p3jimjllj31jk0dwqft.jpg">
 
+
 <link rel="canonical" href="https://madordie.github.io/post/swift-build-times/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -58,65 +62,75 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">继刚的博客</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -127,55 +141,84 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
+
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xcode8-2"><span class="nav-number">1.</span> <span class="nav-text">Xcode8.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E8%BF%90%E7%AE%97%E7%AC%A6-%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">针对运算符??的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95%E6%98%BE%E5%BC%8F%E8%A7%A3%E5%8C%85"><span class="nav-number">2.1.</span> <span class="nav-text">尝试显式解包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E7%9A%84%E5%B0%9D%E8%AF%95%E4%BA%86%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6-%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">错误的尝试了重载运算符??方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">尝试扩展方法进行优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8B%E5%8E%9F%E6%96%87%E5%87%BA%E8%87%AA%EF%BC%9A%E5%85%B3%E4%BA%8E-Swift-%E7%BC%96%E8%AF%91%E6%97%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">以下原文出自：关于 Swift 编译时性能优化的一些思考</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-Swift-%E7%BC%96%E8%AF%91%E6%97%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83"><span class="nav-number">3.1.</span> <span class="nav-text">关于 Swift 编译时性能优化的一些思考</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%86%E8%AF%B7%E7%AD%89%E7%AD%89%E2%80%A6-%E8%BF%99%E9%87%8C%E6%9C%89%E4%B8%80%E4%B8%AAXcode%E6%8F%92%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">但请等等… 这里有一个Xcode插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%B0%91%E6%83%8A%E5%96%9C"><span class="nav-number">3.3.</span> <span class="nav-text">不少惊喜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nil-%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.4.</span> <span class="nav-text">Nil 合并运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayOfStuff-Stuff"><span class="nav-number">3.5.</span> <span class="nav-text">ArrayOfStuff + [Stuff]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.6.</span> <span class="nav-text">三元运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2-CGFloat-%E5%88%B0-CGFloat"><span class="nav-number">3.7.</span> <span class="nav-text">转换 CGFloat 到 CGFloat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Round"><span class="nav-number">3.8.</span> <span class="nav-text">Round()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95%E5%AE%83"><span class="nav-number">3.9.</span> <span class="nav-text">尝试它</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
 </div>
 
+
+
+      </section>
     </div>
-  </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-</div>
+
     </header>
 
     
@@ -184,19 +227,24 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
+      
 
-    
+      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/swift-build-times/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -213,33 +261,35 @@
           Swift 编译时性能优化笔记
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2017-01-17 13:47:17" itemprop="dateCreated datePublished" datetime="2017-01-17T13:47:17+08:00">2017-01-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2017-10-09 13:00:20" itemprop="dateModified" datetime="2017-10-09T13:00:20+08:00">2017-10-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-            </span>
+      <time title="Created: 2017-01-17 13:47:17" itemprop="dateCreated datePublished" datetime="2017-01-17T13:47:17+08:00">2017-01-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-10-09 13:00:20" itemprop="dateModified" datetime="2017-10-09T13:00:20+08:00">2017-10-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -248,8 +298,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。</p>
 <a id="more"></a>
 
@@ -276,22 +324,22 @@
 
 <p>测试发现上述方法可以优化时间。</p>
 <hr>
-<h3 id="以下原文出自：关于-Swift-编译时性能优化的一些思考"><a href="#以下原文出自：关于-Swift-编译时性能优化的一些思考" class="headerlink" title="以下原文出自：关于 Swift 编译时性能优化的一些思考"></a>以下原文出自：<a href="https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md" target="_blank" rel="noopener">关于 Swift 编译时性能优化的一些思考</a></h3><hr>
+<h3 id="以下原文出自：关于-Swift-编译时性能优化的一些思考"><a href="#以下原文出自：关于-Swift-编译时性能优化的一些思考" class="headerlink" title="以下原文出自：关于 Swift 编译时性能优化的一些思考"></a>以下原文出自：<a target="_blank" rel="noopener" href="https://github.com/yllziv/gold-miner/blob/1bfbb3deefd27138097415422bec2bb7e98e9715/TODO/regarding-swift-build-time-optimizations.md">关于 Swift 编译时性能优化的一些思考</a></h3><hr>
 <blockquote>
 <ul>
-<li>原文链接 : <a href="https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31#.w81y3zhjr" target="_blank" rel="noopener">Regarding Swift build time optimizations</a></li>
+<li>原文链接 : <a target="_blank" rel="noopener" href="https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31#.w81y3zhjr">Regarding Swift build time optimizations</a></li>
 </ul>
 </blockquote>
 <ul>
-<li>原文作者 : <a href="https://medium.com/@RobertGummesson" target="_blank" rel="noopener">Robert Gummesson</a></li>
-<li>译文出自 : <a href="https://github.com/xitu/gold-miner" target="_blank" rel="noopener">掘金翻译计划</a></li>
-<li>译者 : <a href="http://www.yanglonglong.com/" target="_blank" rel="noopener">杨龙龙</a></li>
-<li>校对者: <a href="https://github.com/shenAlexy" target="_blank" rel="noopener">申冠华</a>, <a href="https://github.com/Jack-Kingdom" target="_blank" rel="noopener">Jack King</a></li>
+<li>原文作者 : <a target="_blank" rel="noopener" href="https://medium.com/@RobertGummesson">Robert Gummesson</a></li>
+<li>译文出自 : <a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner">掘金翻译计划</a></li>
+<li>译者 : <a target="_blank" rel="noopener" href="http://www.yanglonglong.com/">杨龙龙</a></li>
+<li>校对者: <a target="_blank" rel="noopener" href="https://github.com/shenAlexy">申冠华</a>, <a target="_blank" rel="noopener" href="https://github.com/Jack-Kingdom">Jack King</a></li>
 </ul>
 <p><img src="http://ww3.sinaimg.cn/large/005SiNxygw1f3p3jimjllj31jk0dwqft.jpg"></p>
-<h4 id="关于-Swift-编译时性能优化的一些思考"><a href="#关于-Swift-编译时性能优化的一些思考" class="headerlink" title="关于 Swift 编译时性能优化的一些思考"></a>关于 Swift 编译时性能优化的一些思考</h4><p>上周，我读了 <a href="https://medium.com/@nickoneill" target="_blank" rel="noopener">@nickoneill</a> 一篇优秀的帖子 <a href="https://medium.com/swift-programming/speeding-up-slow-swift-build-times-922feeba5780#.k0pngnkns" target="_blank" rel="noopener">Speeding Up Slow Swift Build Times</a> 之后，我发现用一个略不同以往的角度去读Swift代码，并不是很难。</p>
+<h4 id="关于-Swift-编译时性能优化的一些思考"><a href="#关于-Swift-编译时性能优化的一些思考" class="headerlink" title="关于 Swift 编译时性能优化的一些思考"></a>关于 Swift 编译时性能优化的一些思考</h4><p>上周，我读了 <a target="_blank" rel="noopener" href="https://medium.com/@nickoneill">@nickoneill</a> 一篇优秀的帖子 <a target="_blank" rel="noopener" href="https://medium.com/swift-programming/speeding-up-slow-swift-build-times-922feeba5780#.k0pngnkns">Speeding Up Slow Swift Build Times</a> 之后，我发现用一个略不同以往的角度去读Swift代码，并不是很难。</p>
 <p>一行之前很简洁的代码，现在却出现了新的问题——它是否应该重构为9行代码来达到更快的编译速度？ (<em>nil coalescing 运算符就是一个例子</em>)孰轻孰重？简洁的代码还是对编译器友好的代码？ 我觉得，它取决于项目的大小和开发者的想法。</p>
-<h4 id="但请等等…-这里有一个Xcode插件"><a href="#但请等等…-这里有一个Xcode插件" class="headerlink" title="但请等等… 这里有一个Xcode插件"></a>但请等等… 这里有一个Xcode插件</h4><p>在讲一些例子之前，我首先想到了通过手工提取日志信息是非常耗时的事情。通过命令行工具实现会相对容易一些，但是我把它往前推进了一步：集成为<a href="https://github.com/RobertGummesson/BuildTimeAnalyzer-for-Xcode" target="_blank" rel="noopener">Xcode插件</a>。</p>
+<h4 id="但请等等…-这里有一个Xcode插件"><a href="#但请等等…-这里有一个Xcode插件" class="headerlink" title="但请等等… 这里有一个Xcode插件"></a>但请等等… 这里有一个Xcode插件</h4><p>在讲一些例子之前，我首先想到了通过手工提取日志信息是非常耗时的事情。通过命令行工具实现会相对容易一些，但是我把它往前推进了一步：集成为<a target="_blank" rel="noopener" href="https://github.com/RobertGummesson/BuildTimeAnalyzer-for-Xcode">Xcode插件</a>。</p>
 <p><img src="http://ww1.sinaimg.cn/large/005SiNxygw1f3p3hhivppj30m809lwis.jpg"></p>
 <p>在这个例子中，最初的目的仅仅是识别并修复代码中最耗时的地方，但是现在我觉得它成为了一个必须要迭代的过程。这样我才可以更加高效地构建代码，并且防止在项目中出现耗时的函数。</p>
 <h4 id="不少惊喜"><a href="#不少惊喜" class="headerlink" title="不少惊喜"></a>不少惊喜</h4><p>我经常在不同的 Git 分支中跳转，并且等待一个暖慢的项目编译简直是在浪费我的生命。因此我思考了很长时间，一个玩具项目（大约两万行 Swift 代码）会编译如此长的时间。</p>
@@ -303,13 +351,13 @@ return CGSize(width: size.width + (rightView?.bounds.width ?? 0) + (leftView?.bo
 
 // 构建时间： 32.4ms
 var padding: CGFloat = 22
-if let rightView = rightView {
+if let rightView = rightView &#123;
     padding += rightView.bounds.width
-}
+&#125;
 
-if let leftView = leftView {
+if let leftView = leftView &#123;
     padding += leftView.bounds.width
-}
+&#125;
 return CGSizeMake(size.width + padding, bounds.height)</code></pre>
 <h4 id="ArrayOfStuff-Stuff"><a href="#ArrayOfStuff-Stuff" class="headerlink" title="ArrayOfStuff + [Stuff]"></a>ArrayOfStuff + [Stuff]</h4><p>这个看起来像下面这样：</p>
 <pre><code>return ArrayOfStuff + [Stuff]  
@@ -319,28 +367,28 @@ return ArrayOfStuff</code></pre>
 <p>我经常这么做，并且它影响了每次构建的时间。下面是最糟糕的一个例子，改写后构建时间可以减少 **97.9%**。</p>
 <pre><code>// 构建时间： 1250.3ms
 let systemOptions = [ 7, 14, 30, -1 ]
-let systemNames = (0...2).map{ String(format: localizedFormat, systemOptions[$0]) } + [NSLocalizedString(&quot;everything&quot;, comment: &quot;&quot;)]
+let systemNames = (0...2).map&#123; String(format: localizedFormat, systemOptions[$0]) &#125; + [NSLocalizedString(&quot;everything&quot;, comment: &quot;&quot;)]
 // Some code in-between 
 labelNames = Array(systemNames[0..&lt;count]) + [systemNames.last!]
 
 // 构建时间： 25.5ms
 let systemOptions = [ 7, 14, 30, -1 ]
-var systemNames = systemOptions.dropLast().map{ String(format: localizedFormat, $0) }
+var systemNames = systemOptions.dropLast().map&#123; String(format: localizedFormat, $0) &#125;
 systemNames.append(NSLocalizedString(&quot;everything&quot;, comment: &quot;&quot;))
 // Some code in-between
 labelNames = Array(systemNames[0..&lt;count])
 labelNames.append(systemNames.last!)</code></pre>
 <h4 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h4><p>仅仅是通过替换三元运算符为 if else 语句就能减少 <strong>92.9%</strong> 的构建时间。如果使用一个for循环替换 <em>map</em> 函数，它又能减少另一个 75%（但是我的眼睛可就受不了咯😉）。</p>
 <pre><code>// 构建时间： 239.0ms
-let labelNames = type == 0 ? (1...5).map{type0ToString($0)} : (0...2).map{type1ToString($0)}
+let labelNames = type == 0 ? (1...5).map&#123;type0ToString($0)&#125; : (0...2).map&#123;type1ToString($0)&#125;
 
 // 构建时间： 16.9ms
 var labelNames: [String]
-if type == 0 {
-    labelNames = (1...5).map{type0ToString($0)}
-} else {
-    labelNames = (0...2).map{type1ToString($0)}
-}</code></pre>
+if type == 0 &#123;
+    labelNames = (1...5).map&#123;type0ToString($0)&#125;
+&#125; else &#123;
+    labelNames = (0...2).map&#123;type1ToString($0)&#125;
+&#125;</code></pre>
 <h4 id="转换-CGFloat-到-CGFloat"><a href="#转换-CGFloat-到-CGFloat" class="headerlink" title="转换 CGFloat 到 CGFloat"></a>转换 CGFloat 到 CGFloat</h4><p>这里我所说的并不一定正确。变量已经使用了 CGFloat 并且有一些括号也是多余的。在清理了这些冗余之后，构建时间能减少 **99.9%**。</p>
 <pre><code>// 构建时间： 3431.7 ms
 return CGFloat(M_PI) * (CGFloat((hour + hourDelta + CGFloat(minute + minuteDelta) / 60) * 5) - 15) * unit / 180
@@ -356,87 +404,56 @@ let expansion = a — b — c + d * 0.66 + e</code></pre>
 <h4 id="尝试它"><a href="#尝试它" class="headerlink" title="尝试它"></a>尝试它</h4><p>无论你是否面临过构建时间太长的问题，编写对编译器友好的代码都是非常有用的。我确定你自己会在其中找到一些惊喜。作为参考，这里有完整的代码，在我的工程中可以5秒内完成编译…</p>
 <pre><code>import UIKit
 
-class CMExpandingTextField: UITextField {
+class CMExpandingTextField: UITextField &#123;
 
-    func textFieldEditingChanged() {
+    func textFieldEditingChanged() &#123;
         invalidateIntrinsicContentSize()
-    }
+    &#125;
 
-    override func intrinsicContentSize() -&gt; CGSize {
-        if isFirstResponder(), let text = text {
+    override func intrinsicContentSize() -&gt; CGSize &#123;
+        if isFirstResponder(), let text = text &#123;
             let size = text.sizeWithAttributes(typingAttributes)
             return CGSize(width: size.width + (rightView?.bounds.width ?? 0) + (leftView?.bounds.width ?? 0) + 22, height: bounds.height)
-        }
+        &#125;
         return super.intrinsicContentSize()
-    }
-}</code></pre>
+    &#125;
+&#125;</code></pre>
 
     </div>
 
     
     
     
-        
 
-  <div class="followme">
-    <p>Welcome to my other publishing channels</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
-            <span class="icon">
-              <i class="fab fa-twitter"></i>
-            </span>
-
-            <span class="label">Twitter</span>
-          </a>
-        </div>
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
-          </a>
-        </div>
-    </div>
-  </div>
-
-
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E4%BC%98%E5%8C%96/" rel="tag"># 优化</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/post/fastlane-note/" rel="prev" title="Fastlane自动化笔记">
-      <i class="fa fa-chevron-left"></i> Fastlane自动化笔记
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/post/real-world-swift-performance/" rel="next" title="「转」真实世界中的 Swift 性能优化">
-      「转」真实世界中的 Swift 性能优化 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/fastlane-note/" rel="prev" title="Fastlane自动化笔记">
+                  <i class="fa fa-chevron-left"></i> Fastlane自动化笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/real-world-swift-performance/" rel="next" title="「转」真实世界中的 Swift 性能优化">
+                  「转」真实世界中的 Swift 性能优化 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="gitalk-container"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -445,7 +462,7 @@ class CMExpandingTextField: UITextField {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -454,193 +471,46 @@ class CMExpandingTextField: UITextField {
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xcode8-2"><span class="nav-number">1.</span> <span class="nav-text">Xcode8.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#针对运算符-的优化"><span class="nav-number">2.</span> <span class="nav-text">针对运算符??的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试显式解包"><span class="nav-number">2.1.</span> <span class="nav-text">尝试显式解包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误的尝试了重载运算符-方式"><span class="nav-number">2.2.</span> <span class="nav-text">错误的尝试了重载运算符??方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试扩展方法进行优化"><span class="nav-number">2.3.</span> <span class="nav-text">尝试扩展方法进行优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以下原文出自：关于-Swift-编译时性能优化的一些思考"><span class="nav-number">3.</span> <span class="nav-text">以下原文出自：关于 Swift 编译时性能优化的一些思考</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-Swift-编译时性能优化的一些思考"><span class="nav-number">3.1.</span> <span class="nav-text">关于 Swift 编译时性能优化的一些思考</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#但请等等…-这里有一个Xcode插件"><span class="nav-number">3.2.</span> <span class="nav-text">但请等等… 这里有一个Xcode插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不少惊喜"><span class="nav-number">3.3.</span> <span class="nav-text">不少惊喜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nil-合并运算符"><span class="nav-number">3.4.</span> <span class="nav-text">Nil 合并运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayOfStuff-Stuff"><span class="nav-number">3.5.</span> <span class="nav-text">ArrayOfStuff + [Stuff]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三元运算符"><span class="nav-number">3.6.</span> <span class="nav-text">三元运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转换-CGFloat-到-CGFloat"><span class="nav-number">3.7.</span> <span class="nav-text">转换 CGFloat 到 CGFloat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Round"><span class="nav-number">3.8.</span> <span class="nav-text">Round()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试它"><span class="nav-number">3.9.</span> <span class="nav-text">尝试它</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="继刚"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">继刚</p>
-  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>博客园</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
+      
 
 <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">继刚</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="Total Visitors">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="Total Views">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
-  </script>
 
 
 
 
-  
-<script src="/js/local-search.js"></script>
+
 
 
 
@@ -656,26 +526,16 @@ class CMExpandingTextField: UITextField {
 
   
 
+
+
+
+
+
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-<script>
-    var gitalk = new Gitalk({
-      clientID    : '125422a205b9c712854c',
-      clientSecret: 'bf476d441db42d05a0997b6e4bf1ef1fb7e87c02',
-      repo        : 'madordie.github.io',
-      owner       : 'madordie',
-      admin       : ['madordie'],
-      id          : '0358982e99fee910ba48d0054d460c60',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-</script>
+  
 
 </body>
 </html>

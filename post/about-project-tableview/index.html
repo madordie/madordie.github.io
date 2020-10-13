@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -12,12 +12,14 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
   <meta name="description" content="前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。 作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。 当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修">
@@ -26,16 +28,18 @@
 <meta property="og:url" content="https://madordie.github.io/post/about-project-tableview/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。 作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。 当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修">
+<meta property="og:locale">
 <meta property="article:published_time" content="2016-07-26T16:00:00.000Z">
 <meta property="article:modified_time" content="2017-10-09T04:16:40.216Z">
 <meta property="article:author" content="继刚">
 <meta property="article:tag" content="UITableView">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="https://madordie.github.io/post/about-project-tableview/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -55,65 +59,75 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">继刚的博客</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -124,55 +138,84 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
+
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E5%8D%8F%E8%AE%AE%E5%85%A5%E6%89%8B"><span class="nav-number">1.</span> <span class="nav-text">从协议入手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84UITableView"><span class="nav-number">1.1.</span> <span class="nav-text">协议模式下的UITableView</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E5%8C%96%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="nav-number">2.</span> <span class="nav-text">规范化的代码风格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E7%9A%84%E6%8B%86%E5%88%86"><span class="nav-number">3.</span> <span class="nav-text">业务逻辑的拆分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%9B%E9%80%89%E9%87%8D%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">筛选重构</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
 </div>
 
+
+
+      </section>
     </div>
-  </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-</div>
+
     </header>
 
     
@@ -181,19 +224,24 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
+      
 
-    
+      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/about-project-tableview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -210,33 +258,35 @@
           项目中的UITableView
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2016-07-27 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-27T00:00:00+08:00">2016-07-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2017-10-09 12:16:40" itemprop="dateModified" datetime="2017-10-09T12:16:40+08:00">2017-10-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-            </span>
+      <time title="Created: 2016-07-27 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-27T00:00:00+08:00">2016-07-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-10-09 12:16:40" itemprop="dateModified" datetime="2017-10-09T12:16:40+08:00">2017-10-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -245,8 +295,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前两天听到有人说多人合作的项目并不需要处理很多事情，只需要处理好自己的那部分业务逻辑就好了。感觉这是一个很不负责任的说法。</p>
 <p>作为一个APP的开发者，自己负责的事其中的一个模块，但是都是这个APP的开发者，也要往里面塞代码，如果每个人都用不同的逻辑风格去组织代码。那么整个项目就是一坨坨坨，这个坨会影响项目的演进、日后的发展。</p>
 <p>当然有的是看不出来的，比如说：当一个请假的人写的代码出现一个BUG，需要修复上线的时候，对于不同的代码风格，需要找到问题的关键代码，这个过程是撕心裂肺的，但是如果同一套代码风格，心中就会有一个大致的位置，去修改时候就会比较快速的定位问题。</p>
@@ -255,17 +303,17 @@
 <h1 id="从协议入手"><a href="#从协议入手" class="headerlink" title="从协议入手"></a>从协议入手</h1><p><code>UITableView</code>是项目中非常常见的iOS高级控件，在页面中所有相似的页面几乎都是由该控件进行完成。其广泛运用的不止是使用方便，最主要的是内部的复用优化也是相当给力的。</p>
 <h2 id="协议模式下的UITableView"><a href="#协议模式下的UITableView" class="headerlink" title="协议模式下的UITableView"></a>协议模式下的UITableView</h2><p><code>UITableView</code>是典型的 <strong>协议-代理模式</strong> ，比例<code>id &lt;UITableViewDataSource&gt; dataSource</code>和<code>id &lt;UITableViewDelegate&gt; delegate</code>，所以使用对于这种比较规整的列表来说把协议继续扩展到下一级也是可以的。</p>
 <p>为了统一<code>UITableView.dataSource</code>和<code>UITableView.delegate</code>，构建如下协议：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  直接填充Cell的cellModel</span></span><br><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">CellModelProtocol</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSString</span> *)cellClassName;  <span class="comment">//  cellModel绑定的类名</span></span><br><span class="line">- (<span class="keyword">void</span>)cellModelForCell:(<span class="built_in">UITableViewCell</span> *)cell; <span class="comment">//  cellModel填充上面绑定的cell</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  直接填充Cell的cellModel</span></span><br><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">CellModelProtocol</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSString</span> *)cellClassName;  <span class="comment">//  cellModel绑定的类名</span></span><br><span class="line">- (<span class="keyword">void</span>)cellModelForCell:(<span class="built_in">UITableViewCell</span> *)cell; <span class="comment">//  cellModel填充上面绑定的cell</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 <p>那么只需要在代理中做如下设置:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> mark <span class="meta-string">&lt;UITableViewDelegate, UITableViewDataSource&gt;</span></span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="built_in">UITableView</span>*)tableView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span>*)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.viewModel.dataSource.count;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">UITableViewCell</span>*)tableView:(<span class="built_in">UITableView</span>*)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span>*)indexPath</span><br><span class="line">&#123;</span><br><span class="line">      <span class="keyword">id</span>&lt;CellModelProtocol&gt; cellModel = <span class="keyword">self</span>.viewModel.dataSource[indexPath.row];</span><br><span class="line">      <span class="built_in">UITableViewCell</span>* cell = [tableView dequeueReusableCellWithIdentifier:[cellModel cellClassName]];</span><br><span class="line">      cell.frame = tableView.bounds;</span><br><span class="line">      [cellModel cellModelForCell:cell];</span><br><span class="line">      [cell sizeToFit];</span><br><span class="line">      <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span>*)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span>*)indexPath</span><br><span class="line">&#123;</span><br><span class="line">      <span class="keyword">id</span>&lt;CellModelProtocol&gt; cellModel = <span class="keyword">self</span>.viewModel.dataSource[indexPath.row];</span><br><span class="line">      <span class="built_in">UITableViewCell</span>* cell = [tableView ktj_cacheHeightCellForReuseIDFA:[cellModel cellClassName]];</span><br><span class="line">      [cellModel cellModelForCell:cell];</span><br><span class="line">      <span class="keyword">return</span> [cell sizeThatFits:tableView.bounds.size].height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> mark <span class="meta-string">&lt;UITableViewDelegate, UITableViewDataSource&gt;</span></span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="built_in">UITableView</span>*)tableView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span>*)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.viewModel.dataSource.count;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">UITableViewCell</span>*)tableView:(<span class="built_in">UITableView</span>*)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span>*)indexPath</span><br><span class="line">&#123;</span><br><span class="line">      <span class="keyword">id</span>&lt;CellModelProtocol&gt; cellModel = <span class="keyword">self</span>.viewModel.dataSource[indexPath.row];</span><br><span class="line">      <span class="built_in">UITableViewCell</span>* cell = [tableView dequeueReusableCellWithIdentifier:[cellModel cellClassName]];</span><br><span class="line">      cell.frame = tableView.bounds;</span><br><span class="line">      [cellModel cellModelForCell:cell];</span><br><span class="line">      [cell sizeToFit];</span><br><span class="line">      <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span>*)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span>*)indexPath</span><br><span class="line">&#123;</span><br><span class="line">      <span class="keyword">id</span>&lt;CellModelProtocol&gt; cellModel = <span class="keyword">self</span>.viewModel.dataSource[indexPath.row];</span><br><span class="line">      <span class="built_in">UITableViewCell</span>* cell = [tableView ktj_cacheHeightCellForReuseIDFA:[cellModel cellClassName]];</span><br><span class="line">      [cellModel cellModelForCell:cell];</span><br><span class="line">      <span class="keyword">return</span> [cell sizeThatFits:tableView.bounds.size].height;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>而在cell中，默认在<code>sizeThatFits:</code>中进行布局的设置和算高即可。如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  xxxCell.m</span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">CGSize</span>)sizeThatFits:(<span class="built_in">CGSize</span>)size &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="built_in">CGRectZero</span>;</span><br><span class="line">    <span class="comment">//  根据Cell的实际内容进行布局并设置高度</span></span><br><span class="line">    frame.origin = <span class="built_in">CGPointMake</span>(<span class="number">10</span>, <span class="number">15</span>);</span><br><span class="line">    frame.size = [<span class="keyword">self</span>.infoLabel sizeThatFits:<span class="built_in">CGSizeMake</span>(size.width-frame.origin.x*<span class="number">2</span>, size.height)];</span><br><span class="line">    <span class="keyword">self</span>.infoLabel.frame = frame;</span><br><span class="line">    </span><br><span class="line">    size.height = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span>.infoLabel.frame)+frame.origin.y;</span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  xxxCell.m</span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">CGSize</span>)sizeThatFits:(<span class="built_in">CGSize</span>)size &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="built_in">CGRectZero</span>;</span><br><span class="line">    <span class="comment">//  根据Cell的实际内容进行布局并设置高度</span></span><br><span class="line">    frame.origin = <span class="built_in">CGPointMake</span>(<span class="number">10</span>, <span class="number">15</span>);</span><br><span class="line">    frame.size = [<span class="keyword">self</span>.infoLabel sizeThatFits:<span class="built_in">CGSizeMake</span>(size.width-frame.origin.x*<span class="number">2</span>, size.height)];</span><br><span class="line">    <span class="keyword">self</span>.infoLabel.frame = frame;</span><br><span class="line">    </span><br><span class="line">    size.height = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span>.infoLabel.frame)+frame.origin.y;</span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>如果cell采用autolayout，则计算采用<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell/blob/e3ee86ce419d18d3ff735056f1474f2863e43003/Classes/UITableView%2BFDTemplateLayoutCell.m" target="_blank" rel="noopener">UITableView-FDTemplateLayoutCell</a>的计算方法。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UITableViewCell</span> (<span class="title">KTJCellAutoLayoutForSize</span>)</span></span><br><span class="line"><span class="comment">//  autolout布局计算高度</span></span><br><span class="line">- (<span class="built_in">CGSize</span>)ktj_ALCellSizeThatFits:(<span class="built_in">CGSize</span>)size &#123;</span><br><span class="line">    <span class="comment">// Add a hard width constraint to make dynamic content views (like labels) expand vertically instead</span></span><br><span class="line">    <span class="comment">// of growing horizontally, in a flow-layout manner.</span></span><br><span class="line">    <span class="built_in">NSLayoutConstraint</span> *tempWidthConstraint =</span><br><span class="line">    [<span class="built_in">NSLayoutConstraint</span> constraintWithItem:<span class="keyword">self</span>.contentView</span><br><span class="line">                                 attribute:<span class="built_in">NSLayoutAttributeWidth</span></span><br><span class="line">                                 relatedBy:<span class="built_in">NSLayoutRelationEqual</span></span><br><span class="line">                                    toItem:<span class="literal">nil</span></span><br><span class="line">                                 attribute:<span class="built_in">NSLayoutAttributeNotAnAttribute</span></span><br><span class="line">                                multiplier:<span class="number">1.0</span></span><br><span class="line">                                  constant:size.width];</span><br><span class="line">    [<span class="keyword">self</span>.contentView addConstraint:tempWidthConstraint];</span><br><span class="line">    <span class="comment">// Auto layout engine does its math</span></span><br><span class="line">    size = [<span class="keyword">self</span>.contentView systemLayoutSizeFittingSize:<span class="built_in">UILayoutFittingCompressedSize</span>];</span><br><span class="line">    size.height += <span class="number">1</span>;</span><br><span class="line">    [<span class="keyword">self</span>.contentView removeConstraint:tempWidthConstraint];</span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>如果cell采用autolayout，则计算采用<a target="_blank" rel="noopener" href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell/blob/e3ee86ce419d18d3ff735056f1474f2863e43003/Classes/UITableView%2BFDTemplateLayoutCell.m">UITableView-FDTemplateLayoutCell</a>的计算方法。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UITableViewCell</span> (<span class="title">KTJCellAutoLayoutForSize</span>)</span></span><br><span class="line"><span class="comment">//  autolout布局计算高度</span></span><br><span class="line">- (<span class="built_in">CGSize</span>)ktj_ALCellSizeThatFits:(<span class="built_in">CGSize</span>)size &#123;</span><br><span class="line">    <span class="comment">// Add a hard width constraint to make dynamic content views (like labels) expand vertically instead</span></span><br><span class="line">    <span class="comment">// of growing horizontally, in a flow-layout manner.</span></span><br><span class="line">    <span class="built_in">NSLayoutConstraint</span> *tempWidthConstraint =</span><br><span class="line">    [<span class="built_in">NSLayoutConstraint</span> constraintWithItem:<span class="keyword">self</span>.contentView</span><br><span class="line">                                 attribute:<span class="built_in">NSLayoutAttributeWidth</span></span><br><span class="line">                                 relatedBy:<span class="built_in">NSLayoutRelationEqual</span></span><br><span class="line">                                    toItem:<span class="literal">nil</span></span><br><span class="line">                                 attribute:<span class="built_in">NSLayoutAttributeNotAnAttribute</span></span><br><span class="line">                                multiplier:<span class="number">1.0</span></span><br><span class="line">                                  constant:size.width];</span><br><span class="line">    [<span class="keyword">self</span>.contentView addConstraint:tempWidthConstraint];</span><br><span class="line">    <span class="comment">// Auto layout engine does its math</span></span><br><span class="line">    size = [<span class="keyword">self</span>.contentView systemLayoutSizeFittingSize:<span class="built_in">UILayoutFittingCompressedSize</span>];</span><br><span class="line">    size.height += <span class="number">1</span>;</span><br><span class="line">    [<span class="keyword">self</span>.contentView removeConstraint:tempWidthConstraint];</span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>另外在<code>&lt;UITableViewDelegate, UITableViewDataSource&gt;</code>中只写了1组，只有cell，没有header、footer的情况，如果需要，炮制即可。</p>
 <p>说一下这个其中的<code>ktj_cacheHeightCellForReuseIDFA:</code>类别方法。这个方法是为了算高进行缓存的一个cell，这个cell保存在 <code>NSCache</code>中。所以为了统一，需要在数据初始化时候注册所有的cell。当然你也可以根据类名直接生成，这个自主决定。</p>
@@ -274,7 +322,7 @@
 <p>同理，对于<code>UITableView</code>的<code>headerView</code>、<code>footerView</code>来说，可以炮制以上协议、方法。不再赘述</p>
 <p>PS.</p>
 <ol>
-<li><a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell" target="_blank" rel="noopener">UITableView-FDTemplateLayoutCell</a>: <a href="https://github.com/sunnyxx" target="_blank" rel="noopener">sunnyxx</a>打造的优化UITableView的一个库，6000的star，很赞。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell">UITableView-FDTemplateLayoutCell</a>: <a target="_blank" rel="noopener" href="https://github.com/sunnyxx">sunnyxx</a>打造的优化UITableView的一个库，6000的star，很赞。</li>
 </ol>
 <h1 id="规范化的代码风格"><a href="#规范化的代码风格" class="headerlink" title="规范化的代码风格"></a>规范化的代码风格</h1><p>对于多人开发，最崩溃的事情就要数去读别人的代码。就算不是多人开发，接手别人的代码也是让人最崩溃的事情。如果有不用考虑这件事的叫我！</p>
 <p>不同的公司可以有不同的代码风格，但是一个公司的代码风格需要保持一致，这样就不会出现一人请假，无人能接受项目的尴尬局面，就算能接，也是需要为了加一个逻辑判断，需要花费很大的精力去处理。</p>
@@ -288,67 +336,36 @@
     
     
     
-        
 
-  <div class="followme">
-    <p>Welcome to my other publishing channels</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
-            <span class="icon">
-              <i class="fab fa-twitter"></i>
-            </span>
-
-            <span class="label">Twitter</span>
-          </a>
-        </div>
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
-          </a>
-        </div>
-    </div>
-  </div>
-
-
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/UITableView/" rel="tag"># UITableView</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/post/about-reprint-article/" rel="prev" title="关于转载的文章">
-      <i class="fa fa-chevron-left"></i> 关于转载的文章
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/post/note/" rel="next" title="开发小记">
-      开发小记 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/about-reprint-article/" rel="prev" title="关于转载的文章">
+                  <i class="fa fa-chevron-left"></i> 关于转载的文章
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/note/" rel="next" title="开发小记">
+                  开发小记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="gitalk-container"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -357,7 +374,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -366,193 +383,46 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从协议入手"><span class="nav-number">1.</span> <span class="nav-text">从协议入手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协议模式下的UITableView"><span class="nav-number">1.1.</span> <span class="nav-text">协议模式下的UITableView</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#规范化的代码风格"><span class="nav-number">2.</span> <span class="nav-text">规范化的代码风格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#业务逻辑的拆分"><span class="nav-number">3.</span> <span class="nav-text">业务逻辑的拆分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#筛选重构"><span class="nav-number">3.1.</span> <span class="nav-text">筛选重构</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="继刚"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">继刚</p>
-  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>博客园</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
+      
 
 <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">继刚</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="Total Visitors">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="Total Views">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
-  </script>
 
 
 
 
-  
-<script src="/js/local-search.js"></script>
+
 
 
 
@@ -568,26 +438,16 @@
 
   
 
+
+
+
+
+
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-<script>
-    var gitalk = new Gitalk({
-      clientID    : '125422a205b9c712854c',
-      clientSecret: 'bf476d441db42d05a0997b6e4bf1ef1fb7e87c02',
-      repo        : 'madordie.github.io',
-      owner       : 'madordie',
-      admin       : ['madordie'],
-      id          : '639e4a759693ba8e6aeee6038d66ac52',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-</script>
+  
 
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -12,12 +12,14 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
   <meta name="description" content="CRASH:void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()">
@@ -26,16 +28,18 @@
 <meta property="og:url" content="https://madordie.github.io/post/debug-uiview-m-190/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="CRASH:void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()">
+<meta property="og:locale">
 <meta property="article:published_time" content="2016-10-11T04:43:22.000Z">
 <meta property="article:modified_time" content="2017-10-11T03:37:40.320Z">
 <meta property="article:author" content="继刚">
 <meta property="article:tag" content="DEBUG">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="https://madordie.github.io/post/debug-uiview-m-190/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -55,65 +59,75 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">继刚的博客</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -124,55 +138,84 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
+
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UIView-m-190-UIViewReportBrokenSuperviewChain"><span class="nav-number">1.</span> <span class="nav-text">UIView.m:190 - UIViewReportBrokenSuperviewChain</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">异常信息：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">异常分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%B0%E5%88%B0%E8%AF%A5%E9%97%AE%E9%A2%98%E7%9A%84%E8%BF%98%E6%9C%89"><span class="nav-number">1.3.</span> <span class="nav-text">碰到该问题的还有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A0%86%E6%A0%88-lt-%E8%84%B1%E6%95%8F-gt"><span class="nav-number">1.4.</span> <span class="nav-text">错误堆栈 &lt;脱敏&gt;</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
 </div>
 
+
+
+      </section>
     </div>
-  </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-</div>
+
     </header>
 
     
@@ -181,19 +224,24 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
+      
 
-    
+      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/debug-uiview-m-190/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -210,33 +258,35 @@
           DEBUG - UIView.h#190
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2016-10-11 12:43:22" itemprop="dateCreated datePublished" datetime="2016-10-11T12:43:22+08:00">2016-10-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2017-10-11 11:37:40" itemprop="dateModified" datetime="2017-10-11T11:37:40+08:00">2017-10-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-            </span>
+      <time title="Created: 2016-10-11 12:43:22" itemprop="dateCreated datePublished" datetime="2016-10-11T12:43:22+08:00">2016-10-11</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-10-11 11:37:40" itemprop="dateModified" datetime="2017-10-11T11:37:40+08:00">2017-10-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -245,8 +295,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>CRASH:<br><code>void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()</code></p>
 <a id="more"></a>
 
@@ -260,83 +308,52 @@
 <p>  解决方案：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[self layoutIfNeeded];</span><br><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure></p>
 <p>  原因分析：<br>  下面这个说的很在理</p>
 <blockquote>
-<p><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="noopener">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
 <p>I had this issue with a library when moving over to Xcode 8 (Material-Controls-For-iOS - MDTextField). I found that the problem was coming from where the layer of one view (which had no superview) was being added to another.</p>
 <p>It looks like this may be the case for yourself also - your toolbar being created has not been added to a superview first. The fix I used was to add the view as a subview of the view that the layer was being added to, so in your case adding the toolbar as a subview of myModelView should stop the error.</p>
 </blockquote>
 <h2 id="碰到该问题的还有"><a href="#碰到该问题的还有" class="headerlink" title="碰到该问题的还有"></a>碰到该问题的还有</h2><ul>
-<li><a href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8" target="_blank" rel="noopener">Google出来的一个，但是并未看到相关回复。。。</a></li>
-<li><a href="http://www.th7.cn/Program/IOS/201609/975582.shtml" target="_blank" rel="noopener">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a></li>
-<li><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation" target="_blank" rel="noopener">stackoverflow(这个分析的很到位)</a></li>
+<li><a target="_blank" rel="noopener" href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8">Google出来的一个，但是并未看到相关回复。。。</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.th7.cn/Program/IOS/201609/975582.shtml">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a></li>
+<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">stackoverflow(这个分析的很到位)</a></li>
 </ul>
-<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br><span class="line"></span><br><span class="line">(lldb) bt</span><br><span class="line">* thread #1: tid &#x3D; 0x87c18, 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw, queue &#x3D; &#39;com.apple.main-thread&#39;, stop reason &#x3D; breakpoint 1.2</span><br><span class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw</span><br><span class="line">    frame #1: 0x0000000183954094 CoreFoundation&#96;+[NSException raise:format:arguments:] + 104</span><br><span class="line">    frame #2: 0x00000001843de898 Foundation&#96;-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</span><br><span class="line">    frame #3: 0x0000000189a7cf9c UIKit&#96;UIViewReportBrokenSuperviewChain + 472</span><br><span class="line">    frame #4: 0x0000000189a7d658 UIKit&#96;_UIViewTopDownSubtreeTraversal + 1496</span><br><span class="line">    frame #5: 0x000000018a0f3390 UIKit&#96;-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</span><br><span class="line">    frame #6: 0x00000001843832ac Foundation&#96;-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</span><br><span class="line">    frame #7: 0x0000000184382dcc Foundation&#96;-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</span><br><span class="line">    frame #8: 0x00000001843809e0 Foundation&#96;-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</span><br><span class="line">    frame #9: 0x000000018989cfdc UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</span><br><span class="line">    frame #10: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #11: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #12: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #13: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #14: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #15: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #16: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #17: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #18: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #19: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #20: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #21: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #22: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #23: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #24: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #25: 0x00000001898a4bb0 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</span><br><span class="line">    frame #26: 0x00000001898a4b04 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</span><br><span class="line">    frame #27: 0x00000001898a4910 UIKit&#96;-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</span><br><span class="line">    frame #28: 0x00000001897996dc UIKit&#96;-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</span><br><span class="line">    frame #29: 0x0000000189798d90 UIKit&#96;__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</span><br><span class="line">    frame #30: 0x0000000189798be8 UIKit&#96;-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</span><br><span class="line">    frame #31: 0x00000001897a4ad0 UIKit&#96;-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</span><br><span class="line">    frame #32: 0x00000001897a43bc UIKit&#96;-[UIView(Hierarchy) addSubview:] + 828</span><br><span class="line">  * frame #33: 0x00000001004f78ec Project_ent&#96;__31-[EsfCommentReportView show]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</span><br><span class="line">    frame #34: 0x00000001897d2b88 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</span><br><span class="line">    frame #35: 0x00000001897d28e8 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</span><br><span class="line">    frame #36: 0x00000001004f77a0 Project_ent&#96;-[EsfCommentReportView show](self&#x3D;0x000000015fe32020, _cmd&#x3D;&quot;show&quot;) + 492 at EsfCommentReportView.m:291</span><br><span class="line">    frame #37: 0x0000000100858a04 Project_ent&#96;__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</span><br><span class="line">    frame #38: 0x00000001003f93e4 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, sourceType&#x3D;2, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 236 at MyLoginViewController.m:123</span><br><span class="line">    frame #39: 0x00000001003f92b0 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 156 at MyLoginViewController.m:114</span><br><span class="line">    frame #40: 0x00000001003f9124 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0) + 120 at MyLoginViewController.m:104</span><br><span class="line">    frame #41: 0x0000000100858870 Project_ent&#96;-[BuyerAdviserProfileViewController reportAction:](self&#x3D;0x000000015fd2e320, _cmd&#x3D;&quot;reportAction:&quot;, button&#x3D;0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</span><br><span class="line">    frame #42: 0x00000001897d27b0 UIKit&#96;-[UIApplication sendAction:to:from:forEvent:] + 96</span><br><span class="line">    frame #43: 0x00000001897d2730 UIKit&#96;-[UIControl sendAction:to:forEvent:] + 80</span><br><span class="line">    frame #44: 0x00000001897bcbe4 UIKit&#96;-[UIControl _sendActionsForEvents:withEvent:] + 452</span><br><span class="line">    frame #45: 0x00000001897d201c UIKit&#96;-[UIControl touchesEnded:withEvent:] + 584</span><br><span class="line">    frame #46: 0x00000001897d1b44 UIKit&#96;-[UIWindow _sendTouchesForEvent:] + 2484</span><br><span class="line">    frame #47: 0x00000001897ccd8c UIKit&#96;-[UIWindow sendEvent:] + 2988</span><br><span class="line">    frame #48: 0x000000018979d858 UIKit&#96;-[UIApplication sendEvent:] + 340</span><br><span class="line">    frame #49: 0x0000000189f8acb8 UIKit&#96;__dispatchPreprocessedEventFromEventQueue + 2736</span><br><span class="line">    frame #50: 0x0000000189f84720 UIKit&#96;__handleEventQueue + 784</span><br><span class="line">    frame #51: 0x0000000183902278 CoreFoundation&#96;__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</span><br><span class="line">    frame #52: 0x0000000183901bc0 CoreFoundation&#96;__CFRunLoopDoSources0 + 524</span><br><span class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation&#96;__CFRunLoopRun + 804</span><br><span class="line">    frame #54: 0x000000018382e048 CoreFoundation&#96;CFRunLoopRunSpecific + 444</span><br><span class="line">    frame #55: 0x00000001852b1198 GraphicsServices&#96;GSEventRunModal + 180</span><br><span class="line">    frame #56: 0x0000000189808628 UIKit&#96;-[UIApplication _run] + 684</span><br><span class="line">    frame #57: 0x0000000189803360 UIKit&#96;UIApplicationMain + 208</span><br><span class="line">    frame #58: 0x0000000100a3db78 Project_ent&#96;main + 460 at main.swift:24</span><br><span class="line">    frame #59: 0x00000001828105b8 libdyld.dylib&#96;start + 4</span><br><span class="line">(lldb)</span><br></pre></td></tr></table></figure>
+<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br><span class="line"></span><br><span class="line">(lldb) bt</span><br><span class="line">* thread #1: tid &#x3D; 0x87c18, 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw, queue &#x3D; &#39;com.apple.main-thread&#39;, stop reason &#x3D; breakpoint 1.2</span><br><span class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw</span><br><span class="line">    frame #1: 0x0000000183954094 CoreFoundation&#96;+[NSException raise:format:arguments:] + 104</span><br><span class="line">    frame #2: 0x00000001843de898 Foundation&#96;-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</span><br><span class="line">    frame #3: 0x0000000189a7cf9c UIKit&#96;UIViewReportBrokenSuperviewChain + 472</span><br><span class="line">    frame #4: 0x0000000189a7d658 UIKit&#96;_UIViewTopDownSubtreeTraversal + 1496</span><br><span class="line">    frame #5: 0x000000018a0f3390 UIKit&#96;-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</span><br><span class="line">    frame #6: 0x00000001843832ac Foundation&#96;-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</span><br><span class="line">    frame #7: 0x0000000184382dcc Foundation&#96;-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</span><br><span class="line">    frame #8: 0x00000001843809e0 Foundation&#96;-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</span><br><span class="line">    frame #9: 0x000000018989cfdc UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</span><br><span class="line">    frame #10: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #11: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #12: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #13: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #14: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #15: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #16: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #17: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #18: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #19: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #20: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #21: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #22: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #23: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #24: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #25: 0x00000001898a4bb0 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</span><br><span class="line">    frame #26: 0x00000001898a4b04 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</span><br><span class="line">    frame #27: 0x00000001898a4910 UIKit&#96;-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</span><br><span class="line">    frame #28: 0x00000001897996dc UIKit&#96;-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</span><br><span class="line">    frame #29: 0x0000000189798d90 UIKit&#96;__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</span><br><span class="line">    frame #30: 0x0000000189798be8 UIKit&#96;-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</span><br><span class="line">    frame #31: 0x00000001897a4ad0 UIKit&#96;-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</span><br><span class="line">    frame #32: 0x00000001897a43bc UIKit&#96;-[UIView(Hierarchy) addSubview:] + 828</span><br><span class="line">  * frame #33: 0x00000001004f78ec Project_ent&#96;__31-[EsfCommentReportView show]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</span><br><span class="line">    frame #34: 0x00000001897d2b88 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</span><br><span class="line">    frame #35: 0x00000001897d28e8 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</span><br><span class="line">    frame #36: 0x00000001004f77a0 Project_ent&#96;-[EsfCommentReportView show](self&#x3D;0x000000015fe32020, _cmd&#x3D;&quot;show&quot;) + 492 at EsfCommentReportView.m:291</span><br><span class="line">    frame #37: 0x0000000100858a04 Project_ent&#96;__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</span><br><span class="line">    frame #38: 0x00000001003f93e4 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, sourceType&#x3D;2, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 236 at MyLoginViewController.m:123</span><br><span class="line">    frame #39: 0x00000001003f92b0 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 156 at MyLoginViewController.m:114</span><br><span class="line">    frame #40: 0x00000001003f9124 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0) + 120 at MyLoginViewController.m:104</span><br><span class="line">    frame #41: 0x0000000100858870 Project_ent&#96;-[BuyerAdviserProfileViewController reportAction:](self&#x3D;0x000000015fd2e320, _cmd&#x3D;&quot;reportAction:&quot;, button&#x3D;0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</span><br><span class="line">    frame #42: 0x00000001897d27b0 UIKit&#96;-[UIApplication sendAction:to:from:forEvent:] + 96</span><br><span class="line">    frame #43: 0x00000001897d2730 UIKit&#96;-[UIControl sendAction:to:forEvent:] + 80</span><br><span class="line">    frame #44: 0x00000001897bcbe4 UIKit&#96;-[UIControl _sendActionsForEvents:withEvent:] + 452</span><br><span class="line">    frame #45: 0x00000001897d201c UIKit&#96;-[UIControl touchesEnded:withEvent:] + 584</span><br><span class="line">    frame #46: 0x00000001897d1b44 UIKit&#96;-[UIWindow _sendTouchesForEvent:] + 2484</span><br><span class="line">    frame #47: 0x00000001897ccd8c UIKit&#96;-[UIWindow sendEvent:] + 2988</span><br><span class="line">    frame #48: 0x000000018979d858 UIKit&#96;-[UIApplication sendEvent:] + 340</span><br><span class="line">    frame #49: 0x0000000189f8acb8 UIKit&#96;__dispatchPreprocessedEventFromEventQueue + 2736</span><br><span class="line">    frame #50: 0x0000000189f84720 UIKit&#96;__handleEventQueue + 784</span><br><span class="line">    frame #51: 0x0000000183902278 CoreFoundation&#96;__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</span><br><span class="line">    frame #52: 0x0000000183901bc0 CoreFoundation&#96;__CFRunLoopDoSources0 + 524</span><br><span class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation&#96;__CFRunLoopRun + 804</span><br><span class="line">    frame #54: 0x000000018382e048 CoreFoundation&#96;CFRunLoopRunSpecific + 444</span><br><span class="line">    frame #55: 0x00000001852b1198 GraphicsServices&#96;GSEventRunModal + 180</span><br><span class="line">    frame #56: 0x0000000189808628 UIKit&#96;-[UIApplication _run] + 684</span><br><span class="line">    frame #57: 0x0000000189803360 UIKit&#96;UIApplicationMain + 208</span><br><span class="line">    frame #58: 0x0000000100a3db78 Project_ent&#96;main + 460 at main.swift:24</span><br><span class="line">    frame #59: 0x00000001828105b8 libdyld.dylib&#96;start + 4</span><br><span class="line">(lldb) </span><br></pre></td></tr></table></figure>
 
     </div>
 
     
     
     
-        
 
-  <div class="followme">
-    <p>Welcome to my other publishing channels</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
-            <span class="icon">
-              <i class="fab fa-twitter"></i>
-            </span>
-
-            <span class="label">Twitter</span>
-          </a>
-        </div>
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
-          </a>
-        </div>
-    </div>
-  </div>
-
-
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/DEBUG/" rel="tag"># DEBUG</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/post/build-ipa-sh/" rel="prev" title="Xcode打包脚本">
-      <i class="fa fa-chevron-left"></i> Xcode打包脚本
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/post/debug-xcode8-analysis-crash-file/" rel="next" title="DEBUG - Xcode解析.crash">
-      DEBUG - Xcode解析.crash <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/build-ipa-sh/" rel="prev" title="Xcode打包脚本">
+                  <i class="fa fa-chevron-left"></i> Xcode打包脚本
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/debug-xcode8-analysis-crash-file/" rel="next" title="DEBUG - Xcode解析.crash">
+                  DEBUG - Xcode解析.crash <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="gitalk-container"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -345,7 +362,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -354,193 +371,46 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UIView-m-190-UIViewReportBrokenSuperviewChain"><span class="nav-number">1.</span> <span class="nav-text">UIView.m:190 - UIViewReportBrokenSuperviewChain</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常信息："><span class="nav-number">1.1.</span> <span class="nav-text">异常信息：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常分析"><span class="nav-number">1.2.</span> <span class="nav-text">异常分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#碰到该问题的还有"><span class="nav-number">1.3.</span> <span class="nav-text">碰到该问题的还有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误堆栈-lt-脱敏-gt"><span class="nav-number">1.4.</span> <span class="nav-text">错误堆栈 &lt;脱敏&gt;</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="继刚"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">继刚</p>
-  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>博客园</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
+      
 
 <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">继刚</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="Total Visitors">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="Total Views">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
-  </script>
 
 
 
 
-  
-<script src="/js/local-search.js"></script>
+
 
 
 
@@ -556,26 +426,16 @@
 
   
 
+
+
+
+
+
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-<script>
-    var gitalk = new Gitalk({
-      clientID    : '125422a205b9c712854c',
-      clientSecret: 'bf476d441db42d05a0997b6e4bf1ef1fb7e87c02',
-      repo        : 'madordie.github.io',
-      owner       : 'madordie',
-      admin       : ['madordie'],
-      id          : '897b71ea172ad0557efd3e72ae44bc14',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-</script>
+  
 
 </body>
 </html>

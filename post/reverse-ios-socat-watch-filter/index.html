@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -12,12 +12,14 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
   <meta name="description" content="前两天，重启电脑突然发现我的iOS8设备无法连接到MacOS了。。 MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。 具体报错如下：Xcode&lt;Version 9.4 (9F1027a)&gt;报错如下: (我安装过Xcode10 beta1) iTunes报错如下： 1iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。">
@@ -26,6 +28,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/reverse-ios-socat-watch-filter/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="前两天，重启电脑突然发现我的iOS8设备无法连接到MacOS了。。 MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。 具体报错如下：Xcode&lt;Version 9.4 (9F1027a)&gt;报错如下: (我安装过Xcode10 beta1) iTunes报错如下： 1iTunes 无法连接 iPhone “iPhone”，因为收到来自此设备的无效响应。">
+<meta property="og:locale">
 <meta property="og:image" content="https://madordie.github.io/images/2018-06-15-10-13-16.png">
 <meta property="og:image" content="https://madordie.github.io/images/2018-06-15-10-06-16.png">
 <meta property="og:image" content="https://madordie.github.io/images/2018-06-15-10-09-33.png">
@@ -38,10 +41,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://madordie.github.io/images/2018-06-15-10-13-16.png">
 
+
 <link rel="canonical" href="https://madordie.github.io/post/reverse-ios-socat-watch-filter/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -61,65 +65,75 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">继刚的博客</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -130,55 +144,84 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
+
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%8F%AF%E4%BB%A5%E8%BF%9E%E6%8E%A5%E5%88%B0MacOS"><span class="nav-number">1.</span> <span class="nav-text">手机可以连接到MacOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9AConsole-app-%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-number">1.1.</span> <span class="nav-text">方案一：Console.app(控制台)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9ALogGuru"><span class="nav-number">1.2.</span> <span class="nav-text">方案二：LogGuru</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%89-%E5%85%B6%E4%BB%96%E7%9A%84"><span class="nav-number">1.3.</span> <span class="nav-text">方案三: 其他的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E6%97%A0%E6%B3%95%E9%93%BE%E6%8E%A5%E8%BF%9BMacOS"><span class="nav-number">2.</span> <span class="nav-text">手机无法链接进MacOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#socat%E7%9A%84%E5%9D%91"><span class="nav-number">2.1.</span> <span class="nav-text">socat的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#stop%E6%B2%A1%E6%9C%89%E7%94%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">stop没有用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E5%8A%9E%E6%B3%95%E5%AE%9E%E6%97%B6%E8%BF%87%E6%BB%A4"><span class="nav-number">2.1.2.</span> <span class="nav-text">没有办法实时过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%A2%E4%B8%AA%E5%A7%BF%E5%8A%BF%E4%BD%BF%E7%94%A8socat"><span class="nav-number">2.2.</span> <span class="nav-text">换个姿势使用socat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8mac%E4%B8%8A%E5%AE%89%E8%A3%85expect"><span class="nav-number">2.2.1.</span> <span class="nav-text">在mac上安装expect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8mac%E7%9A%84%EF%BD%9E-bash-profile%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">在mac的～&#x2F;.bash_profile配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%8B%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="nav-number">2.2.3.</span> <span class="nav-text">晋级用法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
 </div>
 
+
+
+      </section>
     </div>
-  </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-</div>
+
     </header>
 
     
@@ -187,19 +230,24 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
+      
 
-    
+      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/reverse-ios-socat-watch-filter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -216,33 +264,35 @@
           关于日志打印和过滤的那点破事
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2018-06-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-15T00:00:00+08:00">2018-06-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-07-02 19:05:37" itemprop="dateModified" datetime="2018-07-02T19:05:37+08:00">2018-07-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-            </span>
+      <time title="Created: 2018-06-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-15T00:00:00+08:00">2018-06-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2018-07-02 19:05:37" itemprop="dateModified" datetime="2018-07-02T19:05:37+08:00">2018-07-02</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -251,8 +301,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前两天，重启电脑突然发现我的<code>iOS8</code>设备无法连接到<code>MacOS</code>了。。</p>
 <p>MMP，也就是说没有办法使用Xcode调试、之前使用的日志查看也没有办法继续。。</p>
 <p>具体报错如下：<br><code>Xcode&lt;Version 9.4 (9F1027a)&gt;</code>报错如下: (我安装过<code>Xcode10 beta1</code>)<br><img src="/images/2018-06-15-10-13-16.png" alt="Xcode报错"></p>
@@ -270,16 +318,16 @@
 <h2 id="手机可以连接到MacOS"><a href="#手机可以连接到MacOS" class="headerlink" title="手机可以连接到MacOS"></a>手机可以连接到MacOS</h2><p>这种情况是最常见的，就是能在Xcode下Debug….</p>
 <h3 id="方案一：Console-app-控制台"><a href="#方案一：Console-app-控制台" class="headerlink" title="方案一：Console.app(控制台)"></a>方案一：Console.app(控制台)</h3><p>这是MacOS自带的日志神器～ 效果顶呱呱👍👍👍，截图如下：<br><img src="/images/2018-06-15-10-23-02.png" alt="Console.app"></p>
 <p>具体用法我就不说了。。。毕竟都是中文😂</p>
-<h3 id="方案二：LogGuru"><a href="#方案二：LogGuru" class="headerlink" title="方案二：LogGuru"></a>方案二：LogGuru</h3><p><a href="https://github.com/madordie/LogGuru" target="_blank" rel="noopener">madordie/LogGuru</a> 也不错，很久之前fork自<a href="https://github.com/FIRHQ/LogGuru" target="_blank" rel="noopener">FIRHQ/LogGuru</a>，增加了直接过滤的功能，要不然速度真的很慢。。</p>
+<h3 id="方案二：LogGuru"><a href="#方案二：LogGuru" class="headerlink" title="方案二：LogGuru"></a>方案二：LogGuru</h3><p><a target="_blank" rel="noopener" href="https://github.com/madordie/LogGuru">madordie/LogGuru</a> 也不错，很久之前fork自<a target="_blank" rel="noopener" href="https://github.com/FIRHQ/LogGuru">FIRHQ/LogGuru</a>，增加了直接过滤的功能，要不然速度真的很慢。。</p>
 <p>只要插入USB，即可显示日志，还是不错滴。。</p>
 <p><img src="/images/2018-06-15-10-29-07.png" alt="原来的截图"></p>
 <h3 id="方案三-其他的"><a href="#方案三-其他的" class="headerlink" title="方案三: 其他的"></a>方案三: 其他的</h3><p>还有很多方案，比如说命令行啊、其他的工具啊，我就不说了，我觉得 <strong>Console.app(控制台)</strong> 就够了😂</p>
 <h2 id="手机无法链接进MacOS"><a href="#手机无法链接进MacOS" class="headerlink" title="手机无法链接进MacOS"></a>手机无法链接进MacOS</h2><p>也就是最开始说的报错的情况下，可以连接进MacOS的方案均无法使用。苦逼，只能让iOS打印日志了。。</p>
 <p>下面都是 <strong>越狱环境</strong> 下的。。不越狱还有人用iOS8么😂</p>
-<p>先来看个文档：<a href="https://www.theiphonewiki.com/wiki/System_Log" target="_blank" rel="noopener">The iPhone Wiki/System Log</a>,这里提供了很多方案，也非常全面，值得一试。</p>
-<p>苦逼的事情是我手上的iOS8.4.1无法使用<code>syslogd to /var/log/syslog</code>插件，尝试使用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_saving_to_a_file_via_a_Python_script" target="_blank" rel="noopener">On-device with saving to a file via a Python script</a>的方案去解决也并不如意。。</p>
-<p>开始用<a href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_socat" target="_blank" rel="noopener">On-device with socat</a>（ 在<a href="http://bbs.iosre.com/" target="_blank" rel="noopener">iosre</a>中也有一个类似的文章：<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="noopener">iOS查看日志利器 —— socat</a>），说的都是相当的详细。</p>
-<h3 id="socat的坑"><a href="#socat的坑" class="headerlink" title="socat的坑"></a>socat的坑</h3><h4 id="stop没有用"><a href="#stop没有用" class="headerlink" title="stop没有用"></a>stop没有用</h4><p>如<a href="http://bbs.iosre.com/t/ios-socat/139" target="_blank" rel="noopener">iOS查看日志利器 —— socat</a>所说：</p>
+<p>先来看个文档：<a target="_blank" rel="noopener" href="https://www.theiphonewiki.com/wiki/System_Log">The iPhone Wiki/System Log</a>,这里提供了很多方案，也非常全面，值得一试。</p>
+<p>苦逼的事情是我手上的iOS8.4.1无法使用<code>syslogd to /var/log/syslog</code>插件，尝试使用<a target="_blank" rel="noopener" href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_saving_to_a_file_via_a_Python_script">On-device with saving to a file via a Python script</a>的方案去解决也并不如意。。</p>
+<p>开始用<a target="_blank" rel="noopener" href="https://www.theiphonewiki.com/wiki/System_Log#On-device_with_socat">On-device with socat</a>（ 在<a target="_blank" rel="noopener" href="http://bbs.iosre.com/">iosre</a>中也有一个类似的文章：<a target="_blank" rel="noopener" href="http://bbs.iosre.com/t/ios-socat/139">iOS查看日志利器 —— socat</a>），说的都是相当的详细。</p>
+<h3 id="socat的坑"><a href="#socat的坑" class="headerlink" title="socat的坑"></a>socat的坑</h3><h4 id="stop没有用"><a href="#stop没有用" class="headerlink" title="stop没有用"></a>stop没有用</h4><p>如<a target="_blank" rel="noopener" href="http://bbs.iosre.com/t/ios-socat/139">iOS查看日志利器 —— socat</a>所说：</p>
 <blockquote>
 <p>输入watch查看，输入stop停止（不过停止貌似没用，也不知道为啥，知道的请告诉我）</p>
 </blockquote>
@@ -291,14 +339,14 @@
 <h4 id="在mac上安装expect"><a href="#在mac上安装expect" class="headerlink" title="在mac上安装expect"></a>在mac上安装expect</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install expect</span><br></pre></td></tr></table></figure>
 
 <h4 id="在mac的～-bash-profile配置"><a href="#在mac的～-bash-profile配置" class="headerlink" title="在mac的～/.bash_profile配置"></a>在mac的～/.bash_profile配置</h4><p>此处假设你的设备已经按照<a href="../reverse-ios-ssh">iOS逆向-设备ssh免密登录</a>配置好了：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">"</span></span><br><span class="line"><span class="string">        spawn ssh i5s \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \"&gt; \" &#123;send \"watch\n\";&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">&quot;</span></span><br><span class="line"><span class="string">        spawn ssh i5s \&quot;socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\&quot;</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \&quot;&gt; \&quot; &#123;send \&quot;watch\n\&quot;;&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><code>ios-socat</code> 函数名，在命令行可以直接输入函数名调用该函数</li>
 <li><code>i5s</code> 在<code>~/.ssh/config</code>中配置的名字</li>
 </ul>
 <p>如果没有配置ssh免密呢需要这样：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">"</span></span><br><span class="line"><span class="string">        spawn ssh -p22 root@ios's_ip \"socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\"</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \"*password: \" &#123;send \"mypassword\n\";&#125;</span></span><br><span class="line"><span class="string">            \"&gt; \" &#123;send \"watch\n\";&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> ios-<span class="function"><span class="title">socat</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">&quot;</span></span><br><span class="line"><span class="string">        spawn ssh -p22 root@ios&#x27;s_ip \&quot;socat - UNIX-CONNECT:/var/run/lockdown/syslog.sock\&quot;</span></span><br><span class="line"><span class="string">        expect &#123;</span></span><br><span class="line"><span class="string">            \&quot;*password: \&quot; &#123;send \&quot;mypassword\n\&quot;;&#125;</span></span><br><span class="line"><span class="string">            \&quot;&gt; \&quot; &#123;send \&quot;watch\n\&quot;;&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    interact&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><code>-p22</code> 端口号，22是默认不用写，但是其他的需要写。</li>
@@ -314,9 +362,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ios-socat | grep iosre</span><br></pre></td></tr></table></figure>
 
 <h4 id="晋级用法"><a href="#晋级用法" class="headerlink" title="晋级用法"></a>晋级用法</h4><ul>
-<li><p>我的iOS设备通过<code>iproxy</code>来进行端口映射。具体用法移步<a href="https://www.google.com/search?q=iproxy&oq=iproxy" target="_blank" rel="noopener">Google</a></p>
+<li><p>我的iOS设备通过<code>iproxy</code>来进行端口映射。具体用法移步<a target="_blank" rel="noopener" href="https://www.google.com/search?q=iproxy&oq=iproxy">Google</a></p>
 </li>
-<li><p>通过<code>ios-socat &gt; ~/Desktop/ios.log</code> 然后下载<a href="https://itunes.apple.com/cn/app/logtail/id1073404370?mt=12" target="_blank" rel="noopener">LogTail</a>，剩下的摸索一下咯</p>
+<li><p>通过<code>ios-socat &gt; ~/Desktop/ios.log</code> 然后下载<a target="_blank" rel="noopener" href="https://itunes.apple.com/cn/app/logtail/id1073404370?mt=12">LogTail</a>，剩下的摸索一下咯</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2></li>
 </ul>
 <p>我还不清楚究竟什么原因导致了<code>收到来自此设备的无效响应</code>错误，布吉岛系统修改了什么。我尝试重新安装iTunes、Xcode都无效（据说陌陌的开发为这个无法调试直接将系统降级是可以的😂）。。有老铁懂得指点下～～</p>
@@ -327,67 +375,36 @@
     
     
     
-        
 
-  <div class="followme">
-    <p>Welcome to my other publishing channels</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
-            <span class="icon">
-              <i class="fab fa-twitter"></i>
-            </span>
-
-            <span class="label">Twitter</span>
-          </a>
-        </div>
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
-          </a>
-        </div>
-    </div>
-  </div>
-
-
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E9%80%86%E5%90%91/" rel="tag"># 逆向</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/post/reverse-ios-creat-cydia-sources/" rel="prev" title="iOS逆向-创建Cydia源">
-      <i class="fa fa-chevron-left"></i> iOS逆向-创建Cydia源
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/post/sync-sketchplugin/" rel="next" title="sketech模块同步插件">
-      sketech模块同步插件 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/reverse-ios-creat-cydia-sources/" rel="prev" title="iOS逆向-创建Cydia源">
+                  <i class="fa fa-chevron-left"></i> iOS逆向-创建Cydia源
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/sync-sketchplugin/" rel="next" title="sketech模块同步插件">
+                  sketech模块同步插件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="gitalk-container"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -396,7 +413,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -405,193 +422,46 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#手机可以连接到MacOS"><span class="nav-number">1.</span> <span class="nav-text">手机可以连接到MacOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一：Console-app-控制台"><span class="nav-number">1.1.</span> <span class="nav-text">方案一：Console.app(控制台)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二：LogGuru"><span class="nav-number">1.2.</span> <span class="nav-text">方案二：LogGuru</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三-其他的"><span class="nav-number">1.3.</span> <span class="nav-text">方案三: 其他的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手机无法链接进MacOS"><span class="nav-number">2.</span> <span class="nav-text">手机无法链接进MacOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#socat的坑"><span class="nav-number">2.1.</span> <span class="nav-text">socat的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#stop没有用"><span class="nav-number">2.1.1.</span> <span class="nav-text">stop没有用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#没有办法实时过滤"><span class="nav-number">2.1.2.</span> <span class="nav-text">没有办法实时过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#换个姿势使用socat"><span class="nav-number">2.2.</span> <span class="nav-text">换个姿势使用socat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在mac上安装expect"><span class="nav-number">2.2.1.</span> <span class="nav-text">在mac上安装expect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在mac的～-bash-profile配置"><span class="nav-number">2.2.2.</span> <span class="nav-text">在mac的～&#x2F;.bash_profile配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#晋级用法"><span class="nav-number">2.2.3.</span> <span class="nav-text">晋级用法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="继刚"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">继刚</p>
-  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>博客园</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
+      
 
 <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">继刚</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="Total Visitors">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="Total Views">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
-  </script>
 
 
 
 
-  
-<script src="/js/local-search.js"></script>
+
 
 
 
@@ -607,26 +477,16 @@
 
   
 
+
+
+
+
+
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-<script>
-    var gitalk = new Gitalk({
-      clientID    : '125422a205b9c712854c',
-      clientSecret: 'bf476d441db42d05a0997b6e4bf1ef1fb7e87c02',
-      repo        : 'madordie.github.io',
-      owner       : 'madordie',
-      admin       : ['madordie'],
-      id          : 'faacdc62263f0d63c50226572ffc7700',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-</script>
+  
 
 </body>
 </html>

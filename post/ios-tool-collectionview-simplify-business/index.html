@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -12,12 +12,14 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"madordie.github.io","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
   <meta name="description" content="UITableView作为高级控件被开发者广泛使用，同样的，UICollectionView由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。 在业务需求中，常规布局，大多数都是采用UITableView进行的，但是有痛点：  当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但">
@@ -26,6 +28,7 @@
 <meta property="og:url" content="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/index.html">
 <meta property="og:site_name" content="继刚的博客">
 <meta property="og:description" content="UITableView作为高级控件被开发者广泛使用，同样的，UICollectionView由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。 在业务需求中，常规布局，大多数都是采用UITableView进行的，但是有痛点：  当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-10-11T16:00:00.000Z">
 <meta property="article:modified_time" content="2020-05-18T02:46:39.005Z">
 <meta property="article:author" content="继刚">
@@ -33,10 +36,11 @@
 <meta property="article:tag" content="UICollectionView">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -56,65 +60,75 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">继刚的博客</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">不疯魔,不成活</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -125,55 +139,84 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
+
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CollectionView"><span class="nav-number">1.</span> <span class="nav-text">CollectionView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListItemDefaultProtocol%EF%BC%9A%E7%BB%91%E5%AE%9ACell%E5%92%8CModel"><span class="nav-number">2.</span> <span class="nav-text">ListItemDefaultProtocol：绑定Cell和Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%90%8E%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">以后如何开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8ECell%E7%9A%84%E8%B7%B3%E8%BD%AC%E5%A4%84%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">关于Cell的跳转处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%AE%97%E9%AB%98%E9%82%A3%E7%82%B9%E4%BA%8B"><span class="nav-number">5.</span> <span class="nav-text">关于算高那点事</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E9%AB%98%E4%BD%8D%E7%BD%AE%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">5.1.</span> <span class="nav-text">算高位置的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E9%AB%98%E4%BD%BF%E7%94%A8%E7%9A%84view%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">5.2.</span> <span class="nav-text">算高使用的view的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E9%AB%98%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%98%E5%B1%80%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="nav-number">5.3.</span> <span class="nav-text">算高的时候变局的控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BB%A3%E7%90%86%E9%82%A3%E7%82%B9%E4%BA%8B"><span class="nav-number">6.</span> <span class="nav-text">关于代理那点事</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#KVO"><span class="nav-number">6.1.</span> <span class="nav-text">KVO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rx%E7%B3%BB"><span class="nav-number">6.2.</span> <span class="nav-text">Rx系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RAC%E7%B3%BB"><span class="nav-number">6.3.</span> <span class="nav-text">RAC系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E4%BC%A0%E9%80%92"><span class="nav-number">6.4.</span> <span class="nav-text">代理传递</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OC%E5%92%8B%E5%8A%9E%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">OC咋办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A1%AB%E5%85%85Cell%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%9C%A8CellModel%E4%B8%AD%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">填充Cell的数据为什么会在CellModel中？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">9.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%AB%E7%9A%84"><span class="nav-number">10.</span> <span class="nav-text">别的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%B6%E7%84%B6%E7%9C%8B%E5%88%B0%E4%B8%80%E4%B8%AA%E7%B1%BB%E4%BC%BC%E7%9A%84%E6%96%87%E7%AB%A0"><span class="nav-number">11.</span> <span class="nav-text">偶然看到一个类似的文章</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">继刚</p>
+  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
 </div>
 
+
+
+      </section>
     </div>
-  </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-</div>
+
     </header>
 
     
@@ -182,19 +225,24 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
+      
 
-    
+      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -211,33 +259,35 @@
           用CollectionView简化代码，专注于业务和UI
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2017-10-12 00:00:00" itemprop="dateCreated datePublished" datetime="2017-10-12T00:00:00+08:00">2017-10-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-18 10:46:39" itemprop="dateModified" datetime="2020-05-18T10:46:39+08:00">2020-05-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-            </span>
+      <time title="Created: 2017-10-12 00:00:00" itemprop="dateCreated datePublished" datetime="2017-10-12T00:00:00+08:00">2017-10-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-05-18 10:46:39" itemprop="dateModified" datetime="2020-05-18T10:46:39+08:00">2020-05-18</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -246,8 +296,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><code>UITableView</code>作为高级控件被开发者广泛使用，同样的，<code>UICollectionView</code>由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。</p>
 <p>在业务需求中，常规布局，大多数都是采用<code>UITableView</code>进行的，但是有痛点：</p>
 <ul>
@@ -273,7 +321,7 @@
 <a id="more"></a>
 
 <h3 id="CollectionView"><a href="#CollectionView" class="headerlink" title="CollectionView"></a>CollectionView</h3><p>为了达到上面效果中的第三步，我们需要自定义一个<code>CollectionView</code>来处理刷新数据、设置代理、设置数据源、注册cell、等操作。</p>
-<p>需要说明的是，此处使用<a href="https://github.com/chiahsien/CHTCollectionViewWaterfallLayout" target="_blank" rel="noopener"><code>CHTCollectionViewWaterfallLayout</code></a>来处理瀑布流。</p>
+<p>需要说明的是，此处使用<a target="_blank" rel="noopener" href="https://github.com/chiahsien/CHTCollectionViewWaterfallLayout"><code>CHTCollectionViewWaterfallLayout</code></a>来处理瀑布流。</p>
 <p>创建一个<code>CollectionViewSection</code>的类/结构体来保存section信息。比如说：<code>sectionInset</code>、<code>minimumColumnSpacing</code>、<code>minimumInteritemSpacing</code>、<code>columnCount</code>、等</p>
 <p>在<code>CollectionView</code>中设置一个<code>var sections = [KTJCollectionViewSection]()</code>用于保存sections</p>
 <p>实现<code>UICollectionViewDataSource</code>、 <code>UICollectionViewDelegate</code>。此处省略约1千字…</p>
@@ -292,7 +340,7 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">ListItemDefaultProtocol</span>: <span class="title">KTJListItemProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">associatedtype</span> <span class="type">ItemType</span>: <span class="type">UIView</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(view: ItemType)</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ListItemDefaultProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> identifa: <span class="type">String</span> &#123; <span class="keyword">return</span>  <span class="type">NSStringFromClass</span>(<span class="type">ItemType</span>.<span class="keyword">self</span>)&#125;</span><br><span class="line">    <span class="keyword">var</span> registClass: <span class="type">AnyClass</span> &#123; <span class="keyword">return</span> <span class="type">ItemType</span>.<span class="keyword">self</span> &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(item: AnyObject)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> reusableView = item <span class="keyword">as</span>? <span class="type">ItemType</span> &#123;</span><br><span class="line">            fillModel(view: reusableView)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>然后，就可以愉快的玩耍了～～</p>
-<p>最后Cell中的的代码效果就是<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView-simplify-business/LabelCell.swift" target="_blank" rel="noopener">这个样子</a>。<br>再加上<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView-simplify-business/ViewController.swift" target="_blank" rel="noopener">数据填充</a>是不是很简单了呢～～</p>
+<p>最后Cell中的的代码效果就是<a target="_blank" rel="noopener" href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView-simplify-business/LabelCell.swift">这个样子</a>。<br>再加上<a target="_blank" rel="noopener" href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView-simplify-business/ViewController.swift">数据填充</a>是不是很简单了呢～～</p>
 <h3 id="以后如何开发"><a href="#以后如何开发" class="headerlink" title="以后如何开发"></a>以后如何开发</h3><p>真的如同前面的例子一样，只需要这么几步绕不过去的：</p>
 <ol>
 <li>处理接口吐出来的数据。</li>
@@ -318,29 +366,29 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JmpCell</span>: <span class="title">UICollectionViewCell</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> jmp = <span class="type">JmpCellModel</span>()</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setup</span><span class="params">()</span></span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        jmpBtn.addTarget(jmp, action: jmp.action, <span class="keyword">for</span>: .touchUpInside)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JmpCellModel</span>: <span class="title">ListItemDefaultProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> jmp: <span class="type">Jmp?</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(view: JmpCell)</span></span> &#123;</span><br><span class="line">        view.jmp.info = jmp</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>至于这个<code>JmpCellModel.jmp</code>怎么生成，这里就不说了。</p>
 <h3 id="关于算高那点事"><a href="#关于算高那点事" class="headerlink" title="关于算高那点事"></a>关于算高那点事</h3><h4 id="算高位置的选择"><a href="#算高位置的选择" class="headerlink" title="算高位置的选择"></a>算高位置的选择</h4><p>我也曾纠结过frame的代码应该写在哪里。。有写在初始化的，有单独写一个方法的，还有写在<code>func sizeThatFits(:) -&gt; CGSize</code></p>
-<p>由于当年对<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell" target="_blank" rel="noopener">UITableView-FDTemplateLayoutCell</a>中毒较深，所以沿用了最后一种方案。</p>
+<p>由于当年对<a target="_blank" rel="noopener" href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell">UITableView-FDTemplateLayoutCell</a>中毒较深，所以沿用了最后一种方案。</p>
 <h4 id="算高使用的view的选择"><a href="#算高使用的view的选择" class="headerlink" title="算高使用的view的选择"></a>算高使用的view的选择</h4><p>在算高的时候，首先需要明确的是：<strong>高度是数据和当前最大宽度共同决定的</strong>，所以在算高的时候需要拿着数据、view然后才能去算高（PS：至于那些拿着数据硬算出一个高度的代码，此处不发表看法😂，早晚会后悔的）</p>
 <p>然后就是<code>UITableView</code>、<code>UICollectionView</code>的算高是通过一个单独的代理去获取的，并不提供view去计算。。这就是矛盾的地方。</p>
 <p>虽然<code>UITableView</code>、<code>UICollectionView</code>在算高的地方不提供View,但是有一个<code>dequeueReusableCell....</code>的方法可以获取到缓存池中的<code>Cell</code>呀</p>
-<p>如果你这样做了，那么你将会付出惨重的代码。这个方案我在<a href="http://www.cnblogs.com/madordie" target="_blank" rel="noopener">博客园</a>2015.03.17的<a href="http://www.cnblogs.com/madordie/p/4344209.html" target="_blank" rel="noopener">“iOS 优化性能之TableView”</a>中已经说了：</p>
+<p>如果你这样做了，那么你将会付出惨重的代码。这个方案我在<a target="_blank" rel="noopener" href="http://www.cnblogs.com/madordie">博客园</a>2015.03.17的<a target="_blank" rel="noopener" href="http://www.cnblogs.com/madordie/p/4344209.html">“iOS 优化性能之TableView”</a>中已经说了：</p>
 <blockquote>
 <p>dequeueReusableCellWithIdentifier:此函数的调用要注意以下几点：<br>    i.此函数的返回值是做为tableView:cellForRowAtIndexPath:的返回值的。这样保证拿出来的完整还给TableView。<br>    ii.如果此函数的返回值不是为了给tableView:cellForRowAtIndexPath:做返回值，那么你要注意这是在一个拿取别人稀缺资源的操作，需要注意珍惜这个返回值，能不浪费就不要浪费。<br>    iii.对于AL自动适应的TableView取Cell时候要注意保存。个人建议封装TableView，然后用来计算高度的Cell保存在TableView中。对于多种类型的Cell，则可以使用复用标识符作为Key的字典来存储。这样能够有效节约dequeueReusableCellWithIdentifier:调用次数。</p>
 </blockquote>
 <p><code>UICollectionView</code>也是如此。所以使用<code>dequeueReusableCell....</code>方法是<strong>很不靠谱的</strong>。</p>
-<p>在<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell/blob/912b3ce4a61198c0b79a3d85b977f8fdacd153ea/Classes/UITableView%2BFDTemplateLayoutCell.m#L134-#L155" target="_blank" rel="noopener">UITableView-FDTemplateLayoutCell</a>中使用了字典保存缓存算高的View，也是比较赞的。</p>
+<p>在<a target="_blank" rel="noopener" href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell/blob/912b3ce4a61198c0b79a3d85b977f8fdacd153ea/Classes/UITableView%2BFDTemplateLayoutCell.m#L134-#L155">UITableView-FDTemplateLayoutCell</a>中使用了字典保存缓存算高的View，也是比较赞的。</p>
 <p>但是现在有了<code>CollectionView</code>，我们可以不用OC的<code>objc_setAssociatedObject(,,,)</code>去处理而直接使用了<code>NSCache</code>去处理就行了～</p>
-<p>如果看了<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift" target="_blank" rel="noopener"><code>CollectionView</code></a>就会发现，<code>ListItemProtocol</code>还有一个get方法<code>var newItem: AnyObject { get }</code>这个是用来算高的。</p>
-<p>在<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift" target="_blank" rel="noopener">CollectionView.swift</a>关于高度的代理设置中可以看到相关获取和设置。</p>
+<p>如果看了<a target="_blank" rel="noopener" href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift"><code>CollectionView</code></a>就会发现，<code>ListItemProtocol</code>还有一个get方法<code>var newItem: AnyObject &#123; get &#125;</code>这个是用来算高的。</p>
+<p>在<a target="_blank" rel="noopener" href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift">CollectionView.swift</a>关于高度的代理设置中可以看到相关获取和设置。</p>
 <h4 id="算高的时候变局的控制"><a href="#算高的时候变局的控制" class="headerlink" title="算高的时候变局的控制"></a>算高的时候变局的控制</h4><p>高度的计算现在已经可以正常计算，但是对于<code>columnCount &gt; 1</code>的时候，牵扯到间隙的计算需要注意一次啊。毕竟<code>CHTCollectionViewWaterfallLayout</code>功能更强大。</p>
-<p>相关代码在<a href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift" target="_blank" rel="noopener">CollectionView.swift</a>的<code>func collectionView(:,layout:,sizeForItemAt:) -&gt; CGSize</code>函数中。</p>
+<p>相关代码在<a target="_blank" rel="noopener" href="https://github.com/madordie/collectionview-simplify-business/blob/master/CollectionView.swift">CollectionView.swift</a>的<code>func collectionView(:,layout:,sizeForItemAt:) -&gt; CGSize</code>函数中。</p>
 <h3 id="关于代理那点事"><a href="#关于代理那点事" class="headerlink" title="关于代理那点事"></a>关于代理那点事</h3><p>丫的，需求总是比想的多，但是办法也比问题多。</p>
 <p>对于<code>CollectionView</code>来说，代理都设置成了self，这样会导致有时候需要<code>UIScrollViewDelegate</code>干些事情的时候总是不那么自由。。。实乃新痛点，不过有办法。</p>
 <p>下面是几种方案：</p>
 <h4 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h4><p>直接KVO到<code>self.contentOffset</code>，这样一了百了。写什么代理，要什么自行车！（PS：swift提供闭包的代理，也是很好用的）</p>
-<p>如果不会，请自行<a href="https://www.google.com/" target="_blank" rel="noopener">Google</a>。<a href="https://objccn.io/issue-7-3/" target="_blank" rel="noopener">ObjC-中国：KVC 和 KVO</a>，我只能帮你到这里</p>
-<h4 id="Rx系"><a href="#Rx系" class="headerlink" title="Rx系"></a>Rx系</h4><p>很抱歉，你不能用<code>self.rx.contentOffset</code>。原因是<a href="https://github.com/chiahsien/CHTCollectionViewWaterfallLayout" target="_blank" rel="noopener"><code>CHTCollectionViewWaterfallLayout</code></a>中有这么一行断言：</p>
+<p>如果不会，请自行<a target="_blank" rel="noopener" href="https://www.google.com/">Google</a>。<a target="_blank" rel="noopener" href="https://objccn.io/issue-7-3/">ObjC-中国：KVC 和 KVO</a>，我只能帮你到这里</p>
+<h4 id="Rx系"><a href="#Rx系" class="headerlink" title="Rx系"></a>Rx系</h4><p>很抱歉，你不能用<code>self.rx.contentOffset</code>。原因是<a target="_blank" rel="noopener" href="https://github.com/chiahsien/CHTCollectionViewWaterfallLayout"><code>CHTCollectionViewWaterfallLayout</code></a>中有这么一行断言：</p>
 <blockquote>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSAssert</span>([<span class="keyword">self</span>.delegate conformsToProtocol:@<span class="class"><span class="keyword">protocol</span>(<span class="title">CHTCollectionViewDelegateWaterfallLayout</span>)], @"<span class="title">UICollectionView</span>'<span class="title">s</span> <span class="title">delegate</span> <span class="title">should</span> <span class="title">conform</span> <span class="title">to</span> <span class="title">CHTCollectionViewDelegateWaterfallLayout</span> <span class="title">protocol</span>"); </span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSAssert</span>([<span class="keyword">self</span>.delegate conformsToProtocol:@<span class="class"><span class="keyword">protocol</span>(<span class="title">CHTCollectionViewDelegateWaterfallLayout</span>)], @&quot;<span class="title">UICollectionView</span>&#x27;<span class="title">s</span> <span class="title">delegate</span> <span class="title">should</span> <span class="title">conform</span> <span class="title">to</span> <span class="title">CHTCollectionViewDelegateWaterfallLayout</span> <span class="title">protocol</span>&quot;);</span></span><br></pre></td></tr></table></figure>
 </blockquote>
 <p><strong>但是</strong>，你可以使用Rx里面的KVO呀～也是贼方便</p>
 <h4 id="RAC系"><a href="#RAC系" class="headerlink" title="RAC系"></a>RAC系</h4><p>抱歉，我不会。原因在此<a href="../reactivecocoa-ready-to-use">准备食用RAC(ReactiveCocoa)的顾虑</a></p>
@@ -354,10 +402,10 @@
 <p>cellModel中定义了Cell所对应的填充数据格式，在第一次写的时候难免会按照业务逻辑起一些业务逻辑的名字，在复用的时候又不能改名字，会对维护和开发加了一定量的复杂度，这不是我想要的。。</p>
 <p>于是乎每个CellModel根据自己的需要绑定需要绑定的Cell，去填充Cell所对应的数据就好。只需要侵入cellModel即可。代价最小，受益最大。</p>
 <p>PS.对于同一个List，需要注意cell的复用和多个cellModel同时绑定一个cell时，属性的设置。</p>
-<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p><a href="https://github.com/madordie/collectionview-simplify-business" target="_blank" rel="noopener">Demo</a>部分没有写跳转相关内容，但是别的都有了😂</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p><a target="_blank" rel="noopener" href="https://github.com/madordie/collectionview-simplify-business">Demo</a>部分没有写跳转相关内容，但是别的都有了😂</p>
 <h3 id="别的"><a href="#别的" class="headerlink" title="别的"></a>别的</h3><p>好像没了吧～，想起来了再补充咯</p>
 <h3 id="偶然看到一个类似的文章"><a href="#偶然看到一个类似的文章" class="headerlink" title="偶然看到一个类似的文章"></a>偶然看到一个类似的文章</h3><blockquote>
-<p><a href="https://www.appcoda.com.tw/tableview-mvvm/" target="_blank" rel="noopener">Table View 太複雜？利用 MVVM 和 Protocol 就可以為它重構瘦身！</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.appcoda.com.tw/tableview-mvvm/">Table View 太複雜？利用 MVVM 和 Protocol 就可以為它重構瘦身！</a></p>
 </blockquote>
 <p>昨天(2018.7.24)翻文章的时候看到这个文章，然后将文章和代码捋了一下，发现这才是MVVM吧。觉得不错，贴出来～</p>
 
@@ -366,37 +414,8 @@
     
     
     
-        
 
-  <div class="followme">
-    <p>Welcome to my other publishing channels</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="https://twitter.com/sunjigang">
-            <span class="icon">
-              <i class="fab fa-twitter"></i>
-            </span>
-
-            <span class="label">Twitter</span>
-          </a>
-        </div>
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
-          </a>
-        </div>
-    </div>
-  </div>
-
-
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/tool/" rel="tag"># tool</a>
               <a href="/tags/UICollectionView/" rel="tag"># UICollectionView</a>
@@ -404,30 +423,28 @@
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/post/macos-high-sierra-cocoapods/" rel="prev" title="mac10.13 pods 命令错误">
-      <i class="fa fa-chevron-left"></i> mac10.13 pods 命令错误
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/post/reprinted-regular-mind-map/" rel="next" title="「转」一张思维导图，让正则表达式不再难懂">
-      「转」一张思维导图，让正则表达式不再难懂 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/macos-high-sierra-cocoapods/" rel="prev" title="mac10.13 pods 命令错误">
+                  <i class="fa fa-chevron-left"></i> mac10.13 pods 命令错误
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/reprinted-regular-mind-map/" rel="next" title="「转」一张思维导图，让正则表达式不再难懂">
+                  「转」一张思维导图，让正则表达式不再难懂 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="gitalk-container"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -436,7 +453,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -445,193 +462,46 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CollectionView"><span class="nav-number">1.</span> <span class="nav-text">CollectionView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListItemDefaultProtocol：绑定Cell和Model"><span class="nav-number">2.</span> <span class="nav-text">ListItemDefaultProtocol：绑定Cell和Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以后如何开发"><span class="nav-number">3.</span> <span class="nav-text">以后如何开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Cell的跳转处理"><span class="nav-number">4.</span> <span class="nav-text">关于Cell的跳转处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于算高那点事"><span class="nav-number">5.</span> <span class="nav-text">关于算高那点事</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算高位置的选择"><span class="nav-number">5.1.</span> <span class="nav-text">算高位置的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算高使用的view的选择"><span class="nav-number">5.2.</span> <span class="nav-text">算高使用的view的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算高的时候变局的控制"><span class="nav-number">5.3.</span> <span class="nav-text">算高的时候变局的控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于代理那点事"><span class="nav-number">6.</span> <span class="nav-text">关于代理那点事</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#KVO"><span class="nav-number">6.1.</span> <span class="nav-text">KVO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rx系"><span class="nav-number">6.2.</span> <span class="nav-text">Rx系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RAC系"><span class="nav-number">6.3.</span> <span class="nav-text">RAC系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代理传递"><span class="nav-number">6.4.</span> <span class="nav-text">代理传递</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OC咋办？"><span class="nav-number">7.</span> <span class="nav-text">OC咋办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填充Cell的数据为什么会在CellModel中？"><span class="nav-number">8.</span> <span class="nav-text">填充Cell的数据为什么会在CellModel中？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">9.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#别的"><span class="nav-number">10.</span> <span class="nav-text">别的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#偶然看到一个类似的文章"><span class="nav-number">11.</span> <span class="nav-text">偶然看到一个类似的文章</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="继刚"
-      src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">继刚</p>
-  <div class="site-description" itemprop="description">学习使我快乐 :)</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/madordie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:io.madordie@gmail.com" title="E-Mail → mailto:io.madordie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/sunjigang" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;sunjigang" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://www.cnblogs.com/madordie" title="博客园 → http:&#x2F;&#x2F;www.cnblogs.com&#x2F;madordie" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>博客园</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
+      
 
 <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">继刚</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="Total Visitors">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="Total Views">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
-  </script>
 
 
 
 
-  
-<script src="/js/local-search.js"></script>
+
 
 
 
@@ -647,26 +517,16 @@
 
   
 
+
+
+
+
+
+
+
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-<script>
-    var gitalk = new Gitalk({
-      clientID    : '125422a205b9c712854c',
-      clientSecret: 'bf476d441db42d05a0997b6e4bf1ef1fb7e87c02',
-      repo        : 'madordie.github.io',
-      owner       : 'madordie',
-      admin       : ['madordie'],
-      id          : '50b89089660bc8278a0d945c110a5a77',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-</script>
+  
 
 </body>
 </html>
