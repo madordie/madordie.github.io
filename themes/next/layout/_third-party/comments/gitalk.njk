@@ -1,15 +1,15 @@
-{%- if page.comments %}
-<link rel="stylesheet" href="{{ theme.vendors.gitalk_css }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
 <script>
 NexT.utils.loadComments('#gitalk-container', () => {
   NexT.utils.getScript('{{ theme.vendors.gitalk_js }}', () => {
     var gitalk = new Gitalk({
-      clientID    : '{{ theme.gitalk.client_id }}',
-      clientSecret: '{{ theme.gitalk.client_secret }}',
-      repo        : '{{ theme.gitalk.repo }}',
-      owner       : '{{ theme.gitalk.github_id }}',
-      admin       : ['{{ theme.gitalk.admin_user }}'],
+      clientID    : '2fcb2111497d0ea0dba4',
+      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
+      repo        : 'madordie.github.io',
+      owner       : 'madordie',
+      admin       : ['madordie'],
       id          : '{{ gitalk_md5(page.path) }}',
       {%- if theme.gitalk.language == '' %}
         language: window.navigator.language || window.navigator.userLanguage,
@@ -22,4 +22,3 @@ NexT.utils.loadComments('#gitalk-container', () => {
   }, window.Gitalk);
 });
 </script>
-{%- endif %}

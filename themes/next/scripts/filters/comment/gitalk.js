@@ -7,7 +7,6 @@ const path = require('path');
 // Add comment
 hexo.extend.filter.register('theme_inject', injects => {
   const theme = hexo.theme.config;
-  if (!theme.gitalk.enable) return;
 
   injects.comment.raw('gitalk', '<div class="comments" id="gitalk-container"></div>', {}, {cache: true});
 
