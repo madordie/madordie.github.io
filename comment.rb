@@ -42,7 +42,10 @@ end
 urls.each_with_index do |url, index|
   url = url.gsub(/index.html$/, "")
 
-  if commenteds.include?("#{url}\n") == false
+  md5_key = URI.parse(url).path
+
+  if md5_key.match(/^\/tags\/.+/) || md5_key.match(/^\/categories\/.+/)
+  elsif commenteds.include?("#{url}\n") == false
     url_key = Digest::MD5.hexdigest(URI.parse(url).path)
     response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
 
@@ -76,7 +79,7 @@ urls.each_with_index do |url, index|
     else
       title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
       response = conn.post("/repos/#{username}/#{repo_name}/issues") do |req|
-        # req.body = { body: url, labels: [kind, url_key], title: title }.to_json
+        req.body = { body: url, labels: [kind, url_key], title: title }.to_json
       end
       if JSON.parse(response.body)['number'] > 0
         `echo #{url} >> .commenteds`
