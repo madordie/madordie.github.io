@@ -410,14 +410,7 @@
 
   
   <url>
-    <loc>https://madordie.github.io/tags/gitment/</loc>
-    <lastmod>2020-10-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/tags/gitalk/</loc>
+    <loc>https://madordie.github.io/tags/SEO/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -431,7 +424,14 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/tags/SEO/</loc>
+    <loc>https://madordie.github.io/tags/gitment/</loc>
+    <lastmod>2020-10-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/tags/gitalk/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -452,14 +452,14 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/tags/Xcode/</loc>
+    <loc>https://madordie.github.io/tags/Sketchplugin/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://madordie.github.io/tags/Sketchplugin/</loc>
+    <loc>https://madordie.github.io/tags/Xcode/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -473,14 +473,14 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/tags/Sonarqube/</loc>
+    <loc>https://madordie.github.io/tags/SwiftLint/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://madordie.github.io/tags/SwiftLint/</loc>
+    <loc>https://madordie.github.io/tags/Sonarqube/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
