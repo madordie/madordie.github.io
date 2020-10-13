@@ -64,13 +64,14 @@ elif [ $opt = 'p' ]; then
     # # 这个脚本在这里：https://madordie.github.io/post/use-hexo-setup-blog/
     # python auto-push-sitemap.py
     # echo ' --> 已上传站图.\n'
-    backup
     cd ./source
     ruby comment.rb
     echo ' --> 评论已自动创建.\n'
     sitemap=`mktemp`
     curl -s https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml | grep madordie.github.io | awk -v FS='<loc>|</loc>' '{print $2}' > sitemap
     curl -H 'Content-Type:text/plain' --data-binary @sitemap "http://data.zz.baidu.com/urls?site=https://madordie.github.io&token=`cat .baidu-token`"
+    cd ../
+    backup
 fi
 
 echo ' -->  所有操作已完成.'
