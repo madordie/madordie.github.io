@@ -265,22 +265,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于转载的文章</title>
-    <url>/post/about-reprint-article/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一点删除原链接的转载文章的牢骚</p>
-<a id="more"></a>
-
-<h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并没有署名转载出处，所以应该是原创）。之后看了一下他的另一个文章，刚好我百度过这个文章的原作者的最后一个系列的，于是我又翻阅了一下看看是不是不一样，结果和我想的一样，除了删除了作者的署名之外其他的都是一样的。于是关掉了网页，心中默默的鄙视。</p>
-<h1 id="关于转载的别人文章"><a href="#关于转载的别人文章" class="headerlink" title="关于转载的别人文章"></a>关于转载的别人文章</h1><p>对于一些大神的技术文章都是喜欢的，爱不释手的那种，我也是。有的能转载的我就转载，不能转载的，我会复制下来，放在我自己的文件夹中，为的是方便查询。在转载的时候我会特意标示转载的地址。而且一般情况下我会在文章的开始写上几句简单的主要的思想（比如：<a href="http://www.cnblogs.com/madordie/p/5159597.html">《[转]蓝牙开发》</a>、<a href="http://www.cnblogs.com/madordie/p/4322044.html">《[搬运] mac下安装GDB》</a>、<a href="http://www.cnblogs.com/madordie/p/4322042.html">《［搬运］MAC 下安装 brew》</a>），当然有时候没来得及的就忘了😂（比如：<a href="http://www.cnblogs.com/madordie/p/4357685.html">《[搬运] iOS 7 侧滑返回手势使用和错误集》</a>）。</p>
-<p>还有关于文章的排版，殊不知原作者为了让读者更好的阅读会对排版做的比较好，有的人为了阅读方便会去阅读原作者的文章。比如说我这种强迫症。</p>
-<h1 id="我对删除原链的转载文章态度"><a href="#我对删除原链的转载文章态度" class="headerlink" title="我对删除原链的转载文章态度"></a>我对删除原链的转载文章态度</h1><p>然后说一下我对于那些抄袭的，然后删除了原链接的人鄙视一下。每一篇文章都是别人花费了大量的精力去完成的，有的为了让读者能够更清楚的理解，所以会在发布的时候找别人去读一读，看能不能理解其中云云。然而对文章的原链接保存是一种对别人劳动成果的尊重，对原作者最基本的尊重。</p>
-<p>别的不想多说了。转载请注明出处。谢谢！<br>且行且珍惜。</p>
-]]></content>
-      <categories>
-        <category>牢骚</category>
-      </categories>
-  </entry>
-  <entry>
     <title>mac10.13 pods 命令错误</title>
     <url>/post/macos-high-sierra-cocoapods/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每逢升级大版本总要过搞点事情。</p>
@@ -713,6 +697,22 @@
       <tags>
         <tag>Sketchplugin</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>关于转载的文章</title>
+    <url>/post/about-reprint-article/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一点删除原链接的转载文章的牢骚</p>
+<a id="more"></a>
+
+<h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并没有署名转载出处，所以应该是原创）。之后看了一下他的另一个文章，刚好我百度过这个文章的原作者的最后一个系列的，于是我又翻阅了一下看看是不是不一样，结果和我想的一样，除了删除了作者的署名之外其他的都是一样的。于是关掉了网页，心中默默的鄙视。</p>
+<h1 id="关于转载的别人文章"><a href="#关于转载的别人文章" class="headerlink" title="关于转载的别人文章"></a>关于转载的别人文章</h1><p>对于一些大神的技术文章都是喜欢的，爱不释手的那种，我也是。有的能转载的我就转载，不能转载的，我会复制下来，放在我自己的文件夹中，为的是方便查询。在转载的时候我会特意标示转载的地址。而且一般情况下我会在文章的开始写上几句简单的主要的思想（比如：<a href="http://www.cnblogs.com/madordie/p/5159597.html">《[转]蓝牙开发》</a>、<a href="http://www.cnblogs.com/madordie/p/4322044.html">《[搬运] mac下安装GDB》</a>、<a href="http://www.cnblogs.com/madordie/p/4322042.html">《［搬运］MAC 下安装 brew》</a>），当然有时候没来得及的就忘了😂（比如：<a href="http://www.cnblogs.com/madordie/p/4357685.html">《[搬运] iOS 7 侧滑返回手势使用和错误集》</a>）。</p>
+<p>还有关于文章的排版，殊不知原作者为了让读者更好的阅读会对排版做的比较好，有的人为了阅读方便会去阅读原作者的文章。比如说我这种强迫症。</p>
+<h1 id="我对删除原链的转载文章态度"><a href="#我对删除原链的转载文章态度" class="headerlink" title="我对删除原链的转载文章态度"></a>我对删除原链的转载文章态度</h1><p>然后说一下我对于那些抄袭的，然后删除了原链接的人鄙视一下。每一篇文章都是别人花费了大量的精力去完成的，有的为了让读者能够更清楚的理解，所以会在发布的时候找别人去读一读，看能不能理解其中云云。然而对文章的原链接保存是一种对别人劳动成果的尊重，对原作者最基本的尊重。</p>
+<p>别的不想多说了。转载请注明出处。谢谢！<br>且行且珍惜。</p>
+]]></content>
+      <categories>
+        <category>牢骚</category>
+      </categories>
   </entry>
   <entry>
     <title>Fastlane自动化笔记</title>
@@ -1166,6 +1166,40 @@
       </tags>
   </entry>
   <entry>
+    <title>DEBUG - UIView.h#190</title>
+    <url>/post/debug-uiview-m-190/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>CRASH:<br><code>void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()</code></p>
+<a id="more"></a>
+
+<h1 id="UIView-m-190-UIViewReportBrokenSuperviewChain"><a href="#UIView-m-190-UIViewReportBrokenSuperviewChain" class="headerlink" title="UIView.m:190 - UIViewReportBrokenSuperviewChain"></a>UIView.m:190 - UIViewReportBrokenSuperviewChain</h1><h2 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常分析"><a href="#异常分析" class="headerlink" title="异常分析"></a>异常分析</h2><p>  APP crash在<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[keyWindow addSubview:weakSelf];</span><br></pre></td></tr></table></figure><br>  <a href="#%E9%94%99%E8%AF%AF%E5%A0%86%E6%A0%88">错误堆栈信息</a>。</p>
+<p>  但是真正造成crash的代码为：</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure>
+
+
+<p>  解决方案：<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self layoutIfNeeded];</span><br><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure></p>
+<p>  原因分析：<br>  下面这个说的很在理</p>
+<blockquote>
+<p><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
+<p>I had this issue with a library when moving over to Xcode 8 (Material-Controls-For-iOS - MDTextField). I found that the problem was coming from where the layer of one view (which had no superview) was being added to another.</p>
+<p>It looks like this may be the case for yourself also - your toolbar being created has not been added to a superview first. The fix I used was to add the view as a subview of the view that the layer was being added to, so in your case adding the toolbar as a subview of myModelView should stop the error.</p>
+</blockquote>
+<h2 id="碰到该问题的还有"><a href="#碰到该问题的还有" class="headerlink" title="碰到该问题的还有"></a>碰到该问题的还有</h2><ul>
+<li><a href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8">Google出来的一个，但是并未看到相关回复。。。</a></li>
+<li><a href="http://www.th7.cn/Program/IOS/201609/975582.shtml">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a></li>
+<li><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">stackoverflow(这个分析的很到位)</a></li>
+</ul>
+<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br><span class="line"></span><br><span class="line">(lldb) bt</span><br><span class="line">* thread #1: tid &#x3D; 0x87c18, 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw, queue &#x3D; &#39;com.apple.main-thread&#39;, stop reason &#x3D; breakpoint 1.2</span><br><span class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw</span><br><span class="line">    frame #1: 0x0000000183954094 CoreFoundation&#96;+[NSException raise:format:arguments:] + 104</span><br><span class="line">    frame #2: 0x00000001843de898 Foundation&#96;-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</span><br><span class="line">    frame #3: 0x0000000189a7cf9c UIKit&#96;UIViewReportBrokenSuperviewChain + 472</span><br><span class="line">    frame #4: 0x0000000189a7d658 UIKit&#96;_UIViewTopDownSubtreeTraversal + 1496</span><br><span class="line">    frame #5: 0x000000018a0f3390 UIKit&#96;-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</span><br><span class="line">    frame #6: 0x00000001843832ac Foundation&#96;-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</span><br><span class="line">    frame #7: 0x0000000184382dcc Foundation&#96;-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</span><br><span class="line">    frame #8: 0x00000001843809e0 Foundation&#96;-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</span><br><span class="line">    frame #9: 0x000000018989cfdc UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</span><br><span class="line">    frame #10: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #11: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #12: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #13: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #14: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #15: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #16: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #17: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #18: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #19: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #20: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #21: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #22: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #23: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #24: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #25: 0x00000001898a4bb0 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</span><br><span class="line">    frame #26: 0x00000001898a4b04 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</span><br><span class="line">    frame #27: 0x00000001898a4910 UIKit&#96;-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</span><br><span class="line">    frame #28: 0x00000001897996dc UIKit&#96;-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</span><br><span class="line">    frame #29: 0x0000000189798d90 UIKit&#96;__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</span><br><span class="line">    frame #30: 0x0000000189798be8 UIKit&#96;-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</span><br><span class="line">    frame #31: 0x00000001897a4ad0 UIKit&#96;-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</span><br><span class="line">    frame #32: 0x00000001897a43bc UIKit&#96;-[UIView(Hierarchy) addSubview:] + 828</span><br><span class="line">  * frame #33: 0x00000001004f78ec Project_ent&#96;__31-[EsfCommentReportView show]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</span><br><span class="line">    frame #34: 0x00000001897d2b88 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</span><br><span class="line">    frame #35: 0x00000001897d28e8 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</span><br><span class="line">    frame #36: 0x00000001004f77a0 Project_ent&#96;-[EsfCommentReportView show](self&#x3D;0x000000015fe32020, _cmd&#x3D;&quot;show&quot;) + 492 at EsfCommentReportView.m:291</span><br><span class="line">    frame #37: 0x0000000100858a04 Project_ent&#96;__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</span><br><span class="line">    frame #38: 0x00000001003f93e4 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, sourceType&#x3D;2, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 236 at MyLoginViewController.m:123</span><br><span class="line">    frame #39: 0x00000001003f92b0 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 156 at MyLoginViewController.m:114</span><br><span class="line">    frame #40: 0x00000001003f9124 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0) + 120 at MyLoginViewController.m:104</span><br><span class="line">    frame #41: 0x0000000100858870 Project_ent&#96;-[BuyerAdviserProfileViewController reportAction:](self&#x3D;0x000000015fd2e320, _cmd&#x3D;&quot;reportAction:&quot;, button&#x3D;0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</span><br><span class="line">    frame #42: 0x00000001897d27b0 UIKit&#96;-[UIApplication sendAction:to:from:forEvent:] + 96</span><br><span class="line">    frame #43: 0x00000001897d2730 UIKit&#96;-[UIControl sendAction:to:forEvent:] + 80</span><br><span class="line">    frame #44: 0x00000001897bcbe4 UIKit&#96;-[UIControl _sendActionsForEvents:withEvent:] + 452</span><br><span class="line">    frame #45: 0x00000001897d201c UIKit&#96;-[UIControl touchesEnded:withEvent:] + 584</span><br><span class="line">    frame #46: 0x00000001897d1b44 UIKit&#96;-[UIWindow _sendTouchesForEvent:] + 2484</span><br><span class="line">    frame #47: 0x00000001897ccd8c UIKit&#96;-[UIWindow sendEvent:] + 2988</span><br><span class="line">    frame #48: 0x000000018979d858 UIKit&#96;-[UIApplication sendEvent:] + 340</span><br><span class="line">    frame #49: 0x0000000189f8acb8 UIKit&#96;__dispatchPreprocessedEventFromEventQueue + 2736</span><br><span class="line">    frame #50: 0x0000000189f84720 UIKit&#96;__handleEventQueue + 784</span><br><span class="line">    frame #51: 0x0000000183902278 CoreFoundation&#96;__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</span><br><span class="line">    frame #52: 0x0000000183901bc0 CoreFoundation&#96;__CFRunLoopDoSources0 + 524</span><br><span class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation&#96;__CFRunLoopRun + 804</span><br><span class="line">    frame #54: 0x000000018382e048 CoreFoundation&#96;CFRunLoopRunSpecific + 444</span><br><span class="line">    frame #55: 0x00000001852b1198 GraphicsServices&#96;GSEventRunModal + 180</span><br><span class="line">    frame #56: 0x0000000189808628 UIKit&#96;-[UIApplication _run] + 684</span><br><span class="line">    frame #57: 0x0000000189803360 UIKit&#96;UIApplicationMain + 208</span><br><span class="line">    frame #58: 0x0000000100a3db78 Project_ent&#96;main + 460 at main.swift:24</span><br><span class="line">    frame #59: 0x00000001828105b8 libdyld.dylib&#96;start + 4</span><br><span class="line">(lldb) </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>DEBUG</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>从一个常见的崩溃开始</title>
     <url>/post/debug-sth-from-crash/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不信邪的态度，决定尝试一番。然后将此事记录如下文。</p>
@@ -1252,40 +1286,6 @@
 <li>开发的第三方SDK一定要注意测试覆盖率。</li>
 <li>swift大法好。swift不用<code>!</code>绝对不会有机会出现<code>func hasPrefix(_ str: String) -&gt; Bool</code>中参数<code>str</code>传空的可能 :)</li>
 </ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>DEBUG</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DEBUG - UIView.h#190</title>
-    <url>/post/debug-uiview-m-190/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>CRASH:<br><code>void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()</code></p>
-<a id="more"></a>
-
-<h1 id="UIView-m-190-UIViewReportBrokenSuperviewChain"><a href="#UIView-m-190-UIViewReportBrokenSuperviewChain" class="headerlink" title="UIView.m:190 - UIViewReportBrokenSuperviewChain"></a>UIView.m:190 - UIViewReportBrokenSuperviewChain</h1><h2 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br></pre></td></tr></table></figure>
-
-<h2 id="异常分析"><a href="#异常分析" class="headerlink" title="异常分析"></a>异常分析</h2><p>  APP crash在<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[keyWindow addSubview:weakSelf];</span><br></pre></td></tr></table></figure><br>  <a href="#%E9%94%99%E8%AF%AF%E5%A0%86%E6%A0%88">错误堆栈信息</a>。</p>
-<p>  但是真正造成crash的代码为：</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure>
-
-
-<p>  解决方案：<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self layoutIfNeeded];</span><br><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure></p>
-<p>  原因分析：<br>  下面这个说的很在理</p>
-<blockquote>
-<p><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
-<p>I had this issue with a library when moving over to Xcode 8 (Material-Controls-For-iOS - MDTextField). I found that the problem was coming from where the layer of one view (which had no superview) was being added to another.</p>
-<p>It looks like this may be the case for yourself also - your toolbar being created has not been added to a superview first. The fix I used was to add the view as a subview of the view that the layer was being added to, so in your case adding the toolbar as a subview of myModelView should stop the error.</p>
-</blockquote>
-<h2 id="碰到该问题的还有"><a href="#碰到该问题的还有" class="headerlink" title="碰到该问题的还有"></a>碰到该问题的还有</h2><ul>
-<li><a href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8">Google出来的一个，但是并未看到相关回复。。。</a></li>
-<li><a href="http://www.th7.cn/Program/IOS/201609/975582.shtml">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a></li>
-<li><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">stackoverflow(这个分析的很到位)</a></li>
-</ul>
-<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br><span class="line"></span><br><span class="line">(lldb) bt</span><br><span class="line">* thread #1: tid &#x3D; 0x87c18, 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw, queue &#x3D; &#39;com.apple.main-thread&#39;, stop reason &#x3D; breakpoint 1.2</span><br><span class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw</span><br><span class="line">    frame #1: 0x0000000183954094 CoreFoundation&#96;+[NSException raise:format:arguments:] + 104</span><br><span class="line">    frame #2: 0x00000001843de898 Foundation&#96;-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</span><br><span class="line">    frame #3: 0x0000000189a7cf9c UIKit&#96;UIViewReportBrokenSuperviewChain + 472</span><br><span class="line">    frame #4: 0x0000000189a7d658 UIKit&#96;_UIViewTopDownSubtreeTraversal + 1496</span><br><span class="line">    frame #5: 0x000000018a0f3390 UIKit&#96;-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</span><br><span class="line">    frame #6: 0x00000001843832ac Foundation&#96;-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</span><br><span class="line">    frame #7: 0x0000000184382dcc Foundation&#96;-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</span><br><span class="line">    frame #8: 0x00000001843809e0 Foundation&#96;-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</span><br><span class="line">    frame #9: 0x000000018989cfdc UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</span><br><span class="line">    frame #10: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #11: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #12: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #13: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #14: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #15: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #16: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #17: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #18: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #19: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #20: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #21: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #22: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #23: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #24: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #25: 0x00000001898a4bb0 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</span><br><span class="line">    frame #26: 0x00000001898a4b04 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</span><br><span class="line">    frame #27: 0x00000001898a4910 UIKit&#96;-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</span><br><span class="line">    frame #28: 0x00000001897996dc UIKit&#96;-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</span><br><span class="line">    frame #29: 0x0000000189798d90 UIKit&#96;__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</span><br><span class="line">    frame #30: 0x0000000189798be8 UIKit&#96;-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</span><br><span class="line">    frame #31: 0x00000001897a4ad0 UIKit&#96;-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</span><br><span class="line">    frame #32: 0x00000001897a43bc UIKit&#96;-[UIView(Hierarchy) addSubview:] + 828</span><br><span class="line">  * frame #33: 0x00000001004f78ec Project_ent&#96;__31-[EsfCommentReportView show]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</span><br><span class="line">    frame #34: 0x00000001897d2b88 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</span><br><span class="line">    frame #35: 0x00000001897d28e8 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</span><br><span class="line">    frame #36: 0x00000001004f77a0 Project_ent&#96;-[EsfCommentReportView show](self&#x3D;0x000000015fe32020, _cmd&#x3D;&quot;show&quot;) + 492 at EsfCommentReportView.m:291</span><br><span class="line">    frame #37: 0x0000000100858a04 Project_ent&#96;__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</span><br><span class="line">    frame #38: 0x00000001003f93e4 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, sourceType&#x3D;2, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 236 at MyLoginViewController.m:123</span><br><span class="line">    frame #39: 0x00000001003f92b0 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 156 at MyLoginViewController.m:114</span><br><span class="line">    frame #40: 0x00000001003f9124 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0) + 120 at MyLoginViewController.m:104</span><br><span class="line">    frame #41: 0x0000000100858870 Project_ent&#96;-[BuyerAdviserProfileViewController reportAction:](self&#x3D;0x000000015fd2e320, _cmd&#x3D;&quot;reportAction:&quot;, button&#x3D;0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</span><br><span class="line">    frame #42: 0x00000001897d27b0 UIKit&#96;-[UIApplication sendAction:to:from:forEvent:] + 96</span><br><span class="line">    frame #43: 0x00000001897d2730 UIKit&#96;-[UIControl sendAction:to:forEvent:] + 80</span><br><span class="line">    frame #44: 0x00000001897bcbe4 UIKit&#96;-[UIControl _sendActionsForEvents:withEvent:] + 452</span><br><span class="line">    frame #45: 0x00000001897d201c UIKit&#96;-[UIControl touchesEnded:withEvent:] + 584</span><br><span class="line">    frame #46: 0x00000001897d1b44 UIKit&#96;-[UIWindow _sendTouchesForEvent:] + 2484</span><br><span class="line">    frame #47: 0x00000001897ccd8c UIKit&#96;-[UIWindow sendEvent:] + 2988</span><br><span class="line">    frame #48: 0x000000018979d858 UIKit&#96;-[UIApplication sendEvent:] + 340</span><br><span class="line">    frame #49: 0x0000000189f8acb8 UIKit&#96;__dispatchPreprocessedEventFromEventQueue + 2736</span><br><span class="line">    frame #50: 0x0000000189f84720 UIKit&#96;__handleEventQueue + 784</span><br><span class="line">    frame #51: 0x0000000183902278 CoreFoundation&#96;__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</span><br><span class="line">    frame #52: 0x0000000183901bc0 CoreFoundation&#96;__CFRunLoopDoSources0 + 524</span><br><span class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation&#96;__CFRunLoopRun + 804</span><br><span class="line">    frame #54: 0x000000018382e048 CoreFoundation&#96;CFRunLoopRunSpecific + 444</span><br><span class="line">    frame #55: 0x00000001852b1198 GraphicsServices&#96;GSEventRunModal + 180</span><br><span class="line">    frame #56: 0x0000000189808628 UIKit&#96;-[UIApplication _run] + 684</span><br><span class="line">    frame #57: 0x0000000189803360 UIKit&#96;UIApplicationMain + 208</span><br><span class="line">    frame #58: 0x0000000100a3db78 Project_ent&#96;main + 460 at main.swift:24</span><br><span class="line">    frame #59: 0x00000001828105b8 libdyld.dylib&#96;start + 4</span><br><span class="line">(lldb) </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>iOS</category>
@@ -2061,31 +2061,6 @@ class CMExpandingTextField: UITextField &#123;
       </tags>
   </entry>
   <entry>
-    <title>iOS逆向-class-dump工具</title>
-    <url>/post/reverse-ios-class-dump/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/">stevenygard.com</a>下载最新的包。</p>
-<p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
-<p>在<code>~/.base_profile</code>中添加<code>export PATH=/opt/class-dump:$PATH</code></p>
-<p>运行<code>source ~/.base_profile</code></p>
-<p>最后确认一下安装OK ：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> class-dump --v</span></span><br><span class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
-<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="../reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br><span class="line"><span class="meta">$</span><span class="bash"> class-dump -H WeChat.decrypted -o ./Headers/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls Headers</span></span><br><span class="line">Headers</span><br></pre></td></tr></table></figure>
-
-<p>即得头文件目录：<code>Headers</code></p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>逆向</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>「转」真实世界中的 Swift 性能优化</title>
     <url>/post/real-world-swift-performance/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文链接：<a href="https://realm.io/cn/news/real-world-swift-performance/">真实世界中的 Swift 性能优化</a></p>
@@ -2164,6 +2139,31 @@ class CMExpandingTextField: UITextField &#123;
       </categories>
       <tags>
         <tag>优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS逆向-class-dump工具</title>
+    <url>/post/reverse-ios-class-dump/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/">stevenygard.com</a>下载最新的包。</p>
+<p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
+<p>在<code>~/.base_profile</code>中添加<code>export PATH=/opt/class-dump:$PATH</code></p>
+<p>运行<code>source ~/.base_profile</code></p>
+<p>最后确认一下安装OK ：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> class-dump --v</span></span><br><span class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
+<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="../reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br><span class="line"><span class="meta">$</span><span class="bash"> class-dump -H WeChat.decrypted -o ./Headers/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls Headers</span></span><br><span class="line">Headers</span><br></pre></td></tr></table></figure>
+
+<p>即得头文件目录：<code>Headers</code></p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>逆向</tag>
       </tags>
   </entry>
   <entry>
@@ -2474,59 +2474,6 @@ class CMExpandingTextField: UITextField &#123;
       </tags>
   </entry>
   <entry>
-    <title>logio</title>
-    <url>/post/logio-brief/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief-zh-cn/">中文</a></p>
-<p>Real-time log monitoring in your browser.</p>
-<a id="more"></a>
-
-<h1 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work"></a>How does it work</h1><blockquote>
-<p>Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.</p>
-<p>Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.</p>
-<p><img src="/images/2019-05-17-10-03-13.png" alt="work io"></p>
-</blockquote>
-<h2 id="Activate-streams-amp-nodes-to-watch-log-messages"><a href="#Activate-streams-amp-nodes-to-watch-log-messages" class="headerlink" title="Activate streams &amp; nodes to watch log messages"></a>Activate streams &amp; nodes to watch log messages</h2><blockquote>
-<p><img src="/images/2019-05-17-10-12-25.png" alt="Activate streams &amp; nodes to watch log messages"></p>
-</blockquote>
-<h2 id="Simple-TCP-interface"><a href="#Simple-TCP-interface" class="headerlink" title="Simple TCP interface"></a><a name="Simple TCP interface">Simple TCP interface</a></h2><blockquote>
-<p>Log.io uses a stateless TCP API to receive log messages.</p>
-<p>Writing a third party harvester is easy. Open a TCP connection to the &gt; server and begin writing properly formatted messages to the socket.</p>
-<p>Read the <a href="https://github.com/NarrativeScience/Log.io">API documentation</a>.</p>
-</blockquote>
-<h3 id="Send-a-log-message"><a href="#Send-a-log-message" class="headerlink" title="Send a log message"></a>Send a log message</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
-
-<h3 id="Register-a-new-node-with-stream-associations"><a href="#Register-a-new-node-with-stream-associations" class="headerlink" title="Register a new node, with stream associations"></a>Register a new node, with stream associations</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
-
-<h3 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
-
-<h1 id="Install-Log-io"><a href="#Install-Log-io" class="headerlink" title="Install Log.io"></a>Install Log.io</h1><p>The original project <a href="https://github.com/NarrativeScience/Log.io">NarrativeScience/Log.io</a> has been unavailable due to lack of maintenance for a long time.</p>
-<p>Fortunately, the <a href="https://github.com/blacklabelops-legacy/logio">blacklabelops-legacy/logio</a> can also be used.</p>
-<p>So we can install the project like this：</p>
-<h2 id="Install-and-start-docker"><a href="#Install-and-start-docker" class="headerlink" title="Install and start docker"></a>Install and start docker</h2><p>The <a href="https://docs.docker.com/install/">docs.docker.com</a> is very detailed.</p>
-<p>Support <a href="https://docs.docker.com/install/">Cloud</a>、 <a href="https://docs.docker.com/docker-for-mac/install/">MacOS</a> 、<a href="https://docs.docker.com/install/">Linux</a> 、 <a href="https://docs.docker.com/docker-for-windows/install/">Windows</a></p>
-<h2 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ docker pull blacklabelops/logio</span><br></pre></td></tr></table></figure>
-
-<h2 id="Start-the-server"><a href="#Start-the-server" class="headerlink" title="Start the server"></a>Start the server</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 28778:28778 \</span><br><span class="line">    -p 28777:28777 \</span><br><span class="line">    --name logio \</span><br><span class="line">    blacklabelops/logio</span><br></pre></td></tr></table></figure>
-
-<h2 id="Other-configure"><a href="#Other-configure" class="headerlink" title="Other configure"></a>Other configure</h2><p><a href="https://github.com/blacklabelops-legacy/logio">blacklabelops-legacy/logio</a>.</p>
-<h2 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h2><p>Browser: <a href="http://localhost:28778/">http://localhost:28778/</a><br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
-<p>Now we can write logs to port 28777. 🎉🎉🎉</p>
-<h1 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h1><p>We only need to perform TCP communication according to the rules <a href="#Simple TCP interface">Simple TCP interface</a>, and the log can be displayed on the browser.</p>
-<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio">logio for iOS</a></p>
-<hr>
-<ul>
-<li><a href="http://logio.org/">logio.org</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>tool</tag>
-        <tag>logio</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>用CollectionView简化代码，专注于业务和UI</title>
     <url>/post/ios-tool-collectionview-simplify-business/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><code>UITableView</code>作为高级控件被开发者广泛使用，同样的，<code>UICollectionView</code>由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。</p>
@@ -2648,6 +2595,59 @@ class CMExpandingTextField: UITextField &#123;
       <tags>
         <tag>tool</tag>
         <tag>UICollectionView</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>logio</title>
+    <url>/post/logio-brief/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief-zh-cn/">中文</a></p>
+<p>Real-time log monitoring in your browser.</p>
+<a id="more"></a>
+
+<h1 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work"></a>How does it work</h1><blockquote>
+<p>Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.</p>
+<p>Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.</p>
+<p><img src="/images/2019-05-17-10-03-13.png" alt="work io"></p>
+</blockquote>
+<h2 id="Activate-streams-amp-nodes-to-watch-log-messages"><a href="#Activate-streams-amp-nodes-to-watch-log-messages" class="headerlink" title="Activate streams &amp; nodes to watch log messages"></a>Activate streams &amp; nodes to watch log messages</h2><blockquote>
+<p><img src="/images/2019-05-17-10-12-25.png" alt="Activate streams &amp; nodes to watch log messages"></p>
+</blockquote>
+<h2 id="Simple-TCP-interface"><a href="#Simple-TCP-interface" class="headerlink" title="Simple TCP interface"></a><a name="Simple TCP interface">Simple TCP interface</a></h2><blockquote>
+<p>Log.io uses a stateless TCP API to receive log messages.</p>
+<p>Writing a third party harvester is easy. Open a TCP connection to the &gt; server and begin writing properly formatted messages to the socket.</p>
+<p>Read the <a href="https://github.com/NarrativeScience/Log.io">API documentation</a>.</p>
+</blockquote>
+<h3 id="Send-a-log-message"><a href="#Send-a-log-message" class="headerlink" title="Send a log message"></a>Send a log message</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
+
+<h3 id="Register-a-new-node-with-stream-associations"><a href="#Register-a-new-node-with-stream-associations" class="headerlink" title="Register a new node, with stream associations"></a>Register a new node, with stream associations</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
+
+<h3 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
+
+<h1 id="Install-Log-io"><a href="#Install-Log-io" class="headerlink" title="Install Log.io"></a>Install Log.io</h1><p>The original project <a href="https://github.com/NarrativeScience/Log.io">NarrativeScience/Log.io</a> has been unavailable due to lack of maintenance for a long time.</p>
+<p>Fortunately, the <a href="https://github.com/blacklabelops-legacy/logio">blacklabelops-legacy/logio</a> can also be used.</p>
+<p>So we can install the project like this：</p>
+<h2 id="Install-and-start-docker"><a href="#Install-and-start-docker" class="headerlink" title="Install and start docker"></a>Install and start docker</h2><p>The <a href="https://docs.docker.com/install/">docs.docker.com</a> is very detailed.</p>
+<p>Support <a href="https://docs.docker.com/install/">Cloud</a>、 <a href="https://docs.docker.com/docker-for-mac/install/">MacOS</a> 、<a href="https://docs.docker.com/install/">Linux</a> 、 <a href="https://docs.docker.com/docker-for-windows/install/">Windows</a></p>
+<h2 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ docker pull blacklabelops/logio</span><br></pre></td></tr></table></figure>
+
+<h2 id="Start-the-server"><a href="#Start-the-server" class="headerlink" title="Start the server"></a>Start the server</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 28778:28778 \</span><br><span class="line">    -p 28777:28777 \</span><br><span class="line">    --name logio \</span><br><span class="line">    blacklabelops/logio</span><br></pre></td></tr></table></figure>
+
+<h2 id="Other-configure"><a href="#Other-configure" class="headerlink" title="Other configure"></a>Other configure</h2><p><a href="https://github.com/blacklabelops-legacy/logio">blacklabelops-legacy/logio</a>.</p>
+<h2 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h2><p>Browser: <a href="http://localhost:28778/">http://localhost:28778/</a><br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
+<p>Now we can write logs to port 28777. 🎉🎉🎉</p>
+<h1 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h1><p>We only need to perform TCP communication according to the rules <a href="#Simple TCP interface">Simple TCP interface</a>, and the log can be displayed on the browser.</p>
+<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio">logio for iOS</a></p>
+<hr>
+<ul>
+<li><a href="http://logio.org/">logio.org</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>tool</tag>
+        <tag>logio</tag>
       </tags>
   </entry>
   <entry>
