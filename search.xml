@@ -238,22 +238,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于转载的文章</title>
-    <url>/post/about-reprint-article/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一点删除原链接的转载文章的牢骚</p>
-<a id="more"></a>
-
-<h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并没有署名转载出处，所以应该是原创）。之后看了一下他的另一个文章，刚好我百度过这个文章的原作者的最后一个系列的，于是我又翻阅了一下看看是不是不一样，结果和我想的一样，除了删除了作者的署名之外其他的都是一样的。于是关掉了网页，心中默默的鄙视。</p>
-<h1 id="关于转载的别人文章"><a href="#关于转载的别人文章" class="headerlink" title="关于转载的别人文章"></a>关于转载的别人文章</h1><p>对于一些大神的技术文章都是喜欢的，爱不释手的那种，我也是。有的能转载的我就转载，不能转载的，我会复制下来，放在我自己的文件夹中，为的是方便查询。在转载的时候我会特意标示转载的地址。而且一般情况下我会在文章的开始写上几句简单的主要的思想（比如：<a href="http://www.cnblogs.com/madordie/p/5159597.html">《[转]蓝牙开发》</a>、<a href="http://www.cnblogs.com/madordie/p/4322044.html">《[搬运] mac下安装GDB》</a>、<a href="http://www.cnblogs.com/madordie/p/4322042.html">《［搬运］MAC 下安装 brew》</a>），当然有时候没来得及的就忘了😂（比如：<a href="http://www.cnblogs.com/madordie/p/4357685.html">《[搬运] iOS 7 侧滑返回手势使用和错误集》</a>）。</p>
-<p>还有关于文章的排版，殊不知原作者为了让读者更好的阅读会对排版做的比较好，有的人为了阅读方便会去阅读原作者的文章。比如说我这种强迫症。</p>
-<h1 id="我对删除原链的转载文章态度"><a href="#我对删除原链的转载文章态度" class="headerlink" title="我对删除原链的转载文章态度"></a>我对删除原链的转载文章态度</h1><p>然后说一下我对于那些抄袭的，然后删除了原链接的人鄙视一下。每一篇文章都是别人花费了大量的精力去完成的，有的为了让读者能够更清楚的理解，所以会在发布的时候找别人去读一读，看能不能理解其中云云。然而对文章的原链接保存是一种对别人劳动成果的尊重，对原作者最基本的尊重。</p>
-<p>别的不想多说了。转载请注明出处。谢谢！<br>且行且珍惜。</p>
-]]></content>
-      <categories>
-        <category>牢骚</category>
-      </categories>
-  </entry>
-  <entry>
     <title>mac10.13 pods 命令错误</title>
     <url>/post/macos-high-sierra-cocoapods/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每逢升级大版本总要过搞点事情。</p>
@@ -686,6 +670,22 @@
       <tags>
         <tag>Sketchplugin</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>关于转载的文章</title>
+    <url>/post/about-reprint-article/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一点删除原链接的转载文章的牢骚</p>
+<a id="more"></a>
+
+<h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>前两天看到朋友圈一个哥们转载了许多关于iOS的一些文章，很是兴奋，去围观。突然发现这文笔绝对是经过校对的。心中大喜，以为淘到宝了（因为文章并没有署名转载出处，所以应该是原创）。之后看了一下他的另一个文章，刚好我百度过这个文章的原作者的最后一个系列的，于是我又翻阅了一下看看是不是不一样，结果和我想的一样，除了删除了作者的署名之外其他的都是一样的。于是关掉了网页，心中默默的鄙视。</p>
+<h1 id="关于转载的别人文章"><a href="#关于转载的别人文章" class="headerlink" title="关于转载的别人文章"></a>关于转载的别人文章</h1><p>对于一些大神的技术文章都是喜欢的，爱不释手的那种，我也是。有的能转载的我就转载，不能转载的，我会复制下来，放在我自己的文件夹中，为的是方便查询。在转载的时候我会特意标示转载的地址。而且一般情况下我会在文章的开始写上几句简单的主要的思想（比如：<a href="http://www.cnblogs.com/madordie/p/5159597.html">《[转]蓝牙开发》</a>、<a href="http://www.cnblogs.com/madordie/p/4322044.html">《[搬运] mac下安装GDB》</a>、<a href="http://www.cnblogs.com/madordie/p/4322042.html">《［搬运］MAC 下安装 brew》</a>），当然有时候没来得及的就忘了😂（比如：<a href="http://www.cnblogs.com/madordie/p/4357685.html">《[搬运] iOS 7 侧滑返回手势使用和错误集》</a>）。</p>
+<p>还有关于文章的排版，殊不知原作者为了让读者更好的阅读会对排版做的比较好，有的人为了阅读方便会去阅读原作者的文章。比如说我这种强迫症。</p>
+<h1 id="我对删除原链的转载文章态度"><a href="#我对删除原链的转载文章态度" class="headerlink" title="我对删除原链的转载文章态度"></a>我对删除原链的转载文章态度</h1><p>然后说一下我对于那些抄袭的，然后删除了原链接的人鄙视一下。每一篇文章都是别人花费了大量的精力去完成的，有的为了让读者能够更清楚的理解，所以会在发布的时候找别人去读一读，看能不能理解其中云云。然而对文章的原链接保存是一种对别人劳动成果的尊重，对原作者最基本的尊重。</p>
+<p>别的不想多说了。转载请注明出处。谢谢！<br>且行且珍惜。</p>
+]]></content>
+      <categories>
+        <category>牢骚</category>
+      </categories>
   </entry>
   <entry>
     <title>Fastlane自动化笔记</title>
@@ -2878,6 +2878,11 @@ class CMExpandingTextField: UITextField &#123;
 <p>很扎心, 用LLDB运行的结果和实际的并不一样的事情我并不能确定原因.</p>
 <p>不过, 我还是上传了源码: <a href="https://github.com/madordie/PerformDemo">madordie/PerformDemo</a></p>
 <p>希望能找到答案~ 😭</p>
+<p>纯猜一下:</p>
+<p>关于LLDB曾经有过这么一段讨论:</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">It seems that the retain count of the object increases 1 whenever you execute `expression object`. Another workaround is to use frame variable<br><br>(lldb) frame variable object <a href="https://t.co/Y2ghQ3sHzL">pic.twitter.com/Y2ghQ3sHzL</a></p>&mdash; Pofat (@PofatTseng) <a href="https://twitter.com/PofatTseng/status/1057644037107118080?ref_src=twsrc%5Etfw">October 31, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>会不会和<code>Debug Area</code>有关系?</p>
 ]]></content>
       <categories>
         <category>iOS</category>
