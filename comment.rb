@@ -1,5 +1,4 @@
-# from : https://madordie.github.io/post/blog-gitment-auto-setup
-# 另外，token已放在.git-token文件下，防止泄漏。。
+# token已放在.git-token文件下，防止泄漏。。
 
 username = "madordie" # GitHub 用户名
 token = `cat .git-token`  # GitHub Token
@@ -45,6 +44,7 @@ urls.each_with_index do |url, index|
   md5_key = URI.parse(url).path
 
   if md5_key.match(/^\/tags\/.+/) || md5_key.match(/^\/categories\/.+/)
+    # 此处并不需要评论
   elsif commenteds.include?("#{url}\n") == false
     url_key = Digest::MD5.hexdigest(URI.parse(url).path)
     response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
