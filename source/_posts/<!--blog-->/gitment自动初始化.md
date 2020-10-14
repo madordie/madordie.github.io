@@ -61,6 +61,8 @@ gitment:
 
 但是存在多次执行就会多次创建的问题。这不是我想要的。
 
+**为了防止忘记更新下面的脚本, 请去[comment.rb](https://github.com/madordie/madordie.github.io/blob/master/comment.rb)确保最新版本**
+
 ```rb
 # token已放在.git-token文件下，防止泄漏。。
 
