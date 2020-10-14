@@ -476,3 +476,11 @@ libobjc.A.dylib`objc_object::sidetable_release:
 不过, 我还是上传了源码: [madordie/PerformDemo](https://github.com/madordie/PerformDemo)
 
 希望能找到答案~ 😭
+
+纯猜一下:
+
+关于LLDB曾经有过这么一段讨论:
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">It seems that the retain count of the object increases 1 whenever you execute `expression object`. Another workaround is to use frame variable<br><br>(lldb) frame variable object <a href="https://t.co/Y2ghQ3sHzL">pic.twitter.com/Y2ghQ3sHzL</a></p>&mdash; Pofat (@PofatTseng) <a href="https://twitter.com/PofatTseng/status/1057644037107118080?ref_src=twsrc%5Etfw">October 31, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+会不会和`Debug Area`有关系?
