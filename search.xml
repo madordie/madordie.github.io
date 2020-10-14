@@ -22,6 +22,7 @@
 <p>但是我要用。。等是不可能等的了。</p>
 <p>看到<a href="https://draveness.me/git-comments-initialize">自动初始化 Gitalk 和 Gitment 评论</a>的脚本想着刚好我的也是自动发布、备份，这不是刚好嘛。。</p>
 <p>但是存在多次执行就会多次创建的问题。这不是我想要的。</p>
+<p><strong>为了防止忘记更新下面的脚本, 请去<a href="https://github.com/madordie/madordie.github.io/blob/master/comment.rb">comment.rb</a>确保最新版本</strong></p>
 <figure class="highlight rb"><table><tr><td class="code"><pre><span class="line"><span class="comment"># token已放在.git-token文件下，防止泄漏。。</span></span><br><span class="line"></span><br><span class="line">username = <span class="string">&quot;madordie&quot;</span> <span class="comment"># GitHub 用户名</span></span><br><span class="line">token = <span class="string">`cat .git-token`</span>  <span class="comment"># GitHub Token</span></span><br><span class="line">repo_name = <span class="string">&quot;madordie.github.io&quot;</span> <span class="comment"># 存放 issues</span></span><br><span class="line">sitemap_url = <span class="string">&quot;https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml&quot;</span> <span class="comment"># sitemap</span></span><br><span class="line">kind = <span class="string">&quot;Gitalk&quot;</span> <span class="comment"># &quot;Gitalk&quot; or &quot;gitment&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;open-uri&#x27;</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;faraday&#x27;</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;active_support&#x27;</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;active_support/core_ext&#x27;</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;sitemap-parser&#x27;</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;digest&#x27;</span></span><br><span class="line"></span><br><span class="line">puts <span class="string">&quot;正在检索URL&quot;</span></span><br><span class="line"></span><br><span class="line">sitemap = SitemapParser.new sitemap_url</span><br><span class="line">urls = sitemap.to_a</span><br><span class="line"></span><br><span class="line">puts <span class="string">&quot;检索到文章共<span class="subst">#&#123;urls.count&#125;</span>个&quot;</span></span><br><span class="line"></span><br><span class="line">conn = Faraday.new(<span class="symbol">:url</span> =&gt; <span class="string">&quot;https://api.github.com/&quot;</span>) <span class="keyword">do</span> <span class="params">|conn|</span></span><br><span class="line">  conn.basic_auth(username, token)</span><br><span class="line">  conn.headers[<span class="string">&#x27;Accept&#x27;</span>] = <span class="string">&quot;application/vnd.github.symmetra-preview+json&quot;</span></span><br><span class="line">  conn.adapter  Faraday.default_adapter</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">commenteds = Array.new</span><br><span class="line"><span class="string">`</span></span><br><span class="line"><span class="string">  if [ ! -f .commenteds ]; then</span></span><br><span class="line"><span class="string">    touch .commenteds</span></span><br><span class="line"><span class="string">  fi</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">File.open(<span class="string">&quot;.commenteds&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">do</span> <span class="params">|file|</span></span><br><span class="line">  file.each_line <span class="keyword">do</span> <span class="params">|line|</span></span><br><span class="line">      commenteds.push line</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">urls.each_with_index <span class="keyword">do</span> <span class="params">|url, index|</span></span><br><span class="line">  url = url.gsub(<span class="regexp">/index.html$/</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">  md5_key = URI.parse(url).path</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> md5_key.match(<span class="regexp">/^\/tags\/.+/</span>) <span class="params">||</span> md5_key.match(<span class="regexp">/^\/categories\/.+/</span>)</span><br><span class="line">    <span class="comment"># 此处并不需要评论</span></span><br><span class="line">  <span class="keyword">elsif</span> commenteds.<span class="keyword">include</span>?(<span class="string">&quot;<span class="subst">#&#123;url&#125;</span>\n&quot;</span>) == <span class="literal">false</span></span><br><span class="line">    url_key = Digest::MD5.hexdigest(URI.parse(url).path)</span><br><span class="line">    response = conn.get <span class="string">&quot;/search/issues?q=label:<span class="subst">#&#123;url_key&#125;</span>+state:open+repo:<span class="subst">#&#123;username&#125;</span>/<span class="subst">#&#123;repo_name&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    puts <span class="string">&quot;正在创建: <span class="subst">#&#123;url&#125;</span> (<span class="subst">#&#123;URI.parse(url).path&#125;</span>) -&gt; [<span class="subst">#&#123;url_key&#125;</span>, <span class="subst">#&#123;kind&#125;</span>]&quot;</span></span><br><span class="line">    labels = JSON.parse(response.body)[<span class="string">&quot;items&quot;</span>]</span><br><span class="line">      .map &#123; <span class="params">|item|</span></span><br><span class="line">        item[<span class="string">&quot;labels&quot;</span>].map &#123; <span class="params">|label|</span> label[<span class="string">&quot;name&quot;</span>] &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      .flatten</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> labels.<span class="keyword">include</span>?(url_key)</span><br><span class="line">      <span class="keyword">if</span> labels.<span class="keyword">include</span>?(kind)</span><br><span class="line">        puts <span class="string">&quot;\t↳ 已存在&quot;</span></span><br><span class="line">        <span class="string">`echo <span class="subst">#&#123;url&#125;</span> &gt;&gt; .commenteds`</span></span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        issue_id = JSON.parse(response.body)[<span class="string">&quot;items&quot;</span>]</span><br><span class="line">          .map &#123; <span class="params">|item|</span> item[<span class="string">&quot;number&quot;</span>] &#125;</span><br><span class="line">          .first</span><br><span class="line"></span><br><span class="line">        puts <span class="string">&quot;\t↳ 正在为评论(<span class="subst">#&#123;issue_id&#125;</span>)增加`<span class="subst">#&#123;kind&#125;</span>`标签&quot;</span></span><br><span class="line">        response = conn.post(<span class="string">&quot;/repos/<span class="subst">#&#123;username&#125;</span>/<span class="subst">#&#123;repo_name&#125;</span>/issues/<span class="subst">#&#123;issue_id&#125;</span>/labels&quot;</span>) <span class="keyword">do</span> <span class="params">|req|</span></span><br><span class="line">          req.body = &#123; <span class="symbol">labels:</span> [kind] &#125;.to_json</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">if</span> response.status == <span class="number">200</span></span><br><span class="line">          <span class="string">`echo <span class="subst">#&#123;url&#125;</span> &gt;&gt; .commenteds`</span></span><br><span class="line">          puts <span class="string">&quot;\t\t↳ 已增加成功&quot;</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">          puts <span class="string">&quot;\t↳ <span class="subst">#&#123;response.body&#125;</span>&quot;</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      title = open(url).read.scan(<span class="regexp">/&lt;title&gt;(.*?)&lt;\/title&gt;/</span>).first.first.force_encoding(<span class="string">&#x27;UTF-8&#x27;</span>)</span><br><span class="line">      response = conn.post(<span class="string">&quot;/repos/<span class="subst">#&#123;username&#125;</span>/<span class="subst">#&#123;repo_name&#125;</span>/issues&quot;</span>) <span class="keyword">do</span> <span class="params">|req|</span></span><br><span class="line">        req.body = &#123; <span class="symbol">body:</span> url, <span class="symbol">labels:</span> [kind, url_key], <span class="symbol">title:</span> title &#125;.to_json</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">if</span> JSON.parse(response.body)[<span class="string">&#x27;number&#x27;</span>] &gt; <span class="number">0</span></span><br><span class="line">        <span class="string">`echo <span class="subst">#&#123;url&#125;</span> &gt;&gt; .commenteds`</span></span><br><span class="line">        puts <span class="string">&quot;\t↳ 已创建成功&quot;</span></span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        puts <span class="string">&quot;\t↳ <span class="subst">#&#123;response.body&#125;</span>&quot;</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <p>同时别忘了修改对应的网页。。我这里使用的是<a href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces v5.1.4</a></p>
@@ -2570,6 +2571,59 @@ class CMExpandingTextField: UITextField &#123;
       </tags>
   </entry>
   <entry>
+    <title>logio</title>
+    <url>/post/logio-brief/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief-zh-cn/">中文</a></p>
+<p>Real-time log monitoring in your browser.</p>
+<a id="more"></a>
+
+<h1 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work"></a>How does it work</h1><blockquote>
+<p>Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.</p>
+<p>Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.</p>
+<p><img src="/images/2019-05-17-10-03-13.png" alt="work io"></p>
+</blockquote>
+<h2 id="Activate-streams-amp-nodes-to-watch-log-messages"><a href="#Activate-streams-amp-nodes-to-watch-log-messages" class="headerlink" title="Activate streams &amp; nodes to watch log messages"></a>Activate streams &amp; nodes to watch log messages</h2><blockquote>
+<p><img src="/images/2019-05-17-10-12-25.png" alt="Activate streams &amp; nodes to watch log messages"></p>
+</blockquote>
+<h2 id="Simple-TCP-interface"><a href="#Simple-TCP-interface" class="headerlink" title="Simple TCP interface"></a><a name="Simple TCP interface">Simple TCP interface</a></h2><blockquote>
+<p>Log.io uses a stateless TCP API to receive log messages.</p>
+<p>Writing a third party harvester is easy. Open a TCP connection to the &gt; server and begin writing properly formatted messages to the socket.</p>
+<p>Read the <a href="https://github.com/NarrativeScience/Log.io">API documentation</a>.</p>
+</blockquote>
+<h3 id="Send-a-log-message"><a href="#Send-a-log-message" class="headerlink" title="Send a log message"></a>Send a log message</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
+
+<h3 id="Register-a-new-node-with-stream-associations"><a href="#Register-a-new-node-with-stream-associations" class="headerlink" title="Register a new node, with stream associations"></a>Register a new node, with stream associations</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
+
+<h3 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
+
+<h1 id="Install-Log-io"><a href="#Install-Log-io" class="headerlink" title="Install Log.io"></a>Install Log.io</h1><p>The original project <a href="https://github.com/NarrativeScience/Log.io">NarrativeScience/Log.io</a> has been unavailable due to lack of maintenance for a long time.</p>
+<p>Fortunately, the <a href="https://github.com/blacklabelops-legacy/logio">blacklabelops-legacy/logio</a> can also be used.</p>
+<p>So we can install the project like this：</p>
+<h2 id="Install-and-start-docker"><a href="#Install-and-start-docker" class="headerlink" title="Install and start docker"></a>Install and start docker</h2><p>The <a href="https://docs.docker.com/install/">docs.docker.com</a> is very detailed.</p>
+<p>Support <a href="https://docs.docker.com/install/">Cloud</a>、 <a href="https://docs.docker.com/docker-for-mac/install/">MacOS</a> 、<a href="https://docs.docker.com/install/">Linux</a> 、 <a href="https://docs.docker.com/docker-for-windows/install/">Windows</a></p>
+<h2 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ docker pull blacklabelops/logio</span><br></pre></td></tr></table></figure>
+
+<h2 id="Start-the-server"><a href="#Start-the-server" class="headerlink" title="Start the server"></a>Start the server</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 28778:28778 \</span><br><span class="line">    -p 28777:28777 \</span><br><span class="line">    --name logio \</span><br><span class="line">    blacklabelops/logio</span><br></pre></td></tr></table></figure>
+
+<h2 id="Other-configure"><a href="#Other-configure" class="headerlink" title="Other configure"></a>Other configure</h2><p><a href="https://github.com/blacklabelops-legacy/logio">blacklabelops-legacy/logio</a>.</p>
+<h2 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h2><p>Browser: <a href="http://localhost:28778/">http://localhost:28778/</a><br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
+<p>Now we can write logs to port 28777. 🎉🎉🎉</p>
+<h1 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h1><p>We only need to perform TCP communication according to the rules <a href="#Simple TCP interface">Simple TCP interface</a>, and the log can be displayed on the browser.</p>
+<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio">logio for iOS</a></p>
+<hr>
+<ul>
+<li><a href="http://logio.org/">logio.org</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>tool</tag>
+        <tag>logio</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>实时显示日志logio</title>
     <url>/post/logio-brief-zh-cn/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief/">English</a></p>
@@ -2612,59 +2666,6 @@ class CMExpandingTextField: UITextField &#123;
 
 <p>其iOS版本已经放在了这里：<a href="https://github.com/madordie/logio">madordie/logio</a></p>
 <p>iOS上之前有一个类似的<a href="https://github.com/s4nchez/LogIO-CocoaLumberjack">LogIO-CocoaLumberjack</a>, 我这里做了简单的更新，目的是不绑定<a href="https://github.com/robbiehanson/CocoaAsyncSocket">CocoaAsyncSocket</a>。</p>
-<hr>
-<ul>
-<li><a href="http://logio.org/">logio.org</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>tool</tag>
-        <tag>logio</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>logio</title>
-    <url>/post/logio-brief/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="log-io"><a href="#log-io" class="headerlink" title="log.io"></a>log.io</h1><p><a href="https://madordie.github.io/post/logio-brief-zh-cn/">中文</a></p>
-<p>Real-time log monitoring in your browser.</p>
-<a id="more"></a>
-
-<h1 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work"></a>How does it work</h1><blockquote>
-<p>Harvesters watch log files for changes, send new log messages to the server, which broadcasts to web clients. Log messages are tagged with stream, node, and log level information based on user configuration.</p>
-<p>Log.io has no persistence layer. Harvesters are informed of file changes via inotify, and log messages hop from harvester to server to web client via TCP and socket.io, respectively.</p>
-<p><img src="/images/2019-05-17-10-03-13.png" alt="work io"></p>
-</blockquote>
-<h2 id="Activate-streams-amp-nodes-to-watch-log-messages"><a href="#Activate-streams-amp-nodes-to-watch-log-messages" class="headerlink" title="Activate streams &amp; nodes to watch log messages"></a>Activate streams &amp; nodes to watch log messages</h2><blockquote>
-<p><img src="/images/2019-05-17-10-12-25.png" alt="Activate streams &amp; nodes to watch log messages"></p>
-</blockquote>
-<h2 id="Simple-TCP-interface"><a href="#Simple-TCP-interface" class="headerlink" title="Simple TCP interface"></a><a name="Simple TCP interface">Simple TCP interface</a></h2><blockquote>
-<p>Log.io uses a stateless TCP API to receive log messages.</p>
-<p>Writing a third party harvester is easy. Open a TCP connection to the &gt; server and begin writing properly formatted messages to the socket.</p>
-<p>Read the <a href="https://github.com/NarrativeScience/Log.io">API documentation</a>.</p>
-</blockquote>
-<h3 id="Send-a-log-message"><a href="#Send-a-log-message" class="headerlink" title="Send a log message"></a>Send a log message</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+log|my_stream|my_node|info|this is log message\r\n</span><br></pre></td></tr></table></figure>
-
-<h3 id="Register-a-new-node-with-stream-associations"><a href="#Register-a-new-node-with-stream-associations" class="headerlink" title="Register a new node, with stream associations"></a>Register a new node, with stream associations</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+node|my_node|my_stream1,my_stream2\r\n</span><br></pre></td></tr></table></figure>
-
-<h3 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-node|my_node\r\n</span><br></pre></td></tr></table></figure>
-
-<h1 id="Install-Log-io"><a href="#Install-Log-io" class="headerlink" title="Install Log.io"></a>Install Log.io</h1><p>The original project <a href="https://github.com/NarrativeScience/Log.io">NarrativeScience/Log.io</a> has been unavailable due to lack of maintenance for a long time.</p>
-<p>Fortunately, the <a href="https://github.com/blacklabelops-legacy/logio">blacklabelops-legacy/logio</a> can also be used.</p>
-<p>So we can install the project like this：</p>
-<h2 id="Install-and-start-docker"><a href="#Install-and-start-docker" class="headerlink" title="Install and start docker"></a>Install and start docker</h2><p>The <a href="https://docs.docker.com/install/">docs.docker.com</a> is very detailed.</p>
-<p>Support <a href="https://docs.docker.com/install/">Cloud</a>、 <a href="https://docs.docker.com/docker-for-mac/install/">MacOS</a> 、<a href="https://docs.docker.com/install/">Linux</a> 、 <a href="https://docs.docker.com/docker-for-windows/install/">Windows</a></p>
-<h2 id="Pull-image"><a href="#Pull-image" class="headerlink" title="Pull image"></a>Pull image</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ docker pull blacklabelops/logio</span><br></pre></td></tr></table></figure>
-
-<h2 id="Start-the-server"><a href="#Start-the-server" class="headerlink" title="Start the server"></a>Start the server</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ docker run -d \</span><br><span class="line">    -p 28778:28778 \</span><br><span class="line">    -p 28777:28777 \</span><br><span class="line">    --name logio \</span><br><span class="line">    blacklabelops/logio</span><br></pre></td></tr></table></figure>
-
-<h2 id="Other-configure"><a href="#Other-configure" class="headerlink" title="Other configure"></a>Other configure</h2><p><a href="https://github.com/blacklabelops-legacy/logio">blacklabelops-legacy/logio</a>.</p>
-<h2 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h2><p>Browser: <a href="http://localhost:28778/">http://localhost:28778/</a><br><img src="/images/2019-05-17-10-40-18.png" alt="log.io server"></p>
-<p>Now we can write logs to port 28777. 🎉🎉🎉</p>
-<h1 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h1><p>We only need to perform TCP communication according to the rules <a href="#Simple TCP interface">Simple TCP interface</a>, and the log can be displayed on the browser.</p>
-<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p><a href="https://github.com/madordie/logio">logio for iOS</a></p>
 <hr>
 <ul>
 <li><a href="http://logio.org/">logio.org</a></li>
