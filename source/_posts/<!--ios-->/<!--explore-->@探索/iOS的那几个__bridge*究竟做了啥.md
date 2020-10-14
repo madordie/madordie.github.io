@@ -3,6 +3,7 @@ title: iOS的那几个__bridge*究竟做了啥
 url: what-happened-to-the-bridge-in-ios
 date: 2020-10-10
 tags:
+    - DEBUG
     - __bridge*
 categories:
     - iOS
