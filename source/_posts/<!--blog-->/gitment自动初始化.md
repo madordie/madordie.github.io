@@ -51,9 +51,9 @@ gitment:
   redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled
 ```
 
-## Gitment
+## 开始自动化配置
 
-关于作者的[初始化评论框方案讨论](https://github.com/imsun/gitment/issues/8)还在讨论中。。。
+关于`gitment`作者的[初始化评论框方案讨论](https://github.com/imsun/gitment/issues/8)还在讨论中。。。
 
 但是我要用。。等是不可能等的了。
 
@@ -61,180 +61,8 @@ gitment:
 
 但是存在多次执行就会多次创建的问题。这不是我想要的。
 
-### 第一版：支持多次执行
-
-GitHub提供较为完善的API，用我这水水的rb水平，大致可以完善如下：
-
 ```rb
-# from : https://madordie.github.io/post/blog-gitment-auto-setup
-# 另外，token已放在.git-token文件下，防止泄漏。。
 
-username = "madordie" # GitHub 用户名
-token = `cat .git-token`  # GitHub Token
-repo_name = "madordie.github.io" # 存放 issues
-sitemap_url = "https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml" # sitemap 此处由于github.io不是立马生效，但是仓库是立马生效的，所以此处应该更换为仓库的raw
-kind = "gitment" # "Gitalk" or "gitment"
-
-require 'open-uri'
-require 'faraday'
-require 'active_support'
-require 'active_support/core_ext'
-require 'sitemap-parser'
-
-puts "正在检索URL"
-
-sitemap = SitemapParser.new sitemap_url
-urls = sitemap.to_a
-
-puts "检索到文章共#{urls.count}个"
-
-conn = Faraday.new(:url => "https://api.github.com") do |conn|
-  conn.basic_auth(username, token)
-  conn.headers['Accept'] = "application/vnd.github.symmetra-preview+json"
-  conn.adapter  Faraday.default_adapter
-end
-
-commenteds = Array.new
-`
-  if [ ! -f .commenteds ]; then
-    touch .commenteds
-  fi
-`
-File.open(".commenteds", "r") do |file|
-  file.each_line do |line|
-    commenteds.push line
-  end
-end
-
-urls.each_with_index do |url, index|
-  url = url.gsub(/index.html$/, "")
-
-  if commenteds.include?("#{url}\n") == false
-    url_key = Digest::MD5.hexdigest(URI.parse(url).path)
-    response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
-
-    puts "正在创建: #{url}"
-    if JSON.parse(response.body)['total_count'] > 0
-      puts "\t↳ 已存在"
-      `echo #{url} >> .commenteds`
-      title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
-
-      response = conn.post("/repos/#{username}/#{repo_name}/issues") do |req|
-        req.body = { body: url, labels: [kind, url], title: title }.to_json
-      end
-      if JSON.parse(response.body)['number'] > 0
-        `echo #{url} >> .commenteds`
-        puts "\t↳ 已创建成功"
-      else
-        puts "\t↳ #{response.body}"
-      end
-    end
-  end
-end
-```
-
-脚本OK，还需要安装一些库用这个就行：
-
-```sh
-sudo gem install faraday activesupport sitemap-parser
-```
-
-正常情况都会安装成功，那么跑一下脚本吧：
-
-```rb
-ruby comment.rb
-```
-
-第一次运行请求多，稍微等一会。表急。。
-
-跑完之后如果你的链接总长度都是 `<= 50` 字符，那么真嗨，这就行了。
-
-但是如果以后有可能 `> 50`，或者不确定以后会不会写一个链接贼长的文章，那么你可能还要往下再看一下。。
-
-### 第二版：兼容文章链接很长长长
-
-关于这个的讨论很多，在issues中搜一下大约这样：[Error: Validation Failed](https://github.com/imsun/gitment/issues?utf8=✓&q=is%3Aissue+validation+Failed)。
-
-这个`Error: Validation Failed`就是label太长。
-
-关于这个问题在[API: Create a label](https://developer.github.com/v3/issues/labels/#create-a-label)并未提及。
-
-但是在任何一个仓库下，按照`Issues -> New label`的时候，输入的`Label name`是有限制的，输入超过`50`个自符之后便无法再接收输入。就酱，没找到什么文档。。
-
-看了这个[Validation Failed ID长度问题建议](https://github.com/imsun/gitment/issues/116)之后觉得，MD5一下吧那就。。
-
-为了选择一个KEY去MD5，顺便解决一下[同一个页面，带锚点#more会初始化一条新的issue](https://github.com/imsun/gitment/issues/168)这个问题，
-
-所以KEY使用[关于hexo博客单篇文章初始化两次的问题](https://github.com/imsun/gitment/issues/68)中提出的`window.location.pathname`吧，但是关于`/`的讨论，我这里貌似并没有看到，我的都是有的😂。。如果看到的话再更，或者保险期间，先按照这种方案更新一下。
-
-将上面的做完，现在的rb应该长这个样子:
-
-```rb
-# from : https://madordie.github.io/post/blog-gitment-auto-setup
-# 另外，token已放在.git-token文件下,并被.gitignore标记，防止泄漏。。
-
-username = "madordie" # GitHub 用户名
-token = `cat .git-token`  # GitHub Token
-repo_name = "madordie.github.io" # 存放 issues
-sitemap_url = "https://madordie.github.io/sitemap.xml" # sitemap
-kind = "gitment" # "Gitalk" or "gitment"
-
-require 'open-uri'
-require 'faraday'
-require 'active_support'
-require 'active_support/core_ext'
-require 'sitemap-parser'
-require 'digest'
-
-puts "正在检索URL"
-
-sitemap = SitemapParser.new sitemap_url
-urls = sitemap.to_a
-
-puts "检索到文章共#{urls.count}个"
-
-conn = Faraday.new(:url => "https://api.github.com") do |conn|
-  conn.basic_auth(username, token)
-  conn.headers['Accept'] = "application/vnd.github.symmetra-preview+json"
-  conn.adapter  Faraday.default_adapter
-end
-
-commenteds = Array.new
-`
-  if [ ! -f .commenteds ]; then
-    touch .commenteds
-  fi
-`
-File.open(".commenteds", "r") do |file|
-  file.each_line do |line|
-      commenteds.push line
-  end
-end
-
-urls.each_with_index do |url, index|
-  url.gsub!(/index.html$/, "")
-
-  if commenteds.include?("#{url}\n") == false
-    url_key = Digest::MD5.hexdigest(URI.parse(url).path)
-    response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
-
-    if JSON.parse(response.body)['total_count'] > 0
-      `echo #{url} >> .commenteds`
-    else
-      puts "正在创建: #{url}"
-      title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
-      response = conn.post("/repos/#{username}/#{repo_name}/issues") do |req|
-        req.body = { body: url, labels: [kind, url_key], title: title }.to_json
-      end
-      if JSON.parse(response.body)['number'] > 0
-        `echo #{url} >> .commenteds`
-        puts "\t↳ 已创建成功"
-      else
-        puts "\t↳ #{response.body}"
-      end
-    end
-  end
-end
 ```
 
 同时别忘了修改对应的网页。。我这里使用的是[NexT.Pisces v5.1.4](https://github.com/iissnan/hexo-theme-next)
@@ -265,116 +93,21 @@ end
 
 执行一下脚本吧，应该齐活了。
 
-## Gitalk
+## Tips.
 
-好气啊, [Next主题](https://github.com/next-theme/hexo-theme-next)升级之后不支持Gitment了, 大概是因为上面种种问题吧, 所以,被迫来到了[Gitalk](https://github.com/gitalk/gitalk)
+另外为了避免`label`过长的问题这个的讨论很多，在issues中搜一下大约这样：[Error: Validation Failed](https://github.com/imsun/gitment/issues?utf8=✓&q=is%3Aissue+validation+Failed)。
 
-真香警告.
+这个`Error: Validation Failed`就是label太长。
 
-回归本心,诉求就一个: 从`gitment`兼容至`Gitalk`.
+关于这个问题在[API: Create a label](https://developer.github.com/v3/issues/labels/#create-a-label)并未提及。
 
-脚本需要配置项:
+但是在任何一个仓库下，按照`Issues -> New label`的时候，输入的`Label name`是有限制的，输入超过`50`个自符之后便无法再接收输入。就酱，没找到什么文档。。
 
-- .git-token = 放置token 切记注意添加`.gitignore`
-- username = "madordie" # GitHub 用户名
-- token = `cat .git-token`  # GitHub Token
-- repo_name = "madordie.github.io" # 存放 issues
-- sitemap_url = "https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml" # sitemap
-- kind = "Gitalk" # "Gitalk" or "gitment"
+看了这个[Validation Failed ID长度问题建议](https://github.com/imsun/gitment/issues/116)之后觉得，MD5一下吧那就。。
 
-然后, 脚本会识别`kind`是否已经添加, 如果没有添加会追一个`label`, 以确保能正常执行
+为了选择一个KEY去MD5，顺便解决一下[同一个页面，带锚点#more会初始化一条新的issue](https://github.com/imsun/gitment/issues/168)这个问题，
 
-```rb
-# from : https://madordie.github.io/post/blog-gitment-auto-setup
-# 另外，token已放在.git-token文件下，防止泄漏。。
-
-username = "madordie" # GitHub 用户名
-token = `cat .git-token`  # GitHub Token
-repo_name = "madordie.github.io" # 存放 issues
-sitemap_url = "https://raw.githubusercontent.com/madordie/madordie.github.io/master/sitemap.xml" # sitemap
-kind = "Gitalk" # "Gitalk" or "gitment"
-
-require 'open-uri'
-require 'faraday'
-require 'active_support'
-require 'active_support/core_ext'
-require 'sitemap-parser'
-require 'digest'
-
-puts "正在检索URL"
-
-sitemap = SitemapParser.new sitemap_url
-urls = sitemap.to_a
-
-puts "检索到文章共#{urls.count}个"
-
-conn = Faraday.new(:url => "https://api.github.com/") do |conn|
-  conn.basic_auth(username, token)
-  conn.headers['Accept'] = "application/vnd.github.symmetra-preview+json"
-  conn.adapter  Faraday.default_adapter
-end
-
-commenteds = Array.new
-`
-  if [ ! -f .commenteds ]; then
-    touch .commenteds
-  fi
-`
-File.open(".commenteds", "r") do |file|
-  file.each_line do |line|
-      commenteds.push line
-  end
-end
-
-urls.each_with_index do |url, index|
-  url = url.gsub(/index.html$/, "")
-
-  if commenteds.include?("#{url}\n") == false
-    url_key = Digest::MD5.hexdigest(URI.parse(url).path)
-    response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
-
-    puts "正在创建: #{url} -> [#{url_key}, #{kind}]"
-    labels = JSON.parse(response.body)["items"]
-      .map { |item|
-        item["labels"].map { |label| label["name"] }
-      }
-      .flatten
-
-    if labels.include?(url_key)
-      if labels.include?(kind)
-        puts "\t↳ 已存在"
-        `echo #{url} >> .commenteds`
-      else
-        issue_id = JSON.parse(response.body)["items"]
-          .map { |item| item["number"] }
-          .first
-
-        puts "\t↳ 正在为评论(#{issue_id})增加`#{kind}`标签"
-        response = conn.post("/repos/#{username}/#{repo_name}/issues/#{issue_id}/labels") do |req|
-          req.body = { labels: [kind] }.to_json
-        end
-        if response.status == 200
-          `echo #{url} >> .commenteds`
-          puts "\t\t↳ 已增加成功"
-        else
-          puts "\t↳ #{response.body}"
-        end
-      end
-    else
-      title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
-      response = conn.post("/repos/#{username}/#{repo_name}/issues") do |req|
-        req.body = { body: url, labels: [kind, url_key], title: title }.to_json
-      end
-      if JSON.parse(response.body)['number'] > 0
-        `echo #{url} >> .commenteds`
-        puts "\t↳ 已创建成功"
-      else
-        puts "\t↳ #{response.body}"
-      end
-    end
-  end
-end
-```
+所以KEY使用[关于hexo博客单篇文章初始化两次的问题](https://github.com/imsun/gitment/issues/68)中提出的`window.location.pathname`吧，但是关于`/`的讨论，我这里貌似并没有看到，我的都是有的😂。。如果看到的话再更，或者保险期间，先按照这种方案更新一下。
 
 ## 最后
 
