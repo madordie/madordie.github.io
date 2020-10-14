@@ -508,14 +508,14 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/tags/Jenkins/</loc>
+    <loc>https://madordie.github.io/tags/Fastlane/</loc>
     <lastmod>2020-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://madordie.github.io/tags/Fastlane/</loc>
+    <loc>https://madordie.github.io/tags/Jenkins/</loc>
     <lastmod>2020-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -585,13 +585,6 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/tags/%E9%80%86%E5%90%91/</loc>
-    <lastmod>2020-10-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://madordie.github.io/tags/UITableView/</loc>
     <lastmod>2020-10-14</lastmod>
     <changefreq>daily</changefreq>
@@ -607,6 +600,13 @@
   
   <url>
     <loc>https://madordie.github.io/tags/%E5%9B%BD%E9%99%85%E5%8C%96/</loc>
+    <lastmod>2020-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/tags/%E9%80%86%E5%90%91/</loc>
     <lastmod>2020-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
