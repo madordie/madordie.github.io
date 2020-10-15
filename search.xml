@@ -56,6 +56,12 @@
       </tags>
   </entry>
   <entry>
+    <title>个人资料页</title>
+    <url>/post/about-me/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../about">关于</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>hexo的博客让百度收录</title>
     <url>/post/use-hexo-setup-blog/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个github.io搭建的过程参考，以及向百度推送的python、js脚本。</p>
@@ -85,12 +91,6 @@
         <tag>blog</tag>
         <tag>SEO</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>个人资料页</title>
-    <url>/post/about-me/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../about">关于</a></p>
-]]></content>
   </entry>
   <entry>
     <title>博客迁移公告</title>
