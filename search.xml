@@ -903,6 +903,35 @@
       </tags>
   </entry>
   <entry>
+    <title>如何实现AppStore查看更多的方法</title>
+    <url>/post/appstore-truncate/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="UITextView-More"><a href="#UITextView-More" class="headerlink" title="UITextView-More"></a><a href="https://github.com/madordie/UITextView-More">UITextView-More</a></h2><p>使用UITextKit 实现“更多”的折叠效果</p>
+<p><img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="预览"></p>
+<a id="more"></a>
+
+<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><h3 id="获取最后一行Rect"><a href="#获取最后一行Rect" class="headerlink" title="获取最后一行Rect"></a>获取最后一行Rect</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> lastRect = <span class="type">CGRect</span>.zero</span><br><span class="line">layoutManager.enumerateEnclosingRects(forGlyphRange: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: textStorage.string.characters.<span class="built_in">count</span>), withinSelectedGlyphRange: <span class="type">NSRange</span>(location: <span class="type">NSNotFound</span>, length: <span class="number">0</span>), <span class="keyword">in</span>: textContainer, using: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (rect, isStop) <span class="keyword">in</span></span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> _self = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"><span class="keyword">var</span> newRect = rect</span><br><span class="line">newRect.origin.y += _self.textContainerInset.top</span><br><span class="line">lastRect = newRect</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">print</span>(lastRect)</span><br></pre></td></tr></table></figure>
+
+<h3 id="增加-exclusionPaths"><a href="#增加-exclusionPaths" class="headerlink" title="增加 exclusionPaths"></a>增加 <code>exclusionPaths</code></h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">textContainer.exclusionPaths = [<span class="type">UIBezierPath</span>.<span class="keyword">init</span>(rect: rect)]</span><br></pre></td></tr></table></figure>
+
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
+<li><code>UITextView</code>默认携带左右边距，通过<code>UITextView.textContainer.lineFragmentPadding</code>获取</li>
+<li><code>UITextView</code>默认携带上下左右边距(<code>UITextView.textContainerInset</code>)，其中左右和<code>lineFragmentPadding</code>相加</li>
+<li>此处并没有对<a href="https://github.com/madordie/UITextView-More/blob/master/TruncateTextView.swift">TruncateTextView</a>进行过多的设置，主要是因为继承在UITextView下，<a href="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif">GIF</a>中的这部分设置放在了<a href="https://github.com/madordie/UITextView-More/blob/master/Demo-AppStore-More/ViewController.swift">ViewController.swift</a>中</li>
+<li>此处使用的是<code>frame</code>，可以在<code>UIView.sizeToFit()</code>之后获取到<code>UIView</code>的<code>Size</code>。约束也大抵如此</li>
+</ul>
+<hr>
+<ul>
+<li>感谢<a href="https://github.com/lexiaoyao20">乐逍遥</a>提供的例子，才找到了<code>open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange</code>方法😂</li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>效果</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DEBUG - Xcode解析.crash</title>
     <url>/post/debug-xcode8-analysis-crash-file/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
@@ -1398,35 +1427,6 @@
       </tags>
   </entry>
   <entry>
-    <title>如何实现AppStore查看更多的方法</title>
-    <url>/post/appstore-truncate/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="UITextView-More"><a href="#UITextView-More" class="headerlink" title="UITextView-More"></a><a href="https://github.com/madordie/UITextView-More">UITextView-More</a></h2><p>使用UITextKit 实现“更多”的折叠效果</p>
-<p><img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="预览"></p>
-<a id="more"></a>
-
-<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><h3 id="获取最后一行Rect"><a href="#获取最后一行Rect" class="headerlink" title="获取最后一行Rect"></a>获取最后一行Rect</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> lastRect = <span class="type">CGRect</span>.zero</span><br><span class="line">layoutManager.enumerateEnclosingRects(forGlyphRange: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: textStorage.string.characters.<span class="built_in">count</span>), withinSelectedGlyphRange: <span class="type">NSRange</span>(location: <span class="type">NSNotFound</span>, length: <span class="number">0</span>), <span class="keyword">in</span>: textContainer, using: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (rect, isStop) <span class="keyword">in</span></span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> _self = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"><span class="keyword">var</span> newRect = rect</span><br><span class="line">newRect.origin.y += _self.textContainerInset.top</span><br><span class="line">lastRect = newRect</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">print</span>(lastRect)</span><br></pre></td></tr></table></figure>
-
-<h3 id="增加-exclusionPaths"><a href="#增加-exclusionPaths" class="headerlink" title="增加 exclusionPaths"></a>增加 <code>exclusionPaths</code></h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">textContainer.exclusionPaths = [<span class="type">UIBezierPath</span>.<span class="keyword">init</span>(rect: rect)]</span><br></pre></td></tr></table></figure>
-
-<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
-<li><code>UITextView</code>默认携带左右边距，通过<code>UITextView.textContainer.lineFragmentPadding</code>获取</li>
-<li><code>UITextView</code>默认携带上下左右边距(<code>UITextView.textContainerInset</code>)，其中左右和<code>lineFragmentPadding</code>相加</li>
-<li>此处并没有对<a href="https://github.com/madordie/UITextView-More/blob/master/TruncateTextView.swift">TruncateTextView</a>进行过多的设置，主要是因为继承在UITextView下，<a href="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif">GIF</a>中的这部分设置放在了<a href="https://github.com/madordie/UITextView-More/blob/master/Demo-AppStore-More/ViewController.swift">ViewController.swift</a>中</li>
-<li>此处使用的是<code>frame</code>，可以在<code>UIView.sizeToFit()</code>之后获取到<code>UIView</code>的<code>Size</code>。约束也大抵如此</li>
-</ul>
-<hr>
-<ul>
-<li>感谢<a href="https://github.com/lexiaoyao20">乐逍遥</a>提供的例子，才找到了<code>open func truncatedGlyphRange(inLineFragmentForGlyphAt glyphIndex: Int) -&gt; NSRange</code>方法😂</li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>效果</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Swift 编译时性能优化笔记</title>
     <url>/post/swift-build-times/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Xcode在编译Swift代码的时候速度会越来越慢，就此查找原因，并列出自己的优化思路。</p>
@@ -1664,6 +1664,42 @@ class CMExpandingTextField: UITextField &#123;
       </tags>
   </entry>
   <entry>
+    <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
+    <url>/post/reactivecocoa-ready-to-use/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。</p>
+<a id="more"></a>
+
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。</p>
+<h1 id="OC简单食用方法"><a href="#OC简单食用方法" class="headerlink" title="OC简单食用方法"></a>OC简单食用方法</h1><p>先来个例子代码：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">RACSignal *RSignal = [[<span class="keyword">self</span>.R rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.R.value)];</span><br><span class="line">RACSignal *GSignal = [[<span class="keyword">self</span>.G rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.G.value)];</span><br><span class="line">RACSignal *BSignal = [[<span class="keyword">self</span>.B rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.B.value)];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span>*(^valueFormat)(<span class="built_in">NSNumber</span> *value) = ^(<span class="built_in">NSNumber</span> *value) &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@&quot;%.0f&quot;</span>, [value doubleValue]*<span class="number">255</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">[RSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.RVaule.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[GSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.GValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[BSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.BValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>是不是超级简单！</p>
+<h2 id="顾虑"><a href="#顾虑" class="headerlink" title="顾虑"></a>顾虑</h2><p>可是我有一个问题：</p>
+<ul>
+<li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。</li>
+</ul>
+<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1><p>在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa</a>的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift">README.md</a>中有这么一段话：</p>
+<blockquote>
+<h2 id="Objective-C-and-Swift"><a href="#Objective-C-and-Swift" class="headerlink" title="Objective-C and Swift"></a>Objective-C and Swift</h2></blockquote>
+<p>  Although ReactiveCocoa was started as an Objective-C framework, as of [version<br>  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].</p>
+<blockquote>
+</blockquote>
+<p>  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is<br>  a [bridge][Objective-C Bridging] to convert between the two. This<br>  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to<br>  use Cocoa extensions which haven’t been added to the Swift API yet.</p>
+<blockquote>
+</blockquote>
+<p>  The Objective-C API will continue to exist and be supported for the foreseeable<br>  future, but it won’t receive many improvements. For more information about using<br>  this API, please consult our [legacy documentation][].</p>
+<blockquote>
+</blockquote>
+<p>  <strong>We highly recommend that all new projects use the Swift API.</strong></p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>ReactiveCocoa</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>iOS11-beta</title>
     <url>/post/ios11-beta/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>iOS11 预览版安装体验笔记。</p>
@@ -1707,42 +1743,6 @@ class CMExpandingTextField: UITextField &#123;
       <categories>
         <category>iOS</category>
       </categories>
-  </entry>
-  <entry>
-    <title>准备食用RAC(ReactiveCocoa)的顾虑</title>
-    <url>/post/reactivecocoa-ready-to-use/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>对于目前的项目，如果引用RAC，会对项目造成哪些影响的相关思考。</p>
-<a id="more"></a>
-
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>众所周知，RAC很火，有很多崇拜者。本文只是一个新手第一次使用RAC时候所顾忌的一些问题，如果有比较好的解决方案及时告知我，我会及时更改。</p>
-<h1 id="OC简单食用方法"><a href="#OC简单食用方法" class="headerlink" title="OC简单食用方法"></a>OC简单食用方法</h1><p>先来个例子代码：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">RACSignal *RSignal = [[<span class="keyword">self</span>.R rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.R.value)];</span><br><span class="line">RACSignal *GSignal = [[<span class="keyword">self</span>.G rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.G.value)];</span><br><span class="line">RACSignal *BSignal = [[<span class="keyword">self</span>.B rac_newValueChannelWithNilValue:@<span class="number">0</span>] startWith:@(<span class="keyword">self</span>.B.value)];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span>*(^valueFormat)(<span class="built_in">NSNumber</span> *value) = ^(<span class="built_in">NSNumber</span> *value) &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@&quot;%.0f&quot;</span>, [value doubleValue]*<span class="number">255</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">[RSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.RVaule.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[GSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.GValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line">[BSignal subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">    <span class="keyword">self</span>.BValue.text = valueFormat(x);</span><br><span class="line">&#125;];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>是不是超级简单！</p>
-<h2 id="顾虑"><a href="#顾虑" class="headerlink" title="顾虑"></a>顾虑</h2><p>可是我有一个问题：</p>
-<ul>
-<li>OC属于运行时语法，这个里面的<code>id x</code>的不确定因素可能会导致类型识别出现错误。如果说项目是多人维护，那么A可能不知道B写的Signal走的类型是什么，所以这个问题就不适用于松散的多人开发。如果需要使用RAC恐怕需要在项目启动时进行规避这些不确定的问题才能引入。</li>
-</ul>
-<h1 id="Swift简单食用方法"><a href="#Swift简单食用方法" class="headerlink" title="Swift简单食用方法"></a>Swift简单食用方法</h1><p>在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa</a>的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa#objective-c-and-swift">README.md</a>中有这么一段话：</p>
-<blockquote>
-<h2 id="Objective-C-and-Swift"><a href="#Objective-C-and-Swift" class="headerlink" title="Objective-C and Swift"></a>Objective-C and Swift</h2></blockquote>
-<p>  Although ReactiveCocoa was started as an Objective-C framework, as of [version<br>  3.0][CHANGELOG], all major feature development is concentrated on the [Swift API][].</p>
-<blockquote>
-</blockquote>
-<p>  RAC’s [Objective-C API][] and Swift API are entirely separate, but there is<br>  a [bridge][Objective-C Bridging] to convert between the two. This<br>  is mostly meant as a compatibility layer for older ReactiveCocoa projects, or to<br>  use Cocoa extensions which haven’t been added to the Swift API yet.</p>
-<blockquote>
-</blockquote>
-<p>  The Objective-C API will continue to exist and be supported for the foreseeable<br>  future, but it won’t receive many improvements. For more information about using<br>  this API, please consult our [legacy documentation][].</p>
-<blockquote>
-</blockquote>
-<p>  <strong>We highly recommend that all new projects use the Swift API.</strong></p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>ReactiveCocoa</tag>
-      </tags>
   </entry>
   <entry>
     <title>项目中的UITableView</title>
