@@ -34,7 +34,7 @@ function checkout_URLs() {
 
 # 备份
 function backup() {
-    echo "最后更新于:" `date` > README.md
+    echo "最后更新于:" `$(date "+%Y-%m-%d %H:%M:%S")` > README.md
 
     git --git-dir=themes/next/.git --work-tree=themes/next/ rev-parse HEAD > themes/next.commit
     git --git-dir=themes/next/.git --work-tree=themes/next/ diff --binary > themes/next.diff
