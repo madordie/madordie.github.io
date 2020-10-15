@@ -37,9 +37,7 @@ function backup() {
     echo "最后更新于:" `date` > README.md
 
     git --git-dir=themes/next/.git --work-tree=themes/next/ rev-parse HEAD > themes/next.commit
-    git --git-dir=themes/next/.git --work-tree=themes/next/ diff > themes/next.diff
-    cp themes/next/source/images/avatar.gif themes/avatar.gif
-    cp themes/next/source/images/favicon-32x32-next.png themes/favicon-32x32-next.png
+    git --git-dir=themes/next/.git --work-tree=themes/next/ diff --binary > themes/next.diff
 
     git add .
     git commit -am "backup"
