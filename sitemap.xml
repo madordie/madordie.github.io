@@ -685,6 +685,13 @@
   </url>
   
   <url>
+    <loc>https://madordie.github.io/categories/%E7%89%A2%E9%AA%9A/</loc>
+    <lastmod>2020-10-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/categories/macOS/</loc>
     <lastmod>2020-10-20</lastmod>
     <changefreq>daily</changefreq>
@@ -693,13 +700,6 @@
   
   <url>
     <loc>https://madordie.github.io/categories/iOS/</loc>
-    <lastmod>2020-10-20</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/categories/%E7%89%A2%E9%AA%9A/</loc>
     <lastmod>2020-10-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
