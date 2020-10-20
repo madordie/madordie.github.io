@@ -212,7 +212,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -269,6 +269,115 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/ios-tool-collectionview-simplify-business/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="继刚">
+      <meta itemprop="description" content="学习使我快乐 :)">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="继刚的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/ios-tool-collectionview-simplify-business/" class="post-title-link" itemprop="url">用CollectionView简化代码，专注于业务和UI</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-10-12 00:00:00" itemprop="dateCreated datePublished" datetime="2017-10-12T00:00:00+08:00">2017-10-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-05-18 10:46:39" itemprop="dateModified" datetime="2020-05-18T10:46:39+08:00">2020-05-18</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>UITableView</code>作为高级控件被开发者广泛使用，同样的，<code>UICollectionView</code>由于其NB的布局也被广泛使用。但是后者在使用的时候大多数都属于自定义的比较多，前者则相对普通，list基本上都用。</p>
+<p>在业务需求中，常规布局，大多数都是采用<code>UITableView</code>进行的，但是有痛点：</p>
+<ul>
+<li>当使在APP内用过一次瀑布流之后，设计师会突然的让你在正常的list中底部追加瀑布流。。虽然是在底部追加，但是要从<code>UITableView</code>迁移到<code>UICollectionView</code></li>
+<li><code>UITableViewDelegate</code>、<code>UITableViewDataSource</code> 恐怕每处使用都要写繁琐的相同的代码吧～</li>
+<li>很多人也会对其进行高度缓存啊神马的优化策略</li>
+<li>不知不觉这些代码堆在一起已经将<code>UIViewController</code>堆的相当的高</li>
+</ul>
+<p>然后呢，我们现在使用一个<code>CollectionView</code>将这些操作包装一下，达到这样一个流程:</p>
+<ol>
+<li><p>自定义Cell、CellModel</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LabelCell</span>: <span class="title">UICollectionViewCell</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> info = <span class="type">UILabel</span>()</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">sizeThatFits</span><span class="params">(<span class="number">_</span> size: CGSize)</span></span> -&gt; <span class="type">CGSize</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">return</span> <span class="type">CGSize</span>(width: size.width, height: info.frame.maxY + info.frame.minY)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LabelCell</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Model</span>: <span class="title">ListItemDefaultProtocol</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> info: <span class="type">String?</span></span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">fillModel</span><span class="params">(view: LabelCell)</span></span> &#123;</span><br><span class="line">            view.info.text = info</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>请求、处理数据格式化为<code>LabelCell.Model</code>这样的类</p>
+</li>
+<li><p>处理好的数据交给<code>CollectionView</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.sections = model.format(...)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>休息一会，完工了～</p>
+</li>
+</ol>
+<p>然后，来看看<code>Collection</code>里面都做了什么操作</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/ios-tool-collectionview-simplify-business/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -644,95 +753,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/post/ios-automation-jenkins-build/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://madordie.github.io/post/appstore-truncate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="继刚">
-      <meta itemprop="description" content="学习使我快乐 :)">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="继刚的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/appstore-truncate/" class="post-title-link" itemprop="url">如何实现AppStore查看更多的方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-09-14 11:46:18" itemprop="dateCreated datePublished" datetime="2017-09-14T11:46:18+08:00">2017-09-14</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2017-10-10 13:34:54" itemprop="dateModified" datetime="2017-10-10T13:34:54+08:00">2017-10-10</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="UITextView-More"><a href="#UITextView-More" class="headerlink" title="UITextView-More"></a><a target="_blank" rel="noopener" href="https://github.com/madordie/UITextView-More">UITextView-More</a></h2><p>使用UITextKit 实现“更多”的折叠效果</p>
-<p><img src="https://github.com/madordie/UITextView-More/blob/master/Untitled.gif?raw=true" alt="预览"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/appstore-truncate/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
