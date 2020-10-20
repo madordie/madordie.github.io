@@ -1,5 +1,5 @@
 diff --git a/_config.yml b/_config.yml
-index 02758d9..6fafbf2 100644
+index 02758d9..fe8c6c2 100644
 --- a/_config.yml
 +++ b/_config.yml
 @@ -36,13 +36,13 @@ custom_file_path:
@@ -99,6 +99,15 @@ index 02758d9..6fafbf2 100644
    prism:
      light: prism
      dark: prism-dark
+@@ -513,7 +513,7 @@ pjax: false
+ 
+ # FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.
+ # For more information: https://fancyapps.com/fancybox
+-fancybox: false
++fancybox: true
+ 
+ # A JavaScript library for zooming images like Medium.
+ # Warning: Do not enable both `fancybox` and `mediumzoom`.
 @@ -627,12 +627,12 @@ livere_uid: # <your_uid>
  # Gitalk
  # For more information: https://gitalk.github.io, https://github.com/gitalk/gitalk
