@@ -87,12 +87,6 @@
       </tags>
   </entry>
   <entry>
-    <title>个人资料页</title>
-    <url>/post/about-me/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../about">关于</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>博客迁移公告</title>
     <url>/post/about-change-blog/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>你敢信！我又搬家了。。</p>
@@ -109,6 +103,48 @@
       </categories>
       <tags>
         <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人资料页</title>
+    <url>/post/about-me/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><a href="../about">关于</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>mac10.13 pods 命令错误</title>
+    <url>/post/macos-high-sierra-cocoapods/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每逢升级大版本总要过搞点事情。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ pod env</span><br><span class="line">-bash: /usr/<span class="built_in">local</span>/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>不论是<code>pod env</code>、<code>pod update</code> 等等均报上面的错误。</p>
+<p>如果Google发现：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/44396215/cocoapods-not-working-in-macos-high-sierra">ruby - CocoaPods not working in macOS High Sierra - Stack Overflow</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6778">CocoaPods CLI fails in High Sierra due to change of Ruby version #6778</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096">High Sierra: bad interpreter #6898</a></li>
+</ul>
+<p>事情的缘由就是这样。</p>
+<p><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096">#6898</a>中道出了简单直接的解决方案：</p>
+<blockquote>
+<p>for all others:</p>
+</blockquote>
+<blockquote>
+<p><code>gem install -n /usr/local/bin cocoapods</code></p>
+</blockquote>
+<blockquote>
+<p>fixes it</p>
+</blockquote>
+<p><strong>综合起来</strong>解决这个问题是这样的：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem update --system</span><br><span class="line">$ gem uninstall cocoapods</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;gem: --bindir /usr/local/bin&#x27;</span> &gt;&gt; ~/.gemrc</span><br><span class="line">$ sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
+
+<p>愉快的使用cocoapods吧～</p>
+]]></content>
+      <categories>
+        <category>macOS</category>
+      </categories>
+      <tags>
+        <tag>cocoapods</tag>
       </tags>
   </entry>
   <entry>
@@ -235,42 +271,6 @@
       </categories>
       <tags>
         <tag>内网穿透</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mac10.13 pods 命令错误</title>
-    <url>/post/macos-high-sierra-cocoapods/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每逢升级大版本总要过搞点事情。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ pod env</span><br><span class="line">-bash: /usr/<span class="built_in">local</span>/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<p>不论是<code>pod env</code>、<code>pod update</code> 等等均报上面的错误。</p>
-<p>如果Google发现：</p>
-<ul>
-<li><a href="https://stackoverflow.com/questions/44396215/cocoapods-not-working-in-macos-high-sierra">ruby - CocoaPods not working in macOS High Sierra - Stack Overflow</a></li>
-<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6778">CocoaPods CLI fails in High Sierra due to change of Ruby version #6778</a></li>
-<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096">High Sierra: bad interpreter #6898</a></li>
-</ul>
-<p>事情的缘由就是这样。</p>
-<p><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096">#6898</a>中道出了简单直接的解决方案：</p>
-<blockquote>
-<p>for all others:</p>
-</blockquote>
-<blockquote>
-<p><code>gem install -n /usr/local/bin cocoapods</code></p>
-</blockquote>
-<blockquote>
-<p>fixes it</p>
-</blockquote>
-<p><strong>综合起来</strong>解决这个问题是这样的：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem update --system</span><br><span class="line">$ gem uninstall cocoapods</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;gem: --bindir /usr/local/bin&#x27;</span> &gt;&gt; ~/.gemrc</span><br><span class="line">$ sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
-
-<p>愉快的使用cocoapods吧～</p>
-]]></content>
-      <categories>
-        <category>macOS</category>
-      </categories>
-      <tags>
-        <tag>cocoapods</tag>
       </tags>
   </entry>
   <entry>
@@ -454,6 +454,42 @@
       </tags>
   </entry>
   <entry>
+    <title>开发小记</title>
+    <url>/post/note/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>开发中的小笔记。记录开发中的点滴滴点。</p>
+<a id="more"></a>
+
+
+<h2 id="批量替换json文件中的注释"><a href="#批量替换json文件中的注释" class="headerlink" title="批量替换json文件中的注释"></a>批量替换json文件中的注释</h2><p>备份至.bat</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ perl -i.bat -lpe <span class="string">&#x27;s/\/\/[^&quot;]+$//g&#x27;</span> xx</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="批量正则替换的另一种思路"><a href="#批量正则替换的另一种思路" class="headerlink" title="批量正则替换的另一种思路"></a>批量正则替换的另一种思路</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;base&#x2F;sh</span><br><span class="line">find . -name &#39;*.swift&#39; | while read file; do</span><br><span class="line">  perl -i -lpe &#39;s&#x2F;if \(([^\)].*)\) \&#123;&#x2F;if $1 \&#123;&#x2F;g&#39; $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h2 id="批量删除空格组成的空行中的空格"><a href="#批量删除空格组成的空行中的空格" class="headerlink" title="批量删除空格组成的空行中的空格"></a>批量删除空格组成的空行中的空格</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;base&#x2F;sh</span><br><span class="line">find . -name &#39;*.swift&#39; | while read file; do</span><br><span class="line">  sed -i &#39;&#39; &#39;s&#x2F;^[[:space:]][[:space:]]*$&#x2F;&#x2F;g&#39; $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取代码执行时间"><a href="#获取代码执行时间" class="headerlink" title="获取代码执行时间"></a>获取代码执行时间</h2>  <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">#<span class="keyword">import</span> &lt;mach/mach_time.h&gt;</span><br><span class="line"><span class="keyword">static</span> <span class="type">NSMutableDictionary</span> *__times;</span><br><span class="line"><span class="keyword">static</span> inline void debug_start_of(<span class="type">NSString</span> *key)</span><br><span class="line">&#123;</span><br><span class="line">  __times = __times ?: [<span class="type">NSMutableDictionary</span> new];</span><br><span class="line"></span><br><span class="line">  uint64_t start = mach_absolute_time();</span><br><span class="line">  __times[key] = @(start);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> inline void debug_stop_of(<span class="type">NSString</span> *key)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (__times) &#123;</span><br><span class="line">    uint64_t end = mach_absolute_time();</span><br><span class="line">    uint64_t start = [__times[key] unsignedLongLongValue];</span><br><span class="line">    <span class="keyword">if</span> (start != <span class="number">0</span>) &#123;</span><br><span class="line">      uint64_t elapsed = end - start;</span><br><span class="line">      mach_timebase_info_data_t info;</span><br><span class="line">      <span class="keyword">if</span> (mach_timebase_info(&amp;info) != <span class="type">KERN_SUCCESS</span>) &#123;</span><br><span class="line">        printf(<span class="string">&quot;mach_timebase_info failed\n&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      uint64_t nanosecs = elapsed * info.numer / info.denom;</span><br><span class="line">      uint64_t millisecs = nanosecs / <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line">      printf(<span class="string">&quot;[DEBUG code rt] %s:%llu ms\n&quot;</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>], millisecs);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      printf(<span class="string">&quot;[DEBUG code rt] %s error: no start\n&quot;</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h2><ul>
+<li><p><code>A</code>对<code>B</code>除余时，如果<code>B == 0</code> 则会造成NAN，<code>truncatingRemainder(dividingBy:)</code>是<code>swift</code>的方法，也会造成此问题</p>
+</li>
+<li><p>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885">Objective-C 中 判断 NaN</a>大致记录了一下</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  math.h  #56</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(__GNUC__)</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VAL     __builtin_huge_val()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALF    __builtin_huge_valf()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALL    __builtin_huge_vall()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    NAN          __builtin_nanf(<span class="meta-string">&quot;0x7fc00000&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VAL     1e500</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALF    1e50f</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALL    1e5000L</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    NAN          __nan()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">//  math.h  #178</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> isnan(x)                                                         \</span></span><br><span class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</span><br><span class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</span><br><span class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>正则表达式学习笔记</title>
     <url>/post/bruch-up-regular-expressions/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>正则表达式基础学习笔记。</p>
@@ -563,42 +599,6 @@
       </categories>
       <tags>
         <tag>正则表达式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开发小记</title>
-    <url>/post/note/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>开发中的小笔记。记录开发中的点滴滴点。</p>
-<a id="more"></a>
-
-
-<h2 id="批量替换json文件中的注释"><a href="#批量替换json文件中的注释" class="headerlink" title="批量替换json文件中的注释"></a>批量替换json文件中的注释</h2><p>备份至.bat</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ perl -i.bat -lpe <span class="string">&#x27;s/\/\/[^&quot;]+$//g&#x27;</span> xx</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="批量正则替换的另一种思路"><a href="#批量正则替换的另一种思路" class="headerlink" title="批量正则替换的另一种思路"></a>批量正则替换的另一种思路</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;base&#x2F;sh</span><br><span class="line">find . -name &#39;*.swift&#39; | while read file; do</span><br><span class="line">  perl -i -lpe &#39;s&#x2F;if \(([^\)].*)\) \&#123;&#x2F;if $1 \&#123;&#x2F;g&#39; $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h2 id="批量删除空格组成的空行中的空格"><a href="#批量删除空格组成的空行中的空格" class="headerlink" title="批量删除空格组成的空行中的空格"></a>批量删除空格组成的空行中的空格</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;base&#x2F;sh</span><br><span class="line">find . -name &#39;*.swift&#39; | while read file; do</span><br><span class="line">  sed -i &#39;&#39; &#39;s&#x2F;^[[:space:]][[:space:]]*$&#x2F;&#x2F;g&#39; $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h2 id="获取代码执行时间"><a href="#获取代码执行时间" class="headerlink" title="获取代码执行时间"></a>获取代码执行时间</h2>  <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">#<span class="keyword">import</span> &lt;mach/mach_time.h&gt;</span><br><span class="line"><span class="keyword">static</span> <span class="type">NSMutableDictionary</span> *__times;</span><br><span class="line"><span class="keyword">static</span> inline void debug_start_of(<span class="type">NSString</span> *key)</span><br><span class="line">&#123;</span><br><span class="line">  __times = __times ?: [<span class="type">NSMutableDictionary</span> new];</span><br><span class="line"></span><br><span class="line">  uint64_t start = mach_absolute_time();</span><br><span class="line">  __times[key] = @(start);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> inline void debug_stop_of(<span class="type">NSString</span> *key)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (__times) &#123;</span><br><span class="line">    uint64_t end = mach_absolute_time();</span><br><span class="line">    uint64_t start = [__times[key] unsignedLongLongValue];</span><br><span class="line">    <span class="keyword">if</span> (start != <span class="number">0</span>) &#123;</span><br><span class="line">      uint64_t elapsed = end - start;</span><br><span class="line">      mach_timebase_info_data_t info;</span><br><span class="line">      <span class="keyword">if</span> (mach_timebase_info(&amp;info) != <span class="type">KERN_SUCCESS</span>) &#123;</span><br><span class="line">        printf(<span class="string">&quot;mach_timebase_info failed\n&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      uint64_t nanosecs = elapsed * info.numer / info.denom;</span><br><span class="line">      uint64_t millisecs = nanosecs / <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line">      printf(<span class="string">&quot;[DEBUG code rt] %s:%llu ms\n&quot;</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>], millisecs);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      printf(<span class="string">&quot;[DEBUG code rt] %s error: no start\n&quot;</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h2><ul>
-<li><p><code>A</code>对<code>B</code>除余时，如果<code>B == 0</code> 则会造成NAN，<code>truncatingRemainder(dividingBy:)</code>是<code>swift</code>的方法，也会造成此问题</p>
-</li>
-<li><p>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885">Objective-C 中 判断 NaN</a>大致记录了一下</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  math.h  #56</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(__GNUC__)</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VAL     __builtin_huge_val()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALF    __builtin_huge_valf()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALL    __builtin_huge_vall()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    NAN          __builtin_nanf(<span class="meta-string">&quot;0x7fc00000&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VAL     1e500</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALF    1e50f</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALL    1e5000L</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    NAN          __nan()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">//  math.h  #178</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> isnan(x)                                                         \</span></span><br><span class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</span><br><span class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</span><br><span class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -723,90 +723,6 @@
       </categories>
   </entry>
   <entry>
-    <title>iOS自动化-Jenkins编译工程</title>
-    <url>/post/ios-automation-jenkins-build/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
-<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
-<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
-</ul>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～</p>
-<p>从这个文章中你将要实现以下功能：</p>
-<ul>
-<li>在Jenkins创建工程</li>
-<li>build出ipa</li>
-<li>将ipa上传至fir</li>
-<li>钉钉机器人群通知</li>
-<li>将dsym上传至bugly</li>
-</ul>
-<a id="more"></a>
-
-<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><p>这里大多数操作都是用脚本来进行的，不为别的，就为自由和以后～</p>
-<h3 id="fastlane"><a href="#fastlane" class="headerlink" title="fastlane"></a>fastlane</h3><p>此乃自动化神器。<a href="https://docs.fastlane.tools/">文档在此</a>。<a href="https://github.com/fastlane/fastlane">开源哟～</a></p>
-<p>此处主要用来编译、打包。</p>
-<p>安装方法：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew cask install fastlane</span><br></pre></td></tr></table></figure>
-
-<p>此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。</p>
-<p>在Xcode9 我使用的版本2.14.1打包出问题了。。具体在这里详见<a href="../debug-xcode9-build-ipa">Xcode9编译失败</a>。于是呼采用了<code>xcodebuild</code>进行打包</p>
-<h3 id="fir-im-cli"><a href="#fir-im-cli" class="headerlink" title="fir.im-cli"></a>fir.im-cli</h3><p><a href="https://fir.im/">fir.im</a>提供的应用内测托管工具。<a href="https://github.com/FIRHQ/fir-cli/blob/master/README.md">开源官网</a>。</p>
-<p>安装方法：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem install fir-cli</span><br></pre></td></tr></table></figure>
-
-<p>此工具也提供打包ipa、apk、上传符号表至BugHD、等功能。但是我们在这里选择了<code>fastlane gym</code></p>
-<p>上传加速：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sh -c <span class="string">&quot;<span class="subst">$(curl -sSL https://gist.githubusercontent.com/trawor/5dda140dee86836b8e60/raw/turbo-qiniu.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>上传加速代码已经<a href="http://blog.fir.im/turbo-qiniu/">开源至此</a>。</p>
-<p><a href="http://bughd.com/">BugHD</a>: 已停止线上免费服务，开始卖私有部署了。</p>
-<p>另外，fir 也有<a href="http://blog.fir.im/jenkins/">Jenkins插件</a>，但是这里选择脚本方式。</p>
-<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
-<p>确保以下插件已经被安装：</p>
-<ul>
-<li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin">Git Plugin</a></li>
-<li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin">Tool Environment Plugin</a></li>
-</ul>
-<p>嗯，开始创建工程，然后配置打包吧！</p>
-<h2 id="工程相关配置"><a href="#工程相关配置" class="headerlink" title="工程相关配置"></a>工程相关配置</h2><p>左侧的<code>新建(New Item)</code>我就不说了吧～，点击输入项目名字，然后选择第一个<code>构建一个自由风格的软件项目</code>就行啦～～</p>
-<p>此处项目名字暂且成为<code>test</code>。这里只说一些比较重要的，没有活不成的那种配置。别的自己研究一下或者点击右侧❓就能看到介绍。</p>
-<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>此处点击<code>Git</code>，展开之后输入<code>Repository URL</code>即可。</p>
-<p><code>Repository URL</code>输入完毕之后点击别处，Jenkins的Git插件会自动校验该URL是否能够clone下来代码。出现红色就自己根据错误修改一下咯。。</p>
-<p>另外此处支持<code>ssh</code> 的方式，大致样式为：<code>ssh://sunjigang@github.com:29418/projects/aaa</code>。</p>
-<p><code>Branches to build</code> 写上你的构建分支～，根据自己需求来，<code>master</code>一般为仓库的默认分支。</p>
-<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><p>此处表示该项目的构建触发条件。（可选）</p>
-<p>我们这里说一下<code>Poll SCM</code>：</p>
-<p>定时检查源码变更。条件是 一定要配置<code>Git</code>这样的源码管理。</p>
-<p>例子：</p>
-<ul>
-<li><code>H/15 * * * *</code>：每15分钟构建一次</li>
-<li><code>0 2 * * *</code>： 每天2:00构建一次</li>
-</ul>
-<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>此处为构建的核心😂。当然，我们为了自由，此处全部使用<code>shell</code>脚本。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 工程名</span></span><br><span class="line">workspace=<span class="string">&#x27;xxx.xcworkspace&#x27;</span></span><br><span class="line"><span class="comment"># 构建scheme</span></span><br><span class="line">scheme=<span class="string">&#x27;xxx&#x27;</span></span><br><span class="line"><span class="comment"># 打包类型：app-store, ad-hoc, package, enterprise, development, and developer-id.</span></span><br><span class="line">export_method=<span class="string">&#x27;enterprise&#x27;</span></span><br><span class="line"><span class="comment"># fir的token，在fir-&gt;用户-&gt;token 获取</span></span><br><span class="line">fir_token=<span class="string">&#x27;c5077e0368888b9750ae848b9fe00***&#x27;</span></span><br><span class="line"><span class="comment"># fir上传短链接，效果为 https://fir.im/xxx</span></span><br><span class="line">fir_url=<span class="string">&#x27;xxx&#x27;</span></span><br><span class="line"><span class="comment"># 钉钉机器人token</span></span><br><span class="line">dingtalk_token=<span class="string">&#x27;6d09e43ddc62e540be914ff2e901e28b921d55c5ad457f6f3571f9f881287***&#x27;</span></span><br><span class="line"><span class="comment"># 钉钉机器人发送的内容</span></span><br><span class="line">dingtalk_content=<span class="string">&quot;iOSXXX已经上传至 http://fir.im/<span class="variable">$&#123;fir_url&#125;</span> ,吧啦吧啦吧啦～&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建</span></span><br><span class="line">fastlane gym</span><br><span class="line">    --workspace <span class="variable">$workspace</span> \</span><br><span class="line">    --scheme <span class="variable">$scheme</span> \</span><br><span class="line">    --export_method <span class="variable">$export_method</span> \</span><br><span class="line">    clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># fir</span></span><br><span class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls *.ipa)</span><br><span class="line">git <span class="built_in">log</span> -10 &gt; git.log</span><br><span class="line">fir p <span class="variable">$ipa</span> -T <span class="variable">$fir_token</span> -s <span class="variable">$fir_url</span> -c git.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 钉钉通知</span></span><br><span class="line">curl <span class="string">&quot;https://oapi.dingtalk.com/robot/send?access_token=<span class="variable">$&#123;dingtalk_token&#125;</span>&quot;</span> -H <span class="string">&#x27;Content-Type: application/json&#x27;</span>    -d <span class="string">&#x27;</span></span><br><span class="line"><span class="string">    &#123;&quot;msgtype&quot;: &quot;text&quot;,</span></span><br><span class="line"><span class="string">        &quot;text&quot;: &#123;</span></span><br><span class="line"><span class="string">            &quot;content&quot;:$&#123;dingtalk_content&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>至此 已经完成了打包、上传fir、钉钉机器人通知。</p>
-<p>上述脚本只是配置的例子，可以根据自己需求，自己编写和配置。特别是</p>
-<ul>
-<li><code>.xcworkspace</code>的位置，要找清楚呀</li>
-<li><code>scheme</code>无法找到是因为你在提交代码的时候没有将其设置为shared</li>
-<li><code>fastlane gym</code> 支持很多参数，是对<code>xcodebuild</code>的封装，<a href="https://github.com/fastlane/fastlane/tree/master/gym">源码及文档在此</a></li>
-</ul>
-<h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
-<p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
-<p>其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 路径主要用来提取Info.plist以及dsym文件</span></span><br><span class="line">path=<span class="string">&#x27;/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo&#x27;</span></span><br><span class="line"><span class="comment"># scheme name</span></span><br><span class="line">scheme=<span class="string">&#x27;Fangduoduo_ent&#x27;</span></span><br><span class="line"><span class="comment"># ipa bundleId</span></span><br><span class="line">package=<span class="string">&#x27;xx.xx.com&#x27;</span></span><br><span class="line"><span class="comment"># bugly id</span></span><br><span class="line">bugly_id=<span class="string">&#x27;9xxx&#x27;</span></span><br><span class="line"><span class="comment"># bugly key</span></span><br><span class="line">bugly_key=<span class="string">&#x27;wHzxcxxx&#x27;</span></span><br><span class="line"></span><br><span class="line">rm -rf *dSYM*</span><br><span class="line">cp <span class="variable">$&#123;path&#125;</span>/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist</span><br><span class="line">cp -rf <span class="variable">$&#123;path&#125;</span>/build/*.xcarchive/dSYMs .</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------ post dsym ------------ #</span></span><br><span class="line"></span><br><span class="line">app_infoplist_path=<span class="string">&#x27;Info.plist&#x27;</span></span><br><span class="line">version=$(/usr/libexec/PlistBuddy -c <span class="string">&quot;print CFBundleVersion&quot;</span> <span class="variable">$&#123;app_infoplist_path&#125;</span>)</span><br><span class="line"></span><br><span class="line">java -jar ./bugly/buglySymboliOS.jar \</span><br><span class="line">	-i dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM \</span><br><span class="line">    -dsym \</span><br><span class="line">    -u \</span><br><span class="line">    -id <span class="variable">$&#123;bugly_id&#125;</span> \</span><br><span class="line">    -key <span class="variable">$&#123;bugly_key&#125;</span> \</span><br><span class="line">    -package <span class="variable">$&#123;package&#125;</span> \</span><br><span class="line">    -version <span class="variable">$&#123;version&#125;</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># ------------ UUID ------------ #</span></span><br><span class="line"></span><br><span class="line">unzip -o ./dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM.zip</span><br><span class="line">xcrun dwarfdump --uuid ./<span class="variable">$&#123;scheme&#125;</span> &gt;&gt; ./uuids-<span class="variable">$&#123;version&#125;</span>.txt</span><br></pre></td></tr></table></figure>
-
-<p>值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。</p>
-<p>如果还有问题，可以在<a href="../../about">关于</a>中找到我。</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>构建</tag>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>iOS自动化-Jenkins环境搭建</title>
     <url>/post/ios-automation-jenkins-configuration/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
@@ -893,6 +809,90 @@
 <p>在mac 中 <code>系统偏好设置 -&gt; 网络</code> 记录下来当前获取到的IP。</p>
 <p>在<code>高级</code>中将<code>使用DHCP</code>修改为<code>使用DHCP(手动设定地址)</code>，然后将上面的地址填进去就好啦～</p>
 <p>当然你也可以指定其他的地址，只要别人没有占用😂，你开心就好～</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>构建</tag>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS自动化-Jenkins编译工程</title>
+    <url>/post/ios-automation-jenkins-build/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
+<li><a href="../ios-automation-jenkins-configuration">iOS自动化-Jenkins环境搭建</a></li>
+<li><a href="../ios-automation-jenkins-build">iOS自动化-Jenkins编译工程</a></li>
+</ul>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Jenkins环境已搭建好，现在我们来开始愉快的为iOS打包吧～</p>
+<p>从这个文章中你将要实现以下功能：</p>
+<ul>
+<li>在Jenkins创建工程</li>
+<li>build出ipa</li>
+<li>将ipa上传至fir</li>
+<li>钉钉机器人群通知</li>
+<li>将dsym上传至bugly</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="脚本环境安装"><a href="#脚本环境安装" class="headerlink" title="脚本环境安装"></a>脚本环境安装</h2><p>这里大多数操作都是用脚本来进行的，不为别的，就为自由和以后～</p>
+<h3 id="fastlane"><a href="#fastlane" class="headerlink" title="fastlane"></a>fastlane</h3><p>此乃自动化神器。<a href="https://docs.fastlane.tools/">文档在此</a>。<a href="https://github.com/fastlane/fastlane">开源哟～</a></p>
+<p>此处主要用来编译、打包。</p>
+<p>安装方法：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ brew cask install fastlane</span><br></pre></td></tr></table></figure>
+
+<p>此神器除了上述功能，还提供很多很多很多很多功能，包括自定义神马的都支持。需要的可以去文档里面翻翻。</p>
+<p>在Xcode9 我使用的版本2.14.1打包出问题了。。具体在这里详见<a href="../debug-xcode9-build-ipa">Xcode9编译失败</a>。于是呼采用了<code>xcodebuild</code>进行打包</p>
+<h3 id="fir-im-cli"><a href="#fir-im-cli" class="headerlink" title="fir.im-cli"></a>fir.im-cli</h3><p><a href="https://fir.im/">fir.im</a>提供的应用内测托管工具。<a href="https://github.com/FIRHQ/fir-cli/blob/master/README.md">开源官网</a>。</p>
+<p>安装方法：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem install fir-cli</span><br></pre></td></tr></table></figure>
+
+<p>此工具也提供打包ipa、apk、上传符号表至BugHD、等功能。但是我们在这里选择了<code>fastlane gym</code></p>
+<p>上传加速：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sh -c <span class="string">&quot;<span class="subst">$(curl -sSL https://gist.githubusercontent.com/trawor/5dda140dee86836b8e60/raw/turbo-qiniu.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>上传加速代码已经<a href="http://blog.fir.im/turbo-qiniu/">开源至此</a>。</p>
+<p><a href="http://bughd.com/">BugHD</a>: 已停止线上免费服务，开始卖私有部署了。</p>
+<p>另外，fir 也有<a href="http://blog.fir.im/jenkins/">Jenkins插件</a>，但是这里选择脚本方式。</p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>所有的插件可以在<code>系统管理 -&gt; 插件管理</code>中进行安装、卸载、降级、更新、等操作。</p>
+<p>确保以下插件已经被安装：</p>
+<ul>
+<li>源代码管理：<a href="https://wiki.jenkins.io/display/JENKINS/Git+Plugin">Git Plugin</a></li>
+<li>编译脚本环境变量：<a href="http://wiki.hudson-ci.org/display/HUDSON/Tool+Environment+Plugin">Tool Environment Plugin</a></li>
+</ul>
+<p>嗯，开始创建工程，然后配置打包吧！</p>
+<h2 id="工程相关配置"><a href="#工程相关配置" class="headerlink" title="工程相关配置"></a>工程相关配置</h2><p>左侧的<code>新建(New Item)</code>我就不说了吧～，点击输入项目名字，然后选择第一个<code>构建一个自由风格的软件项目</code>就行啦～～</p>
+<p>此处项目名字暂且成为<code>test</code>。这里只说一些比较重要的，没有活不成的那种配置。别的自己研究一下或者点击右侧❓就能看到介绍。</p>
+<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>此处点击<code>Git</code>，展开之后输入<code>Repository URL</code>即可。</p>
+<p><code>Repository URL</code>输入完毕之后点击别处，Jenkins的Git插件会自动校验该URL是否能够clone下来代码。出现红色就自己根据错误修改一下咯。。</p>
+<p>另外此处支持<code>ssh</code> 的方式，大致样式为：<code>ssh://sunjigang@github.com:29418/projects/aaa</code>。</p>
+<p><code>Branches to build</code> 写上你的构建分支～，根据自己需求来，<code>master</code>一般为仓库的默认分支。</p>
+<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><p>此处表示该项目的构建触发条件。（可选）</p>
+<p>我们这里说一下<code>Poll SCM</code>：</p>
+<p>定时检查源码变更。条件是 一定要配置<code>Git</code>这样的源码管理。</p>
+<p>例子：</p>
+<ul>
+<li><code>H/15 * * * *</code>：每15分钟构建一次</li>
+<li><code>0 2 * * *</code>： 每天2:00构建一次</li>
+</ul>
+<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>此处为构建的核心😂。当然，我们为了自由，此处全部使用<code>shell</code>脚本。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 工程名</span></span><br><span class="line">workspace=<span class="string">&#x27;xxx.xcworkspace&#x27;</span></span><br><span class="line"><span class="comment"># 构建scheme</span></span><br><span class="line">scheme=<span class="string">&#x27;xxx&#x27;</span></span><br><span class="line"><span class="comment"># 打包类型：app-store, ad-hoc, package, enterprise, development, and developer-id.</span></span><br><span class="line">export_method=<span class="string">&#x27;enterprise&#x27;</span></span><br><span class="line"><span class="comment"># fir的token，在fir-&gt;用户-&gt;token 获取</span></span><br><span class="line">fir_token=<span class="string">&#x27;c5077e0368888b9750ae848b9fe00***&#x27;</span></span><br><span class="line"><span class="comment"># fir上传短链接，效果为 https://fir.im/xxx</span></span><br><span class="line">fir_url=<span class="string">&#x27;xxx&#x27;</span></span><br><span class="line"><span class="comment"># 钉钉机器人token</span></span><br><span class="line">dingtalk_token=<span class="string">&#x27;6d09e43ddc62e540be914ff2e901e28b921d55c5ad457f6f3571f9f881287***&#x27;</span></span><br><span class="line"><span class="comment"># 钉钉机器人发送的内容</span></span><br><span class="line">dingtalk_content=<span class="string">&quot;iOSXXX已经上传至 http://fir.im/<span class="variable">$&#123;fir_url&#125;</span> ,吧啦吧啦吧啦～&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建</span></span><br><span class="line">fastlane gym</span><br><span class="line">    --workspace <span class="variable">$workspace</span> \</span><br><span class="line">    --scheme <span class="variable">$scheme</span> \</span><br><span class="line">    --export_method <span class="variable">$export_method</span> \</span><br><span class="line">    clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># fir</span></span><br><span class="line">ipa=$(<span class="built_in">pwd</span>)/$(ls *.ipa)</span><br><span class="line">git <span class="built_in">log</span> -10 &gt; git.log</span><br><span class="line">fir p <span class="variable">$ipa</span> -T <span class="variable">$fir_token</span> -s <span class="variable">$fir_url</span> -c git.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 钉钉通知</span></span><br><span class="line">curl <span class="string">&quot;https://oapi.dingtalk.com/robot/send?access_token=<span class="variable">$&#123;dingtalk_token&#125;</span>&quot;</span> -H <span class="string">&#x27;Content-Type: application/json&#x27;</span>    -d <span class="string">&#x27;</span></span><br><span class="line"><span class="string">    &#123;&quot;msgtype&quot;: &quot;text&quot;,</span></span><br><span class="line"><span class="string">        &quot;text&quot;: &#123;</span></span><br><span class="line"><span class="string">            &quot;content&quot;:$&#123;dingtalk_content&#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>至此 已经完成了打包、上传fir、钉钉机器人通知。</p>
+<p>上述脚本只是配置的例子，可以根据自己需求，自己编写和配置。特别是</p>
+<ul>
+<li><code>.xcworkspace</code>的位置，要找清楚呀</li>
+<li><code>scheme</code>无法找到是因为你在提交代码的时候没有将其设置为shared</li>
+<li><code>fastlane gym</code> 支持很多参数，是对<code>xcodebuild</code>的封装，<a href="https://github.com/fastlane/fastlane/tree/master/gym">源码及文档在此</a></li>
+</ul>
+<h3 id="上传dSYM至Bugly"><a href="#上传dSYM至Bugly" class="headerlink" title="上传dSYM至Bugly"></a>上传dSYM至Bugly</h3><p>这个还是有点点复杂的，因为bugly并未提供完整的cli工具链，需要手动跑jar包。不过都是可以完成的。</p>
+<p>为了隔离开打包和上传，这里在Jenkins上新建一个项目用来上传dSYM</p>
+<p>其中需要衔接的地方就是上面的输出要作为这个的输出。所以需要前后对应位置。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 路径主要用来提取Info.plist以及dsym文件</span></span><br><span class="line">path=<span class="string">&#x27;/Users/FDD/.jenkins/workspace/fdd-ios-app/fdd-app-ios/Fangduoduo&#x27;</span></span><br><span class="line"><span class="comment"># scheme name</span></span><br><span class="line">scheme=<span class="string">&#x27;Fangduoduo_ent&#x27;</span></span><br><span class="line"><span class="comment"># ipa bundleId</span></span><br><span class="line">package=<span class="string">&#x27;xx.xx.com&#x27;</span></span><br><span class="line"><span class="comment"># bugly id</span></span><br><span class="line">bugly_id=<span class="string">&#x27;9xxx&#x27;</span></span><br><span class="line"><span class="comment"># bugly key</span></span><br><span class="line">bugly_key=<span class="string">&#x27;wHzxcxxx&#x27;</span></span><br><span class="line"></span><br><span class="line">rm -rf *dSYM*</span><br><span class="line">cp <span class="variable">$&#123;path&#125;</span>/Fangduoduo/Fangduoduo_ent-Info.plist ./Info.plist</span><br><span class="line">cp -rf <span class="variable">$&#123;path&#125;</span>/build/*.xcarchive/dSYMs .</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------ post dsym ------------ #</span></span><br><span class="line"></span><br><span class="line">app_infoplist_path=<span class="string">&#x27;Info.plist&#x27;</span></span><br><span class="line">version=$(/usr/libexec/PlistBuddy -c <span class="string">&quot;print CFBundleVersion&quot;</span> <span class="variable">$&#123;app_infoplist_path&#125;</span>)</span><br><span class="line"></span><br><span class="line">java -jar ./bugly/buglySymboliOS.jar \</span><br><span class="line">	-i dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM \</span><br><span class="line">    -dsym \</span><br><span class="line">    -u \</span><br><span class="line">    -id <span class="variable">$&#123;bugly_id&#125;</span> \</span><br><span class="line">    -key <span class="variable">$&#123;bugly_key&#125;</span> \</span><br><span class="line">    -package <span class="variable">$&#123;package&#125;</span> \</span><br><span class="line">    -version <span class="variable">$&#123;version&#125;</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># @bugly jar执行的时候返回状态码有问题。已反馈，但是不见修改。。</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># ------------ UUID ------------ #</span></span><br><span class="line"></span><br><span class="line">unzip -o ./dSYMs/<span class="variable">$&#123;scheme&#125;</span>.app.dSYM.zip</span><br><span class="line">xcrun dwarfdump --uuid ./<span class="variable">$&#123;scheme&#125;</span> &gt;&gt; ./uuids-<span class="variable">$&#123;version&#125;</span>.txt</span><br></pre></td></tr></table></figure>
+
+<p>值得说的是，如果上面的报错，那么检查一下是不是路径什么的写错了。。。</p>
+<p>如果还有问题，可以在<a href="../../about">关于</a>中找到我。</p>
 ]]></content>
       <categories>
         <category>iOS</category>
