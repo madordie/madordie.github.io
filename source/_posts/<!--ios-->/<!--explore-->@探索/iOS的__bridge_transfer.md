@@ -40,7 +40,7 @@ typedef struct Test {
 ## 大佬提供的一些资料
 
 - [Xcode 12 ReactNativeART Crash](https://lengmolehongyan.github.io/blog/2020/09/19/xcode-12-reactnativeart-crash/)
-- [WWDC2018 Session409: What’s New in LLVM ](https://devstreaming-cdn.apple.com/videos/wwdc/2018/409t8zw7rumablsh/409/409_whats_new_in_llvm.pdf)
+- [WWDC2018 Session409: What’s New in LLVM](https://devstreaming-cdn.apple.com/videos/wwdc/2018/409t8zw7rumablsh/409/409_whats_new_in_llvm.pdf)
 
 ## 还原一下场景
 
