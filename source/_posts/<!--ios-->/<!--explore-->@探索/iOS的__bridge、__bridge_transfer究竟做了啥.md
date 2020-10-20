@@ -1,6 +1,6 @@
 ---
-title: iOS的那几个__bridge*究竟做了啥
-url: what-happened-to-the-bridge-in-ios
+title: iOS的__bridge、__bridge_transfer究竟做了啥
+url: what-happened-on-the-bridge-in-ios
 date: 2020-10-10
 tags:
     - DEBUG
@@ -118,7 +118,7 @@ categories:
 
 这个对象从`-[NSInvocation getReturnValue:]`获取出来之后在没有增加引用计数的情况下反而给人家加到了`autoreleasepool`里面.
 
-中所周知`autoreleasepool`在释放的时候会对其进行一次`release`, 而这次不对等的`release`就是这个崩溃发生的究极原因.
+众所周知`autoreleasepool`在释放的时候会对其进行一次`release`, 而这次不对等的`release`就是这个崩溃发生的究极原因.
 
 ## 怎么解决
 
