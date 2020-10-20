@@ -58,7 +58,7 @@ elif [ $opt = 'p' ]; then
     hexo clean
     hexo generate --deploy --force --bail
     echo ' --> 已成功部署.\n'
-    sleep 1
+    sleep 5
     # # 这个脚本在这里：https://madordie.github.io/post/use-hexo-setup-blog/
     # python auto-push-sitemap.py
     # echo ' --> 已上传站图.\n'
