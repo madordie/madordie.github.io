@@ -417,20 +417,6 @@
 
   
   <url>
-    <loc>https://madordie.github.io/tags/SEO/</loc>
-    <lastmod>2020-10-20</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/tags/blog/</loc>
-    <lastmod>2020-10-20</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://madordie.github.io/tags/gitment/</loc>
     <lastmod>2020-10-20</lastmod>
     <changefreq>daily</changefreq>
@@ -445,7 +431,14 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/tags/cocoapods/</loc>
+    <loc>https://madordie.github.io/tags/blog/</loc>
+    <lastmod>2020-10-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/tags/SEO/</loc>
     <lastmod>2020-10-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -453,6 +446,13 @@
   
   <url>
     <loc>https://madordie.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</loc>
+    <lastmod>2020-10-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://madordie.github.io/tags/cocoapods/</loc>
     <lastmod>2020-10-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -678,14 +678,14 @@
   </url>
   
   <url>
-    <loc>https://madordie.github.io/categories/macOS/</loc>
+    <loc>https://madordie.github.io/categories/Linux/</loc>
     <lastmod>2020-10-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://madordie.github.io/categories/Linux/</loc>
+    <loc>https://madordie.github.io/categories/macOS/</loc>
     <lastmod>2020-10-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -1,37 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hexo的博客让百度收录</title>
-    <url>/post/use-hexo-setup-blog/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个github.io搭建的过程参考，以及向百度推送的python、js脚本。</p>
-<a id="more"></a>
-
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p>感谢 <a href="http://lovenight.github.io/">岁月如歌</a> 的这个<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/">《Hexo 3.1.1 静态博客搭建指南》</a>同时感谢这个<a href="http://lovenight.github.io/2015/11/18/%E5%90%91%E7%99%BE%E5%BA%A6%E6%8E%A8%E9%80%81hexo%E5%8D%9A%E5%AE%A2%E6%89%80%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84Python%E8%84%9A%E6%9C%AC/">《向百度推送hexo博客所有链接的Python脚本》</a>(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)</p>
-<p>另外还有一个<a href="http://emufan.com/">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/">百度主动推送hexo生成的文章</a></p>
-<h1 id="python自动推送脚本修改"><a href="#python自动推送脚本修改" class="headerlink" title="python自动推送脚本修改"></a>python自动推送脚本修改</h1><p>上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: LoveNight</span></span><br><span class="line"><span class="comment"># @Date:   2015-11-16 20:45:59</span></span><br><span class="line"><span class="comment"># @Last Modified by:   LoveNight</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2015-11-18 18:07:19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># @Last Modified by:   Keith</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2016-07-06 16:22:45</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> BS</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#import msvcrt</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">hexo 博客专用，向百度站长平台提交所有网址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">本脚本必须放在hexo博客的根目录下执行！需要已安装生成百度站点地图的插件。</span></span><br><span class="line"><span class="string">百度站长平台提交链接：http://zhanzhang.baidu.com/linksubmit/index</span></span><br><span class="line"><span class="string">主动推送：最为快速的提交方式，推荐您将站点当天新产出链接立即通过此方式推送给百度，以保证新链接可以及时被百度收录。</span></span><br><span class="line"><span class="string">从中找到自己的接口调用地址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">python环境：</span></span><br><span class="line"><span class="string">pip install beautifulsoup4</span></span><br><span class="line"><span class="string">pip install requests</span></span><br><span class="line"><span class="string">xcode-select --install	</span></span><br><span class="line"><span class="string">pip install lxml </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ❌❌❌ 抄的需要更改这个URL！！这是我的！！❌❌❌</span></span><br><span class="line">url = <span class="string">&#x27;http://data.zz.baidu.com/urls?site=https://madordie.github.io&amp;token=j33t0VEPFl24tJ8N&#x27;</span></span><br><span class="line">baidu_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;baidusitemap.xml&#x27;</span>)</span><br><span class="line">google_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;sitemap.xml&#x27;</span>)</span><br><span class="line">sitemap = [baidu_sitemap, google_sitemap]</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> (os.path.exists(baidu_sitemap) <span class="keyword">or</span> os.path.exists(</span><br><span class="line">    google_sitemap)), <span class="string">&quot;没找到任何网站地图，请检查！&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从站点地图中读取网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrls</span>():</span></span><br><span class="line">    urls = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> sitemap:</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(_):</span><br><span class="line">            <span class="keyword">with</span> open(_, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                xml = f.read()</span><br><span class="line">        soup = BS(xml, <span class="string">&quot;xml&quot;</span>)</span><br><span class="line">        tags = soup.find_all(<span class="string">&quot;loc&quot;</span>)</span><br><span class="line">        urls += [x.string <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">        <span class="keyword">if</span> _ == baidu_sitemap:</span><br><span class="line">            tags = soup.find_all(<span class="string">&quot;breadCrumb&quot;</span>, url=<span class="literal">True</span>)</span><br><span class="line">            urls += [x[<span class="string">&quot;url&quot;</span>] <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">    <span class="keyword">return</span> urls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># POST提交网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postUrls</span>(<span class="params">urls</span>):</span></span><br><span class="line">    urls = set(urls)  <span class="comment"># 先去重</span></span><br><span class="line">    print(<span class="string">&quot;一共提取出 %s 个网址&quot;</span> % len(urls))</span><br><span class="line">    print(urls)</span><br><span class="line">    data = <span class="string">&quot;\n&quot;</span>.join(urls)</span><br><span class="line">    <span class="keyword">return</span> requests.post(url, data=data).text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    urls = getUrls()</span><br><span class="line">    result = postUrls(urls)</span><br><span class="line">    print(<span class="string">&quot;提交结果：&quot;</span>)</span><br><span class="line">    print(result)</span><br><span class="line"><span class="comment">#    msvcrt.getch()</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="js脚本"><a href="#js脚本" class="headerlink" title="js脚本"></a>js脚本</h1><p>这个脚本是我在<a href="http://emufan.com/">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/">百度主动推送hexo生成的文章</a>发现的，感觉也很赞。</p>
-<blockquote>
-<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>  <a href="https://github.com/Relsoul/bdwork/tree/master/soul/hexo%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E4%B8%8A%E4%BC%A0">脚本地址</a></p>
-</blockquote>
-<h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2><p>  今天发现百度没收录我的站..主要是我的站点换来换去的..估计被ban了..然后想用sitemap来推送一下..结果发现github禁用了百度爬虫..没办法只能主动推送了.</p>
-<h2 id="利用插件"><a href="#利用插件" class="headerlink" title="利用插件"></a>利用插件</h2><p>  这里利用到了一款插件<br>  <a href="https://github.com/coneycode/hexo-generator-baidu-sitemap">hexo-generator-baidu-sitemap</a><br>  设置很简单 只需要在.config.yml添加一些数据即可, 下面附上我的添加数据 theme这个可以随意更改 下面的copy即可<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: http:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: yilia</span><br><span class="line">baidusitemap:</span><br><span class="line">path: baidusitemap.xml</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>  然后hexo g 生成一下数据 会在public下面发现一个文件名为baidusitemap.xml</p>
-</blockquote>
-<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>  这里用nodejs写了一款脚本 大概流程是 获取baidusitemap.xml里面的内容 然后读取本地的一个site_file.json这个文件 这个文件存储的是上一次数据 与上一次数据进行对比 如果对比发现新数据那么就上传新数据 否则全部上传.</p>
-<h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>  把ActivePush.js脚本放在hexo文件夹主目录 然后用nodejs ActivePush.js一下即可 这里还支持一个参数nodejs ActivePush.js all 则是不对比直接上传数据</p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>SEO</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Gitment/Gitalk自动初始化</title>
     <url>/post/blog-gitment-auto-setup/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一个ruby脚本解放你双手啪啪啪的敲键盘三分钟～</p>
@@ -81,9 +50,40 @@
         <category>工具</category>
       </categories>
       <tags>
-        <tag>blog</tag>
         <tag>gitment</tag>
         <tag>gitalk</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo的博客让百度收录</title>
+    <url>/post/use-hexo-setup-blog/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个github.io搭建的过程参考，以及向百度推送的python、js脚本。</p>
+<a id="more"></a>
+
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p>感谢 <a href="http://lovenight.github.io/">岁月如歌</a> 的这个<a href="http://lovenight.github.io/2015/11/10/Hexo-3-1-1-%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/">《Hexo 3.1.1 静态博客搭建指南》</a>同时感谢这个<a href="http://lovenight.github.io/2015/11/18/%E5%90%91%E7%99%BE%E5%BA%A6%E6%8E%A8%E9%80%81hexo%E5%8D%9A%E5%AE%A2%E6%89%80%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84Python%E8%84%9A%E6%9C%AC/">《向百度推送hexo博客所有链接的Python脚本》</a>(别问我为啥点不开，这个要问博主，不过要看这个文章也不是没办法的😂，因为这个博客也用git管理的。。。你懂)</p>
+<p>另外还有一个<a href="http://emufan.com/">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/">百度主动推送hexo生成的文章</a></p>
+<h1 id="python自动推送脚本修改"><a href="#python自动推送脚本修改" class="headerlink" title="python自动推送脚本修改"></a>python自动推送脚本修改</h1><p>上面说的博主大约用的是windows，所以脚本并不能立马的运行在Mac上，需要做些修改：故修改为：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: LoveNight</span></span><br><span class="line"><span class="comment"># @Date:   2015-11-16 20:45:59</span></span><br><span class="line"><span class="comment"># @Last Modified by:   LoveNight</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2015-11-18 18:07:19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># @Last Modified by:   Keith</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2016-07-06 16:22:45</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> BS</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#import msvcrt</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">hexo 博客专用，向百度站长平台提交所有网址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">本脚本必须放在hexo博客的根目录下执行！需要已安装生成百度站点地图的插件。</span></span><br><span class="line"><span class="string">百度站长平台提交链接：http://zhanzhang.baidu.com/linksubmit/index</span></span><br><span class="line"><span class="string">主动推送：最为快速的提交方式，推荐您将站点当天新产出链接立即通过此方式推送给百度，以保证新链接可以及时被百度收录。</span></span><br><span class="line"><span class="string">从中找到自己的接口调用地址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">python环境：</span></span><br><span class="line"><span class="string">pip install beautifulsoup4</span></span><br><span class="line"><span class="string">pip install requests</span></span><br><span class="line"><span class="string">xcode-select --install	</span></span><br><span class="line"><span class="string">pip install lxml </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ❌❌❌ 抄的需要更改这个URL！！这是我的！！❌❌❌</span></span><br><span class="line">url = <span class="string">&#x27;http://data.zz.baidu.com/urls?site=https://madordie.github.io&amp;token=j33t0VEPFl24tJ8N&#x27;</span></span><br><span class="line">baidu_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;baidusitemap.xml&#x27;</span>)</span><br><span class="line">google_sitemap = os.path.join(sys.path[<span class="number">0</span>], <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;sitemap.xml&#x27;</span>)</span><br><span class="line">sitemap = [baidu_sitemap, google_sitemap]</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> (os.path.exists(baidu_sitemap) <span class="keyword">or</span> os.path.exists(</span><br><span class="line">    google_sitemap)), <span class="string">&quot;没找到任何网站地图，请检查！&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从站点地图中读取网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrls</span>():</span></span><br><span class="line">    urls = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> sitemap:</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(_):</span><br><span class="line">            <span class="keyword">with</span> open(_, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                xml = f.read()</span><br><span class="line">        soup = BS(xml, <span class="string">&quot;xml&quot;</span>)</span><br><span class="line">        tags = soup.find_all(<span class="string">&quot;loc&quot;</span>)</span><br><span class="line">        urls += [x.string <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">        <span class="keyword">if</span> _ == baidu_sitemap:</span><br><span class="line">            tags = soup.find_all(<span class="string">&quot;breadCrumb&quot;</span>, url=<span class="literal">True</span>)</span><br><span class="line">            urls += [x[<span class="string">&quot;url&quot;</span>] <span class="keyword">for</span> x <span class="keyword">in</span> tags]</span><br><span class="line">    <span class="keyword">return</span> urls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># POST提交网址列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postUrls</span>(<span class="params">urls</span>):</span></span><br><span class="line">    urls = set(urls)  <span class="comment"># 先去重</span></span><br><span class="line">    print(<span class="string">&quot;一共提取出 %s 个网址&quot;</span> % len(urls))</span><br><span class="line">    print(urls)</span><br><span class="line">    data = <span class="string">&quot;\n&quot;</span>.join(urls)</span><br><span class="line">    <span class="keyword">return</span> requests.post(url, data=data).text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    urls = getUrls()</span><br><span class="line">    result = postUrls(urls)</span><br><span class="line">    print(<span class="string">&quot;提交结果：&quot;</span>)</span><br><span class="line">    print(result)</span><br><span class="line"><span class="comment">#    msvcrt.getch()</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="js脚本"><a href="#js脚本" class="headerlink" title="js脚本"></a>js脚本</h1><p>这个脚本是我在<a href="http://emufan.com/">soul</a>的<a href="http://emufan.com/2016/02/18/%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81hexo%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E7%AB%A0/">百度主动推送hexo生成的文章</a>发现的，感觉也很赞。</p>
+<blockquote>
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>  <a href="https://github.com/Relsoul/bdwork/tree/master/soul/hexo%E7%99%BE%E5%BA%A6%E4%B8%BB%E5%8A%A8%E4%B8%8A%E4%BC%A0">脚本地址</a></p>
+</blockquote>
+<h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2><p>  今天发现百度没收录我的站..主要是我的站点换来换去的..估计被ban了..然后想用sitemap来推送一下..结果发现github禁用了百度爬虫..没办法只能主动推送了.</p>
+<h2 id="利用插件"><a href="#利用插件" class="headerlink" title="利用插件"></a>利用插件</h2><p>  这里利用到了一款插件<br>  <a href="https://github.com/coneycode/hexo-generator-baidu-sitemap">hexo-generator-baidu-sitemap</a><br>  设置很简单 只需要在.config.yml添加一些数据即可, 下面附上我的添加数据 theme这个可以随意更改 下面的copy即可<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: http:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: yilia</span><br><span class="line">baidusitemap:</span><br><span class="line">path: baidusitemap.xml</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>  然后hexo g 生成一下数据 会在public下面发现一个文件名为baidusitemap.xml</p>
+</blockquote>
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>  这里用nodejs写了一款脚本 大概流程是 获取baidusitemap.xml里面的内容 然后读取本地的一个site_file.json这个文件 这个文件存储的是上一次数据 与上一次数据进行对比 如果对比发现新数据那么就上传新数据 否则全部上传.</p>
+<h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><p>  把ActivePush.js脚本放在hexo文件夹主目录 然后用nodejs ActivePush.js一下即可 这里还支持一个参数nodejs ActivePush.js all 则是不对比直接上传数据</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>SEO</tag>
       </tags>
   </entry>
   <entry>
@@ -109,42 +109,6 @@
       </categories>
       <tags>
         <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mac10.13 pods 命令错误</title>
-    <url>/post/macos-high-sierra-cocoapods/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每逢升级大版本总要过搞点事情。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ pod env</span><br><span class="line">-bash: /usr/<span class="built_in">local</span>/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<p>不论是<code>pod env</code>、<code>pod update</code> 等等均报上面的错误。</p>
-<p>如果Google发现：</p>
-<ul>
-<li><a href="https://stackoverflow.com/questions/44396215/cocoapods-not-working-in-macos-high-sierra">ruby - CocoaPods not working in macOS High Sierra - Stack Overflow</a></li>
-<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6778">CocoaPods CLI fails in High Sierra due to change of Ruby version #6778</a></li>
-<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096">High Sierra: bad interpreter #6898</a></li>
-</ul>
-<p>事情的缘由就是这样。</p>
-<p><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096">#6898</a>中道出了简单直接的解决方案：</p>
-<blockquote>
-<p>for all others:</p>
-</blockquote>
-<blockquote>
-<p><code>gem install -n /usr/local/bin cocoapods</code></p>
-</blockquote>
-<blockquote>
-<p>fixes it</p>
-</blockquote>
-<p><strong>综合起来</strong>解决这个问题是这样的：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem update --system</span><br><span class="line">$ gem uninstall cocoapods</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;gem: --bindir /usr/local/bin&#x27;</span> &gt;&gt; ~/.gemrc</span><br><span class="line">$ sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
-
-<p>愉快的使用cocoapods吧～</p>
-]]></content>
-      <categories>
-        <category>macOS</category>
-      </categories>
-      <tags>
-        <tag>cocoapods</tag>
       </tags>
   </entry>
   <entry>
@@ -271,6 +235,42 @@
       </categories>
       <tags>
         <tag>内网穿透</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mac10.13 pods 命令错误</title>
+    <url>/post/macos-high-sierra-cocoapods/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每逢升级大版本总要过搞点事情。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ pod env</span><br><span class="line">-bash: /usr/<span class="built_in">local</span>/bin/pod: /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby: bad interpreter: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>不论是<code>pod env</code>、<code>pod update</code> 等等均报上面的错误。</p>
+<p>如果Google发现：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/44396215/cocoapods-not-working-in-macos-high-sierra">ruby - CocoaPods not working in macOS High Sierra - Stack Overflow</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6778">CocoaPods CLI fails in High Sierra due to change of Ruby version #6778</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096">High Sierra: bad interpreter #6898</a></li>
+</ul>
+<p>事情的缘由就是这样。</p>
+<p><a href="https://github.com/CocoaPods/CocoaPods/issues/6898#issuecomment-332060096">#6898</a>中道出了简单直接的解决方案：</p>
+<blockquote>
+<p>for all others:</p>
+</blockquote>
+<blockquote>
+<p><code>gem install -n /usr/local/bin cocoapods</code></p>
+</blockquote>
+<blockquote>
+<p>fixes it</p>
+</blockquote>
+<p><strong>综合起来</strong>解决这个问题是这样的：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gem update --system</span><br><span class="line">$ gem uninstall cocoapods</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;gem: --bindir /usr/local/bin&#x27;</span> &gt;&gt; ~/.gemrc</span><br><span class="line">$ sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
+
+<p>愉快的使用cocoapods吧～</p>
+]]></content>
+      <categories>
+        <category>macOS</category>
+      </categories>
+      <tags>
+        <tag>cocoapods</tag>
       </tags>
   </entry>
   <entry>
@@ -819,30 +819,6 @@
       </tags>
   </entry>
   <entry>
-    <title>DEBUG - Xcode解析.crash</title>
-    <url>/post/debug-xcode8-analysis-crash-file/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
-<a id="more"></a>
-
-<h1 id="Xcode中解析-crash文件"><a href="#Xcode中解析-crash文件" class="headerlink" title="Xcode中解析.crash文件"></a>Xcode中解析.crash文件</h1><ol>
-<li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
-<li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
-<li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
-<li>拷贝脚本文件，运行<code>cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A</code></li>
-<li>到<code>目录A</code>解析，运行<code>./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名</code></li>
-</ol>
-<h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><ul>
-<li>这里最重要的是<code>symbolicatecrash</code>文件，<code>symbolicatecrash</code>在手解析不愁。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>DEBUG</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>iOS自动化-Jenkins编译工程</title>
     <url>/post/ios-automation-jenkins-build/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
@@ -927,46 +903,27 @@
       </tags>
   </entry>
   <entry>
-    <title>class的class-static-func使用Self作为返回值</title>
-    <url>/post/class-static-func-return-self/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="一个问题"><a href="#一个问题" class="headerlink" title="一个问题"></a>一个问题</h1><ul>
-<li>Xcode: Version 11.4.1 (11E503a)</li>
-<li>swift: Swift 5</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MDButton</span>: <span class="title">UIButton</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 为了更清楚展示问题,代码经过精简</span></span><br><span class="line">    <span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">make</span>() -&gt; <span class="title">Self</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">MDButton</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码无法编译:</p>
-<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">ViewController.swift: error: cannot convert return expression of type &#x27;MDButton&#x27; to return type &#x27;Self&#x27;</span><br><span class="line">        return MDButton()</span><br><span class="line">               ^~~~~~~~~~</span><br><span class="line">                          as! Self</span><br></pre></td></tr></table></figure>
-
+    <title>DEBUG - Xcode解析.crash</title>
+    <url>/post/debug-xcode8-analysis-crash-file/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
 <a id="more"></a>
 
-<h1 id="查找关于Self的新特性"><a href="#查找关于Self的新特性" class="headerlink" title="查找关于Self的新特性"></a>查找关于<code>Self</code>的新特性</h1><p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0068-universal-self.md">Proposal: SE-0068</a>这里有说到关于这个<code>Self</code>的问题.</p>
-<p>其目的是为了解决:</p>
-<blockquote>
-<ul>
-<li><code>dynamicType</code> remains an exception to Swift’s lowercased keywords rule. This change eliminates a special case that’s out of step with Swift’s new standards.</li>
-<li><code>Self</code> is shorter and clearer in its intent. It mirrors <code>self</code>, which refers to the current instance.</li>
-<li>It provides an easier way to access static members. As type names grow large, readability suffers. <code>MyExtremelyLargeTypeName.staticMember</code> is unwieldy to type and read.</li>
-<li>Code using hardwired type names is less portable than code that automatically knows its type.</li>
-<li>Renaming a type means updating any <code>TypeName</code> references in code.</li>
-<li>Using <code>self.dynamicType</code> fights against Swift’s goals of concision and clarity in that it is both noisy and esoteric.</li>
+<h1 id="Xcode中解析-crash文件"><a href="#Xcode中解析-crash文件" class="headerlink" title="Xcode中解析.crash文件"></a>Xcode中解析.crash文件</h1><ol>
+<li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
+<li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
+<li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
+<li>拷贝脚本文件，运行<code>cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A</code></li>
+<li>到<code>目录A</code>解析，运行<code>./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名</code></li>
+</ol>
+<h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><ul>
+<li>这里最重要的是<code>symbolicatecrash</code>文件，<code>symbolicatecrash</code>在手解析不愁。</li>
 </ul>
-</blockquote>
-<p>所以说该问题在<code>struct</code>中并不存在,也就是下面的代码完全没有问题:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">xxx</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">()</span></span> -&gt; <span class="type">Self</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> xxx()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="究竟如何修改"><a href="#究竟如何修改" class="headerlink" title="究竟如何修改"></a>究竟如何修改</h1><p>好吧,上面测试过这几个关键字之后,尝试修改函数内的返回对象吧.此时既然<code>Self</code>是<code>dynamicType</code>,那么可以使用<code>self</code>去调用初始化方法就行了吧, 于是:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MDButton2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">     <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">make</span>() -&gt; <span class="title">Self</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 或 return self.init()</span></span><br><span class="line">        <span class="keyword">return</span> <span class="type">Self</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="一点看法"><a href="#一点看法" class="headerlink" title="一点看法"></a>一点看法</h1><p>首先, 整个过程(包括Xcode的提示)不使用<code>as!</code>的解决方案, 对,我就是那个坚决不使用<code>as!</code>的人(刷题除外).</p>
-<p>然后, 可以翻一下这个<code>Self</code>的实现<a href="https://github.com/apple/swift/pull/22863">apple/swift#22863</a>,内容比较多.</p>
 ]]></content>
       <categories>
         <category>iOS</category>
       </categories>
       <tags>
         <tag>DEBUG</tag>
-        <tag>Swift</tag>
       </tags>
   </entry>
   <entry>
@@ -1099,6 +1056,49 @@
       </tags>
   </entry>
   <entry>
+    <title>class的class-static-func使用Self作为返回值</title>
+    <url>/post/class-static-func-return-self/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="一个问题"><a href="#一个问题" class="headerlink" title="一个问题"></a>一个问题</h1><ul>
+<li>Xcode: Version 11.4.1 (11E503a)</li>
+<li>swift: Swift 5</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MDButton</span>: <span class="title">UIButton</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 为了更清楚展示问题,代码经过精简</span></span><br><span class="line">    <span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">make</span>() -&gt; <span class="title">Self</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">MDButton</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码无法编译:</p>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">ViewController.swift: error: cannot convert return expression of type &#x27;MDButton&#x27; to return type &#x27;Self&#x27;</span><br><span class="line">        return MDButton()</span><br><span class="line">               ^~~~~~~~~~</span><br><span class="line">                          as! Self</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h1 id="查找关于Self的新特性"><a href="#查找关于Self的新特性" class="headerlink" title="查找关于Self的新特性"></a>查找关于<code>Self</code>的新特性</h1><p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0068-universal-self.md">Proposal: SE-0068</a>这里有说到关于这个<code>Self</code>的问题.</p>
+<p>其目的是为了解决:</p>
+<blockquote>
+<ul>
+<li><code>dynamicType</code> remains an exception to Swift’s lowercased keywords rule. This change eliminates a special case that’s out of step with Swift’s new standards.</li>
+<li><code>Self</code> is shorter and clearer in its intent. It mirrors <code>self</code>, which refers to the current instance.</li>
+<li>It provides an easier way to access static members. As type names grow large, readability suffers. <code>MyExtremelyLargeTypeName.staticMember</code> is unwieldy to type and read.</li>
+<li>Code using hardwired type names is less portable than code that automatically knows its type.</li>
+<li>Renaming a type means updating any <code>TypeName</code> references in code.</li>
+<li>Using <code>self.dynamicType</code> fights against Swift’s goals of concision and clarity in that it is both noisy and esoteric.</li>
+</ul>
+</blockquote>
+<p>所以说该问题在<code>struct</code>中并不存在,也就是下面的代码完全没有问题:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">xxx</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">()</span></span> -&gt; <span class="type">Self</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> xxx()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="究竟如何修改"><a href="#究竟如何修改" class="headerlink" title="究竟如何修改"></a>究竟如何修改</h1><p>好吧,上面测试过这几个关键字之后,尝试修改函数内的返回对象吧.此时既然<code>Self</code>是<code>dynamicType</code>,那么可以使用<code>self</code>去调用初始化方法就行了吧, 于是:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MDButton2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">     <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">make</span>() -&gt; <span class="title">Self</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 或 return self.init()</span></span><br><span class="line">        <span class="keyword">return</span> <span class="type">Self</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="一点看法"><a href="#一点看法" class="headerlink" title="一点看法"></a>一点看法</h1><p>首先, 整个过程(包括Xcode的提示)不使用<code>as!</code>的解决方案, 对,我就是那个坚决不使用<code>as!</code>的人(刷题除外).</p>
+<p>然后, 可以翻一下这个<code>Self</code>的实现<a href="https://github.com/apple/swift/pull/22863">apple/swift#22863</a>,内容比较多.</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>DEBUG</tag>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>debug-_SwiftValue-unsignedIntegerValue</title>
     <url>/post/debug-SwiftValue-unsignedIntegerValue/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>crash:</p>
@@ -1130,6 +1130,40 @@
 <p>  由于Release无法调试，所以费了不少劲。首先Swift中的字典已经可以存放值类型，其本身也是值类型。所以我首先选择了第一种写法<code>let frame = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect</code>, 但是Release情况下却发生解包失败的情况。所以采用OC的传统写法<code>let value = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue</code>。就能解析出来。但是总感觉OC的方法不够swift😂。。。</p>
 <p>  有同事直接强制转换为NSValue是没有问题的，于是乎试了一下，发现直接校验NSValue就可以。但是swift中感觉不应该有这个转换了，毕竟本身就可以存储CGRect..</p>
 <p>  猜测原因：目前阶段Swift的字典和OC的字典数据结构还并未完全一致。。</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>DEBUG</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DEBUG - UIView.h#190</title>
+    <url>/post/debug-uiview-m-190/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>CRASH:<br><code>void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()</code></p>
+<a id="more"></a>
+
+<h1 id="UIView-m-190-UIViewReportBrokenSuperviewChain"><a href="#UIView-m-190-UIViewReportBrokenSuperviewChain" class="headerlink" title="UIView.m:190 - UIViewReportBrokenSuperviewChain"></a>UIView.m:190 - UIViewReportBrokenSuperviewChain</h1><h2 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常分析"><a href="#异常分析" class="headerlink" title="异常分析"></a>异常分析</h2><p>  APP crash在<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[keyWindow addSubview:weakSelf];</span><br></pre></td></tr></table></figure><br>  <a href="#%E9%94%99%E8%AF%AF%E5%A0%86%E6%A0%88">错误堆栈信息</a>。</p>
+<p>  但是真正造成crash的代码为：</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure>
+
+
+<p>  解决方案：<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self layoutIfNeeded];</span><br><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure></p>
+<p>  原因分析：<br>  下面这个说的很在理</p>
+<blockquote>
+<p><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
+<p>I had this issue with a library when moving over to Xcode 8 (Material-Controls-For-iOS - MDTextField). I found that the problem was coming from where the layer of one view (which had no superview) was being added to another.</p>
+<p>It looks like this may be the case for yourself also - your toolbar being created has not been added to a superview first. The fix I used was to add the view as a subview of the view that the layer was being added to, so in your case adding the toolbar as a subview of myModelView should stop the error.</p>
+</blockquote>
+<h2 id="碰到该问题的还有"><a href="#碰到该问题的还有" class="headerlink" title="碰到该问题的还有"></a>碰到该问题的还有</h2><ul>
+<li><a href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8">Google出来的一个，但是并未看到相关回复。。。</a></li>
+<li><a href="http://www.th7.cn/Program/IOS/201609/975582.shtml">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a></li>
+<li><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">stackoverflow(这个分析的很到位)</a></li>
+</ul>
+<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br><span class="line"></span><br><span class="line">(lldb) bt</span><br><span class="line">* thread #1: tid &#x3D; 0x87c18, 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw, queue &#x3D; &#39;com.apple.main-thread&#39;, stop reason &#x3D; breakpoint 1.2</span><br><span class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw</span><br><span class="line">    frame #1: 0x0000000183954094 CoreFoundation&#96;+[NSException raise:format:arguments:] + 104</span><br><span class="line">    frame #2: 0x00000001843de898 Foundation&#96;-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</span><br><span class="line">    frame #3: 0x0000000189a7cf9c UIKit&#96;UIViewReportBrokenSuperviewChain + 472</span><br><span class="line">    frame #4: 0x0000000189a7d658 UIKit&#96;_UIViewTopDownSubtreeTraversal + 1496</span><br><span class="line">    frame #5: 0x000000018a0f3390 UIKit&#96;-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</span><br><span class="line">    frame #6: 0x00000001843832ac Foundation&#96;-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</span><br><span class="line">    frame #7: 0x0000000184382dcc Foundation&#96;-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</span><br><span class="line">    frame #8: 0x00000001843809e0 Foundation&#96;-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</span><br><span class="line">    frame #9: 0x000000018989cfdc UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</span><br><span class="line">    frame #10: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #11: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #12: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #13: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #14: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #15: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #16: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #17: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #18: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #19: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #20: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #21: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #22: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #23: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #24: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #25: 0x00000001898a4bb0 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</span><br><span class="line">    frame #26: 0x00000001898a4b04 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</span><br><span class="line">    frame #27: 0x00000001898a4910 UIKit&#96;-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</span><br><span class="line">    frame #28: 0x00000001897996dc UIKit&#96;-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</span><br><span class="line">    frame #29: 0x0000000189798d90 UIKit&#96;__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</span><br><span class="line">    frame #30: 0x0000000189798be8 UIKit&#96;-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</span><br><span class="line">    frame #31: 0x00000001897a4ad0 UIKit&#96;-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</span><br><span class="line">    frame #32: 0x00000001897a43bc UIKit&#96;-[UIView(Hierarchy) addSubview:] + 828</span><br><span class="line">  * frame #33: 0x00000001004f78ec Project_ent&#96;__31-[EsfCommentReportView show]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</span><br><span class="line">    frame #34: 0x00000001897d2b88 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</span><br><span class="line">    frame #35: 0x00000001897d28e8 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</span><br><span class="line">    frame #36: 0x00000001004f77a0 Project_ent&#96;-[EsfCommentReportView show](self&#x3D;0x000000015fe32020, _cmd&#x3D;&quot;show&quot;) + 492 at EsfCommentReportView.m:291</span><br><span class="line">    frame #37: 0x0000000100858a04 Project_ent&#96;__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</span><br><span class="line">    frame #38: 0x00000001003f93e4 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, sourceType&#x3D;2, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 236 at MyLoginViewController.m:123</span><br><span class="line">    frame #39: 0x00000001003f92b0 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 156 at MyLoginViewController.m:114</span><br><span class="line">    frame #40: 0x00000001003f9124 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0) + 120 at MyLoginViewController.m:104</span><br><span class="line">    frame #41: 0x0000000100858870 Project_ent&#96;-[BuyerAdviserProfileViewController reportAction:](self&#x3D;0x000000015fd2e320, _cmd&#x3D;&quot;reportAction:&quot;, button&#x3D;0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</span><br><span class="line">    frame #42: 0x00000001897d27b0 UIKit&#96;-[UIApplication sendAction:to:from:forEvent:] + 96</span><br><span class="line">    frame #43: 0x00000001897d2730 UIKit&#96;-[UIControl sendAction:to:forEvent:] + 80</span><br><span class="line">    frame #44: 0x00000001897bcbe4 UIKit&#96;-[UIControl _sendActionsForEvents:withEvent:] + 452</span><br><span class="line">    frame #45: 0x00000001897d201c UIKit&#96;-[UIControl touchesEnded:withEvent:] + 584</span><br><span class="line">    frame #46: 0x00000001897d1b44 UIKit&#96;-[UIWindow _sendTouchesForEvent:] + 2484</span><br><span class="line">    frame #47: 0x00000001897ccd8c UIKit&#96;-[UIWindow sendEvent:] + 2988</span><br><span class="line">    frame #48: 0x000000018979d858 UIKit&#96;-[UIApplication sendEvent:] + 340</span><br><span class="line">    frame #49: 0x0000000189f8acb8 UIKit&#96;__dispatchPreprocessedEventFromEventQueue + 2736</span><br><span class="line">    frame #50: 0x0000000189f84720 UIKit&#96;__handleEventQueue + 784</span><br><span class="line">    frame #51: 0x0000000183902278 CoreFoundation&#96;__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</span><br><span class="line">    frame #52: 0x0000000183901bc0 CoreFoundation&#96;__CFRunLoopDoSources0 + 524</span><br><span class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation&#96;__CFRunLoopRun + 804</span><br><span class="line">    frame #54: 0x000000018382e048 CoreFoundation&#96;CFRunLoopRunSpecific + 444</span><br><span class="line">    frame #55: 0x00000001852b1198 GraphicsServices&#96;GSEventRunModal + 180</span><br><span class="line">    frame #56: 0x0000000189808628 UIKit&#96;-[UIApplication _run] + 684</span><br><span class="line">    frame #57: 0x0000000189803360 UIKit&#96;UIApplicationMain + 208</span><br><span class="line">    frame #58: 0x0000000100a3db78 Project_ent&#96;main + 460 at main.swift:24</span><br><span class="line">    frame #59: 0x00000001828105b8 libdyld.dylib&#96;start + 4</span><br><span class="line">(lldb) </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>iOS</category>
@@ -1225,40 +1259,6 @@
 <li>开发的第三方SDK一定要注意测试覆盖率。</li>
 <li>swift大法好。swift不用<code>!</code>绝对不会有机会出现<code>func hasPrefix(_ str: String) -&gt; Bool</code>中参数<code>str</code>传空的可能 :)</li>
 </ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>DEBUG</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DEBUG - UIView.h#190</title>
-    <url>/post/debug-uiview-m-190/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>CRASH:<br><code>void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)()</code></p>
-<a id="more"></a>
-
-<h1 id="UIView-m-190-UIViewReportBrokenSuperviewChain"><a href="#UIView-m-190-UIViewReportBrokenSuperviewChain" class="headerlink" title="UIView.m:190 - UIViewReportBrokenSuperviewChain"></a>UIView.m:190 - UIViewReportBrokenSuperviewChain</h1><h2 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br></pre></td></tr></table></figure>
-
-<h2 id="异常分析"><a href="#异常分析" class="headerlink" title="异常分析"></a>异常分析</h2><p>  APP crash在<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[keyWindow addSubview:weakSelf];</span><br></pre></td></tr></table></figure><br>  <a href="#%E9%94%99%E8%AF%AF%E5%A0%86%E6%A0%88">错误堆栈信息</a>。</p>
-<p>  但是真正造成crash的代码为：</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure>
-
-
-<p>  解决方案：<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[self layoutIfNeeded];</span><br><span class="line">[self.layer insertSublayer:xxxView.layer atIndex:0];</span><br></pre></td></tr></table></figure></p>
-<p>  原因分析：<br>  下面这个说的很在理</p>
-<blockquote>
-<p><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation</a></p>
-<p>I had this issue with a library when moving over to Xcode 8 (Material-Controls-For-iOS - MDTextField). I found that the problem was coming from where the layer of one view (which had no superview) was being added to another.</p>
-<p>It looks like this may be the case for yourself also - your toolbar being created has not been added to a superview first. The fix I used was to add the view as a subview of the view that the layer was being added to, so in your case adding the toolbar as a subview of myModelView should stop the error.</p>
-</blockquote>
-<h2 id="碰到该问题的还有"><a href="#碰到该问题的还有" class="headerlink" title="碰到该问题的还有"></a>碰到该问题的还有</h2><ul>
-<li><a href="http://technology.ezeenow.com/Posts/119474/Unity_Prime31_prompt_for_photo_is_crashing_on_iOS_10_and_XCode_8">Google出来的一个，但是并未看到相关回复。。。</a></li>
-<li><a href="http://www.th7.cn/Program/IOS/201609/975582.shtml">IOS10上崩溃错误“View has lost track of its superview, most (并未找到原贴)</a></li>
-<li><a href="http://stackoverflow.com/questions/39565424/swift-uiviewreportbrokensuperviewchain-cause-by-layer-manipulation">stackoverflow(这个分析的很到位)</a></li>
-</ul>
-<h2 id="错误堆栈-lt-脱敏-gt"><a href="#错误堆栈-lt-脱敏-gt" class="headerlink" title="错误堆栈 &lt;脱敏&gt;"></a><a name="错误堆栈">错误堆栈 &lt;脱敏&gt;</a></h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** Assertion failure in void UIViewReportBrokenSuperviewChain(UIView *__strong, UIView *__strong, BOOL)(), &#x2F;BuildRoot&#x2F;Library&#x2F;Caches&#x2F;com.apple.xbs&#x2F;Sources&#x2F;UIKit&#x2F;UIKit-3599.6.1&#x2F;UIView.m:190</span><br><span class="line">invalid mode &#39;kCFRunLoopCommonModes&#39; provided to CFRunLoopRunSpecific - break on _CFRunLoopError_RunCalledWithInvalidMode to debug. This message will only appear once per execution.</span><br><span class="line">libc++abi.dylib: terminate_handler unexpectedly threw an exception</span><br><span class="line"></span><br><span class="line">(lldb) bt</span><br><span class="line">* thread #1: tid &#x3D; 0x87c18, 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw, queue &#x3D; &#39;com.apple.main-thread&#39;, stop reason &#x3D; breakpoint 1.2</span><br><span class="line">    frame #0: 0x000000018238c524 libobjc.A.dylib&#96;objc_exception_throw</span><br><span class="line">    frame #1: 0x0000000183954094 CoreFoundation&#96;+[NSException raise:format:arguments:] + 104</span><br><span class="line">    frame #2: 0x00000001843de898 Foundation&#96;-[NSAssertionHandler handleFailureInFunction:file:lineNumber:description:] + 88</span><br><span class="line">    frame #3: 0x0000000189a7cf9c UIKit&#96;UIViewReportBrokenSuperviewChain + 472</span><br><span class="line">    frame #4: 0x0000000189a7d658 UIKit&#96;_UIViewTopDownSubtreeTraversal + 1496</span><br><span class="line">    frame #5: 0x000000018a0f3390 UIKit&#96;-[UIView(UIConstraintBasedLayout_EngineDelegate) _invalidateSystemLayoutSizeFittingSizeAtEngineDelegateLevel] + 232</span><br><span class="line">    frame #6: 0x00000001843832ac Foundation&#96;-[NSISEngine tryToAddConstraintWithMarker:expression:integralizationAdjustment:mutuallyExclusiveConstraints:] + 920</span><br><span class="line">    frame #7: 0x0000000184382dcc Foundation&#96;-[NSLayoutConstraint _addLoweredExpression:toEngine:integralizationAdjustment:lastLoweredConstantWasRounded:mutuallyExclusiveConstraints:] + 284</span><br><span class="line">    frame #8: 0x00000001843809e0 Foundation&#96;-[NSLayoutConstraint _addToEngine:integralizationAdjustment:mutuallyExclusiveConstraints:] + 272</span><br><span class="line">    frame #9: 0x000000018989cfdc UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 396</span><br><span class="line">    frame #10: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #11: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #12: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #13: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #14: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #15: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #16: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #17: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #18: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #19: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #20: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #21: 0x000000018989cf14 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke_2 + 196</span><br><span class="line">    frame #22: 0x0000000184380510 Foundation&#96;-[NSISEngine withBehaviors:performModifications:] + 168</span><br><span class="line">    frame #23: 0x000000018989cde8 UIKit&#96;__57-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:]_block_invoke + 564</span><br><span class="line">    frame #24: 0x00000001897995e0 UIKit&#96;-[UIView(AdditionalLayoutSupport) _switchToLayoutEngine:] + 224</span><br><span class="line">    frame #25: 0x00000001898a4bb0 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _switchToLayoutEngine:] + 72</span><br><span class="line">    frame #26: 0x00000001898a4b04 UIKit&#96;-[UIWindow(UIConstraintBasedLayout) _initializeLayoutEngine] + 256</span><br><span class="line">    frame #27: 0x00000001898a4910 UIKit&#96;-[UIView(UIConstraintBasedLayout) _layoutEngine_windowDidChange] + 132</span><br><span class="line">    frame #28: 0x00000001897996dc UIKit&#96;-[UIView(Internal) _didMoveFromWindow:toWindow:] + 200</span><br><span class="line">    frame #29: 0x0000000189798d90 UIKit&#96;__45-[UIView(Hierarchy) _postMovedFromSuperview:]_block_invoke + 156</span><br><span class="line">    frame #30: 0x0000000189798be8 UIKit&#96;-[UIView(Hierarchy) _postMovedFromSuperview:] + 792</span><br><span class="line">    frame #31: 0x00000001897a4ad0 UIKit&#96;-[UIView(Internal) _addSubview:positioned:relativeTo:] + 1788</span><br><span class="line">    frame #32: 0x00000001897a43bc UIKit&#96;-[UIView(Hierarchy) addSubview:] + 828</span><br><span class="line">  * frame #33: 0x00000001004f78ec Project_ent&#96;__31-[EsfCommentReportView show]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 228 at EsfCommentReportView.m:293</span><br><span class="line">    frame #34: 0x00000001897d2b88 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) _setupAnimationWithDuration:delay:view:options:factory:animations:start:animationStateGenerator:completion:] + 660</span><br><span class="line">    frame #35: 0x00000001897d28e8 UIKit&#96;+[UIView(UIViewAnimationWithBlocks) animateWithDuration:animations:] + 56</span><br><span class="line">    frame #36: 0x00000001004f77a0 Project_ent&#96;-[EsfCommentReportView show](self&#x3D;0x000000015fe32020, _cmd&#x3D;&quot;show&quot;) + 492 at EsfCommentReportView.m:291</span><br><span class="line">    frame #37: 0x0000000100858a04 Project_ent&#96;__53-[BuyerAdviserProfileViewController reportAction:]_block_invoke((null)&#x3D;&lt;unavailable&gt;) + 308 at BuyerAdviserProfileViewController.m:174</span><br><span class="line">    frame #38: 0x00000001003f93e4 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:sourceType:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, sourceType&#x3D;2, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 236 at MyLoginViewController.m:123</span><br><span class="line">    frame #39: 0x00000001003f92b0 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:cancelLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0, cancelLogin&#x3D;(null)) + 156 at MyLoginViewController.m:114</span><br><span class="line">    frame #40: 0x00000001003f9124 Project_ent&#96;+[MyLoginViewController ifShouldLoginFromViewController:afterCheckOrLogin:](self&#x3D;MyLoginViewController, _cmd&#x3D;&quot;ifShouldLoginFromViewController:afterCheckOrLogin:&quot;, viewController&#x3D;0x000000015fd2e320, afterCheckOrLogin&#x3D;0x00000001008588d0) + 120 at MyLoginViewController.m:104</span><br><span class="line">    frame #41: 0x0000000100858870 Project_ent&#96;-[BuyerAdviserProfileViewController reportAction:](self&#x3D;0x000000015fd2e320, _cmd&#x3D;&quot;reportAction:&quot;, button&#x3D;0x000000015fe26650) + 452 at BuyerAdviserProfileViewController.m:156</span><br><span class="line">    frame #42: 0x00000001897d27b0 UIKit&#96;-[UIApplication sendAction:to:from:forEvent:] + 96</span><br><span class="line">    frame #43: 0x00000001897d2730 UIKit&#96;-[UIControl sendAction:to:forEvent:] + 80</span><br><span class="line">    frame #44: 0x00000001897bcbe4 UIKit&#96;-[UIControl _sendActionsForEvents:withEvent:] + 452</span><br><span class="line">    frame #45: 0x00000001897d201c UIKit&#96;-[UIControl touchesEnded:withEvent:] + 584</span><br><span class="line">    frame #46: 0x00000001897d1b44 UIKit&#96;-[UIWindow _sendTouchesForEvent:] + 2484</span><br><span class="line">    frame #47: 0x00000001897ccd8c UIKit&#96;-[UIWindow sendEvent:] + 2988</span><br><span class="line">    frame #48: 0x000000018979d858 UIKit&#96;-[UIApplication sendEvent:] + 340</span><br><span class="line">    frame #49: 0x0000000189f8acb8 UIKit&#96;__dispatchPreprocessedEventFromEventQueue + 2736</span><br><span class="line">    frame #50: 0x0000000189f84720 UIKit&#96;__handleEventQueue + 784</span><br><span class="line">    frame #51: 0x0000000183902278 CoreFoundation&#96;__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 24</span><br><span class="line">    frame #52: 0x0000000183901bc0 CoreFoundation&#96;__CFRunLoopDoSources0 + 524</span><br><span class="line">    frame #53: 0x00000001838ff7c0 CoreFoundation&#96;__CFRunLoopRun + 804</span><br><span class="line">    frame #54: 0x000000018382e048 CoreFoundation&#96;CFRunLoopRunSpecific + 444</span><br><span class="line">    frame #55: 0x00000001852b1198 GraphicsServices&#96;GSEventRunModal + 180</span><br><span class="line">    frame #56: 0x0000000189808628 UIKit&#96;-[UIApplication _run] + 684</span><br><span class="line">    frame #57: 0x0000000189803360 UIKit&#96;UIApplicationMain + 208</span><br><span class="line">    frame #58: 0x0000000100a3db78 Project_ent&#96;main + 460 at main.swift:24</span><br><span class="line">    frame #59: 0x00000001828105b8 libdyld.dylib&#96;start + 4</span><br><span class="line">(lldb) </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>iOS</category>
