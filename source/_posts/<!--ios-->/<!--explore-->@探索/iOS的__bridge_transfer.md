@@ -137,11 +137,11 @@ __int64 __fastcall __destructor_8_s0(__int64 a1)
 
 ## Xcode12的这种情境下如何修正
 
-- 此处只是作为[iOS的__bridge、__bridge_transfer究竟做了啥](./what-happened-on-the-bridge-in-ios)的补充去讨论`__bridge_retained`, 至于真正的场景应该如何修复, 或许只是一个Xcode12的BUG, 请继续Google :>
+- 此处只是作为[iOS的__bridge、__bridge_transfer究竟做了啥](../what-happened-on-the-bridge-in-ios)的补充去讨论`__bridge_retained`, 至于真正的场景应该如何修复, 或许只是一个Xcode12的BUG, 请继续Google :>
 
-按照[iOS的__bridge、__bridge_transfer究竟做了啥](./what-happened-on-the-bridge-in-ios)的思路来: 我们需要加一下`__bridge*`的标记, `struct`虽然不是`CoreFounction`的东西,但是可以用的
+按照[iOS的__bridge、__bridge_transfer究竟做了啥](../what-happened-on-the-bridge-in-ios)的思路来: 我们需要加一下`__bridge*`的标记, `struct`虽然不是`CoreFounction`的东西,但是可以用的
 
-从对比来看, 我们应该修改的是`for-NSLog`中的代码, 这样才不至于引出其他的问题, 然后从[上文](./what-happened-on-the-bridge-in-ios)可以得知, 此处我们应该用`__bridge`, 来试验一下:
+从对比来看, 我们应该修改的是`for-NSLog`中的代码, 这样才不至于引出其他的问题, 然后从[上文](../what-happened-on-the-bridge-in-ios)可以得知, 此处我们应该用`__bridge`, 来试验一下:
 
 ![Xcode12-__bridge](/images/2020-10-20-11-10-46.png)
 
