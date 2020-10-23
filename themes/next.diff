@@ -1,5 +1,5 @@
 diff --git a/_config.yml b/_config.yml
-index 02758d9..fe8c6c2 100644
+index 02758d9..b762140 100644
 --- a/_config.yml
 +++ b/_config.yml
 @@ -36,13 +36,13 @@ custom_file_path:
@@ -127,6 +127,15 @@ index 02758d9..fe8c6c2 100644
    distraction_free_mode: true # Facebook-like distraction free mode
    # Gitalk's display language depends on user's browser or system environment
    # If you want everyone visiting your site to see a uniform language, you can set a force language value
+@@ -664,7 +664,7 @@ add_this_id:
+ 
+ # Google Analytics
+ google_analytics:
+-  tracking_id: # <app_id>
++  tracking_id: 106555472 # <app_id>
+   # By default, NexT will load an external gtag.js script on your site.
+   # If you only need the pageview feature, set the following option to true to get a better performance.
+   only_pageview: false
 @@ -705,12 +705,12 @@ firestore:
  # Show Views / Visitors of the website / page with busuanzi.
  # Get more information on http://ibruce.info/2015/04/04/busuanzi
