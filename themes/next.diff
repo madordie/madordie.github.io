@@ -295,7 +295,7 @@ index 48003f7..94fd22b 100644
 +  gtag('config', 'UA-106555472-1');
 +</script>
 diff --git a/layout/_third-party/comments/gitalk.njk b/layout/_third-party/comments/gitalk.njk
-index 4f54907..0082036 100644
+index 4f54907..33ba5da 100644
 --- a/layout/_third-party/comments/gitalk.njk
 +++ b/layout/_third-party/comments/gitalk.njk
 @@ -1,25 +1,26 @@
@@ -324,7 +324,7 @@ index 4f54907..0082036 100644
 -    gitalk.render('gitalk-container');
 -  }, window.Gitalk);
 -});
-+if document.getElementById('gitalk-container') {
++if (document.getElementById('#gitalk-container')) {
 +  NexT.utils.loadComments('#gitalk-container', () => {
 +    NexT.utils.getScript('{{ theme.vendors.gitalk_js }}', () => {
 +      var gitalk = new Gitalk({
