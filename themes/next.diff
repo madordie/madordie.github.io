@@ -295,56 +295,35 @@ index 48003f7..94fd22b 100644
 +  gtag('config', 'UA-106555472-1');
 +</script>
 diff --git a/layout/_third-party/comments/gitalk.njk b/layout/_third-party/comments/gitalk.njk
-index 4f54907..33ba5da 100644
+index 4f54907..b921c6b 100644
 --- a/layout/_third-party/comments/gitalk.njk
 +++ b/layout/_third-party/comments/gitalk.njk
-@@ -1,25 +1,26 @@
+@@ -1,15 +1,15 @@
 -{%- if page.comments %}
 -<link rel="stylesheet" href="{{ theme.vendors.gitalk_css }}">
 +  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 +  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
  
  <script>
--NexT.utils.loadComments('#gitalk-container', () => {
--  NexT.utils.getScript('{{ theme.vendors.gitalk_js }}', () => {
--    var gitalk = new Gitalk({
+ NexT.utils.loadComments('#gitalk-container', () => {
+   NexT.utils.getScript('{{ theme.vendors.gitalk_js }}', () => {
+     var gitalk = new Gitalk({
 -      clientID    : '{{ theme.gitalk.client_id }}',
 -      clientSecret: '{{ theme.gitalk.client_secret }}',
 -      repo        : '{{ theme.gitalk.repo }}',
 -      owner       : '{{ theme.gitalk.github_id }}',
 -      admin       : ['{{ theme.gitalk.admin_user }}'],
--      id          : '{{ gitalk_md5(page.path) }}',
--      {%- if theme.gitalk.language == '' %}
--        language: window.navigator.language || window.navigator.userLanguage,
--      {% else %}
--        language: '{{ theme.gitalk.language }}',
--      {%- endif %}
--      distractionFreeMode: {{ theme.gitalk.distraction_free_mode }}
--    });
--    gitalk.render('gitalk-container');
--  }, window.Gitalk);
--});
-+if (document.getElementById('#gitalk-container')) {
-+  NexT.utils.loadComments('#gitalk-container', () => {
-+    NexT.utils.getScript('{{ theme.vendors.gitalk_js }}', () => {
-+      var gitalk = new Gitalk({
-+        clientID    : '2fcb2111497d0ea0dba4',
-+        clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
-+        repo        : 'madordie.github.io',
-+        owner       : 'madordie',
-+        admin       : ['madordie'],
-+        id          : '{{ gitalk_md5(page.path) }}',
-+        {%- if theme.gitalk.language == '' %}
-+          language: window.navigator.language || window.navigator.userLanguage,
-+        {% else %}
-+          language: '{{ theme.gitalk.language }}',
-+        {%- endif %}
-+        distractionFreeMode: {{ theme.gitalk.distraction_free_mode }}
-+      });
-+      gitalk.render('gitalk-container');
-+    }, window.Gitalk);
-+  });
-+}
++      clientID    : '2fcb2111497d0ea0dba4',
++      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
++      repo        : 'madordie.github.io',
++      owner       : 'madordie',
++      admin       : ['madordie'],
+       id          : '{{ gitalk_md5(page.path) }}',
+       {%- if theme.gitalk.language == '' %}
+         language: window.navigator.language || window.navigator.userLanguage,
+@@ -22,4 +22,3 @@ NexT.utils.loadComments('#gitalk-container', () => {
+   }, window.Gitalk);
+ });
  </script>
 -{%- endif %}
 diff --git a/layout/_third-party/statistics/busuanzi-counter.njk b/layout/_third-party/statistics/busuanzi-counter.njk
