@@ -1173,6 +1173,35 @@
       </tags>
   </entry>
   <entry>
+    <title>侧滑导航栏消失问题笔记</title>
+    <url>/post/push-pop-navigation-bar-hidden/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>如果前页面和后页面不同，则会出现轻微侧滑时导航栏莫名其妙没了😂</p>
+<p><a href="https://github.com/madordie/Demo-PushAndPop">Demo-PushAndPop</a></p>
+<a id="more"></a>
+
+<h2 id="Demo-PushAndPop"><a href="#Demo-PushAndPop" class="headerlink" title="Demo-PushAndPop"></a>Demo-PushAndPop</h2><p>[已解决] 隐藏导航栏+改变状态栏样式时出现导航栏莫名其妙没了</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><img src="https://github.com/madordie/Demo-PushAndPop/blob/master/Untitled.gif?raw=true" alt="snapshot"></p>
+<p>当<code>ViewController.swift</code>实现</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">var</span> preferredStatusBarStyle: <span class="type">UIStatusBarStyle</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> .lightContent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时，两个<code>ViewController</code>对应的<code>UIStatusBarStyle</code>不同，则会出现如上图。<code>UIStatusBarStyle</code>一致则正常。</p>
+<h2 id="解决关键"><a href="#解决关键" class="headerlink" title="解决关键"></a>解决关键</h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NavigationController</span>: <span class="title">UINavigationController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">var</span> childViewControllerForStatusBarStyle: <span class="type">UIViewController?</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> topViewController</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只需要将<code>childViewControllerForStatusBarStyle</code>设置为<code>UINavigationController.topViewController</code>即可。</p>
+<h2 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h2><p>附上<code>BViewController</code>中相关代码。在切换的两个<code>UIViewController</code>的<code>preferredStatusBarStyle</code>一样时，不需要设置<code>UINavigationController.childViewControllerForStatusBarStyle</code>。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> navigationBarHidden = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillAppear</span><span class="params">(<span class="number">_</span> animated: Bool)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewWillAppear(animated)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> navigationController = navigationController  <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> navigationController.isNavigationBarHidden != navigationBarHidden &#123;</span><br><span class="line">            navigationController.setNavigationBarHidden(navigationBarHidden, animated: animated)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillDisappear</span><span class="params">(<span class="number">_</span> animated: Bool)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewWillDisappear(animated)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> navigationController = navigationController  <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> last = navigationController.viewControllers.last <span class="keyword">as</span>? <span class="type">BViewController</span> <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> last.navigationBarHidden != navigationBarHidden &#123;</span><br><span class="line">            navigationController.setNavigationBarHidden(last.navigationBarHidden, animated: animated)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><ul>
+<li>@木头 <code>viewWillAppear</code>更换为<code>viewDidAppear</code>然后调试，在Demo中测试也可以曲线救国。</li>
+<li>@Harry 提供的终极大法～</li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>DEBUG</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>从一个常见的崩溃开始</title>
     <url>/post/debug-sth-from-crash/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>昨天下班时候一朋友碰到一个下面的崩溃，但是全局断点却无法断到指定位置。鉴于不信邪的态度，决定尝试一番。然后将此事记录如下文。</p>
@@ -1258,35 +1287,6 @@
 <li>代码中的 ** warning ** 记得消一下。成天<code>999+</code> 容易漏掉关键信息。</li>
 <li>开发的第三方SDK一定要注意测试覆盖率。</li>
 <li>swift大法好。swift不用<code>!</code>绝对不会有机会出现<code>func hasPrefix(_ str: String) -&gt; Bool</code>中参数<code>str</code>传空的可能 :)</li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>DEBUG</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>侧滑导航栏消失问题笔记</title>
-    <url>/post/push-pop-navigation-bar-hidden/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>如果前页面和后页面不同，则会出现轻微侧滑时导航栏莫名其妙没了😂</p>
-<p><a href="https://github.com/madordie/Demo-PushAndPop">Demo-PushAndPop</a></p>
-<a id="more"></a>
-
-<h2 id="Demo-PushAndPop"><a href="#Demo-PushAndPop" class="headerlink" title="Demo-PushAndPop"></a>Demo-PushAndPop</h2><p>[已解决] 隐藏导航栏+改变状态栏样式时出现导航栏莫名其妙没了</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><img src="https://github.com/madordie/Demo-PushAndPop/blob/master/Untitled.gif?raw=true" alt="snapshot"></p>
-<p>当<code>ViewController.swift</code>实现</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">var</span> preferredStatusBarStyle: <span class="type">UIStatusBarStyle</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> .lightContent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>时，两个<code>ViewController</code>对应的<code>UIStatusBarStyle</code>不同，则会出现如上图。<code>UIStatusBarStyle</code>一致则正常。</p>
-<h2 id="解决关键"><a href="#解决关键" class="headerlink" title="解决关键"></a>解决关键</h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NavigationController</span>: <span class="title">UINavigationController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">var</span> childViewControllerForStatusBarStyle: <span class="type">UIViewController?</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> topViewController</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>只需要将<code>childViewControllerForStatusBarStyle</code>设置为<code>UINavigationController.topViewController</code>即可。</p>
-<h2 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h2><p>附上<code>BViewController</code>中相关代码。在切换的两个<code>UIViewController</code>的<code>preferredStatusBarStyle</code>一样时，不需要设置<code>UINavigationController.childViewControllerForStatusBarStyle</code>。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> navigationBarHidden = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillAppear</span><span class="params">(<span class="number">_</span> animated: Bool)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewWillAppear(animated)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> navigationController = navigationController  <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> navigationController.isNavigationBarHidden != navigationBarHidden &#123;</span><br><span class="line">            navigationController.setNavigationBarHidden(navigationBarHidden, animated: animated)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillDisappear</span><span class="params">(<span class="number">_</span> animated: Bool)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewWillDisappear(animated)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> navigationController = navigationController  <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> last = navigationController.viewControllers.last <span class="keyword">as</span>? <span class="type">BViewController</span> <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> last.navigationBarHidden != navigationBarHidden &#123;</span><br><span class="line">            navigationController.setNavigationBarHidden(last.navigationBarHidden, animated: animated)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><ul>
-<li>@木头 <code>viewWillAppear</code>更换为<code>viewDidAppear</code>然后调试，在Demo中测试也可以曲线救国。</li>
-<li>@Harry 提供的终极大法～</li>
 </ul>
 ]]></content>
       <categories>
@@ -1424,6 +1424,263 @@
       </categories>
       <tags>
         <tag>效果</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
+    <url>/post/bang-fastimagecache/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文：<a href="http://blog.cnbang.net/tech/2578/">iOS图片加载速度极限优化—FastImageCache解析</a></p>
+<p><a href="https://github.com/path/FastImageCache">FastImageCache</a>是Path团队开发的一个开源库，用于提升图片的加载和渲染速度，让基于图片的列表滑动起来更顺畅，来看看它是怎么做的。</p>
+<a id="more"></a>
+
+<h2 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h2><p>iOS从磁盘加载一张图片，使用UIImageVIew显示在屏幕上，需要经过以下步骤：</p>
+<ol>
+<li>从磁盘拷贝数据到内核缓冲区</li>
+<li>从内核缓冲区复制数据到用户空间</li>
+<li>生成UIImageView，把图像数据赋值给UIImageView</li>
+<li>如果图像数据为未解码的PNG/JPG，解码为位图数据</li>
+<li>CATransaction捕获到UIImageView layer树的变化</li>
+<li>主线程Runloop提交CATransaction，开始进行图像渲染<br> 6.1 如果数据没有字节对齐，Core Animation会再拷贝一份数据，进行字节对齐。<br> 6.2 GPU处理位图数据，进行渲染。</li>
+</ol>
+<p>FastImageCache分别优化了2,4,6.1三个步骤：</p>
+<ol>
+<li>使用mmap内存映射，省去了上述第2步数据从内核空间拷贝到用户空间的操作。</li>
+<li>缓存解码后的位图数据到磁盘，下次从磁盘读取时省去第4步解码的操作。</li>
+<li>生成字节对齐的数据，防止上述第6.1步CoreAnimation在渲染时再拷贝一份数据。</li>
+</ol>
+<p>接下来具体介绍这三个优化点以及它的实现。</p>
+<h3 id="内存映射"><a href="#内存映射" class="headerlink" title="内存映射"></a>内存映射</h3><p>平常我们读取磁盘上的一个文件，上层API调用到最后会使用系统方法read()读取数据，内核把磁盘数据读入内核缓冲区，用户再从内核缓冲区读取数据复制到用户内存空间，这里有一次内存拷贝的时间消耗，并且读取后整个文件数据就已经存在于用户内存中，占用了进程的内存空间。</p>
+<p>FastImageCache采用了另一种读写文件的方法，就是用mmap把文件映射到用户空间里的虚拟内存，文件中的位置在虚拟内存中有了对应的地址，可以像操作内存一样操作这个文件，相当于已经把整个文件放入内存，但在真正使用到这些数据前却不会消耗物理内存，也不会有读写磁盘的操作，只有真正使用这些数据时，也就是图像准备渲染在屏幕上时，虚拟内存管理系统VMS才根据缺页加载的机制从磁盘加载对应的数据块到物理内存，再进行渲染。这样的文件读写文件方式少了数据从内核缓存到用户空间的拷贝，效率很高。</p>
+<h3 id="解码图像"><a href="#解码图像" class="headerlink" title="解码图像"></a>解码图像</h3><p>一般我们使用的图像是JPG/PNG，这些图像数据不是位图，而是是经过编码压缩后的数据，使用它渲染到屏幕之前需要进行解码转成位图数据，这个解码操作是比较耗时的，并且没有GPU硬解码，只能通过CPU，iOS默认会在主线程对图像进行解码。很多库都解决了图像解码的问题，不过由于解码后的图像太大，一般不会缓存到磁盘，SDWebImage的做法是把解码操作从主线程移到子线程，让耗时的解码操作不占用主线程的时间。</p>
+<p>FastImageCache也是在子线程解码图像，不同的是它会缓存解码后的图像到磁盘。因为解码后的图像体积很大，FastImageCache对这些图像数据做了系列缓存管理，详见下文实现部分。另外缓存的图像体积大也是使用内存映射读取文件的原因，小文件使用内存映射无优势，内存拷贝的量少，拷贝后占用用户内存也不高，文件越大内存映射优势越大。</p>
+<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>Core Animation在图像数据非字节对齐的情况下渲染前会先拷贝一份图像数据，官方文档没有对这次拷贝行为作说明，模拟器和Instrument里有高亮显示“copied images”的功能，但似乎它有bug，即使某张图片没有被高亮显示出渲染时被copy，从调用堆栈上也还是能看到调用了CA::Render::copy_image方法：</p>
+<p><img src="/images/fastImageCache1.png" alt="fastImageCache1"></p>
+<p>那什么是字节对齐呢，按我的理解，为了性能，底层渲染图像时不是一个像素一个像素渲染，而是一块一块渲染，数据是一块块地取，就可能遇到这一块连续的内存数据里结尾的数据不是图像的内容，是内存里其他的数据，可能越界读取导致一些奇怪的东西混入，所以在渲染之前CoreAnimation要把数据拷贝一份进行处理，确保每一块都是图像数据，对于不足一块的数据置空。大致图示：(pixel是图像像素数据，data是内存里其他数据)</p>
+<p><img src="/images/fastImageCache2.png" alt="fastImageCache2"></p>
+<p>块的大小应该是跟CPU cache line有关，ARMv7是32byte，A9是64byte，在A9下CoreAnimation应该是按64byte作为一块数据去读取和渲染，让图像数据对齐64byte就可以避免CoreAnimation再拷贝一份数据进行修补。FastImageCache做的字节对齐就是这个事情。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>FastImageCache把同个类型和尺寸的图像都放在一个文件里，根据文件偏移取单张图片，类似web的css雪碧图，这里称为ImageTable。这样做主要是为了方便统一管理图片缓存，控制缓存的大小，整个FastImageCache就是在管理一个个ImageTable的数据。整体实现的数据结构如图：</p>
+<p><img src="/images/fastImageCache3.png" alt="fastImageCache3"></p>
+<p>一些补充和说明：</p>
+<h3 id="ImageTable"><a href="#ImageTable" class="headerlink" title="ImageTable"></a>ImageTable</h3><ol>
+<li>一个ImageFormat对应一个ImageTable，ImageFormat指定了ImageTable里图像渲染格式/大小等信息，ImageTable里的图像数据都由ImageFormat规定了统一的尺寸，每张图像大小都是一样的。</li>
+<li>一个ImageTable一个实体文件，并有另一个文件保存这个ImageTable的meta信息。</li>
+<li>图像使用entityUUID作为唯一标示符，由用户定义，通常是图像url的hash值。ImageTable Meta的indexMap记录了entityUUID-&gt;entryIndex的映射，通过indexMap就可以用图像的entityUUID找到缓存数据在ImageTable对应的位置。</li>
+</ol>
+<h3 id="ImageTableEntry"><a href="#ImageTableEntry" class="headerlink" title="ImageTableEntry"></a>ImageTableEntry</h3><ol>
+<li>ImageTable的实体数据是ImageTableEntry，每个entry有两部分数据，一部分是对齐后的图像数据，另一部分是meta信息，meta保存这张图像的UUID和原图UUID，用于校验图像数据的正确性。</li>
+<li>Entry数据是按内存分页大小对齐的，数据大小是内存分页大小的整数倍，这样可以保证虚拟内存缺页加载时使用最少的内存页加载一张图像。</li>
+<li>图像数据做了字节对齐处理，CoreAnimation使用时无需再处理拷贝。具体做法是CGBitmapContextCreate创建位图画布时bytesPerRow参数传64倍数。</li>
+</ol>
+<h3 id="Chunk"><a href="#Chunk" class="headerlink" title="Chunk"></a>Chunk</h3><ul>
+<li>ImageTable和实体数据Entry间多了层Chunk，Chunk是逻辑上的数据划分，N个Entry作为一个Chunk，内存映射mmap操作是以chunk为单位的，每一个chunk执行一次mmap把这个chunk的内容映射到虚拟内存。为什么要多一层chunk呢，按我的理解，这样做是为了灵活控制mmap的大小和调用次数，若对整个ImageTable执行mmap，载入虚拟内存的文件过大，若对每个Entry做mmap，调用次数会太多。</li>
+</ul>
+<h3 id="缓存管理"><a href="#缓存管理" class="headerlink" title="缓存管理"></a>缓存管理</h3><ul>
+<li>用户可以定义整个ImageTable里最大缓存的图像数量，在有新图像需要缓存时，如果缓存没有超过限制，会以chunk为单位扩展文件大小，顺序写下去。如果已超过最大缓存限制，会把最少使用的缓存替换掉，实现方法是每次使用图像都会把UUID插入到MRUEntries数组的开头，MRUEntries按最近使用顺序排列了图像UUID，数组里最后一个图像就是最少使用的。被替换掉的图片下次需要再使用时，再走一次取原图—解压—存储的流程。</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>FastImageCache适合用于tableView里缓存每个cell上同样规格的图像，优点是能极大加快第一次从磁盘加载这些图像的速度。但它有两个明显的缺点：一是占空间大。因为缓存了解码后的位图到磁盘，位图是很大的，宽高100<em>100的图像在2x的高清屏设备下就需要200</em>200*4byte/pixel=156KB，这也是为什么FastImageCache要大费周章限制缓存大小。二是接口不友好，需预定义好缓存的图像尺寸。FastImageCache无法像SDWebImage那样无缝接入UIImageView，使用它需要配置ImageTable，定义好尺寸，手动提供的原图，每种实体图像要定义一个FICEntity模型，使逻辑变复杂。</p>
+<p>FastImageCache已经属于极限优化，做图像加载/渲染优化时应该优先考虑一些低代价高回报的优化点，例如CALayer代替UIImageVIew，减少GPU计算（去透明/像素对齐），图像子线程解码，避免Offscreen-Render等。在其他优化都做到位，图像的渲染还是有性能问题的前提下才考虑使用FastImageCache进一步提升首次加载的性能，不过字节对齐的优化倒是可以脱离FastImageCache直接运用在项目上，只需要在解码图像时bitmap画布的bytesPerRow设为64的倍数即可。</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>FastImageCache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「转」一个NB的补救项目国际化的方案</title>
+    <url>/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><a href="http://www.devashen.com/blog/2016/01/15/localized02/"> iOS 多语言版本的开发（二）</a> 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了<a href="https://github.com/Ashen-Zhao/easyLocalized">Demo</a> 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单快捷高效的方法，让我慢慢与您道来；</p>
+<h2 id="如何辨别项目中的中文字符串"><a href="#如何辨别项目中的中文字符串" class="headerlink" title="如何辨别项目中的中文字符串?"></a>如何辨别项目中的中文字符串?</h2><p> 既然要替换项目中使用到的中文字符串，那么前提就必须要先找到这些个字符串，然后将这些字符串，替换成我们定义的宏， 为了替换方便，可将这些字符串自身作为key， 这里不理解的不要紧，下面我还会讲到。 既然是辨别中文字符串，那也就是说在项目文件中进行匹配查找，说到匹配，那就需要正则表达式了，用正则表达式匹配Xcode中的使用的中文字符串，使用<code>(@&quot;[^&quot;]*[\u4E00-\u9FA5]+[^&quot;\n]*?&quot;)\s*</code> 即可， 打开你的Xcode 试试看，切记find 后面的选项要选择 <code>Regular Expression</code>, 默认选中的是<code>Text</code>, 如图</p>
+<p><img src="/images/2018-05-25-13-32-53.png" alt="啊神多语言"></p>
+<h2 id="如何取出识别到的中文字符串？"><a href="#如何取出识别到的中文字符串？" class="headerlink" title="如何取出识别到的中文字符串？"></a>如何取出识别到的中文字符串？</h2><p> 我们已经知道如何识别项目中的字符串了，但是如何取出来使用呢？ 这就需要遍历项目中所有的指定后缀（e.g: .h、.m等）的文件，然后利用正则表达匹配所有使用到的中文字符串，并写入文件中。为了方便起见，我将此过程写了一个Mac客户端<a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>，可直接将选中的项目中所有的中文字符串，导出到指定的路径下；该应用还可以选择对于重复出现的中文字符串进行处理，以及还可以将中文字符串导出为繁体； <a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>更值得关注的是它导出的文件，可以直接拿来当做多语言文件中的<code>key=value</code> 使用，非常简单，喜欢的可以去<a href="https://github.com/Ashen-Zhao/ReadChinese">下载看看</a>， 含有源码的哦；小应用运行图如下：</p>
+<p><img src="/images/2018-05-25-13-48-12.png" alt="啊神多语言"></p>
+<h2 id="如何使用取出的中文字符串？"><a href="#如何使用取出的中文字符串？" class="headerlink" title="如何使用取出的中文字符串？"></a>如何使用取出的中文字符串？</h2><p> 已经拿到取出的中文字符串文件，这个文件是可以直接拿来用做多语言文件使用的，小应用导出的文件，只可以用于中文以及繁体多语言文件，而对于其他的语言，就需要你拿着导出的文件，找你们公司的翻译人员，进行翻译； 拿繁体版来举个例子，导出来的繁体文件如下（收留我App导出的文件）：</p>
+<p><img src="/images/2018-05-25-13-48-38.png" alt="啊神多语言"></p>
+<p>这个繁体文件，可以直接作为繁体多语言使用，如何想要翻译成英文，可以将此文件拷贝一份，交给翻译人员，让其翻译。翻译的时候，你一定要给翻译人员沟通好，让其只翻译<code>value</code>, 也就是图中<code>=</code> 后面双引号中的内容，格式什么的也不要让他乱改，否则容易出现问题，导致key与value对不上号。 一切沟通妥当后，等翻译把文件给你后，直接将文件中的内容，复制到多语言文件的英语文件中即可；</p>
+<h2 id="如何将项目中的中文字符串进行替换"><a href="#如何将项目中的中文字符串进行替换" class="headerlink" title="如何将项目中的中文字符串进行替换"></a>如何将项目中的中文字符串进行替换</h2><p> 多语言文件已经配置完成，到了这里，那么问题来了，我们只是取出项目中使用的中文字符串，然后将字符串封装成多语言文件，但是对于项目中使用的中文字符串依然还是中文字符串，我们还并没有进行替换处理。当然，这一步我们是不能够忘了，由于是替换项目中所有的使用中文字符串，我们还是谨慎为好，首先将你的项目进行备份、备份、备份，非常重要的事情说三篇，切记一定要备份。备份好后，我们就可以开始替换工作了，没有备份的不要往下看了，赶紧备份去；<br> 假设你已经备份好了，你就可以开始替换工作了，前面我们说过让中文字符串自身作为key 进行替换，之所以让其自身作为key, 是因为这样可以大大减轻替换的困难度，而且还有利于代码的可读性，基本上算是保持原有代码；既然要替换项目中的使用中文字符串，就要用到Xcode 自带的字符串替换功能，首先还需要使用正则表达式<code>(@&quot;[^&quot;]*[\u4E00-\u9FA5]+[^&quot;\n]*?&quot;)\s*</code>，匹配出项目中使用的中文字符串，然后在对其进行替换处理。</p>
+<p> 由于我们在<a href="http://www.devashen.com/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>中，对取key对应的语言内容，进行了宏的封装, 这里我们可以将匹配到的使用中文字符直接替换成我们定义的宏的使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define ASLocalizedString(key)  [NSString stringWithFormat:@&quot;%@&quot;, [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@&quot;%@&quot;,[[NSUserDefaults standardUserDefaults] objectForKey:@&quot;appLanguage&quot;]] ofType:@&quot;lproj&quot;]] localizedStringForKey:(key) value:nil table:@&quot;ASLocalized&quot;]] </span><br></pre></td></tr></table></figure>
+
+<p>以上是宏的定义，我们需要将字符串进行替换成宏的使用，如：<br> 替换前是这样的<code>_lbl.text = @&quot;我是多语言&quot;;</code><br> 替换后<code>_lbl.text = ASLocalizedString(@&quot;我是多语言&quot;)</code></p>
+<p>替换规则如图：</p>
+<p><img src="/images/2018-05-25-13-50-18.png" alt="啊神多语言"></p>
+<p>这次选中的是<code>Replace</code>, 不是<code>Find</code>。按图中所示，选择完毕后，点击<code>ReplaceAll</code>, 会出来一个弹框，不用管它直接继续，即可，然后你在看项目中使用到的中文字符串是否已经替换掉了，到这里基本上大功告成了；</p>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>1、正则表达式，不懂得可以先照文章里写就行，然后再去学习下，<a href="http://deerchao.net/tutorials/regex/regex.htm">这里有篇基础文章</a><br>2、ASLocalizedString(key) ， 该宏使用面积广，可以将其定义成公共头文件中，然后用时引用头文件即可，也可将文件封装进pch文件中，这样无需使用头文件接口使用<br>3、替换后，可能会有些地方报错，command + b 编译下，看看报错的地方，进行相应修改即可。报错原因：a. 可能是你定义的常量字符串； b. 可能是定义的宏； c. 可能是替换后没有换行； 基本上报的错误很明显，进行修改即可；<br>4、在迭代版本中，再次使用中文字符串，就需要使用<code>ASLocalizedString(key)</code>， 来代替了，然后再多语言文件中，进行<code>key=value</code> 配置；</p>
+<blockquote>
+<p>相关文章</p>
+</blockquote>
+<blockquote>
+<p>iOS 多语言版本的开发（一）</p>
+</blockquote>
+<blockquote>
+<p>iOS 多语言版本的开发（二）</p>
+</blockquote>
+<hr>
+<p>文章转自 <a href="http://www.devashen.com/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a></p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>国际化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「转」一张思维导图，让正则表达式不再难懂</title>
+    <url>/post/reprinted-regular-mind-map/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="/images/bruch-up-regular-expressions-1.png" alt="思维导图"></p>
+<a id="more"></a>
+
+<h2 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h2><ul>
+<li><p>普通字符：字母、数字、汉字、下划线，匹配与之相同的一个字符</p>
+</li>
+<li><p>简单转义字符：\n（换行）,\t（制表）,\（\本身）和 ^…（^等有特殊作用的符号如要匹配自己的话要用转义）</p>
+</li>
+<li><p>标准字符集合<br>注意区分大小写，大写是相反的意思，匹配相反是不匹配</p>
+<ul>
+<li>\d<br>  任意一个数字，0~9</li>
+<li>\w<br>  任意一个字母、数字、汉字或下划线，A<del>Z、a</del>z、0~9、_和任意一个汉字</li>
+<li>\s<br>  任意空白符，包括空格、制表符、换行符</li>
+<li>.<br>  小数点可以匹配任意一个字符，换行除外（如果要匹配包括”\n”在内的所有字符，一般用[\s\S]）</li>
+</ul>
+</li>
+<li><p>自定义字符集合<br>[ ]方括号匹配方式，能够匹配方括号中的任意一个字符,^表示取反</p>
+<ul>
+<li>[ab5@]<br>  匹配”a”或”b”或”5”或”@”</li>
+<li>[^abc]<br>  匹配a、b、c之外的任意字符</li>
+<li>[f-k]<br>  匹配“f”到”k”之间的字符</li>
+<li>[^A-F0-3]<br>  匹配“A”-“F”,”0”-“3”之外的任意一个字符</li>
+</ul>
+</li>
+</ul>
+<h2 id="量词-Quantifier"><a href="#量词-Quantifier" class="headerlink" title="量词(Quantifier)"></a>量词(Quantifier)</h2><p>修饰前面的一个表达式，如果要修饰多个表达式，就用( )把表达式包起来</p>
+<ul>
+<li>{n}<br>  表达式重复n次​</li>
+<li>{m,n}<br>  表达式至少重复m次，最多重复n次<ul>
+<li>贪婪模式 （默认）<br>匹配符合的最长的字符串</li>
+<li>非贪婪模式 （在量词后面加 ? 例：{m,n}? )<br>  匹配符合的最短的字符串</li>
+</ul>
+</li>
+<li>{m,}<br>  表达式至少重复m次</li>
+<li>？<br>  匹配表达式0或1次，相当于{0,1}</li>
+<li>+<br>  表达式至少出现一次，相当于{1,}</li>
+<li>*<br>  表达式不出现或出现任意次，相当于{0,}</li>
+</ul>
+<h2 id="字符边界"><a href="#字符边界" class="headerlink" title="字符边界"></a>字符边界</h2><pre><code>零宽：匹配的不是字符而是位置，符合某种条件的位置</code></pre>
+<ul>
+<li>^<br>  与字符串开始的地方匹配</li>
+<li>$<br>  与字符串结束的地方匹配</li>
+<li>\b<br>  匹配一个单词的边界，当前位置前面的字符和后面的字符不全是\w</li>
+</ul>
+<h2 id="预搜索（零宽断言、环视）"><a href="#预搜索（零宽断言、环视）" class="headerlink" title="预搜索（零宽断言、环视）"></a>预搜索（零宽断言、环视）</h2><p>零宽：匹配的不是字符而是位置，符合某种条件的位置</p>
+<ul>
+<li>(?=exp)<br>  断言自身出现的位置的后面能匹配表达式exp</li>
+<li>(?!exp)<br>  断言自身出现的位置的后面不能匹配表达式exp</li>
+<li>(?&lt;=exp)<br>  断言自身出现的位置的前面能匹配表达式exp</li>
+<li>(?&lt;!exp)<br>  断言自身出现的位置的前面不能匹配表达式exp</li>
+</ul>
+<h2 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h2><p>对文本的处理方式</p>
+<ul>
+<li>IGNORECASE 忽略大小写模式<br>  匹配时忽略大小写<br>  默认是区分大小写的</li>
+<li>SINGLELINE 单行模式<br>  整个文本看作一个字符串，只有一个开头一个结尾<br>  使小数点”.”可以匹配包含换行符(\n)在内的任意字符</li>
+<li>MULTILINE 多行模式<br>  每行都是一个字符串<br>  在多行模式下，如果需要仅匹配字符串开始和结束位置，可以使用\A和\Z</li>
+</ul>
+<h2 id="选择符和分组"><a href="#选择符和分组" class="headerlink" title="选择符和分组"></a>选择符和分组</h2><p>分支结构、捕获组合非捕获组</p>
+<ul>
+<li>| 分支结构​<br>  左右表达式之间“或”关系，匹配左边或右边</li>
+<li>( ) 捕获组<br>  （1）、在被修饰匹配次数的时候，括号中的表达式可以作为整体被修饰<br>  （2）、取匹配结果的时候，括号中的表达式匹配到的内容可以被单独得到<br>  （3）、每一对括号会分配一个编号，使用（）的捕获根据左括号的顺序从1开始自动编号。捕获编号为零的第一个捕获是整个正则表达式模式匹配的文本<br>   反向引用：通过反向引用，可以对分组已捕获的字符串进行引用。</li>
+<li>(?:Expression) 非捕获组<br>  一些表达式中，不得不使用（），但又不需要保存（）中子表达式匹配的内容，这时可以用非捕获组来抵消（）带来的副作用。</li>
+</ul>
+<hr>
+<p>原文：<a href="https://my.oschina.net/u/3080373/blog/1550653">一张思维导图，让正则表达式不再难懂</a></p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>正则表达式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「转」真实世界中的 Swift 性能优化</title>
+    <url>/post/real-world-swift-performance/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文链接：<a href="https://realm.io/cn/news/real-world-swift-performance/">真实世界中的 Swift 性能优化</a></p>
+<a id="more"></a>
+
+<hr>
+<p>有太多的因素会导致您的应用变得缓慢。在本次讲演中，我们将自底向上地来探索应用的性能优化。来看一看在真实世界中进行数据解析、数据映射和数据存储的时候，Swift 的特性（协议、泛型、结构体和类）是如何影响应用性能的，我们将确定影响性能提升的瓶颈所在，并体验 Swift 带来的「迅捷」体验。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>今天我打算同大家谈论 Swift 性能优化方面的内容。当我们构建软件的时候，特别是移动软件，由于人们的精力、时间有限，人们往往更喜欢有一个流畅的用户体验，而不是等着您的应用在那加载。如果应用运行速度过慢，并且不能给用户带来他们所想要的结果的话，那么这会让人们感到不爽。因此，让您的代码能够快速运行是无比重要的一件事。</p>
+<p>那么有什么因素会导致代码运行缓慢呢？当您在编写代码并选择架构的时候，深刻认识到这些架构所带来的影响是非常重要的。我将首先谈一谈：如何理解内联、动态调度与静态调度之间的权衡，以及相关结构是如何分配内存的，还有怎样选择最适合的架构。</p>
+<h2 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h2><p>对象的内存分配 (allocation) 和内存释放 (deallocation) 是代码中最大的开销之一，同时通常也是不可避免的。Swift 会自行分配和释放内存，此外它存在两种类型的分配方式。</p>
+<p>第一个是基于栈 (stack-based) 的内存分配。Swift 会尽可能选择在栈上分配内存。栈是一种非常简单的数据结构；数据从栈的底部推入 (push)，从栈的顶部弹出 (pop)。由于我们只能够修改栈的末端，因此我们可以通过维护一个指向栈末端的指针来实现这种数据结构，并且在其中进行内存的分配和释放只需要重新分配该整数即可。</p>
+<p>第二个是基于堆 (heap-based) 的内存分配。这使得内存分配将具备更加动态的生命周期，但是这需要更为复杂的数据结构。要在堆上进行内存分配的话，您需要锁定堆当中的一个空闲块 (free block)，其大小能够容纳您的对象。因此，我们需要找到未使用的块，然后在其中分配内存。当我们需要释放内存的时候，我们就必须搜索何处能够重新插入该内存块。这个操作很缓慢。主要是为了线程安全，我们必须要对这些东西进行锁定和同步。</p>
+<h2 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h2><p>我们还有引用计数 (reference counting) 的概念，这个操作相对不怎么耗费性能，但是由于使用次数很多，因此它带来的性能影响仍然是很大的。引用计数是 Objective-C 和 Swift 中用于确定何时该释放对象的安全机制。目前，Swift 当中的引用计数是强制自动管理的，这意味着它很容易被开发者们所忽略。然而，当您打开 Instrument 查看何处影响了代码运行的速度的时候，您会发现 20,000 多次的 Swift 持有 (retain) 和释放 (release)，这些操作占用了 90% 的代码运行时间！</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">perform</span><span class="params">(with object: Object)</span></span> &#123;</span><br><span class="line">    object.doAThing()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是因为如果有这样一个函数接收了一个对象作为参数，并且执行了这个对象的 doAThing() 方法，编译器会自动插入对象持有和释放操作，以确保在这个方法的生命周期当中，这个对象不会被回收掉。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">perform</span><span class="params">(with object: Object)</span></span> &#123;</span><br><span class="line">    __swift_retain(object)</span><br><span class="line">    object.doAThing()</span><br><span class="line">    __swift_release(object)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这些对象持有和释放操作是原子操作 (atomic operations)，所以它们运转缓慢就很正常了。或者，是因为我们不知道如何让它们能够运行得更快一些。</p>
+<h2 id="调度与对象"><a href="#调度与对象" class="headerlink" title="调度与对象"></a>调度与对象</h2><p>此外还有调度 (dispatch) 的概念。Swift 拥有三种类型的调度方式。Swift 会尽可能将函数内联 (inline)，这样的话使用这个函数将不会有额外的性能开销。这个函数可以直接调用。静态调度 (static dispatch) 本质上是通过 V-table 进行的查找和跳转，这个操作会花费一纳秒的时间。然后动态调度 (dynamic dispatch) 将会花费大概五纳秒的时间，如果您只有几个这样的方法调用的话，这实际上并不会带来多大的问题，问题是当您在一个嵌套循环或者执行上千次操作当中使用了动态调度的话，那么它所带来的性能耗费将成百上千地累积起来，最终影响应用性能。</p>
+<p>Swift 同样也有两种类型的对象。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>,</span><br><span class="line">                item: <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>这是一个类，类当中的数据都会在堆上分配内存。您可以在此处看到，这里我们创建了一个名为 Index 的类。其中包含了两个属性，一个 section 和一个 item。当我们创建了这个对象的时候，堆上便创建了一个指向此 Index 的指针，因此在堆上便存放了这个 section 和 item 的数据和空间。</p>
+<p>如果我们对其建立引用，就会发现我们现在有两个指向堆上相同区域的指针了，它们之间是共享内存的。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>,</span><br><span class="line">                item: <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i2 = i</span><br></pre></td></tr></table></figure>
+<p>这个时候，Swift 会自动插入对象持有操作。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>,</span><br><span class="line">                item: <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">__swift_retain(i)</span><br><span class="line"><span class="keyword">let</span> i2 = i</span><br></pre></td></tr></table></figure>
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><p>很多人都会说：要编写性能优异的 Swift 代码，最简单的方式就是使用结构体了，结构体通常是一个很好的结构，因为结构体会存储在栈上，并且通常会使用静态调度或者内联调度。</p>
+<p>存储在栈上的 Swift 结构体将占用三个 Word 大小。如果您的结构体当中的数据数量低于三种的话，那么结构体的值会自动在栈上内联。Word 是 CPU 当中内置整数的大小，它是 CPU 所工作的区块。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>, item: <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>在这里您可以看到，当我们创建这个结构体的时候，带有 section 和 item 值得 Index 结构体将会直接下放到栈当中，这个时候不会有额外的内存分配发生。那么如果我们在别处将其赋值到另一个变量的时候，会发生什么呢？</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>, item: <span class="number">1</span>)</span><br><span class="line"><span class="keyword">let</span> i2 = i</span><br></pre></td></tr></table></figure>
+<p>如果我们将 i 赋给 i2，这会将我们存储在栈当中的值直接再次复制一遍，这个时候并不会出现引用的情况。这就是所谓的「值类型」。</p>
+<p>那么如果结构体当中存放了引用类型的话又会怎样呢？持有内联指针的结构体。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> id: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> u = <span class="type">User</span>(name: <span class="string">&quot;Joe&quot;</span>, id: <span class="string">&quot;1234&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>当我们将其赋值给别的变量的时候，我们就持有了共享两个结构体的相同指针，因此我们必须要对这两个指针进行持有操作，而不是在对象上执行单独的持有操作。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> id: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> u = <span class="type">User</span>(name: <span class="string">&quot;Joe&quot;</span>,</span><br><span class="line">             id: <span class="string">&quot;1234&quot;</span>)</span><br><span class="line">__swift_retain(u.name._textStorage)</span><br><span class="line">__swift_retain(u.id._textStorage)</span><br><span class="line"><span class="keyword">let</span> u2 = u</span><br></pre></td></tr></table></figure>
+<p>如果其中包含了类的话，那么性能耗费会更大。</p>
+<h2 id="抽象类型"><a href="#抽象类型" class="headerlink" title="抽象类型"></a>抽象类型</h2><p>正如我们此前所述，Swift 提供了许多不同的抽象类型 (abstraction)，从而允许我们自行决定代码该如何运行，以及决定代码的性能特性。现在我们来看一看抽象类型是如何在实际环境当中使用的。这里有一段很简单的代码：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> radius: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> center: <span class="type">Point</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">draw</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> circles = (<span class="number">1</span>..&lt;<span class="number">100_000_000</span>).<span class="built_in">map</span> &#123; <span class="number">_</span> <span class="keyword">in</span> <span class="type">Circle</span>(...) &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> circle <span class="keyword">in</span> circles &#123;</span><br><span class="line">    circle.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有一个带有 radius 和 center 属性的 Circle 结构体。它将占用三个 Word 大小的空间，并存储在栈上。我们创建了一亿个 Circle，然后我们遍历这些 Circle 并调用这个函数。在我的电脑上，这段操作在发布模式下耗费了 0.3 秒的时间。那么当需求发生变更的时候，会发生什么事呢？</p>
+<p>我们不仅需要绘圆，还需要能够处理多种类型的形状。让我们假设我们还需要绘线。我非常喜欢面向协议编程，因为它允许我在不使用继承的情况下实现多态性，并且它允许我们只需要考虑这个「抽象类型」即可。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protocol Drawable &#123;</span><br><span class="line">    func draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Circle: Drawable &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let drawables: [Drawable] &#x3D; (1..&lt;100_000_000).map &#123; _ in Circle(...) &#125;</span><br><span class="line"></span><br><span class="line">for drawable in drawables &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们需要做的，就是将这个 draw 方法析取到协议当中，然后将数组的引用类型变更为这个协议，这样做导致这段代码花费了 4.0 秒的时间来运行。速率减慢了 1300%，这是为什么呢？</p>
+<p>这是因为此前的代码可以被静态调度，从而在没有任何堆应用建立的情况下仍能够执行。这就是协议是如何实现的。</p>
+<p>例如，如大家所见，这里是我们此前的 Circle 结构体。在这个 for 循环当中，Swift 编译器所做的就是前往 V-table 进行查找，或者直接将 draw 函数内联。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Circle &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var circles &#x3D; (1..&lt;100_000_000).map &#123; _ in Circle(...) &#125;</span><br><span class="line"></span><br><span class="line">for circle in circles &#123;</span><br><span class="line">    circle.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们用协议来替代的时候，此时它并不知道这个对象是结构体还是类。因为这里可能是任何一个实现此协议的类型。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protocol Drawable &#123;</span><br><span class="line">    func draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Circle: Drawable &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line"></span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var drawables: [Drawable] &#x3D; (1..&lt;100_000_000).map &#123; _ in return Circle(...) &#125;</span><br><span class="line"></span><br><span class="line">for drawable in drawables &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么我们该如何去调度这个 draw 函数呢？答案就位于协议记录表 (protocol witness table，也称为虚函数表) 当中。它其中存放了您应用当中每个实现协议的对象名，并且在底层实现当中，这个表本质上充当了这些类型的别名。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protocol Drawable &#123;</span><br><span class="line">    func draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Circle: Drawable &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line"></span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var drawables: [Drawable] &#x3D; (1..&lt;100_000_000).map &#123; _ in</span><br><span class="line">    return Circle(...)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for drawable in drawables &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里的代码当中，我们该如何获取协议记录表呢？答案就是从这个既有容器 (existential container) 当中获取，这个容器目前拥有一个三个字大小的结构体，并且存放在其内部的值缓冲区当中，此外还与协议记录表建立了引用关系。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Circle: Drawable &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line"></span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里 Circle 类型存放在了三个字大小的缓冲区当中，并且不会被单独引用。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Line: Drawable &#123;</span><br><span class="line">    let origin: Point</span><br><span class="line">    let end: Point</span><br><span class="line"></span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>举个例子，对于我们的 Line 类型来说，它其中包含了四个字的存储空间，因为它拥有两个点类型。这个 Line 结构体需要超过四个字以上的存储空间。我们该如何处理它呢？这会对性能有影响么？好吧，它的确会：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protocol Drawable &#123;</span><br><span class="line">    func draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Line: Drawable &#123;</span><br><span class="line">    let origin: Point</span><br><span class="line">    let end: Point</span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let drawables: [Drawable] &#x3D; (1..&lt;100_000_000).map &#123; _ in Line(...) &#125;</span><br><span class="line"></span><br><span class="line">for drawable in drawables &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这需要花费 45 秒钟的时间来运行。为什么这里要花这么久的时间呢，发生了什么事呢？</p>
+<p>绝大部分的时间都花费在对结构体进行内存分配上了，因为现在它们无法存放在只有三个字大小的缓冲区当中了。因此这些结构会在堆上进行内存分配，此外这也与协议有一点关系。由于既有容器只能够存储三个字大小的结构体，或者也可以与对象建立引用关系，我们同样需要某种名为值记录表 (value witness table)。这就是我们用来处理任意值的东西。</p>
+<p>因此在这里，编译器将创建一个值记录表，对每个���缓冲区、内敛结构体来说，都有三个字大小的缓冲区，然后它将负责对值或者类进行内存分配、拷贝、销毁和内存释放等操作。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func draw(drawable: Drawable) &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let value: Drawable &#x3D; Line()</span><br><span class="line">draw(local: value)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Generates</span><br><span class="line">func draw(value: ECTDrawable) &#123;</span><br><span class="line">    var drawable: ECTDrawable &#x3D; ECTDrawable()</span><br><span class="line">    let vwt &#x3D; value.vwt</span><br><span class="line">    let pwt &#x3D; value.pwt</span><br><span class="line">    drawable.vwt &#x3D; value.vwt</span><br><span class="line">    drawable.pwt &#x3D; value.pwt</span><br><span class="line">    vwt.allocateBuffAndCopyValue(&amp;drawable, value)</span><br><span class="line">    pwt.draw(vwt.projectBuffer(&amp;drawable)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里是一个例子，这就是这个过程的中间产物。如果我们只有一个 draw 函数，那么它将会接受我们创建的 Line 作为参数，因此我们将它传递给这个 draw 函数即可。</p>
+<p>实际情况时，它将这个 Drawable 协议传递到既有容器当中，然后在函数内部再次进行创建。这会对值和协议记录表进行赋值，然后分配一个新的缓冲区，然后将其他结构、类或者类似对象的值拷贝进这个缓冲区当中。然后就使用协议记录表当中的 draw 函数，把真实的 Drable 对象传递给这个函数。</p>
+<p>您可以看到，值记录表和协议记录表将会存放在栈上，而 Line 将会被存放在堆上，从而最后将线绘制出来。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>对我们进行数据建模的方式进行简单的更改将会对性能造成巨大的影响。让我们来看一看该如何来避免这些情况的发生。</p>
+<p>首先让我们来说一说泛型。大家可能会说了，我给各位展示了协议会导致性能的下降，那么我们为什么还要使用泛型呢？答案在于：泛型允许我们做什么。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Stack&lt;T: Type&gt; &#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假设我们这里有一个带有泛型 T 的 Stack 结构体，它受到一个协议类型的约束。编译器所要做的，就是将这个 T 提换成相应的协议，或者替换为我们传入的具体类型。这些操作会一直沿着函数链 (function chain) 执行，并且编译器会创建直接对此类型进行操作的专用版本。</p>
+<p>这样我们就无需再使用值记录表或者协议记录表了，并且还移除了既有容器，这可能是一个非常好的解决方式，这使得我们仍然能够写出真正快速运行的泛型代码，并且还具备 Swift 所提供的良好多态性。这就是所谓的静态多态性 (static polymorphism)。</p>
+<p>您还可以通过使用枚举来改进数据模型，而不是从服务器中获取大量的字符串。例如，假设您正在构建一个社交应用，您需要对账户建立状态的管理，以前您可能会使用字符串来进行控制。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum AccountStatus: String, RawRepresentable &#123;</span><br><span class="line">case .banned, .verified, incomplete</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果我们改用枚举的话，那么我们就无需进行内存分配了，当我们传递这个类型的时候，我们只是将枚举值进行传递，这是一个加快代码运行速度的好方法，同时也可以为整个应用程序提供更安全、更可读的代码。</p>
+<p>此外，使用 u-模型或者演示者 (Presenter) 或者不同的抽象类型的形式，来构建特定类型的模型也是非常有用的，这使得我们能够精简掉应用当中许多不必要的部分。</p>
+<p>好的，我的讲演到此结束，内容很短，感谢诸位的参与！</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>优化</tag>
       </tags>
   </entry>
   <entry>
@@ -1842,263 +2099,6 @@ class CMExpandingTextField: UITextField &#123;
       </categories>
       <tags>
         <tag>UITableView</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「转」iOS图片加载速度极限优化—FastImageCache解析</title>
-    <url>/post/bang-fastimagecache/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文：<a href="http://blog.cnbang.net/tech/2578/">iOS图片加载速度极限优化—FastImageCache解析</a></p>
-<p><a href="https://github.com/path/FastImageCache">FastImageCache</a>是Path团队开发的一个开源库，用于提升图片的加载和渲染速度，让基于图片的列表滑动起来更顺畅，来看看它是怎么做的。</p>
-<a id="more"></a>
-
-<h2 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h2><p>iOS从磁盘加载一张图片，使用UIImageVIew显示在屏幕上，需要经过以下步骤：</p>
-<ol>
-<li>从磁盘拷贝数据到内核缓冲区</li>
-<li>从内核缓冲区复制数据到用户空间</li>
-<li>生成UIImageView，把图像数据赋值给UIImageView</li>
-<li>如果图像数据为未解码的PNG/JPG，解码为位图数据</li>
-<li>CATransaction捕获到UIImageView layer树的变化</li>
-<li>主线程Runloop提交CATransaction，开始进行图像渲染<br> 6.1 如果数据没有字节对齐，Core Animation会再拷贝一份数据，进行字节对齐。<br> 6.2 GPU处理位图数据，进行渲染。</li>
-</ol>
-<p>FastImageCache分别优化了2,4,6.1三个步骤：</p>
-<ol>
-<li>使用mmap内存映射，省去了上述第2步数据从内核空间拷贝到用户空间的操作。</li>
-<li>缓存解码后的位图数据到磁盘，下次从磁盘读取时省去第4步解码的操作。</li>
-<li>生成字节对齐的数据，防止上述第6.1步CoreAnimation在渲染时再拷贝一份数据。</li>
-</ol>
-<p>接下来具体介绍这三个优化点以及它的实现。</p>
-<h3 id="内存映射"><a href="#内存映射" class="headerlink" title="内存映射"></a>内存映射</h3><p>平常我们读取磁盘上的一个文件，上层API调用到最后会使用系统方法read()读取数据，内核把磁盘数据读入内核缓冲区，用户再从内核缓冲区读取数据复制到用户内存空间，这里有一次内存拷贝的时间消耗，并且读取后整个文件数据就已经存在于用户内存中，占用了进程的内存空间。</p>
-<p>FastImageCache采用了另一种读写文件的方法，就是用mmap把文件映射到用户空间里的虚拟内存，文件中的位置在虚拟内存中有了对应的地址，可以像操作内存一样操作这个文件，相当于已经把整个文件放入内存，但在真正使用到这些数据前却不会消耗物理内存，也不会有读写磁盘的操作，只有真正使用这些数据时，也就是图像准备渲染在屏幕上时，虚拟内存管理系统VMS才根据缺页加载的机制从磁盘加载对应的数据块到物理内存，再进行渲染。这样的文件读写文件方式少了数据从内核缓存到用户空间的拷贝，效率很高。</p>
-<h3 id="解码图像"><a href="#解码图像" class="headerlink" title="解码图像"></a>解码图像</h3><p>一般我们使用的图像是JPG/PNG，这些图像数据不是位图，而是是经过编码压缩后的数据，使用它渲染到屏幕之前需要进行解码转成位图数据，这个解码操作是比较耗时的，并且没有GPU硬解码，只能通过CPU，iOS默认会在主线程对图像进行解码。很多库都解决了图像解码的问题，不过由于解码后的图像太大，一般不会缓存到磁盘，SDWebImage的做法是把解码操作从主线程移到子线程，让耗时的解码操作不占用主线程的时间。</p>
-<p>FastImageCache也是在子线程解码图像，不同的是它会缓存解码后的图像到磁盘。因为解码后的图像体积很大，FastImageCache对这些图像数据做了系列缓存管理，详见下文实现部分。另外缓存的图像体积大也是使用内存映射读取文件的原因，小文件使用内存映射无优势，内存拷贝的量少，拷贝后占用用户内存也不高，文件越大内存映射优势越大。</p>
-<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>Core Animation在图像数据非字节对齐的情况下渲染前会先拷贝一份图像数据，官方文档没有对这次拷贝行为作说明，模拟器和Instrument里有高亮显示“copied images”的功能，但似乎它有bug，即使某张图片没有被高亮显示出渲染时被copy，从调用堆栈上也还是能看到调用了CA::Render::copy_image方法：</p>
-<p><img src="/images/fastImageCache1.png" alt="fastImageCache1"></p>
-<p>那什么是字节对齐呢，按我的理解，为了性能，底层渲染图像时不是一个像素一个像素渲染，而是一块一块渲染，数据是一块块地取，就可能遇到这一块连续的内存数据里结尾的数据不是图像的内容，是内存里其他的数据，可能越界读取导致一些奇怪的东西混入，所以在渲染之前CoreAnimation要把数据拷贝一份进行处理，确保每一块都是图像数据，对于不足一块的数据置空。大致图示：(pixel是图像像素数据，data是内存里其他数据)</p>
-<p><img src="/images/fastImageCache2.png" alt="fastImageCache2"></p>
-<p>块的大小应该是跟CPU cache line有关，ARMv7是32byte，A9是64byte，在A9下CoreAnimation应该是按64byte作为一块数据去读取和渲染，让图像数据对齐64byte就可以避免CoreAnimation再拷贝一份数据进行修补。FastImageCache做的字节对齐就是这个事情。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>FastImageCache把同个类型和尺寸的图像都放在一个文件里，根据文件偏移取单张图片，类似web的css雪碧图，这里称为ImageTable。这样做主要是为了方便统一管理图片缓存，控制缓存的大小，整个FastImageCache就是在管理一个个ImageTable的数据。整体实现的数据结构如图：</p>
-<p><img src="/images/fastImageCache3.png" alt="fastImageCache3"></p>
-<p>一些补充和说明：</p>
-<h3 id="ImageTable"><a href="#ImageTable" class="headerlink" title="ImageTable"></a>ImageTable</h3><ol>
-<li>一个ImageFormat对应一个ImageTable，ImageFormat指定了ImageTable里图像渲染格式/大小等信息，ImageTable里的图像数据都由ImageFormat规定了统一的尺寸，每张图像大小都是一样的。</li>
-<li>一个ImageTable一个实体文件，并有另一个文件保存这个ImageTable的meta信息。</li>
-<li>图像使用entityUUID作为唯一标示符，由用户定义，通常是图像url的hash值。ImageTable Meta的indexMap记录了entityUUID-&gt;entryIndex的映射，通过indexMap就可以用图像的entityUUID找到缓存数据在ImageTable对应的位置。</li>
-</ol>
-<h3 id="ImageTableEntry"><a href="#ImageTableEntry" class="headerlink" title="ImageTableEntry"></a>ImageTableEntry</h3><ol>
-<li>ImageTable的实体数据是ImageTableEntry，每个entry有两部分数据，一部分是对齐后的图像数据，另一部分是meta信息，meta保存这张图像的UUID和原图UUID，用于校验图像数据的正确性。</li>
-<li>Entry数据是按内存分页大小对齐的，数据大小是内存分页大小的整数倍，这样可以保证虚拟内存缺页加载时使用最少的内存页加载一张图像。</li>
-<li>图像数据做了字节对齐处理，CoreAnimation使用时无需再处理拷贝。具体做法是CGBitmapContextCreate创建位图画布时bytesPerRow参数传64倍数。</li>
-</ol>
-<h3 id="Chunk"><a href="#Chunk" class="headerlink" title="Chunk"></a>Chunk</h3><ul>
-<li>ImageTable和实体数据Entry间多了层Chunk，Chunk是逻辑上的数据划分，N个Entry作为一个Chunk，内存映射mmap操作是以chunk为单位的，每一个chunk执行一次mmap把这个chunk的内容映射到虚拟内存。为什么要多一层chunk呢，按我的理解，这样做是为了灵活控制mmap的大小和调用次数，若对整个ImageTable执行mmap，载入虚拟内存的文件过大，若对每个Entry做mmap，调用次数会太多。</li>
-</ul>
-<h3 id="缓存管理"><a href="#缓存管理" class="headerlink" title="缓存管理"></a>缓存管理</h3><ul>
-<li>用户可以定义整个ImageTable里最大缓存的图像数量，在有新图像需要缓存时，如果缓存没有超过限制，会以chunk为单位扩展文件大小，顺序写下去。如果已超过最大缓存限制，会把最少使用的缓存替换掉，实现方法是每次使用图像都会把UUID插入到MRUEntries数组的开头，MRUEntries按最近使用顺序排列了图像UUID，数组里最后一个图像就是最少使用的。被替换掉的图片下次需要再使用时，再走一次取原图—解压—存储的流程。</li>
-</ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>FastImageCache适合用于tableView里缓存每个cell上同样规格的图像，优点是能极大加快第一次从磁盘加载这些图像的速度。但它有两个明显的缺点：一是占空间大。因为缓存了解码后的位图到磁盘，位图是很大的，宽高100<em>100的图像在2x的高清屏设备下就需要200</em>200*4byte/pixel=156KB，这也是为什么FastImageCache要大费周章限制缓存大小。二是接口不友好，需预定义好缓存的图像尺寸。FastImageCache无法像SDWebImage那样无缝接入UIImageView，使用它需要配置ImageTable，定义好尺寸，手动提供的原图，每种实体图像要定义一个FICEntity模型，使逻辑变复杂。</p>
-<p>FastImageCache已经属于极限优化，做图像加载/渲染优化时应该优先考虑一些低代价高回报的优化点，例如CALayer代替UIImageVIew，减少GPU计算（去透明/像素对齐），图像子线程解码，避免Offscreen-Render等。在其他优化都做到位，图像的渲染还是有性能问题的前提下才考虑使用FastImageCache进一步提升首次加载的性能，不过字节对齐的优化倒是可以脱离FastImageCache直接运用在项目上，只需要在解码图像时bitmap画布的bytesPerRow设为64的倍数即可。</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>FastImageCache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「转」一个NB的补救项目国际化的方案</title>
-    <url>/post/yi-ge-nb-de-bu-jiu-xiang-mu-guo-ji-hua-de-fang-an/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><a href="http://www.devashen.com/blog/2016/01/15/localized02/"> iOS 多语言版本的开发（二）</a> 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了<a href="https://github.com/Ashen-Zhao/easyLocalized">Demo</a> 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单快捷高效的方法，让我慢慢与您道来；</p>
-<h2 id="如何辨别项目中的中文字符串"><a href="#如何辨别项目中的中文字符串" class="headerlink" title="如何辨别项目中的中文字符串?"></a>如何辨别项目中的中文字符串?</h2><p> 既然要替换项目中使用到的中文字符串，那么前提就必须要先找到这些个字符串，然后将这些字符串，替换成我们定义的宏， 为了替换方便，可将这些字符串自身作为key， 这里不理解的不要紧，下面我还会讲到。 既然是辨别中文字符串，那也就是说在项目文件中进行匹配查找，说到匹配，那就需要正则表达式了，用正则表达式匹配Xcode中的使用的中文字符串，使用<code>(@&quot;[^&quot;]*[\u4E00-\u9FA5]+[^&quot;\n]*?&quot;)\s*</code> 即可， 打开你的Xcode 试试看，切记find 后面的选项要选择 <code>Regular Expression</code>, 默认选中的是<code>Text</code>, 如图</p>
-<p><img src="/images/2018-05-25-13-32-53.png" alt="啊神多语言"></p>
-<h2 id="如何取出识别到的中文字符串？"><a href="#如何取出识别到的中文字符串？" class="headerlink" title="如何取出识别到的中文字符串？"></a>如何取出识别到的中文字符串？</h2><p> 我们已经知道如何识别项目中的字符串了，但是如何取出来使用呢？ 这就需要遍历项目中所有的指定后缀（e.g: .h、.m等）的文件，然后利用正则表达匹配所有使用到的中文字符串，并写入文件中。为了方便起见，我将此过程写了一个Mac客户端<a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>，可直接将选中的项目中所有的中文字符串，导出到指定的路径下；该应用还可以选择对于重复出现的中文字符串进行处理，以及还可以将中文字符串导出为繁体； <a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>更值得关注的是它导出的文件，可以直接拿来当做多语言文件中的<code>key=value</code> 使用，非常简单，喜欢的可以去<a href="https://github.com/Ashen-Zhao/ReadChinese">下载看看</a>， 含有源码的哦；小应用运行图如下：</p>
-<p><img src="/images/2018-05-25-13-48-12.png" alt="啊神多语言"></p>
-<h2 id="如何使用取出的中文字符串？"><a href="#如何使用取出的中文字符串？" class="headerlink" title="如何使用取出的中文字符串？"></a>如何使用取出的中文字符串？</h2><p> 已经拿到取出的中文字符串文件，这个文件是可以直接拿来用做多语言文件使用的，小应用导出的文件，只可以用于中文以及繁体多语言文件，而对于其他的语言，就需要你拿着导出的文件，找你们公司的翻译人员，进行翻译； 拿繁体版来举个例子，导出来的繁体文件如下（收留我App导出的文件）：</p>
-<p><img src="/images/2018-05-25-13-48-38.png" alt="啊神多语言"></p>
-<p>这个繁体文件，可以直接作为繁体多语言使用，如何想要翻译成英文，可以将此文件拷贝一份，交给翻译人员，让其翻译。翻译的时候，你一定要给翻译人员沟通好，让其只翻译<code>value</code>, 也就是图中<code>=</code> 后面双引号中的内容，格式什么的也不要让他乱改，否则容易出现问题，导致key与value对不上号。 一切沟通妥当后，等翻译把文件给你后，直接将文件中的内容，复制到多语言文件的英语文件中即可；</p>
-<h2 id="如何将项目中的中文字符串进行替换"><a href="#如何将项目中的中文字符串进行替换" class="headerlink" title="如何将项目中的中文字符串进行替换"></a>如何将项目中的中文字符串进行替换</h2><p> 多语言文件已经配置完成，到了这里，那么问题来了，我们只是取出项目中使用的中文字符串，然后将字符串封装成多语言文件，但是对于项目中使用的中文字符串依然还是中文字符串，我们还并没有进行替换处理。当然，这一步我们是不能够忘了，由于是替换项目中所有的使用中文字符串，我们还是谨慎为好，首先将你的项目进行备份、备份、备份，非常重要的事情说三篇，切记一定要备份。备份好后，我们就可以开始替换工作了，没有备份的不要往下看了，赶紧备份去；<br> 假设你已经备份好了，你就可以开始替换工作了，前面我们说过让中文字符串自身作为key 进行替换，之所以让其自身作为key, 是因为这样可以大大减轻替换的困难度，而且还有利于代码的可读性，基本上算是保持原有代码；既然要替换项目中的使用中文字符串，就要用到Xcode 自带的字符串替换功能，首先还需要使用正则表达式<code>(@&quot;[^&quot;]*[\u4E00-\u9FA5]+[^&quot;\n]*?&quot;)\s*</code>，匹配出项目中使用的中文字符串，然后在对其进行替换处理。</p>
-<p> 由于我们在<a href="http://www.devashen.com/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>中，对取key对应的语言内容，进行了宏的封装, 这里我们可以将匹配到的使用中文字符直接替换成我们定义的宏的使用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define ASLocalizedString(key)  [NSString stringWithFormat:@&quot;%@&quot;, [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@&quot;%@&quot;,[[NSUserDefaults standardUserDefaults] objectForKey:@&quot;appLanguage&quot;]] ofType:@&quot;lproj&quot;]] localizedStringForKey:(key) value:nil table:@&quot;ASLocalized&quot;]] </span><br></pre></td></tr></table></figure>
-
-<p>以上是宏的定义，我们需要将字符串进行替换成宏的使用，如：<br> 替换前是这样的<code>_lbl.text = @&quot;我是多语言&quot;;</code><br> 替换后<code>_lbl.text = ASLocalizedString(@&quot;我是多语言&quot;)</code></p>
-<p>替换规则如图：</p>
-<p><img src="/images/2018-05-25-13-50-18.png" alt="啊神多语言"></p>
-<p>这次选中的是<code>Replace</code>, 不是<code>Find</code>。按图中所示，选择完毕后，点击<code>ReplaceAll</code>, 会出来一个弹框，不用管它直接继续，即可，然后你在看项目中使用到的中文字符串是否已经替换掉了，到这里基本上大功告成了；</p>
-<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>1、正则表达式，不懂得可以先照文章里写就行，然后再去学习下，<a href="http://deerchao.net/tutorials/regex/regex.htm">这里有篇基础文章</a><br>2、ASLocalizedString(key) ， 该宏使用面积广，可以将其定义成公共头文件中，然后用时引用头文件即可，也可将文件封装进pch文件中，这样无需使用头文件接口使用<br>3、替换后，可能会有些地方报错，command + b 编译下，看看报错的地方，进行相应修改即可。报错原因：a. 可能是你定义的常量字符串； b. 可能是定义的宏； c. 可能是替换后没有换行； 基本上报的错误很明显，进行修改即可；<br>4、在迭代版本中，再次使用中文字符串，就需要使用<code>ASLocalizedString(key)</code>， 来代替了，然后再多语言文件中，进行<code>key=value</code> 配置；</p>
-<blockquote>
-<p>相关文章</p>
-</blockquote>
-<blockquote>
-<p>iOS 多语言版本的开发（一）</p>
-</blockquote>
-<blockquote>
-<p>iOS 多语言版本的开发（二）</p>
-</blockquote>
-<hr>
-<p>文章转自 <a href="http://www.devashen.com/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a></p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>国际化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「转」一张思维导图，让正则表达式不再难懂</title>
-    <url>/post/reprinted-regular-mind-map/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="/images/bruch-up-regular-expressions-1.png" alt="思维导图"></p>
-<a id="more"></a>
-
-<h2 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h2><ul>
-<li><p>普通字符：字母、数字、汉字、下划线，匹配与之相同的一个字符</p>
-</li>
-<li><p>简单转义字符：\n（换行）,\t（制表）,\（\本身）和 ^…（^等有特殊作用的符号如要匹配自己的话要用转义）</p>
-</li>
-<li><p>标准字符集合<br>注意区分大小写，大写是相反的意思，匹配相反是不匹配</p>
-<ul>
-<li>\d<br>  任意一个数字，0~9</li>
-<li>\w<br>  任意一个字母、数字、汉字或下划线，A<del>Z、a</del>z、0~9、_和任意一个汉字</li>
-<li>\s<br>  任意空白符，包括空格、制表符、换行符</li>
-<li>.<br>  小数点可以匹配任意一个字符，换行除外（如果要匹配包括”\n”在内的所有字符，一般用[\s\S]）</li>
-</ul>
-</li>
-<li><p>自定义字符集合<br>[ ]方括号匹配方式，能够匹配方括号中的任意一个字符,^表示取反</p>
-<ul>
-<li>[ab5@]<br>  匹配”a”或”b”或”5”或”@”</li>
-<li>[^abc]<br>  匹配a、b、c之外的任意字符</li>
-<li>[f-k]<br>  匹配“f”到”k”之间的字符</li>
-<li>[^A-F0-3]<br>  匹配“A”-“F”,”0”-“3”之外的任意一个字符</li>
-</ul>
-</li>
-</ul>
-<h2 id="量词-Quantifier"><a href="#量词-Quantifier" class="headerlink" title="量词(Quantifier)"></a>量词(Quantifier)</h2><p>修饰前面的一个表达式，如果要修饰多个表达式，就用( )把表达式包起来</p>
-<ul>
-<li>{n}<br>  表达式重复n次​</li>
-<li>{m,n}<br>  表达式至少重复m次，最多重复n次<ul>
-<li>贪婪模式 （默认）<br>匹配符合的最长的字符串</li>
-<li>非贪婪模式 （在量词后面加 ? 例：{m,n}? )<br>  匹配符合的最短的字符串</li>
-</ul>
-</li>
-<li>{m,}<br>  表达式至少重复m次</li>
-<li>？<br>  匹配表达式0或1次，相当于{0,1}</li>
-<li>+<br>  表达式至少出现一次，相当于{1,}</li>
-<li>*<br>  表达式不出现或出现任意次，相当于{0,}</li>
-</ul>
-<h2 id="字符边界"><a href="#字符边界" class="headerlink" title="字符边界"></a>字符边界</h2><pre><code>零宽：匹配的不是字符而是位置，符合某种条件的位置</code></pre>
-<ul>
-<li>^<br>  与字符串开始的地方匹配</li>
-<li>$<br>  与字符串结束的地方匹配</li>
-<li>\b<br>  匹配一个单词的边界，当前位置前面的字符和后面的字符不全是\w</li>
-</ul>
-<h2 id="预搜索（零宽断言、环视）"><a href="#预搜索（零宽断言、环视）" class="headerlink" title="预搜索（零宽断言、环视）"></a>预搜索（零宽断言、环视）</h2><p>零宽：匹配的不是字符而是位置，符合某种条件的位置</p>
-<ul>
-<li>(?=exp)<br>  断言自身出现的位置的后面能匹配表达式exp</li>
-<li>(?!exp)<br>  断言自身出现的位置的后面不能匹配表达式exp</li>
-<li>(?&lt;=exp)<br>  断言自身出现的位置的前面能匹配表达式exp</li>
-<li>(?&lt;!exp)<br>  断言自身出现的位置的前面不能匹配表达式exp</li>
-</ul>
-<h2 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h2><p>对文本的处理方式</p>
-<ul>
-<li>IGNORECASE 忽略大小写模式<br>  匹配时忽略大小写<br>  默认是区分大小写的</li>
-<li>SINGLELINE 单行模式<br>  整个文本看作一个字符串，只有一个开头一个结尾<br>  使小数点”.”可以匹配包含换行符(\n)在内的任意字符</li>
-<li>MULTILINE 多行模式<br>  每行都是一个字符串<br>  在多行模式下，如果需要仅匹配字符串开始和结束位置，可以使用\A和\Z</li>
-</ul>
-<h2 id="选择符和分组"><a href="#选择符和分组" class="headerlink" title="选择符和分组"></a>选择符和分组</h2><p>分支结构、捕获组合非捕获组</p>
-<ul>
-<li>| 分支结构​<br>  左右表达式之间“或”关系，匹配左边或右边</li>
-<li>( ) 捕获组<br>  （1）、在被修饰匹配次数的时候，括号中的表达式可以作为整体被修饰<br>  （2）、取匹配结果的时候，括号中的表达式匹配到的内容可以被单独得到<br>  （3）、每一对括号会分配一个编号，使用（）的捕获根据左括号的顺序从1开始自动编号。捕获编号为零的第一个捕获是整个正则表达式模式匹配的文本<br>   反向引用：通过反向引用，可以对分组已捕获的字符串进行引用。</li>
-<li>(?:Expression) 非捕获组<br>  一些表达式中，不得不使用（），但又不需要保存（）中子表达式匹配的内容，这时可以用非捕获组来抵消（）带来的副作用。</li>
-</ul>
-<hr>
-<p>原文：<a href="https://my.oschina.net/u/3080373/blog/1550653">一张思维导图，让正则表达式不再难懂</a></p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>正则表达式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>「转」真实世界中的 Swift 性能优化</title>
-    <url>/post/real-world-swift-performance/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文链接：<a href="https://realm.io/cn/news/real-world-swift-performance/">真实世界中的 Swift 性能优化</a></p>
-<a id="more"></a>
-
-<hr>
-<p>有太多的因素会导致您的应用变得缓慢。在本次讲演中，我们将自底向上地来探索应用的性能优化。来看一看在真实世界中进行数据解析、数据映射和数据存储的时候，Swift 的特性（协议、泛型、结构体和类）是如何影响应用性能的，我们将确定影响性能提升的瓶颈所在，并体验 Swift 带来的「迅捷」体验。</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>今天我打算同大家谈论 Swift 性能优化方面的内容。当我们构建软件的时候，特别是移动软件，由于人们的精力、时间有限，人们往往更喜欢有一个流畅的用户体验，而不是等着您的应用在那加载。如果应用运行速度过慢，并且不能给用户带来他们所想要的结果的话，那么这会让人们感到不爽。因此，让您的代码能够快速运行是无比重要的一件事。</p>
-<p>那么有什么因素会导致代码运行缓慢呢？当您在编写代码并选择架构的时候，深刻认识到这些架构所带来的影响是非常重要的。我将首先谈一谈：如何理解内联、动态调度与静态调度之间的权衡，以及相关结构是如何分配内存的，还有怎样选择最适合的架构。</p>
-<h2 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h2><p>对象的内存分配 (allocation) 和内存释放 (deallocation) 是代码中最大的开销之一，同时通常也是不可避免的。Swift 会自行分配和释放内存，此外它存在两种类型的分配方式。</p>
-<p>第一个是基于栈 (stack-based) 的内存分配。Swift 会尽可能选择在栈上分配内存。栈是一种非常简单的数据结构；数据从栈的底部推入 (push)，从栈的顶部弹出 (pop)。由于我们只能够修改栈的末端，因此我们可以通过维护一个指向栈末端的指针来实现这种数据结构，并且在其中进行内存的分配和释放只需要重新分配该整数即可。</p>
-<p>第二个是基于堆 (heap-based) 的内存分配。这使得内存分配将具备更加动态的生命周期，但是这需要更为复杂的数据结构。要在堆上进行内存分配的话，您需要锁定堆当中的一个空闲块 (free block)，其大小能够容纳您的对象。因此，我们需要找到未使用的块，然后在其中分配内存。当我们需要释放内存的时候，我们就必须搜索何处能够重新插入该内存块。这个操作很缓慢。主要是为了线程安全，我们必须要对这些东西进行锁定和同步。</p>
-<h2 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h2><p>我们还有引用计数 (reference counting) 的概念，这个操作相对不怎么耗费性能，但是由于使用次数很多，因此它带来的性能影响仍然是很大的。引用计数是 Objective-C 和 Swift 中用于确定何时该释放对象的安全机制。目前，Swift 当中的引用计数是强制自动管理的，这意味着它很容易被开发者们所忽略。然而，当您打开 Instrument 查看何处影响了代码运行的速度的时候，您会发现 20,000 多次的 Swift 持有 (retain) 和释放 (release)，这些操作占用了 90% 的代码运行时间！</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">perform</span><span class="params">(with object: Object)</span></span> &#123;</span><br><span class="line">    object.doAThing()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是因为如果有这样一个函数接收了一个对象作为参数，并且执行了这个对象的 doAThing() 方法，编译器会自动插入对象持有和释放操作，以确保在这个方法的生命周期当中，这个对象不会被回收掉。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">perform</span><span class="params">(with object: Object)</span></span> &#123;</span><br><span class="line">    __swift_retain(object)</span><br><span class="line">    object.doAThing()</span><br><span class="line">    __swift_release(object)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这些对象持有和释放操作是原子操作 (atomic operations)，所以它们运转缓慢就很正常了。或者，是因为我们不知道如何让它们能够运行得更快一些。</p>
-<h2 id="调度与对象"><a href="#调度与对象" class="headerlink" title="调度与对象"></a>调度与对象</h2><p>此外还有调度 (dispatch) 的概念。Swift 拥有三种类型的调度方式。Swift 会尽可能将函数内联 (inline)，这样的话使用这个函数将不会有额外的性能开销。这个函数可以直接调用。静态调度 (static dispatch) 本质上是通过 V-table 进行的查找和跳转，这个操作会花费一纳秒的时间。然后动态调度 (dynamic dispatch) 将会花费大概五纳秒的时间，如果您只有几个这样的方法调用的话，这实际上并不会带来多大的问题，问题是当您在一个嵌套循环或者执行上千次操作当中使用了动态调度的话，那么它所带来的性能耗费将成百上千地累积起来，最终影响应用性能。</p>
-<p>Swift 同样也有两种类型的对象。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>,</span><br><span class="line">                item: <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>这是一个类，类当中的数据都会在堆上分配内存。您可以在此处看到，这里我们创建了一个名为 Index 的类。其中包含了两个属性，一个 section 和一个 item。当我们创建了这个对象的时候，堆上便创建了一个指向此 Index 的指针，因此在堆上便存放了这个 section 和 item 的数据和空间。</p>
-<p>如果我们对其建立引用，就会发现我们现在有两个指向堆上相同区域的指针了，它们之间是共享内存的。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>,</span><br><span class="line">                item: <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i2 = i</span><br></pre></td></tr></table></figure>
-<p>这个时候，Swift 会自动插入对象持有操作。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>,</span><br><span class="line">                item: <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">__swift_retain(i)</span><br><span class="line"><span class="keyword">let</span> i2 = i</span><br></pre></td></tr></table></figure>
-<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><p>很多人都会说：要编写性能优异的 Swift 代码，最简单的方式就是使用结构体了，结构体通常是一个很好的结构，因为结构体会存储在栈上，并且通常会使用静态调度或者内联调度。</p>
-<p>存储在栈上的 Swift 结构体将占用三个 Word 大小。如果您的结构体当中的数据数量低于三种的话，那么结构体的值会自动在栈上内联。Word 是 CPU 当中内置整数的大小，它是 CPU 所工作的区块。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>, item: <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>在这里您可以看到，当我们创建这个结构体的时候，带有 section 和 item 值得 Index 结构体将会直接下放到栈当中，这个时候不会有额外的内存分配发生。那么如果我们在别处将其赋值到另一个变量的时候，会发生什么呢？</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Index</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> section: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> item: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="type">Index</span>(section: <span class="number">1</span>, item: <span class="number">1</span>)</span><br><span class="line"><span class="keyword">let</span> i2 = i</span><br></pre></td></tr></table></figure>
-<p>如果我们将 i 赋给 i2，这会将我们存储在栈当中的值直接再次复制一遍，这个时候并不会出现引用的情况。这就是所谓的「值类型」。</p>
-<p>那么如果结构体当中存放了引用类型的话又会怎样呢？持有内联指针的结构体。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> id: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> u = <span class="type">User</span>(name: <span class="string">&quot;Joe&quot;</span>, id: <span class="string">&quot;1234&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>当我们将其赋值给别的变量的时候，我们就持有了共享两个结构体的相同指针，因此我们必须要对这两个指针进行持有操作，而不是在对象上执行单独的持有操作。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> id: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> u = <span class="type">User</span>(name: <span class="string">&quot;Joe&quot;</span>,</span><br><span class="line">             id: <span class="string">&quot;1234&quot;</span>)</span><br><span class="line">__swift_retain(u.name._textStorage)</span><br><span class="line">__swift_retain(u.id._textStorage)</span><br><span class="line"><span class="keyword">let</span> u2 = u</span><br></pre></td></tr></table></figure>
-<p>如果其中包含了类的话，那么性能耗费会更大。</p>
-<h2 id="抽象类型"><a href="#抽象类型" class="headerlink" title="抽象类型"></a>抽象类型</h2><p>正如我们此前所述，Swift 提供了许多不同的抽象类型 (abstraction)，从而允许我们自行决定代码该如何运行，以及决定代码的性能特性。现在我们来看一看抽象类型是如何在实际环境当中使用的。这里有一段很简单的代码：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> radius: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> center: <span class="type">Point</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">draw</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> circles = (<span class="number">1</span>..&lt;<span class="number">100_000_000</span>).<span class="built_in">map</span> &#123; <span class="number">_</span> <span class="keyword">in</span> <span class="type">Circle</span>(...) &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> circle <span class="keyword">in</span> circles &#123;</span><br><span class="line">    circle.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里有一个带有 radius 和 center 属性的 Circle 结构体。它将占用三个 Word 大小的空间，并存储在栈上。我们创建了一亿个 Circle，然后我们遍历这些 Circle 并调用这个函数。在我的电脑上，这段操作在发布模式下耗费了 0.3 秒的时间。那么当需求发生变更的时候，会发生什么事呢？</p>
-<p>我们不仅需要绘圆，还需要能够处理多种类型的形状。让我们假设我们还需要绘线。我非常喜欢面向协议编程，因为它允许我在不使用继承的情况下实现多态性，并且它允许我们只需要考虑这个「抽象类型」即可。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protocol Drawable &#123;</span><br><span class="line">    func draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Circle: Drawable &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let drawables: [Drawable] &#x3D; (1..&lt;100_000_000).map &#123; _ in Circle(...) &#125;</span><br><span class="line"></span><br><span class="line">for drawable in drawables &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们需要做的，就是将这个 draw 方法析取到协议当中，然后将数组的引用类型变更为这个协议，这样做导致这段代码花费了 4.0 秒的时间来运行。速率减慢了 1300%，这是为什么呢？</p>
-<p>这是因为此前的代码可以被静态调度，从而在没有任何堆应用建立的情况下仍能够执行。这就是协议是如何实现的。</p>
-<p>例如，如大家所见，这里是我们此前的 Circle 结构体。在这个 for 循环当中，Swift 编译器所做的就是前往 V-table 进行查找，或者直接将 draw 函数内联。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Circle &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var circles &#x3D; (1..&lt;100_000_000).map &#123; _ in Circle(...) &#125;</span><br><span class="line"></span><br><span class="line">for circle in circles &#123;</span><br><span class="line">    circle.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当我们用协议来替代的时候，此时它并不知道这个对象是结构体还是类。因为这里可能是任何一个实现此协议的类型。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protocol Drawable &#123;</span><br><span class="line">    func draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Circle: Drawable &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line"></span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var drawables: [Drawable] &#x3D; (1..&lt;100_000_000).map &#123; _ in return Circle(...) &#125;</span><br><span class="line"></span><br><span class="line">for drawable in drawables &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么我们该如何去调度这个 draw 函数呢？答案就位于协议记录表 (protocol witness table，也称为虚函数表) 当中。它其中存放了您应用当中每个实现协议的对象名，并且在底层实现当中，这个表本质上充当了这些类型的别名。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protocol Drawable &#123;</span><br><span class="line">    func draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Circle: Drawable &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line"></span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var drawables: [Drawable] &#x3D; (1..&lt;100_000_000).map &#123; _ in</span><br><span class="line">    return Circle(...)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for drawable in drawables &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在这里的代码当中，我们该如何获取协议记录表呢？答案就是从这个既有容器 (existential container) 当中获取，这个容器目前拥有一个三个字大小的结构体，并且存放在其内部的值缓冲区当中，此外还与协议记录表建立了引用关系。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Circle: Drawable &#123;</span><br><span class="line">    let radius: Double</span><br><span class="line">    let center: Point</span><br><span class="line"></span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里 Circle 类型存放在了三个字大小的缓冲区当中，并且不会被单独引用。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Line: Drawable &#123;</span><br><span class="line">    let origin: Point</span><br><span class="line">    let end: Point</span><br><span class="line"></span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>举个例子，对于我们的 Line 类型来说，它其中包含了四个字的存储空间，因为它拥有两个点类型。这个 Line 结构体需要超过四个字以上的存储空间。我们该如何处理它呢？这会对性能有影响么？好吧，它的确会：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protocol Drawable &#123;</span><br><span class="line">    func draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Line: Drawable &#123;</span><br><span class="line">    let origin: Point</span><br><span class="line">    let end: Point</span><br><span class="line">    func draw() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let drawables: [Drawable] &#x3D; (1..&lt;100_000_000).map &#123; _ in Line(...) &#125;</span><br><span class="line"></span><br><span class="line">for drawable in drawables &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这需要花费 45 秒钟的时间来运行。为什么这里要花这么久的时间呢，发生了什么事呢？</p>
-<p>绝大部分的时间都花费在对结构体进行内存分配上了，因为现在它们无法存放在只有三个字大小的缓冲区当中了。因此这些结构会在堆上进行内存分配，此外这也与协议有一点关系。由于既有容器只能够存储三个字大小的结构体，或者也可以与对象建立引用关系，我们同样需要某种名为值记录表 (value witness table)。这就是我们用来处理任意值的东西。</p>
-<p>因此在这里，编译器将创建一个值记录表，对每个���缓冲区、内敛结构体来说，都有三个字大小的缓冲区，然后它将负责对值或者类进行内存分配、拷贝、销毁和内存释放等操作。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func draw(drawable: Drawable) &#123;</span><br><span class="line">    drawable.draw()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let value: Drawable &#x3D; Line()</span><br><span class="line">draw(local: value)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Generates</span><br><span class="line">func draw(value: ECTDrawable) &#123;</span><br><span class="line">    var drawable: ECTDrawable &#x3D; ECTDrawable()</span><br><span class="line">    let vwt &#x3D; value.vwt</span><br><span class="line">    let pwt &#x3D; value.pwt</span><br><span class="line">    drawable.vwt &#x3D; value.vwt</span><br><span class="line">    drawable.pwt &#x3D; value.pwt</span><br><span class="line">    vwt.allocateBuffAndCopyValue(&amp;drawable, value)</span><br><span class="line">    pwt.draw(vwt.projectBuffer(&amp;drawable)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里是一个例子，这就是这个过程的中间产物。如果我们只有一个 draw 函数，那么它将会接受我们创建的 Line 作为参数，因此我们将它传递给这个 draw 函数即可。</p>
-<p>实际情况时，它将这个 Drawable 协议传递到既有容器当中，然后在函数内部再次进行创建。这会对值和协议记录表进行赋值，然后分配一个新的缓冲区，然后将其他结构、类或者类似对象的值拷贝进这个缓冲区当中。然后就使用协议记录表当中的 draw 函数，把真实的 Drable 对象传递给这个函数。</p>
-<p>您可以看到，值记录表和协议记录表将会存放在栈上，而 Line 将会被存放在堆上，从而最后将线绘制出来。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>对我们进行数据建模的方式进行简单的更改将会对性能造成巨大的影响。让我们来看一看该如何来避免这些情况的发生。</p>
-<p>首先让我们来说一说泛型。大家可能会说了，我给各位展示了协议会导致性能的下降，那么我们为什么还要使用泛型呢？答案在于：泛型允许我们做什么。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct Stack&lt;T: Type&gt; &#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>假设我们这里有一个带有泛型 T 的 Stack 结构体，它受到一个协议类型的约束。编译器所要做的，就是将这个 T 提换成相应的协议，或者替换为我们传入的具体类型。这些操作会一直沿着函数链 (function chain) 执行，并且编译器会创建直接对此类型进行操作的专用版本。</p>
-<p>这样我们就无需再使用值记录表或者协议记录表了，并且还移除了既有容器，这可能是一个非常好的解决方式，这使得我们仍然能够写出真正快速运行的泛型代码，并且还具备 Swift 所提供的良好多态性。这就是所谓的静态多态性 (static polymorphism)。</p>
-<p>您还可以通过使用枚举来改进数据模型，而不是从服务器中获取大量的字符串。例如，假设您正在构建一个社交应用，您需要对账户建立状态的管理，以前您可能会使用字符串来进行控制。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum AccountStatus: String, RawRepresentable &#123;</span><br><span class="line">case .banned, .verified, incomplete</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果我们改用枚举的话，那么我们就无需进行内存分配了，当我们传递这个类型的时候，我们只是将枚举值进行传递，这是一个加快代码运行速度的好方法，同时也可以为整个应用程序提供更安全、更可读的代码。</p>
-<p>此外，使用 u-模型或者演示者 (Presenter) 或者不同的抽象类型的形式，来构建特定类型的模型也是非常有用的，这使得我们能够精简掉应用当中许多不必要的部分。</p>
-<p>好的，我的讲演到此结束，内容很短，感谢诸位的参与！</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>优化</tag>
       </tags>
   </entry>
   <entry>
