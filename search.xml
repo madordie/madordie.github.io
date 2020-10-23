@@ -2021,6 +2021,31 @@ class CMExpandingTextField: UITextField &#123;
       </tags>
   </entry>
   <entry>
+    <title>iOS逆向-class-dump工具</title>
+    <url>/post/reverse-ios-class-dump/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/">stevenygard.com</a>下载最新的包。</p>
+<p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
+<p>在<code>~/.base_profile</code>中添加<code>export PATH=/opt/class-dump:$PATH</code></p>
+<p>运行<code>source ~/.base_profile</code></p>
+<p>最后确认一下安装OK ：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> class-dump --v</span></span><br><span class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
+<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="../reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br><span class="line"><span class="meta">$</span><span class="bash"> class-dump -H WeChat.decrypted -o ./Headers/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls Headers</span></span><br><span class="line">Headers</span><br></pre></td></tr></table></figure>
+
+<p>即得头文件目录：<code>Headers</code></p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>逆向</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>「转」真实世界中的 Swift 性能优化</title>
     <url>/post/real-world-swift-performance/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>原文链接：<a href="https://realm.io/cn/news/real-world-swift-performance/">真实世界中的 Swift 性能优化</a></p>
@@ -2099,31 +2124,6 @@ class CMExpandingTextField: UITextField &#123;
       </categories>
       <tags>
         <tag>优化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS逆向-class-dump工具</title>
-    <url>/post/reverse-ios-class-dump/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="安装class-dump"><a href="#安装class-dump" class="headerlink" title="安装class-dump"></a>安装class-dump</h2><p>去<a href="http://stevenygard.com/projects/class-dump/">stevenygard.com</a>下载最新的包。</p>
-<p>将包中的<code>class-dump</code>可执行文件复制到<code>/opt/class-dump</code>。(我的逆向相关工具均在这下面😂）</p>
-<p>在<code>~/.base_profile</code>中添加<code>export PATH=/opt/class-dump:$PATH</code></p>
-<p>运行<code>source ~/.base_profile</code></p>
-<p>最后确认一下安装OK ：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> class-dump --v</span></span><br><span class="line">class-dump 3.5 (64 bit) compiled Nov 16 2013 12:22:33</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>使用一个记录一个吧～</p>
-<h3 id="用来导出ipa-decrypted头文件"><a href="#用来导出ipa-decrypted头文件" class="headerlink" title="用来导出ipa/.decrypted头文件"></a>用来导出<code>ipa</code>/<code>.decrypted</code>头文件</h3><p>此处只能导出未加密的<code>ipa</code>，或者砸过壳的。<a href="../reverse-ios-dump-decrypted/">具体砸壳过程传送门</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls WeChat.decrypted</span></span><br><span class="line">WeChat.decrypted</span><br><span class="line"><span class="meta">$</span><span class="bash"> class-dump -H WeChat.decrypted -o ./Headers/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls Headers</span></span><br><span class="line">Headers</span><br></pre></td></tr></table></figure>
-
-<p>即得头文件目录：<code>Headers</code></p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>逆向</tag>
       </tags>
   </entry>
   <entry>
