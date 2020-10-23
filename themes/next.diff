@@ -1,5 +1,5 @@
 diff --git a/_config.yml b/_config.yml
-index 02758d9..b762140 100644
+index 02758d9..3875913 100644
 --- a/_config.yml
 +++ b/_config.yml
 @@ -36,13 +36,13 @@ custom_file_path:
@@ -132,7 +132,7 @@ index 02758d9..b762140 100644
  # Google Analytics
  google_analytics:
 -  tracking_id: # <app_id>
-+  tracking_id: 106555472 # <app_id>
++  tracking_id: UA-106555472-1 # <app_id>
    # By default, NexT will load an external gtag.js script on your site.
    # If you only need the pageview feature, set the following option to true to get a better performance.
    only_pageview: false
@@ -295,35 +295,56 @@ index 48003f7..94fd22b 100644
 +  gtag('config', 'UA-106555472-1');
 +</script>
 diff --git a/layout/_third-party/comments/gitalk.njk b/layout/_third-party/comments/gitalk.njk
-index 4f54907..b921c6b 100644
+index 4f54907..0082036 100644
 --- a/layout/_third-party/comments/gitalk.njk
 +++ b/layout/_third-party/comments/gitalk.njk
-@@ -1,15 +1,15 @@
+@@ -1,25 +1,26 @@
 -{%- if page.comments %}
 -<link rel="stylesheet" href="{{ theme.vendors.gitalk_css }}">
 +  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 +  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
  
  <script>
- NexT.utils.loadComments('#gitalk-container', () => {
-   NexT.utils.getScript('{{ theme.vendors.gitalk_js }}', () => {
-     var gitalk = new Gitalk({
+-NexT.utils.loadComments('#gitalk-container', () => {
+-  NexT.utils.getScript('{{ theme.vendors.gitalk_js }}', () => {
+-    var gitalk = new Gitalk({
 -      clientID    : '{{ theme.gitalk.client_id }}',
 -      clientSecret: '{{ theme.gitalk.client_secret }}',
 -      repo        : '{{ theme.gitalk.repo }}',
 -      owner       : '{{ theme.gitalk.github_id }}',
 -      admin       : ['{{ theme.gitalk.admin_user }}'],
-+      clientID    : '2fcb2111497d0ea0dba4',
-+      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
-+      repo        : 'madordie.github.io',
-+      owner       : 'madordie',
-+      admin       : ['madordie'],
-       id          : '{{ gitalk_md5(page.path) }}',
-       {%- if theme.gitalk.language == '' %}
-         language: window.navigator.language || window.navigator.userLanguage,
-@@ -22,4 +22,3 @@ NexT.utils.loadComments('#gitalk-container', () => {
-   }, window.Gitalk);
- });
+-      id          : '{{ gitalk_md5(page.path) }}',
+-      {%- if theme.gitalk.language == '' %}
+-        language: window.navigator.language || window.navigator.userLanguage,
+-      {% else %}
+-        language: '{{ theme.gitalk.language }}',
+-      {%- endif %}
+-      distractionFreeMode: {{ theme.gitalk.distraction_free_mode }}
+-    });
+-    gitalk.render('gitalk-container');
+-  }, window.Gitalk);
+-});
++if document.getElementById('gitalk-container') {
++  NexT.utils.loadComments('#gitalk-container', () => {
++    NexT.utils.getScript('{{ theme.vendors.gitalk_js }}', () => {
++      var gitalk = new Gitalk({
++        clientID    : '2fcb2111497d0ea0dba4',
++        clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
++        repo        : 'madordie.github.io',
++        owner       : 'madordie',
++        admin       : ['madordie'],
++        id          : '{{ gitalk_md5(page.path) }}',
++        {%- if theme.gitalk.language == '' %}
++          language: window.navigator.language || window.navigator.userLanguage,
++        {% else %}
++          language: '{{ theme.gitalk.language }}',
++        {%- endif %}
++        distractionFreeMode: {{ theme.gitalk.distraction_free_mode }}
++      });
++      gitalk.render('gitalk-container');
++    }, window.Gitalk);
++  });
++}
  </script>
 -{%- endif %}
 diff --git a/layout/_third-party/statistics/busuanzi-counter.njk b/layout/_third-party/statistics/busuanzi-counter.njk
