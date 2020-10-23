@@ -250,6 +250,41 @@ index 73fa566..56a5b92 100644
  
  {%- if theme.creative_commons.license and theme.creative_commons.sidebar %}
    <div class="cc-license site-overview-item animated" itemprop="license">
+diff --git a/layout/_third-party/analytics/google-analytics.njk b/layout/_third-party/analytics/google-analytics.njk
+index 48003f7..99a04ad 100644
+--- a/layout/_third-party/analytics/google-analytics.njk
++++ b/layout/_third-party/analytics/google-analytics.njk
+@@ -1,6 +1,4 @@
+-{%- if theme.google_analytics.tracking_id %}
+-  {%- if not theme.google_analytics.only_pageview %}
+-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ theme.google_analytics.tracking_id }}"></script>
++    <script async src="https://www.googletagmanager.com/gtag/js?id=106555472"></script>
+     <script{{ pjax }}>
+       if (CONFIG.hostname === location.hostname) {
+         window.dataLayer = window.dataLayer || [];
+@@ -9,22 +7,3 @@
+         gtag('config', '{{ theme.google_analytics.tracking_id }}');
+       }
+     </script>
+-  {%- else %}
+-    <script>
+-      function sendPageView() {
+-        if (CONFIG.hostname !== location.hostname) return;
+-        var uid = localStorage.getItem('uid') || (Math.random() + '.' + Math.random());
+-        localStorage.setItem('uid', uid);
+-        navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
+-          v  : 1,
+-          tid: '{{ theme.google_analytics.tracking_id }}',
+-          cid: uid,
+-          t  : 'pageview',
+-          dp : encodeURIComponent(location.pathname)
+-        }));
+-      }
+-      document.addEventListener('pjax:complete', sendPageView);
+-      sendPageView();
+-    </script>
+-  {%- endif %}
+-{%- endif %}
 diff --git a/layout/_third-party/comments/gitalk.njk b/layout/_third-party/comments/gitalk.njk
 index 4f54907..b921c6b 100644
 --- a/layout/_third-party/comments/gitalk.njk
