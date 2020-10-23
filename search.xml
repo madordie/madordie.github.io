@@ -903,6 +903,30 @@
       </tags>
   </entry>
   <entry>
+    <title>DEBUG - Xcode解析.crash</title>
+    <url>/post/debug-xcode8-analysis-crash-file/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
+<a id="more"></a>
+
+<h1 id="Xcode中解析-crash文件"><a href="#Xcode中解析-crash文件" class="headerlink" title="Xcode中解析.crash文件"></a>Xcode中解析.crash文件</h1><ol>
+<li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
+<li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
+<li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
+<li>拷贝脚本文件，运行<code>cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A</code></li>
+<li>到<code>目录A</code>解析，运行<code>./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名</code></li>
+</ol>
+<h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><ul>
+<li>这里最重要的是<code>symbolicatecrash</code>文件，<code>symbolicatecrash</code>在手解析不愁。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>DEBUG</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Xcode9编译失败</title>
     <url>/post/debug-xcode9-build-ipa/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="错误输出"><a href="#错误输出" class="headerlink" title="错误输出"></a>错误输出</h2><blockquote>
@@ -1072,30 +1096,6 @@
       <tags>
         <tag>DEBUG</tag>
         <tag>Swift</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DEBUG - Xcode解析.crash</title>
-    <url>/post/debug-xcode8-analysis-crash-file/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>5步解析<code>.crash</code>文件</p>
-<a id="more"></a>
-
-<h1 id="Xcode中解析-crash文件"><a href="#Xcode中解析-crash文件" class="headerlink" title="Xcode中解析.crash文件"></a>Xcode中解析.crash文件</h1><ol>
-<li>导出<code>x.crash</code>文件，放置在<code>目录A</code>下</li>
-<li>复制<code>工程名.app.dSYM</code>到<code>目录A</code></li>
-<li>配置环境变量，运行<code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</code></li>
-<li>拷贝脚本文件，运行<code>cp /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash 目录A</code></li>
-<li>到<code>目录A</code>解析，运行<code>./symbolicatecrash x.crash 工程名.app.dSYM &gt; 自定义输出结果文件名</code></li>
-</ol>
-<h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><ul>
-<li>这里最重要的是<code>symbolicatecrash</code>文件，<code>symbolicatecrash</code>在手解析不愁。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>DEBUG</tag>
       </tags>
   </entry>
   <entry>
