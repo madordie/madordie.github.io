@@ -509,23 +509,21 @@
   <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
 <script>
-if (document.getElementById('#gitalk-container')) {
-  NexT.utils.loadComments('#gitalk-container', () => {
-    NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js', () => {
-      var gitalk = new Gitalk({
-        clientID    : '2fcb2111497d0ea0dba4',
-        clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
-        repo        : 'madordie.github.io',
-        owner       : 'madordie',
-        admin       : ['madordie'],
-        id          : 'd08fa1b6231e3ce943761a083a9387d1',
-          language: '',
-        distractionFreeMode: true
-      });
-      gitalk.render('gitalk-container');
-    }, window.Gitalk);
-  });
-}
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2fcb2111497d0ea0dba4',
+      clientSecret: '5e3ce0fb3c73d264112224a08b329c60029d50c2',
+      repo        : 'madordie.github.io',
+      owner       : 'madordie',
+      admin       : ['madordie'],
+      id          : 'd08fa1b6231e3ce943761a083a9387d1',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
 </script>
 
 </body>
