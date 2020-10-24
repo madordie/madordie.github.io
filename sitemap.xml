@@ -529,6 +529,13 @@
   </url>
   
   <url>
+    <loc>https://madordie.github.io/tags/%E6%95%88%E6%9E%9C/</loc>
+    <lastmod>2020-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://madordie.github.io/tags/DEBUG/</loc>
     <lastmod>2020-10-24</lastmod>
     <changefreq>daily</changefreq>
@@ -551,13 +558,6 @@
   
   <url>
     <loc>https://madordie.github.io/tags/debug/</loc>
-    <lastmod>2020-10-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://madordie.github.io/tags/%E6%95%88%E6%9E%9C/</loc>
     <lastmod>2020-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
