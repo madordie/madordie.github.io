@@ -454,6 +454,42 @@
       </tags>
   </entry>
   <entry>
+    <title>开发小记</title>
+    <url>/post/note/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>开发中的小笔记。记录开发中的点滴滴点。</p>
+<a id="more"></a>
+
+
+<h2 id="批量替换json文件中的注释"><a href="#批量替换json文件中的注释" class="headerlink" title="批量替换json文件中的注释"></a>批量替换json文件中的注释</h2><p>备份至.bat</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ perl -i.bat -lpe <span class="string">&#x27;s/\/\/[^&quot;]+$//g&#x27;</span> xx</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="批量正则替换的另一种思路"><a href="#批量正则替换的另一种思路" class="headerlink" title="批量正则替换的另一种思路"></a>批量正则替换的另一种思路</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;base&#x2F;sh</span><br><span class="line">find . -name &#39;*.swift&#39; | while read file; do</span><br><span class="line">  perl -i -lpe &#39;s&#x2F;if \(([^\)].*)\) \&#123;&#x2F;if $1 \&#123;&#x2F;g&#39; $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h2 id="批量删除空格组成的空行中的空格"><a href="#批量删除空格组成的空行中的空格" class="headerlink" title="批量删除空格组成的空行中的空格"></a>批量删除空格组成的空行中的空格</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;base&#x2F;sh</span><br><span class="line">find . -name &#39;*.swift&#39; | while read file; do</span><br><span class="line">  sed -i &#39;&#39; &#39;s&#x2F;^[[:space:]][[:space:]]*$&#x2F;&#x2F;g&#39; $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取代码执行时间"><a href="#获取代码执行时间" class="headerlink" title="获取代码执行时间"></a>获取代码执行时间</h2>  <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">#<span class="keyword">import</span> &lt;mach/mach_time.h&gt;</span><br><span class="line"><span class="keyword">static</span> <span class="type">NSMutableDictionary</span> *__times;</span><br><span class="line"><span class="keyword">static</span> inline void debug_start_of(<span class="type">NSString</span> *key)</span><br><span class="line">&#123;</span><br><span class="line">  __times = __times ?: [<span class="type">NSMutableDictionary</span> new];</span><br><span class="line"></span><br><span class="line">  uint64_t start = mach_absolute_time();</span><br><span class="line">  __times[key] = @(start);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> inline void debug_stop_of(<span class="type">NSString</span> *key)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (__times) &#123;</span><br><span class="line">    uint64_t end = mach_absolute_time();</span><br><span class="line">    uint64_t start = [__times[key] unsignedLongLongValue];</span><br><span class="line">    <span class="keyword">if</span> (start != <span class="number">0</span>) &#123;</span><br><span class="line">      uint64_t elapsed = end - start;</span><br><span class="line">      mach_timebase_info_data_t info;</span><br><span class="line">      <span class="keyword">if</span> (mach_timebase_info(&amp;info) != <span class="type">KERN_SUCCESS</span>) &#123;</span><br><span class="line">        printf(<span class="string">&quot;mach_timebase_info failed\n&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      uint64_t nanosecs = elapsed * info.numer / info.denom;</span><br><span class="line">      uint64_t millisecs = nanosecs / <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line">      printf(<span class="string">&quot;[DEBUG code rt] %s:%llu ms\n&quot;</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>], millisecs);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      printf(<span class="string">&quot;[DEBUG code rt] %s error: no start\n&quot;</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h2><ul>
+<li><p><code>A</code>对<code>B</code>除余时，如果<code>B == 0</code> 则会造成NAN，<code>truncatingRemainder(dividingBy:)</code>是<code>swift</code>的方法，也会造成此问题</p>
+</li>
+<li><p>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885">Objective-C 中 判断 NaN</a>大致记录了一下</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  math.h  #56</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(__GNUC__)</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VAL     __builtin_huge_val()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALF    __builtin_huge_valf()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALL    __builtin_huge_vall()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    NAN          __builtin_nanf(<span class="meta-string">&quot;0x7fc00000&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VAL     1e500</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALF    1e50f</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALL    1e5000L</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    NAN          __nan()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">//  math.h  #178</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> isnan(x)                                                         \</span></span><br><span class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</span><br><span class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</span><br><span class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>正则表达式学习笔记</title>
     <url>/post/bruch-up-regular-expressions/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>正则表达式基础学习笔记。</p>
@@ -563,42 +599,6 @@
       </categories>
       <tags>
         <tag>正则表达式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开发小记</title>
-    <url>/post/note/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>开发中的小笔记。记录开发中的点滴滴点。</p>
-<a id="more"></a>
-
-
-<h2 id="批量替换json文件中的注释"><a href="#批量替换json文件中的注释" class="headerlink" title="批量替换json文件中的注释"></a>批量替换json文件中的注释</h2><p>备份至.bat</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ perl -i.bat -lpe <span class="string">&#x27;s/\/\/[^&quot;]+$//g&#x27;</span> xx</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="批量正则替换的另一种思路"><a href="#批量正则替换的另一种思路" class="headerlink" title="批量正则替换的另一种思路"></a>批量正则替换的另一种思路</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;base&#x2F;sh</span><br><span class="line">find . -name &#39;*.swift&#39; | while read file; do</span><br><span class="line">  perl -i -lpe &#39;s&#x2F;if \(([^\)].*)\) \&#123;&#x2F;if $1 \&#123;&#x2F;g&#39; $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h2 id="批量删除空格组成的空行中的空格"><a href="#批量删除空格组成的空行中的空格" class="headerlink" title="批量删除空格组成的空行中的空格"></a>批量删除空格组成的空行中的空格</h2>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;base&#x2F;sh</span><br><span class="line">find . -name &#39;*.swift&#39; | while read file; do</span><br><span class="line">  sed -i &#39;&#39; &#39;s&#x2F;^[[:space:]][[:space:]]*$&#x2F;&#x2F;g&#39; $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h2 id="获取代码执行时间"><a href="#获取代码执行时间" class="headerlink" title="获取代码执行时间"></a>获取代码执行时间</h2>  <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">#<span class="keyword">import</span> &lt;mach/mach_time.h&gt;</span><br><span class="line"><span class="keyword">static</span> <span class="type">NSMutableDictionary</span> *__times;</span><br><span class="line"><span class="keyword">static</span> inline void debug_start_of(<span class="type">NSString</span> *key)</span><br><span class="line">&#123;</span><br><span class="line">  __times = __times ?: [<span class="type">NSMutableDictionary</span> new];</span><br><span class="line"></span><br><span class="line">  uint64_t start = mach_absolute_time();</span><br><span class="line">  __times[key] = @(start);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> inline void debug_stop_of(<span class="type">NSString</span> *key)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (__times) &#123;</span><br><span class="line">    uint64_t end = mach_absolute_time();</span><br><span class="line">    uint64_t start = [__times[key] unsignedLongLongValue];</span><br><span class="line">    <span class="keyword">if</span> (start != <span class="number">0</span>) &#123;</span><br><span class="line">      uint64_t elapsed = end - start;</span><br><span class="line">      mach_timebase_info_data_t info;</span><br><span class="line">      <span class="keyword">if</span> (mach_timebase_info(&amp;info) != <span class="type">KERN_SUCCESS</span>) &#123;</span><br><span class="line">        printf(<span class="string">&quot;mach_timebase_info failed\n&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      uint64_t nanosecs = elapsed * info.numer / info.denom;</span><br><span class="line">      uint64_t millisecs = nanosecs / <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line">      printf(<span class="string">&quot;[DEBUG code rt] %s:%llu ms\n&quot;</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>], millisecs);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      printf(<span class="string">&quot;[DEBUG code rt] %s error: no start\n&quot;</span>, [key cStringUsingEncoding:<span class="type">NSUTF8StringEncoding</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h2><ul>
-<li><p><code>A</code>对<code>B</code>除余时，如果<code>B == 0</code> 则会造成NAN，<code>truncatingRemainder(dividingBy:)</code>是<code>swift</code>的方法，也会造成此问题</p>
-</li>
-<li><p>当<code>NSUInteger 0 - 1</code>时，运算结果为 NAN，iOS中有一个宏<code>isnan(x)</code>返回是否为nan。另外这里有一篇文章<a href="http://blog.csdn.net/toss156/article/details/7101885">Objective-C 中 判断 NaN</a>大致记录了一下</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  math.h  #56</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(__GNUC__)</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VAL     __builtin_huge_val()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALF    __builtin_huge_valf()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALL    __builtin_huge_vall()</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    NAN          __builtin_nanf(<span class="meta-string">&quot;0x7fc00000&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VAL     1e500</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALF    1e50f</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    HUGE_VALL    1e5000L</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span>    NAN          __nan()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>另外，NAN不能直接判断 == 需要调用下面的宏。否则会发生莫名其妙的问题</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">//  math.h  #178</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> isnan(x)                                                         \</span></span><br><span class="line">    ( <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">float</span>)  ? __inline_isnanf((<span class="keyword">float</span>)(x))          \</span><br><span class="line">    : <span class="keyword">sizeof</span>(x) == <span class="keyword">sizeof</span>(<span class="keyword">double</span>) ? __inline_isnand((<span class="keyword">double</span>)(x))         \</span><br><span class="line">                                  : __inline_isnanl((<span class="keyword">long</span> <span class="keyword">double</span>)(x)))</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1623,6 +1623,60 @@ class CMExpandingTextField: UITextField &#123;
       </tags>
   </entry>
   <entry>
+    <title>iOS的__bridge_retained可以做什么</title>
+    <url>/post/what-happened-on-the-bridge-in-ios-2/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="抛出问题"><a href="#抛出问题" class="headerlink" title="抛出问题"></a>抛出问题</h2><p>群友(@止一)昨晚上发了一个问题:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> Test &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *arr;</span><br><span class="line">&#125; Test;</span><br><span class="line">- (<span class="keyword">void</span>)test &#123;</span><br><span class="line">    Test test = &#123;&#125;;</span><br><span class="line">    test.arr = @[@<span class="number">1</span>, @<span class="number">2</span>, @<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">self</span>.var = test;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    [<span class="keyword">self</span> test];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, <span class="keyword">self</span>.var.arr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>xcode12这样写会崩溃</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="大佬提供的一些资料"><a href="#大佬提供的一些资料" class="headerlink" title="大佬提供的一些资料"></a>大佬提供的一些资料</h2><ul>
+<li><a href="https://lengmolehongyan.github.io/blog/2020/09/19/xcode-12-reactnativeart-crash/">Xcode 12 ReactNativeART Crash</a></li>
+<li><a href="https://devstreaming-cdn.apple.com/videos/wwdc/2018/409t8zw7rumablsh/409/409_whats_new_in_llvm.pdf">WWDC2018 Session409: What’s New in LLVM</a></li>
+</ul>
+<h2 id="还原一下场景"><a href="#还原一下场景" class="headerlink" title="还原一下场景"></a>还原一下场景</h2><p>打开<code>Zombie Objects</code>时场景如下:</p>
+<p><img src="/images/2020-10-20-10-35-52.png" alt="Xcode12-Zombie-Objects"></p>
+<p>当不打开的时候是这样的:</p>
+<p><img src="/images/2020-10-20-10-39-08.png" alt="Xcode12-No-Zombie-Objects"></p>
+<p><code>Xcode11</code>并不崩溃:</p>
+<p><img src="/images/2020-10-20-10-41-28.png" alt="Xcode11"></p>
+<h2 id="对比一下汇编伪代码"><a href="#对比一下汇编伪代码" class="headerlink" title="对比一下汇编伪代码"></a>对比一下汇编伪代码</h2><p>仔细对比了一下代码,发现<code>test</code>函数完全一样:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)test &#123;</span><br><span class="line">    Test test = &#123;&#125;;</span><br><span class="line">    test.arr = @[@<span class="number">1</span>, @<span class="number">2</span>, @<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">self</span>.var = test;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 汇编伪代码</span></span><br><span class="line"><span class="keyword">void</span> __cdecl -[XX test](XX *<span class="keyword">self</span>, SEL a2)</span><br><span class="line">&#123;</span><br><span class="line">  v14 = <span class="keyword">self</span>;</span><br><span class="line">  v13 = a2;</span><br><span class="line">  v8 = @[@<span class="number">1</span>, @<span class="number">2</span>, @<span class="number">3</span>];</span><br><span class="line">  v12 = objc_retainAutoreleasedReturnValue(v8);</span><br><span class="line">  objc_release(<span class="number">0</span>LL);</span><br><span class="line">  __copy_constructor_8_8_s0(&amp;v11, &amp;v12);</span><br><span class="line">  v9 = v14;</span><br><span class="line">  __copy_constructor_8_8_s0(&amp;v10, &amp;v11);</span><br><span class="line">  -[XX setVar:](v9, <span class="string">&quot;setVar:&quot;</span>, v10);</span><br><span class="line">  __destructor_8_s0(&amp;v12);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后, 关联的<code>for-NSLog</code>:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)main &#123;</span><br><span class="line">    [<span class="keyword">self</span> test];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, <span class="keyword">self</span>.var.arr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Xcode12下汇编伪代码</span></span><br><span class="line"><span class="keyword">void</span> __cdecl -[XX main](XX *<span class="keyword">self</span>, SEL a2)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">void</span> *v2; <span class="comment">// [rsp+10h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+1Ch] [rbp-14h]</span></span><br><span class="line">  SEL v4; <span class="comment">// [rsp+20h] [rbp-10h]</span></span><br><span class="line">  <span class="keyword">void</span> *v5; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v5 = <span class="keyword">self</span>;</span><br><span class="line">  v4 = a2;</span><br><span class="line">  -[XX test](<span class="keyword">self</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = objc_msgSend(v5, <span class="string">&quot;var&quot;</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="built_in">CFSTR</span>(<span class="string">&quot;%@&quot;</span>), v2);</span><br><span class="line">    __destructor_8_s0((__int64)&amp;v2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Xcode11下汇编伪代码</span></span><br><span class="line"><span class="keyword">void</span> __cdecl -[XX main](XX *<span class="keyword">self</span>, SEL a2)</span><br><span class="line">&#123;</span><br><span class="line">  Test v2; <span class="comment">// ST10_8</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> i; <span class="comment">// [rsp+1Ch] [rbp-14h]</span></span><br><span class="line"></span><br><span class="line">  -[XX test](<span class="keyword">self</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v2.var0 = -[XX var](<span class="keyword">self</span>, <span class="string">&quot;var&quot;</span>).var0;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="built_in">CFSTR</span>(<span class="string">&quot;%@&quot;</span>), v2.var0);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以Xcode12比Xcode11多了一行<code>__destructor_8_s0((__int64)&amp;v2);</code>, 再看下这个是啥:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">__int64 __fastcall __destructor_8_s0(__int64 a1)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> objc_storeStrong(a1, <span class="number">0</span>LL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结案, Xcode12下<code>self.var.arr</code>之后会将返回值进行一次<code>release</code></p>
+<h2 id="Xcode12的这种情境下如何修正"><a href="#Xcode12的这种情境下如何修正" class="headerlink" title="Xcode12的这种情境下如何修正"></a>Xcode12的这种情境下如何修正</h2><ul>
+<li>此处只是作为<a href="../what-happened-on-the-bridge-in-ios">iOS的__bridge、__bridge_transfer究竟做了啥</a>的补充去讨论<code>__bridge_retained</code>, 至于真正的场景应该如何修复, 或许只是一个Xcode12的BUG, 请继续Google :&gt;</li>
+</ul>
+<p>按照<a href="../what-happened-on-the-bridge-in-ios">iOS的__bridge、__bridge_transfer究竟做了啥</a>的思路来: 我们需要加一下<code>__bridge*</code>的标记, <code>struct</code>虽然不是<code>CoreFounction</code>的东西,但是可以用的</p>
+<p>从对比来看, 我们应该修改的是<code>for-NSLog</code>中的代码, 这样才不至于引出其他的问题, 然后从<a href="../what-happened-on-the-bridge-in-ios">上文</a>可以得知, 此处我们应该用<code>__bridge</code>, 来试验一下:</p>
+<p><img src="/images/2020-10-20-11-10-46.png" alt="Xcode12-__bridge"></p>
+<p>GG, 我们注意到<code>__destructor_8_s0</code>函数在<code>test</code>中也出现过, 作用是释放<code>@[@1, @2, @3]</code>临时变量, 难道作用是<code>将ObjC对象交给C处理之后清理ObjC对象临时引用</code>? 按照这个思路我们应该试一下<code>__bridge_retained</code>, 目的是伪造一个从Objc对象移交给<code>CoreFounction</code>的假象,试一下:</p>
+<p><img src="/images/2020-10-20-11-20-14.png" alt="Xcode12-__bridge_retained"></p>
+<p>不崩溃了~~</p>
+<p>看下伪代码:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)main &#123;</span><br><span class="line">    [<span class="keyword">self</span> test];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, (__bridge_retained <span class="keyword">void</span>*)(<span class="keyword">self</span>.var.arr));</span><br><span class="line">    &#125;</span><br><span class="line">    printf(<span class="string">&quot;over\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Xcode12伪代码</span></span><br><span class="line"><span class="keyword">void</span> __cdecl -[XX main](XX *<span class="keyword">self</span>, SEL a2)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">void</span> *v2; <span class="comment">// rax</span></span><br><span class="line">  __int64 v3; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">void</span> *v4; <span class="comment">// [rsp+10h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+1Ch] [rbp-14h]</span></span><br><span class="line">  SEL v6; <span class="comment">// [rsp+20h] [rbp-10h]</span></span><br><span class="line">  <span class="keyword">void</span> *v7; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v7 = <span class="keyword">self</span>;</span><br><span class="line">  v6 = a2;</span><br><span class="line">  -[XX test](<span class="keyword">self</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = objc_msgSend(v7, <span class="string">&quot;var&quot;</span>);</span><br><span class="line">    v4 = v2;</span><br><span class="line">    v3 = objc_retain(v2);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="built_in">CFSTR</span>(<span class="string">&quot;%@&quot;</span>), v3);</span><br><span class="line">    __destructor_8_s0((__int64)&amp;v4);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>从<code>__bridge</code>、<code>__bridge_transfer</code>到<code>__bridge_retained</code>, 而没有一处是关于<code>CoreFounction</code>的东西, 却看到了ARC下对引用计数的干预…</p>
+<p>愿世界再无BUG~</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>DEBUG</tag>
+        <tag>__bridge*</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Xcode打包脚本</title>
     <url>/post/build-ipa-sh/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Jenkins自动构建脚本解决方案。</p>
@@ -1661,60 +1715,6 @@ class CMExpandingTextField: UITextField &#123;
       </categories>
       <tags>
         <tag>构建</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS的__bridge_retained可以做什么</title>
-    <url>/post/what-happened-on-the-bridge-in-ios-2/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="抛出问题"><a href="#抛出问题" class="headerlink" title="抛出问题"></a>抛出问题</h2><p>群友(@止一)昨晚上发了一个问题:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> Test &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *arr;</span><br><span class="line">&#125; Test;</span><br><span class="line">- (<span class="keyword">void</span>)test &#123;</span><br><span class="line">    Test test = &#123;&#125;;</span><br><span class="line">    test.arr = @[@<span class="number">1</span>, @<span class="number">2</span>, @<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">self</span>.var = test;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    [<span class="keyword">self</span> test];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, <span class="keyword">self</span>.var.arr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>xcode12这样写会崩溃</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="大佬提供的一些资料"><a href="#大佬提供的一些资料" class="headerlink" title="大佬提供的一些资料"></a>大佬提供的一些资料</h2><ul>
-<li><a href="https://lengmolehongyan.github.io/blog/2020/09/19/xcode-12-reactnativeart-crash/">Xcode 12 ReactNativeART Crash</a></li>
-<li><a href="https://devstreaming-cdn.apple.com/videos/wwdc/2018/409t8zw7rumablsh/409/409_whats_new_in_llvm.pdf">WWDC2018 Session409: What’s New in LLVM</a></li>
-</ul>
-<h2 id="还原一下场景"><a href="#还原一下场景" class="headerlink" title="还原一下场景"></a>还原一下场景</h2><p>打开<code>Zombie Objects</code>时场景如下:</p>
-<p><img src="/images/2020-10-20-10-35-52.png" alt="Xcode12-Zombie-Objects"></p>
-<p>当不打开的时候是这样的:</p>
-<p><img src="/images/2020-10-20-10-39-08.png" alt="Xcode12-No-Zombie-Objects"></p>
-<p><code>Xcode11</code>并不崩溃:</p>
-<p><img src="/images/2020-10-20-10-41-28.png" alt="Xcode11"></p>
-<h2 id="对比一下汇编伪代码"><a href="#对比一下汇编伪代码" class="headerlink" title="对比一下汇编伪代码"></a>对比一下汇编伪代码</h2><p>仔细对比了一下代码,发现<code>test</code>函数完全一样:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)test &#123;</span><br><span class="line">    Test test = &#123;&#125;;</span><br><span class="line">    test.arr = @[@<span class="number">1</span>, @<span class="number">2</span>, @<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">self</span>.var = test;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 汇编伪代码</span></span><br><span class="line"><span class="keyword">void</span> __cdecl -[XX test](XX *<span class="keyword">self</span>, SEL a2)</span><br><span class="line">&#123;</span><br><span class="line">  v14 = <span class="keyword">self</span>;</span><br><span class="line">  v13 = a2;</span><br><span class="line">  v8 = @[@<span class="number">1</span>, @<span class="number">2</span>, @<span class="number">3</span>];</span><br><span class="line">  v12 = objc_retainAutoreleasedReturnValue(v8);</span><br><span class="line">  objc_release(<span class="number">0</span>LL);</span><br><span class="line">  __copy_constructor_8_8_s0(&amp;v11, &amp;v12);</span><br><span class="line">  v9 = v14;</span><br><span class="line">  __copy_constructor_8_8_s0(&amp;v10, &amp;v11);</span><br><span class="line">  -[XX setVar:](v9, <span class="string">&quot;setVar:&quot;</span>, v10);</span><br><span class="line">  __destructor_8_s0(&amp;v12);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后, 关联的<code>for-NSLog</code>:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)main &#123;</span><br><span class="line">    [<span class="keyword">self</span> test];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, <span class="keyword">self</span>.var.arr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Xcode12下汇编伪代码</span></span><br><span class="line"><span class="keyword">void</span> __cdecl -[XX main](XX *<span class="keyword">self</span>, SEL a2)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">void</span> *v2; <span class="comment">// [rsp+10h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+1Ch] [rbp-14h]</span></span><br><span class="line">  SEL v4; <span class="comment">// [rsp+20h] [rbp-10h]</span></span><br><span class="line">  <span class="keyword">void</span> *v5; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v5 = <span class="keyword">self</span>;</span><br><span class="line">  v4 = a2;</span><br><span class="line">  -[XX test](<span class="keyword">self</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = objc_msgSend(v5, <span class="string">&quot;var&quot;</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="built_in">CFSTR</span>(<span class="string">&quot;%@&quot;</span>), v2);</span><br><span class="line">    __destructor_8_s0((__int64)&amp;v2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Xcode12下汇编伪代码</span></span><br><span class="line"><span class="keyword">void</span> __cdecl -[XX main](XX *<span class="keyword">self</span>, SEL a2)</span><br><span class="line">&#123;</span><br><span class="line">  Test v2; <span class="comment">// ST10_8</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> i; <span class="comment">// [rsp+1Ch] [rbp-14h]</span></span><br><span class="line"></span><br><span class="line">  -[XX test](<span class="keyword">self</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v2.var0 = -[XX var](<span class="keyword">self</span>, <span class="string">&quot;var&quot;</span>).var0;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="built_in">CFSTR</span>(<span class="string">&quot;%@&quot;</span>), v2.var0);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>所以Xcode12比Xcode11多了一行<code>__destructor_8_s0((__int64)&amp;v2);</code>, 再看下这个是啥:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">__int64 __fastcall __destructor_8_s0(__int64 a1)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> objc_storeStrong(a1, <span class="number">0</span>LL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结案, Xcode12下<code>self.var.arr</code>之后会将返回值进行一次<code>release</code></p>
-<h2 id="Xcode12的这种情境下如何修正"><a href="#Xcode12的这种情境下如何修正" class="headerlink" title="Xcode12的这种情境下如何修正"></a>Xcode12的这种情境下如何修正</h2><ul>
-<li>此处只是作为<a href="../what-happened-on-the-bridge-in-ios">iOS的__bridge、__bridge_transfer究竟做了啥</a>的补充去讨论<code>__bridge_retained</code>, 至于真正的场景应该如何修复, 或许只是一个Xcode12的BUG, 请继续Google :&gt;</li>
-</ul>
-<p>按照<a href="../what-happened-on-the-bridge-in-ios">iOS的__bridge、__bridge_transfer究竟做了啥</a>的思路来: 我们需要加一下<code>__bridge*</code>的标记, <code>struct</code>虽然不是<code>CoreFounction</code>的东西,但是可以用的</p>
-<p>从对比来看, 我们应该修改的是<code>for-NSLog</code>中的代码, 这样才不至于引出其他的问题, 然后从<a href="../what-happened-on-the-bridge-in-ios">上文</a>可以得知, 此处我们应该用<code>__bridge</code>, 来试验一下:</p>
-<p><img src="/images/2020-10-20-11-10-46.png" alt="Xcode12-__bridge"></p>
-<p>GG, 我们注意到<code>__destructor_8_s0</code>函数在<code>test</code>中也出现过, 作用是释放<code>@[@1, @2, @3]</code>临时变量, 难道作用是<code>将ObjC对象交给C处理之后清理ObjC对象临时引用</code>? 按照这个思路我们应该试一下<code>__bridge_retained</code>, 目的是伪造一个从Objc对象移交给<code>CoreFounction</code>的假象,试一下:</p>
-<p><img src="/images/2020-10-20-11-20-14.png" alt="Xcode12-__bridge_retained"></p>
-<p>不崩溃了~~</p>
-<p>看下伪代码:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)main &#123;</span><br><span class="line">    [<span class="keyword">self</span> test];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, (__bridge_retained <span class="keyword">void</span>*)(<span class="keyword">self</span>.var.arr));</span><br><span class="line">    &#125;</span><br><span class="line">    printf(<span class="string">&quot;over\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Xcode12伪代码</span></span><br><span class="line"><span class="keyword">void</span> __cdecl -[XX main](XX *<span class="keyword">self</span>, SEL a2)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">void</span> *v2; <span class="comment">// rax</span></span><br><span class="line">  __int64 v3; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">void</span> *v4; <span class="comment">// [rsp+10h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+1Ch] [rbp-14h]</span></span><br><span class="line">  SEL v6; <span class="comment">// [rsp+20h] [rbp-10h]</span></span><br><span class="line">  <span class="keyword">void</span> *v7; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v7 = <span class="keyword">self</span>;</span><br><span class="line">  v6 = a2;</span><br><span class="line">  -[XX test](<span class="keyword">self</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = objc_msgSend(v7, <span class="string">&quot;var&quot;</span>);</span><br><span class="line">    v4 = v2;</span><br><span class="line">    v3 = objc_retain(v2);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="built_in">CFSTR</span>(<span class="string">&quot;%@&quot;</span>), v3);</span><br><span class="line">    __destructor_8_s0((__int64)&amp;v4);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>从<code>__bridge</code>、<code>__bridge_transfer</code>到<code>__bridge_retained</code>, 而没有一处是关于<code>CoreFounction</code>的东西, 却看到了ARC下对引用计数的干预…</p>
-<p>愿世界再无BUG~</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>DEBUG</tag>
-        <tag>__bridge*</tag>
       </tags>
   </entry>
   <entry>
